@@ -13,11 +13,11 @@ import (
 	"time"
 
 	"github.com/mattermost/gorp"
-	"github.com/mattermost/mattermost-server/v5/einterfaces"
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/services/cache"
-	"github.com/mattermost/mattermost-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v5/store"
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/pkg/errors"
@@ -641,7 +641,7 @@ func (s SqlChannelStore) MigrateFavoritesToSidebarChannels(lastUserId string, ru
 }
 
 // MigratePublicChannels initializes the PublicChannels table with data created before this version
-// of the Mattermost server kept it up-to-date.
+// of the Matterfoss server kept it up-to-date.
 func (s SqlChannelStore) MigratePublicChannels() error {
 	if _, err := s.GetMaster().Exec(`
 		INSERT INTO PublicChannels

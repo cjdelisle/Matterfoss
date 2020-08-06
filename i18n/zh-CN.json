@@ -89,7 +89,7 @@
     },
     {
         "id": "api.admin.test_email.body",
-        "translation": "看来你的 Mattermost 邮箱设置成功了！"
+        "translation": "看来你的 Matterfoss 邮箱设置成功了！"
     },
     {
         "id": "api.admin.test_email.missing_server",
@@ -101,7 +101,7 @@
     },
     {
         "id": "api.admin.test_email.subject",
-        "translation": "Mattermost - 测试邮箱设置"
+        "translation": "Matterfoss - 测试邮箱设置"
     },
     {
         "id": "api.admin.test_s3.missing_s3_bucket",
@@ -357,7 +357,7 @@
     },
     {
         "id": "api.command.invite_people.desc",
-        "translation": "发送一封邀请邮件给你的Mattermost团队"
+        "translation": "发送一封邀请邮件给你的Matterfoss团队"
     },
     {
         "id": "api.command.invite_people.email_invitations_off",
@@ -639,7 +639,7 @@
     },
     {
         "id": "api.command_help.desc",
-        "translation": "打开 Mattermost 帮助页面"
+        "translation": "打开 Matterfoss 帮助页面"
     },
     {
         "id": "api.command_help.name",
@@ -651,7 +651,7 @@
     },
     {
         "id": "api.command_invite.channel.error",
-        "translation": "无法找到频道{{.Channel}}。请使用[频道识别](https://about.mattermost.com/default-channel-handle-documentation)以分辨频道。"
+        "translation": "无法找到频道{{.Channel}}。请使用[频道识别](https://about.matterfoss.com/default-channel-handle-documentation)以分辨频道。"
     },
     {
         "id": "api.command_invite.desc",
@@ -743,7 +743,7 @@
     },
     {
         "id": "api.command_logout.desc",
-        "translation": "注销Mattermost"
+        "translation": "注销Matterfoss"
     },
     {
         "id": "api.command_logout.name",
@@ -795,7 +795,7 @@
     },
     {
         "id": "api.command_mute.error",
-        "translation": "无法找到频道{{.Channel}}。请使用[频道识别](https://about.mattermost.com/default-channel-handle-documentation)以分辨频道。"
+        "translation": "无法找到频道{{.Channel}}。请使用[频道识别](https://about.matterfoss.com/default-channel-handle-documentation)以分辨频道。"
     },
     {
         "id": "api.command_mute.hint",
@@ -807,7 +807,7 @@
     },
     {
         "id": "api.command_mute.no_channel.error",
-        "translation": "无法找到指定的频道。请使用[频道识别](https://about.mattermost.com/default-channel-handle-documentation) 以分辨频道。"
+        "translation": "无法找到指定的频道。请使用[频道识别](https://about.matterfoss.com/default-channel-handle-documentation) 以分辨频道。"
     },
     {
         "id": "api.command_mute.not_member.error",
@@ -1651,11 +1651,11 @@
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing",
-        "translation": "Slack 用户已和拥有邮箱地址 {{.Email}} 和用户名 {{.Username}} 的 Mattermost 用户合并。\r\n"
+        "translation": "Slack 用户已和拥有邮箱地址 {{.Email}} 和用户名 {{.Username}} 的 Matterfoss 用户合并。\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing_failed",
-        "translation": "Slack 用户已和现有邮箱地址 {{.Email}} 和用户名 {{.Username}} 的 Mattermost 用户合并，但没法添加用户到他们的团队。\r\n"
+        "translation": "Slack 用户已和现有邮箱地址 {{.Email}} 和用户名 {{.Username}} 的 Matterfoss 用户合并，但没法添加用户到他们的团队。\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1667,7 +1667,7 @@
     },
     {
         "id": "api.slackimport.slack_import.log",
-        "translation": "Mattermost Slack 导入日志 \r\n"
+        "translation": "Matterfoss Slack 导入日志 \r\n"
     },
     {
         "id": "api.slackimport.slack_import.note1",
@@ -1939,7 +1939,7 @@
     },
     {
         "id": "api.templates.invite_body.extra_info",
-        "translation": "Mattermost 允许您通过电脑、电话分享消息和文件，即时查找和归档。当你加入[[{{.TeamDisplayName}}]]后，你可以登录到你的新团队并在任何时候从网络地址访问这些功能："
+        "translation": "Matterfoss 允许您通过电脑、电话分享消息和文件，即时查找和归档。当你加入[[{{.TeamDisplayName}}]]后，你可以登录到你的新团队并在任何时候从网络地址访问这些功能："
     },
     {
         "id": "api.templates.invite_body.info",
@@ -2083,7 +2083,7 @@
     },
     {
         "id": "api.templates.welcome_body.info3",
-        "translation": "Mattermost 允许您通过PC或手机分享信息和文件，即时搜索和归档。"
+        "translation": "Matterfoss 允许您通过PC或手机分享信息和文件，即时搜索和归档。"
     },
     {
         "id": "api.templates.welcome_body.title",
@@ -3483,7 +3483,7 @@
     },
     {
         "id": "ent.ldap.do_login.user_filtered.app_error",
-        "translation": "您的 AD/LDAP 账号没有使用此 Mattermost 服务器的权限。请向您的系统管理员询问确认 AD/LDAP 用户过滤器。"
+        "translation": "您的 AD/LDAP 账号没有使用此 Matterfoss 服务器的权限。请向您的系统管理员询问确认 AD/LDAP 用户过滤器。"
     },
     {
         "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3503,7 +3503,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure.app_error",
-        "translation": "从 AD/LDAP 搜索用户失败。请测试 Mattermost 服务器是否可以连接您的 AD/LDAP 服务器后重新尝试。"
+        "translation": "从 AD/LDAP 搜索用户失败。请测试 Matterfoss 服务器是否可以连接您的 AD/LDAP 服务器后重新尝试。"
     },
     {
         "id": "ent.ldap.validate_filter.app_error",
@@ -3599,7 +3599,7 @@
     },
     {
         "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-        "translation": "用户名已被其他 Mattermost 用户使用。"
+        "translation": "用户名已被其他 Matterfoss 用户使用。"
     },
     {
         "id": "ent.saml.attribute.app_error",
@@ -3710,8 +3710,8 @@
         "translation": "无法获得频道"
     },
     {
-        "id": "mattermost.bulletin.subject",
-        "translation": "Mattermost 安全公告"
+        "id": "matterfoss.bulletin.subject",
+        "translation": "Matterfoss 安全公告"
     },
     {
         "id": "mfa.activate.authenticate.app_error",
@@ -4919,7 +4919,7 @@
     },
     {
         "id": "oauth.gitlab.tos.error",
-        "translation": "GitLab 的使用条款已更新。请到 gitlab.com 接受新的使用条款后再尝试登入 Mattermost。"
+        "translation": "GitLab 的使用条款已更新。请到 gitlab.com 接受新的使用条款后再尝试登入 Matterfoss。"
     },
     {
         "id": "plugin.api.update_user_status.bad_status",
@@ -6635,7 +6635,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-        "translation": "尺寸超过限制。请检查您的[最大页面尺寸](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
+        "translation": "尺寸超过限制。请检查您的[最大页面尺寸](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
     },
     {
         "id": "group_not_associated_to_synced_team",
@@ -6851,7 +6851,7 @@
     },
     {
         "id": "api.license.request_trial_license.app_error",
-        "translation": "无法获取试用证书，请重试或联系 support@mattermost.com。"
+        "translation": "无法获取试用证书，请重试或联系 support@matterfoss.com。"
     },
     {
         "id": "api.image.get.app_error",
@@ -6959,7 +6959,7 @@
     },
     {
         "id": "api.templates.remove_expired_license.subject",
-        "translation": "Mattermost 企业许可证已停用。"
+        "translation": "Matterfoss 企业许可证已停用。"
     },
     {
         "id": "api.user.create_user.guest_accounts.disabled.app_error",
@@ -7031,7 +7031,7 @@
     },
     {
         "id": "app.bot.get_disable_bot_sysadmin_message",
-        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下已停用的机器人帐号。\n\n{{.BotNames}}{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个已停用的机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}您可以在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下机器人帐号。\n\n{{.BotNames}}\n{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}我们强烈推荐您在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。\n\n如果您想在用户被注销后自动停用机器人帐号，在**系统控制台 > 整合 > 机器人帐号**设定“在用户注销后自动停用机器人帐号”为是。{{end}}"
+        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下已停用的机器人帐号。\n\n{{.BotNames}}{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个已停用的机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}您可以在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下机器人帐号。\n\n{{.BotNames}}\n{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}我们强烈推荐您在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。\n\n如果您想在用户被注销后自动停用机器人帐号，在**系统控制台 > 整合 > 机器人帐号**设定“在用户注销后自动停用机器人帐号”为是。{{end}}"
     },
     {
         "id": "app.bot.getbot.internal_error",
@@ -7163,11 +7163,11 @@
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support_version",
-        "translation": "您的浏览器不再被 Mattermost 支持"
+        "translation": "您的浏览器不再被 Matterfoss 支持"
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support",
-        "translation": "Mattermost 不再支持此浏览器"
+        "translation": "Matterfoss 不再支持此浏览器"
     },
     {
         "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -7211,7 +7211,7 @@
     },
     {
         "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-        "translation": "下载 Mattermost 应用或使用支持的浏览器以获得更好的体验。"
+        "translation": "下载 Matterfoss 应用或使用支持的浏览器以获得更好的体验。"
     },
     {
         "id": "web.error.unsupported_browser.download",
@@ -7671,11 +7671,11 @@
     },
     {
         "id": "api.license.request_trial_license.no-site-url.app_error",
-        "translation": "无法请求试用许可证。请在 Mattermost 系统控制台设置站点网址。"
+        "translation": "无法请求试用许可证。请在 Matterfoss 系统控制台设置站点网址。"
     },
     {
         "id": "api.license.request-trial.bad-request.terms-not-accepted",
-        "translation": "您在请求许可证前必须接受 Mattermost Software Evaluation Agreement 以及隐私政策。"
+        "translation": "您在请求许可证前必须接受 Matterfoss Software Evaluation Agreement 以及隐私政策。"
     },
     {
         "id": "api.invalid_channel",
@@ -7807,7 +7807,7 @@
     },
     {
         "id": "api.server.warn_metric.bot_response.notification_success.message",
-        "translation": "感谢您联系 Mattermost，我们会尽快与您联络。"
+        "translation": "感谢您联系 Matterfoss，我们会尽快与您联络。"
     },
     {
         "id": "api.server.warn_metric.bot_response.notification_failure.message",

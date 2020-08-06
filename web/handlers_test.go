@@ -8,10 +8,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/app"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin/plugintest/mock"
-	"github.com/mattermost/mattermost-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v5/app"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -43,7 +43,7 @@ func TestHandlerServeHTTPErrors(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			request := httptest.NewRequest("GET", tt.url, nil)
 			if tt.mobile {
-				request.Header.Add("X-Mobile-App", "mattermost")
+				request.Header.Add("X-Mobile-App", "matterfoss")
 			}
 			response := httptest.NewRecorder()
 			handler.ServeHTTP(response, request)

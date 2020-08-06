@@ -436,7 +436,7 @@ func TestTrimTrailingCharactersFromLink(t *testing.T) {
 }
 
 func TestAutolinking(t *testing.T) {
-	// These tests are adapted from https://github.com/mattermost/commonmark.js/test/mattermost.txt.
+	// These tests are adapted from https://github.com/matterfoss/commonmark.js/test/matterfoss.txt.
 	// It is missing tests for:
 	// 1. Links surrounded by emphasis (emphasis not implemented on the server)
 	// 2. IPv6 addresses (not implemented on the server or by GitHub)

@@ -11,7 +11,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -175,7 +175,7 @@ func TestAuthorizeOAuthUser(t *testing.T) {
 	}
 
 	makeRequest := func(t *testing.T, cookie string) *http.Request {
-		request, _ := http.NewRequest(http.MethodGet, "https://mattermost.example.com", nil)
+		request, _ := http.NewRequest(http.MethodGet, "https://matterfoss.example.com", nil)
 
 		if cookie != "" {
 			request.AddCookie(&http.Cookie{
@@ -559,7 +559,7 @@ func TestGetAuthorizationCode(t *testing.T) {
 					*cfg.ServiceSettings.SiteURL = tc.SiteURL
 				})
 
-				request, _ := http.NewRequest(http.MethodGet, "https://mattermost.example.com", nil)
+				request, _ := http.NewRequest(http.MethodGet, "https://matterfoss.example.com", nil)
 
 				stateProps := map[string]string{
 					"email":  "email@example.com",

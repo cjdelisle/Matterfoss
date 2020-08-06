@@ -15,10 +15,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v5/einterfaces"
-	"github.com/mattermost/mattermost-server/v5/model"
-	oauthgitlab "github.com/mattermost/mattermost-server/v5/model/gitlab"
-	"github.com/mattermost/mattermost-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	oauthgitlab "github.com/cjdelisle/matterfoss-server/v5/model/gitlab"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
 )
 
 func TestIsUsernameTaken(t *testing.T) {
@@ -612,7 +612,7 @@ func TestCreateUserWithInviteId(t *testing.T) {
 	})
 
 	t.Run("invalid domain", func(t *testing.T) {
-		th.BasicTeam.AllowedDomains = "mattermost.com"
+		th.BasicTeam.AllowedDomains = "matterfoss.org"
 		_, err := th.App.Srv().Store.Team().Update(th.BasicTeam)
 		require.Nil(t, err)
 		_, err = th.App.CreateUserWithInviteId(&user, th.BasicTeam.InviteId, "")

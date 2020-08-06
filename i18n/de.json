@@ -89,7 +89,7 @@
     },
     {
         "id": "api.admin.test_email.body",
-        "translation": "Ihre Mattermost E-Mail-Einrichtung scheint korrekt zu sein!"
+        "translation": "Ihre Matterfoss E-Mail-Einrichtung scheint korrekt zu sein!"
     },
     {
         "id": "api.admin.test_email.missing_server",
@@ -101,7 +101,7 @@
     },
     {
         "id": "api.admin.test_email.subject",
-        "translation": "Mattermost - E-Mail-Einstellungen überprüfen"
+        "translation": "Matterfoss - E-Mail-Einstellungen überprüfen"
     },
     {
         "id": "api.admin.test_s3.missing_s3_bucket",
@@ -357,7 +357,7 @@
     },
     {
         "id": "api.command.invite_people.desc",
-        "translation": "Eine E-Mail-Einladung zu ihrem Mattermost-Team senden"
+        "translation": "Eine E-Mail-Einladung zu ihrem Matterfoss-Team senden"
     },
     {
         "id": "api.command.invite_people.email_invitations_off",
@@ -640,7 +640,7 @@
     },
     {
         "id": "api.command_help.desc",
-        "translation": "Die Mattermost-Hilfeseite öffnen"
+        "translation": "Die Matterfoss-Hilfeseite öffnen"
     },
     {
         "id": "api.command_help.name",
@@ -652,7 +652,7 @@
     },
     {
         "id": "api.command_invite.channel.error",
-        "translation": "Konnte den Kanal {{.Channel}} nicht finden. Bitte nutzen Sie den [Kanal-Handle](https://about.mattermost.com/default-channel-handle-documentation), um Kanäle zu identifizieren."
+        "translation": "Konnte den Kanal {{.Channel}} nicht finden. Bitte nutzen Sie den [Kanal-Handle](https://about.matterfoss.com/default-channel-handle-documentation), um Kanäle zu identifizieren."
     },
     {
         "id": "api.command_invite.desc",
@@ -744,7 +744,7 @@
     },
     {
         "id": "api.command_logout.desc",
-        "translation": "Von Mattermost abmelden"
+        "translation": "Von Matterfoss abmelden"
     },
     {
         "id": "api.command_logout.name",
@@ -796,7 +796,7 @@
     },
     {
         "id": "api.command_mute.error",
-        "translation": "Konnte den Kanal {{.Channel}} nicht finden. Bitte nutzen Sie den [Kanal-Handle](https://about.mattermost.com/default-channel-handle-documentation), um Kanäle zu identifizieren."
+        "translation": "Konnte den Kanal {{.Channel}} nicht finden. Bitte nutzen Sie den [Kanal-Handle](https://about.matterfoss.com/default-channel-handle-documentation), um Kanäle zu identifizieren."
     },
     {
         "id": "api.command_mute.hint",
@@ -808,7 +808,7 @@
     },
     {
         "id": "api.command_mute.no_channel.error",
-        "translation": "Konnte den Kanal nicht finden. Bitte nutzen Sie den [Kanal-Handle](https://about.mattermost.com/default-channel-handle-documentation), um Kanäle zu identifizieren."
+        "translation": "Konnte den Kanal nicht finden. Bitte nutzen Sie den [Kanal-Handle](https://about.matterfoss.com/default-channel-handle-documentation), um Kanäle zu identifizieren."
     },
     {
         "id": "api.command_mute.not_member.error",
@@ -1644,7 +1644,7 @@
     },
     {
         "id": "api.slackimport.slack_add_channels.merge",
-        "translation": "Der Slack-Kanal {{.DisplayName}} existiert bereits als aktiver Mattermost-Kanal. Beide Kanäle wurden zusammengeführt.\r\n"
+        "translation": "Der Slack-Kanal {{.DisplayName}} existiert bereits als aktiver Matterfoss-Kanal. Beide Kanäle wurden zusammengeführt.\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.created",
@@ -1656,11 +1656,11 @@
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing",
-        "translation": "Slack-Benutzer mit existierendem Mattermost-Benutzer mit identischer E-Mail-Adresse {{.Email}} und Benutzername {{.Username}} zusammengeführt.\r\n"
+        "translation": "Slack-Benutzer mit existierendem Matterfoss-Benutzer mit identischer E-Mail-Adresse {{.Email}} und Benutzername {{.Username}} zusammengeführt.\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing_failed",
-        "translation": "Slack-Benutzer mit existierendem Mattermost-Benutzer mit identischer E-Mail-Adresse {{.Email}} und Benutzername {{.Username}} zusammengeführt, konnte aber den Benutzer nicht zu seinem Team hinzufügen.\r\n"
+        "translation": "Slack-Benutzer mit existierendem Matterfoss-Benutzer mit identischer E-Mail-Adresse {{.Email}} und Benutzername {{.Username}} zusammengeführt, konnte aber den Benutzer nicht zu seinem Team hinzufügen.\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1672,7 +1672,7 @@
     },
     {
         "id": "api.slackimport.slack_import.log",
-        "translation": "Mattermost Slack Import Log\r\n"
+        "translation": "Matterfoss Slack Import Log\r\n"
     },
     {
         "id": "api.slackimport.slack_import.note1",
@@ -1944,7 +1944,7 @@
     },
     {
         "id": "api.templates.invite_body.extra_info",
-        "translation": "Mattermost lässt Sie Nachrichten und Dateien von Ihrem PC oder Smartphone teilen, mit Sofortsuche und Archivierung. Nachdem Sie [[{{.TeamDisplayName}}]] beigetreten sind, können Sie sich bei ihrem neuen Team anmelden und auf all diese Funktionen von folgender Webadresse aus zugreifen:"
+        "translation": "Matterfoss lässt Sie Nachrichten und Dateien von Ihrem PC oder Smartphone teilen, mit Sofortsuche und Archivierung. Nachdem Sie [[{{.TeamDisplayName}}]] beigetreten sind, können Sie sich bei ihrem neuen Team anmelden und auf all diese Funktionen von folgender Webadresse aus zugreifen:"
     },
     {
         "id": "api.templates.invite_body.info",
@@ -2088,7 +2088,7 @@
     },
     {
         "id": "api.templates.welcome_body.info3",
-        "translation": "Mit Mattermost können Sie Nachrichten und Dateien von ihrem PC oder Telefon aus teilen, suchen und archivieren."
+        "translation": "Mit Matterfoss können Sie Nachrichten und Dateien von ihrem PC oder Telefon aus teilen, suchen und archivieren."
     },
     {
         "id": "api.templates.welcome_body.title",
@@ -3488,7 +3488,7 @@
     },
     {
         "id": "ent.ldap.do_login.user_filtered.app_error",
-        "translation": "Ihr AD/LDAP-Konto hat keine Berechtigung diesen Mattermost-Server zu benutzen. Bitten Sie ihren Systemadministrator den AD/LDAP-Benutzerfilter zu überprüfen."
+        "translation": "Ihr AD/LDAP-Konto hat keine Berechtigung diesen Matterfoss-Server zu benutzen. Bitten Sie ihren Systemadministrator den AD/LDAP-Benutzerfilter zu überprüfen."
     },
     {
         "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3508,7 +3508,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure.app_error",
-        "translation": "Fehler beim Suchen von Benutzern im AD/LDAP. Prüfen Sie, ob sich der Mattermost-Server mit ihrem AD/LDAP-Server verbinden kann und versuchen sie es erneut."
+        "translation": "Fehler beim Suchen von Benutzern im AD/LDAP. Prüfen Sie, ob sich der Matterfoss-Server mit ihrem AD/LDAP-Server verbinden kann und versuchen sie es erneut."
     },
     {
         "id": "ent.ldap.validate_filter.app_error",
@@ -3604,7 +3604,7 @@
     },
     {
         "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-        "translation": "Benutzername wird bereits von einem anderen Mattermost-Benutzer verwendet."
+        "translation": "Benutzername wird bereits von einem anderen Matterfoss-Benutzer verwendet."
     },
     {
         "id": "ent.saml.attribute.app_error",
@@ -3715,8 +3715,8 @@
         "translation": "Konnte die Kanäle nicht abrufen."
     },
     {
-        "id": "mattermost.bulletin.subject",
-        "translation": "Mattermost Security Bulletin"
+        "id": "matterfoss.bulletin.subject",
+        "translation": "Matterfoss Security Bulletin"
     },
     {
         "id": "mfa.activate.authenticate.app_error",
@@ -4924,7 +4924,7 @@
     },
     {
         "id": "oauth.gitlab.tos.error",
-        "translation": "Die Nutzungsbedingungen von GitLab haben sich geändert. Bitte gehen Sie zu gitlab.com um sie zu akzeptieren und versuchen dann, sich erneut an Mattermost anzumelden."
+        "translation": "Die Nutzungsbedingungen von GitLab haben sich geändert. Bitte gehen Sie zu gitlab.com um sie zu akzeptieren und versuchen dann, sich erneut an Matterfoss anzumelden."
     },
     {
         "id": "plugin.api.update_user_status.bad_status",
@@ -6024,11 +6024,11 @@
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support_version",
-        "translation": "Dieser Version ihres Browsers wird von Mattermost nicht mehr unterstützt."
+        "translation": "Dieser Version ihres Browsers wird von Matterfoss nicht mehr unterstützt."
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support",
-        "translation": "Dieser Browser wird von Mattermost nicht mehr unterstützt."
+        "translation": "Dieser Browser wird von Matterfoss nicht mehr unterstützt."
     },
     {
         "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -6072,7 +6072,7 @@
     },
     {
         "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-        "translation": "Laden Sie die Mattermost-App herunter oder verwenden Sie einen unterstützten Browser für ein besseres Erlebnis."
+        "translation": "Laden Sie die Matterfoss-App herunter oder verwenden Sie einen unterstützten Browser für ein besseres Erlebnis."
     },
     {
         "id": "web.error.unsupported_browser.download",
@@ -6460,7 +6460,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-        "translation": "Größenbegrenzung überschritten. Überprüfen Sie Ihre [maximale Seitengröße](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
+        "translation": "Größenbegrenzung überschritten. Überprüfen Sie Ihre [maximale Seitengröße](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
     },
     {
         "id": "ent.ldap.syncronize.delete_group_constained_memberships",
@@ -6952,7 +6952,7 @@
     },
     {
         "id": "app.bot.get_disable_bot_sysadmin_message",
-        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}}{{.UserName}} wurde deaktiviert. Sie verwalteten die folgenden Bot-Konten, die nun deaktiviert wurden.\n\n{{.BotNames}}{{else}}{{.UserName}} wurde deaktiviert und verwaltete {{.NumBots}} Bot-Konten, die nun deaktiviert wurden, darunter die folgenden:\n\n{{.BotNames}}{{end}}Sie können den Besitz jedes Bots übernehmen, indem Sie ihn unter **Integrationen > Bot-Konten** aktivieren und neue Token für den Bot erstellen.\n\nErfahren Sie mehr in der [Dokumentation](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} wurde deaktiviert. Sie verwalteten die folgenden Bot-Konten, die noch aktiviert sind.\n\n{{.BotNames}}\n{{else}}{{.UserName}} wurde deaktiviert und verwaltete {{.NumBots}} Bot-Konten, die immer noch aktiviert sind, einschließlich der folgenden:\n\n{{.BotNames}}{{end}}Wir empfehlen Ihnen dringend, die Eigentumsrechte an jedem Bot zu übernehmen, indem Sie ihn unter **Integrationen > Bot-Konten** wieder aktivieren und neue Token für den Bot erstellen.\n\nErfahren Sie mehr in der [Dokumentation] (https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nWenn Sie möchten, dass Bot-Konten nach der Benutzerdeaktivierung automatisch deaktiviert werden, setzen Sie \"Bot-Konten nach der Benutzerdeaktivierung deaktivieren\" in **Systemkonsole > Integrationen > Bot-Konten** auf wahr.{{end}}"
+        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}}{{.UserName}} wurde deaktiviert. Sie verwalteten die folgenden Bot-Konten, die nun deaktiviert wurden.\n\n{{.BotNames}}{{else}}{{.UserName}} wurde deaktiviert und verwaltete {{.NumBots}} Bot-Konten, die nun deaktiviert wurden, darunter die folgenden:\n\n{{.BotNames}}{{end}}Sie können den Besitz jedes Bots übernehmen, indem Sie ihn unter **Integrationen > Bot-Konten** aktivieren und neue Token für den Bot erstellen.\n\nErfahren Sie mehr in der [Dokumentation](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} wurde deaktiviert. Sie verwalteten die folgenden Bot-Konten, die noch aktiviert sind.\n\n{{.BotNames}}\n{{else}}{{.UserName}} wurde deaktiviert und verwaltete {{.NumBots}} Bot-Konten, die immer noch aktiviert sind, einschließlich der folgenden:\n\n{{.BotNames}}{{end}}Wir empfehlen Ihnen dringend, die Eigentumsrechte an jedem Bot zu übernehmen, indem Sie ihn unter **Integrationen > Bot-Konten** wieder aktivieren und neue Token für den Bot erstellen.\n\nErfahren Sie mehr in der [Dokumentation] (https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nWenn Sie möchten, dass Bot-Konten nach der Benutzerdeaktivierung automatisch deaktiviert werden, setzen Sie \"Bot-Konten nach der Benutzerdeaktivierung deaktivieren\" in **Systemkonsole > Integrationen > Bot-Konten** auf wahr.{{end}}"
     },
     {
         "id": "app.bot.createbot.internal_error",
@@ -7044,7 +7044,7 @@
     },
     {
         "id": "api.templates.remove_expired_license.subject",
-        "translation": "Mattermost Enterprise license has been disabled."
+        "translation": "Matterfoss Enterprise license has been disabled."
     },
     {
         "id": "api.templates.remove_expired_license.body.title",
@@ -7296,7 +7296,7 @@
     },
     {
         "id": "api.bot.teams_channels.add_message_mobile",
-        "translation": "Bitte fügen Sie mich den Teams und Kanälen hinzu, mit denen ich interagieren soll. Um dies zu tun, verwenden Sie den Browser oder die Mattermost-Desktop-App."
+        "translation": "Bitte fügen Sie mich den Teams und Kanälen hinzu, mit denen ich interagieren soll. Um dies zu tun, verwenden Sie den Browser oder die Matterfoss-Desktop-App."
     },
     {
         "id": "api.bot.set_bot_icon_image.too_large.app_error",

@@ -7,14 +7,14 @@ import (
 	"net/http"
 )
 
-// MattermostTransport is an implementation of http.RoundTripper that ensures each request contains a custom user agent
-// string to indicate that the request is coming from a Mattermost instance.
-type MattermostTransport struct {
+// MatterfossTransport is an implementation of http.RoundTripper that ensures each request contains a custom user agent
+// string to indicate that the request is coming from a Matterfoss instance.
+type MatterfossTransport struct {
 	// Transport is the underlying http.RoundTripper that is actually used to make the request
 	Transport http.RoundTripper
 }
 
-func (t *MattermostTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+func (t *MatterfossTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req.Header.Set("User-Agent", defaultUserAgent)
 
 	return t.Transport.RoundTrip(req)

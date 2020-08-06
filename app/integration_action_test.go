@@ -16,7 +16,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 // Test for MM-13598 where an invalid integration URL was causing a crash
@@ -483,12 +483,12 @@ func TestSubmitInteractiveDialog(t *testing.T) {
 
 		import (
 			"net/http"
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {
@@ -771,12 +771,12 @@ func TestPostActionRelativePluginURL(t *testing.T) {
 
 		import (
 			"net/http"
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) 	ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {
@@ -972,11 +972,11 @@ func TestDoPluginRequest(t *testing.T) {
 			"reflect"
 			"sort"
 
-			"github.com/mattermost/mattermost-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {

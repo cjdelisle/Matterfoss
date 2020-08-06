@@ -18,11 +18,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"github.com/mattermost/mattermost-server/v5/testlib"
-	"github.com/mattermost/mattermost-server/v5/utils"
-	"github.com/mattermost/mattermost-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/testlib"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 
 	svg "github.com/h2non/go-is-svg"
 	"github.com/stretchr/testify/assert"
@@ -640,9 +640,9 @@ func TestGetInstalledMarketplacePlugins(t *testing.T) {
 	samplePlugins := []*model.MarketplacePlugin{
 		{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
-				HomepageURL: "https://example.com/mattermost/mattermost-plugin-nps",
+				HomepageURL: "https://example.com/matterfoss/matterfoss-plugin-nps",
 				IconData:    "https://example.com/icon.svg",
-				DownloadURL: "https://example.com/mattermost/mattermost-plugin-nps/releases/download/v1.0.4/com.mattermost.nps-1.0.4.tar.gz",
+				DownloadURL: "https://example.com/matterfoss/matterfoss-plugin-nps/releases/download/v1.0.4/com.matterfoss.nps-1.0.4.tar.gz",
 				Labels: []model.MarketplaceLabel{
 					{
 						Name:        "someName",
@@ -650,9 +650,9 @@ func TestGetInstalledMarketplacePlugins(t *testing.T) {
 					},
 				},
 				Manifest: &model.Manifest{
-					Id:               "com.mattermost.nps",
+					Id:               "com.matterfoss.nps",
 					Name:             "User Satisfaction Surveys",
-					Description:      "This plugin sends quarterly user satisfaction surveys to gather feedback and help improve Mattermost.",
+					Description:      "This plugin sends quarterly user satisfaction surveys to gather feedback and help improve Matterfoss.",
 					Version:          "1.0.4",
 					MinServerVersion: "5.14.0",
 				},
@@ -784,13 +784,13 @@ func TestSearchGetMarketplacePlugins(t *testing.T) {
 	samplePlugins := []*model.MarketplacePlugin{
 		{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
-				HomepageURL: "example.com/mattermost/mattermost-plugin-nps",
+				HomepageURL: "example.com/matterfoss/matterfoss-plugin-nps",
 				IconData:    "Cjxzdmcgdmlld0JveD0nMCAwIDEwNSA5MycgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KPHBhdGggZD0nTTY2LDBoMzl2OTN6TTM4LDBoLTM4djkzek01MiwzNWwyNSw1OGgtMTZsLTgtMThoLTE4eicgZmlsbD0nI0VEMUMyNCcvPgo8L3N2Zz4K",
-				DownloadURL: "example.com/mattermost/mattermost-plugin-nps/releases/download/v1.0.4/com.mattermost.nps-1.0.4.tar.gz",
+				DownloadURL: "example.com/matterfoss/matterfoss-plugin-nps/releases/download/v1.0.4/com.matterfoss.nps-1.0.4.tar.gz",
 				Manifest: &model.Manifest{
-					Id:               "com.mattermost.nps",
+					Id:               "com.matterfoss.nps",
 					Name:             "User Satisfaction Surveys",
-					Description:      "This plugin sends quarterly user satisfaction surveys to gather feedback and help improve Mattermost.",
+					Description:      "This plugin sends quarterly user satisfaction surveys to gather feedback and help improve Matterfoss.",
 					Version:          "1.0.4",
 					MinServerVersion: "5.14.0",
 				},
@@ -914,7 +914,7 @@ func TestGetLocalPluginInMarketplace(t *testing.T) {
 	samplePlugins := []*model.MarketplacePlugin{
 		{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
-				HomepageURL: "https://example.com/mattermost/mattermost-plugin-nps",
+				HomepageURL: "https://example.com/matterfoss/matterfoss-plugin-nps",
 				IconData:    "https://example.com/icon.svg",
 				DownloadURL: "www.github.com/example",
 				Manifest: &model.Manifest{
@@ -1078,7 +1078,7 @@ func TestGetPrepackagedPluginInMarketplace(t *testing.T) {
 	marketplacePlugins := []*model.MarketplacePlugin{
 		{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
-				HomepageURL: "https://example.com/mattermost/mattermost-plugin-nps",
+				HomepageURL: "https://example.com/matterfoss/matterfoss-plugin-nps",
 				IconData:    "https://example.com/icon.svg",
 				DownloadURL: "www.github.com/example",
 				Manifest: &model.Manifest{
@@ -1207,7 +1207,7 @@ func TestInstallMarketplacePlugin(t *testing.T) {
 	samplePlugins := []*model.MarketplacePlugin{
 		{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
-				HomepageURL: "https://example.com/mattermost/mattermost-plugin-nps",
+				HomepageURL: "https://example.com/matterfoss/matterfoss-plugin-nps",
 				IconData:    "https://example.com/icon.svg",
 				DownloadURL: pluginServer.URL,
 				Manifest: &model.Manifest{
@@ -1222,7 +1222,7 @@ func TestInstallMarketplacePlugin(t *testing.T) {
 		},
 		{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
-				HomepageURL: "https://example.com/mattermost/mattermost-plugin-nps",
+				HomepageURL: "https://example.com/matterfoss/matterfoss-plugin-nps",
 				IconData:    "https://example.com/icon.svg",
 				DownloadURL: pluginServer.URL,
 				Manifest: &model.Manifest{

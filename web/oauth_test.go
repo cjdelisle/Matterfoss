@@ -13,9 +13,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/einterfaces"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -405,7 +405,7 @@ func TestOAuthComplete(t *testing.T) {
 	assert.NotNil(t, err)
 	closeBody(r)
 
-	// We are going to use mattermost as the provider emulating gitlab
+	// We are going to use matterfoss as the provider emulating gitlab
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.ServiceSettings.EnableOAuthServiceProvider = true })
 
 	defaultRolePermissions := th.SaveDefaultRolePermissions()
@@ -435,7 +435,7 @@ func TestOAuthComplete(t *testing.T) {
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.GitLabSettings.TokenEndpoint = ApiClient.Url + "/oauth/access_token" })
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.GitLabSettings.UserApiEndpoint = ApiClient.ApiUrl + "/users/me" })
 
-	provider := &MattermostTestProvider{}
+	provider := &MatterfossTestProvider{}
 
 	authRequest := &model.AuthorizeRequest{
 		ResponseType: model.AUTHCODE_RESPONSE_TYPE,
@@ -546,10 +546,10 @@ func closeBody(r *http.Response) {
 	}
 }
 
-type MattermostTestProvider struct {
+type MatterfossTestProvider struct {
 }
 
-func (m *MattermostTestProvider) GetUserFromJson(data io.Reader) *model.User {
+func (m *MatterfossTestProvider) GetUserFromJson(data io.Reader) *model.User {
 	user := model.UserFromJson(data)
 	user.AuthData = &user.Email
 	return user

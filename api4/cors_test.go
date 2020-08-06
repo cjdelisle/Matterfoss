@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -58,7 +58,7 @@ func TestCORSRequestHandling(t *testing.T) {
 			"",
 			false,
 			func(req *http.Request) {
-				req.Header.Set("Origin", "http://pre-release.mattermost.com")
+				req.Header.Set("Origin", "http://pre-release.matterfoss.org")
 			},
 			"*",
 			"",
@@ -75,46 +75,46 @@ func TestCORSRequestHandling(t *testing.T) {
 			"",
 		},
 		"CORSEnabledMatching": {
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			"",
 			false,
 			func(req *http.Request) {
-				req.Header.Set("Origin", "http://mattermost.com")
+				req.Header.Set("Origin", "http://matterfoss.org")
 			},
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			"",
 			"",
 		},
 		"CORSEnabledMultiple": {
-			"http://spinmint.com http://mattermost.com",
+			"http://spinmint.com http://matterfoss.org",
 			"",
 			false,
 			func(req *http.Request) {
-				req.Header.Set("Origin", "http://mattermost.com")
+				req.Header.Set("Origin", "http://matterfoss.org")
 			},
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			"",
 			"",
 		},
 		"CORSEnabledWithCredentials": {
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			"",
 			true,
 			func(req *http.Request) {
-				req.Header.Set("Origin", "http://mattermost.com")
+				req.Header.Set("Origin", "http://matterfoss.org")
 			},
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			"",
 			"true",
 		},
 		"CORSEnabledWithHeaders": {
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			"x-my-special-header x-blueberry",
 			true,
 			func(req *http.Request) {
-				req.Header.Set("Origin", "http://mattermost.com")
+				req.Header.Set("Origin", "http://matterfoss.org")
 			},
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			"X-My-Special-Header, X-Blueberry",
 			"true",
 		},

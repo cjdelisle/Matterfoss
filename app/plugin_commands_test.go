@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -38,8 +38,8 @@ func TestPluginCommand(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type configuration struct {
@@ -47,7 +47,7 @@ func TestPluginCommand(t *testing.T) {
 			}
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 
 				configuration configuration
 			}
@@ -119,8 +119,8 @@ func TestPluginCommand(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type configuration struct {
@@ -128,7 +128,7 @@ func TestPluginCommand(t *testing.T) {
 			}
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 
 				configuration configuration
 			}
@@ -226,8 +226,8 @@ func TestPluginCommand(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type configuration struct {
@@ -235,7 +235,7 @@ func TestPluginCommand(t *testing.T) {
 			}
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 
 				configuration configuration
 			}

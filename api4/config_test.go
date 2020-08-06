@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -288,7 +288,7 @@ func TestUpdateConfigRestrictSystemAdmin(t *testing.T) {
 }
 
 func TestGetEnvironmentConfig(t *testing.T) {
-	os.Setenv("MM_SERVICESETTINGS_SITEURL", "http://example.mattermost.com")
+	os.Setenv("MM_SERVICESETTINGS_SITEURL", "http://example.matterfoss.org")
 	os.Setenv("MM_SERVICESETTINGS_ENABLECUSTOMEMOJI", "true")
 	defer os.Unsetenv("MM_SERVICESETTINGS_SITEURL")
 	defer os.Unsetenv("MM_SERVICESETTINGS_ENABLECUSTOMEMOJI")
@@ -465,10 +465,10 @@ func TestPatchConfig(t *testing.T) {
 			assert.False(t, *oldConfig.PasswordSettings.Lowercase)
 			assert.NotEqual(t, 15, *oldConfig.PasswordSettings.MinimumLength)
 			assert.Equal(t, "DEBUG", *oldConfig.LogSettings.ConsoleLevel)
-			assert.True(t, oldConfig.PluginSettings.PluginStates["com.mattermost.nps"].Enable)
+			assert.True(t, oldConfig.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
 
 			states := make(map[string]*model.PluginState)
-			states["com.mattermost.nps"] = &model.PluginState{Enable: *model.NewBool(false)}
+			states["com.matterfoss.nps"] = &model.PluginState{Enable: *model.NewBool(false)}
 			config := model.Config{PasswordSettings: model.PasswordSettings{
 				Lowercase:     model.NewBool(true),
 				MinimumLength: model.NewInt(15),
@@ -489,7 +489,7 @@ func TestPatchConfig(t *testing.T) {
 			assert.True(t, *updatedConfig.PasswordSettings.Lowercase)
 			assert.Equal(t, "INFO", *updatedConfig.LogSettings.ConsoleLevel)
 			assert.Equal(t, []string{"another-channel"}, updatedConfig.TeamSettings.ExperimentalDefaultChannels)
-			assert.False(t, updatedConfig.PluginSettings.PluginStates["com.mattermost.nps"].Enable)
+			assert.False(t, updatedConfig.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
 			assert.Equal(t, "no-cache, no-store, must-revalidate", response.Header.Get("Cache-Control"))
 
 			// reset the config

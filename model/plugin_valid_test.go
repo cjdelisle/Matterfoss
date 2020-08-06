@@ -21,7 +21,7 @@ func TestIsValidPluginId(t *testing.T) {
 		"abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij1": false,
 		"../path":     false,
 		"/etc/passwd": false,
-		"com.mattermost.plugin_with_features-0.9": true,
+		"com.matterfoss.plugin_with_features-0.9": true,
 		"PLUGINS-THAT-YELL-ARE-OK-2":              true,
 	}
 

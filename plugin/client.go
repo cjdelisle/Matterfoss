@@ -12,7 +12,7 @@ const (
 	BOT_USER_KEY        = INTERNAL_KEY_PREFIX + "botid"
 )
 
-// Starts the serving of a Mattermost plugin over net/rpc. gRPC is not yet supported.
+// Starts the serving of a Matterfoss plugin over net/rpc. gRPC is not yet supported.
 //
 // Call this when your plugin is ready to start.
 func ClientMain(pluginImplementation interface{}) {
@@ -20,7 +20,7 @@ func ClientMain(pluginImplementation interface{}) {
 		SetAPI(api API)
 		SetHelpers(helpers Helpers)
 	}); !ok {
-		panic("Plugin implementation given must embed plugin.MattermostPlugin")
+		panic("Plugin implementation given must embed plugin.MatterfossPlugin")
 	} else {
 		impl.SetAPI(nil)
 		impl.SetHelpers(nil)
@@ -36,7 +36,7 @@ func ClientMain(pluginImplementation interface{}) {
 	})
 }
 
-type MattermostPlugin struct {
+type MatterfossPlugin struct {
 	// API exposes the plugin api, and becomes available just prior to the OnActive hook.
 	API     API
 	Helpers Helpers
@@ -44,11 +44,11 @@ type MattermostPlugin struct {
 
 // SetAPI persists the given API interface to the plugin. It is invoked just prior to the
 // OnActivate hook, exposing the API for use by the plugin.
-func (p *MattermostPlugin) SetAPI(api API) {
+func (p *MatterfossPlugin) SetAPI(api API) {
 	p.API = api
 }
 
 // SetHelpers does the same thing as SetAPI except for the plugin helpers.
-func (p *MattermostPlugin) SetHelpers(helpers Helpers) {
+func (p *MatterfossPlugin) SetHelpers(helpers Helpers) {
 	p.Helpers = helpers
 }

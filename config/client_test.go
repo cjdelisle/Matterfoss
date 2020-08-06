@@ -9,8 +9,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/mattermost/mattermost-server/v5/config"
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/config"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 func TestGetClientConfig(t *testing.T) {
@@ -33,7 +33,7 @@ func TestGetClientConfig(t *testing.T) {
 					AllowCustomThemes: bToP(false),
 				},
 				ServiceSettings: model.ServiceSettings{
-					WebsocketURL:        sToP("ws://mattermost.example.com:8065"),
+					WebsocketURL:        sToP("ws://matterfoss.example.com:8065"),
 					WebsocketPort:       iToP(80),
 					WebsocketSecurePort: iToP(443),
 				},
@@ -45,7 +45,7 @@ func TestGetClientConfig(t *testing.T) {
 				"EmailNotificationContentsType":    "full",
 				"AllowCustomThemes":                "true",
 				"EnforceMultifactorAuthentication": "false",
-				"WebsocketURL":                     "ws://mattermost.example.com:8065",
+				"WebsocketURL":                     "ws://matterfoss.example.com:8065",
 				"WebsocketPort":                    "80",
 				"WebsocketSecurePort":              "443",
 			},
@@ -221,7 +221,7 @@ func TestGetLimitedClientConfig(t *testing.T) {
 					AllowCustomThemes: bToP(false),
 				},
 				ServiceSettings: model.ServiceSettings{
-					WebsocketURL:        sToP("ws://mattermost.example.com:8065"),
+					WebsocketURL:        sToP("ws://matterfoss.example.com:8065"),
 					WebsocketPort:       iToP(80),
 					WebsocketSecurePort: iToP(443),
 				},
@@ -231,7 +231,7 @@ func TestGetLimitedClientConfig(t *testing.T) {
 			map[string]string{
 				"DiagnosticId":                     "",
 				"EnforceMultifactorAuthentication": "false",
-				"WebsocketURL":                     "ws://mattermost.example.com:8065",
+				"WebsocketURL":                     "ws://matterfoss.example.com:8065",
 				"WebsocketPort":                    "80",
 				"WebsocketSecurePort":              "443",
 			},

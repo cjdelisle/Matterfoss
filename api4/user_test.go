@@ -12,10 +12,10 @@ import (
 	"time"
 
 	"github.com/dgryski/dgoogauth"
-	"github.com/mattermost/mattermost-server/v5/app"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/services/mailservice"
-	"github.com/mattermost/mattermost-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v5/app"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/services/mailservice"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -87,7 +87,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 		th.App.UpdateConfig(func(cfg *model.Config) {
 			*cfg.TeamSettings.EnableOpenServer = true
 			*cfg.TeamSettings.EnableUserCreation = true
-			*cfg.TeamSettings.RestrictCreationToDomains = "mattermost.com"
+			*cfg.TeamSettings.RestrictCreationToDomains = "matterfoss.org"
 			*cfg.ServiceSettings.EnableAPIUserDeletion = true
 		})
 
@@ -97,7 +97,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 		})
 
 		th.TestForSystemAdminAndLocal(t, func(t *testing.T, client *model.Client4) {
-			user := &model.User{Email: "foobar+testdomainrestriction@mattermost.com", Password: "Password1", Username: GenerateTestUsername()}
+			user := &model.User{Email: "foobar+testdomainrestriction@matterfoss.org", Password: "Password1", Username: GenerateTestUsername()}
 			u, resp := client.CreateUser(user) // we need the returned created user to use its Id for deletion.
 			CheckNoError(t, resp)
 			_, resp = client.PermanentDeleteUser(u.Id)
@@ -105,7 +105,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 		}, "ValidUser")
 
 		th.TestForSystemAdminAndLocal(t, func(t *testing.T, client *model.Client4) {
-			user := &model.User{Email: "foobar+testdomainrestriction@mattermost.org", Password: "Password1", Username: GenerateTestUsername()}
+			user := &model.User{Email: "foobar+testdomainrestriction@matterfoss.org", Password: "Password1", Username: GenerateTestUsername()}
 			_, resp := client.CreateUser(user)
 			CheckBadRequestStatus(t, resp)
 		}, "InvalidEmail")
@@ -113,7 +113,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 		t.Run("ValidAuthServiceFilter", func(t *testing.T) {
 			t.Run("SystemAdminClient", func(t *testing.T) {
 				user := &model.User{
-					Email:       "foobar+testdomainrestriction@mattermost.org",
+					Email:       "foobar+testdomainrestriction@matterfoss.org",
 					Username:    GenerateTestUsername(),
 					AuthService: "ldap",
 					AuthData:    model.NewString("999099"),
@@ -125,7 +125,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 			})
 			t.Run("LocalClient", func(t *testing.T) {
 				user := &model.User{
-					Email:       "foobar+testdomainrestrictionlocalclient@mattermost.org",
+					Email:       "foobar+testdomainrestrictionlocalclient@matterfoss.org",
 					Username:    GenerateTestUsername(),
 					AuthService: "ldap",
 					AuthData:    model.NewString("999100"),
@@ -138,7 +138,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 		})
 
 		th.TestForSystemAdminAndLocal(t, func(t *testing.T, client *model.Client4) {
-			user := &model.User{Email: "foobar+testdomainrestriction@mattermost.org", Password: "Password1", Username: GenerateTestUsername(), AuthService: "ldap"}
+			user := &model.User{Email: "foobar+testdomainrestriction@matterfoss.org", Password: "Password1", Username: GenerateTestUsername(), AuthService: "ldap"}
 			_, resp := th.Client.CreateUser(user)
 			CheckBadRequestStatus(t, resp)
 		}, "InvalidAuthServiceFilter")
@@ -153,7 +153,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 		})
 
 		th.TestForSystemAdminAndLocal(t, func(t *testing.T, client *model.Client4) {
-			emailAddr := "foobar+testinvalidrole@mattermost.com"
+			emailAddr := "foobar+testinvalidrole@matterfoss.org"
 			user := &model.User{Email: emailAddr, Password: "Password1", Username: GenerateTestUsername(), Roles: "system_user system_admin"}
 			_, resp := client.CreateUser(user)
 			CheckNoError(t, resp)
@@ -170,7 +170,7 @@ func TestCreateUserInputFilter(t *testing.T) {
 			*cfg.TeamSettings.EnableOpenServer = true
 			*cfg.TeamSettings.EnableUserCreation = true
 		})
-		user := &model.User{Id: "AAAAAAAAAAAAAAAAAAAAAAAAAA", Email: "foobar+testinvalidid@mattermost.com", Password: "Password1", Username: GenerateTestUsername(), Roles: "system_user system_admin"}
+		user := &model.User{Id: "AAAAAAAAAAAAAAAAAAAAAAAAAA", Email: "foobar+testinvalidid@matterfoss.org", Password: "Password1", Username: GenerateTestUsername(), Roles: "system_user system_admin"}
 		_, resp := client.CreateUser(user)
 		CheckBadRequestStatus(t, resp)
 	}, "InvalidId")

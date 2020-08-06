@@ -7,14 +7,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 )
 
 const (
 	LOG_ROTATE_SIZE           = 10000
-	LOG_FILENAME              = "mattermost.log"
+	LOG_FILENAME              = "matterfoss.log"
 	LOG_NOTIFICATION_FILENAME = "notifications.log"
 )
 

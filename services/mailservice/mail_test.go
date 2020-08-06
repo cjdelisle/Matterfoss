@@ -18,10 +18,10 @@ import (
 	"net/mail"
 	"net/smtp"
 
-	"github.com/mattermost/mattermost-server/v5/config"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/services/filesstore"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/config"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/services/filesstore"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -257,8 +257,8 @@ func TestSendMailUsingConfigAdvanced(t *testing.T) {
 	mail := mailData{
 		mimeTo:        "test@example.com",
 		smtpTo:        "test2@example.com",
-		from:          mail.Address{Name: "Nobody", Address: "nobody@mattermost.com"},
-		replyTo:       mail.Address{Name: "ReplyTo", Address: "reply_to@mattermost.com"},
+		from:          mail.Address{Name: "Nobody", Address: "nobody@matterfoss.org"},
+		replyTo:       mail.Address{Name: "ReplyTo", Address: "reply_to@matterfoss.org"},
 		subject:       "Testing this email",
 		htmlBody:      "This is a test from autobot",
 		attachments:   attachments,

@@ -1,6 +1,6 @@
 # Link Testing
  
-Links in Mattermosts should render as specified below.
+Links in Matterfosss should render as specified below.
 
 #### These strings should auto-link:
  

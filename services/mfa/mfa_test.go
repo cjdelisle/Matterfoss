@@ -11,10 +11,10 @@ import (
 	"time"
 
 	"github.com/dgryski/dgoogauth"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin/plugintest/mock"
-	"github.com/mattermost/mattermost-server/v5/store/storetest/mocks"
-	"github.com/mattermost/mattermost-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -82,8 +82,8 @@ func TestGetIssuerFromUrl(t *testing.T) {
 		{"http://somewebsite.com/chat", url.QueryEscape("somewebsite.com/chat")},
 		{"somewebsite.com ", url.QueryEscape("somewebsite.com")},
 		{"http://localhost:8065", url.QueryEscape("localhost:8065")},
-		{"", "Mattermost"},
-		{"  ", "Mattermost"},
+		{"", "Matterfoss"},
+		{"  ", "Matterfoss"},
 	}
 
 	for _, c := range cases {

@@ -6,8 +6,8 @@ package app
 import (
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
 	"github.com/stretchr/testify/require"
 )
 
@@ -20,12 +20,12 @@ func TestHealthCheckJob(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/model"
-				"github.com/mattermost/mattermost-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {

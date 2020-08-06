@@ -8,12 +8,12 @@ import (
 
 	"github.com/avct/uasurfer"
 
-	"github.com/mattermost/mattermost-server/v5/app"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/app"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
 
-// MattermostApp describes downloads for the Mattermost App
-type MattermostApp struct {
+// MatterfossApp describes downloads for the Matterfoss App
+type MatterfossApp struct {
 	LogoSrc                string
 	Title                  string
 	SupportedVersionString string
@@ -64,11 +64,11 @@ func renderUnsupportedBrowser(app app.AppIface, w http.ResponseWriter, r *http.R
 	page.Props["DownloadAppOrUpgradeBrowserString"] = app.T("web.error.unsupported_browser.download_app_or_upgrade_browser")
 	page.Props["LearnMoreString"] = app.T("web.error.unsupported_browser.learn_more")
 
-	// Mattermost app version
+	// Matterfoss app version
 	if isWindows {
-		page.Props["App"] = renderMattermostAppWindows(app)
+		page.Props["App"] = renderMatterfossAppWindows(app)
 	} else if isMacOSX {
-		page.Props["App"] = renderMattermostAppMac(app)
+		page.Props["App"] = renderMatterfossAppMac(app)
 	}
 
 	// Browsers to download
@@ -88,27 +88,27 @@ func renderUnsupportedBrowser(app app.AppIface, w http.ResponseWriter, r *http.R
 	page.RenderToWriter(w)
 }
 
-func renderMattermostAppMac(app app.AppIface) MattermostApp {
-	return MattermostApp{
+func renderMatterfossAppMac(app app.AppIface) MatterfossApp {
+	return MatterfossApp{
 		"/static/images/browser-icons/mac.png",
 		app.T("web.error.unsupported_browser.download_the_app"),
 		app.T("web.error.unsupported_browser.min_os_version.mac"),
 		app.T("web.error.unsupported_browser.download"),
-		"https://mattermost.com/download/#mattermostApps",
+		"https://matterfoss.org/download/#matterfossApps",
 		app.T("web.error.unsupported_browser.install_guide.mac"),
-		"https://docs.mattermost.com/install/desktop.html#mac-os-x-10-9",
+		"https://docs.matterfoss.org/install/desktop.html#mac-os-x-10-9",
 	}
 }
 
-func renderMattermostAppWindows(app app.AppIface) MattermostApp {
-	return MattermostApp{
+func renderMatterfossAppWindows(app app.AppIface) MatterfossApp {
+	return MatterfossApp{
 		"/static/images/browser-icons/windows.svg",
 		app.T("web.error.unsupported_browser.download_the_app"),
 		app.T("web.error.unsupported_browser.min_os_version.windows"),
 		app.T("web.error.unsupported_browser.download"),
-		"https://mattermost.com/download/#mattermostApps",
+		"https://matterfoss.org/download/#matterfossApps",
 		app.T("web.error.unsupported_browser.install_guide.windows"),
-		"https://docs.mattermost.com/install/desktop.html#windows-10-windows-8-1-windows-7",
+		"https://docs.matterfoss.org/install/desktop.html#windows-10-windows-8-1-windows-7",
 	}
 }
 

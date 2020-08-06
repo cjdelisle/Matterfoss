@@ -7,7 +7,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/uber/jaeger-lib/metrics"
 
@@ -52,7 +52,7 @@ func New() (*Tracer, error) {
 	zipkinPropagator := zipkin.NewZipkinB3HTTPHeaderPropagator()
 
 	closer, err := cfg.InitGlobalTracer(
-		"mattermost",
+		"matterfoss",
 		jaegercfg.Logger(LogrusAdapter{}),
 		jaegercfg.Metrics(metrics.NullFactory),
 		jaegercfg.Tag("serverStartTime", time.Now().UTC().Format(time.RFC3339)),

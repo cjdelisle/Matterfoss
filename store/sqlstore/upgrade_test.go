@@ -6,7 +6,7 @@ package sqlstore
 import (
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v5/store"
 	"github.com/stretchr/testify/require"
 )
 
@@ -29,7 +29,7 @@ func TestStoreUpgrade(t *testing.T) {
 		t.Run("upgrade from unsupported version", func(t *testing.T) {
 			saveSchemaVersion(sqlStore, "2.0.0")
 			err := upgradeDatabase(sqlStore, "5.8.0")
-			require.EqualError(t, err, "Database schema version 2.0.0 is no longer supported. This Mattermost server supports automatic upgrades from schema version 3.0.0 through schema version 5.8.0. Please manually upgrade to at least version 3.0.0 before continuing.")
+			require.EqualError(t, err, "Database schema version 2.0.0 is no longer supported. This Matterfoss server supports automatic upgrades from schema version 3.0.0 through schema version 5.8.0. Please manually upgrade to at least version 3.0.0 before continuing.")
 			require.Equal(t, "2.0.0", sqlStore.GetCurrentSchemaVersion())
 		})
 
@@ -73,7 +73,7 @@ func TestStoreUpgrade(t *testing.T) {
 		t.Run("upgrade schema running later major version", func(t *testing.T) {
 			saveSchemaVersion(sqlStore, "6.0.0")
 			err := upgradeDatabase(sqlStore, "5.8.0")
-			require.EqualError(t, err, "Database schema version 6.0.0 is not supported. This Mattermost server supports only >=5.8.0, <6.0.0. Please upgrade to at least version 6.0.0 before continuing.")
+			require.EqualError(t, err, "Database schema version 6.0.0 is not supported. This Matterfoss server supports only >=5.8.0, <6.0.0. Please upgrade to at least version 6.0.0 before continuing.")
 			require.Equal(t, "6.0.0", sqlStore.GetCurrentSchemaVersion())
 		})
 	})

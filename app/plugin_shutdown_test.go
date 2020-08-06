@@ -24,11 +24,11 @@ func TestPluginShutdownTest(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func main() {
@@ -39,11 +39,11 @@ func TestPluginShutdownTest(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) OnDeactivate() error {

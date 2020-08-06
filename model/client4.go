@@ -3359,7 +3359,7 @@ func (c *Client4) UploadLicenseFile(data []byte) (bool, *Response) {
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 
-	part, err := writer.CreateFormFile("license", "test-license.mattermost-license")
+	part, err := writer.CreateFormFile("license", "test-license.matterfoss-license")
 	if err != nil {
 		return false, &Response{Error: NewAppError("UploadLicenseFile", "model.client.set_profile_user.no_file.app_error", nil, err.Error(), http.StatusBadRequest)}
 	}
@@ -3855,7 +3855,7 @@ func (c *Client4) GetLdapGroups() ([]*Group, *Response) {
 	return GroupsFromJson(r.Body), BuildResponse(r)
 }
 
-// LinkLdapGroup creates or undeletes a Mattermost group and associates it to the given LDAP group DN.
+// LinkLdapGroup creates or undeletes a Matterfoss group and associates it to the given LDAP group DN.
 func (c *Client4) LinkLdapGroup(dn string) (*Group, *Response) {
 	path := fmt.Sprintf("%s/groups/%s/link", c.GetLdapRoute(), dn)
 
@@ -3868,7 +3868,7 @@ func (c *Client4) LinkLdapGroup(dn string) (*Group, *Response) {
 	return GroupFromJson(r.Body), BuildResponse(r)
 }
 
-// UnlinkLdapGroup deletes the Mattermost group associated with the given LDAP group DN.
+// UnlinkLdapGroup deletes the Matterfoss group associated with the given LDAP group DN.
 func (c *Client4) UnlinkLdapGroup(dn string) (*Group, *Response) {
 	path := fmt.Sprintf("%s/groups/%s/link", c.GetLdapRoute(), dn)
 
@@ -3893,7 +3893,7 @@ func (c *Client4) MigrateIdLdap(toAttribute string) (bool, *Response) {
 	return CheckStatusOK(r), BuildResponse(r)
 }
 
-// GetGroupsByChannel retrieves the Mattermost Groups associated with a given channel
+// GetGroupsByChannel retrieves the Matterfoss Groups associated with a given channel
 func (c *Client4) GetGroupsByChannel(channelId string, opts GroupSearchOpts) ([]*GroupWithSchemeAdmin, int, *Response) {
 	path := fmt.Sprintf("%s/groups?q=%v&include_member_count=%v&filter_allow_reference=%v", c.GetChannelRoute(channelId), opts.Q, opts.IncludeMemberCount, opts.FilterAllowReference)
 	if opts.PageOpts != nil {
@@ -3917,7 +3917,7 @@ func (c *Client4) GetGroupsByChannel(channelId string, opts GroupSearchOpts) ([]
 	return responseData.Groups, responseData.Count, BuildResponse(r)
 }
 
-// GetGroupsByTeam retrieves the Mattermost Groups associated with a given team
+// GetGroupsByTeam retrieves the Matterfoss Groups associated with a given team
 func (c *Client4) GetGroupsByTeam(teamId string, opts GroupSearchOpts) ([]*GroupWithSchemeAdmin, int, *Response) {
 	path := fmt.Sprintf("%s/groups?q=%v&include_member_count=%v&filter_allow_reference=%v", c.GetTeamRoute(teamId), opts.Q, opts.IncludeMemberCount, opts.FilterAllowReference)
 	if opts.PageOpts != nil {
@@ -3941,7 +3941,7 @@ func (c *Client4) GetGroupsByTeam(teamId string, opts GroupSearchOpts) ([]*Group
 	return responseData.Groups, responseData.Count, BuildResponse(r)
 }
 
-// GetGroupsAssociatedToChannelsByTeam retrieves the Mattermost Groups associated with channels in a given team
+// GetGroupsAssociatedToChannelsByTeam retrieves the Matterfoss Groups associated with channels in a given team
 func (c *Client4) GetGroupsAssociatedToChannelsByTeam(teamId string, opts GroupSearchOpts) (map[string][]*GroupWithSchemeAdmin, *Response) {
 	path := fmt.Sprintf("%s/groups_by_channels?q=%v&filter_allow_reference=%v", c.GetTeamRoute(teamId), opts.Q, opts.FilterAllowReference)
 	if opts.PageOpts != nil {
@@ -3964,7 +3964,7 @@ func (c *Client4) GetGroupsAssociatedToChannelsByTeam(teamId string, opts GroupS
 	return responseData.GroupsAssociatedToChannels, BuildResponse(r)
 }
 
-// GetGroups retrieves Mattermost Groups
+// GetGroups retrieves Matterfoss Groups
 func (c *Client4) GetGroups(opts GroupSearchOpts) ([]*Group, *Response) {
 	path := fmt.Sprintf(
 		"%s?include_member_count=%v&not_associated_to_team=%v&not_associated_to_channel=%v&filter_allow_reference=%v&q=%v&filter_parent_team_permitted=%v",
@@ -3991,7 +3991,7 @@ func (c *Client4) GetGroups(opts GroupSearchOpts) ([]*Group, *Response) {
 	return GroupsFromJson(r.Body), BuildResponse(r)
 }
 
-// GetGroupsByUserId retrieves Mattermost Groups for a user
+// GetGroupsByUserId retrieves Matterfoss Groups for a user
 func (c *Client4) GetGroupsByUserId(userId string) ([]*Group, *Response) {
 	path := fmt.Sprintf(
 		"%s/%v/groups",
@@ -4119,7 +4119,7 @@ func (c *Client4) PostLog(message map[string]string) (map[string]string, *Respon
 
 // OAuth Section
 
-// CreateOAuthApp will register a new OAuth 2.0 client application with Mattermost acting as an OAuth 2.0 service provider.
+// CreateOAuthApp will register a new OAuth 2.0 client application with Matterfoss acting as an OAuth 2.0 service provider.
 func (c *Client4) CreateOAuthApp(app *OAuthApp) (*OAuthApp, *Response) {
 	r, err := c.DoApiPost(c.GetOAuthAppsRoute(), app.ToJson())
 	if err != nil {
@@ -4129,7 +4129,7 @@ func (c *Client4) CreateOAuthApp(app *OAuthApp) (*OAuthApp, *Response) {
 	return OAuthAppFromJson(r.Body), BuildResponse(r)
 }
 
-// UpdateOAuthApp updates a page of registered OAuth 2.0 client applications with Mattermost acting as an OAuth 2.0 service provider.
+// UpdateOAuthApp updates a page of registered OAuth 2.0 client applications with Matterfoss acting as an OAuth 2.0 service provider.
 func (c *Client4) UpdateOAuthApp(app *OAuthApp) (*OAuthApp, *Response) {
 	r, err := c.DoApiPut(c.GetOAuthAppRoute(app.Id), app.ToJson())
 	if err != nil {
@@ -4139,7 +4139,7 @@ func (c *Client4) UpdateOAuthApp(app *OAuthApp) (*OAuthApp, *Response) {
 	return OAuthAppFromJson(r.Body), BuildResponse(r)
 }
 
-// GetOAuthApps gets a page of registered OAuth 2.0 client applications with Mattermost acting as an OAuth 2.0 service provider.
+// GetOAuthApps gets a page of registered OAuth 2.0 client applications with Matterfoss acting as an OAuth 2.0 service provider.
 func (c *Client4) GetOAuthApps(page, perPage int) ([]*OAuthApp, *Response) {
 	query := fmt.Sprintf("?page=%v&per_page=%v", page, perPage)
 	r, err := c.DoApiGet(c.GetOAuthAppsRoute()+query, "")
@@ -4150,7 +4150,7 @@ func (c *Client4) GetOAuthApps(page, perPage int) ([]*OAuthApp, *Response) {
 	return OAuthAppListFromJson(r.Body), BuildResponse(r)
 }
 
-// GetOAuthApp gets a registered OAuth 2.0 client application with Mattermost acting as an OAuth 2.0 service provider.
+// GetOAuthApp gets a registered OAuth 2.0 client application with Matterfoss acting as an OAuth 2.0 service provider.
 func (c *Client4) GetOAuthApp(appId string) (*OAuthApp, *Response) {
 	r, err := c.DoApiGet(c.GetOAuthAppRoute(appId), "")
 	if err != nil {
@@ -4160,7 +4160,7 @@ func (c *Client4) GetOAuthApp(appId string) (*OAuthApp, *Response) {
 	return OAuthAppFromJson(r.Body), BuildResponse(r)
 }
 
-// GetOAuthAppInfo gets a sanitized version of a registered OAuth 2.0 client application with Mattermost acting as an OAuth 2.0 service provider.
+// GetOAuthAppInfo gets a sanitized version of a registered OAuth 2.0 client application with Matterfoss acting as an OAuth 2.0 service provider.
 func (c *Client4) GetOAuthAppInfo(appId string) (*OAuthApp, *Response) {
 	r, err := c.DoApiGet(c.GetOAuthAppRoute(appId)+"/info", "")
 	if err != nil {
@@ -5295,7 +5295,7 @@ func (c *Client4) RequestTrialLicense(users int) (bool, *Response) {
 	return CheckStatusOK(r), BuildResponse(r)
 }
 
-// GetGroupStats retrieves stats for a Mattermost Group
+// GetGroupStats retrieves stats for a Matterfoss Group
 func (c *Client4) GetGroupStats(groupID string) (*GroupStats, *Response) {
 	r, appErr := c.DoApiGet(c.GetGroupRoute(groupID)+"/stats", "")
 	if appErr != nil {

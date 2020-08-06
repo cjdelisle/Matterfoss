@@ -101,7 +101,7 @@
     },
     {
         "id": "api.admin.test_email.subject",
-        "translation": "Mattermost - 電子メール設定のテスト"
+        "translation": "Matterfoss - 電子メール設定のテスト"
     },
     {
         "id": "api.admin.test_s3.missing_s3_bucket",
@@ -357,7 +357,7 @@
     },
     {
         "id": "api.command.invite_people.desc",
-        "translation": "あなたのMattermostチームへ招待する電子メールを送る"
+        "translation": "あなたのMatterfossチームへ招待する電子メールを送る"
     },
     {
         "id": "api.command.invite_people.email_invitations_off",
@@ -639,7 +639,7 @@
     },
     {
         "id": "api.command_help.desc",
-        "translation": "Mattermostヘルプページを開く"
+        "translation": "Matterfossヘルプページを開く"
     },
     {
         "id": "api.command_help.name",
@@ -651,7 +651,7 @@
     },
     {
         "id": "api.command_invite.channel.error",
-        "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.mattermost.com/default-channel-handle-documentation)を使用してください。"
+        "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.matterfoss.com/default-channel-handle-documentation)を使用してください。"
     },
     {
         "id": "api.command_invite.desc",
@@ -743,7 +743,7 @@
     },
     {
         "id": "api.command_logout.desc",
-        "translation": "Mattermostからログアウトする"
+        "translation": "Matterfossからログアウトする"
     },
     {
         "id": "api.command_logout.name",
@@ -795,7 +795,7 @@
     },
     {
         "id": "api.command_mute.error",
-        "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.mattermost.com/default-channel-handle-documentation)を使用してください。"
+        "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.matterfoss.com/default-channel-handle-documentation)を使用してください。"
     },
     {
         "id": "api.command_mute.hint",
@@ -807,7 +807,7 @@
     },
     {
         "id": "api.command_mute.no_channel.error",
-        "translation": "指定したチャンネルが見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.mattermost.com/default-channel-handle-documentation)を使用してください。"
+        "translation": "指定したチャンネルが見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.matterfoss.com/default-channel-handle-documentation)を使用してください。"
     },
     {
         "id": "api.command_mute.not_member.error",
@@ -1639,7 +1639,7 @@
     },
     {
         "id": "api.slackimport.slack_add_channels.merge",
-        "translation": "Slackチャンネル {{.DisplayName}} は有効なMattermostのチャンネルとして既に存在しています。両方のチャンネルがマージされます。\r\n"
+        "translation": "Slackチャンネル {{.DisplayName}} は有効なMatterfossのチャンネルとして既に存在しています。両方のチャンネルがマージされます。\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.created",
@@ -1651,11 +1651,11 @@
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing",
-        "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMattermostユーザーとSlackユーザーをマージしました。\r\n"
+        "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMatterfossユーザーとSlackユーザーをマージしました。\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing_failed",
-        "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMattermostユーザーとSlackユーザーをマージしましたが、そのユーザーをチームに追加できませんでした。\r\n"
+        "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMatterfossユーザーとSlackユーザーをマージしましたが、そのユーザーをチームに追加できませんでした。\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1667,7 +1667,7 @@
     },
     {
         "id": "api.slackimport.slack_import.log",
-        "translation": "Mattermost Slackインポートログ\r\n"
+        "translation": "Matterfoss Slackインポートログ\r\n"
     },
     {
         "id": "api.slackimport.slack_import.note1",
@@ -1939,7 +1939,7 @@
     },
     {
         "id": "api.templates.invite_body.extra_info",
-        "translation": "Mattermostにより、メッセージやファイルをPCやスマートフォンから共有することができます。検索やアーカイブもできます。[[{{.TeamDisplayName}}]]に参加すると、新しいチームにサインインし、以下のアドレスからいつでもこの機能にアクセスできます。:"
+        "translation": "Matterfossにより、メッセージやファイルをPCやスマートフォンから共有することができます。検索やアーカイブもできます。[[{{.TeamDisplayName}}]]に参加すると、新しいチームにサインインし、以下のアドレスからいつでもこの機能にアクセスできます。:"
     },
     {
         "id": "api.templates.invite_body.info",
@@ -2083,7 +2083,7 @@
     },
     {
         "id": "api.templates.welcome_body.info3",
-        "translation": "Mattermostにより、メッセージやファイルをPCやスマートフォンから共有することができます。検索やアーカイブもできます。"
+        "translation": "Matterfossにより、メッセージやファイルをPCやスマートフォンから共有することができます。検索やアーカイブもできます。"
     },
     {
         "id": "api.templates.welcome_body.title",
@@ -3483,7 +3483,7 @@
     },
     {
         "id": "ent.ldap.do_login.user_filtered.app_error",
-        "translation": "あなたのAD/LDAPアカウントにはMattermostサーバを利用する権限がありません。システム管理者にAD/LDAPのユーザーフィルターをチェックするよう依頼してください。"
+        "translation": "あなたのAD/LDAPアカウントにはMatterfossサーバを利用する権限がありません。システム管理者にAD/LDAPのユーザーフィルターをチェックするよう依頼してください。"
     },
     {
         "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3503,7 +3503,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure.app_error",
-        "translation": "AD/LDAPでのユーザー検索に失敗しました。MattermostサーバーがAD/LDAPサーバーに接続できることを確認し、再度実行してください。"
+        "translation": "AD/LDAPでのユーザー検索に失敗しました。MatterfossサーバーがAD/LDAPサーバーに接続できることを確認し、再度実行してください。"
     },
     {
         "id": "ent.ldap.validate_filter.app_error",
@@ -3599,7 +3599,7 @@
     },
     {
         "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-        "translation": "ユーザー名は既に別のMattermostユーザーによって使用されています。"
+        "translation": "ユーザー名は既に別のMatterfossユーザーによって使用されています。"
     },
     {
         "id": "ent.saml.attribute.app_error",
@@ -3710,8 +3710,8 @@
         "translation": "チャンネルが取得できません。"
     },
     {
-        "id": "mattermost.bulletin.subject",
-        "translation": "Mattermostセキュリティー通知"
+        "id": "matterfoss.bulletin.subject",
+        "translation": "Matterfossセキュリティー通知"
     },
     {
         "id": "mfa.activate.authenticate.app_error",
@@ -4919,7 +4919,7 @@
     },
     {
         "id": "oauth.gitlab.tos.error",
-        "translation": "GitLabの利用規約が更新されました。gitlab.comで新しい利用規約に同意してから、もう一度Mattermostへログインしてみてください。"
+        "translation": "GitLabの利用規約が更新されました。gitlab.comで新しい利用規約に同意してから、もう一度Matterfossへログインしてみてください。"
     },
     {
         "id": "plugin.api.update_user_status.bad_status",
@@ -5963,11 +5963,11 @@
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support_version",
-        "translation": "あなたのブラウザのバージョンはMattermostではサポートされていません"
+        "translation": "あなたのブラウザのバージョンはMatterfossではサポートされていません"
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support",
-        "translation": "このブラウザはMattermostではサポートされていません"
+        "translation": "このブラウザはMatterfossではサポートされていません"
     },
     {
         "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -6011,7 +6011,7 @@
     },
     {
         "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-        "translation": "より良い体験のために、Mattermostアプリかサポートされたブラウザをダウンロードしてください。"
+        "translation": "より良い体験のために、Matterfossアプリかサポートされたブラウザをダウンロードしてください。"
     },
     {
         "id": "web.error.unsupported_browser.download",
@@ -6399,7 +6399,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-        "translation": "サイズ制限超過。[最大ページサイズ](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)を確認してください。"
+        "translation": "サイズ制限超過。[最大ページサイズ](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)を確認してください。"
     },
     {
         "id": "ent.ldap.syncronize.delete_group_constained_memberships",
@@ -6891,7 +6891,7 @@
     },
     {
         "id": "app.bot.get_disable_bot_sysadmin_message",
-        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在無効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}{{else}}{{.UserName}} は無効化されています。 現在無効化されている以下の Bot アカウントを含む {{.NumBots}} 個の Bot アカウントを管理していました: \n\n{{.BotNames}}{{end}} **統合機能 > Botアカウント** からBotを有効にし、Bot用のトークンを新たに作成することで、これらのBotを引き継ぐことができます。\n\n詳しくは[説明文書](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。{{else}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在も有効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}\n{{else}}{{.UserName}} は無効化されています。以下を含む現在も有効な {{.NumBots}} 個の Bot アカウントを管理していました:\n\n{{.BotNames}}{{end}}**統合機能 > Botアカウント** から各Botを再度有効化し、Bot用のトークンを新たに生成してBotを引き継ぐことを強く推奨します。\n\n詳しくは[説明文書](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。\n\nユーザーが無効化された際に自動でBotも無効化したい場合、**システムコンソール > 統合機能 > Botアカウント** の \"所有者が無効化された際にBotアカウントを無効化する\" を true にしてください。{{end}}"
+        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在無効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}{{else}}{{.UserName}} は無効化されています。 現在無効化されている以下の Bot アカウントを含む {{.NumBots}} 個の Bot アカウントを管理していました: \n\n{{.BotNames}}{{end}} **統合機能 > Botアカウント** からBotを有効にし、Bot用のトークンを新たに作成することで、これらのBotを引き継ぐことができます。\n\n詳しくは[説明文書](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。{{else}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在も有効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}\n{{else}}{{.UserName}} は無効化されています。以下を含む現在も有効な {{.NumBots}} 個の Bot アカウントを管理していました:\n\n{{.BotNames}}{{end}}**統合機能 > Botアカウント** から各Botを再度有効化し、Bot用のトークンを新たに生成してBotを引き継ぐことを強く推奨します。\n\n詳しくは[説明文書](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。\n\nユーザーが無効化された際に自動でBotも無効化したい場合、**システムコンソール > 統合機能 > Botアカウント** の \"所有者が無効化された際にBotアカウントを無効化する\" を true にしてください。{{end}}"
     },
     {
         "id": "app.bot.createbot.internal_error",
@@ -6983,7 +6983,7 @@
     },
     {
         "id": "api.templates.remove_expired_license.subject",
-        "translation": "Mattermostエンタープライズライセンスは無効になっています。"
+        "translation": "Matterfossエンタープライズライセンスは無効になっています。"
     },
     {
         "id": "api.templates.remove_expired_license.body.title",
@@ -7235,7 +7235,7 @@
     },
     {
         "id": "api.bot.teams_channels.add_message_mobile",
-        "translation": "ブラウザ、もしくはMattermostデスクトップアプリから、Botをチーム・チャンネルに追加してください。"
+        "translation": "ブラウザ、もしくはMatterfossデスクトップアプリから、Botをチーム・チャンネルに追加してください。"
     },
     {
         "id": "api.bot.set_bot_icon_image.too_large.app_error",
@@ -7431,11 +7431,11 @@
     },
     {
         "id": "api.license.request_trial_license.app_error",
-        "translation": "トライアルライセンスを取得できませんでした。再度試してみるか、support@mattermost.com に連絡してください。"
+        "translation": "トライアルライセンスを取得できませんでした。再度試してみるか、support@matterfoss.com に連絡してください。"
     },
     {
         "id": "api.license.request-trial.bad-request.terms-not-accepted",
-        "translation": "ライセンスをリクエストするには、Mattermost Software Evaluation Agreement と プライバシーポリシーに同意しなくてはなりません。"
+        "translation": "ライセンスをリクエストするには、Matterfoss Software Evaluation Agreement と プライバシーポリシーに同意しなくてはなりません。"
     },
     {
         "id": "api.license.request-trial.bad-request",

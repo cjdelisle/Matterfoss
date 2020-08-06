@@ -8,31 +8,31 @@ import (
 	"os"
 	"syscall"
 
-	"github.com/mattermost/mattermost-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 )
 
 func main() {
-	// Print angry message to use mattermost command directly
+	// Print angry message to use matterfoss command directly
 	fmt.Println(`
 ------------------------------------ ERROR ------------------------------------------------
-The platform binary has been deprecated, please switch to using the new mattermost binary.
+The platform binary has been deprecated, please switch to using the new matterfoss binary.
 The platform binary will be removed in a future version.
 -------------------------------------------------------------------------------------------
 	`)
 
 	// Execve the real MM binary
 	args := os.Args
-	args[0] = "mattermost"
+	args[0] = "matterfoss"
 	args = append(args, "--platform")
 
-	realMattermost := fileutils.FindFile("mattermost")
-	if realMattermost == "" {
-		realMattermost = fileutils.FindFile("bin/mattermost")
+	realMatterfoss := fileutils.FindFile("matterfoss")
+	if realMatterfoss == "" {
+		realMatterfoss = fileutils.FindFile("bin/matterfoss")
 	}
 
-	if realMattermost == "" {
-		fmt.Println("Could not start Mattermost, use the mattermost command directly: failed to find mattermost")
-	} else if err := syscall.Exec(realMattermost, args, nil); err != nil {
-		fmt.Printf("Could not start Mattermost, use the mattermost command directly: %s\n", err.Error())
+	if realMatterfoss == "" {
+		fmt.Println("Could not start Matterfoss, use the matterfoss command directly: failed to find matterfoss")
+	} else if err := syscall.Exec(realMatterfoss, args, nil); err != nil {
+		fmt.Printf("Could not start Matterfoss, use the matterfoss command directly: %s\n", err.Error())
 	}
 }

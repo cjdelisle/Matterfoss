@@ -89,7 +89,7 @@
     },
     {
         "id": "api.admin.test_email.body",
-        "translation": "Mattermost e-posta ayarları doğru görünüyor!"
+        "translation": "Matterfoss e-posta ayarları doğru görünüyor!"
     },
     {
         "id": "api.admin.test_email.missing_server",
@@ -101,7 +101,7 @@
     },
     {
         "id": "api.admin.test_email.subject",
-        "translation": "Mattermost - E-posta Ayarları Sınanıyor"
+        "translation": "Matterfoss - E-posta Ayarları Sınanıyor"
     },
     {
         "id": "api.admin.test_s3.missing_s3_bucket",
@@ -357,7 +357,7 @@
     },
     {
         "id": "api.command.invite_people.desc",
-        "translation": "Mattermost takımınıza bir e-posta çağrısı gönderir"
+        "translation": "Matterfoss takımınıza bir e-posta çağrısı gönderir"
     },
     {
         "id": "api.command.invite_people.email_invitations_off",
@@ -640,7 +640,7 @@
     },
     {
         "id": "api.command_help.desc",
-        "translation": "Mattermost yardım sayfasını açar"
+        "translation": "Matterfoss yardım sayfasını açar"
     },
     {
         "id": "api.command_help.name",
@@ -652,7 +652,7 @@
     },
     {
         "id": "api.command_invite.channel.error",
-        "translation": "{{.Channel}} kanalı bulunamadı. Lütfen kanalları belirtmek için [kanal kısaltması] kullanın (https://about.mattermost.com/default-channel-handle-documentation)."
+        "translation": "{{.Channel}} kanalı bulunamadı. Lütfen kanalları belirtmek için [kanal kısaltması] kullanın (https://about.matterfoss.com/default-channel-handle-documentation)."
     },
     {
         "id": "api.command_invite.desc",
@@ -744,7 +744,7 @@
     },
     {
         "id": "api.command_logout.desc",
-        "translation": "Mattermost oturumunu kapatır"
+        "translation": "Matterfoss oturumunu kapatır"
     },
     {
         "id": "api.command_logout.name",
@@ -796,7 +796,7 @@
     },
     {
         "id": "api.command_mute.error",
-        "translation": "{{.Channel}} kanalı bulunamadı. Lütfen kanalları belirtmek için [kanal kısaltması](https://about.mattermost.com/default-channel-handle-documentation) kullanın."
+        "translation": "{{.Channel}} kanalı bulunamadı. Lütfen kanalları belirtmek için [kanal kısaltması](https://about.matterfoss.com/default-channel-handle-documentation) kullanın."
     },
     {
         "id": "api.command_mute.hint",
@@ -808,7 +808,7 @@
     },
     {
         "id": "api.command_mute.no_channel.error",
-        "translation": "Belirtilen kanal bulunamadı. Lütfen kanalları belirtmek için [kanal kısaltması] kullanın (https://about.mattermost.com/default-channel-handle-documentation)."
+        "translation": "Belirtilen kanal bulunamadı. Lütfen kanalları belirtmek için [kanal kısaltması] kullanın (https://about.matterfoss.com/default-channel-handle-documentation)."
     },
     {
         "id": "api.command_mute.not_member.error",
@@ -1644,7 +1644,7 @@
     },
     {
         "id": "api.slackimport.slack_add_channels.merge",
-        "translation": "{{.DisplayName}} Slack kanalı zaten etkin bir Mattermost kanalı olarak var. İki kanal birleştirilecek.\r\n"
+        "translation": "{{.DisplayName}} Slack kanalı zaten etkin bir Matterfoss kanalı olarak var. İki kanal birleştirilecek.\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.created",
@@ -1656,11 +1656,11 @@
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing",
-        "translation": "E-posta adresi {{.Email}} olan Slack kullanıcısı aynı e-posta adresini kullanan {{.Username}} Mattermost kullanıcısı ile birleştirildi.\r\n"
+        "translation": "E-posta adresi {{.Email}} olan Slack kullanıcısı aynı e-posta adresini kullanan {{.Username}} Matterfoss kullanıcısı ile birleştirildi.\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.merge_existing_failed",
-        "translation": "E-posta adresi {{.Email}} olan Slack kullanıcısı aynı e-posta adresini kullanan {{.Username}} Mattermost kullanıcısı birleştirildi ancak kullanıcı ilgili takıma eklenemedi.\r\n"
+        "translation": "E-posta adresi {{.Email}} olan Slack kullanıcısı aynı e-posta adresini kullanan {{.Username}} Matterfoss kullanıcısı birleştirildi ancak kullanıcı ilgili takıma eklenemedi.\r\n"
     },
     {
         "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1672,7 +1672,7 @@
     },
     {
         "id": "api.slackimport.slack_import.log",
-        "translation": "Mattermost Slack İçe Aktarma Günlüğü\r\n"
+        "translation": "Matterfoss Slack İçe Aktarma Günlüğü\r\n"
     },
     {
         "id": "api.slackimport.slack_import.note1",
@@ -1944,7 +1944,7 @@
     },
     {
         "id": "api.templates.invite_body.extra_info",
-        "translation": "Mattermost kullanarak ileti ve dosyaları bilgisayarınız ya da telefonunuz üzerinden paylaşabilir; anında arama ve arşivleme özelliklerine sahip olabilirsiniz. [[{{.TeamDisplayName}}]] takımına katıldıktan sonra takımınızda oturum açmak ve bu özelliklere istediğiniz zaman ulaşmak için şu adresi kullanın:"
+        "translation": "Matterfoss kullanarak ileti ve dosyaları bilgisayarınız ya da telefonunuz üzerinden paylaşabilir; anında arama ve arşivleme özelliklerine sahip olabilirsiniz. [[{{.TeamDisplayName}}]] takımına katıldıktan sonra takımınızda oturum açmak ve bu özelliklere istediğiniz zaman ulaşmak için şu adresi kullanın:"
     },
     {
         "id": "api.templates.invite_body.info",
@@ -2088,7 +2088,7 @@
     },
     {
         "id": "api.templates.welcome_body.info3",
-        "translation": "Mattermost kullanarak ileti ve dosyaları bilgisayarınız ya da telefonunuz üzerinden paylaşabilir ve anında arama ve arşivleme özelliklerine sahip olabilirsiniz."
+        "translation": "Matterfoss kullanarak ileti ve dosyaları bilgisayarınız ya da telefonunuz üzerinden paylaşabilir ve anında arama ve arşivleme özelliklerine sahip olabilirsiniz."
     },
     {
         "id": "api.templates.welcome_body.title",
@@ -3488,7 +3488,7 @@
     },
     {
         "id": "ent.ldap.do_login.user_filtered.app_error",
-        "translation": "AD/LDAP hesabınızın bu Mattermost sunucusunu kullanma izni yok. Lütfen sistem yöneticinizden AD/LDAP kullanıcı süzgecini denetlemesini isteyin."
+        "translation": "AD/LDAP hesabınızın bu Matterfoss sunucusunu kullanma izni yok. Lütfen sistem yöneticinizden AD/LDAP kullanıcı süzgecini denetlemesini isteyin."
     },
     {
         "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3508,7 +3508,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure.app_error",
-        "translation": "AD/LDAP üzerinde kullanıcılar aranamadı. Mattermost sunucunuzun AD/LDAP sunucunuza bağlanabildiğinden emin olun."
+        "translation": "AD/LDAP üzerinde kullanıcılar aranamadı. Matterfoss sunucunuzun AD/LDAP sunucunuza bağlanabildiğinden emin olun."
     },
     {
         "id": "ent.ldap.validate_filter.app_error",
@@ -3604,7 +3604,7 @@
     },
     {
         "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-        "translation": "Bu kullanıcı adı zaten başka bir Mattermost kullanıcısı tarafından kullanılıyor."
+        "translation": "Bu kullanıcı adı zaten başka bir Matterfoss kullanıcısı tarafından kullanılıyor."
     },
     {
         "id": "ent.saml.attribute.app_error",
@@ -3715,8 +3715,8 @@
         "translation": "Kanallar alınamadı."
     },
     {
-        "id": "mattermost.bulletin.subject",
-        "translation": "Mattermost Güvenlik Duyurusu"
+        "id": "matterfoss.bulletin.subject",
+        "translation": "Matterfoss Güvenlik Duyurusu"
     },
     {
         "id": "mfa.activate.authenticate.app_error",
@@ -4924,7 +4924,7 @@
     },
     {
         "id": "oauth.gitlab.tos.error",
-        "translation": "GitLab Hizmet Koşulları güncellendi. Lütfen gitlab.com adresine giderek yeni hizmet koşullarını onayladıktan sonra yeniden Mattermost oturumu açmayı deneyin."
+        "translation": "GitLab Hizmet Koşulları güncellendi. Lütfen gitlab.com adresine giderek yeni hizmet koşullarını onayladıktan sonra yeniden Matterfoss oturumu açmayı deneyin."
     },
     {
         "id": "plugin.api.update_user_status.bad_status",
@@ -6272,7 +6272,7 @@
     },
     {
         "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-        "translation": "Boyut Sınırı Aşıldı. [max page size](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded) değerini denetlemeyi deneyin."
+        "translation": "Boyut Sınırı Aşıldı. [max page size](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded) değerini denetlemeyi deneyin."
     },
     {
         "id": "ent.ldap.validate_admin_filter.app_error",
@@ -6388,7 +6388,7 @@
     },
     {
         "id": "api.license.request_trial_license.app_error",
-        "translation": "Deneme lisansı alınamadı. Lütfen yeniden deneyin ya da support@mattermost.com adresine yazın."
+        "translation": "Deneme lisansı alınamadı. Lütfen yeniden deneyin ya da support@matterfoss.com adresine yazın."
     },
     {
         "id": "api.admin.delete_brand_image.storage.not_found",
@@ -6408,7 +6408,7 @@
     },
     {
         "id": "api.bot.teams_channels.add_message_mobile",
-        "translation": "Lütfen beni etkileşimde bulunmamı istediğiniz takım ve kanallara ekleyin. Bu işlemi web tarayıcı ya da Mattermost Masaüstü uygulaması üzerinden yapabilirsiniz."
+        "translation": "Lütfen beni etkileşimde bulunmamı istediğiniz takım ve kanallara ekleyin. Bu işlemi web tarayıcı ya da Matterfoss Masaüstü uygulaması üzerinden yapabilirsiniz."
     },
     {
         "id": "api.channel.channel_member_counts_by_group.license.error",
@@ -6556,7 +6556,7 @@
     },
     {
         "id": "app.bot.get_disable_bot_sysadmin_message",
-        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden etkinleştirin ve bot hesapları için yeni kodlar oluşturun.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}\n{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden yeniden etkinleştirmeniz ve bot hesapları için yeni kodlar oluşturmanız önemle önerilir.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nKullanıcıların devre dışı bırakılmasından sonra bot hesaplarının da otomatik olarak devre dışı bırakılmasını istiyorsanız, **Sistem Panosu > Bütünleştirmeler > Bot Hesapları** bölümünden “Kullanıcı hesabı devre dışı bırakıldığında bot hesapları devre dışı bırakılsın” seçeneğini etkinleştirin.{{end}}"
+        "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden etkinleştirin ve bot hesapları için yeni kodlar oluşturun.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}\n{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden yeniden etkinleştirmeniz ve bot hesapları için yeni kodlar oluşturmanız önemle önerilir.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nKullanıcıların devre dışı bırakılmasından sonra bot hesaplarının da otomatik olarak devre dışı bırakılmasını istiyorsanız, **Sistem Panosu > Bütünleştirmeler > Bot Hesapları** bölümünden “Kullanıcı hesabı devre dışı bırakıldığında bot hesapları devre dışı bırakılsın” seçeneğini etkinleştirin.{{end}}"
     },
     {
         "id": "app.channel.get_more_channels.get.app_error",
@@ -6800,11 +6800,11 @@
     },
     {
         "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-        "translation": "Mattermost uygulamasını indirin ya da daha iyi bir deneyim elde etmek için desteklenen bir web tarayıcı kullanın."
+        "translation": "Matterfoss uygulamasını indirin ya da daha iyi bir deneyim elde etmek için desteklenen bir web tarayıcı kullanın."
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support",
-        "translation": "Bu web tarayıcı artık Mattermost tarafından desteklenmiyor"
+        "translation": "Bu web tarayıcı artık Matterfoss tarafından desteklenmiyor"
     },
     {
         "id": "api.push_notifications.session.expired",
@@ -7000,7 +7000,7 @@
     },
     {
         "id": "api.templates.remove_expired_license.subject",
-        "translation": "Mattermost Enterprise lisansı devre dışı bırakıldı."
+        "translation": "Matterfoss Enterprise lisansı devre dışı bırakıldı."
     },
     {
         "id": "api.team.add_members.error",
@@ -7364,7 +7364,7 @@
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support_version",
-        "translation": "Kullandığınız web tarayıcının bu sürümü artık Mattermost tarafından desteklenmiyor"
+        "translation": "Kullandığınız web tarayıcının bu sürümü artık Matterfoss tarafından desteklenmiyor"
     },
     {
         "id": "web.error.unsupported_browser.open_system_browser.edge",
@@ -7444,7 +7444,7 @@
     },
     {
         "id": "api.license.request_trial_license.no-site-url.app_error",
-        "translation": "Deneme isteği yapılamadı. Lütfen Mattermost sistem panosundaki web sunucu bölümünden bir site adresi yapılandırın."
+        "translation": "Deneme isteği yapılamadı. Lütfen Matterfoss sistem panosundaki web sunucu bölümünden bir site adresi yapılandırın."
     },
     {
         "id": "ent.data_retention.reactions_batch.internal_error",
@@ -7468,7 +7468,7 @@
     },
     {
         "id": "api.license.request-trial.bad-request.terms-not-accepted",
-        "translation": "Lisans isteğinde bulunmak için Mattermost Yazılım Değerlendirme Sözleşmesi ve Gizlilik İllkesini kabul etmelisiniz."
+        "translation": "Lisans isteğinde bulunmak için Matterfoss Yazılım Değerlendirme Sözleşmesi ve Gizlilik İllkesini kabul etmelisiniz."
     },
     {
         "id": "store.sql_channel.get_private_channels.get.app_error",
@@ -7736,23 +7736,23 @@
     },
     {
         "id": "api.server.warn_metric.number_of_active_users_400.notification_body",
-        "translation": "Mattermost sisteminiz 400 kullanıcıya ulaştı. Mattermost ile kuruluşunuzun tek oturum açma hizmeti sağlayıcısını bütünleştirirseniz, kullanıcılar hesap bilgilerini yeniden yazmadan Mattermost üzerine erişebilir. Mattermost Enterprise E20 sürümünde bulunan SAML 2.0 bütünleştirmesi hakkında ayrıntılı bilgi almak için destek ile görüşebilirsiniz.\n[SAML 2.0 bütünleştirmesi hakkında ayrıntılı bilgi alın](https://docs.mattermost.com/deployment/sso-saml.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml)"
+        "translation": "Matterfoss sisteminiz 400 kullanıcıya ulaştı. Matterfoss ile kuruluşunuzun tek oturum açma hizmeti sağlayıcısını bütünleştirirseniz, kullanıcılar hesap bilgilerini yeniden yazmadan Matterfoss üzerine erişebilir. Matterfoss Enterprise E20 sürümünde bulunan SAML 2.0 bütünleştirmesi hakkında ayrıntılı bilgi almak için destek ile görüşebilirsiniz.\n[SAML 2.0 bütünleştirmesi hakkında ayrıntılı bilgi alın](https://docs.matterfoss.com/deployment/sso-saml.html?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=saml)"
     },
     {
         "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-        "translation": "Mattermost sisteminiz 200 kullanıcıya ulaştı. Kullanıcı sayınız arttıkça, yeni hesapları ayarlamak zaman alan bir iş haline gelebilir. Mattermost Enterprise E10 sürümüne geçerek, kullanıcı hesaplarını kuruluşunuzun Active Directory/LDAP dizininden otomatik olarak alabilir ve bu dizinlerde bir hesabı olan herkesin Mattermost üzerine erişmesi sağlanabilir. Kullanıcılar, yeni kullanıcı adı ve parola oluşturulmasına gerek kalmadan var olan kullanıcı hesabı bilgileri ile oturum açabilir ve BT yöneticileri hesap açmak ve yönetmek için zaman kaybetmez.\n[AD/LDAP bütünleştirmesi hakkında ayrıntılı bilgi alın](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)"
+        "translation": "Matterfoss sisteminiz 200 kullanıcıya ulaştı. Kullanıcı sayınız arttıkça, yeni hesapları ayarlamak zaman alan bir iş haline gelebilir. Matterfoss Enterprise E10 sürümüne geçerek, kullanıcı hesaplarını kuruluşunuzun Active Directory/LDAP dizininden otomatik olarak alabilir ve bu dizinlerde bir hesabı olan herkesin Matterfoss üzerine erişmesi sağlanabilir. Kullanıcılar, yeni kullanıcı adı ve parola oluşturulmasına gerek kalmadan var olan kullanıcı hesabı bilgileri ile oturum açabilir ve BT yöneticileri hesap açmak ve yönetmek için zaman kaybetmez.\n[AD/LDAP bütünleştirmesi hakkında ayrıntılı bilgi alın](https://docs.matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)"
     },
     {
         "id": "app.system.warn_metric.bot_displayname",
-        "translation": "Mattermost Danışmanı"
+        "translation": "Matterfoss Danışmanı"
     },
     {
         "id": "app.system.warn_metric.bot_description",
-        "translation": "[Mattermost Danışmanı hakkında ayrıntılı bilgi alın](https://about.mattermost.com/default-channel-handle-documentation)"
+        "translation": "[Matterfoss Danışmanı hakkında ayrıntılı bilgi alın](https://about.matterfoss.com/default-channel-handle-documentation)"
     },
     {
         "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-        "translation": "Mattermost, 500 üzerinde kullanıcı için, kullanıcı yönetimi, sunucu kümeleme ve başarım izleme gibi özellikler sunan Mattermost Enterprise E20 sürümünün kullanılmasını önerir."
+        "translation": "Matterfoss, 500 üzerinde kullanıcı için, kullanıcı yönetimi, sunucu kümeleme ve başarım izleme gibi özellikler sunan Matterfoss Enterprise E20 sürümünün kullanılmasını önerir."
     },
     {
         "id": "app.system.warn_metric.store.app_error",
@@ -7768,11 +7768,11 @@
     },
     {
         "id": "api.templates.warn_metric_ack.subject",
-        "translation": "Mattermost ile iletişim kurma isteği"
+        "translation": "Matterfoss ile iletişim kurma isteği"
     },
     {
         "id": "api.templates.warn_metric_ack.footer",
-        "translation": "Sorularınız için lütfen support@mattermost.com adresine yazın"
+        "translation": "Sorularınız için lütfen support@matterfoss.com adresine yazın"
     },
     {
         "id": "api.templates.warn_metric_ack.body.site_url_header",
@@ -7796,7 +7796,7 @@
     },
     {
         "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-        "translation": "Mattermost Enterprise sürümüne yükseltin"
+        "translation": "Matterfoss Enterprise sürümüne yükseltin"
     },
     {
         "id": "api.server.warn_metric.number_of_active_users_400.notification_title",
@@ -7816,11 +7816,11 @@
     },
     {
         "id": "api.server.warn_metric.bot_response.number_of_users.mailto_body",
-        "translation": "Mattermost ile iletişim kurma isteği. Takımım {{.Limit}} kullanıcıya ulaştı ve Mattermost Enterprise sürümüne geçmeyi düşünüyorum.\n"
+        "translation": "Matterfoss ile iletişim kurma isteği. Takımım {{.Limit}} kullanıcıya ulaştı ve Matterfoss Enterprise sürümüne geçmeyi düşünüyorum.\n"
     },
     {
         "id": "api.templates.warn_metric_ack.number_of_active_users.body",
-        "translation": "Mattermost ile iletişim kurma isteği. Takımım {{.Limit}} kullanıcıya ulaştı ve Mattermost Enterprise sürümüne geçmeyi düşünüyorum."
+        "translation": "Matterfoss ile iletişim kurma isteği. Takımım {{.Limit}} kullanıcıya ulaştı ve Matterfoss Enterprise sürümüne geçmeyi düşünüyorum."
     },
     {
         "id": "api.server.warn_metric.contact_us",
@@ -7828,7 +7828,7 @@
     },
     {
         "id": "api.server.warn_metric.bot_response.notification_success.message",
-        "translation": "Mattermost ile iletişim kurduğunuz için teşekkür ederiz. Kısa süre içinde size yazacağız."
+        "translation": "Matterfoss ile iletişim kurduğunuz için teşekkür ederiz. Kısa süre içinde size yazacağız."
     },
     {
         "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -7840,7 +7840,7 @@
     },
     {
         "id": "api.server.warn_metric.bot_response.mailto_subject",
-        "translation": "Mattermost ile iletişim kurma isteği"
+        "translation": "Matterfoss ile iletişim kurma isteği"
     },
     {
         "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -7852,7 +7852,7 @@
     },
     {
         "id": "api.server.warn_metric.bot_response.mailto_footer",
-        "translation": "Sorularınız için lütfen support@mattermost.com adresine yazın"
+        "translation": "Sorularınız için lütfen support@matterfoss.com adresine yazın"
     },
     {
         "id": "api.server.warn_metric.bot_response.mailto_email_header",

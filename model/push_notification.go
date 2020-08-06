@@ -28,7 +28,7 @@ const (
 	// with the push notifications
 	CATEGORY_CAN_REPLY = "CAN_REPLY"
 
-	MHPNS = "https://push.mattermost.com"
+	MHPNS = "https://push.matterfoss.org"
 
 	PUSH_SEND_PREPARE = "Prepared to send"
 	PUSH_SEND_SUCCESS = "Successful"

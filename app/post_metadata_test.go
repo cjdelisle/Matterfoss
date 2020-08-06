@@ -19,10 +19,10 @@ import (
 	"time"
 
 	"github.com/dyatlov/go-opengraph/opengraph"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/services/httpservice"
-	"github.com/mattermost/mattermost-server/v5/services/imageproxy"
-	"github.com/mattermost/mattermost-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v5/services/imageproxy"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -521,7 +521,7 @@ func TestPreparePostForClientWithImageProxy(t *testing.T) {
 
 		th.App.UpdateConfig(func(cfg *model.Config) {
 			*cfg.ServiceSettings.EnableLinkPreviews = true
-			*cfg.ServiceSettings.SiteURL = "http://mymattermost.com"
+			*cfg.ServiceSettings.SiteURL = "http://mymatterfoss.org"
 			*cfg.ServiceSettings.AllowedUntrustedInternalConnections = "localhost,127.0.0.1"
 			*cfg.ImageProxySettings.Enable = true
 			*cfg.ImageProxySettings.ImageProxyType = "atmos/camo"
@@ -550,7 +550,7 @@ func TestPreparePostForClientWithImageProxy(t *testing.T) {
 func testProxyLinkedImage(t *testing.T, th *TestHelper, shouldProxy bool) {
 	postTemplate := "![foo](%v)"
 	imageURL := "http://mydomain.com/myimage"
-	proxiedImageURL := "http://mymattermost.com/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
+	proxiedImageURL := "http://mymatterfoss.org/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
 
 	post := &model.Post{
 		UserId:    th.BasicUser.Id,
@@ -622,7 +622,7 @@ func testProxyOpenGraphImage(t *testing.T, th *TestHelper, shouldProxy bool) {
 	image := og.Images[0]
 	if shouldProxy {
 		assert.Equal(t, "", image.URL, "image URL should not be set with proxy")
-		assert.Equal(t, "http://mymattermost.com/api/v4/image?url="+url.QueryEscape(server.URL+"/test-image3.png"), image.SecureURL, "secure image URL should be sent through proxy")
+		assert.Equal(t, "http://mymatterfoss.org/api/v4/image?url="+url.QueryEscape(server.URL+"/test-image3.png"), image.SecureURL, "secure image URL should be sent through proxy")
 	} else {
 		assert.Equal(t, server.URL+"/test-image3.png", image.URL, "image URL should be set")
 		assert.Equal(t, "", image.SecureURL, "secure image URL should not be set")
@@ -1995,7 +1995,7 @@ func TestGetLinkMetadata(t *testing.T) {
 
 		th.App.UpdateConfig(func(cfg *model.Config) {
 			*cfg.ServiceSettings.AllowedUntrustedInternalConnections = ""
-			*cfg.ServiceSettings.SiteURL = "http://mattermost.example.com"
+			*cfg.ServiceSettings.SiteURL = "http://matterfoss.example.com"
 			*cfg.ImageProxySettings.Enable = true
 			*cfg.ImageProxySettings.ImageProxyType = "local"
 		})
@@ -2059,14 +2059,14 @@ func TestResolveMetadataURL(t *testing.T) {
 		{
 			Name:       "relative to root",
 			RequestURL: "/file?param=1",
-			SiteURL:    "https://mattermost.example.com:123",
-			Expected:   "https://mattermost.example.com:123/file?param=1",
+			SiteURL:    "https://matterfoss.example.com:123",
+			Expected:   "https://matterfoss.example.com:123/file?param=1",
 		},
 		{
 			Name:       "relative to root with subpath",
 			RequestURL: "/file?param=1",
-			SiteURL:    "https://mattermost.example.com:123/subpath",
-			Expected:   "https://mattermost.example.com:123/file?param=1",
+			SiteURL:    "https://matterfoss.example.com:123/subpath",
+			Expected:   "https://matterfoss.example.com:123/file?param=1",
 		},
 	} {
 		t.Run(test.Name, func(t *testing.T) {

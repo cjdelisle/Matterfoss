@@ -129,7 +129,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "It appears your Mattermost email is setup correctly!"
+    "translation": "It appears your Matterfoss email is setup correctly!"
   },
   {
     "id": "api.admin.test_email.missing_server",
@@ -141,7 +141,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Mattermost - Testing Email Settings"
+    "translation": "Matterfoss - Testing Email Settings"
   },
   {
     "id": "api.admin.test_s3.missing_s3_bucket",
@@ -205,7 +205,7 @@
   },
   {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "Please add me to teams and channels you want me to interact in. To do this, use the browser or Mattermost Desktop App."
+    "translation": "Please add me to teams and channels you want me to interact in. To do this, use the browser or Matterfoss Desktop App."
   },
   {
     "id": "api.channel.add_guest.added",
@@ -513,7 +513,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "Send an email invite to your Mattermost team"
+    "translation": "Send an email invite to your Matterfoss team"
   },
   {
     "id": "api.command.invite_people.email_invitations_off",
@@ -796,7 +796,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Open the Mattermost help page"
+    "translation": "Open the Matterfoss help page"
   },
   {
     "id": "api.command_help.name",
@@ -808,7 +808,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "Could not find the channel {{.Channel}}. Please use the [channel handle](https://about.mattermost.com/default-channel-handle-documentation) to identify channels."
+    "translation": "Could not find the channel {{.Channel}}. Please use the [channel handle](https://about.matterfoss.com/default-channel-handle-documentation) to identify channels."
   },
   {
     "id": "api.command_invite.desc",
@@ -908,7 +908,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Logout of Mattermost"
+    "translation": "Logout of Matterfoss"
   },
   {
     "id": "api.command_logout.name",
@@ -960,7 +960,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "Could not find the channel {{.Channel}}. Please use the [channel handle](https://about.mattermost.com/default-channel-handle-documentation) to identify channels."
+    "translation": "Could not find the channel {{.Channel}}. Please use the [channel handle](https://about.matterfoss.com/default-channel-handle-documentation) to identify channels."
   },
   {
     "id": "api.command_mute.hint",
@@ -972,7 +972,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "Could not find the specified channel. Please use the [channel handle](https://about.mattermost.com/default-channel-handle-documentation) to identify channels."
+    "translation": "Could not find the specified channel. Please use the [channel handle](https://about.matterfoss.com/default-channel-handle-documentation) to identify channels."
   },
   {
     "id": "api.command_mute.not_member.error",
@@ -1526,15 +1526,15 @@
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "You must accept the Mattermost Software Evaluation Agreement and Privacy Policy to request a license."
+    "translation": "You must accept the Matterfoss Software Evaluation Agreement and Privacy Policy to request a license."
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "Unable to get a trial license, please try again or contact with support@mattermost.com."
+    "translation": "Unable to get a trial license, please try again or contact with support@matterfoss.com."
   },
   {
     "id": "api.license.request_trial_license.no-site-url.app_error",
-    "translation": "Unable to request a trial license. Please configure a Site URL in the web server section of the Mattermost System Console."
+    "translation": "Unable to request a trial license. Please configure a Site URL in the web server section of the Matterfoss System Console."
   },
   {
     "id": "api.marshal_error",
@@ -1956,7 +1956,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "If you have any additional inquiries, please contact support@mattermost.com"
+    "translation": "If you have any additional inquiries, please contact support@matterfoss.com"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_registered_users_header",
@@ -1968,7 +1968,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Mattermost Contact Us request"
+    "translation": "Matterfoss Contact Us request"
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.body",
@@ -1980,11 +1980,11 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "Thank you for contacting Mattermost. We will follow up with you soon."
+    "translation": "Thank you for contacting Matterfoss. We will follow up with you soon."
   },
   {
     "id": "api.server.warn_metric.bot_response.number_of_users.mailto_body",
-    "translation": "Mattermost Contact Us request. My team has now {{.Limit}} users and I am considering Mattermost Enterprise Edition.\r\n"
+    "translation": "Matterfoss Contact Us request. My team has now {{.Limit}} users and I am considering Matterfoss Enterprise Edition.\r\n"
   },
   {
     "id": "api.server.warn_metric.contact_us",
@@ -2000,7 +2000,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "Your Mattermost system now has 200 users. As your user base grows, provisioning new accounts can become time-consuming. We recommend that you upgrade to Mattermost Enterprise E10 and integrate your organization’s Active Directory/LDAP, which will allow anyone with an account to access Mattermost. Users can log in without having to create new usernames and passwords, and administrators save time provisioning and managing accounts.\n[Learn more about integrating with AD/LDAP](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)"
+    "translation": "Your Matterfoss system now has 200 users. As your user base grows, provisioning new accounts can become time-consuming. We recommend that you upgrade to Matterfoss Enterprise E10 and integrate your organization’s Active Directory/LDAP, which will allow anyone with an account to access Matterfoss. Users can log in without having to create new usernames and passwords, and administrators save time provisioning and managing accounts.\n[Learn more about integrating with AD/LDAP](https://docs.matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
@@ -2008,7 +2008,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_400.notification_body",
-    "translation": "Your Mattermost system now has 400 users. When you connect Mattermost with your organization's single sign-on provider, users can access Mattermost without having to re-enter their credentials. Contact support to learn more about integrating with SAML 2.0, available in Mattermost Enterprise E20.\n[Learn more about integrating with SAML 2.0](https://docs.mattermost.com/deployment/sso-saml.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml)"
+    "translation": "Your Matterfoss system now has 400 users. When you connect Matterfoss with your organization's single sign-on provider, users can access Matterfoss without having to re-enter their credentials. Contact support to learn more about integrating with SAML 2.0, available in Matterfoss Enterprise E20.\n[Learn more about integrating with SAML 2.0](https://docs.matterfoss.com/deployment/sso-saml.html?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=saml)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_400.notification_title",
@@ -2016,11 +2016,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "Mattermost strongly recommends that deployments of over 500 users upgrade to Mattermost Enterprise E20, which offers features such as user management, server clustering, and performance monitoring."
+    "translation": "Matterfoss strongly recommends that deployments of over 500 users upgrade to Matterfoss Enterprise E20, which offers features such as user management, server clustering, and performance monitoring."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Upgrade to Mattermost Enterprise edition"
+    "translation": "Upgrade to Matterfoss Enterprise edition"
   },
   {
     "id": "api.slackimport.slack_add_bot_user.email_pwd",
@@ -2044,7 +2044,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "The Slack channel {{.DisplayName}} already exists as an active Mattermost channel. Both channels have been merged.\r\n"
+    "translation": "The Slack channel {{.DisplayName}} already exists as an active Matterfoss channel. Both channels have been merged.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.created",
@@ -2056,11 +2056,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "Slack user merged with an existing Mattermost user with matching email {{.Email}} and username {{.Username}}.\r\n"
+    "translation": "Slack user merged with an existing Matterfoss user with matching email {{.Email}} and username {{.Username}}.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "Slack user merged with an existing Mattermost user with matching email {{.Email}} and username {{.Username}}, but was unable to add the user to their team.\r\n"
+    "translation": "Slack user merged with an existing Matterfoss user with matching email {{.Email}} and username {{.Username}}, but was unable to add the user to their team.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -2072,7 +2072,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Mattermost Slack Import Log\r\n"
+    "translation": "Matterfoss Slack Import Log\r\n"
   },
   {
     "id": "api.slackimport.slack_import.note1",
@@ -2412,7 +2412,7 @@
   },
   {
     "id": "api.templates.invite_body.extra_info",
-    "translation": "Mattermost lets you share messages and files from your PC or phone, with instant search and archiving. After you’ve joined [[{{.TeamDisplayName}}]], you can sign-in to your new team and access these features anytime from the web address:"
+    "translation": "Matterfoss lets you share messages and files from your PC or phone, with instant search and archiving. After you’ve joined [[{{.TeamDisplayName}}]], you can sign-in to your new team and access these features anytime from the web address:"
   },
   {
     "id": "api.templates.invite_body.info",
@@ -2480,7 +2480,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "Mattermost Enterprise license has been disabled."
+    "translation": "Matterfoss Enterprise license has been disabled."
   },
   {
     "id": "api.templates.reset_body.button",
@@ -2580,15 +2580,15 @@
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "If you have any additional inquiries, please contact support@mattermost.com"
+    "translation": "If you have any additional inquiries, please contact support@matterfoss.com"
   },
   {
     "id": "api.templates.warn_metric_ack.number_of_active_users.body",
-    "translation": "Mattermost Contact Us request. My team has now {{ .Limit }} users and I am considering Mattermost Enterprise Edition."
+    "translation": "Matterfoss Contact Us request. My team has now {{ .Limit }} users and I am considering Matterfoss Enterprise Edition."
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Mattermost Contact Us request"
+    "translation": "Matterfoss Contact Us request"
   },
   {
     "id": "api.templates.welcome_body.app_download_info",
@@ -2608,7 +2608,7 @@
   },
   {
     "id": "api.templates.welcome_body.info3",
-    "translation": "Mattermost lets you share messages and files from your PC or phone, with instant search and archiving."
+    "translation": "Matterfoss lets you share messages and files from your PC or phone, with instant search and archiving."
   },
   {
     "id": "api.templates.welcome_body.title",
@@ -3152,7 +3152,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which have now been disabled.\n\n{{.BotNames}}{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which have now been disabled, including the following:\n\n{{.BotNames}}{{end}}You can take ownership of each bot by enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which are still enabled.\n\n{{.BotNames}}\n{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which are still enabled, including the following:\n\n{{.BotNames}}{{end}}We strongly recommend you to take ownership of each bot by re-enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nIf you want bot accounts to disable automatically after owner deactivation, set “Disable bot accounts when owner is deactivated” in **System Console > Integrations > Bot Accounts** to true.{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which have now been disabled.\n\n{{.BotNames}}{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which have now been disabled, including the following:\n\n{{.BotNames}}{{end}}You can take ownership of each bot by enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which are still enabled.\n\n{{.BotNames}}\n{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which are still enabled, including the following:\n\n{{.BotNames}}{{end}}We strongly recommend you to take ownership of each bot by re-enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nIf you want bot accounts to disable automatically after owner deactivation, set “Disable bot accounts when owner is deactivated” in **System Console > Integrations > Bot Accounts** to true.{{end}}"
   },
   {
     "id": "app.bot.getbot.internal_error",
@@ -4368,11 +4368,11 @@
   },
   {
     "id": "app.system.warn_metric.bot_description",
-    "translation": "[Learn more about the Mattermost Advisor](https://about.mattermost.com/default-channel-handle-documentation)"
+    "translation": "[Learn more about the Matterfoss Advisor](https://about.matterfoss.com/default-channel-handle-documentation)"
   },
   {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Mattermost Advisor"
+    "translation": "Matterfoss Advisor"
   },
   {
     "id": "app.system.warn_metric.notification.empty_admin_list.app_error",
@@ -5084,7 +5084,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "Your AD/LDAP account does not have permission to use this Mattermost server. Please ask your System Administrator to check the AD/LDAP user filter."
+    "translation": "Your AD/LDAP account does not have permission to use this Matterfoss server. Please ask your System Administrator to check the AD/LDAP user filter."
   },
   {
     "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -5108,11 +5108,11 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "Failed to search users in AD/LDAP. Test if the Mattermost server can connect to your AD/LDAP server and try again."
+    "translation": "Failed to search users in AD/LDAP. Test if the Matterfoss server can connect to your AD/LDAP server and try again."
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "Size Limit Exceeded. Try checking your [max page size](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
+    "translation": "Size Limit Exceeded. Try checking your [max page size](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
   },
   {
     "id": "ent.ldap.validate_admin_filter.app_error",
@@ -5224,7 +5224,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "Username already used by another Mattermost user."
+    "translation": "Username already used by another Matterfoss user."
   },
   {
     "id": "ent.saml.attribute.app_error",
@@ -5347,8 +5347,8 @@
     "translation": "Unable to get channels."
   },
   {
-    "id": "mattermost.bulletin.subject",
-    "translation": "Mattermost Security Bulletin"
+    "id": "matterfoss.bulletin.subject",
+    "translation": "Matterfoss Security Bulletin"
   },
   {
     "id": "mfa.activate.authenticate.app_error",
@@ -6692,7 +6692,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "GitLab's Terms of Service have updated. Please go to gitlab.com to accept them and then try logging into Mattermost again."
+    "translation": "GitLab's Terms of Service have updated. Please go to gitlab.com to accept them and then try logging into Matterfoss again."
   },
   {
     "id": "plugin.api.get_users_in_channel",
@@ -7940,7 +7940,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "Download the Mattermost app or use a supported browser for a better experience."
+    "translation": "Download the Matterfoss app or use a supported browser for a better experience."
   },
   {
     "id": "web.error.unsupported_browser.download_the_app",
@@ -7984,11 +7984,11 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "This browser is no longer supported by Mattermost"
+    "translation": "This browser is no longer supported by Matterfoss"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "This version of your browser is no longer supported by Mattermost"
+    "translation": "This version of your browser is no longer supported by Matterfoss"
   },
   {
     "id": "web.error.unsupported_browser.open_system_browser.edge",

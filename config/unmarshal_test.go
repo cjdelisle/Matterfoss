@@ -12,8 +12,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
 
 func TestGetDefaultsFromStruct(t *testing.T) {
@@ -52,7 +52,7 @@ func TestUnmarshalConfig(t *testing.T) {
 func TestUnmarshalConfig_PluginSettings(t *testing.T) {
 	config, _, err := unmarshalConfig(bytes.NewReader([]byte(`{
 		"PluginSettings": {
-			"Directory": "/temp/mattermost-plugins",
+			"Directory": "/temp/matterfoss-plugins",
 			"Plugins": {
 				"com.example.plugin": {
 					"number": 1,
@@ -85,7 +85,7 @@ func TestUnmarshalConfig_PluginSettings(t *testing.T) {
 	}`)), false)
 	require.Nil(t, err)
 
-	assert.Equal(t, "/temp/mattermost-plugins", *config.PluginSettings.Directory)
+	assert.Equal(t, "/temp/matterfoss-plugins", *config.PluginSettings.Directory)
 
 	if assert.Contains(t, config.PluginSettings.Plugins, "com.example.plugin") {
 		assert.Equal(t, map[string]interface{}{
@@ -129,11 +129,11 @@ func TestConfigFromEnviroVars(t *testing.T) {
 			"ReadTimeout": 100
 		},
 		"TeamSettings": {
-			"SiteName": "Mattermost",
+			"SiteName": "Matterfoss",
 			"CustomBrandText": ""
 		},
 		"SupportSettings": {
-			"TermsOfServiceLink": "https://about.mattermost.com/default-terms/"
+			"TermsOfServiceLink": "https://about.matterfoss.org/default-terms/"
 		},
 		"PluginSettings": {
 			"Enable": true,
@@ -179,7 +179,7 @@ func TestConfigFromEnviroVars(t *testing.T) {
 		cfg, envCfg, err = unmarshalConfig(strings.NewReader(config), true)
 		require.Nil(t, err)
 
-		assert.Equal(t, "Mattermost", *cfg.TeamSettings.SiteName)
+		assert.Equal(t, "Matterfoss", *cfg.TeamSettings.SiteName)
 
 		_, ok = envCfg["TeamSettings"]
 		require.False(t, ok, "TeamSettings should be missing from envConfig")

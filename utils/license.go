@@ -16,9 +16,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 )
 
 var publicKey []byte = []byte(`-----BEGIN PUBLIC KEY-----
@@ -115,7 +115,7 @@ func GetLicenseFileFromDisk(fileName string) []byte {
 func GetLicenseFileLocation(fileLocation string) string {
 	if fileLocation == "" {
 		configDir, _ := fileutils.FindDir("config")
-		return filepath.Join(configDir, "mattermost.mattermost-license")
+		return filepath.Join(configDir, "matterfoss.matterfoss-license")
 	} else {
 		return fileLocation
 	}

@@ -4,12 +4,12 @@
 package plugin
 
 import (
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 // Helpers provide a common patterns plugins use.
 //
-// Plugins obtain access to the Helpers by embedding MattermostPlugin.
+// Plugins obtain access to the Helpers by embedding MatterfossPlugin.
 type Helpers interface {
 	// EnsureBot either returns an existing bot user matching the given bot, or creates a bot user from the given bot.
 	// A profile image or icon image may be optionally passed in to be set for the existing or newly created bot.

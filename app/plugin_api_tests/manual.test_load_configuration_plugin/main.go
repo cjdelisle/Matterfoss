@@ -6,9 +6,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/mattermost/mattermost-server/v5/app/plugin_api_tests"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/app/plugin_api_tests"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
 )
 
 type configuration struct {
@@ -20,7 +20,7 @@ type configuration struct {
 }
 
 type MyPlugin struct {
-	plugin.MattermostPlugin
+	plugin.MatterfossPlugin
 
 	configuration configuration
 }

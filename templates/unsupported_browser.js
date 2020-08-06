@@ -18,21 +18,21 @@ function onUnHover(element, prefix) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    var hovers = document.querySelectorAll("div[data-mattermost-hover]");
+    var hovers = document.querySelectorAll("div[data-matterfoss-hover]");
     for (var i = 0; i < hovers.length; i++) {
         var element = hovers[i];
         element.addEventListener("mouseover", function(e) {
-            onHover(e.currentTarget, e.currentTarget.getAttribute("data-mattermost-hover"));
+            onHover(e.currentTarget, e.currentTarget.getAttribute("data-matterfoss-hover"));
         });
         element.addEventListener("mouseout", function(e) {
-            onUnHover(e.currentTarget, e.currentTarget.getAttribute("data-mattermost-hover"))
+            onUnHover(e.currentTarget, e.currentTarget.getAttribute("data-matterfoss-hover"))
         });
     }
-    var clicks = document.querySelectorAll("div[data-mattermost-click], button[data-mattermost-click]");
+    var clicks = document.querySelectorAll("div[data-matterfoss-click], button[data-matterfoss-click]");
     for (var i = 0; i < clicks.length; i++) {
         var element = clicks[i];
         element.addEventListener("click", function(e) {
-            window.open(e.currentTarget.getAttribute('data-mattermost-click'), '_blank');
+            window.open(e.currentTarget.getAttribute('data-matterfoss-click'), '_blank');
         });
     };
 });

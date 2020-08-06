@@ -9,7 +9,7 @@ import (
 
 	"github.com/mattermost/logr"
 	"github.com/mattermost/logr/format"
-	"github.com/mattermost/mattermost-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
 )
 
 type Audit struct {

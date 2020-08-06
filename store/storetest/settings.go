@@ -17,12 +17,12 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 const (
-	defaultMysqlDSN      = "mmuser:mostest@tcp(localhost:3306)/mattermost_test?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s"
-	defaultPostgresqlDSN = "postgres://mmuser:mostest@localhost:5432/mattermost_test?sslmode=disable&connect_timeout=10"
+	defaultMysqlDSN      = "mmuser:mostest@tcp(localhost:3306)/matterfoss_test?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s"
+	defaultPostgresqlDSN = "postgres://mmuser:mostest@localhost:5432/matterfoss_test?sslmode=disable&connect_timeout=10"
 	defaultMysqlRootPWD  = "mostest"
 )
 

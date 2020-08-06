@@ -84,8 +84,8 @@ func getOSName(ua *uasurfer.UserAgent) string {
 }
 
 func getBrowserVersion(ua *uasurfer.UserAgent, userAgentString string) string {
-	if index := strings.Index(userAgentString, "Mattermost/"); index != -1 {
-		afterVersion := userAgentString[index+len("Mattermost/"):]
+	if index := strings.Index(userAgentString, "Matterfoss/"); index != -1 {
+		afterVersion := userAgentString[index+len("Matterfoss/"):]
 		return strings.Fields(afterVersion)[0]
 	}
 
@@ -123,7 +123,7 @@ var browserNames = map[uasurfer.BrowserName]string{
 func getBrowserName(ua *uasurfer.UserAgent, userAgentString string) string {
 	browser := ua.Browser.Name
 
-	if strings.Contains(userAgentString, "Mattermost") {
+	if strings.Contains(userAgentString, "Matterfoss") {
 		return "Desktop App"
 	}
 

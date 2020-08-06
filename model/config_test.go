@@ -263,7 +263,7 @@ func TestConfigDefaultNPSPluginState(t *testing.T) {
 		c1 := Config{}
 		c1.SetDefaults()
 
-		assert.True(t, c1.PluginSettings.PluginStates["com.mattermost.nps"].Enable)
+		assert.True(t, c1.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
 	})
 
 	t.Run("should enable NPS plugin if diagnostics are enabled", func(t *testing.T) {
@@ -275,7 +275,7 @@ func TestConfigDefaultNPSPluginState(t *testing.T) {
 
 		c1.SetDefaults()
 
-		assert.True(t, c1.PluginSettings.PluginStates["com.mattermost.nps"].Enable)
+		assert.True(t, c1.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
 	})
 
 	t.Run("should not enable NPS plugin if diagnostics are disabled", func(t *testing.T) {
@@ -287,14 +287,14 @@ func TestConfigDefaultNPSPluginState(t *testing.T) {
 
 		c1.SetDefaults()
 
-		assert.False(t, c1.PluginSettings.PluginStates["com.mattermost.nps"].Enable)
+		assert.False(t, c1.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
 	})
 
 	t.Run("should not re-enable NPS plugin after it has been disabled", func(t *testing.T) {
 		c1 := Config{
 			PluginSettings: PluginSettings{
 				PluginStates: map[string]*PluginState{
-					"com.mattermost.nps": {
+					"com.matterfoss.nps": {
 						Enable: false,
 					},
 				},
@@ -303,7 +303,7 @@ func TestConfigDefaultNPSPluginState(t *testing.T) {
 
 		c1.SetDefaults()
 
-		assert.False(t, c1.PluginSettings.PluginStates["com.mattermost.nps"].Enable)
+		assert.False(t, c1.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
 	})
 }
 
@@ -459,7 +459,7 @@ func TestMessageExportSettingsIsValidGlobalRelaySettingsInvalidCustomerType(t *t
 		BatchSize:           NewInt(100),
 		GlobalRelaySettings: &GlobalRelayMessageExportSettings{
 			CustomerType: NewString("Invalid"),
-			EmailAddress: NewString("valid@mattermost.com"),
+			EmailAddress: NewString("valid@matterfoss.org"),
 			SmtpUsername: NewString("SomeUsername"),
 			SmtpPassword: NewString("SomePassword"),
 		},
@@ -493,7 +493,7 @@ func TestMessageExportSettingsGlobalRelaySettings(t *testing.T) {
 			"Missing smtp username",
 			&GlobalRelayMessageExportSettings{
 				CustomerType: NewString(GLOBALRELAY_CUSTOMER_TYPE_A10),
-				EmailAddress: NewString("valid@mattermost.com"),
+				EmailAddress: NewString("valid@matterfoss.org"),
 				SmtpPassword: NewString("SomePassword"),
 			},
 			false,
@@ -502,7 +502,7 @@ func TestMessageExportSettingsGlobalRelaySettings(t *testing.T) {
 			"Invalid smtp username",
 			&GlobalRelayMessageExportSettings{
 				CustomerType: NewString(GLOBALRELAY_CUSTOMER_TYPE_A10),
-				EmailAddress: NewString("valid@mattermost.com"),
+				EmailAddress: NewString("valid@matterfoss.org"),
 				SmtpUsername: NewString(""),
 				SmtpPassword: NewString("SomePassword"),
 			},
@@ -512,7 +512,7 @@ func TestMessageExportSettingsGlobalRelaySettings(t *testing.T) {
 			"Invalid smtp password",
 			&GlobalRelayMessageExportSettings{
 				CustomerType: NewString(GLOBALRELAY_CUSTOMER_TYPE_A10),
-				EmailAddress: NewString("valid@mattermost.com"),
+				EmailAddress: NewString("valid@matterfoss.org"),
 				SmtpUsername: NewString("SomeUsername"),
 				SmtpPassword: NewString(""),
 			},
@@ -522,7 +522,7 @@ func TestMessageExportSettingsGlobalRelaySettings(t *testing.T) {
 			"Valid data",
 			&GlobalRelayMessageExportSettings{
 				CustomerType: NewString(GLOBALRELAY_CUSTOMER_TYPE_A9),
-				EmailAddress: NewString("valid@mattermost.com"),
+				EmailAddress: NewString("valid@matterfoss.org"),
 				SmtpUsername: NewString("SomeUsername"),
 				SmtpPassword: NewString("SomePassword"),
 			},
@@ -795,7 +795,7 @@ func TestImageProxySettingsSetDefaults(t *testing.T) {
 	})
 
 	t.Run("not default, old settings", func(t *testing.T) {
-		url := "http://images.mattermost.com"
+		url := "http://images.matterfoss.org"
 		options := "aaaaaaaa"
 
 		ips := ImageProxySettings{

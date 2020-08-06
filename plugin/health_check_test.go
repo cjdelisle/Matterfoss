@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -35,11 +35,11 @@ func testPluginHealthCheckSuccess(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func main() {
@@ -77,12 +77,12 @@ func testPluginHealthCheckPanic(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/model"
-			"github.com/mattermost/mattermost-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {

@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/store"
 )
 
 func (a *App) ProcessSlackText(text string) string {
@@ -55,7 +55,7 @@ func expandAnnouncement(text string) string {
 }
 
 // Replaces user IDs mentioned like this <@userID> to a normal username (eg. @bob)
-// This is required so that Mattermost maintains Slack compatibility
+// This is required so that Matterfoss maintains Slack compatibility
 // Refer to: https://api.slack.com/changelog/2017-09-the-one-about-usernames
 func replaceUserIds(userStore store.UserStore, text string) string {
 	rgx, err := regexp.Compile("<@([a-zA-Z0-9]+)>")

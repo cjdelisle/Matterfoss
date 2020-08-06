@@ -12,10 +12,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin/plugintest/mock"
-	"github.com/mattermost/mattermost-server/v5/store/storetest/mocks"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -144,7 +144,7 @@ func TestUpdateChannel(t *testing.T) {
 	//Update a open channel
 	channel.DisplayName = "My new display name"
 	channel.Header = "My fancy header"
-	channel.Purpose = "Mattermost ftw!"
+	channel.Purpose = "Matterfoss ftw!"
 
 	newChannel, resp := Client.UpdateChannel(channel)
 	CheckNoError(t, resp)
@@ -164,7 +164,7 @@ func TestUpdateChannel(t *testing.T) {
 	//Update a private channel
 	private.DisplayName = "My new display name for private channel"
 	private.Header = "My fancy private header"
-	private.Purpose = "Mattermost ftw! in private mode"
+	private.Purpose = "Matterfoss ftw! in private mode"
 
 	newPrivateChannel, resp := Client.UpdateChannel(private)
 	CheckNoError(t, resp)

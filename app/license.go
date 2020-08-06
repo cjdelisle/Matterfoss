@@ -10,13 +10,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
 
 const (
-	requestTrialURL = "https://customers.mattermost.com/api/v1/trials"
+	requestTrialURL = "https://customers.matterfoss.org/api/v1/trials"
 	LicenseEnv      = "MM_LICENSE"
 )
 
@@ -51,7 +51,7 @@ func (s *Server) LoadLicense() {
 
 	record, nErr := s.Store.License().Get(licenseId)
 	if nErr != nil {
-		mlog.Info("License key from https://mattermost.com required to unlock enterprise features.")
+		mlog.Info("License key from https://matterfoss.org required to unlock enterprise features.")
 		s.SetLicense(nil)
 		return
 	}
@@ -223,7 +223,7 @@ func (s *Server) GetSanitizedClientLicense() map[string]string {
 	return sanitizedLicense
 }
 
-// RequestTrialLicense request a trial license from the mattermost offical license server
+// RequestTrialLicense request a trial license from the matterfoss offical license server
 func (s *Server) RequestTrialLicense(trialRequest *model.TrialLicenseRequest) *model.AppError {
 	resp, err := http.Post(requestTrialURL, "application/json", bytes.NewBuffer([]byte(trialRequest.ToJson())))
 	if err != nil {

@@ -14,10 +14,10 @@ import (
 	"io/ioutil"
 
 	"github.com/gorilla/mux"
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
 
 func (a *App) ServePluginRequest(w http.ResponseWriter, r *http.Request) {
@@ -123,7 +123,7 @@ func (a *App) servePluginRequest(w http.ResponseWriter, r *http.Request, handler
 		token = r.URL.Query().Get("access_token")
 	}
 
-	r.Header.Del("Mattermost-User-Id")
+	r.Header.Del("Matterfoss-User-Id")
 	if token != "" {
 		session, err := a.GetSession(token)
 		csrfCheckPassed := false
@@ -177,7 +177,7 @@ func (a *App) servePluginRequest(w http.ResponseWriter, r *http.Request, handler
 		}
 
 		if session != nil && err == nil && csrfCheckPassed {
-			r.Header.Set("Mattermost-User-Id", session.UserId)
+			r.Header.Set("Matterfoss-User-Id", session.UserId)
 			context.SessionId = session.Id
 		}
 	}

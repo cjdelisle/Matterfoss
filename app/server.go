@@ -28,28 +28,28 @@ import (
 
 	"golang.org/x/crypto/acme/autocert"
 
-	"github.com/mattermost/mattermost-server/v5/audit"
-	"github.com/mattermost/mattermost-server/v5/config"
-	"github.com/mattermost/mattermost-server/v5/einterfaces"
-	"github.com/mattermost/mattermost-server/v5/jobs"
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"github.com/mattermost/mattermost-server/v5/services/cache"
-	"github.com/mattermost/mattermost-server/v5/services/filesstore"
-	"github.com/mattermost/mattermost-server/v5/services/httpservice"
-	"github.com/mattermost/mattermost-server/v5/services/imageproxy"
-	"github.com/mattermost/mattermost-server/v5/services/mailservice"
-	"github.com/mattermost/mattermost-server/v5/services/searchengine"
-	"github.com/mattermost/mattermost-server/v5/services/searchengine/bleveengine"
-	"github.com/mattermost/mattermost-server/v5/services/timezones"
-	"github.com/mattermost/mattermost-server/v5/services/tracing"
-	"github.com/mattermost/mattermost-server/v5/store"
-	"github.com/mattermost/mattermost-server/v5/store/localcachelayer"
-	"github.com/mattermost/mattermost-server/v5/store/searchlayer"
-	"github.com/mattermost/mattermost-server/v5/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v5/store/timerlayer"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/audit"
+	"github.com/cjdelisle/matterfoss-server/v5/config"
+	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v5/jobs"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v5/services/filesstore"
+	"github.com/cjdelisle/matterfoss-server/v5/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v5/services/imageproxy"
+	"github.com/cjdelisle/matterfoss-server/v5/services/mailservice"
+	"github.com/cjdelisle/matterfoss-server/v5/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v5/services/searchengine/bleveengine"
+	"github.com/cjdelisle/matterfoss-server/v5/services/timezones"
+	"github.com/cjdelisle/matterfoss-server/v5/services/tracing"
+	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v5/store/localcachelayer"
+	"github.com/cjdelisle/matterfoss-server/v5/store/searchlayer"
+	"github.com/cjdelisle/matterfoss-server/v5/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v5/store/timerlayer"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
 
 var MaxNotificationsPerChannelDefault int64 = 1000000
@@ -231,7 +231,7 @@ func NewServer(options ...Option) (*Server, error) {
 	s.ImageProxy = imageproxy.MakeImageProxy(s, s.HTTPService, s.Log)
 
 	if err := utils.TranslationsPreInit(); err != nil {
-		return nil, errors.Wrapf(err, "unable to load Mattermost translation files")
+		return nil, errors.Wrapf(err, "unable to load Matterfoss translation files")
 	}
 
 	searchEngine := searchengine.NewBroker(s.Config(), s.Jobs)
@@ -262,7 +262,7 @@ func NewServer(options ...Option) (*Server, error) {
 	s.createPushNotificationsHub()
 
 	if err := utils.InitTranslations(s.Config().LocalizationSettings); err != nil {
-		return nil, errors.Wrapf(err, "unable to load Mattermost translation files")
+		return nil, errors.Wrapf(err, "unable to load Matterfoss translation files")
 	}
 
 	s.configListenerId = s.AddConfigListener(func(_, _ *model.Config) {
@@ -398,7 +398,7 @@ func NewServer(options ...Option) (*Server, error) {
 	}
 
 	if _, err = url.ParseRequestURI(*s.Config().ServiceSettings.SiteURL); err != nil {
-		mlog.Error("SiteURL must be set. Some features will operate incorrectly if the SiteURL is not set. See documentation for details: http://about.mattermost.com/default-site-url")
+		mlog.Error("SiteURL must be set. Some features will operate incorrectly if the SiteURL is not set. See documentation for details: http://about.matterfoss.org/default-site-url")
 	}
 
 	backend, appErr := s.FileBackend()
@@ -1194,7 +1194,7 @@ func doLicenseExpirationCheck(a *App) {
 
 	users, err := a.Srv().Store.User().GetSystemAdminProfiles()
 	if err != nil {
-		mlog.Error("Failed to get system admins for license expired message from Mattermost.")
+		mlog.Error("Failed to get system admins for license expired message from Matterfoss.")
 		return
 	}
 

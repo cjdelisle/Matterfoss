@@ -9,8 +9,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
 
 type ensureBotOptions struct {
@@ -256,7 +256,7 @@ func (p *HelpersImpl) ensureBot(bot *model.Bot) (retBotID string, retErr error) 
 				p.API.LogWarn("Failed to set claimed bot user id.", "userid", user.Id, "err", kvSetErr)
 			}
 		} else {
-			p.API.LogError("Plugin attempted to use an account that already exists. Convert user to a bot account in the CLI by running 'mattermost user convert <username> --bot'. If the user is an existing user account you want to preserve, change its username and restart the Mattermost server, after which the plugin will create a bot account with that name. For more information about bot accounts, see https://mattermost.com/pl/default-bot-accounts", "username", bot.Username, "user_id", user.Id)
+			p.API.LogError("Plugin attempted to use an account that already exists. Convert user to a bot account in the CLI by running 'matterfoss user convert <username> --bot'. If the user is an existing user account you want to preserve, change its username and restart the Matterfoss server, after which the plugin will create a bot account with that name. For more information about bot accounts, see https://matterfoss.org/pl/default-bot-accounts", "username", bot.Username, "user_id", user.Id)
 		}
 		return user.Id, nil
 	}

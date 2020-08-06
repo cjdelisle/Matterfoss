@@ -1,7 +1,7 @@
 # Emoji Testing  
 Verify that all emoji and emoticons render. 
 
-:mattermost:
+:matterfoss:
 
 ### Emoticons - Punctuation  
 

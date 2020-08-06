@@ -9,9 +9,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/services/httpservice"
-	"github.com/mattermost/mattermost-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -20,7 +20,7 @@ func makeTestAtmosCamoProxy() *ImageProxy {
 	configService := &testutils.StaticConfigService{
 		Cfg: &model.Config{
 			ServiceSettings: model.ServiceSettings{
-				SiteURL:                             model.NewString("https://mattermost.example.com"),
+				SiteURL:                             model.NewString("https://matterfoss.example.com"),
 				AllowedUntrustedInternalConnections: model.NewString("127.0.0.1"),
 			},
 			ImageProxySettings: model.ImageProxySettings{
@@ -36,7 +36,7 @@ func makeTestAtmosCamoProxy() *ImageProxy {
 }
 
 func TestAtmosCamoBackend_GetImage(t *testing.T) {
-	imageURL := "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontalWhite.png"
+	imageURL := "http://www.matterfoss.org/wp-content/uploads/2016/03/logoHorizontalWhite.png"
 	proxiedURL := "http://images.example.com/62183a1cf0a4927c3b56d249366c2745e34ffe63/687474703a2f2f7777772e6d61747465726d6f73742e6f72672f77702d636f6e74656e742f75706c6f6164732f323031362f30332f6c6f676f486f72697a6f6e74616c57686974652e706e67"
 
 	proxy := makeTestAtmosCamoProxy()
@@ -77,10 +77,10 @@ func TestAtmosCamoBackend_GetImageDirect(t *testing.T) {
 }
 
 func TestGetAtmosCamoImageURL(t *testing.T) {
-	imageURL := "http://www.mattermost.org/wp-content/uploads/2016/03/logoHorizontal.png"
+	imageURL := "http://www.matterfoss.org/wp-content/uploads/2016/03/logoHorizontal.png"
 	proxiedURL := "http://images.example.com/5b6f6661516bc837b89b54566eb619d14a5c3eca/687474703a2f2f7777772e6d61747465726d6f73742e6f72672f77702d636f6e74656e742f75706c6f6164732f323031362f30332f6c6f676f486f72697a6f6e74616c2e706e67"
 
-	defaultSiteURL := "https://mattermost.example.com"
+	defaultSiteURL := "https://matterfoss.example.com"
 	proxyURL := "http://images.example.com"
 	options := "7e5f3fab20b94782b43cdb022a66985ef28ba355df2c5d5da3c9a05e4b697bac"
 
@@ -115,16 +115,16 @@ func TestGetAtmosCamoImageURL(t *testing.T) {
 			Expected: "/static/logo.png",
 		},
 		{
-			Name:     "should not proxy an image on the Mattermost server",
-			Input:    "https://mattermost.example.com/static/logo.png",
+			Name:     "should not proxy an image on the Matterfoss server",
+			Input:    "https://matterfoss.example.com/static/logo.png",
 			SiteURL:  defaultSiteURL,
-			Expected: "https://mattermost.example.com/static/logo.png",
+			Expected: "https://matterfoss.example.com/static/logo.png",
 		},
 		{
-			Name:     "should not proxy an image on the Mattermost server when a subpath is set",
-			Input:    "https://mattermost.example.com/static/logo.png",
+			Name:     "should not proxy an image on the Matterfoss server when a subpath is set",
+			Input:    "https://matterfoss.example.com/static/logo.png",
 			SiteURL:  defaultSiteURL + "/static",
-			Expected: "https://mattermost.example.com/static/logo.png",
+			Expected: "https://matterfoss.example.com/static/logo.png",
 		},
 		{
 			Name:     "should not proxy an image that has already been proxied",

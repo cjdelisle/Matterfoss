@@ -4,8 +4,8 @@
 package scheduler
 
 import (
-	"github.com/mattermost/mattermost-server/v5/app"
-	tjobs "github.com/mattermost/mattermost-server/v5/jobs/interfaces"
+	"github.com/cjdelisle/matterfoss-server/v5/app"
+	tjobs "github.com/cjdelisle/matterfoss-server/v5/jobs/interfaces"
 )
 
 type PluginsJobInterfaceImpl struct {

@@ -6,11 +6,11 @@ package main
 import (
 	"net/http"
 
-	"github.com/mattermost/mattermost-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
 )
 
 type Plugin struct {
-	plugin.MattermostPlugin
+	plugin.MatterfossPlugin
 }
 
 func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {

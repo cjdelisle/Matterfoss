@@ -16,11 +16,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v5/einterfaces/mocks"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"github.com/mattermost/mattermost-server/v5/plugin/plugintest"
-	"github.com/mattermost/mattermost-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/einterfaces/mocks"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin/plugintest"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -72,12 +72,12 @@ func TestHookMessageWillBePosted(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -112,12 +112,12 @@ func TestHookMessageWillBePosted(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -153,12 +153,12 @@ func TestHookMessageWillBePosted(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -196,12 +196,12 @@ func TestHookMessageWillBePosted(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -240,12 +240,12 @@ func TestHookMessageWillBePosted(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -262,12 +262,12 @@ func TestHookMessageWillBePosted(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -308,12 +308,12 @@ func TestHookMessageHasBeenPosted(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageHasBeenPosted(c *plugin.Context, post *model.Post) {
@@ -346,12 +346,12 @@ func TestHookMessageWillBeUpdated(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageWillBeUpdated(c *plugin.Context, newPost, oldPost *model.Post) (*model.Post, string) {
@@ -394,12 +394,12 @@ func TestHookMessageHasBeenUpdated(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageHasBeenUpdated(c *plugin.Context, newPost, oldPost *model.Post) {
@@ -442,12 +442,12 @@ func TestHookFileWillBeUploaded(t *testing.T) {
 
 			import (
 				"io"
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) FileWillBeUploaded(c *plugin.Context, info *model.FileInfo, file io.Reader, output io.Writer) (*model.FileInfo, string) {
@@ -490,12 +490,12 @@ func TestHookFileWillBeUploaded(t *testing.T) {
 			import (
 				"fmt"
 				"io"
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) FileWillBeUploaded(c *plugin.Context, info *model.FileInfo, file io.Reader, output io.Writer) (*model.FileInfo, string) {
@@ -542,12 +542,12 @@ func TestHookFileWillBeUploaded(t *testing.T) {
 
 			import (
 				"io"
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) FileWillBeUploaded(c *plugin.Context, info *model.FileInfo, file io.Reader, output io.Writer) (*model.FileInfo, string) {
@@ -603,12 +603,12 @@ func TestHookFileWillBeUploaded(t *testing.T) {
 				"io"
 				"fmt"
 				"bytes"
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) FileWillBeUploaded(c *plugin.Context, info *model.FileInfo, file io.Reader, output io.Writer) (*model.FileInfo, string) {
@@ -676,12 +676,12 @@ func TestUserWillLogIn_Blocked(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) UserWillLogIn(c *plugin.Context, user *model.User) string {
@@ -715,12 +715,12 @@ func TestUserWillLogInIn_Passed(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) UserWillLogIn(c *plugin.Context, user *model.User) string {
@@ -755,12 +755,12 @@ func TestUserHasLoggedIn(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) UserHasLoggedIn(c *plugin.Context, user *model.User) {
@@ -797,12 +797,12 @@ func TestUserHasBeenCreated(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) UserHasBeenCreated(c *plugin.Context, user *model.User) {
@@ -846,11 +846,11 @@ func TestErrorString(t *testing.T) {
 			import (
 				"errors"
 
-				"github.com/mattermost/mattermost-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) OnActivate() error {
@@ -875,12 +875,12 @@ func TestErrorString(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/plugin"
-				"github.com/mattermost/mattermost-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) OnActivate() error {
@@ -930,12 +930,12 @@ func TestHookContext(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageHasBeenPosted(c *plugin.Context, post *model.Post) {
@@ -973,12 +973,12 @@ func TestActiveHooks(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v5/model"
-				"github.com/mattermost/mattermost-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v5/model"
+				"github.com/cjdelisle/matterfoss-server/v5/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) OnActivate() error {
@@ -1059,12 +1059,12 @@ func TestHookMetrics(t *testing.T) {
 	package main
 
 	import (
-		"github.com/mattermost/mattermost-server/v5/model"
-		"github.com/mattermost/mattermost-server/v5/plugin"
+		"github.com/cjdelisle/matterfoss-server/v5/model"
+		"github.com/cjdelisle/matterfoss-server/v5/plugin"
 	)
 
 	type MyPlugin struct {
-		plugin.MattermostPlugin
+		plugin.MatterfossPlugin
 	}
 
 	func (p *MyPlugin) OnActivate() error {

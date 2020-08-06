@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/require"
 )
 
@@ -148,7 +148,7 @@ func TestLoadTestHelpCommands(t *testing.T) {
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.ServiceSettings.EnableTesting = true })
 
 	rs := Client.Must(Client.ExecuteCommand(channel.Id, "/test help")).(*model.CommandResponse)
-	require.True(t, strings.Contains(rs.Text, "Mattermost testing commands to help"), rs.Text)
+	require.True(t, strings.Contains(rs.Text, "Matterfoss testing commands to help"), rs.Text)
 
 	time.Sleep(2 * time.Second)
 }

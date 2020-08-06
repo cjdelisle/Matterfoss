@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -419,7 +419,7 @@ func TestS3TestConnection(t *testing.T) {
 		CheckBadRequestStatus(t, resp)
 		require.Equal(t, resp.Error.Message, "S3 Bucket is required", "should return error - missing s3 bucket")
 		// If this fails, check the test configuration to ensure minio is setup with the
-		// `mattermost-test` bucket defined by model.MINIO_BUCKET.
+		// `matterfoss-test` bucket defined by model.MINIO_BUCKET.
 		*config.FileSettings.AmazonS3Bucket = model.MINIO_BUCKET
 		config.FileSettings.AmazonS3PathPrefix = model.NewString("")
 		*config.FileSettings.AmazonS3Region = "us-east-1"
@@ -462,7 +462,7 @@ func TestSupportedTimezones(t *testing.T) {
 }
 
 func TestRedirectLocation(t *testing.T) {
-	expected := "https://mattermost.com/wp-content/themes/mattermostv2/img/logo-light.svg"
+	expected := "https://matterfoss.org/wp-content/themes/matterfossv2/img/logo-light.svg"
 
 	testServer := httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		res.Header().Set("Location", expected)
@@ -484,7 +484,7 @@ func TestRedirectLocation(t *testing.T) {
 	*th.App.Config().ServiceSettings.EnableLinkPreviews = true
 	*th.App.Config().ServiceSettings.AllowedUntrustedInternalConnections = "127.0.0.1"
 
-	_, resp := th.SystemAdminClient.GetRedirectLocation("https://mattermost.com/", "")
+	_, resp := th.SystemAdminClient.GetRedirectLocation("https://matterfoss.org/", "")
 	CheckNoError(t, resp)
 
 	_, resp = th.SystemAdminClient.GetRedirectLocation("", "")
@@ -500,7 +500,7 @@ func TestRedirectLocation(t *testing.T) {
 	assert.Equal(t, expected, actual)
 
 	*th.App.Config().ServiceSettings.EnableLinkPreviews = false
-	actual, resp = th.SystemAdminClient.GetRedirectLocation("https://mattermost.com/", "")
+	actual, resp = th.SystemAdminClient.GetRedirectLocation("https://matterfoss.org/", "")
 	CheckNoError(t, resp)
 	assert.Equal(t, actual, "")
 

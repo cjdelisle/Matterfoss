@@ -8,10 +8,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/services/marketplace"
-	"github.com/mattermost/mattermost-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/services/marketplace"
+	"github.com/cjdelisle/matterfoss-server/v5/store"
 	rudder "github.com/rudderlabs/analytics-go"
 )
 
@@ -361,7 +361,7 @@ func (s *Server) trackConfig() {
 		"teammate_name_display":                     *cfg.TeamSettings.TeammateNameDisplay,
 		"experimental_view_archived_channels":       *cfg.TeamSettings.ExperimentalViewArchivedChannels,
 		"lock_teammate_name_display":                *cfg.TeamSettings.LockTeammateNameDisplay,
-		"isdefault_site_name":                       isDefault(cfg.TeamSettings.SiteName, "Mattermost"),
+		"isdefault_site_name":                       isDefault(cfg.TeamSettings.SiteName, "Matterfoss"),
 		"isdefault_custom_brand_text":               isDefault(*cfg.TeamSettings.CustomBrandText, model.TEAM_SETTINGS_DEFAULT_CUSTOM_BRAND_TEXT),
 		"isdefault_custom_description_text":         isDefault(*cfg.TeamSettings.CustomDescriptionText, model.TEAM_SETTINGS_DEFAULT_CUSTOM_DESCRIPTION_TEXT),
 		"isdefault_user_status_away_timeout":        isDefault(*cfg.TeamSettings.UserStatusAwayTimeout, model.TEAM_SETTINGS_DEFAULT_USER_STATUS_AWAY_TIMEOUT),
@@ -1060,7 +1060,7 @@ func (s *Server) trackWarnMetrics() {
 
 func (s *Server) trackPluginConfig(cfg *model.Config, marketplaceURL string) {
 	pluginConfigData := map[string]interface{}{
-		"enable_nps_survey":             pluginSetting(&cfg.PluginSettings, "com.mattermost.nps", "enablesurvey", true),
+		"enable_nps_survey":             pluginSetting(&cfg.PluginSettings, "com.matterfoss.nps", "enablesurvey", true),
 		"enable":                        *cfg.PluginSettings.Enable,
 		"enable_uploads":                *cfg.PluginSettings.EnableUploads,
 		"allow_insecure_download_url":   *cfg.PluginSettings.AllowInsecureDownloadUrl,
@@ -1076,23 +1076,23 @@ func (s *Server) trackPluginConfig(cfg *model.Config, marketplaceURL string) {
 	// knownPluginIDs lists all known plugin IDs in the Marketplace
 	knownPluginIDs := []string{
 		"antivirus",
-		"com.github.manland.mattermost-plugin-gitlab",
-		"com.github.moussetc.mattermost.plugin.giphy",
-		"com.github.phillipahereza.mattermost-plugin-digitalocean",
-		"com.mattermost.aws-sns",
-		"com.mattermost.confluence",
-		"com.mattermost.custom-attributes",
-		"com.mattermost.mscalendar",
-		"com.mattermost.nps",
-		"com.mattermost.plugin-incident-response",
-		"com.mattermost.plugin-todo",
-		"com.mattermost.webex",
-		"com.mattermost.welcomebot",
+		"com.github.manland.matterfoss-plugin-gitlab",
+		"com.github.moussetc.matterfoss.plugin.giphy",
+		"com.github.phillipahereza.matterfoss-plugin-digitalocean",
+		"com.matterfoss.aws-sns",
+		"com.matterfoss.confluence",
+		"com.matterfoss.custom-attributes",
+		"com.matterfoss.mscalendar",
+		"com.matterfoss.nps",
+		"com.matterfoss.plugin-incident-response",
+		"com.matterfoss.plugin-todo",
+		"com.matterfoss.webex",
+		"com.matterfoss.welcomebot",
 		"github",
 		"jenkins",
 		"jira",
 		"jitsi",
-		"mattermost-autolink",
+		"matterfoss-autolink",
 		"memes",
 		"skype4business",
 		"zoom",

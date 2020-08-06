@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 // These assignments are part of the wire protocol used to trigger hook events in plugins.
@@ -44,7 +44,7 @@ const (
 // Hooks describes the methods a plugin may implement to automatically receive the corresponding
 // event.
 //
-// A plugin only need implement the hooks it cares about. The MattermostPlugin provides some
+// A plugin only need implement the hooks it cares about. The MatterfossPlugin provides some
 // default implementations for convenience but may be overridden.
 type Hooks interface {
 	// OnActivate is invoked when the plugin is activated. If an error is returned, the plugin
@@ -77,7 +77,7 @@ type Hooks interface {
 	// ServeHTTP allows the plugin to implement the http.Handler interface. Requests destined for
 	// the /plugins/{id} path will be routed to the plugin.
 	//
-	// The Mattermost-User-Id header will be present if (and only if) the request is by an
+	// The Matterfoss-User-Id header will be present if (and only if) the request is by an
 	// authenticated user.
 	//
 	// Minimum server version: 5.2

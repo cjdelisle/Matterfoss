@@ -9,8 +9,8 @@ import (
 	"go/token"
 	"go/types"
 
-	"github.com/mattermost/mattermost-server/v5/plugin/checker/internal/asthelpers"
-	"github.com/mattermost/mattermost-server/v5/plugin/checker/internal/version"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin/checker/internal/asthelpers"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin/checker/internal/version"
 
 	"github.com/pkg/errors"
 )

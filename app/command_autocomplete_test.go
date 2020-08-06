@@ -6,7 +6,7 @@ package app
 import (
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -227,7 +227,7 @@ func TestSuggestions(t *testing.T) {
 	assert.Equal(t, "jira connect", suggestions[0].Complete)
 	assert.Equal(t, "connect", suggestions[0].Suggestion)
 	assert.Equal(t, "[url]", suggestions[0].Hint)
-	assert.Equal(t, "Connect your Mattermost account to your Jira account", suggestions[0].Description)
+	assert.Equal(t, "Connect your Matterfoss account to your Jira account", suggestions[0].Description)
 
 	suggestions = th.App.getSuggestions(emptyCmdArgs, []*model.AutocompleteData{jira}, "", "jira create ", model.SYSTEM_ADMIN_ROLE_ID)
 	assert.Len(t, suggestions, 1)
@@ -538,10 +538,10 @@ func createCommandWithOptionalArgs() *model.AutocompleteData {
 func createJiraAutocompleteData() *model.AutocompleteData {
 	jira := model.NewAutocompleteData("jira", "[command]", "Available commands: connect, assign, disconnect, create, transition, view, subscribe, settings, install cloud/server, uninstall cloud/server, help")
 
-	connect := model.NewAutocompleteData("connect", "[url]", "Connect your Mattermost account to your Jira account")
+	connect := model.NewAutocompleteData("connect", "[url]", "Connect your Matterfoss account to your Jira account")
 	jira.AddCommand(connect)
 
-	disconnect := model.NewAutocompleteData("disconnect", "", "Disconnect your Mattermost account from your Jira account")
+	disconnect := model.NewAutocompleteData("disconnect", "", "Disconnect your Matterfoss account from your Jira account")
 	jira.AddCommand(disconnect)
 
 	assign := model.NewAutocompleteData("assign", "[issue]", "Change the assignee of a Jira issue")
@@ -586,7 +586,7 @@ func createJiraAutocompleteData() *model.AutocompleteData {
 	timezone.AddNamedTextArgument("zone", "Set timezone", "[UTC+07:00]", "", true)
 	jira.AddCommand(timezone)
 
-	install := model.NewAutocompleteData("install", "", "Connect Mattermost to a Jira instance")
+	install := model.NewAutocompleteData("install", "", "Connect Matterfoss to a Jira instance")
 	install.RoleID = model.SYSTEM_ADMIN_ROLE_ID
 	cloud := model.NewAutocompleteData("cloud", "", "Connect to a Jira Cloud instance")
 	urlPattern := "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"
@@ -597,7 +597,7 @@ func createJiraAutocompleteData() *model.AutocompleteData {
 	install.AddCommand(server)
 	jira.AddCommand(install)
 
-	uninstall := model.NewAutocompleteData("uninstall", "", "Disconnect Mattermost from a Jira instance")
+	uninstall := model.NewAutocompleteData("uninstall", "", "Disconnect Matterfoss from a Jira instance")
 	uninstall.RoleID = model.SYSTEM_ADMIN_ROLE_ID
 	cloud = model.NewAutocompleteData("cloud", "", "Disconnect from a Jira Cloud instance")
 	cloud.AddTextArgument("input URL of the Jira Cloud instance", "[URL]", urlPattern)

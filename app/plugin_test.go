@@ -20,12 +20,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v5/mlog"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"github.com/mattermost/mattermost-server/v5/testlib"
-	"github.com/mattermost/mattermost-server/v5/utils"
-	"github.com/mattermost/mattermost-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/testlib"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 )
 
 func getHashedKey(key string) string {
@@ -419,7 +419,7 @@ func TestHandlePluginRequest(t *testing.T) {
 	r.Header.Add("Authorization", "Bearer "+token.Token)
 	assertions = func(r *http.Request) {
 		assert.Equal(t, "/bar", r.URL.Path)
-		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Mattermost-User-Id"))
+		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Matterfoss-User-Id"))
 	}
 	router.ServeHTTP(nil, r)
 
@@ -427,7 +427,7 @@ func TestHandlePluginRequest(t *testing.T) {
 	assertions = func(r *http.Request) {
 		assert.Equal(t, "/bar", r.URL.Path)
 		assert.Equal(t, "a=b&c=d", r.URL.RawQuery)
-		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Mattermost-User-Id"))
+		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Matterfoss-User-Id"))
 	}
 	router.ServeHTTP(nil, r)
 
@@ -435,7 +435,7 @@ func TestHandlePluginRequest(t *testing.T) {
 	assertions = func(r *http.Request) {
 		assert.Equal(t, "/bar", r.URL.Path)
 		assert.Equal(t, "a=b&c=d", r.URL.RawQuery)
-		assert.Empty(t, r.Header.Get("Mattermost-User-Id"))
+		assert.Empty(t, r.Header.Get("Matterfoss-User-Id"))
 	}
 	router.ServeHTTP(nil, r)
 }
@@ -638,12 +638,12 @@ func TestPluginPanicLogs(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {

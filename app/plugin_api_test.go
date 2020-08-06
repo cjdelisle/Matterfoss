@@ -21,11 +21,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v5/einterfaces/mocks"
-	"github.com/mattermost/mattermost-server/v5/model"
-	"github.com/mattermost/mattermost-server/v5/plugin"
-	"github.com/mattermost/mattermost-server/v5/utils"
-	"github.com/mattermost/mattermost-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v5/einterfaces/mocks"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -105,25 +105,25 @@ func TestPublicFilesPathConfiguration(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
 
-	pluginID := "com.mattermost.sample"
+	pluginID := "com.matterfoss.sample"
 
 	pluginDir := setupPluginApiTest(t,
 		`
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func main() {
 			plugin.ClientMain(&MyPlugin{})
 		}
 	`,
-		`{"id": "com.mattermost.sample", "server": {"executable": "backend.exe"}, "settings_schema": {"settings": []}}`, pluginID, th.App)
+		`{"id": "com.matterfoss.sample", "server": {"executable": "backend.exe"}, "settings_schema": {"settings": []}}`, pluginID, th.App)
 
 	publicFilesFolderInTest := filepath.Join(pluginDir, pluginID, "public")
 	publicFilesPath, err := th.App.GetPluginsEnvironment().PublicFilesPath(pluginID)
@@ -651,7 +651,7 @@ func TestPluginAPILoadPluginConfiguration(t *testing.T) {
 		cfg.PluginSettings.Plugins["testloadpluginconfig"] = pluginJson
 	})
 
-	testFolder, found := fileutils.FindDir("mattermost-server/app/plugin_api_tests")
+	testFolder, found := fileutils.FindDir("matterfoss-server/app/plugin_api_tests")
 	require.True(t, found, "Cannot find tests folder")
 	fullPath := path.Join(testFolder, "manual.test_load_configuration_plugin", "main.go")
 
@@ -687,7 +687,7 @@ func TestPluginAPILoadPluginConfigurationDefaults(t *testing.T) {
 		cfg.PluginSettings.Plugins["testloadpluginconfig"] = pluginJson
 	})
 
-	testFolder, found := fileutils.FindDir("mattermost-server/app/plugin_api_tests")
+	testFolder, found := fileutils.FindDir("matterfoss-server/app/plugin_api_tests")
 	require.True(t, found, "Cannot find tests folder")
 	fullPath := path.Join(testFolder, "manual.test_load_configuration_defaults_plugin", "main.go")
 
@@ -724,11 +724,11 @@ func TestPluginAPIGetPlugins(t *testing.T) {
     package main
 
     import (
-      "github.com/mattermost/mattermost-server/v5/plugin"
+      "github.com/cjdelisle/matterfoss-server/v5/plugin"
     )
 
     type MyPlugin struct {
-      plugin.MattermostPlugin
+      plugin.MatterfossPlugin
     }
 
     func main() {
@@ -872,7 +872,7 @@ func TestInstallPlugin(t *testing.T) {
 
 			"github.com/pkg/errors"
 
-			"github.com/mattermost/mattermost-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
 		)
 
 		type configuration struct {
@@ -880,7 +880,7 @@ func TestInstallPlugin(t *testing.T) {
 		}
 
 		type Plugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 
 			configuration configuration
 		}
@@ -1048,7 +1048,7 @@ func pluginAPIHookTest(t *testing.T, th *TestHelper, fileName string, id string,
 
 func TestBasicAPIPlugins(t *testing.T) {
 	defaultSchema := getDefaultPluginSettingsSchema()
-	testFolder, found := fileutils.FindDir("mattermost-server/app/plugin_api_tests")
+	testFolder, found := fileutils.FindDir("matterfoss-server/app/plugin_api_tests")
 	require.True(t, found, "Cannot read find app folder")
 	dirs, err := ioutil.ReadDir(testFolder)
 	require.NoError(t, err, "Cannot read test folder %v", testFolder)
@@ -1368,13 +1368,13 @@ func TestInterpluginPluginHTTP(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
 			"bytes"
 			"net/http"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {
@@ -1401,15 +1401,15 @@ func TestInterpluginPluginHTTP(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v5/plugin"
-			"github.com/mattermost/mattermost-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v5/plugin"
+			"github.com/cjdelisle/matterfoss-server/v5/model"
 			"bytes"
 			"net/http"
 			"io/ioutil"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -1419,7 +1419,7 @@ func TestInterpluginPluginHTTP(t *testing.T) {
 			if err != nil {
 				return nil, err.Error()
 			}
-			req.Header.Add("Mattermost-User-Id", "userid")
+			req.Header.Add("Matterfoss-User-Id", "userid")
 			resp := p.API.PluginHTTP(req)
 			if resp == nil {
 				return nil, "Nil resp"
@@ -1485,12 +1485,12 @@ func TestApiMetrics(t *testing.T) {
 	package main
 
 	import (
-		"github.com/mattermost/mattermost-server/v5/model"
-		"github.com/mattermost/mattermost-server/v5/plugin"
+		"github.com/cjdelisle/matterfoss-server/v5/model"
+		"github.com/cjdelisle/matterfoss-server/v5/plugin"
 	)
 
 	type MyPlugin struct {
-		plugin.MattermostPlugin
+		plugin.MatterfossPlugin
 	}
 
 	func (p *MyPlugin) UserHasBeenCreated(c *plugin.Context, user *model.User) {
@@ -1587,7 +1587,7 @@ func TestPluginHTTPConnHijack(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
 
-	testFolder, found := fileutils.FindDir("mattermost-server/app/plugin_api_tests")
+	testFolder, found := fileutils.FindDir("matterfoss-server/app/plugin_api_tests")
 	require.True(t, found, "Cannot find tests folder")
 	fullPath := path.Join(testFolder, "manual.test_http_hijack_plugin", "main.go")
 
@@ -1622,7 +1622,7 @@ func TestPluginHTTPUpgradeWebSocket(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
 
-	testFolder, found := fileutils.FindDir("mattermost-server/app/plugin_api_tests")
+	testFolder, found := fileutils.FindDir("matterfoss-server/app/plugin_api_tests")
 	require.True(t, found, "Cannot find tests folder")
 	fullPath := path.Join(testFolder, "manual.test_http_upgrade_websocket_plugin", "main.go")
 
