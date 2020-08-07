@@ -11,7 +11,8 @@ the terms of the AGPL.
 * **No DRM**: Every feature that is present in the open source software is fully unlocked, you
 don't need any "license" file in order to use them.
 * **No Tracking**: There is no telemetry, update-check or other "call home" feature which can
-be used to track you.
+be used to track you. Note that if you use a 3rd party push notification provider, they will
+have access to whatever data is sent to them.
 
 ## No warrantees, no support
 If you are considering using Matterfoss in a commercial setting, please note that this
