@@ -17,10 +17,6 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/dyatlov/go-opengraph/opengraph"
-	"github.com/gorilla/websocket"
-	"github.com/mattermost/go-i18n/i18n"
-	goi18n "github.com/mattermost/go-i18n/i18n"
 	"github.com/cjdelisle/matterfoss-server/v5/audit"
 	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
 	"github.com/cjdelisle/matterfoss-server/v5/mlog"
@@ -32,6 +28,10 @@ import (
 	"github.com/cjdelisle/matterfoss-server/v5/services/searchengine"
 	"github.com/cjdelisle/matterfoss-server/v5/services/timezones"
 	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/dyatlov/go-opengraph/opengraph"
+	"github.com/gorilla/websocket"
+	"github.com/mattermost/go-i18n/i18n"
+	goi18n "github.com/mattermost/go-i18n/i18n"
 )
 
 // AppIface is extracted from App struct and contains all it's exported methods. It's provided to allow partial interface passing and app layers creation.
@@ -450,7 +450,6 @@ type AppIface interface {
 	DeleteScheme(schemeId string) (*model.Scheme, *model.AppError)
 	DeleteSidebarCategory(userId, teamId, categoryId string) *model.AppError
 	DeleteToken(token *model.Token) *model.AppError
-	DiagnosticId() string
 	DisableAutoResponder(userId string, asAdmin bool) *model.AppError
 	DisableUserAccessToken(token *model.UserAccessToken) *model.AppError
 	DoAppMigrations()
@@ -874,7 +873,6 @@ type AppIface interface {
 	SetAutoResponderStatus(user *model.User, oldNotifyProps model.StringMap)
 	SetContext(c context.Context)
 	SetDefaultProfileImage(user *model.User) *model.AppError
-	SetDiagnosticId(id string)
 	SetIpAddress(s string)
 	SetLog(l *mlog.Logger)
 	SetPath(s string)

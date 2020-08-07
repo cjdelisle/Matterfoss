@@ -19,12 +19,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/getsentry/sentry-go"
-	sentryhttp "github.com/getsentry/sentry-go/http"
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 	"github.com/rs/cors"
-	rudder "github.com/rudderlabs/analytics-go"
 
 	"golang.org/x/crypto/acme/autocert"
 
@@ -131,9 +128,6 @@ type Server struct {
 	clientConfigHash    atomic.Value
 	limitedClientConfig atomic.Value
 
-	diagnosticId string
-	rudderClient rudder.Client
-
 	phase2PermissionsMigrationComplete bool
 
 	HTTPService httpservice.HTTPService
@@ -202,20 +196,6 @@ func NewServer(options ...Option) (*Server, error) {
 	// to avoid race conditions while logging from inside the hub.
 	fakeApp := New(ServerConnector(s))
 	fakeApp.HubStart()
-
-	if *s.Config().LogSettings.EnableDiagnostics && *s.Config().LogSettings.EnableSentry {
-		if strings.Contains(SENTRY_DSN, "placeholder") {
-			mlog.Warn("Sentry reporting is enabled, but SENTRY_DSN is not set. Disabling reporting.")
-		} else {
-			if err := sentry.Init(sentry.ClientOptions{
-				Dsn:              SENTRY_DSN,
-				Release:          model.BuildHash,
-				AttachStacktrace: true,
-			}); err != nil {
-				mlog.Warn("Sentry could not be initiated, probably bad DSN?", mlog.Err(err))
-			}
-		}
-	}
 
 	if *s.Config().ServiceSettings.EnableOpenTracing {
 		tracer, err := tracing.New()
@@ -358,7 +338,6 @@ func NewServer(options ...Option) (*Server, error) {
 		return nil, errors.Wrapf(err, "unable to ensure first run timestamp")
 	}
 
-	s.ensureDiagnosticId()
 	s.regenerateClientConfig()
 
 	s.clusterLeaderListenerId = s.AddClusterLeaderChangedListener(func() {
@@ -505,12 +484,6 @@ func NewServer(options ...Option) (*Server, error) {
 func (s *Server) RunJobs() {
 	if s.runjobs {
 		s.Go(func() {
-			runSecurityJob(s)
-		})
-		s.Go(func() {
-			runDiagnosticsJob(s)
-		})
-		s.Go(func() {
 			runSessionCleanupJob(s)
 		})
 		s.Go(func() {
@@ -639,8 +612,6 @@ func (s *Server) StopHTTPServer() {
 func (s *Server) Shutdown() error {
 	mlog.Info("Stopping Server...")
 
-	defer sentry.Flush(2 * time.Second)
-
 	s.HubStop()
 	s.ShutDownPlugins()
 	s.RemoveLicenseListener(s.licenseListenerId)
@@ -650,11 +621,6 @@ func (s *Server) Shutdown() error {
 		if err := s.tracer.Close(); err != nil {
 			mlog.Error("Unable to cleanly shutdown opentracing client", mlog.Err(err))
 		}
-	}
-
-	err := s.shutdownDiagnostics()
-	if err != nil {
-		mlog.Error("Unable to cleanly shutdown diagnostic client", mlog.Err(err))
 	}
 
 	s.StopHTTPServer()
@@ -700,7 +666,7 @@ func (s *Server) Shutdown() error {
 	}
 
 	if s.CacheProvider != nil {
-		if err = s.CacheProvider.Close(); err != nil {
+		if err := s.CacheProvider.Close(); err != nil {
 			mlog.Error("Unable to cleanly shutdown cache", mlog.Err(err))
 		}
 	}
@@ -776,13 +742,6 @@ func (s *Server) Start() error {
 	mlog.Info("Starting Server...")
 
 	var handler http.Handler = s.RootRouter
-
-	if *s.Config().LogSettings.EnableDiagnostics && *s.Config().LogSettings.EnableSentry && !strings.Contains(SENTRY_DSN, "placeholder") {
-		sentryHandler := sentryhttp.New(sentryhttp.Options{
-			Repanic: true,
-		})
-		handler = sentryHandler.Handle(handler)
-	}
 
 	if allowedOrigins := *s.Config().ServiceSettings.AllowCorsFrom; allowedOrigins != "" {
 		exposedCorsHeaders := *s.Config().ServiceSettings.CorsExposedHeaders
@@ -1029,41 +988,6 @@ func (s *Server) checkPushNotificationServerUrl() {
 	}
 }
 
-func runSecurityJob(s *Server) {
-	doSecurity(s)
-	model.CreateRecurringTask("Security", func() {
-		doSecurity(s)
-	}, time.Hour*4)
-}
-
-func doDiagnosticsIfNeeded(s *Server, firstRun time.Time) {
-	hoursSinceFirstServerRun := time.Since(firstRun).Hours()
-	// Send once every 10 minutes for the first hour
-	// Send once every hour thereafter for the first 12 hours
-	// Send at the 24 hour mark and every 24 hours after
-	if hoursSinceFirstServerRun < 1 {
-		doDiagnostics(s)
-	} else if hoursSinceFirstServerRun <= 12 && time.Since(s.timestampLastDiagnosticSent) >= time.Hour {
-		doDiagnostics(s)
-	} else if hoursSinceFirstServerRun > 12 && time.Since(s.timestampLastDiagnosticSent) >= 24*time.Hour {
-		doDiagnostics(s)
-	}
-}
-
-func runDiagnosticsJob(s *Server) {
-	// Send on boot
-	doDiagnostics(s)
-	firstRun, err := s.getFirstServerRunTimestamp()
-	if err != nil {
-		mlog.Warn("Fetching time of first server run failed. Setting to 'now'.")
-		s.ensureFirstServerRunTimestamp()
-		firstRun = utils.MillisFromTime(time.Now())
-	}
-	model.CreateRecurringTask("Diagnostics", func() {
-		doDiagnosticsIfNeeded(s, utils.TimeFromMillis(firstRun))
-	}, time.Minute*10)
-}
-
 func runTokenCleanupJob(s *Server) {
 	doTokenCleanup(s)
 	model.CreateRecurringTask("Token Cleanup", func() {
@@ -1097,17 +1021,6 @@ func runCheckNumberOfActiveUsersWarnMetricStatusJob(a *App) {
 	model.CreateRecurringTask("Check Number Of Active Users Warn Metric Status", func() {
 		doCheckNumberOfActiveUsersWarnMetricStatus(a)
 	}, time.Hour*24)
-}
-
-func doSecurity(s *Server) {
-	s.DoSecurityUpdateCheck()
-}
-
-func doDiagnostics(s *Server) {
-	if *s.Config().LogSettings.EnableDiagnostics {
-		s.timestampLastDiagnosticSent = time.Now()
-		s.SendDailyDiagnostics()
-	}
 }
 
 func doTokenCleanup(s *Server) {
@@ -1296,39 +1209,6 @@ func (s *Server) stopSearchEngine() {
 	}
 }
 
-// initDiagnostics initialises the Rudder client for the diagnostics system.
-func (s *Server) initDiagnostics(endpoint string) {
-	if s.rudderClient == nil {
-		config := rudder.Config{}
-		config.Logger = rudder.StdLogger(s.Log.StdLog(mlog.String("source", "rudder")))
-		config.Endpoint = endpoint
-		// For testing
-		if endpoint != RUDDER_DATAPLANE_URL {
-			config.Verbose = true
-			config.BatchSize = 1
-		}
-		client, err := rudder.NewWithConfig(RUDDER_KEY, endpoint, config)
-		if err != nil {
-			mlog.Error("Failed to create Rudder instance", mlog.Err(err))
-			return
-		}
-		client.Enqueue(rudder.Identify{
-			UserId: s.diagnosticId,
-		})
-
-		s.rudderClient = client
-	}
-}
-
-// shutdownDiagnostics closes the diagnostics system Rudder client.
-func (s *Server) shutdownDiagnostics() error {
-	if s.rudderClient != nil {
-		return s.rudderClient.Close()
-	}
-
-	return nil
-}
-
 func (s *Server) FileBackend() (filesstore.FileBackend, *model.AppError) {
 	license := s.License()
 	return filesstore.NewFileBackend(&s.Config().FileSettings, license != nil && *license.Features.Compliance)
@@ -1347,25 +1227,6 @@ func (s *Server) TotalWebsocketConnections() int {
 
 func (s *Server) ClusterHealthScore() int {
 	return s.Cluster.HealthScore()
-}
-
-func (s *Server) ensureDiagnosticId() {
-	if s.diagnosticId != "" {
-		return
-	}
-	props, err := s.Store.System().Get()
-	if err != nil {
-		return
-	}
-
-	id := props[model.SYSTEM_DIAGNOSTIC_ID]
-	if len(id) == 0 {
-		id = model.NewId()
-		systemID := &model.System{Name: model.SYSTEM_DIAGNOSTIC_ID, Value: id}
-		s.Store.System().Save(systemID)
-	}
-
-	s.diagnosticId = id
 }
 
 func (s *Server) configOrLicenseListener() {

@@ -516,7 +516,7 @@ func (a *App) buildWarnMetricMailtoLink(warnMetricId string, user *model.User) s
 	mailBody += T("api.server.warn_metric.bot_response.mailto_site_url_header", map[string]interface{}{"SiteUrl": a.GetSiteURL()})
 	mailBody += "\r\n"
 
-	mailBody += T("api.server.warn_metric.bot_response.mailto_diagnostic_id_header", map[string]interface{}{"DiagnosticId": a.DiagnosticId()})
+	mailBody += T("api.server.warn_metric.bot_response.mailto_diagnostic_id_header", map[string]interface{}{"DiagnosticId": "matterfoss"})
 	mailBody += "\r\n"
 
 	mailBody += T("api.server.warn_metric.bot_response.mailto_footer")

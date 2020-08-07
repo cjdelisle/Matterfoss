@@ -11,8 +11,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mattermost/go-i18n/i18n"
-	goi18n "github.com/mattermost/go-i18n/i18n"
 	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
 	"github.com/cjdelisle/matterfoss-server/v5/mlog"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
@@ -22,6 +20,8 @@ import (
 	"github.com/cjdelisle/matterfoss-server/v5/services/searchengine"
 	"github.com/cjdelisle/matterfoss-server/v5/services/timezones"
 	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/mattermost/go-i18n/i18n"
+	goi18n "github.com/mattermost/go-i18n/i18n"
 )
 
 type App struct {
@@ -123,14 +123,6 @@ func (a *App) initJobs() {
 
 	a.srv.Jobs.Workers = a.srv.Jobs.InitWorkers()
 	a.srv.Jobs.Schedulers = a.srv.Jobs.InitSchedulers()
-}
-
-func (a *App) DiagnosticId() string {
-	return a.Srv().diagnosticId
-}
-
-func (a *App) SetDiagnosticId(id string) {
-	a.Srv().diagnosticId = id
 }
 
 func (s *Server) HTMLTemplates() *template.Template {
@@ -373,7 +365,7 @@ func (a *App) NotifyAndSetWarnMetricAck(warnMetricId string, sender *model.User,
 			bodyPage.Props["SiteURLHeader"] = T("api.templates.warn_metric_ack.body.site_url_header")
 			bodyPage.Props["SiteURL"] = a.GetSiteURL()
 			bodyPage.Props["DiagnosticIdHeader"] = T("api.templates.warn_metric_ack.body.diagnostic_id_header")
-			bodyPage.Props["DiagnosticIdValue"] = a.DiagnosticId()
+			bodyPage.Props["DiagnosticIdValue"] = "matterfoss"
 			bodyPage.Props["Footer"] = T("api.templates.warn_metric_ack.footer")
 
 			warnMetricStatus, warnMetricDisplayTexts := a.getWarnMetricStatusAndDisplayTextsForId(warnMetricId, T)

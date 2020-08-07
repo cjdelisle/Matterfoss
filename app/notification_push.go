@@ -13,10 +13,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/go-i18n/i18n"
 	"github.com/cjdelisle/matterfoss-server/v5/mlog"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/mattermost/go-i18n/i18n"
 )
 
 type notificationType string
@@ -332,7 +332,7 @@ func (s *Server) StopPushNotificationsHubWorkers() {
 }
 
 func (a *App) sendToPushProxy(msg *model.PushNotification, session *model.Session) error {
-	msg.ServerId = a.DiagnosticId()
+	msg.ServerId = "matterfoss"
 
 	a.NotificationsLog().Info("Notification will be sent",
 		mlog.String("ackId", msg.AckId),

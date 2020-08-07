@@ -17,10 +17,6 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/dyatlov/go-opengraph/opengraph"
-	"github.com/gorilla/websocket"
-	"github.com/mattermost/go-i18n/i18n"
-	goi18n "github.com/mattermost/go-i18n/i18n"
 	"github.com/cjdelisle/matterfoss-server/v5/app"
 	"github.com/cjdelisle/matterfoss-server/v5/audit"
 	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
@@ -34,6 +30,10 @@ import (
 	"github.com/cjdelisle/matterfoss-server/v5/services/timezones"
 	"github.com/cjdelisle/matterfoss-server/v5/services/tracing"
 	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/dyatlov/go-opengraph/opengraph"
+	"github.com/gorilla/websocket"
+	"github.com/mattermost/go-i18n/i18n"
+	goi18n "github.com/mattermost/go-i18n/i18n"
 	"github.com/opentracing/opentracing-go/ext"
 	spanlog "github.com/opentracing/opentracing-go/log"
 )
@@ -2925,20 +2925,7 @@ func (a *OpenTracingAppLayer) DemoteUserToGuest(user *model.User) *model.AppErro
 }
 
 func (a *OpenTracingAppLayer) DiagnosticId() string {
-	origCtx := a.ctx
-	span, newCtx := tracing.StartSpanWithParentByContext(a.ctx, "app.DiagnosticId")
-
-	a.ctx = newCtx
-	a.app.Srv().Store.SetContext(newCtx)
-	defer func() {
-		a.app.Srv().Store.SetContext(origCtx)
-		a.ctx = origCtx
-	}()
-
-	defer span.Finish()
-	resultVar0 := a.app.DiagnosticId()
-
-	return resultVar0
+	return "matterfoss"
 }
 
 func (a *OpenTracingAppLayer) DisableAutoResponder(userId string, asAdmin bool) *model.AppError {
@@ -12983,18 +12970,6 @@ func (a *OpenTracingAppLayer) SetDefaultProfileImage(user *model.User) *model.Ap
 }
 
 func (a *OpenTracingAppLayer) SetDiagnosticId(id string) {
-	origCtx := a.ctx
-	span, newCtx := tracing.StartSpanWithParentByContext(a.ctx, "app.SetDiagnosticId")
-
-	a.ctx = newCtx
-	a.app.Srv().Store.SetContext(newCtx)
-	defer func() {
-		a.app.Srv().Store.SetContext(origCtx)
-		a.ctx = origCtx
-	}()
-
-	defer span.Finish()
-	a.app.SetDiagnosticId(id)
 }
 
 func (a *OpenTracingAppLayer) SetLog(l *mlog.Logger) {
