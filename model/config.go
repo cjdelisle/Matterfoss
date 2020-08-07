@@ -46,8 +46,8 @@ const (
 
 	GENERIC_NO_CHANNEL_NOTIFICATION = "generic_no_channel"
 	GENERIC_NOTIFICATION            = "generic"
-	GENERIC_NOTIFICATION_SERVER     = "https://push-test.matterfoss.org"
-	MM_SUPPORT_ADDRESS              = "support@matterfoss.org"
+	GENERIC_NOTIFICATION_SERVER     = "https://push-test.mattermost.com"
+	MM_SUPPORT_ADDRESS              = "configurethis@in.the.config.json.file"
 	FULL_NOTIFICATION               = "full"
 	ID_LOADED_NOTIFICATION          = "id_loaded"
 
@@ -107,18 +107,18 @@ const (
 	TEAM_SETTINGS_DEFAULT_CUSTOM_DESCRIPTION_TEXT  = ""
 	TEAM_SETTINGS_DEFAULT_USER_STATUS_AWAY_TIMEOUT = 300
 
-	SQL_SETTINGS_DEFAULT_DATA_SOURCE = "mmuser:mostest@tcp(localhost:3306)/matterfoss_test?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
+	SQL_SETTINGS_DEFAULT_DATA_SOURCE = "mfuser:mfpass@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
 
 	FILE_SETTINGS_DEFAULT_DIRECTORY = "./data/"
 
 	EMAIL_SETTINGS_DEFAULT_FEEDBACK_ORGANIZATION = ""
 
-	SUPPORT_SETTINGS_DEFAULT_TERMS_OF_SERVICE_LINK = "https://about.matterfoss.org/default-terms/"
-	SUPPORT_SETTINGS_DEFAULT_PRIVACY_POLICY_LINK   = "https://about.matterfoss.org/default-privacy-policy/"
-	SUPPORT_SETTINGS_DEFAULT_ABOUT_LINK            = "https://about.matterfoss.org/default-about/"
-	SUPPORT_SETTINGS_DEFAULT_HELP_LINK             = "https://about.matterfoss.org/default-help/"
-	SUPPORT_SETTINGS_DEFAULT_REPORT_A_PROBLEM_LINK = "https://about.matterfoss.org/default-report-a-problem/"
-	SUPPORT_SETTINGS_DEFAULT_SUPPORT_EMAIL         = "feedback@matterfoss.org"
+	SUPPORT_SETTINGS_DEFAULT_TERMS_OF_SERVICE_LINK = "https://github.com/cjdelisle/Matterfoss#Customization"
+	SUPPORT_SETTINGS_DEFAULT_PRIVACY_POLICY_LINK   = "https://github.com/cjdelisle/Matterfoss#Customization"
+	SUPPORT_SETTINGS_DEFAULT_ABOUT_LINK            = "https://github.com/cjdelisle/Matterfoss#Customization"
+	SUPPORT_SETTINGS_DEFAULT_HELP_LINK             = "https://github.com/cjdelisle/Matterfoss#Customization"
+	SUPPORT_SETTINGS_DEFAULT_REPORT_A_PROBLEM_LINK = "https://github.com/cjdelisle/Matterfoss#Customization"
+	SUPPORT_SETTINGS_DEFAULT_SUPPORT_EMAIL         = "configurethis@in.the.config.json.file"
 	SUPPORT_SETTINGS_DEFAULT_RE_ACCEPTANCE_PERIOD  = 365
 
 	LDAP_SETTINGS_DEFAULT_FIRST_NAME_ATTRIBUTE         = ""
@@ -153,9 +153,9 @@ const (
 	SAML_SETTINGS_CANONICAL_ALGORITHM_C14N11  = "Canonical1.1"
 	SAML_SETTINGS_DEFAULT_CANONICAL_ALGORITHM = SAML_SETTINGS_CANONICAL_ALGORITHM_C14N
 
-	NATIVEAPP_SETTINGS_DEFAULT_APP_DOWNLOAD_LINK         = "https://matterfoss.org/download/#matterfossApps"
-	NATIVEAPP_SETTINGS_DEFAULT_ANDROID_APP_DOWNLOAD_LINK = "https://about.matterfoss.org/matterfoss-android-app/"
-	NATIVEAPP_SETTINGS_DEFAULT_IOS_APP_DOWNLOAD_LINK     = "https://about.matterfoss.org/matterfoss-ios-app/"
+	NATIVEAPP_SETTINGS_DEFAULT_APP_DOWNLOAD_LINK         = "http://apps.matterfoss.org"
+	NATIVEAPP_SETTINGS_DEFAULT_ANDROID_APP_DOWNLOAD_LINK = "http://android.matterfoss.org"
+	NATIVEAPP_SETTINGS_DEFAULT_IOS_APP_DOWNLOAD_LINK     = "http://ios.matterfoss.org"
 
 	EXPERIMENTAL_SETTINGS_DEFAULT_LINK_METADATA_TIMEOUT_MILLISECONDS = 5000
 
@@ -1409,11 +1409,11 @@ func (s *EmailSettings) SetDefaults(isUpdate bool) {
 	}
 
 	if s.FeedbackEmail == nil {
-		s.FeedbackEmail = NewString("test@example.com")
+		s.FeedbackEmail = NewString("configurethis@in.the.config.json.file")
 	}
 
 	if s.ReplyToAddress == nil {
-		s.ReplyToAddress = NewString("test@example.com")
+		s.ReplyToAddress = NewString("configurethis@in.the.config.json.file")
 	}
 
 	if s.FeedbackOrganization == nil {
