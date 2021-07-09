@@ -9,8 +9,9 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/require"
+
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 func genRateLimitSettings(useAuth, useIP bool, header string) *model.RateLimitSettings {

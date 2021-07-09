@@ -4,6 +4,7 @@
 package localcachelayer
 
 import (
+	"context"
 	"sort"
 	"strings"
 
@@ -17,7 +18,7 @@ type LocalCacheRoleStore struct {
 }
 
 func (s *LocalCacheRoleStore) handleClusterInvalidateRole(msg *model.ClusterMessage) {
-	if msg.Data == CLEAR_CACHE_MESSAGE_DATA {
+	if msg.Data == ClearCacheMessageData {
 		s.rootStore.roleCache.Purge()
 	} else {
 		s.rootStore.roleCache.Remove(msg.Data)
@@ -25,28 +26,28 @@ func (s *LocalCacheRoleStore) handleClusterInvalidateRole(msg *model.ClusterMess
 }
 
 func (s *LocalCacheRoleStore) handleClusterInvalidateRolePermissions(msg *model.ClusterMessage) {
-	if msg.Data == CLEAR_CACHE_MESSAGE_DATA {
+	if msg.Data == ClearCacheMessageData {
 		s.rootStore.rolePermissionsCache.Purge()
 	} else {
 		s.rootStore.rolePermissionsCache.Remove(msg.Data)
 	}
 }
 
-func (s LocalCacheRoleStore) Save(role *model.Role) (*model.Role, *model.AppError) {
-	if len(role.Name) != 0 {
+func (s LocalCacheRoleStore) Save(role *model.Role) (*model.Role, error) {
+	if role.Name != "" {
 		defer s.rootStore.doInvalidateCacheCluster(s.rootStore.roleCache, role.Name)
 		defer s.rootStore.doClearCacheCluster(s.rootStore.rolePermissionsCache)
 	}
 	return s.RoleStore.Save(role)
 }
 
-func (s LocalCacheRoleStore) GetByName(name string) (*model.Role, *model.AppError) {
+func (s LocalCacheRoleStore) GetByName(ctx context.Context, name string) (*model.Role, error) {
 	var role *model.Role
 	if err := s.rootStore.doStandardReadCache(s.rootStore.roleCache, name, &role); err == nil {
 		return role, nil
 	}
 
-	role, err := s.RoleStore.GetByName(name)
+	role, err := s.RoleStore.GetByName(ctx, name)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +55,7 @@ func (s LocalCacheRoleStore) GetByName(name string) (*model.Role, *model.AppErro
 	return role, nil
 }
 
-func (s LocalCacheRoleStore) GetByNames(names []string) ([]*model.Role, *model.AppError) {
+func (s LocalCacheRoleStore) GetByNames(names []string) ([]*model.Role, error) {
 	var foundRoles []*model.Role
 	var rolesToQuery []string
 
@@ -67,7 +68,10 @@ func (s LocalCacheRoleStore) GetByNames(names []string) ([]*model.Role, *model.A
 		}
 	}
 
-	roles, _ := s.RoleStore.GetByNames(rolesToQuery)
+	roles, err := s.RoleStore.GetByNames(rolesToQuery)
+	if err != nil {
+		return nil, err
+	}
 
 	for _, role := range roles {
 		s.rootStore.doStandardAddToCache(s.rootStore.roleCache, role.Name, role)
@@ -76,7 +80,7 @@ func (s LocalCacheRoleStore) GetByNames(names []string) ([]*model.Role, *model.A
 	return append(foundRoles, roles...), nil
 }
 
-func (s LocalCacheRoleStore) Delete(roleId string) (*model.Role, *model.AppError) {
+func (s LocalCacheRoleStore) Delete(roleId string) (*model.Role, error) {
 	role, err := s.RoleStore.Delete(roleId)
 
 	if err == nil {
@@ -86,7 +90,7 @@ func (s LocalCacheRoleStore) Delete(roleId string) (*model.Role, *model.AppError
 	return role, err
 }
 
-func (s LocalCacheRoleStore) PermanentDeleteAll() *model.AppError {
+func (s LocalCacheRoleStore) PermanentDeleteAll() error {
 	defer s.rootStore.roleCache.Purge()
 	defer s.rootStore.doClearCacheCluster(s.rootStore.roleCache)
 	defer s.rootStore.doClearCacheCluster(s.rootStore.rolePermissionsCache)
@@ -94,7 +98,7 @@ func (s LocalCacheRoleStore) PermanentDeleteAll() *model.AppError {
 	return s.RoleStore.PermanentDeleteAll()
 }
 
-func (s LocalCacheRoleStore) ChannelHigherScopedPermissions(roleNames []string) (map[string]*model.RolePermissions, *model.AppError) {
+func (s LocalCacheRoleStore) ChannelHigherScopedPermissions(roleNames []string) (map[string]*model.RolePermissions, error) {
 	sort.Strings(roleNames)
 	cacheKey := strings.Join(roleNames, "/")
 	var rolePermissionsMap map[string]*model.RolePermissions

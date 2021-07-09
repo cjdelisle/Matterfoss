@@ -6,11 +6,11 @@ package commands
 import (
 	"fmt"
 
-	"github.com/cjdelisle/matterfoss-server/v5/audit"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+
+	"github.com/cjdelisle/matterfoss-server/v5/audit"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 var GroupCmd = &cobra.Command{

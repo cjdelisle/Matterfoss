@@ -7,8 +7,9 @@ import (
 	"errors"
 	"io/ioutil"
 
-	"github.com/cjdelisle/matterfoss-server/v5/audit"
 	"github.com/spf13/cobra"
+
+	"github.com/cjdelisle/matterfoss-server/v5/audit"
 )
 
 var LicenseCmd = &cobra.Command{
@@ -20,7 +21,7 @@ var UploadLicenseCmd = &cobra.Command{
 	Use:     "upload [license]",
 	Short:   "Upload a license.",
 	Long:    "Upload a license. Replaces current license.",
-	Example: "  license upload /path/to/license/mylicensefile.matterfoss-license",
+	Example: "  license upload /path/to/license/mylicensefile.MatterfossPlugin",
 	RunE:    uploadLicenseCmdF,
 }
 

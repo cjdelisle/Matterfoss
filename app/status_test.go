@@ -6,8 +6,9 @@ package app
 import (
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/require"
+
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 func TestSaveStatus(t *testing.T) {

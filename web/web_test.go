@@ -13,26 +13,28 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/cjdelisle/matterfoss-server/v5/app"
+	"github.com/cjdelisle/matterfoss-server/v5/app/request"
 	"github.com/cjdelisle/matterfoss-server/v5/config"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/cjdelisle/matterfoss-server/v5/plugin"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
 	"github.com/cjdelisle/matterfoss-server/v5/store/localcachelayer"
 	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
-	"github.com/cjdelisle/matterfoss-server/v5/testlib"
 	"github.com/cjdelisle/matterfoss-server/v5/utils"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 var ApiClient *model.Client4
 var URL string
 
 type TestHelper struct {
-	App    app.AppIface
-	Server *app.Server
-	Web    *Web
+	App     app.AppIface
+	Context *request.Context
+	Server  *app.Server
+	Web     *Web
 
 	BasicUser    *model.User
 	BasicChannel *model.Channel
@@ -49,8 +51,8 @@ func SetupWithStoreMock(tb testing.TB) *TestHelper {
 	if testing.Short() {
 		tb.SkipNow()
 	}
-	store := testlib.GetMockStoreForSetupFunctions()
-	th := setupTestHelper(tb, store, false)
+
+	th := setupTestHelper(false)
 	emptyMockStore := mocks.Store{}
 	emptyMockStore.On("Close").Return(nil)
 	th.App.Srv().Store = &emptyMockStore
@@ -63,18 +65,21 @@ func Setup(tb testing.TB) *TestHelper {
 	}
 	store := mainHelper.GetStore()
 	store.DropAllTables()
-	return setupTestHelper(tb, store, true)
+	return setupTestHelper(true)
 }
 
-func setupTestHelper(t testing.TB, store store.Store, includeCacheLayer bool) *TestHelper {
-	memoryStore, err := config.NewMemoryStoreWithOptions(&config.MemoryStoreOptions{IgnoreEnvironmentOverrides: true})
-	if err != nil {
-		panic("failed to initialize memory store: " + err.Error())
-	}
-
+func setupTestHelper(includeCacheLayer bool) *TestHelper {
+	memoryStore := config.NewTestMemoryStore()
+	newConfig := memoryStore.Get().Clone()
+	*newConfig.AnnouncementSettings.AdminNoticesEnabled = false
+	*newConfig.AnnouncementSettings.UserNoticesEnabled = false
+	*newConfig.PluginSettings.AutomaticPrepackagedPlugins = false
+	memoryStore.Set(newConfig)
 	var options []app.Option
 	options = append(options, app.ConfigStore(memoryStore))
 	options = append(options, app.StoreOverride(mainHelper.Store))
+
+	mlog.DisableZap()
 
 	s, err := app.NewServer(options...)
 	if err != nil {
@@ -82,7 +87,10 @@ func setupTestHelper(t testing.TB, store store.Store, includeCacheLayer bool) *T
 	}
 	if includeCacheLayer {
 		// Adds the cache layer to the test store
-		s.Store = localcachelayer.NewLocalCacheLayer(s.Store, s.Metrics, s.Cluster, s.CacheProvider)
+		s.Store, err = localcachelayer.NewLocalCacheLayer(s.Store, s.Metrics, s.Cluster, s.CacheProvider)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	prevListenAddress := *s.Config().ServiceSettings.ListenAddress
@@ -102,10 +110,10 @@ func setupTestHelper(t testing.TB, store store.Store, includeCacheLayer bool) *T
 		*cfg.PasswordSettings.Number = false
 	})
 
+	ctx := &request.Context{}
 	a := app.New(app.ServerConnector(s))
-	a.InitServer()
 
-	web := New(s, s.AppOptions, s.Router)
+	web := New(a, s.Router)
 	URL = fmt.Sprintf("http://localhost:%v", s.ListenAddr.Port)
 	ApiClient = model.NewAPIv4Client(URL)
 
@@ -117,6 +125,7 @@ func setupTestHelper(t testing.TB, store store.Store, includeCacheLayer bool) *T
 
 	th := &TestHelper{
 		App:               a,
+		Context:           ctx,
 		Server:            s,
 		Web:               web,
 		IncludeCacheLayer: includeCacheLayer,
@@ -129,21 +138,25 @@ func (th *TestHelper) InitPlugins() *TestHelper {
 	pluginDir := filepath.Join(th.tempWorkspace, "plugins")
 	webappDir := filepath.Join(th.tempWorkspace, "webapp")
 
-	th.App.InitPlugins(pluginDir, webappDir)
+	th.App.InitPlugins(th.Context, pluginDir, webappDir)
 
 	return th
 }
 
+func (th *TestHelper) NewPluginAPI(manifest *model.Manifest) plugin.API {
+	return th.App.NewPluginAPI(th.Context, manifest)
+}
+
 func (th *TestHelper) InitBasic() *TestHelper {
-	th.SystemAdminUser, _ = th.App.CreateUser(&model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SYSTEM_ADMIN_ROLE_ID})
+	th.SystemAdminUser, _ = th.App.CreateUser(th.Context, &model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SYSTEM_ADMIN_ROLE_ID})
 
-	user, _ := th.App.CreateUser(&model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SYSTEM_USER_ROLE_ID})
+	user, _ := th.App.CreateUser(th.Context, &model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SYSTEM_USER_ROLE_ID})
 
-	team, _ := th.App.CreateTeam(&model.Team{DisplayName: "Name", Name: "z-z-" + model.NewId() + "a", Email: user.Email, Type: model.TEAM_OPEN})
+	team, _ := th.App.CreateTeam(th.Context, &model.Team{DisplayName: "Name", Name: "z-z-" + model.NewId() + "a", Email: user.Email, Type: model.TEAM_OPEN})
 
-	th.App.JoinUserToTeam(team, user, "")
+	th.App.JoinUserToTeam(th.Context, team, user, "")
 
-	channel, _ := th.App.CreateChannel(&model.Channel{DisplayName: "Test API Name", Name: "zz" + model.NewId() + "a", Type: model.CHANNEL_OPEN, TeamId: team.Id, CreatorId: user.Id}, true)
+	channel, _ := th.App.CreateChannel(th.Context, &model.Channel{DisplayName: "Test API Name", Name: "zz" + model.NewId() + "a", Type: model.CHANNEL_OPEN, TeamId: team.Id, CreatorId: user.Id}, true)
 
 	th.BasicUser = user
 	th.BasicChannel = channel
@@ -205,7 +218,7 @@ func TestStaticFilesRequest(t *testing.T) {
 
 	// Activate the plugin
 	manifest, activated, reterr := th.App.GetPluginsEnvironment().Activate(pluginID)
-	require.Nil(t, reterr)
+	require.NoError(t, reterr)
 	require.NotNil(t, manifest)
 	require.True(t, activated)
 
@@ -257,7 +270,7 @@ func TestPublicFilesRequest(t *testing.T) {
 	defer os.RemoveAll(pluginDir)
 	defer os.RemoveAll(webappPluginDir)
 
-	env, err := plugin.NewEnvironment(th.App.NewPluginAPI, pluginDir, webappPluginDir, th.App.Log(), nil)
+	env, err := plugin.NewEnvironment(th.NewPluginAPI, pluginDir, webappPluginDir, th.App.Log(), nil)
 	require.NoError(t, err)
 
 	pluginID := "com.matterfoss.sample"
@@ -300,7 +313,7 @@ func TestPublicFilesRequest(t *testing.T) {
 	assert.NoError(t, htmlFileErr)
 
 	manifest, activated, reterr := env.Activate(pluginID)
-	require.Nil(t, reterr)
+	require.NoError(t, reterr)
 	require.NotNil(t, manifest)
 	require.True(t, activated)
 
@@ -348,7 +361,7 @@ func TestCheckClientCompatability(t *testing.T) {
 		{"Chrome 60", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36", true},
 		{"Chrome Mobile", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Mobile Safari/537.36", true},
 		{"MM Classic App", "Mozilla/5.0 (Linux; Android 8.0.0; Nexus 5X Build/OPR6.170623.013; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/61.0.3163.81 Mobile Safari/537.36 Web-Atoms-Mobile-WebView", true},
-		{"MM App 3.7.1", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Matterfoss/3.7.1 Chrome/56.0.2924.87 Electron/1.6.11 Safari/537.36", true},
+		{"MM App 3.7.1", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Mattermost/3.7.1 Chrome/56.0.2924.87 Electron/1.6.11 Safari/537.36", true},
 		{"Franz 4.0.4", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Franz/4.0.4 Chrome/52.0.2743.82 Electron/1.3.1 Safari/537.36", true},
 		{"Edge 14", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393", true},
 		{"Internet Explorer 9", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0", false},
@@ -366,7 +379,7 @@ func TestCheckClientCompatability(t *testing.T) {
 	}
 	for _, browser := range uaTestParameters {
 		t.Run(browser.Name, func(t *testing.T) {
-			result := CheckClientCompatability(browser.UserAgent)
+			result := CheckClientCompatibility(browser.UserAgent)
 			require.Equalf(t, result, browser.Result, "user agent test failed for %s", browser.Name)
 		})
 	}

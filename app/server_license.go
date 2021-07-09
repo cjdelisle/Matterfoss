@@ -3,7 +3,9 @@
 
 package app
 
-import "github.com/cjdelisle/matterfoss-server/v5/model"
+import (
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+)
 
 func (s *Server) License() *model.License {
 	license, _ := s.licenseValue.Load().(*model.License)

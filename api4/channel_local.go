@@ -15,8 +15,9 @@ func (api *API) InitChannelLocal() {
 	api.BaseRoutes.Channels.Handle("", api.ApiLocal(localCreateChannel)).Methods("POST")
 	api.BaseRoutes.Channel.Handle("", api.ApiLocal(getChannel)).Methods("GET")
 	api.BaseRoutes.ChannelByName.Handle("", api.ApiLocal(getChannelByName)).Methods("GET")
-	api.BaseRoutes.Channel.Handle("", api.ApiLocal(deleteChannel)).Methods("DELETE")
+	api.BaseRoutes.Channel.Handle("", api.ApiLocal(localDeleteChannel)).Methods("DELETE")
 	api.BaseRoutes.Channel.Handle("/patch", api.ApiLocal(localPatchChannel)).Methods("PUT")
+	api.BaseRoutes.Channel.Handle("/move", api.ApiLocal(localMoveChannel)).Methods("POST")
 
 	api.BaseRoutes.ChannelMember.Handle("", api.ApiLocal(localRemoveChannelMember)).Methods("DELETE")
 	api.BaseRoutes.ChannelMember.Handle("", api.ApiLocal(getChannelMember)).Methods("GET")
@@ -42,7 +43,7 @@ func localCreateChannel(c *Context, w http.ResponseWriter, r *http.Request) {
 	defer c.LogAuditRec(auditRec)
 	auditRec.AddMeta("channel", channel)
 
-	sc, err := c.App.CreateChannel(channel, false)
+	sc, err := c.App.CreateChannel(c.AppContext, channel, false)
 	if err != nil {
 		c.Err = err
 		return
@@ -106,7 +107,7 @@ func localAddChannelMember(c *Context, w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	cm, err := c.App.AddUserToChannel(user, channel)
+	cm, err := c.App.AddUserToChannel(user, channel, false)
 	if err != nil {
 		c.Err = err
 		return
@@ -153,7 +154,7 @@ func localRemoveChannelMember(c *Context, w http.ResponseWriter, r *http.Request
 	auditRec.AddMeta("channel", channel)
 	auditRec.AddMeta("remove_user_id", user.Id)
 
-	if err = c.App.RemoveUserFromChannel(c.Params.UserId, "", channel); err != nil {
+	if err = c.App.RemoveUserFromChannel(c.AppContext, c.Params.UserId, "", channel); err != nil {
 		c.Err = err
 		return
 	}
@@ -205,4 +206,111 @@ func localPatchChannel(c *Context, w http.ResponseWriter, r *http.Request) {
 	auditRec.AddMeta("patch", rchannel)
 
 	w.Write([]byte(rchannel.ToJson()))
+}
+
+func localMoveChannel(c *Context, w http.ResponseWriter, r *http.Request) {
+	c.RequireChannelId()
+	if c.Err != nil {
+		return
+	}
+
+	channel, err := c.App.GetChannel(c.Params.ChannelId)
+	if err != nil {
+		c.Err = err
+		return
+	}
+
+	props := model.StringInterfaceFromJson(r.Body)
+	teamId, ok := props["team_id"].(string)
+	if !ok {
+		c.SetInvalidParam("team_id")
+		return
+	}
+
+	force, ok := props["force"].(bool)
+	if !ok {
+		c.SetInvalidParam("force")
+		return
+	}
+
+	team, err := c.App.GetTeam(teamId)
+	if err != nil {
+		c.Err = err
+		return
+	}
+
+	auditRec := c.MakeAuditRecord("localMoveChannel", audit.Fail)
+	defer c.LogAuditRec(auditRec)
+	auditRec.AddMeta("channel_id", channel.Id)
+	auditRec.AddMeta("channel_name", channel.Name)
+	auditRec.AddMeta("team_id", team.Id)
+	auditRec.AddMeta("team_name", team.Name)
+
+	if channel.Type == model.CHANNEL_DIRECT || channel.Type == model.CHANNEL_GROUP {
+		c.Err = model.NewAppError("moveChannel", "api.channel.move_channel.type.invalid", nil, "", http.StatusForbidden)
+		return
+	}
+
+	err = c.App.RemoveAllDeactivatedMembersFromChannel(channel)
+	if err != nil {
+		c.Err = err
+		return
+	}
+
+	if force {
+		err = c.App.RemoveUsersFromChannelNotMemberOfTeam(c.AppContext, nil, channel, team)
+		if err != nil {
+			c.Err = err
+			return
+		}
+	}
+
+	err = c.App.MoveChannel(c.AppContext, team, channel, nil)
+	if err != nil {
+		c.Err = err
+		return
+	}
+
+	auditRec.Success()
+	c.LogAudit("channel=" + channel.Name)
+	c.LogAudit("team=" + team.Name)
+
+	w.Write([]byte(channel.ToJson()))
+}
+
+func localDeleteChannel(c *Context, w http.ResponseWriter, r *http.Request) {
+	c.RequireChannelId()
+	if c.Err != nil {
+		return
+	}
+
+	channel, err := c.App.GetChannel(c.Params.ChannelId)
+	if err != nil {
+		c.Err = err
+		return
+	}
+
+	auditRec := c.MakeAuditRecord("localDeleteChannel", audit.Fail)
+	defer c.LogAuditRec(auditRec)
+	auditRec.AddMeta("channeld", channel)
+
+	if channel.Type == model.CHANNEL_DIRECT || channel.Type == model.CHANNEL_GROUP {
+		c.Err = model.NewAppError("localDeleteChannel", "api.channel.delete_channel.type.invalid", nil, "", http.StatusBadRequest)
+		return
+	}
+
+	if c.Params.Permanent {
+		err = c.App.PermanentDeleteChannel(channel)
+	} else {
+		err = c.App.DeleteChannel(c.AppContext, channel, "")
+	}
+	if err != nil {
+		c.Err = err
+		return
+	}
+
+	auditRec.Success()
+	c.LogAudit("name=" + channel.Name)
+
+	ReturnStatusOK(w)
 }

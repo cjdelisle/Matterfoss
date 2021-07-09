@@ -4,14 +4,47 @@
 package app
 
 import (
-	"regexp"
-
+	"bytes"
+	"context"
 	"fmt"
+	"mime/multipart"
+	"regexp"
 	"strings"
+	"time"
 
+	"github.com/cjdelisle/matterfoss-server/v5/app/request"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/services/slackimport"
 	"github.com/cjdelisle/matterfoss-server/v5/store"
 )
+
+func (a *App) SlackImport(c *request.Context, fileData multipart.File, fileSize int64, teamID string) (*model.AppError, *bytes.Buffer) {
+	actions := slackimport.Actions{
+		UpdateActive: func(user *model.User, active bool) (*model.User, *model.AppError) {
+			return a.UpdateActive(c, user, active)
+		},
+		AddUserToChannel: a.AddUserToChannel,
+		JoinUserToTeam: func(team *model.Team, user *model.User, userRequestorId string) (*model.TeamMember, *model.AppError) {
+			return a.JoinUserToTeam(c, team, user, userRequestorId)
+		},
+		CreateDirectChannel: a.createDirectChannel,
+		CreateGroupChannel:  a.createGroupChannel,
+		CreateChannel: func(channel *model.Channel, addMember bool) (*model.Channel, *model.AppError) {
+			return a.CreateChannel(c, channel, addMember)
+		},
+		DoUploadFile: func(now time.Time, rawTeamId string, rawChannelId string, rawUserId string, rawFilename string, data []byte) (*model.FileInfo, *model.AppError) {
+			return a.DoUploadFile(c, now, rawTeamId, rawChannelId, rawUserId, rawFilename, data)
+		},
+		GenerateThumbnailImage: a.generateThumbnailImage,
+		GeneratePreviewImage:   a.generatePreviewImage,
+		InvalidateAllCaches:    func() { a.srv.InvalidateAllCaches() },
+		MaxPostSize:            func() int { return a.srv.MaxPostSize() },
+		PrepareImage:           prepareImage,
+	}
+
+	importer := slackimport.New(a.srv.Store, actions, a.Config())
+	return importer.SlackImport(fileData, fileSize, teamID)
+}
 
 func (a *App) ProcessSlackText(text string) string {
 	text = expandAnnouncement(text)
@@ -55,18 +88,18 @@ func expandAnnouncement(text string) string {
 }
 
 // Replaces user IDs mentioned like this <@userID> to a normal username (eg. @bob)
-// This is required so that Matterfoss maintains Slack compatibility
+// This is required so that Mattermost maintains Slack compatibility
 // Refer to: https://api.slack.com/changelog/2017-09-the-one-about-usernames
 func replaceUserIds(userStore store.UserStore, text string) string {
 	rgx, err := regexp.Compile("<@([a-zA-Z0-9]+)>")
 	if err == nil {
-		userIds := make([]string, 0)
+		userIDs := make([]string, 0)
 		matches := rgx.FindAllStringSubmatch(text, -1)
 		for _, match := range matches {
-			userIds = append(userIds, match[1])
+			userIDs = append(userIDs, match[1])
 		}
 
-		if users, err := userStore.GetProfileByIds(userIds, nil, true); err == nil {
+		if users, err := userStore.GetProfileByIds(context.Background(), userIDs, nil, true); err == nil {
 			for _, user := range users {
 				text = strings.Replace(text, "<@"+user.Id+">", "@"+user.Username, -1)
 			}

@@ -8,17 +8,17 @@ import (
 	"fmt"
 
 	"github.com/mattermost/gorp"
+	"github.com/pkg/errors"
+
 	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/cjdelisle/matterfoss-server/v5/store"
-
-	"github.com/pkg/errors"
 )
 
 type SqlOAuthStore struct {
-	SqlStore
+	*SqlStore
 }
 
-func newSqlOAuthStore(sqlStore SqlStore) store.OAuthStore {
+func newSqlOAuthStore(sqlStore *SqlStore) store.OAuthStore {
 	as := &SqlOAuthStore{sqlStore}
 
 	for _, db := range sqlStore.GetAllConns() {
@@ -62,7 +62,7 @@ func (as SqlOAuthStore) createIndexesIfNotExists() {
 }
 
 func (as SqlOAuthStore) SaveApp(app *model.OAuthApp) (*model.OAuthApp, error) {
-	if len(app.Id) > 0 {
+	if app.Id != "" {
 		return nil, store.NewErrInvalidInput("OAuthApp", "Id", app.Id)
 	}
 
@@ -100,7 +100,7 @@ func (as SqlOAuthStore) UpdateApp(app *model.OAuthApp) (*model.OAuthApp, error) 
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to update OAuthApp with id=%s", app.Id)
 	}
-	if count != 1 {
+	if count > 1 {
 		return nil, store.NewErrInvalidInput("OAuthApp", "Id", app.Id)
 	}
 	return app, nil

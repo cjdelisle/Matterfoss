@@ -6,8 +6,9 @@ package api4
 import (
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/require"
+
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 func TestGetClusterStatus(t *testing.T) {

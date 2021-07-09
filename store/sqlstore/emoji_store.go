@@ -4,22 +4,23 @@
 package sqlstore
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
+
+	"github.com/pkg/errors"
 
 	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/cjdelisle/matterfoss-server/v5/store"
-
-	"github.com/pkg/errors"
 )
 
 type SqlEmojiStore struct {
-	SqlStore
+	*SqlStore
 	metrics einterfaces.MetricsInterface
 }
 
-func newSqlEmojiStore(sqlStore SqlStore, metrics einterfaces.MetricsInterface) store.EmojiStore {
+func newSqlEmojiStore(sqlStore *SqlStore, metrics einterfaces.MetricsInterface) store.EmojiStore {
 	s := &SqlEmojiStore{
 		SqlStore: sqlStore,
 		metrics:  metrics,
@@ -57,12 +58,12 @@ func (es SqlEmojiStore) Save(emoji *model.Emoji) (*model.Emoji, error) {
 	return emoji, nil
 }
 
-func (es SqlEmojiStore) Get(id string, allowFromCache bool) (*model.Emoji, error) {
-	return es.getBy("Id", id, allowFromCache)
+func (es SqlEmojiStore) Get(ctx context.Context, id string, allowFromCache bool) (*model.Emoji, error) {
+	return es.getBy(ctx, "Id", id)
 }
 
-func (es SqlEmojiStore) GetByName(name string, allowFromCache bool) (*model.Emoji, error) {
-	return es.getBy("Name", name, allowFromCache)
+func (es SqlEmojiStore) GetByName(ctx context.Context, name string, allowFromCache bool) (*model.Emoji, error) {
+	return es.getBy(ctx, "Name", name)
 }
 
 func (es SqlEmojiStore) GetMultipleByName(names []string) ([]*model.Emoji, error) {
@@ -146,10 +147,10 @@ func (es SqlEmojiStore) Search(name string, prefixOnly bool, limit int) ([]*mode
 }
 
 // getBy returns one active (not deleted) emoji, found by any one column (what/key).
-func (es SqlEmojiStore) getBy(what, key string, addToCache bool) (*model.Emoji, error) {
+func (es SqlEmojiStore) getBy(ctx context.Context, what, key string) (*model.Emoji, error) {
 	var emoji *model.Emoji
 
-	err := es.GetReplica().SelectOne(&emoji,
+	err := es.DBFromContext(ctx).SelectOne(&emoji,
 		`SELECT
 			*
 		FROM

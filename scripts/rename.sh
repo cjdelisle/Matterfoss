@@ -6,7 +6,7 @@
 # project and any commercial product provided Mattermost Inc.
 
 update_paths() {
-    OLDPATH="github.com/mattermost/mattermost-server"
+    OLDPATH="github.com/cjdelisle/matterfoss-server"
     NEWPATH="github.com/cjdelisle/matterfoss-server"
     REGEX="s@$OLDPATH@$NEWPATH@g"
     find ./ -name '*.go' -exec sed -i -e $REGEX {} \;

@@ -5,7 +5,6 @@ package app
 
 import (
 	"testing"
-
 	"time"
 
 	"github.com/cjdelisle/matterfoss-server/v5/model"

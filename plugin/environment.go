@@ -12,11 +12,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
-	"github.com/cjdelisle/matterfoss-server/v5/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
 	"github.com/pkg/errors"
+
+	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
 
 var ErrNotFound = errors.New("Item not found")
@@ -45,7 +46,7 @@ type PrepackagedPlugin struct {
 
 // Environment represents the execution environment of active plugins.
 //
-// It is meant for use by the Matterfoss server to manipulate, interact with and report on the set
+// It is meant for use by the Mattermost server to manipulate, interact with and report on the set
 // of active plugins.
 type Environment struct {
 	registeredPlugins      sync.Map
@@ -86,7 +87,8 @@ func scanSearchPath(path string) ([]*model.BundleInfo, error) {
 		if !file.IsDir() || file.Name()[0] == '.' {
 			continue
 		}
-		if info := model.BundleInfoForPath(filepath.Join(path, file.Name())); info.ManifestPath != "" {
+		info := model.BundleInfoForPath(filepath.Join(path, file.Name()))
+		if info.Manifest != nil {
 			ret = append(ret, info)
 		}
 	}
@@ -244,7 +246,7 @@ func (env *Environment) Activate(id string) (manifest *model.Manifest, activated
 			return nil, false, fmt.Errorf("%v: %v", err.Error(), id)
 		}
 		if !fulfilled {
-			return nil, false, fmt.Errorf("plugin requires Matterfoss %v: %v", pluginInfo.Manifest.MinServerVersion, id)
+			return nil, false, fmt.Errorf("plugin requires Mattermost %v: %v", pluginInfo.Manifest.MinServerVersion, id)
 		}
 	}
 
@@ -472,8 +474,8 @@ func (env *Environment) RunMultiPluginHook(hookRunnerFunc func(hooks Hooks) bool
 	}
 }
 
-// performHealthCheck uses the active plugin's supervisor to verify if the plugin has crashed.
-func (env *Environment) performHealthCheck(id string) error {
+// PerformHealthCheck uses the active plugin's supervisor to verify if the plugin has crashed.
+func (env *Environment) PerformHealthCheck(id string) error {
 	p, ok := env.registeredPlugins.Load(id)
 	if !ok {
 		return nil
@@ -503,7 +505,7 @@ func newRegisteredPlugin(bundle *model.BundleInfo) registeredPlugin {
 func (env *Environment) InitPluginHealthCheckJob(enable bool) {
 	// Config is set to enable. No job exists, start a new job.
 	if enable && env.pluginHealthCheckJob == nil {
-		mlog.Debug("Enabling plugin health check job", mlog.Duration("interval_s", HEALTH_CHECK_INTERVAL))
+		mlog.Debug("Enabling plugin health check job", mlog.Duration("interval_s", HealthCheckInterval))
 
 		job := newPluginHealthCheckJob(env)
 		env.pluginHealthCheckJob = job

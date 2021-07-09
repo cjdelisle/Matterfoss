@@ -6,8 +6,8 @@ package expirynotify
 import (
 	"github.com/cjdelisle/matterfoss-server/v5/app"
 	"github.com/cjdelisle/matterfoss-server/v5/jobs"
-	"github.com/cjdelisle/matterfoss-server/v5/mlog"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
 )
 
 const (

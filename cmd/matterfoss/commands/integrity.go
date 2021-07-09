@@ -8,8 +8,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/spf13/cobra"
+
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 var IntegrityCmd = &cobra.Command{

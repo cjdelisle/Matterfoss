@@ -7,18 +7,18 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/cjdelisle/matterfoss-server/v5/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
-
 	"github.com/pkg/errors"
+
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/store"
 )
 
 type SqlTokenStore struct {
-	SqlStore
+	*SqlStore
 }
 
-func newSqlTokenStore(sqlStore SqlStore) store.TokenStore {
+func newSqlTokenStore(sqlStore *SqlStore) store.TokenStore {
 	s := &SqlTokenStore{sqlStore}
 
 	for _, db := range sqlStore.GetAllConns() {

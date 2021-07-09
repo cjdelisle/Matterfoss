@@ -8,10 +8,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/cjdelisle/matterfoss-server/v5/audit"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+
+	"github.com/cjdelisle/matterfoss-server/v5/audit"
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 var PluginCmd = &cobra.Command{
@@ -22,7 +23,7 @@ var PluginCmd = &cobra.Command{
 var PluginAddCmd = &cobra.Command{
 	Use:     "add [plugins]",
 	Short:   "Add plugins",
-	Long:    "Add plugins to your Matterfoss server.",
+	Long:    "Add plugins to your Mattermost server.",
 	Example: `  plugin add hovercardexample.tar.gz pluginexample.tar.gz`,
 	RunE:    pluginAddCmdF,
 }
@@ -30,7 +31,7 @@ var PluginAddCmd = &cobra.Command{
 var PluginDeleteCmd = &cobra.Command{
 	Use:     "delete [plugins]",
 	Short:   "Delete plugins",
-	Long:    "Delete previously uploaded plugins from your Matterfoss server.",
+	Long:    "Delete previously uploaded plugins from your Mattermost server.",
 	Example: `  plugin delete hovercardexample pluginexample`,
 	RunE:    pluginDeleteCmdF,
 }
@@ -38,7 +39,7 @@ var PluginDeleteCmd = &cobra.Command{
 var PluginEnableCmd = &cobra.Command{
 	Use:     "enable [plugins]",
 	Short:   "Enable plugins",
-	Long:    "Enable plugins for use on your Matterfoss server.",
+	Long:    "Enable plugins for use on your Mattermost server.",
 	Example: `  plugin enable hovercardexample pluginexample`,
 	RunE:    pluginEnableCmdF,
 }
@@ -54,7 +55,7 @@ var PluginDisableCmd = &cobra.Command{
 var PluginListCmd = &cobra.Command{
 	Use:     "list",
 	Short:   "List plugins",
-	Long:    "List all enabled and disabled plugins installed on your Matterfoss server.",
+	Long:    "List all enabled and disabled plugins installed on your Mattermost server.",
 	Example: `  plugin list`,
 	RunE:    pluginListCmdF,
 }
@@ -62,7 +63,7 @@ var PluginListCmd = &cobra.Command{
 var PluginPublicKeysCmd = &cobra.Command{
 	Use:   "keys",
 	Short: "List public keys",
-	Long:  "List names of all public keys installed on your Matterfoss server.",
+	Long:  "List names of all public keys installed on your Mattermost server.",
 	Example: `  plugin keys
   plugin keys --verbose`,
 	RunE: pluginPublicKeysCmdF,
@@ -71,7 +72,7 @@ var PluginPublicKeysCmd = &cobra.Command{
 var PluginAddPublicKeyCmd = &cobra.Command{
 	Use:     "add [keys]",
 	Short:   "Adds public key(s)",
-	Long:    "Adds public key(s) for plugins on your Matterfoss server.",
+	Long:    "Adds public key(s) for plugins on your Mattermost server.",
 	Example: `  plugin keys add my-pk-file1 my-pk-file2`,
 	RunE:    pluginAddPublicKeyCmdF,
 }
@@ -79,13 +80,13 @@ var PluginAddPublicKeyCmd = &cobra.Command{
 var PluginDeletePublicKeyCmd = &cobra.Command{
 	Use:     "delete [keys]",
 	Short:   "Deletes public key(s)",
-	Long:    "Deletes public key(s) for plugins on your Matterfoss server.",
+	Long:    "Deletes public key(s) for plugins on your Mattermost server.",
 	Example: `  plugin keys delete my-pk-file1 my-pk-file2`,
 	RunE:    pluginDeletePublicKeyCmdF,
 }
 
 func init() {
-	PluginPublicKeysCmd.Flags().Bool("verbose", false, "List names and details of all public keys installed on your Matterfoss server.")
+	PluginPublicKeysCmd.Flags().Bool("verbose", false, "List names and details of all public keys installed on your Mattermost server.")
 	PluginPublicKeysCmd.AddCommand(
 		PluginAddPublicKeyCmd,
 		PluginDeletePublicKeyCmd,
@@ -103,7 +104,7 @@ func init() {
 }
 
 func pluginAddCmdF(command *cobra.Command, args []string) error {
-	a, err := InitDBCommandContextCobra(command)
+	a, err := InitDBCommandContextCobraReadWrite(command)
 	if err != nil {
 		return err
 	}
@@ -133,7 +134,7 @@ func pluginAddCmdF(command *cobra.Command, args []string) error {
 }
 
 func pluginDeleteCmdF(command *cobra.Command, args []string) error {
-	a, err := InitDBCommandContextCobra(command)
+	a, err := InitDBCommandContextCobraReadWrite(command)
 	if err != nil {
 		return err
 	}
@@ -157,7 +158,7 @@ func pluginDeleteCmdF(command *cobra.Command, args []string) error {
 }
 
 func pluginEnableCmdF(command *cobra.Command, args []string) error {
-	a, err := InitDBCommandContextCobra(command)
+	a, err := InitDBCommandContextCobraReadWrite(command)
 	if err != nil {
 		return err
 	}
@@ -181,7 +182,7 @@ func pluginEnableCmdF(command *cobra.Command, args []string) error {
 }
 
 func pluginDisableCmdF(command *cobra.Command, args []string) error {
-	a, err := InitDBCommandContextCobra(command)
+	a, err := InitDBCommandContextCobraReadWrite(command)
 	if err != nil {
 		return err
 	}
@@ -264,7 +265,7 @@ func pluginPublicKeysCmdF(command *cobra.Command, args []string) error {
 }
 
 func pluginAddPublicKeyCmdF(command *cobra.Command, args []string) error {
-	a, err := InitDBCommandContextCobra(command)
+	a, err := InitDBCommandContextCobraReadWrite(command)
 	if err != nil {
 		return err
 	}
@@ -295,7 +296,7 @@ func pluginAddPublicKeyCmdF(command *cobra.Command, args []string) error {
 }
 
 func pluginDeletePublicKeyCmdF(command *cobra.Command, args []string) error {
-	a, err := InitDBCommandContextCobra(command)
+	a, err := InitDBCommandContextCobraReadWrite(command)
 	if err != nil {
 		return err
 	}

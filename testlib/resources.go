@@ -10,9 +10,10 @@ import (
 	"path"
 	"path/filepath"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/pkg/errors"
 
+	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/filestore"
 	"github.com/cjdelisle/matterfoss-server/v5/utils"
 	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 )
@@ -27,7 +28,7 @@ const (
 	actionSymlink
 )
 
-const root = "___matterfoss-server"
+const root = "___mattermost-server"
 
 type testResourceDetails struct {
 	src     string
@@ -36,17 +37,26 @@ type testResourceDetails struct {
 	action  int8
 }
 
-// commonBaseSearchPaths is a custom version of what fileutils exposes. At some point, consolidate.
-var commonBaseSearchPaths = []string{
-	".",
-	"..",
-	"../..",
-	"../../..",
-	"../../../..",
+// getCommonBaseSearchPaths() is a custom version of what fileutils exposes. At some point, consolidate.
+func getCommonBaseSearchPaths() []string {
+	paths := []string{
+		".",
+		"..",
+		"../..",
+		"../../..",
+		"../../../..",
+	}
+
+	// this enables the server to be used in tests from a different repository
+	if mmPath := os.Getenv("MM_SERVER_PATH"); mmPath != "" {
+		paths = append(paths, mmPath)
+	}
+
+	return paths
 }
 
 func findFile(path string) string {
-	return fileutils.FindPath(path, commonBaseSearchPaths, func(fileInfo os.FileInfo) bool {
+	return fileutils.FindPath(path, getCommonBaseSearchPaths(), func(fileInfo os.FileInfo) bool {
 		return !fileInfo.IsDir()
 	})
 }
@@ -61,7 +71,7 @@ func findDir(dir string) (string, bool) {
 		return path.Dir(srcPath), true
 	}
 
-	found := fileutils.FindPath(dir, commonBaseSearchPaths, func(fileInfo os.FileInfo) bool {
+	found := fileutils.FindPath(dir, getCommonBaseSearchPaths(), func(fileInfo os.FileInfo) bool {
 		return fileInfo.IsDir()
 	})
 	if found == "" {
@@ -76,7 +86,8 @@ func getTestResourcesToSetup() []testResourceDetails {
 	var found bool
 
 	var testResourcesToSetup = []testResourceDetails{
-		{root, "matterfoss-server", resourceTypeFolder, actionSymlink},
+		{root, "mattermost-server", resourceTypeFolder, actionSymlink},
+		{"go.mod", "go.mod", resourceTypeFile, actionSymlink},
 		{"i18n", "i18n", resourceTypeFolder, actionSymlink},
 		{"templates", "templates", resourceTypeFolder, actionSymlink},
 		{"tests", "tests", resourceTypeFolder, actionSymlink},
@@ -106,6 +117,17 @@ func getTestResourcesToSetup() []testResourceDetails {
 	}
 
 	return testResourcesToSetup
+}
+
+func CopyFile(src, dst string) error {
+	fileBackend, err := filestore.NewFileBackend(filestore.FileBackendSettings{DriverName: "local", Directory: ""})
+	if err != nil {
+		return errors.Wrapf(err, "failed to copy file %s to %s", src, dst)
+	}
+	if err = fileBackend.CopyFile(src, dst); err != nil {
+		return errors.Wrapf(err, "failed to copy file %s to %s", src, dst)
+	}
+	return nil
 }
 
 func SetupTestResources() (string, error) {
@@ -142,9 +164,8 @@ func SetupTestResources() (string, error) {
 
 		if testResource.action == actionCopy {
 			if testResource.resType == resourceTypeFile {
-				err = utils.CopyFile(testResource.src, resourceDestInTemp)
-				if err != nil {
-					return "", errors.Wrapf(err, "failed to copy file %s to %s", testResource.src, resourceDestInTemp)
+				if err = CopyFile(testResource.src, resourceDestInTemp); err != nil {
+					return "", err
 				}
 			} else if testResource.resType == resourceTypeFolder {
 				err = utils.CopyDir(testResource.src, resourceDestInTemp)

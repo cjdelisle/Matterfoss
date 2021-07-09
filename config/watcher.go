@@ -9,13 +9,11 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/pkg/errors"
 
-	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
 )
 
 // watcher monitors a file for changes
 type watcher struct {
-	emitter
-
 	fsWatcher *fsnotify.Watcher
 	close     chan struct{}
 	closed    chan struct{}

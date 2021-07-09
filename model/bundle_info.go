@@ -3,7 +3,9 @@
 
 package model
 
-import "github.com/cjdelisle/matterfoss-server/v5/mlog"
+import (
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+)
 
 type BundleInfo struct {
 	Path string

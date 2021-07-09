@@ -7,17 +7,17 @@ import (
 	"bytes"
 	"net/http"
 
+	"github.com/gorilla/websocket"
+
 	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/cjdelisle/matterfoss-server/v5/plugin"
-
-	"github.com/gorilla/websocket"
 )
 
 type Plugin struct {
 	plugin.MatterfossPlugin
 }
 
-func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {
+func (p *Plugin) ServeHTTP(_ *plugin.Context, w http.ResponseWriter, r *http.Request) {
 	upgrader := websocket.Upgrader{}
 
 	ws, err := upgrader.Upgrade(w, r, nil)

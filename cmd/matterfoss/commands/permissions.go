@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/cjdelisle/matterfoss-server/v5/audit"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/i18n"
 )
 
 var PermissionsCmd = &cobra.Command{
@@ -30,7 +30,7 @@ var ResetPermissionsCmd = &cobra.Command{
 var ExportPermissionsCmd = &cobra.Command{
 	Use:     "export",
 	Short:   "Export permissions data",
-	Long:    "Export Roles and Schemes to JSONL for use by Matterfoss permissions import.",
+	Long:    "Export Roles and Schemes to JSONL for use by Mattermost permissions import.",
 	Example: " permissions export > export.jsonl",
 	RunE:    exportPermissionsCmdF,
 	PreRun: func(cmd *cobra.Command, args []string) {
@@ -41,7 +41,7 @@ var ExportPermissionsCmd = &cobra.Command{
 var ImportPermissionsCmd = &cobra.Command{
 	Use:     "import [file]",
 	Short:   "Import permissions data",
-	Long:    "Import Roles and Schemes JSONL data as created by the Matterfoss permissions export.",
+	Long:    "Import Roles and Schemes JSONL data as created by the Mattermost permissions export.",
 	Example: " permissions import export.jsonl",
 	RunE:    importPermissionsCmdF,
 }
@@ -62,6 +62,7 @@ func resetPermissionsCmdF(command *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
+	defer a.Srv().Shutdown()
 
 	confirmFlag, _ := command.Flags().GetBool("confirm")
 	if !confirmFlag {
@@ -85,7 +86,7 @@ func resetPermissionsCmdF(command *cobra.Command, args []string) error {
 
 	CommandPrettyPrintln("Permissions system successfully reset.")
 	CommandPrettyPrintln("Changes will take effect gradually as the server caches expire.")
-	CommandPrettyPrintln("For the changes to take effect immediately, go to the Matterfoss System Console > General > Configuration and click \"Purge All Caches\".")
+	CommandPrettyPrintln("For the changes to take effect immediately, go to the Mattermost System Console > General > Configuration and click \"Purge All Caches\".")
 
 	auditRec := a.MakeAuditRecord("resetPermissions", audit.Success)
 	a.LogAuditRec(auditRec, nil)
@@ -101,7 +102,7 @@ func exportPermissionsCmdF(command *cobra.Command, args []string) error {
 	defer a.Srv().Shutdown()
 
 	if license := a.Srv().License(); license == nil {
-		return errors.New(utils.T("cli.license.critical"))
+		return errors.New(i18n.T("cli.license.critical"))
 	}
 
 	if err = a.ExportPermissions(os.Stdout); err != nil {
@@ -122,7 +123,7 @@ func importPermissionsCmdF(command *cobra.Command, args []string) error {
 	defer a.Srv().Shutdown()
 
 	if license := a.Srv().License(); license == nil {
-		return errors.New(utils.T("cli.license.critical"))
+		return errors.New(i18n.T("cli.license.critical"))
 	}
 
 	file, err := os.Open(args[0])

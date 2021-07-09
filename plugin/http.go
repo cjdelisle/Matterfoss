@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"net/rpc"
 
-	"github.com/cjdelisle/matterfoss-server/v5/mlog"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
 )
 
 type hijackedResponse struct {

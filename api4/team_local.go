@@ -7,8 +7,11 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/pkg/errors"
+
 	"github.com/cjdelisle/matterfoss-server/v5/audit"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v5/store"
 )
 
 func (api *API) InitTeamLocal() {
@@ -21,6 +24,8 @@ func (api *API) InitTeamLocal() {
 	api.BaseRoutes.Team.Handle("", api.ApiLocal(localDeleteTeam)).Methods("DELETE")
 	api.BaseRoutes.Team.Handle("/invite/email", api.ApiLocal(localInviteUsersToTeam)).Methods("POST")
 	api.BaseRoutes.Team.Handle("/patch", api.ApiLocal(patchTeam)).Methods("PUT")
+	api.BaseRoutes.Team.Handle("/privacy", api.ApiLocal(updateTeamPrivacy)).Methods("PUT")
+	api.BaseRoutes.Team.Handle("/restore", api.ApiLocal(restoreTeam)).Methods("POST")
 
 	api.BaseRoutes.TeamByName.Handle("", api.ApiLocal(getTeamByName)).Methods("GET")
 	api.BaseRoutes.TeamMembers.Handle("", api.ApiLocal(addTeamMember)).Methods("POST")
@@ -87,9 +92,15 @@ func localInviteUsersToTeam(c *Context, w http.ResponseWriter, r *http.Request) 
 	auditRec.AddMeta("count", len(emailList))
 	auditRec.AddMeta("emails", emailList)
 
-	team, err := c.App.Srv().Store.Team().Get(c.Params.TeamId)
-	if err != nil {
-		c.Err = err
+	team, nErr := c.App.Srv().Store.Team().Get(c.Params.TeamId)
+	if nErr != nil {
+		var nfErr *store.ErrNotFound
+		switch {
+		case errors.As(nErr, &nfErr):
+			c.Err = model.NewAppError("localInviteUsersToTeam", "app.team.get.find.app_error", nil, nfErr.Error(), http.StatusNotFound)
+		default:
+			c.Err = model.NewAppError("localInviteUsersToTeam", "app.team.get.finding.app_error", nil, nErr.Error(), http.StatusInternalServerError)
+		}
 		return
 	}
 
@@ -113,7 +124,11 @@ func localInviteUsersToTeam(c *Context, w http.ResponseWriter, r *http.Request) 
 		}
 		auditRec.AddMeta("errors", errList)
 		if len(goodEmails) > 0 {
-			c.App.Srv().EmailService.SendInviteEmails(team, "Administrator", "mmctl "+model.NewId(), goodEmails, *c.App.Config().ServiceSettings.SiteURL)
+			err := c.App.Srv().EmailService.SendInviteEmails(team, "Administrator", "mmctl "+model.NewId(), goodEmails, *c.App.Config().ServiceSettings.SiteURL)
+			if err != nil {
+				c.Err = err
+				return
+			}
 		}
 		// in graceful mode we return both the successful ones and the failed ones
 		w.Write([]byte(model.EmailInviteWithErrorToJson(invitesWithErrors)))
@@ -130,7 +145,11 @@ func localInviteUsersToTeam(c *Context, w http.ResponseWriter, r *http.Request) 
 			c.Err = model.NewAppError("localInviteUsersToTeam", "api.team.invite_members.invalid_email.app_error", map[string]interface{}{"Addresses": s}, "", http.StatusBadRequest)
 			return
 		}
-		c.App.Srv().EmailService.SendInviteEmails(team, "Administrator", "mmctl "+model.NewId(), emailList, *c.App.Config().ServiceSettings.SiteURL)
+		err := c.App.Srv().EmailService.SendInviteEmails(team, "Administrator", "mmctl "+model.NewId(), emailList, *c.App.Config().ServiceSettings.SiteURL)
+		if err != nil {
+			c.Err = err
+			return
+		}
 		ReturnStatusOK(w)
 	}
 	auditRec.Success()
@@ -158,7 +177,7 @@ func isEmailAddressAllowed(email string, allowedDomains []string) bool {
 
 func normalizeDomains(domains string) []string {
 	// commas and @ signs are optional
-	// can be in the form of "@corp.matterfoss.org, matterfoss.org matterfoss.org" -> corp.matterfoss.org matterfoss.org matterfoss.org
+	// can be in the form of "@corp.mattermost.com, mattermost.com mattermost.org" -> corp.mattermost.com mattermost.com mattermost.org
 	return strings.Fields(strings.TrimSpace(strings.ToLower(strings.Replace(strings.Replace(domains, "@", " ", -1), ",", " ", -1))))
 }
 
@@ -174,7 +193,7 @@ func localCreateTeam(c *Context, w http.ResponseWriter, r *http.Request) {
 	defer c.LogAuditRec(auditRec)
 	auditRec.AddMeta("team", team)
 
-	rteam, err := c.App.CreateTeam(team)
+	rteam, err := c.App.CreateTeam(c.AppContext, team)
 	if err != nil {
 		c.Err = err
 		return

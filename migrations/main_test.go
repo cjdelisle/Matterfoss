@@ -6,6 +6,7 @@ package migrations
 import (
 	"testing"
 
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
 	"github.com/cjdelisle/matterfoss-server/v5/testlib"
 )
 
@@ -16,6 +17,8 @@ func TestMain(m *testing.M) {
 		EnableStore:     true,
 		EnableResources: true,
 	}
+
+	mlog.DisableZap()
 
 	mainHelper = testlib.NewMainHelperWithOptions(&options)
 	defer mainHelper.Close()

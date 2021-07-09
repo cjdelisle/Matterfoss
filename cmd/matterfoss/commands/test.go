@@ -8,15 +8,15 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-
 	"os/signal"
 	"syscall"
 
+	"github.com/spf13/cobra"
+
 	"github.com/cjdelisle/matterfoss-server/v5/api4"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v5/shared/i18n"
 	"github.com/cjdelisle/matterfoss-server/v5/wsapi"
-	"github.com/spf13/cobra"
 )
 
 var TestCmd = &cobra.Command{
@@ -52,13 +52,13 @@ func webClientTestsCmdF(command *cobra.Command, args []string) error {
 	}
 	defer a.Srv().Shutdown()
 
-	utils.InitTranslations(a.Config().LocalizationSettings)
+	i18n.InitTranslations(*a.Config().LocalizationSettings.DefaultServerLocale, *a.Config().LocalizationSettings.DefaultClientLocale)
 	serverErr := a.Srv().Start()
 	if serverErr != nil {
 		return serverErr
 	}
 
-	api4.Init(a, a.Srv().AppOptions, a.Srv().Router)
+	api4.Init(a, a.Srv().Router)
 	wsapi.Init(a.Srv())
 	a.UpdateConfig(setupClientTests)
 	runWebClientTests()
@@ -73,13 +73,13 @@ func serverForWebClientTestsCmdF(command *cobra.Command, args []string) error {
 	}
 	defer a.Srv().Shutdown()
 
-	utils.InitTranslations(a.Config().LocalizationSettings)
+	i18n.InitTranslations(*a.Config().LocalizationSettings.DefaultServerLocale, *a.Config().LocalizationSettings.DefaultClientLocale)
 	serverErr := a.Srv().Start()
 	if serverErr != nil {
 		return serverErr
 	}
 
-	api4.Init(a, a.Srv().AppOptions, a.Srv().Router)
+	api4.Init(a, a.Srv().Router)
 	wsapi.Init(a.Srv())
 	a.UpdateConfig(setupClientTests)
 
@@ -138,7 +138,7 @@ func runWebClientTests() {
 	if webappDir := os.Getenv("WEBAPP_DIR"); webappDir != "" {
 		os.Chdir(webappDir)
 	} else {
-		os.Chdir("../matterfoss-webapp")
+		os.Chdir("../mattermost-webapp")
 	}
 
 	cmd := exec.Command("npm", "test")

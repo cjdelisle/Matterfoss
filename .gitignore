@@ -7,9 +7,10 @@ node_modules
 jobserver
 npm-debug.log
 webapp/yarn-error.log
-mattermost.mattermost-license
-config/mattermost.mattermost-license
+matterfoss.matterfoss-license
+config/matterfoss.matterfoss-license
 config/config.json
+config/*.crt
 
 web/static/js/bundle*.js
 web/static/js/bundle*.js.map
@@ -17,10 +18,15 @@ web/static/js/libs*.js
 
 config/active.dat
 config/config.json
+config/logging.json
 /plugins
 
 # Enterprise imports file
 imports/imports.go
+
+#license files
+*.license
+*.matterfoss-license
 
 # Build Targets
 .prebuild
@@ -36,7 +42,6 @@ imports/imports.go
 # Folders
 _obj
 _test
-.vscode
 testfiles
 
 # Architecture specific extensions/prefixes
@@ -73,8 +78,12 @@ Session.vim
 .netrwhist
 *~
 
+# VSCode project files
+.vscode
+*.code-workspace
+
 # Gogland project files
-mattermost-server.iml
+matterfoss-server.iml
 
 # Build files
 *bundle.js
@@ -105,8 +114,8 @@ webapp/coverage
 /tags
 .idea
 
-debug
-client
+/debug
+/client
 __debug_bin
 report.xml
 go.*.orig

@@ -10,10 +10,12 @@ import (
 	"io/ioutil"
 	"strings"
 
+	"github.com/spf13/cobra"
+
 	"github.com/cjdelisle/matterfoss-server/v5/app"
+	"github.com/cjdelisle/matterfoss-server/v5/app/request"
 	"github.com/cjdelisle/matterfoss-server/v5/audit"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/spf13/cobra"
 )
 
 var UserCmd = &cobra.Command{
@@ -189,10 +191,10 @@ func init() {
 	DeleteAllUsersCmd.Flags().Bool("confirm", false, "Confirm you really want to delete the user and a DB backup has been performed.")
 
 	MigrateAuthCmd.Flags().Bool("force", false, "Force the migration to occur even if there are duplicates on the LDAP server. Duplicates will not be migrated. (ldap only)")
-	MigrateAuthCmd.Flags().Bool("auto", false, "Automatically migrate all users. Assumes the usernames and emails are identical between Matterfoss and SAML services. (saml only)")
+	MigrateAuthCmd.Flags().Bool("auto", false, "Automatically migrate all users. Assumes the usernames and emails are identical between Mattermost and SAML services. (saml only)")
 	MigrateAuthCmd.Flags().Bool("dryRun", false, "Run a simulation of the migration process without changing the database.")
 	MigrateAuthCmd.SetUsageTemplate(`Usage:
-  matterfoss user migrate_auth [from_auth] [to_auth] [migration-options] [flags]
+  mattermost user migrate_auth [from_auth] [to_auth] [migration-options] [flags]
 
 Examples:
 {{.Example}}
@@ -216,7 +218,7 @@ Global Flags:
 {{.InheritedFlags.FlagUsages | trimTrailingWhitespaces}}
 `)
 	MigrateAuthCmd.SetHelpTemplate(`Usage:
-  matterfoss user migrate_auth [from_auth] [to_auth] [migration-options] [flags]
+  mattermost user migrate_auth [from_auth] [to_auth] [migration-options] [flags]
 
 Examples:
 {{.Example}}
@@ -237,7 +239,7 @@ Arguments:
 
   migration-options (saml):
     users_file:
-      The path of a json file with the usernames and emails of all users to migrate to SAML. The username and email must be the same that the SAML service provider store. And the email must match with the email in matterfoss database.
+      The path of a json file with the usernames and emails of all users to migrate to SAML. The username and email must be the same that the SAML service provider store. And the email must match with the email in mattermost database.
 
       Example json content:
         {
@@ -304,7 +306,7 @@ func changeUserActiveStatus(a *app.App, user *model.User, userArg string, activa
 	if user.IsSSOUser() {
 		fmt.Println("You must also deactivate this user in the SSO provider or they will be reactivated on next login or sync.")
 	}
-	updatedUser, err := a.UpdateActive(user, activate)
+	updatedUser, err := a.UpdateActive(&request.Context{}, user, activate)
 	if err != nil {
 		return fmt.Errorf("Unable to change activation status of user: %v", userArg)
 	}
@@ -333,6 +335,7 @@ func userDeactivateCmdF(command *cobra.Command, args []string) error {
 	return nil
 }
 
+//nolint:unparam
 func userCreateCmdF(command *cobra.Command, args []string) error {
 	a, err := InitDBCommandContextCobra(command)
 	if err != nil {
@@ -369,19 +372,19 @@ func userCreateCmdF(command *cobra.Command, args []string) error {
 		Locale:    locale,
 	}
 
-	ruser, err := a.CreateUser(user)
+	ruser, err := a.CreateUser(&request.Context{}, user)
 	if ruser == nil {
 		return errors.New("Unable to create user. Error: " + err.Error())
 	}
 
 	if systemAdmin {
-		if _, err := a.UpdateUserRoles(ruser.Id, "system_user system_admin", false); err != nil {
+		if _, err := a.UpdateUserRolesWithUser(ruser, "system_user system_admin", false); err != nil {
 			return errors.New("Unable to make user system admin. Error: " + err.Error())
 		}
 	} else {
 		// This else case exists to prevent the first user created from being
 		// created as a system admin unless explicitly specified.
-		if _, err := a.UpdateUserRoles(ruser.Id, "system_user", false); err != nil {
+		if _, err := a.UpdateUserRolesWithUser(ruser, "system_user", false); err != nil {
 			return errors.New("If this is the first user: Unable to prevent user from being system admin. Error: " + err.Error())
 		}
 	}
@@ -425,7 +428,7 @@ func usersToBots(args []string, a *app.App) {
 	}
 }
 
-func getUpdatedPassword(command *cobra.Command, a *app.App, user *model.User) (string, error) {
+func getUpdatedPassword(command *cobra.Command) (string, error) {
 	password, err := command.Flags().GetString("password")
 	if err != nil {
 		return "", fmt.Errorf("Unable to read password. Error: %s", err.Error())
@@ -499,7 +502,7 @@ func botToUser(command *cobra.Command, args []string, a *app.App) error {
 		return fmt.Errorf("Unable to find bot. Error: %s", appErr.Error())
 	}
 
-	password, err := getUpdatedPassword(command, a, user)
+	password, err := getUpdatedPassword(command)
 	if err != nil {
 		return err
 	}
@@ -623,7 +626,10 @@ func inviteUser(a *app.App, email string, team *model.Team, teamArg string) erro
 		return fmt.Errorf("Email invites are disabled.")
 	}
 
-	a.Srv().EmailService.SendInviteEmails(team, "Administrator", "Matterfoss CLI "+model.NewId(), invites, *a.Config().ServiceSettings.SiteURL)
+	err := a.Srv().EmailService.SendInviteEmails(team, "Administrator", "Mattermost CLI "+model.NewId(), invites, *a.Config().ServiceSettings.SiteURL)
+	if err != nil {
+		return err
+	}
 	CommandPrettyPrintln("Invites may or may not have been sent.")
 
 	auditRec := a.MakeAuditRecord("inviteUser", audit.Success)
@@ -770,7 +776,7 @@ func deleteUserCmdF(command *cobra.Command, args []string) error {
 				return err
 			}
 		} else {
-			if err := a.PermanentDeleteUser(user); err != nil {
+			if err := a.PermanentDeleteUser(&request.Context{}, user); err != nil {
 				return err
 			}
 		}
@@ -811,7 +817,7 @@ func deleteAllUsersCommandF(command *cobra.Command, args []string) error {
 		}
 	}
 
-	if err := a.PermanentDeleteAllUsers(); err != nil {
+	if err := a.PermanentDeleteAllUsers(&request.Context{}); err != nil {
 		return err
 	}
 	CommandPrettyPrintln("All user accounts successfully deleted.")
@@ -839,16 +845,16 @@ func migrateAuthToLdapCmdF(command *cobra.Command, args []string) error {
 	fromAuth := args[0]
 	matchField := args[2]
 
-	if len(fromAuth) == 0 || (fromAuth != "email" && fromAuth != "gitlab" && fromAuth != "saml") {
+	if fromAuth == "" || (fromAuth != "email" && fromAuth != "gitlab" && fromAuth != "saml") {
 		return errors.New("Invalid from_auth argument")
 	}
 
-	// Email auth in Matterfoss system is represented by ""
+	// Email auth in Mattermost system is represented by ""
 	if fromAuth == "email" {
 		fromAuth = ""
 	}
 
-	if len(matchField) == 0 || (matchField != "email" && matchField != "username") {
+	if matchField == "" || (matchField != "email" && matchField != "username") {
 		return errors.New("Invalid match_field argument")
 	}
 
@@ -899,13 +905,13 @@ func migrateAuthToSamlCmdF(command *cobra.Command, args []string) error {
 
 	fromAuth := args[0]
 
-	if len(fromAuth) == 0 || (fromAuth != "email" && fromAuth != "gitlab" && fromAuth != "ldap") {
+	if fromAuth == "" || (fromAuth != "email" && fromAuth != "gitlab" && fromAuth != "ldap") {
 		return errors.New("Invalid from_auth argument")
 	}
 
 	if autoFlag && !dryRunFlag {
 		var confirm string
-		CommandPrettyPrintln("You are about to perform an automatic \"" + fromAuth + " to saml\" migration. This must only be done if your current Matterfoss users with " + fromAuth + " auth have the same username and email in your SAML service. Otherwise, provide the usernames and emails from your SAML Service using the \"users file\" without the \"--auto\" option.\n\nDo you want to proceed with automatic migration anyway? (YES/NO):")
+		CommandPrettyPrintln("You are about to perform an automatic \"" + fromAuth + " to saml\" migration. This must only be done if your current Mattermost users with " + fromAuth + " auth have the same username and email in your SAML service. Otherwise, provide the usernames and emails from your SAML Service using the \"users file\" without the \"--auto\" option.\n\nDo you want to proceed with automatic migration anyway? (YES/NO):")
 		fmt.Scanln(&confirm)
 
 		if confirm != "YES" {
@@ -913,7 +919,7 @@ func migrateAuthToSamlCmdF(command *cobra.Command, args []string) error {
 		}
 	}
 
-	// Email auth in Matterfoss system is represented by ""
+	// Email auth in Mattermost system is represented by ""
 	if fromAuth == "email" {
 		fromAuth = ""
 	}

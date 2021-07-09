@@ -63,6 +63,7 @@ type Features struct {
 	MFA                       *bool `json:"mfa"`
 	GoogleOAuth               *bool `json:"google_oauth"`
 	Office365OAuth            *bool `json:"office365_oauth"`
+	OpenId                    *bool `json:"openid"`
 	Compliance                *bool `json:"compliance"`
 	Cluster                   *bool `json:"cluster"`
 	Metrics                   *bool `json:"metrics"`
@@ -82,6 +83,9 @@ type Features struct {
 	LockTeammateNameDisplay   *bool `json:"lock_teammate_name_display"`
 	EnterprisePlugins         *bool `json:"enterprise_plugins"`
 	AdvancedLogging           *bool `json:"advanced_logging"`
+	Cloud                     *bool `json:"cloud"`
+	SharedChannels            *bool `json:"shared_channels"`
+	RemoteClusterService      *bool `json:"remote_cluster_service"`
 
 	// after we enabled more features we'll need to control them with this
 	FutureFeatures *bool `json:"future_features"`
@@ -94,6 +98,7 @@ func (f *Features) ToMap() map[string]interface{} {
 		"mfa":                         *f.MFA,
 		"google":                      *f.GoogleOAuth,
 		"office365":                   *f.Office365OAuth,
+		"openid":                      *f.OpenId,
 		"compliance":                  *f.Compliance,
 		"cluster":                     *f.Cluster,
 		"metrics":                     *f.Metrics,
@@ -110,6 +115,9 @@ func (f *Features) ToMap() map[string]interface{} {
 		"lock_teammate_name_display":  *f.LockTeammateNameDisplay,
 		"enterprise_plugins":          *f.EnterprisePlugins,
 		"advanced_logging":            *f.AdvancedLogging,
+		"cloud":                       *f.Cloud,
+		"shared_channels":             *f.SharedChannels,
+		"remote_cluster_service":      *f.RemoteClusterService,
 		"future":                      *f.FutureFeatures,
 	}
 }
@@ -141,6 +149,10 @@ func (f *Features) SetDefaults() {
 
 	if f.Office365OAuth == nil {
 		f.Office365OAuth = NewBool(*f.FutureFeatures)
+	}
+
+	if f.OpenId == nil {
+		f.OpenId = NewBool(*f.FutureFeatures)
 	}
 
 	if f.Compliance == nil {
@@ -218,6 +230,18 @@ func (f *Features) SetDefaults() {
 	if f.AdvancedLogging == nil {
 		f.AdvancedLogging = NewBool(*f.FutureFeatures)
 	}
+
+	if f.Cloud == nil {
+		f.Cloud = NewBool(false)
+	}
+
+	if f.SharedChannels == nil {
+		f.SharedChannels = NewBool(*f.FutureFeatures)
+	}
+
+	if f.RemoteClusterService == nil {
+		f.RemoteClusterService = NewBool(*f.FutureFeatures)
+	}
 }
 
 func (l *License) IsExpired() bool {
@@ -272,7 +296,7 @@ func (lr *LicenseRecord) IsValid() *AppError {
 		return NewAppError("LicenseRecord.IsValid", "model.license_record.is_valid.create_at.app_error", nil, "", http.StatusBadRequest)
 	}
 
-	if len(lr.Bytes) == 0 || len(lr.Bytes) > 10000 {
+	if lr.Bytes == "" || len(lr.Bytes) > 10000 {
 		return NewAppError("LicenseRecord.IsValid", "model.license_record.is_valid.create_at.app_error", nil, "", http.StatusBadRequest)
 	}
 

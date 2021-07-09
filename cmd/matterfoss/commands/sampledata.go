@@ -16,16 +16,18 @@ import (
 	"time"
 
 	"github.com/icrowley/fake"
+	"github.com/spf13/cobra"
+
 	"github.com/cjdelisle/matterfoss-server/v5/app"
+	"github.com/cjdelisle/matterfoss-server/v5/app/request"
 	"github.com/cjdelisle/matterfoss-server/v5/audit"
 	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/cjdelisle/matterfoss-server/v5/utils"
-	"github.com/spf13/cobra"
 )
 
 const (
-	DEACTIVATED_USER = "deactivated"
-	GUEST_USER       = "guest"
+	DeactivatedUser = "deactivated"
+	GuestUser       = "guest"
 )
 
 var SampleDataCmd = &cobra.Command{
@@ -105,11 +107,11 @@ func randomMessage(users []string) string {
 	case 1:
 		switch rand.Intn(2) {
 		case 0:
-			matterfossVideos := []string{"Q4MgnxbpZas", "BFo7E9-Kc_E", "LsMLR-BHsKg", "MRmGDhlMhNA", "mUOPxT7VgWc"}
-			message = "https://www.youtube.com/watch?v=" + matterfossVideos[rand.Intn(len(matterfossVideos))]
+			mattermostVideos := []string{"Q4MgnxbpZas", "BFo7E9-Kc_E", "LsMLR-BHsKg", "MRmGDhlMhNA", "mUOPxT7VgWc"}
+			message = "https://www.youtube.com/watch?v=" + mattermostVideos[rand.Intn(len(mattermostVideos))]
 		case 1:
-			matterfossTweets := []string{"943119062334353408", "949370809528832005", "948539688171819009", "939122439115681792", "938061722027425797"}
-			message = "https://twitter.com/matterfosshq/status/" + matterfossTweets[rand.Intn(len(matterfossTweets))]
+			mattermostTweets := []string{"943119062334353408", "949370809528832005", "948539688171819009", "939122439115681792", "938061722027425797"}
+			message = "https://twitter.com/mattermosthq/status/" + mattermostTweets[rand.Intn(len(mattermostTweets))]
 		}
 	case 2:
 		message = ""
@@ -240,10 +242,14 @@ func sampleDataCmdF(command *cobra.Command, args []string) error {
 		return errors.New("You can't have more channel memberships than channels per team.")
 	}
 
+	if users < 6 && groupChannels > 0 {
+		return errors.New("You can't have group channels generation with less than 6 users. Use --group-channels 0 or increase the number of users.")
+	}
+
 	var bulkFile *os.File
 	switch bulk {
 	case "":
-		bulkFile, err = ioutil.TempFile("", ".matterfoss-sample-data-")
+		bulkFile, err = ioutil.TempFile("", ".mattermost-sample-data-")
 		defer os.Remove(bulkFile.Name())
 		if err != nil {
 			return errors.New("Unable to open temporary file.")
@@ -292,12 +298,12 @@ func sampleDataCmdF(command *cobra.Command, args []string) error {
 		allUsers = append(allUsers, *userLine.User.Username)
 	}
 	for i := 0; i < guests; i++ {
-		userLine := createUser(i, teamMemberships, channelMemberships, teamsAndChannels, profileImages, GUEST_USER)
+		userLine := createUser(i, teamMemberships, channelMemberships, teamsAndChannels, profileImages, GuestUser)
 		encoder.Encode(userLine)
 		allUsers = append(allUsers, *userLine.User.Username)
 	}
 	for i := 0; i < deactivatedUsers; i++ {
-		userLine := createUser(i, teamMemberships, channelMemberships, teamsAndChannels, profileImages, DEACTIVATED_USER)
+		userLine := createUser(i, teamMemberships, channelMemberships, teamsAndChannels, profileImages, DeactivatedUser)
 		encoder.Encode(userLine)
 		allUsers = append(allUsers, *userLine.User.Username)
 	}
@@ -368,7 +374,7 @@ func sampleDataCmdF(command *cobra.Command, args []string) error {
 		}
 
 		var importErr *model.AppError
-		importErr, lineNumber := a.BulkImport(bulkFile, false, workers)
+		importErr, lineNumber := a.BulkImport(&request.Context{}, bulkFile, false, workers)
 		if importErr != nil {
 			return fmt.Errorf("%s: %s, %s (line: %d)", importErr.Where, importErr.Message, importErr.DetailedError, lineNumber)
 		}
@@ -397,25 +403,25 @@ func createUser(idx int, teamMemberships int, channelMemberships int, teamsAndCh
 	var email string
 
 	switch userType {
-	case GUEST_USER:
+	case GuestUser:
 		password = fmt.Sprintf("SampleGu@st-%d", idx)
-		email = fmt.Sprintf("guest-%d@sample.matterfoss.org", idx)
+		email = fmt.Sprintf("guest-%d@sample.mattermost.com", idx)
 		roles = "system_guest"
 		if idx == 0 {
 			username = "guest"
 			password = "SampleGu@st1"
-			email = "guest@sample.matterfoss.org"
+			email = "guest@sample.mattermost.com"
 		}
-	case DEACTIVATED_USER:
+	case DeactivatedUser:
 		password = fmt.Sprintf("SampleDe@ctivated-%d", idx)
-		email = fmt.Sprintf("deactivated-%d@sample.matterfoss.org", idx)
+		email = fmt.Sprintf("deactivated-%d@sample.mattermost.com", idx)
 	default:
 		password = fmt.Sprintf("SampleUs@r-%d", idx)
-		email = fmt.Sprintf("user-%d@sample.matterfoss.org", idx)
+		email = fmt.Sprintf("user-%d@sample.mattermost.com", idx)
 		if idx == 0 {
 			username = "sysadmin"
 			password = "Sys@dmin-sample1"
-			email = "sysadmin@sample.matterfoss.org"
+			email = "sysadmin@sample.mattermost.com"
 		} else if idx == 1 {
 			username = "user-1"
 		}
@@ -488,12 +494,12 @@ func createUser(idx int, teamMemberships int, channelMemberships int, teamsAndCh
 		team := possibleTeams[position]
 		possibleTeams = append(possibleTeams[:position], possibleTeams[position+1:]...)
 		if teamChannels, err := teamsAndChannels[team]; err {
-			teams = append(teams, createTeamMembership(channelMemberships, teamChannels, &team, userType == GUEST_USER))
+			teams = append(teams, createTeamMembership(channelMemberships, teamChannels, &team, userType == GuestUser))
 		}
 	}
 
 	var deleteAt int64
-	if userType == DEACTIVATED_USER {
+	if userType == DeactivatedUser {
 		deleteAt = model.GetMillis()
 	}
 

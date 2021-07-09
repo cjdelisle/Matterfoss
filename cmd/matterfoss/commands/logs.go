@@ -7,8 +7,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/cjdelisle/matterfoss-server/v5/mlog/human"
 	"github.com/spf13/cobra"
+
+	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog/human"
 )
 
 var LogsCmd = &cobra.Command{
@@ -31,7 +32,7 @@ func logsCmdF(command *cobra.Command, args []string) error {
 
 	var input io.Reader
 	if fi.Size() == 0 && fi.Mode()&os.ModeNamedPipe == 0 {
-		file, err := os.Open("matterfoss.log")
+		file, err := os.Open("mattermost.log")
 		if err != nil {
 			return err
 		}

@@ -6,9 +6,10 @@ package commands
 import (
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/cjdelisle/matterfoss-server/v5/model"
 )
 
 func TestCreateCommand(t *testing.T) {

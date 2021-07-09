@@ -94,3 +94,8 @@ or go into the System Console and edit the following entries:
 * AboutLink: url about the purpose of your server
 * HelpLink: url with a link to help and support
 * ReportAProblemLink: url where people can go to report problems with your service
+
+## License
+
+See the [LICENSE file](LICENSE.txt) for license rights and limitations.
+
