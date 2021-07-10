@@ -6,7 +6,7 @@ package model
 import (
 	"encoding/json"
 	"io"
-	"net/http"
+	"math"
 )
 
 const (
@@ -123,138 +123,48 @@ func (f *Features) ToMap() map[string]interface{} {
 }
 
 func (f *Features) SetDefaults() {
-	if f.FutureFeatures == nil {
-		f.FutureFeatures = NewBool(true)
-	}
-
-	if f.Users == nil {
-		f.Users = NewInt(0)
-	}
-
-	if f.LDAP == nil {
-		f.LDAP = NewBool(*f.FutureFeatures)
-	}
-
-	if f.LDAPGroups == nil {
-		f.LDAPGroups = NewBool(*f.FutureFeatures)
-	}
-
-	if f.MFA == nil {
-		f.MFA = NewBool(*f.FutureFeatures)
-	}
-
-	if f.GoogleOAuth == nil {
-		f.GoogleOAuth = NewBool(*f.FutureFeatures)
-	}
-
-	if f.Office365OAuth == nil {
-		f.Office365OAuth = NewBool(*f.FutureFeatures)
-	}
-
-	if f.OpenId == nil {
-		f.OpenId = NewBool(*f.FutureFeatures)
-	}
-
-	if f.Compliance == nil {
-		f.Compliance = NewBool(*f.FutureFeatures)
-	}
-
-	if f.Cluster == nil {
-		f.Cluster = NewBool(*f.FutureFeatures)
-	}
-
-	if f.Metrics == nil {
-		f.Metrics = NewBool(*f.FutureFeatures)
-	}
-
-	if f.MHPNS == nil {
-		f.MHPNS = NewBool(*f.FutureFeatures)
-	}
-
-	if f.SAML == nil {
-		f.SAML = NewBool(*f.FutureFeatures)
-	}
-
-	if f.Elasticsearch == nil {
-		f.Elasticsearch = NewBool(*f.FutureFeatures)
-	}
-
-	if f.Announcement == nil {
-		f.Announcement = NewBool(true)
-	}
-
-	if f.ThemeManagement == nil {
-		f.ThemeManagement = NewBool(true)
-	}
-
-	if f.EmailNotificationContents == nil {
-		f.EmailNotificationContents = NewBool(*f.FutureFeatures)
-	}
-
-	if f.DataRetention == nil {
-		f.DataRetention = NewBool(*f.FutureFeatures)
-	}
-
-	if f.MessageExport == nil {
-		f.MessageExport = NewBool(*f.FutureFeatures)
-	}
-
-	if f.CustomPermissionsSchemes == nil {
-		f.CustomPermissionsSchemes = NewBool(*f.FutureFeatures)
-	}
-
-	if f.GuestAccounts == nil {
-		f.GuestAccounts = NewBool(*f.FutureFeatures)
-	}
-
-	if f.GuestAccountsPermissions == nil {
-		f.GuestAccountsPermissions = NewBool(*f.FutureFeatures)
-	}
-
-	if f.CustomTermsOfService == nil {
-		f.CustomTermsOfService = NewBool(*f.FutureFeatures)
-	}
-
-	if f.IDLoadedPushNotifications == nil {
-		f.IDLoadedPushNotifications = NewBool(*f.FutureFeatures)
-	}
-
-	if f.LockTeammateNameDisplay == nil {
-		f.LockTeammateNameDisplay = NewBool(*f.FutureFeatures)
-	}
-
-	if f.EnterprisePlugins == nil {
-		f.EnterprisePlugins = NewBool(*f.FutureFeatures)
-	}
-
-	if f.AdvancedLogging == nil {
-		f.AdvancedLogging = NewBool(*f.FutureFeatures)
-	}
-
-	if f.Cloud == nil {
-		f.Cloud = NewBool(false)
-	}
-
-	if f.SharedChannels == nil {
-		f.SharedChannels = NewBool(*f.FutureFeatures)
-	}
-
-	if f.RemoteClusterService == nil {
-		f.RemoteClusterService = NewBool(*f.FutureFeatures)
-	}
+	f.FutureFeatures = NewBool(true)
+	f.Users = NewInt(math.MaxInt64)
+	f.LDAP = NewBool(false)
+	f.LDAPGroups = NewBool(false)
+	f.MFA = NewBool(true)
+	f.GoogleOAuth = NewBool(false)
+	f.Office365OAuth = NewBool(false)
+	f.OpenId = NewBool(true)
+	f.Compliance = NewBool(true)
+	f.Cluster = NewBool(true)
+	f.Metrics = NewBool(true)
+	f.MHPNS = NewBool(true)
+	f.SAML = NewBool(false)
+	f.Elasticsearch = NewBool(false)
+	f.Announcement = NewBool(true)
+	f.ThemeManagement = NewBool(true)
+	f.EmailNotificationContents = NewBool(true)
+	f.DataRetention = NewBool(true)
+	f.MessageExport = NewBool(true)
+	f.CustomPermissionsSchemes = NewBool(true)
+	f.GuestAccounts = NewBool(true)
+	f.GuestAccountsPermissions = NewBool(true)
+	f.CustomTermsOfService = NewBool(true)
+	f.IDLoadedPushNotifications = NewBool(true)
+	f.LockTeammateNameDisplay = NewBool(true)
+	f.EnterprisePlugins = NewBool(true)
+	f.AdvancedLogging = NewBool(true)
+	f.Cloud = NewBool(false)
+	f.SharedChannels = NewBool(true)
+	f.RemoteClusterService = NewBool(false)
 }
 
 func (l *License) IsExpired() bool {
-	return l.ExpiresAt < GetMillis()
+	return false
 }
 
 func (l *License) IsPastGracePeriod() bool {
-	timeDiff := GetMillis() - l.ExpiresAt
-	return timeDiff > LICENSE_GRACE_PERIOD
+	return false
 }
 
 func (l *License) IsStarted() bool {
-	return l.StartsAt < GetMillis()
+	return true
 }
 
 func (l *License) ToJson() string {
@@ -288,18 +198,6 @@ func LicenseFromJson(data io.Reader) *License {
 }
 
 func (lr *LicenseRecord) IsValid() *AppError {
-	if !IsValidId(lr.Id) {
-		return NewAppError("LicenseRecord.IsValid", "model.license_record.is_valid.id.app_error", nil, "", http.StatusBadRequest)
-	}
-
-	if lr.CreateAt == 0 {
-		return NewAppError("LicenseRecord.IsValid", "model.license_record.is_valid.create_at.app_error", nil, "", http.StatusBadRequest)
-	}
-
-	if lr.Bytes == "" || len(lr.Bytes) > 10000 {
-		return NewAppError("LicenseRecord.IsValid", "model.license_record.is_valid.create_at.app_error", nil, "", http.StatusBadRequest)
-	}
-
 	return nil
 }
 

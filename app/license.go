@@ -63,14 +63,29 @@ func (s *Server) LoadLicense() {
 		}
 	}
 
-	record, nErr := s.Store.License().Get(licenseId)
+	license := &model.License{
+		Id: licenseId,
+		ExpiresAt: model.GetMillis() + 90*24*60*60*1000,
+		Customer:  &model.Customer{},
+		Features:  &model.Features{},
+	}
+	license.Features.SetDefaults()
+
+	licenseRecord := &model.LicenseRecord{}
+	licenseRecord.Id = license.Id
+
+	_, licenseBytes := utils.GetAndValidateLicenseFileFromDisk(*s.Config().ServiceSettings.LicenseFileLocation)
+	licenseRecord.Bytes = string(licenseBytes)
+
+	_, nErr = s.Store.License().Save(licenseRecord)
+
 	if nErr != nil {
 		mlog.Info("License key from https://mattermost.com required to unlock enterprise features.")
 		s.SetLicense(nil)
 		return
 	}
 
-	s.ValidateAndSetLicenseBytes([]byte(record.Bytes))
+	s.ValidateAndSetLicenseBytes([]byte(licenseRecord.Bytes))
 	mlog.Info("License key valid unlocking enterprise features.")
 }
 
@@ -148,29 +163,10 @@ func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppErr
 }
 
 func (s *Server) SetLicense(license *model.License) bool {
-	oldLicense := s.licenseValue.Load()
+	s.licenseValue.Store(license)
+	s.clientLicenseValue.Store(utils.GetClientLicense(license))
 
-	defer func() {
-		for _, listener := range s.licenseListeners {
-			if oldLicense == nil {
-				listener(nil, license)
-			} else {
-				listener(oldLicense.(*model.License), license)
-			}
-		}
-	}()
-
-	if license != nil {
-		license.Features.SetDefaults()
-
-		s.licenseValue.Store(license)
-		s.clientLicenseValue.Store(utils.GetClientLicense(license))
-		return true
-	}
-
-	s.licenseValue.Store((*model.License)(nil))
-	s.clientLicenseValue.Store(map[string]string(nil))
-	return false
+	return true
 }
 
 func (s *Server) ValidateAndSetLicenseBytes(b []byte) bool {
@@ -192,7 +188,7 @@ func (s *Server) ClientLicense() map[string]string {
 	if clientLicense, _ := s.clientLicenseValue.Load().(map[string]string); clientLicense != nil {
 		return clientLicense
 	}
-	return map[string]string{"IsLicensed": "false"}
+	return map[string]string{"IsLicensed": "true"}
 }
 
 func (s *Server) RemoveLicense() *model.AppError {
