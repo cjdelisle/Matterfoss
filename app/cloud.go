@@ -80,69 +80,6 @@ func (a *App) SendAdminUpgradeRequestEmail(username string, subscription *model.
 }
 
 func (a *App) CheckAndSendUserLimitWarningEmails(c *request.Context) *model.AppError {
-	if a.Srv().License() == nil || (a.Srv().License() != nil && !*a.Srv().License().Features.Cloud) {
-		// Not cloud instance, do nothing
-		return nil
-	}
-
-	subscription, err := a.Cloud().GetSubscription(c.Session().UserId)
-	if err != nil {
-		return model.NewAppError(
-			"app.CheckAndSendUserLimitWarningEmails",
-			"api.cloud.get_subscription.error",
-			nil,
-			err.Error(),
-			http.StatusInternalServerError)
-	}
-
-	if subscription != nil && subscription.IsPaidTier == "true" {
-		// Paid subscription, do nothing
-		return nil
-	}
-
-	cloudUserLimit := *a.Config().ExperimentalSettings.CloudUserLimit
-	systemUserCount, _ := a.Srv().Store.User().Count(model.UserCountOptions{})
-	remainingUsers := cloudUserLimit - systemUserCount
-
-	if remainingUsers > 0 {
-		return nil
-	}
-	sysAdmins, appErr := a.getSysAdminsEmailRecipients()
-	if appErr != nil {
-		return model.NewAppError(
-			"app.CheckAndSendUserLimitWarningEmails",
-			"api.cloud.get_admins_emails.error",
-			nil,
-			appErr.Error(),
-			http.StatusInternalServerError)
-	}
-
-	// -1 means they are 1 user over the limit - we only want to send the email for the 11th user
-	if remainingUsers == -1 {
-		// Over limit by 1 user
-		for admin := range sysAdmins {
-			_, appErr := a.Srv().EmailService.SendOverUserLimitWarningEmail(sysAdmins[admin].Email, sysAdmins[admin].Locale, *a.Config().ServiceSettings.SiteURL)
-			if appErr != nil {
-				a.Log().Error(
-					"Error sending user limit warning email to admin",
-					mlog.String("username", sysAdmins[admin].Username),
-					mlog.Err(err),
-				)
-			}
-		}
-	} else if remainingUsers == 0 {
-		// At limit
-		for admin := range sysAdmins {
-			_, appErr := a.Srv().EmailService.SendAtUserLimitWarningEmail(sysAdmins[admin].Email, sysAdmins[admin].Locale, *a.Config().ServiceSettings.SiteURL)
-			if appErr != nil {
-				a.Log().Error(
-					"Error sending user limit warning email to admin",
-					mlog.String("username", sysAdmins[admin].Username),
-					mlog.Err(err),
-				)
-			}
-		}
-	}
 	return nil
 }
 
