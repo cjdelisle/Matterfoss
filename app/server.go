@@ -2093,7 +2093,7 @@ func (a *App) getMattermostLog() (*model.FileData, string) {
 
 		if mattermostLogFileDataErr == nil {
 			fileData := model.FileData{
-				Filename: "mattermost.log",
+				Filename: "matterfoss.log",
 				Body:     mattermostLogFileData,
 			}
 			return &fileData, ""
