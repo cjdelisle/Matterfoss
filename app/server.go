@@ -714,15 +714,6 @@ func (s *Server) runJobs() {
 		runSecurityJob(s)
 	})
 	s.Go(func() {
-		firstRun, err := s.getFirstServerRunTimestamp()
-		if err != nil {
-			mlog.Warn("Fetching time of first server run failed. Setting to 'now'.")
-			s.ensureFirstServerRunTimestamp()
-			firstRun = utils.MillisFromTime(time.Now())
-		}
-		s.telemetryService.RunTelemetryJob(firstRun)
-	})
-	s.Go(func() {
 		runSessionCleanupJob(s)
 	})
 	s.Go(func() {
@@ -965,10 +956,7 @@ func (s *Server) Shutdown() {
 		}
 	}
 
-	err := s.telemetryService.Shutdown()
-	if err != nil {
-		mlog.Warn("Unable to cleanly shutdown telemetry client", mlog.Err(err))
-	}
+	var err error
 
 	s.serviceMux.RLock()
 	if s.sharedChannelService != nil {
@@ -1969,10 +1957,7 @@ func (s *Server) initJobs() {
 }
 
 func (s *Server) TelemetryId() string {
-	if s.telemetryService == nil {
-		return ""
-	}
-	return s.telemetryService.TelemetryID
+	return ""
 }
 
 func (s *Server) HttpService() httpservice.HTTPService {
