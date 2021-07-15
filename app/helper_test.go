@@ -189,6 +189,11 @@ func SetupWithStoreMock(tb testing.TB) *TestHelper {
 
 func SetupEnterpriseWithStoreMock(tb testing.TB) *TestHelper {
 	mockStore := testlib.GetMockStoreForSetupFunctions()
+
+	mockLicenseStore := mocks.LicenseStore{}
+	mockLicenseStore.On("Save", mock.Anything).Return(&model.LicenseRecord{}, nil)
+	mockStore.On("License").Return(&mockLicenseStore)
+
 	th := setupTestHelper(mockStore, true, false, tb)
 	emptyMockStore := mocks.Store{}
 	emptyMockStore.On("Close").Return(nil)
