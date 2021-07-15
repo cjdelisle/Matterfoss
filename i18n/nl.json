@@ -9207,6 +9207,10 @@
     "translation": "Tussen deze gebruikers kan geen direct kanaal worden gecreëerd omdat zij geen gemeenschappelijk team hebben."
   },
   {
+    "id": "api.channel.create_channel.direct_channel.guest_restricted_error",
+    "translation": "A direct channel cannot be created by a guest."
+  },
+  {
     "id": "api.config.update_config.diff.app_error",
     "translation": "Fout bij het vergelijken van de configuraties"
   },

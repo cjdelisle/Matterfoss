@@ -9207,6 +9207,10 @@
     "translation": "En direktkanal kan inte skapas mellan användarna eftersom de inte delar ett team tillsammans."
   },
   {
+    "id": "api.channel.create_channel.direct_channel.guest_restricted_error",
+    "translation": "A direct channel cannot be created by a guest."
+  },
+  {
     "id": "api.config.update_config.diff.app_error",
     "translation": "Kunde inte identifiera konfigurationsförändringar"
   },

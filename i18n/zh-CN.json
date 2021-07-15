@@ -8830,5 +8830,9 @@
   {
     "id": "api.channel.create_channel.direct_channel.team_restricted_error",
     "translation": "无法在这些用户之间创建直连频道因为他们不属于同一个团队。"
+  },
+  {
+    "id": "api.channel.create_channel.direct_channel.guest_restricted_error",
+    "translation": "A direct channel cannot be created by a guest."
   }
 ]

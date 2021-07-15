@@ -276,6 +276,10 @@
     "translation": "A direct channel cannot be created between these users because they do not share a team in common."
   },
   {
+    "id": "api.channel.create_channel.direct_channel.guest_restricted_error",
+    "translation": "A direct channel cannot be created by a guest."
+  },
+  {
     "id": "api.channel.create_channel.max_channel_limit.app_error",
     "translation": "Unable to create more than {{.MaxChannelsPerTeam}} channels for current team."
   },

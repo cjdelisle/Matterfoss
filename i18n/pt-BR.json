@@ -9032,6 +9032,10 @@
     "translation": "Um canal direto não pode ser criado entre esses usuários porque eles não compartilham uma equipe em comum."
   },
   {
+    "id": "api.channel.create_channel.direct_channel.guest_restricted_error",
+    "translation": "A direct channel cannot be created by a guest."
+  },
+  {
     "id": "api.admin.saml.failure_reset_authdata_to_email.app_error",
     "translation": "Não foi possível redefinir o campo AuthData para o e-mail."
   }

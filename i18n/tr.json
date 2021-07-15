@@ -9213,5 +9213,9 @@
   {
     "id": "api.channel.create_channel.direct_channel.team_restricted_error",
     "translation": "Ortak bir takımları olmadığından bu kullanıcılar arasında doğrudan bir kanal oluşturulamadı."
+  },
+  {
+    "id": "api.channel.create_channel.direct_channel.guest_restricted_error",
+    "translation": "A direct channel cannot be created by a guest."
   }
 ]

@@ -9200,5 +9200,9 @@
   {
     "id": "api.channel.create_channel.direct_channel.team_restricted_error",
     "translation": "これらのユーザーはチームを共有していないため、ダイレクトチャネルを作成することはできません。"
+  },
+  {
+    "id": "api.channel.create_channel.direct_channel.guest_restricted_error",
+    "translation": "A direct channel cannot be created by a guest."
   }
 ]

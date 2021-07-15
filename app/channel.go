@@ -323,6 +323,14 @@ func (a *App) CreateChannel(c *request.Context, channel *model.Channel, addMembe
 }
 
 func (a *App) GetOrCreateDirectChannel(c *request.Context, userID, otherUserID string, channelOptions ...model.ChannelOption) (*model.Channel, *model.AppError) {
+	user, err := a.GetUser(userID)
+	if err != nil {
+		return nil, err
+	}
+	if user.IsGuest() {
+		return nil, model.NewAppError("createDirectChannel", "api.channel.create_channel.direct_channel.guest_restricted_error", nil, "", http.StatusForbidden)
+	}
+
 	channel, nErr := a.getDirectChannel(userID, otherUserID)
 	if nErr != nil {
 		return nil, nErr
@@ -343,7 +351,7 @@ func (a *App) GetOrCreateDirectChannel(c *request.Context, userID, otherUserID s
 		}
 	}
 
-	channel, err := a.createDirectChannel(userID, otherUserID, channelOptions...)
+	channel, err = a.createDirectChannel(userID, otherUserID, channelOptions...)
 	if err != nil {
 		if err.Id == store.ChannelExistsError {
 			return channel, nil
