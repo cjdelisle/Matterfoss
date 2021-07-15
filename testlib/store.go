@@ -62,8 +62,14 @@ func GetMockStoreForSetupFunctions() *mocks.Store {
 	systemStore.On("GetByName", model.MIGRATION_KEY_ADD_INTEGRATIONS_SUBSECTION_PERMISSIONS).Return(&model.System{Name: model.MIGRATION_KEY_ADD_INTEGRATIONS_SUBSECTION_PERMISSIONS, Value: "true"}, nil)
 	systemStore.On("GetByName", model.MIGRATION_KEY_ADD_MANAGE_SHARED_CHANNEL_PERMISSIONS).Return(&model.System{Name: model.MIGRATION_KEY_ADD_MANAGE_SHARED_CHANNEL_PERMISSIONS, Value: "true"}, nil)
 	systemStore.On("GetByName", model.MIGRATION_KEY_ADD_MANAGE_SECURE_CONNECTIONS_PERMISSIONS).Return(&model.System{Name: model.MIGRATION_KEY_ADD_MANAGE_SECURE_CONNECTIONS_PERMISSIONS, Value: "true"}, nil)
-	systemStore.On("Get").Return(make(model.StringMap), nil)
+
+	props := model.StringMap{}
+	props[model.SYSTEM_ACTIVE_LICENSE_ID] = "dk93rdg1ciyz3pysiddcw7frge"
+
+	systemStore.On("Get").Return(props, nil)
+
 	systemStore.On("Save", mock.AnythingOfType("*model.System")).Return(nil)
+	systemStore.On("SaveOrUpdate", mock.Anything).Return(nil)
 
 	userStore := mocks.UserStore{}
 	userStore.On("Count", mock.AnythingOfType("model.UserCountOptions")).Return(int64(1), nil)
@@ -72,6 +78,7 @@ func GetMockStoreForSetupFunctions() *mocks.Store {
 
 	postStore := mocks.PostStore{}
 	postStore.On("GetMaxPostSize").Return(4000)
+	postStore.On("ClearCaches").Return(nil)
 
 	statusStore := mocks.StatusStore{}
 	statusStore.On("ResetAll").Return(nil)
@@ -79,22 +86,31 @@ func GetMockStoreForSetupFunctions() *mocks.Store {
 	channelStore := mocks.ChannelStore{}
 	channelStore.On("ClearCaches").Return(nil)
 
+	fileInfoStore := mocks.FileInfoStore{}
+	fileInfoStore.On("ClearCaches").Return(nil)
+
 	schemeStore := mocks.SchemeStore{}
 	schemeStore.On("GetAllPage", model.SCHEME_SCOPE_TEAM, mock.Anything, 100).Return([]*model.Scheme{}, nil)
 
 	teamStore := mocks.TeamStore{}
+	teamStore.On("ClearCaches").Return(nil)
 
 	roleStore := mocks.RoleStore{}
 	roleStore.On("GetAll").Return([]*model.Role{}, nil)
+
+	webHookStore := mocks.WebhookStore{}
+	webHookStore.On("ClearCaches").Return(nil)
 
 	mockStore.On("System").Return(&systemStore)
 	mockStore.On("User").Return(&userStore)
 	mockStore.On("Post").Return(&postStore)
 	mockStore.On("Status").Return(&statusStore)
 	mockStore.On("Channel").Return(&channelStore)
+	mockStore.On("FileInfo").Return(&fileInfoStore)
 	mockStore.On("Team").Return(&teamStore)
 	mockStore.On("Role").Return(&roleStore)
 	mockStore.On("Scheme").Return(&schemeStore)
+	mockStore.On("Webhook").Return(&webHookStore)
 	mockStore.On("Close").Return(nil)
 	mockStore.On("DropAllTables").Return(nil)
 	mockStore.On("MarkSystemRanUnitTests").Return(nil)

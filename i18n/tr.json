@@ -5153,7 +5153,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "Boyut Sınırı Aşıldı. [max page size](https://docs.Matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded) değerini denetlemeyi deneyin."
+    "translation": "Boyut Sınırı Aşıldı. [max page size](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded) değerini denetlemeyi deneyin."
   },
   {
     "id": "ent.ldap.validate_admin_filter.app_error",
@@ -5409,7 +5409,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden etkinleştirin ve bot hesapları için yeni kodlar oluşturun.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}\n{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden yeniden etkinleştirmeniz ve bot hesapları için yeni kodlar oluşturmanız önemle önerilir.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nKullanıcıların devre dışı bırakılmasından sonra bot hesaplarının da otomatik olarak devre dışı bırakılmasını istiyorsanız, **Sistem Panosu > Bütünleştirmeler > Bot Hesapları** bölümünden “Kullanıcı hesabı devre dışı bırakıldığında bot hesapları devre dışı bırakılsın” seçeneğini etkinleştirin.{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda devre dışı bırakılmış şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden etkinleştirin ve bot hesapları için yeni kodlar oluşturun.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu bot hesaplarını yönetiyor.\n\n{{.BotNames}}\n{{else}}{{.UserName}} devre dışı bırakılmış. Bunlar şu anda hala etkin olan şu {{.NumBots}} bot hesaplarını yönetiyor:\n\n{{.BotNames}}{{end}}Bu bot hesaplarının sahipliğini almak için, hesapları **Bütünleştirmeler > Bot Hesapları** bölümünden yeniden etkinleştirmeniz ve bot hesapları için yeni kodlar oluşturmanız önemle önerilir.\n\nAyrıntılı bilgi almak için [belgelere bakabilirsiniz](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nKullanıcıların devre dışı bırakılmasından sonra bot hesaplarının da otomatik olarak devre dışı bırakılmasını istiyorsanız, **Sistem Panosu > Bütünleştirmeler > Bot Hesapları** bölümünden “Kullanıcı hesabı devre dışı bırakıldığında bot hesapları devre dışı bırakılsın” seçeneğini etkinleştirin.{{end}}"
   },
   {
     "id": "app.channel.get_more_channels.get.app_error",
@@ -7137,7 +7137,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "Matterfoss sisteminiz 100 kullanıcıya ulaştı. Kullanıcı sayınız arttıkça, yeni hesapları ayarlamak zaman alan bir iş haline gelebilir. Kullanıcı hesaplarını kuruluşunuzun Active Directory/LDAP dizininden otomatik olarak almanız ve bu dizinlerde bir hesabı olan herkesin Matterfoss üzerine erişmesini sağlamanız önerilir.\n\n[AD/LDAP bütünleştirmesi hakkında ayrıntılı bilgi alın](https://docs.Matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nBizimle İletişim Kurun üzerine tıkladığınızda bilgileriniz Matterfoss, Inc. tarafına gönderilir. Yükseltme hakkında ayrıntılı bilgi almak için [buraya tıklayın](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Matterfoss sisteminiz 100 kullanıcıya ulaştı. Kullanıcı sayınız arttıkça, yeni hesapları ayarlamak zaman alan bir iş haline gelebilir. Kullanıcı hesaplarını kuruluşunuzun Active Directory/LDAP dizininden otomatik olarak almanız ve bu dizinlerde bir hesabı olan herkesin Matterfoss üzerine erişmesini sağlamanız önerilir.\n\n[AD/LDAP bütünleştirmesi hakkında ayrıntılı bilgi alın](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nBizimle İletişim Kurun üzerine tıkladığınızda bilgileriniz Matterfoss, Inc. tarafına gönderilir. Yükseltme hakkında ayrıntılı bilgi almak için [buraya tıklayın](https://Matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
@@ -9129,7 +9129,7 @@
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.start_trial.notification_body",
-    "translation": "Lütfen **Sistem Panosu > Site Yapılandırması > Özelleştirme** bölümüne giderek [Destek E-posta Adresi](https://docs.Matterfoss.com/administration/config-settings.html#support-email) olarak kuruluşunuzun iç BT destek ekibi e-posta adresini yazın. Böylece son kullanıcı geri bildirimleri, e-posta bilgilerimleri ve destek istekleri alınabilir."
+    "translation": "Lütfen **Sistem Panosu > Site Yapılandırması > Özelleştirme** bölümüne giderek [Destek E-posta Adresi](https://docs.mattermost.com/administration/config-settings.html#support-email) olarak kuruluşunuzun iç BT destek ekibi e-posta adresini yazın. Böylece son kullanıcı geri bildirimleri, e-posta bilgilerimleri ve destek istekleri alınabilir."
   },
   {
     "id": "app.notification.footer.title",

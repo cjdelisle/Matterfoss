@@ -6,6 +6,7 @@ package app
 import (
 	"bytes"
 	"context"
+	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -14,6 +15,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
 	"github.com/cjdelisle/matterfoss-server/v5/app/request"
@@ -28,6 +30,9 @@ import (
 	"github.com/cjdelisle/matterfoss-server/v5/testlib"
 	"github.com/cjdelisle/matterfoss-server/v5/utils"
 )
+
+
+const license = `eyJpZCI6ImRrOTNyZGcxY2l5ejNweXNpZGRjdzdmcmdlIiwiaXNzdWVkX2F0IjoxNjI1OTIxOTA5NjE3LCJzdGFydHNfYXQiOjE2MjU5MjE5MDk2MTcsImV4cGlyZXNfYXQiOjE2MzM3MDIzNjU1NzUsImN1c3RvbWVyIjp7ImlkIjoiM293cnlteHBjN2cxM25kc3pkZzY2bWlva3ciLCJuYW1lIjoiZzg5ZnVvdGt4M2RwNWU1YzV5dHpnNGprZHciLCJlbWFpbCI6InQ3ajRhN2FwdHRucjVqM3l6NGQ5cjFuZXNhIiwiY29tcGFueSI6IjRoNWhoemo5NGpieDl4cDF4eGt4NTQ1eDloIn0sImZlYXR1cmVzIjp7InVzZXJzIjo5MjIzMzcyMDM2ODU0Nzc1ODA3LCJsZGFwIjpmYWxzZSwibGRhcF9ncm91cHMiOmZhbHNlLCJtZmEiOnRydWUsImdvb2dsZV9vYXV0aCI6ZmFsc2UsIm9mZmljZTM2NV9vYXV0aCI6ZmFsc2UsIm9wZW5pZCI6dHJ1ZSwiY29tcGxpYW5jZSI6dHJ1ZSwiY2x1c3RlciI6dHJ1ZSwibWV0cmljcyI6dHJ1ZSwibWhwbnMiOnRydWUsInNhbWwiOmZhbHNlLCJlbGFzdGljX3NlYXJjaCI6ZmFsc2UsImFubm91bmNlbWVudCI6dHJ1ZSwidGhlbWVfbWFuYWdlbWVudCI6dHJ1ZSwiZW1haWxfbm90aWZpY2F0aW9uX2NvbnRlbnRzIjp0cnVlLCJkYXRhX3JldGVudGlvbiI6dHJ1ZSwibWVzc2FnZV9leHBvcnQiOnRydWUsImN1c3RvbV9wZXJtaXNzaW9uc19zY2hlbWVzIjp0cnVlLCJjdXN0b21fdGVybXNfb2Zfc2VydmljZSI6dHJ1ZSwiZ3Vlc3RfYWNjb3VudHMiOnRydWUsImd1ZXN0X2FjY291bnRzX3Blcm1pc3Npb25zIjp0cnVlLCJpZF9sb2FkZWQiOnRydWUsImxvY2tfdGVhbW1hdGVfbmFtZV9kaXNwbGF5Ijp0cnVlLCJlbnRlcnByaXNlX3BsdWdpbnMiOnRydWUsImFkdmFuY2VkX2xvZ2dpbmciOnRydWUsImNsb3VkIjp0cnVlLCJzaGFyZWRfY2hhbm5lbHMiOnRydWUsInJlbW90ZV9jbHVzdGVyX3NlcnZpY2UiOmZhbHNlLCJmdXR1cmVfZmVhdHVyZXMiOnRydWV9LCJza3VfbmFtZSI6IiIsInNrdV9zaG9ydF9uYW1lIjoiIn0=`
 
 type TestHelper struct {
 	App          *App
@@ -47,6 +52,16 @@ type TestHelper struct {
 }
 
 func setupTestHelper(dbStore store.Store, enterprise bool, includeCacheLayer bool, tb testing.TB) *TestHelper {
+	license := []byte(license)
+
+	configDir, _ := fileutils.FindDir("config")
+	LicenseFileLocation := filepath.Join(configDir, "matterfoss.matterfoss-license")
+
+	err := ioutil.WriteFile(LicenseFileLocation, license, 0644)
+	if err != nil {
+		panic(err)
+	}
+
 	tempWorkspace, err := ioutil.TempDir("", "apptest")
 	if err != nil {
 		panic(err)
@@ -160,6 +175,11 @@ func SetupWithoutPreloadMigrations(tb testing.TB) *TestHelper {
 
 func SetupWithStoreMock(tb testing.TB) *TestHelper {
 	mockStore := testlib.GetMockStoreForSetupFunctions()
+
+	mockLicenseStore := mocks.LicenseStore{}
+	mockLicenseStore.On("Save", mock.Anything).Return(&model.LicenseRecord{}, nil)
+	mockStore.On("License").Return(&mockLicenseStore)
+
 	th := setupTestHelper(mockStore, false, false, tb)
 	emptyMockStore := mocks.Store{}
 	emptyMockStore.On("Close").Return(nil)

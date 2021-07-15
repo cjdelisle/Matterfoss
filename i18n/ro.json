@@ -5093,7 +5093,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "Limita de dimensiune a fost depășită. Încercați să verificați [mărimea paginii maximă] (https://docs.Matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
+    "translation": "Limita de dimensiune a fost depășită. Încercați să verificați [mărimea paginii maximă] (https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
   },
   {
     "id": "ent.ldap.syncronize.delete_group_constained_memberships",
@@ -5585,7 +5585,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} a fost dezactivat. Au gestionat următoarele conturi bot care acum au fost dezactivate.\n\n{{.BotNames}}{{else}}{{.UserName}} a fost dezactivat. Au gestionat {{.NumBots}} conturi bot care acum au fost dezactivate, inclusiv următoarele:\n\n{{.BotNames}}{{end}} Puteți deține proprietatea fiecărui bot activându-l la **Integrări > Conturi bot** și crearea de noi jetoane pentru bot.\n\nPentru mai multe informații, consultați [documentația](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} a fost dezactivat. Au gestionat următoarele conturi bot care sunt încă activate.\n\n{{.BotNames}}\n{{else}}{{.UserName}} a fost dezactivat. Au gestionat {{.NumBots}} conturi de bot care sunt încă activate, inclusiv următoarele:\n\n{{.BotNames}}{{end}}Vă recomandăm cu tărie să luați proprietatea fiecărui bot reactivându-l la **Integrări > Conturi bot** și crearea de noi jetoane pentru bot.\n\nPentru mai multe informații, consultați [documentația](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nDacă doriți ca conturile bot să se dezactiveze automat după dezactivarea utilizatorului, setați “Dezactivați conturile bot după dezactivarea utilizatorului” în **Consola de sistem > Integrări > Conturi bot** la adevărat.{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} a fost dezactivat. Au gestionat următoarele conturi bot care acum au fost dezactivate.\n\n{{.BotNames}}{{else}}{{.UserName}} a fost dezactivat. Au gestionat {{.NumBots}} conturi bot care acum au fost dezactivate, inclusiv următoarele:\n\n{{.BotNames}}{{end}} Puteți deține proprietatea fiecărui bot activându-l la **Integrări > Conturi bot** și crearea de noi jetoane pentru bot.\n\nPentru mai multe informații, consultați [documentația](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} a fost dezactivat. Au gestionat următoarele conturi bot care sunt încă activate.\n\n{{.BotNames}}\n{{else}}{{.UserName}} a fost dezactivat. Au gestionat {{.NumBots}} conturi de bot care sunt încă activate, inclusiv următoarele:\n\n{{.BotNames}}{{end}}Vă recomandăm cu tărie să luați proprietatea fiecărui bot reactivându-l la **Integrări > Conturi bot** și crearea de noi jetoane pentru bot.\n\nPentru mai multe informații, consultați [documentația](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nDacă doriți ca conturile bot să se dezactiveze automat după dezactivarea utilizatorului, setați “Dezactivați conturile bot după dezactivarea utilizatorului” în **Consola de sistem > Integrări > Conturi bot** la adevărat.{{end}}"
   },
   {
     "id": "app.bot.createbot.internal_error",
@@ -7261,7 +7261,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "Sistemul dvs. cel mai important are acum 200 de utilizatori. Pe măsură ce baza de utilizator crește, furnizarea de conturi noi poate deveni mult timp. Vă recomandăm să faceți upgrade la Ediția Matterfoss Enterprise și să integrați Active Directory/LDAP al organizației dvs., ceea ce va permite oricui are un cont să acceseze Matterfoss. Utilizatorii se pot autentifica fără a fi nevoie să creeze noi nume de utilizator și parole, iar administratorii economisesc conturi de furnizare și gestionare a timpului.\n\n[Aflați mai multe despre integrarea cu AD/LDAP](https://docs.Matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nAsistența de contact trimite informațiile de contact către Matterfoss, Inc. [Aflați mai multe](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Sistemul dvs. cel mai important are acum 200 de utilizatori. Pe măsură ce baza de utilizator crește, furnizarea de conturi noi poate deveni mult timp. Vă recomandăm să faceți upgrade la Ediția Matterfoss Enterprise și să integrați Active Directory/LDAP al organizației dvs., ceea ce va permite oricui are un cont să acceseze Matterfoss. Utilizatorii se pot autentifica fără a fi nevoie să creeze noi nume de utilizator și parole, iar administratorii economisesc conturi de furnizare și gestionare a timpului.\n\n[Aflați mai multe despre integrarea cu AD/LDAP](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nAsistența de contact trimite informațiile de contact către Matterfoss, Inc. [Aflați mai multe](https://Matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
@@ -9121,7 +9121,7 @@
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.start_trial.notification_body",
-    "translation": "Vă rugăm să accesați **System Console > Site Configuration > Customization** pentru a seta [Support Email](https://docs.Matterfoss.com/administration/config-settings.html#support-email) ca adresă de e-mail a biroului de asistență IT intern al organizației dumneavoastră pentru feedback-ul utilizatorului final, notificări prin e-mail și cereri de asistență."
+    "translation": "Vă rugăm să accesați **System Console > Site Configuration > Customization** pentru a seta [Support Email](https://docs.mattermost.com/administration/config-settings.html#support-email) ca adresă de e-mail a biroului de asistență IT intern al organizației dumneavoastră pentru feedback-ul utilizatorului final, notificări prin e-mail și cereri de asistență."
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.notification_title",

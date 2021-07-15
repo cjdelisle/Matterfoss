@@ -3021,7 +3021,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "Storleksbgränsen överskriden. Kolla inställningen [max page size](https://docs.Matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
+    "translation": "Storleksbgränsen överskriden. Kolla inställningen [max page size](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
@@ -4549,7 +4549,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} har inaktiverats. De hanterar följande bot-konton som nu är inaktiverade.\n\n{{.BotNames}}{{else}}{{.UserName}} har inaktiverats. De hanterade {{.NumBots}} bot-konton som nu är avstängda, inkluderat:\n\n{{.BotNames}}{{end}}Du kan ta ägandeskap över respektive bot genom att aktivera den på **Integrations > Bot Accounts** och där skapa nya tokens för bot:en.\n\nFör mer information, läs [dokumentationen](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} har inaktiverats. De hanterar följande bot-konton som fortfarande är aktiverade.\n\n{{.BotNames}}\n{{else}}{{.UserName}} har inaktiverats. De hanterade {{.NumBots}} bot-konton som fortfarande är aktiverade, inkluderat:\n\n{{.BotNames}}{{end}}Vi rekommenderar starkt att du tar ägandeskap över respektive bot genom att aktivera dem på **Integrations > Bot Accounts** och skapa nya tokens för bot:en.\n\nFör mer information, läs [dokumentationen](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nOm du vill inaktivera bot-konton automatiskt när du inaktiverar en användare, gå till **System console > Integration's > Bot Accounts** och aktivera \"Disable bot accounts when owner is deactivated\".{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} har inaktiverats. De hanterar följande bot-konton som nu är inaktiverade.\n\n{{.BotNames}}{{else}}{{.UserName}} har inaktiverats. De hanterade {{.NumBots}} bot-konton som nu är avstängda, inkluderat:\n\n{{.BotNames}}{{end}}Du kan ta ägandeskap över respektive bot genom att aktivera den på **Integrations > Bot Accounts** och där skapa nya tokens för bot:en.\n\nFör mer information, läs [dokumentationen](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} har inaktiverats. De hanterar följande bot-konton som fortfarande är aktiverade.\n\n{{.BotNames}}\n{{else}}{{.UserName}} har inaktiverats. De hanterade {{.NumBots}} bot-konton som fortfarande är aktiverade, inkluderat:\n\n{{.BotNames}}{{end}}Vi rekommenderar starkt att du tar ägandeskap över respektive bot genom att aktivera dem på **Integrations > Bot Accounts** och skapa nya tokens för bot:en.\n\nFör mer information, läs [dokumentationen](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nOm du vill inaktivera bot-konton automatiskt när du inaktiverar en användare, gå till **System console > Integration's > Bot Accounts** och aktivera \"Disable bot accounts when owner is deactivated\".{{end}}"
   },
   {
     "id": "app.bot.createbot.internal_error",
@@ -5873,7 +5873,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_body",
-    "translation": "Din Matterfoss-installation har nu 200 användare. När din ansluter Matterfoss med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Matterfoss utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Matterfoss.server [Läs mer om integration med SAML 2.0] (https://docs.Matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml).\n\nGenom att klicka på Starta test godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Din Matterfoss-installation har nu 200 användare. När din ansluter Matterfoss med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Matterfoss utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Matterfoss.server [Läs mer om integration med SAML 2.0] (https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml).\n\nGenom att klicka på Starta test godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
@@ -5881,7 +5881,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "Din Matterfoss-installation har nu 200 användare. När din ansluter Matterfoss med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Matterfoss utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Matterfoss.server [Läs mer om integration med SAML 2.0] (https://docs.Matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml).\n\nGenom att klicka på Kontakta oss kommer du dela information med Matterfoss Inc. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Din Matterfoss-installation har nu 200 användare. När din ansluter Matterfoss med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Matterfoss utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Matterfoss.server [Läs mer om integration med SAML 2.0] (https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml).\n\nGenom att klicka på Kontakta oss kommer du dela information med Matterfoss Inc. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
@@ -9117,7 +9117,7 @@
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.start_trial.notification_body",
-    "translation": "Gå till **Systemkonsolen > Sajtkonfiguration > Anpassa** för att ställa in [Support mejl](https://docs.Matterfoss.com/administration/config-settings.html#support-email) till organisationens interna e-postadress för it-support för återkoppling från slutanvändare, e-postmeddelanden och supportförfrågningar."
+    "translation": "Gå till **Systemkonsolen > Sajtkonfiguration > Anpassa** för att ställa in [Support mejl](https://docs.mattermost.com/administration/config-settings.html#support-email) till organisationens interna e-postadress för it-support för återkoppling från slutanvändare, e-postmeddelanden och supportförfrågningar."
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.notification_title",

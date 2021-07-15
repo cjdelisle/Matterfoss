@@ -801,7 +801,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "A méretkorlát túllépve. Próbálja meg ellenőrizni a [maximális oldalméretet] (https://docs.Matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded )."
+    "translation": "A méretkorlát túllépve. Próbálja meg ellenőrizni a [maximális oldalméretet] (https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded )."
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
@@ -9105,7 +9105,7 @@
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.start_trial.notification_body",
-    "translation": "A [Támogatási e-mail] (https://docs.Matterfoss.com/administration/config-settings.html#support-email) beállításához a szervezet belső IT-támogatásaként lépjen a ** Rendszerkonzol> Weboldal beállítások> Testreszabás ** oldalra. Asztali e-mail cím a végfelhasználói visszajelzésekhez, e-mailes értesítésekhez és támogatási kérelmekhez."
+    "translation": "A [Támogatási e-mail] (https://docs.mattermost.com/administration/config-settings.html#support-email) beállításához a szervezet belső IT-támogatásaként lépjen a ** Rendszerkonzol> Weboldal beállítások> Testreszabás ** oldalra. Asztali e-mail cím a végfelhasználói visszajelzésekhez, e-mailes értesítésekhez és támogatási kérelmekhez."
   },
   {
     "id": "api.templates.cloud_trial_ended_email.start_subscription",

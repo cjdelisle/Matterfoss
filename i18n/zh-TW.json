@@ -5085,7 +5085,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "超過大小限制。請檢查[最大分頁大小](https://docs.Matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
+    "translation": "超過大小限制。請檢查[最大分頁大小](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
   },
   {
     "id": "ent.ldap.syncronize.delete_group_constained_memberships",
@@ -5577,7 +5577,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號已被停用。{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號已被停用，包括：{{.BotNames}}{{end}}可以在 **外部整合 > 機器人帳號** 對個別啟用以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號還在運作：{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號還在運作，包括：{{.BotNames}}{{end}}在此強烈建議前往 **外部整合 > 機器人帳號** 重新啟用各個機器人以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。如果想要在停用使用者帳號同時自動停用機器人帳號，請前往 **系統主控台 > 外部整合 > 機器人帳號** 啟用 \"停用使用者時停用機器人帳號\"。{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號已被停用。{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號已被停用，包括：{{.BotNames}}{{end}}可以在 **外部整合 > 機器人帳號** 對個別啟用以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號還在運作：{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號還在運作，包括：{{.BotNames}}{{end}}在此強烈建議前往 **外部整合 > 機器人帳號** 重新啟用各個機器人以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。如果想要在停用使用者帳號同時自動停用機器人帳號，請前往 **系統主控台 > 外部整合 > 機器人帳號** 啟用 \"停用使用者時停用機器人帳號\"。{{end}}"
   },
   {
     "id": "app.bot.createbot.internal_error",
@@ -7301,7 +7301,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "一共有 200 位使用者在此 Matterfoss。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Matterfoss。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.Matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Matterfoss 公司，了解更多有關升級。[了解更多](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "一共有 200 位使用者在此 Matterfoss。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Matterfoss。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Matterfoss 公司，了解更多有關升級。[了解更多](https://Matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.post.search_posts.invalid_body.app_error",
@@ -7417,7 +7417,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "一共有 200 位使用者在此 Matterfoss。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Matterfoss。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.Matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Matterfoss 公司，了解更多有關升級。[了解更多](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "一共有 200 位使用者在此 Matterfoss。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Matterfoss。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Matterfoss 公司，了解更多有關升級。[了解更多](https://Matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",

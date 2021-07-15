@@ -75,7 +75,9 @@ func GetLicenseFileLocation(fileLocation string) string {
 func GetClientLicense(l *model.License) map[string]string {
 	props := make(map[string]string)
 
-	l.Features.SetDefaults()
+	if l != nil {
+		l.Features.SetDefaults()
+	}
 
 	props["IsLicensed"] = strconv.FormatBool(l != nil)
 	if l != nil {

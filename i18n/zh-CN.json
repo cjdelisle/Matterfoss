@@ -5493,7 +5493,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "尺寸超过限制。请检查您的[最大页面尺寸](https://docs.Matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
+    "translation": "尺寸超过限制。请检查您的[最大页面尺寸](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
   },
   {
     "id": "group_not_associated_to_synced_team",
@@ -5865,7 +5865,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下已停用的机器人帐号。\n\n{{.BotNames}}{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个已停用的机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}您可以在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下机器人帐号。\n\n{{.BotNames}}\n{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}我们强烈推荐您在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。\n\n如果您想在用户被注销后自动停用机器人帐号，在**系统控制台 > 整合 > 机器人帐号**设定“在用户注销后自动停用机器人帐号”为是。{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下已停用的机器人帐号。\n\n{{.BotNames}}{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个已停用的机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}您可以在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已注销。他们管理以下机器人帐号。\n\n{{.BotNames}}\n{{else}}{{.UserName}} 已注销。他们管理 {{.NumBots}} 个机器人帐号，其中包括：\n\n{{.BotNames}}{{end}}我们强烈推荐您在**整合> 机器人帐号**启用并创建新的令牌以获取所有权。\n\n更多详情，参见我们的[文档](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。\n\n如果您想在用户被注销后自动停用机器人帐号，在**系统控制台 > 整合 > 机器人帐号**设定“在用户注销后自动停用机器人帐号”为是。{{end}}"
   },
   {
     "id": "app.bot.getbot.internal_error",

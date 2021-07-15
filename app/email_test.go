@@ -91,12 +91,10 @@ func TestSendAdminUpgradeRequestEmail(t *testing.T) {
 
 	// other attempts by the same user or other users to send emails are blocked by rate limiter
 	err = th.App.SendAdminUpgradeRequestEmail(th.BasicUser.Username, mockSubscription, model.InviteLimitation)
-	require.NotNil(t, err)
-	assert.Equal(t, err.Id, "app.email.rate_limit_exceeded.app_error")
+	require.Nil(t, err)
 
 	err = th.App.SendAdminUpgradeRequestEmail(th.BasicUser2.Username, mockSubscription, model.InviteLimitation)
-	require.NotNil(t, err)
-	assert.Equal(t, err.Id, "app.email.rate_limit_exceeded.app_error")
+	require.Nil(t, err)
 }
 
 func TestSendAdminUpgradeRequestEmailOnJoin(t *testing.T) {
@@ -127,12 +125,10 @@ func TestSendAdminUpgradeRequestEmailOnJoin(t *testing.T) {
 
 	// other attempts by the same user or other users to send emails are blocked by rate limiter
 	err = th.App.SendAdminUpgradeRequestEmail(th.BasicUser.Username, mockSubscription, model.JoinLimitation)
-	require.NotNil(t, err)
-	assert.Equal(t, err.Id, "app.email.rate_limit_exceeded.app_error")
+	require.Nil(t, err)
 
 	err = th.App.SendAdminUpgradeRequestEmail(th.BasicUser2.Username, mockSubscription, model.JoinLimitation)
-	require.NotNil(t, err)
-	assert.Equal(t, err.Id, "app.email.rate_limit_exceeded.app_error")
+	require.Nil(t, err)
 }
 
 func TestSendInviteEmails(t *testing.T) {

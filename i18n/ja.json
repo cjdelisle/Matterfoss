@@ -5085,7 +5085,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "サイズ制限超過。[最大ページサイズ](https://docs.Matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)を確認してください。"
+    "translation": "サイズ制限超過。[最大ページサイズ](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)を確認してください。"
   },
   {
     "id": "ent.ldap.syncronize.delete_group_constained_memberships",
@@ -5577,7 +5577,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在無効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}{{else}}{{.UserName}} は無効化されています。 現在無効化されている以下の Bot アカウントを含む {{.NumBots}} 個の Bot アカウントを管理していました: \n\n{{.BotNames}}{{end}} **統合機能 > Botアカウント** からBotを有効にし、Bot用のトークンを新たに作成することで、これらのBotを引き継ぐことができます。\n\n詳しくは[説明文書](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。{{else}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在も有効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}\n{{else}}{{.UserName}} は無効化されています。以下を含む現在も有効な {{.NumBots}} 個の Bot アカウントを管理していました:\n\n{{.BotNames}}{{end}}**統合機能 > Botアカウント** から各Botを再度有効化し、Bot用のトークンを新たに生成してBotを引き継ぐことを強く推奨します。\n\n詳しくは[説明文書](https://docs.Matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。\n\nユーザーが無効化された際に自動でBotも無効化したい場合、**システムコンソール > 統合機能 > Botアカウント** の \"所有者が無効化された際にBotアカウントを無効化する\" を true にしてください。{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在無効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}{{else}}{{.UserName}} は無効化されています。 現在無効化されている以下の Bot アカウントを含む {{.NumBots}} 個の Bot アカウントを管理していました: \n\n{{.BotNames}}{{end}} **統合機能 > Botアカウント** からBotを有効にし、Bot用のトークンを新たに作成することで、これらのBotを引き継ぐことができます。\n\n詳しくは[説明文書](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。{{else}}{{if .printAllBots}}{{.UserName}} は無効化されています。現在も有効化されている以下の Bot アカウントを管理していました。\n\n{{.BotNames}}\n{{else}}{{.UserName}} は無効化されています。以下を含む現在も有効な {{.NumBots}} 個の Bot アカウントを管理していました:\n\n{{.BotNames}}{{end}}**統合機能 > Botアカウント** から各Botを再度有効化し、Bot用のトークンを新たに生成してBotを引き継ぐことを強く推奨します。\n\n詳しくは[説明文書](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)を参照してください。\n\nユーザーが無効化された際に自動でBotも無効化したい場合、**システムコンソール > 統合機能 > Botアカウント** の \"所有者が無効化された際にBotアカウントを無効化する\" を true にしてください。{{end}}"
   },
   {
     "id": "app.bot.createbot.internal_error",
@@ -9101,7 +9101,7 @@
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.start_trial.notification_body",
-    "translation": "利用者のフィードバック、電子メール通知、サポートリクエストを受け付けるために、**システムコンソール > サイト設定 > カスタマイズ**に移動し、あなたの組織の内部ITサポートデスクの電子メールアドレスを [サポート電子メールアドレス](https://docs.Matterfoss.com/administration/config-settings.html#support-email)として設定してください。"
+    "translation": "利用者のフィードバック、電子メール通知、サポートリクエストを受け付けるために、**システムコンソール > サイト設定 > カスタマイズ**に移動し、あなたの組織の内部ITサポートデスクの電子メールアドレスを [サポート電子メールアドレス](https://docs.mattermost.com/administration/config-settings.html#support-email)として設定してください。"
   },
   {
     "id": "api.server.warn_metric.support_email_not_configured.notification_title",
