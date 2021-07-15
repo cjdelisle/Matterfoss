@@ -6220,6 +6220,10 @@
     "translation": "din licens tillåter inte användande av LDAP-grupper"
   },
   {
+    "id": "api.get_users.forbidden_to_guests",
+    "translation": "Getting users is forbidden to guests"
+  },
+  {
     "id": "api.ldap_groups.existing_user_name_error",
     "translation": "gruppnamnet finns redan som ett användarnamn"
   },

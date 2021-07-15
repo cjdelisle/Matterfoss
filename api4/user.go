@@ -645,6 +645,13 @@ func getUsers(c *Context, w http.ResponseWriter, r *http.Request) {
 	channelRolesString := r.URL.Query().Get("channel_roles")
 	teamRolesString := r.URL.Query().Get("team_roles")
 
+	user, err := c.App.GetUser(c.AppContext.Session().UserId)
+
+	if user != nil && user.IsGuest() {
+		c.Err = model.NewAppError("Api4.getUsers", "api.get_users.forbidden_to_guests", nil, "", http.StatusForbidden)
+		return
+	}
+
 	if notInChannelId != "" && inTeamId == "" {
 		c.SetInvalidUrlParam("team_id")
 		return

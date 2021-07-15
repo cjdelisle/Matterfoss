@@ -1140,6 +1140,10 @@
     "translation": "あなたのライセンスはLDAPグループをサポートしていません"
   },
   {
+    "id": "api.get_users.forbidden_to_guests",
+    "translation": "Getting users is forbidden to guests"
+  },
+  {
     "id": "api.license.add_license.array.app_error",
     "translation": "リクエストの'license'配列が空です。"
   },

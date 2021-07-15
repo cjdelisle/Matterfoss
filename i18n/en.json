@@ -1929,6 +1929,10 @@
     "translation": "your license does not support ldap groups"
   },
   {
+    "id": "api.get_users.forbidden_to_guests",
+    "translation": "Getting users is forbidden to guests"
+  },
+  {
     "id": "api.license.add_license.array.app_error",
     "translation": "Empty array under 'license' in request."
   },

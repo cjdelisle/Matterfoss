@@ -1140,6 +1140,10 @@
     "translation": "您的许可证不支持 ldap 组"
   },
   {
+    "id": "api.get_users.forbidden_to_guests",
+    "translation": "Getting users is forbidden to guests"
+  },
+  {
     "id": "api.license.add_license.array.app_error",
     "translation": "请求中‘许可证’为空数组。"
   },

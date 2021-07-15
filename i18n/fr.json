@@ -1138,6 +1138,10 @@
     "translation": "groupe ldap introuvable"
   },
   {
+    "id": "api.get_users.forbidden_to_guests",
+    "translation": "Les invités ne sont pas autorisé à obtenir la liste des utilisateurs"
+  },
+  {
     "id": "api.ldap_groups.license_error",
     "translation": "votre licence ne supporte pas les groupes ldap"
   },
