@@ -8449,6 +8449,10 @@
     "translation": "Az Ön licensze nem támogatja az LDAP csoportokat"
   },
   {
+    "id": "api.search_users.forbidden_to_guests",
+    "translation": "Searching users is forbidden to guests"
+  },
+  {
     "id": "api.get_users.forbidden_to_guests",
     "translation": "Getting users is forbidden to guests"
   },

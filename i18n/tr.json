@@ -1142,6 +1142,10 @@
     "translation": "lisansınızda ldap gruplarını kullanma özelliği yok"
   },
   {
+    "id": "api.search_users.forbidden_to_guests",
+    "translation": "Searching users is forbidden to guests"
+  },
+  {
     "id": "api.get_users.forbidden_to_guests",
     "translation": "Getting users is forbidden to guests"
   },

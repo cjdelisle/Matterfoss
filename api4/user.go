@@ -903,6 +903,13 @@ func getKnownUsers(c *Context, w http.ResponseWriter, r *http.Request) {
 }
 
 func searchUsers(c *Context, w http.ResponseWriter, r *http.Request) {
+	user, err := c.App.GetUser(c.AppContext.Session().UserId)
+
+	if user != nil && user.IsGuest() {
+		c.Err = model.NewAppError("Api4.searchUsers", "api.search_users.forbidden_to_guests", nil, "", http.StatusForbidden)
+		return
+	}
+
 	props := model.UserSearchFromJson(r.Body)
 	if props == nil {
 		c.SetInvalidParam("")
@@ -975,7 +982,7 @@ func searchUsers(c *Context, w http.ResponseWriter, r *http.Request) {
 		options.AllowFullNames = *c.App.Config().PrivacySettings.ShowFullName
 	}
 
-	options, err := c.App.RestrictUsersSearchByPermissions(c.AppContext.Session().UserId, options)
+	options, err = c.App.RestrictUsersSearchByPermissions(c.AppContext.Session().UserId, options)
 	if err != nil {
 		c.Err = err
 		return
