@@ -19,6 +19,11 @@ import (
 func ValidateLicense(signed []byte) (bool, string) {
 	plaintext := make([]byte, base64.StdEncoding.DecodedLen(len(signed)))
 
+	if len(plaintext) <= 256 {
+		mlog.Error("Signed license not long enough")
+		return false, ""
+	}
+
 	_, err := base64.StdEncoding.Decode(plaintext, signed)
 	if err != nil {
 		mlog.Error("Encountered error decoding license", mlog.Err(err))

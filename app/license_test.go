@@ -18,7 +18,7 @@ func TestLoadLicense(t *testing.T) {
 	defer th.TearDown()
 
 	th.App.Srv().LoadLicense()
-	require.Nil(t, th.App.Srv().License(), "shouldn't have a valid license")
+	require.NotNil(t, th.App.Srv().License(), "A valid free license is loaded by default")
 }
 
 func TestSaveLicense(t *testing.T) {
@@ -28,7 +28,7 @@ func TestSaveLicense(t *testing.T) {
 	b1 := []byte("junk")
 
 	_, err := th.App.Srv().SaveLicense(b1)
-	require.NotNil(t, err, "shouldn't have saved license")
+	require.NotNil(t, err, "should not have saved junk license")
 }
 
 func TestRemoveLicense(t *testing.T) {
