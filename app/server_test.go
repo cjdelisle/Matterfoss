@@ -250,7 +250,7 @@ func TestGenerateSupportPacket(t *testing.T) {
 	defer th.TearDown()
 
 	d1 := []byte("hello\ngo\n")
-	err := ioutil.WriteFile("mattermost.log", d1, 0777)
+	err := ioutil.WriteFile("matterfoss.log", d1, 0777)
 	require.NoError(t, err)
 	err = ioutil.WriteFile("notifications.log", d1, 0777)
 	require.NoError(t, err)
@@ -266,7 +266,7 @@ func TestGenerateSupportPacket(t *testing.T) {
 	// Remove these two files and ensure that warning.txt file is generated
 	err = os.Remove("notifications.log")
 	require.NoError(t, err)
-	err = os.Remove("mattermost.log")
+	err = os.Remove("matterfoss.log")
 	require.NoError(t, err)
 	fileDatas = th.App.GenerateSupportPacket()
 	testFiles = []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "warning.txt"}
