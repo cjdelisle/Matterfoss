@@ -314,7 +314,7 @@ func TestConfigDefaultIncidentManagementPluginState(t *testing.T) {
 		c1 := Config{}
 		c1.SetDefaults()
 
-		assert.False(t, c1.PluginSettings.PluginStates["com.matterfoss.plugin-incident-management"].Enable)
+		assert.Nil(t, c1.PluginSettings.PluginStates["com.matterfoss.plugin-incident-management"])
 	})
 
 	t.Run("should not enable IncidentManagement plugin by default on non-enterprise-ready builds", func(t *testing.T) {
@@ -349,7 +349,7 @@ func TestConfigDefaultChannelExportPluginState(t *testing.T) {
 		c1 := Config{}
 		c1.SetDefaults()
 
-		assert.False(t, c1.PluginSettings.PluginStates["com.matterfoss.plugin-channel-export"].Enable)
+		assert.Nil(t, c1.PluginSettings.PluginStates["com.matterfoss.plugin-channel-export"])
 	})
 
 	t.Run("should not enable ChannelExport plugin by default on non-enterprise-ready builds", func(t *testing.T) {
