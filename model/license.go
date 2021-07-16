@@ -126,7 +126,7 @@ func (f *Features) SetDefaults() {
 	f.FutureFeatures = NewBool(true)
 	f.Users = NewInt(math.MaxInt64)
 	f.LDAP = NewBool(false)
-	f.LDAPGroups = NewBool(false)
+	f.LDAPGroups = NewBool(true)
 	f.MFA = NewBool(true)
 	f.GoogleOAuth = NewBool(false)
 	f.Office365OAuth = NewBool(false)
