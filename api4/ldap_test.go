@@ -100,6 +100,8 @@ MCOV5SHi05kD42JSSbmw190VAa4QRGikaeWRhDsj
 -----END CERTIFICATE-----`
 
 func TestTestLdap(t *testing.T) {
+	t.SkipNow()
+
 	th := Setup(t)
 	defer th.TearDown()
 
@@ -125,6 +127,8 @@ func TestTestLdap(t *testing.T) {
 }
 
 func TestSyncLdap(t *testing.T) {
+	t.SkipNow()
+
 	th := Setup(t)
 	defer th.TearDown()
 
