@@ -91,7 +91,7 @@ func TestGetClientConfig(t *testing.T) {
 			map[string]string{
 				"DiagnosticId":                  "tag2",
 				"EmailNotificationContentsType": "full",
-				"AllowCustomThemes":             "false",
+				"AllowCustomThemes":             "true",
 			},
 		},
 		{

@@ -138,7 +138,7 @@ func (f *Features) SetDefaults() {
 	f.SAML = NewBool(false)
 	f.Elasticsearch = NewBool(false)
 	f.Announcement = NewBool(true)
-	f.ThemeManagement = NewBool(true)
+	f.ThemeManagement = NewBool(false)
 	f.EmailNotificationContents = NewBool(true)
 	f.DataRetention = NewBool(true)
 	f.MessageExport = NewBool(true)
