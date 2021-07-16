@@ -2812,16 +2812,6 @@ func (s *PluginSettings) SetDefaults(ls LogSettings) {
 		s.PluginStates["com.matterfoss.nps"] = &PluginState{Enable: false}
 	}
 
-	if s.PluginStates["com.matterfoss.plugin-incident-management"] == nil && BuildEnterpriseReady == "true" {
-		// Enable the incident management plugin by default
-		s.PluginStates["com.matterfoss.plugin-incident-management"] = &PluginState{Enable: false}
-	}
-
-	if s.PluginStates["com.matterfoss.plugin-channel-export"] == nil && BuildEnterpriseReady == "true" {
-		// Enable the channel export plugin by default
-		s.PluginStates["com.matterfoss.plugin-channel-export"] = &PluginState{Enable: false}
-	}
-
 	if s.EnableMarketplace == nil {
 		s.EnableMarketplace = NewBool(PLUGIN_SETTINGS_DEFAULT_ENABLE_MARKETPLACE)
 	}
