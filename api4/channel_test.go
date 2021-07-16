@@ -474,12 +474,12 @@ func TestCreateDirectChannelAsGuest(t *testing.T) {
 		CheckForbiddenStatus(t, resp)
 	})
 
-	t.Run("Creating DM with visible user", func(t *testing.T) {
+	t.Run("Creating DM with visible user as guest", func(t *testing.T) {
 		th.LinkUserToTeam(guest, th.BasicTeam)
 		th.AddUserToChannel(guest, th.BasicChannel)
 
 		_, resp := Client.CreateDirectChannel(guest.Id, user1.Id)
-		CheckBadRequestStatus(t, resp)
+		CheckForbiddenStatus(t, resp)
 	})
 }
 
