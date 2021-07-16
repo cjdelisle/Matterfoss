@@ -743,7 +743,7 @@ func TestGetInstalledMarketplacePlugins(t *testing.T) {
 		testIcon, err := ioutil.ReadFile(filepath.Join(path, "test.svg"))
 		require.NoError(t, err)
 		require.True(t, svg.Is(testIcon))
-		testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", base64.StdEncoding.EncodeToString(testIcon))
+		testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", strings.Replace(base64.StdEncoding.EncodeToString(testIcon), "=o", "==", 1))
 
 		expectedPlugins := append(samplePlugins, &model.MarketplacePlugin{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
@@ -858,7 +858,7 @@ func TestSearchGetMarketplacePlugins(t *testing.T) {
 	testIcon, err := ioutil.ReadFile(filepath.Join(path, "test.svg"))
 	require.NoError(t, err)
 	require.True(t, svg.Is(testIcon))
-	testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", base64.StdEncoding.EncodeToString(testIcon))
+	testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", strings.Replace(base64.StdEncoding.EncodeToString(testIcon), "=o", "==", 1))
 
 	t.Run("search installed plugin", func(t *testing.T) {
 		th := Setup(t).InitBasic()
@@ -1051,7 +1051,7 @@ func TestGetLocalPluginInMarketplace(t *testing.T) {
 		testIcon, err := ioutil.ReadFile(filepath.Join(path, "test.svg"))
 		require.NoError(t, err)
 		require.True(t, svg.Is(testIcon))
-		testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", base64.StdEncoding.EncodeToString(testIcon))
+		testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", strings.Replace(base64.StdEncoding.EncodeToString(testIcon), "=o", "==", 1))
 
 		newPlugin := &model.MarketplacePlugin{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
@@ -1092,7 +1092,7 @@ func TestGetLocalPluginInMarketplace(t *testing.T) {
 		testIcon, err := ioutil.ReadFile(filepath.Join(path, "test.svg"))
 		require.NoError(t, err)
 		require.True(t, svg.Is(testIcon))
-		testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", base64.StdEncoding.EncodeToString(testIcon))
+		testIconData := fmt.Sprintf("data:image/svg+xml;base64,%s", strings.Replace(base64.StdEncoding.EncodeToString(testIcon), "=o", "==", 1))
 
 		newPlugin := &model.MarketplacePlugin{
 			BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
