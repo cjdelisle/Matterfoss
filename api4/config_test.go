@@ -658,7 +658,7 @@ func TestPatchConfig(t *testing.T) {
 			assert.False(t, *oldConfig.PasswordSettings.Lowercase)
 			assert.NotEqual(t, 15, *oldConfig.PasswordSettings.MinimumLength)
 			assert.Equal(t, "DEBUG", *oldConfig.LogSettings.ConsoleLevel)
-			assert.True(t, oldConfig.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
+			assert.False(t, oldConfig.PluginSettings.PluginStates["com.matterfoss.nps"].Enable)
 
 			states := make(map[string]*model.PluginState)
 			states["com.matterfoss.nps"] = &model.PluginState{Enable: *model.NewBool(false)}
