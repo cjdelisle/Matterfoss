@@ -4,6 +4,7 @@
 package model
 
 import (
+	"math"
 	"strings"
 	"testing"
 
@@ -16,17 +17,17 @@ func TestLicenseFeaturesToMap(t *testing.T) {
 
 	m := f.ToMap()
 
-	CheckTrue(t, m["ldap"].(bool))
+	CheckFalse(t, m["ldap"].(bool))
 	CheckTrue(t, m["ldap_groups"].(bool))
 	CheckTrue(t, m["mfa"].(bool))
-	CheckTrue(t, m["google"].(bool))
-	CheckTrue(t, m["office365"].(bool))
+	CheckFalse(t, m["google"].(bool))
+	CheckFalse(t, m["office365"].(bool))
 	CheckTrue(t, m["compliance"].(bool))
 	CheckTrue(t, m["cluster"].(bool))
 	CheckTrue(t, m["metrics"].(bool))
 	CheckTrue(t, m["mhpns"].(bool))
-	CheckTrue(t, m["saml"].(bool))
-	CheckTrue(t, m["elastic_search"].(bool))
+	CheckFalse(t, m["saml"].(bool))
+	CheckFalse(t, m["elastic_search"].(bool))
 	CheckTrue(t, m["email_notification_contents"].(bool))
 	CheckTrue(t, m["data_retention"].(bool))
 	CheckTrue(t, m["message_export"].(bool))
@@ -34,25 +35,25 @@ func TestLicenseFeaturesToMap(t *testing.T) {
 	CheckTrue(t, m["id_loaded"].(bool))
 	CheckTrue(t, m["future"].(bool))
 	CheckTrue(t, m["shared_channels"].(bool))
-	CheckTrue(t, m["remote_cluster_service"].(bool))
+	CheckFalse(t, m["remote_cluster_service"].(bool))
 }
 
 func TestLicenseFeaturesSetDefaults(t *testing.T) {
 	f := Features{}
 	f.SetDefaults()
 
-	CheckInt(t, *f.Users, 0)
-	CheckTrue(t, *f.LDAP)
+	CheckInt(t, *f.Users, math.MaxInt64)
+	CheckFalse(t, *f.LDAP)
 	CheckTrue(t, *f.LDAPGroups)
 	CheckTrue(t, *f.MFA)
-	CheckTrue(t, *f.GoogleOAuth)
-	CheckTrue(t, *f.Office365OAuth)
+	CheckFalse(t, *f.GoogleOAuth)
+	CheckFalse(t, *f.Office365OAuth)
 	CheckTrue(t, *f.Compliance)
 	CheckTrue(t, *f.Cluster)
 	CheckTrue(t, *f.Metrics)
 	CheckTrue(t, *f.MHPNS)
-	CheckTrue(t, *f.SAML)
-	CheckTrue(t, *f.Elasticsearch)
+	CheckFalse(t, *f.SAML)
+	CheckFalse(t, *f.Elasticsearch)
 	CheckTrue(t, *f.EmailNotificationContents)
 	CheckTrue(t, *f.DataRetention)
 	CheckTrue(t, *f.MessageExport)
@@ -60,7 +61,7 @@ func TestLicenseFeaturesSetDefaults(t *testing.T) {
 	CheckTrue(t, *f.GuestAccountsPermissions)
 	CheckTrue(t, *f.IDLoadedPushNotifications)
 	CheckTrue(t, *f.SharedChannels)
-	CheckTrue(t, *f.RemoteClusterService)
+	CheckFalse(t, *f.RemoteClusterService)
 	CheckTrue(t, *f.FutureFeatures)
 
 	f = Features{}
@@ -90,18 +91,18 @@ func TestLicenseFeaturesSetDefaults(t *testing.T) {
 
 	f.SetDefaults()
 
-	CheckInt(t, *f.Users, 300)
-	CheckTrue(t, *f.LDAP)
+	CheckInt(t, *f.Users, math.MaxInt64)
+	CheckFalse(t, *f.LDAP)
 	CheckTrue(t, *f.LDAPGroups)
 	CheckTrue(t, *f.MFA)
-	CheckTrue(t, *f.GoogleOAuth)
-	CheckTrue(t, *f.Office365OAuth)
+	CheckFalse(t, *f.GoogleOAuth)
+	CheckFalse(t, *f.Office365OAuth)
 	CheckTrue(t, *f.Compliance)
 	CheckTrue(t, *f.Cluster)
 	CheckTrue(t, *f.Metrics)
 	CheckTrue(t, *f.MHPNS)
-	CheckTrue(t, *f.SAML)
-	CheckTrue(t, *f.Elasticsearch)
+	CheckFalse(t, *f.SAML)
+	CheckFalse(t, *f.Elasticsearch)
 	CheckTrue(t, *f.EmailNotificationContents)
 	CheckTrue(t, *f.DataRetention)
 	CheckTrue(t, *f.MessageExport)
@@ -110,14 +111,14 @@ func TestLicenseFeaturesSetDefaults(t *testing.T) {
 	CheckTrue(t, *f.GuestAccountsPermissions)
 	CheckTrue(t, *f.IDLoadedPushNotifications)
 	CheckTrue(t, *f.SharedChannels)
-	CheckTrue(t, *f.RemoteClusterService)
-	CheckFalse(t, *f.FutureFeatures)
+	CheckFalse(t, *f.RemoteClusterService)
+	CheckTrue(t, *f.FutureFeatures)
 }
 
 func TestLicenseIsExpired(t *testing.T) {
 	l1 := License{}
 	l1.ExpiresAt = GetMillis() - 1000
-	assert.True(t, l1.IsExpired())
+	assert.False(t, l1.IsExpired())
 
 	l1.ExpiresAt = GetMillis() + 10000
 	assert.False(t, l1.IsExpired())
@@ -126,7 +127,7 @@ func TestLicenseIsExpired(t *testing.T) {
 func TestLicenseIsPastGracePeriod(t *testing.T) {
 	l1 := License{}
 	l1.ExpiresAt = GetMillis() - LICENSE_GRACE_PERIOD - 1000
-	assert.True(t, l1.IsPastGracePeriod())
+	assert.False(t, l1.IsPastGracePeriod())
 
 	l1.ExpiresAt = GetMillis() + 1000
 	assert.False(t, l1.IsPastGracePeriod())
@@ -139,7 +140,7 @@ func TestLicenseIsStarted(t *testing.T) {
 	assert.True(t, l1.IsStarted())
 
 	l1.StartsAt = GetMillis() + 10000
-	assert.False(t, l1.IsStarted())
+	assert.True(t, l1.IsStarted())
 }
 
 func TestLicenseToFromJson(t *testing.T) {
@@ -211,21 +212,21 @@ func TestLicenseRecordIsValid(t *testing.T) {
 	}
 
 	err := lr.IsValid()
-	assert.NotNil(t, err)
+	assert.Nil(t, err)
 
 	lr.Id = NewId()
 	lr.CreateAt = 0
 	err = lr.IsValid()
-	assert.NotNil(t, err)
+	assert.Nil(t, err)
 
 	lr.CreateAt = GetMillis()
 	lr.Bytes = ""
 	err = lr.IsValid()
-	assert.NotNil(t, err)
+	assert.Nil(t, err)
 
 	lr.Bytes = strings.Repeat("0123456789", 1001)
 	err = lr.IsValid()
-	assert.NotNil(t, err)
+	assert.Nil(t, err)
 
 	lr.Bytes = "ASDFGHJKL;"
 	err = lr.IsValid()
