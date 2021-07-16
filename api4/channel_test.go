@@ -479,7 +479,7 @@ func TestCreateDirectChannelAsGuest(t *testing.T) {
 		th.AddUserToChannel(guest, th.BasicChannel)
 
 		_, resp := Client.CreateDirectChannel(guest.Id, user1.Id)
-		CheckNoError(t, resp)
+		CheckBadRequestStatus(t, resp)
 	})
 }
 

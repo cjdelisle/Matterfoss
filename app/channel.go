@@ -343,7 +343,12 @@ func (a *App) GetOrCreateDirectChannel(c *request.Context, userID, otherUserID s
 		}
 	}
 
-	channel, err := a.createDirectChannel(userID, otherUserID, channelOptions...)
+	user, err := a.GetUser(userID)
+	if err == nil && user.IsGuest() {
+		return nil, model.NewAppError("createDirectChannel", "api.channel.create_channel.direct_channel.guest_restricted_error", nil, "", http.StatusBadRequest)
+	}
+
+	channel, err = a.createDirectChannel(userID, otherUserID, channelOptions...)
 	if err != nil {
 		if err.Id == store.ChannelExistsError {
 			return channel, nil
