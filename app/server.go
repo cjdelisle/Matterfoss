@@ -2098,7 +2098,7 @@ func (a *App) getMattermostLog() (*model.FileData, string) {
 			}
 			return &fileData, ""
 		}
-		warning = fmt.Sprintf("ioutil.ReadFile(mattermostLog) Error: %s", mattermostLogFileDataErr.Error())
+		warning = fmt.Sprintf("ioutil.ReadFile(matterfossLog) Error: %s", mattermostLogFileDataErr.Error())
 
 	} else {
 		warning = "Unable to retrieve mattermost.log because LogSettings: EnableFile is false in config.json"

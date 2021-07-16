@@ -32,7 +32,7 @@ func logsCmdF(command *cobra.Command, args []string) error {
 
 	var input io.Reader
 	if fi.Size() == 0 && fi.Mode()&os.ModeNamedPipe == 0 {
-		file, err := os.Open("mattermost.log")
+		file, err := os.Open("matterfoss.log")
 		if err != nil {
 			return err
 		}

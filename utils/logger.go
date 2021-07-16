@@ -14,7 +14,7 @@ import (
 
 const (
 	LogRotateSize           = 10000
-	LogFilename             = "mattermost.log"
+	LogFilename             = "matterfoss.log"
 	LogNotificationFilename = "notifications.log"
 )
 

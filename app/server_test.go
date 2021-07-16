@@ -256,7 +256,7 @@ func TestGenerateSupportPacket(t *testing.T) {
 	require.NoError(t, err)
 
 	fileDatas := th.App.GenerateSupportPacket()
-	testFiles := []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "mattermost.log", "notifications.log"}
+	testFiles := []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "matterfoss.log", "notifications.log"}
 	for i, fileData := range fileDatas {
 		require.NotNil(t, fileData)
 		assert.Equal(t, testFiles[i], fileData.Filename)
@@ -334,21 +334,21 @@ func TestGetMattermostLog(t *testing.T) {
 	})
 
 	// If any previous mattermost.log file, lets delete it
-	os.Remove("mattermost.log")
+	os.Remove("matterfoss.log")
 
 	fileData, warning = th.App.getMattermostLog()
 	assert.Nil(t, fileData)
-	assert.Contains(t, warning, "ioutil.ReadFile(mattermostLog) Error:")
+	assert.Contains(t, warning, "ioutil.ReadFile(matterfossLog) Error:")
 
 	// Happy path where we get a log file and no warning
 	d1 := []byte("hello\ngo\n")
-	err := ioutil.WriteFile("mattermost.log", d1, 0777)
-	defer os.Remove("mattermost.log")
+	err := ioutil.WriteFile("matterfoss.log", d1, 0777)
+	defer os.Remove("matterfoss.log")
 	require.NoError(t, err)
 
 	fileData, warning = th.App.getMattermostLog()
 	require.NotNil(t, fileData)
-	assert.Equal(t, "mattermost.log", fileData.Filename)
+	assert.Equal(t, "matterfoss.log", fileData.Filename)
 	assert.Positive(t, len(fileData.Body))
 	assert.Empty(t, warning)
 }
