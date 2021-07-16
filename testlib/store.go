@@ -23,6 +23,11 @@ func (s *TestStore) Close() {
 
 func GetMockStoreForSetupFunctions() *mocks.Store {
 	mockStore := mocks.Store{}
+
+	mockLicenseStore := mocks.LicenseStore{}
+	mockLicenseStore.On("Save", mock.Anything).Return(&model.LicenseRecord{}, nil)
+	mockStore.On("License").Return(&mockLicenseStore)
+
 	systemStore := mocks.SystemStore{}
 	systemStore.On("GetByName", "ContentExtractionConfigDefaultTrueMigrationComplete").Return(&model.System{Name: "ContentExtractionConfigDefaultTrueMigrationComplete", Value: "true"}, nil)
 	systemStore.On("GetByName", "UpgradedFromTE").Return(nil, model.NewAppError("FakeError", "app.system.get_by_name.app_error", nil, "", http.StatusInternalServerError))
