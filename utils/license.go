@@ -49,7 +49,13 @@ func GetAndValidateLicenseFileFromDisk(location string) (*model.License, []byte)
 		mlog.Error("Found license key at %v but it appears to be invalid.", mlog.String("filename", fileName))
 		return nil, nil
 	}
-	return model.LicenseFromJson(strings.NewReader(licenseStr)), licenseBytes
+
+	license := model.LicenseFromJson(strings.NewReader(licenseStr))
+	license.ExpiresAt = model.GetMillis() + 10*365*24*60*60*1000*12 // 10 years give or take
+
+	encodedLicense := []byte(base64.StdEncoding.EncodeToString([]byte(license.ToJson())))
+
+	return license, encodedLicense
 }
 
 func GetLicenseFileFromDisk(fileName string) []byte {
