@@ -5,6 +5,7 @@ package app
 
 import (
 	"bytes"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
@@ -51,8 +52,21 @@ func (s *Server) LoadLicense() {
 	}
 
 	if !model.IsValidId(licenseId) {
+		licenseFileLocation := *s.Config().ServiceSettings.LicenseFileLocation;
+		if _, err := os.Stat(licenseFileLocation); errors.Is(err, os.ErrNotExist) {
+			licenseTemplate, err := ioutil.ReadFile(licenseFileLocation + ".dist")
+			if err != nil {
+				mlog.Error("Can read license template.")
+			}
+
+			err = ioutil.WriteFile(licenseFileLocation, licenseTemplate, 0600)
+			if err != nil {
+				mlog.Error("Can not copy license template to default license file location.")
+			}
+		}
+
 		// Lets attempt to load the file from disk since it was missing from the DB
-		license, licenseBytes := utils.GetAndValidateLicenseFileFromDisk(*s.Config().ServiceSettings.LicenseFileLocation)
+		license, licenseBytes := utils.GetAndValidateLicenseFileFromDisk(licenseFileLocation)
 
 		if license != nil {
 			if _, err := s.SaveLicense(licenseBytes); err != nil {
