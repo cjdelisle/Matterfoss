@@ -4,7 +4,12 @@
 package utils
 
 import (
+	"crypto"
+	"crypto/rsa"
+	"crypto/sha512"
+	"crypto/x509"
 	"encoding/base64"
+	"encoding/pem"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -16,17 +21,55 @@ import (
 	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
 )
 
-func ValidateLicense(signed []byte) (bool, string) {
-	plaintext := make([]byte, base64.StdEncoding.DecodedLen(len(signed)))
+var publicKey []byte = []byte(`-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyZmShlU8Z8HdG0IWSZ8r
+tSyzyxrXkJjsFUf0Ke7bm/TLtIggRdqOcUF3XEWqQk5RGD5vuq7Rlg1zZqMEBk8N
+EZeRhkxyaZW8pLjxwuBUOnXfJew31+gsTNdKZzRjrvPumKr3EtkleuoxNdoatu4E
+HrKmR/4Yi71EqAvkhk7ZjQFuF0osSWJMEEGGCSUYQnTEqUzcZSh1BhVpkIkeu8Kk
+1wCtptODixvEujgqVe+SrE3UlZjBmPjC/CL+3cYmufpSNgcEJm2mwsdaXp2OPpfn
+a0v85XL6i9ote2P+fLZ3wX9EoioHzgdgB7arOxY50QRJO7OyCqpKFKv6lRWTXuSt
+hwIDAQAB
+-----END PUBLIC KEY-----`)
 
-	if len(plaintext) <= 256 {
+func ValidateLicense(signed []byte) (bool, string) {
+	decoded := make([]byte, base64.StdEncoding.DecodedLen(len(signed)))
+
+	_, err := base64.StdEncoding.Decode(decoded, signed)
+	if err != nil {
+		mlog.Error("Encountered error decoding license", mlog.Err(err))
+		return false, ""
+	}
+
+	if len(decoded) <= 256 {
 		mlog.Error("Signed license not long enough")
 		return false, ""
 	}
 
-	_, err := base64.StdEncoding.Decode(plaintext, signed)
+	// remove null terminator
+	for decoded[len(decoded)-1] == byte(0) {
+		decoded = decoded[:len(decoded)-1]
+	}
+
+	plaintext := decoded[:len(decoded)-256]
+	signature := decoded[len(decoded)-256:]
+
+	block, _ := pem.Decode(publicKey)
+
+	public, err := x509.ParsePKIXPublicKey(block.Bytes)
 	if err != nil {
-		mlog.Error("Encountered error decoding license", mlog.Err(err))
+		mlog.Error("Encountered error signing license", mlog.Err(err))
+		return false, ""
+	}
+
+	rsaPublic := public.(*rsa.PublicKey)
+
+	h := sha512.New()
+	h.Write(plaintext)
+	d := h.Sum(nil)
+
+	err = rsa.VerifyPKCS1v15(rsaPublic, crypto.SHA512, d, signature)
+	if err != nil {
+		mlog.Error("Invalid signature", mlog.Err(err))
 		return false, ""
 	}
 
@@ -49,13 +92,7 @@ func GetAndValidateLicenseFileFromDisk(location string) (*model.License, []byte)
 		mlog.Error("Found license key at %v but it appears to be invalid.", mlog.String("filename", fileName))
 		return nil, nil
 	}
-
-	license := model.LicenseFromJson(strings.NewReader(licenseStr))
-	license.ExpiresAt = model.GetMillis() + 10*365*24*60*60*1000*12 // 10 years give or take
-
-	encodedLicense := []byte(base64.StdEncoding.EncodeToString([]byte(license.ToJson())))
-
-	return license, encodedLicense
+	return model.LicenseFromJson(strings.NewReader(licenseStr)), licenseBytes
 }
 
 func GetLicenseFileFromDisk(fileName string) []byte {
@@ -86,11 +123,8 @@ func GetLicenseFileLocation(fileLocation string) string {
 func GetClientLicense(l *model.License) map[string]string {
 	props := make(map[string]string)
 
-	if l != nil {
-		l.Features.SetDefaults()
-	}
-
 	props["IsLicensed"] = strconv.FormatBool(l != nil)
+
 	if l != nil {
 		props["Id"] = l.Id
 		props["SkuName"] = l.SkuName
