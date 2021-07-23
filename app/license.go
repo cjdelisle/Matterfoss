@@ -5,7 +5,6 @@ package app
 
 import (
 	"bytes"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
@@ -45,62 +44,17 @@ func (s *Server) LoadLicense() {
 		return
 	}
 
-	licenseId := ""
-	props, nErr := s.Store.System().Get()
-	if nErr == nil {
-		licenseId = props[model.SYSTEM_ACTIVE_LICENSE_ID]
-	}
-
-	if !model.IsValidId(licenseId) {
-		licenseFileLocation := *s.Config().ServiceSettings.LicenseFileLocation;
-		if _, err := os.Stat(licenseFileLocation); errors.Is(err, os.ErrNotExist) {
-			licenseTemplate, err := ioutil.ReadFile(licenseFileLocation + ".dist")
-			if err != nil {
-				mlog.Error("Can read license template.")
-			}
-
-			err = ioutil.WriteFile(licenseFileLocation, licenseTemplate, 0600)
-			if err != nil {
-				mlog.Error("Can not copy license template to default license file location.")
-			}
-		}
-
-		// Lets attempt to load the file from disk since it was missing from the DB
-		license, licenseBytes := utils.GetAndValidateLicenseFileFromDisk(licenseFileLocation)
-
-		if license != nil {
-			if _, err := s.SaveLicense(licenseBytes); err != nil {
-				mlog.Info("Failed to save license key loaded from disk.", mlog.Err(err))
-			} else {
-				licenseId = license.Id
-			}
-		}
-	}
-
-	license := &model.License{
-		Id: licenseId,
-		ExpiresAt: model.GetMillis() + 90*24*60*60*1000,
-		Customer:  &model.Customer{},
-		Features:  &model.Features{},
-	}
-	license.Features.SetDefaults()
-
-	licenseRecord := &model.LicenseRecord{}
-	licenseRecord.Id = license.Id
-
-	_, licenseBytes := utils.GetAndValidateLicenseFileFromDisk(*s.Config().ServiceSettings.LicenseFileLocation)
-	licenseRecord.Bytes = string(licenseBytes)
-
-	_, nErr = s.Store.License().Save(licenseRecord)
-
-	if nErr != nil {
-		mlog.Info("License key from https://mattermost.com required to unlock enterprise features.")
-		s.SetLicense(nil)
-		return
-	}
-
-	s.ValidateAndSetLicenseBytes([]byte(licenseRecord.Bytes))
-	mlog.Info("License key valid unlocking enterprise features.")
+   // Matterfoss: Enable all OSS features for everyone
+   f := model.Features{}
+   f.SetDefaults()
+   s.SetLicense(&model.License{
+		   Id:        "Anything that prevents you from being friendly, a good neighbour, is a terror tactic. -rms",
+		   IssuedAt:  0,
+		   ExpiresAt: 0x7fffffffffffffff,
+		   Customer:  &model.Customer{},
+		   Features:  &f,
+   })
+   mlog.Info("All features are enabled, do something good for someone today.")
 }
 
 func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppError) {
@@ -177,10 +131,29 @@ func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppErr
 }
 
 func (s *Server) SetLicense(license *model.License) bool {
-	s.licenseValue.Store(license)
-	s.clientLicenseValue.Store(utils.GetClientLicense(license))
+	oldLicense := s.licenseValue.Load()
 
-	return true
+	defer func() {
+		for _, listener := range s.licenseListeners {
+			if oldLicense == nil {
+				listener(nil, license)
+			} else {
+				listener(oldLicense.(*model.License), license)
+			}
+		}
+	}()
+
+	if license != nil {
+		license.Features.SetDefaults()
+
+		s.licenseValue.Store(license)
+		s.clientLicenseValue.Store(utils.GetClientLicense(license))
+		return true
+	}
+
+	s.licenseValue.Store((*model.License)(nil))
+	s.clientLicenseValue.Store(map[string]string(nil))
+	return false
 }
 
 func (s *Server) ValidateAndSetLicenseBytes(b []byte) bool {
@@ -202,7 +175,7 @@ func (s *Server) ClientLicense() map[string]string {
 	if clientLicense, _ := s.clientLicenseValue.Load().(map[string]string); clientLicense != nil {
 		return clientLicense
 	}
-	return map[string]string{"IsLicensed": "true"}
+	return map[string]string{"IsLicensed": "false"}
 }
 
 func (s *Server) RemoveLicense() *model.AppError {
