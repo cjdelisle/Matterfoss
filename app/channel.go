@@ -2140,6 +2140,10 @@ func (a *App) PostAddToChannelMessage(c *request.Context, user *model.User, adde
 		postType = model.POST_ADD_GUEST_TO_CHANNEL
 	}
 
+	if postType == model.POST_ADD_GUEST_TO_CHANNEL {
+		return nil
+	}
+
 	post := &model.Post{
 		ChannelId: channel.Id,
 		Message:   message,
