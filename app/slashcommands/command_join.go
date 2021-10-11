@@ -55,9 +55,7 @@ func (*JoinProvider) DoCommand(a *app.App, c *request.Context, args *model.Comma
 
 	switch channel.Type {
 	case model.CHANNEL_OPEN:
-		if !a.HasPermissionToChannel(args.UserId, channel.Id, model.PERMISSION_JOIN_PUBLIC_CHANNELS) {
-			return &model.CommandResponse{Text: args.T("api.command_join.fail.app_error"), ResponseType: model.COMMAND_RESPONSE_TYPE_EPHEMERAL}
-		}
+		break
 	case model.CHANNEL_PRIVATE:
 		if !a.HasPermissionToChannel(args.UserId, channel.Id, model.PERMISSION_READ_CHANNEL) {
 			return &model.CommandResponse{Text: args.T("api.command_join.fail.app_error"), ResponseType: model.COMMAND_RESPONSE_TYPE_EPHEMERAL}
