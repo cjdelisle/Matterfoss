@@ -4,6 +4,7 @@
 package app
 
 import (
+	"archive/zip"
 	"context"
 	"io/ioutil"
 	"os"
@@ -14,9 +15,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
-	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func TestImportImportScheme(t *testing.T) {
@@ -24,10 +25,10 @@ func TestImportImportScheme(t *testing.T) {
 	defer th.TearDown()
 
 	// Mark the phase 2 permissions migration as completed.
-	th.App.Srv().Store.System().Save(&model.System{Name: model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2, Value: "true"})
+	th.App.Srv().Store.System().Save(&model.System{Name: model.MigrationKeyAdvancedPermissionsPhase2, Value: "true"})
 
 	defer func() {
-		th.App.Srv().Store.System().PermanentDeleteByName(model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2)
+		th.App.Srv().Store.System().PermanentDeleteByName(model.MigrationKeyAdvancedPermissionsPhase2)
 	}()
 
 	// Try importing an invalid scheme in dryRun mode.
@@ -219,10 +220,10 @@ func TestImportImportSchemeWithoutGuestRoles(t *testing.T) {
 	defer th.TearDown()
 
 	// Mark the phase 2 permissions migration as completed.
-	th.App.Srv().Store.System().Save(&model.System{Name: model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2, Value: "true"})
+	th.App.Srv().Store.System().Save(&model.System{Name: model.MigrationKeyAdvancedPermissionsPhase2, Value: "true"})
 
 	defer func() {
-		th.App.Srv().Store.System().PermanentDeleteByName(model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2)
+		th.App.Srv().Store.System().PermanentDeleteByName(model.MigrationKeyAdvancedPermissionsPhase2)
 	}()
 
 	// Try importing an invalid scheme in dryRun mode.
@@ -495,10 +496,10 @@ func TestImportImportTeam(t *testing.T) {
 	defer th.TearDown()
 
 	// Mark the phase 2 permissions migration as completed.
-	th.App.Srv().Store.System().Save(&model.System{Name: model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2, Value: "true"})
+	th.App.Srv().Store.System().Save(&model.System{Name: model.MigrationKeyAdvancedPermissionsPhase2, Value: "true"})
 
 	defer func() {
-		th.App.Srv().Store.System().PermanentDeleteByName(model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2)
+		th.App.Srv().Store.System().PermanentDeleteByName(model.MigrationKeyAdvancedPermissionsPhase2)
 	}()
 
 	scheme1 := th.SetupTeamScheme()
@@ -585,10 +586,10 @@ func TestImportImportChannel(t *testing.T) {
 	defer th.TearDown()
 
 	// Mark the phase 2 permissions migration as completed.
-	th.App.Srv().Store.System().Save(&model.System{Name: model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2, Value: "true"})
+	th.App.Srv().Store.System().Save(&model.System{Name: model.MigrationKeyAdvancedPermissionsPhase2, Value: "true"})
 
 	defer func() {
-		th.App.Srv().Store.System().PermanentDeleteByName(model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2)
+		th.App.Srv().Store.System().PermanentDeleteByName(model.MigrationKeyAdvancedPermissionsPhase2)
 	}()
 
 	scheme1 := th.SetupChannelScheme()
@@ -605,15 +606,16 @@ func TestImportImportChannel(t *testing.T) {
 	require.Nil(t, err, "Failed to get team from database.")
 
 	// Check how many channels are in the database.
-	channelCount, nErr := th.App.Srv().Store.Channel().AnalyticsTypeCount("", model.CHANNEL_OPEN)
+	channelCount, nErr := th.App.Srv().Store.Channel().AnalyticsTypeCount("", model.ChannelTypeOpen)
 	require.NoError(t, nErr, "Failed to get team count.")
 
 	// Do an invalid channel in dry-run mode.
+	chanOpen := model.ChannelTypeOpen
 	data := ChannelImportData{
 		Team:        &teamName,
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
-		Header:      ptrStr("Channe Header"),
+		Type:        &chanOpen,
+		Header:      ptrStr("Channel Header"),
 		Purpose:     ptrStr("Channel Purpose"),
 		Scheme:      &scheme1.Name,
 	}
@@ -677,8 +679,9 @@ func TestImportImportChannel(t *testing.T) {
 	assert.Equal(t, scheme1.Id, *channel.SchemeId)
 
 	// Alter all the fields of that channel.
-	data.DisplayName = ptrStr("Chaned Disp Name")
-	data.Type = ptrStr(model.CHANNEL_PRIVATE)
+	cTypePr := model.ChannelTypePrivate
+	data.DisplayName = ptrStr("Changed Disp Name")
+	data.Type = &cTypePr
 	data.Header = ptrStr("New Header")
 	data.Purpose = ptrStr("New Purpose")
 	data.Scheme = &scheme2.Name
@@ -873,11 +876,12 @@ func TestImportImportUser(t *testing.T) {
 	require.Nil(t, appErr, "Failed to get team from database.")
 
 	channelName := model.NewId()
+	chanTypeOpen := model.ChannelTypeOpen
 	th.App.importChannel(th.Context, &ChannelImportData{
 		Team:        &teamName,
 		Name:        &channelName,
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}, false)
 	channel, appErr := th.App.GetChannelByName(channelName, team.Id, false)
 	require.Nil(t, appErr, "Failed to get channel from database.")
@@ -1087,24 +1091,24 @@ func TestImportImportUser(t *testing.T) {
 	channelMember, appErr := th.App.GetChannelMember(context.Background(), channel.Id, user.Id)
 	require.Nil(t, appErr, "Failed to get channel member from database.")
 	assert.Equal(t, "channel_user", channelMember.Roles)
-	assert.Equal(t, "default", channelMember.NotifyProps[model.DESKTOP_NOTIFY_PROP])
-	assert.Equal(t, "default", channelMember.NotifyProps[model.PUSH_NOTIFY_PROP])
-	assert.Equal(t, "all", channelMember.NotifyProps[model.MARK_UNREAD_NOTIFY_PROP])
+	assert.Equal(t, "default", channelMember.NotifyProps[model.DesktopNotifyProp])
+	assert.Equal(t, "default", channelMember.NotifyProps[model.PushNotifyProp])
+	assert.Equal(t, "all", channelMember.NotifyProps[model.MarkUnreadNotifyProp])
 
 	// Test with the properties of the team and channel membership changed.
 	data.Teams = &[]UserTeamImportData{
 		{
 			Name:  &teamName,
-			Theme: ptrStr(`{"awayIndicator":"#DBBD4E","buttonBg":"#23A1FF","buttonColor":"#FFFFFF","centerChannelBg":"#ffffff","centerChannelColor":"#333333","codeTheme":"github","image":"/static/files/a4a388b38b32678e83823ef1b3e17766.png","linkColor":"#2389d7","mentionBg":"#2389d7","mentionColor":"#ffffff","mentionHighlightBg":"#fff2bb","mentionHighlightLink":"#2f81b7","newMessageSeparator":"#FF8800","onlineIndicator":"#7DBE00","sidebarBg":"#fafafa","sidebarHeaderBg":"#3481B9","sidebarHeaderTextColor":"#ffffff","sidebarText":"#333333","sidebarTextActiveBorder":"#378FD2","sidebarTextActiveColor":"#111111","sidebarTextHoverBg":"#e6f2fa","sidebarUnreadText":"#333333","type":"Matterfoss"}`),
+			Theme: ptrStr(`{"awayIndicator":"#DBBD4E","buttonBg":"#23A1FF","buttonColor":"#FFFFFF","centerChannelBg":"#ffffff","centerChannelColor":"#333333","codeTheme":"github","image":"/static/files/a4a388b38b32678e83823ef1b3e17766.png","linkColor":"#2389d7","mentionBg":"#2389d7","mentionColor":"#ffffff","mentionHighlightBg":"#fff2bb","mentionHighlightLink":"#2f81b7","newMessageSeparator":"#FF8800","onlineIndicator":"#7DBE00","sidebarBg":"#fafafa","sidebarHeaderBg":"#3481B9","sidebarHeaderTextColor":"#ffffff","sidebarText":"#333333","sidebarTextActiveBorder":"#378FD2","sidebarTextActiveColor":"#111111","sidebarTextHoverBg":"#e6f2fa","sidebarUnreadText":"#333333","type":"Mattermost"}`),
 			Roles: ptrStr("team_user team_admin"),
 			Channels: &[]UserChannelImportData{
 				{
 					Name:  &channelName,
 					Roles: ptrStr("channel_user channel_admin"),
 					NotifyProps: &UserChannelNotifyPropsImportData{
-						Desktop:    ptrStr(model.USER_NOTIFY_MENTION),
-						Mobile:     ptrStr(model.USER_NOTIFY_MENTION),
-						MarkUnread: ptrStr(model.USER_NOTIFY_MENTION),
+						Desktop:    ptrStr(model.UserNotifyMention),
+						Mobile:     ptrStr(model.UserNotifyMention),
+						MarkUnread: ptrStr(model.UserNotifyMention),
 					},
 					Favorite: ptrBool(true),
 				},
@@ -1122,12 +1126,12 @@ func TestImportImportUser(t *testing.T) {
 	channelMember, appErr = th.App.GetChannelMember(context.Background(), channel.Id, user.Id)
 	require.Nil(t, appErr, "Failed to get channel member Desktop from database.")
 	assert.Equal(t, "channel_user channel_admin", channelMember.Roles)
-	assert.Equal(t, model.USER_NOTIFY_MENTION, channelMember.NotifyProps[model.DESKTOP_NOTIFY_PROP])
-	assert.Equal(t, model.USER_NOTIFY_MENTION, channelMember.NotifyProps[model.PUSH_NOTIFY_PROP])
-	assert.Equal(t, model.USER_NOTIFY_MENTION, channelMember.NotifyProps[model.MARK_UNREAD_NOTIFY_PROP])
+	assert.Equal(t, model.UserNotifyMention, channelMember.NotifyProps[model.DesktopNotifyProp])
+	assert.Equal(t, model.UserNotifyMention, channelMember.NotifyProps[model.PushNotifyProp])
+	assert.Equal(t, model.UserNotifyMention, channelMember.NotifyProps[model.MarkUnreadNotifyProp])
 
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id, "true")
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_THEME, team.Id, *(*data.Teams)[0].Theme)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryFavoriteChannel, channel.Id, "true")
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryTheme, team.Id, *(*data.Teams)[0].Theme)
 
 	// No more new member objects.
 	tmc, appErr = th.App.GetTeamMembers(team.Id, 0, 1000, nil)
@@ -1143,7 +1147,7 @@ func TestImportImportUser(t *testing.T) {
 	data = UserImportData{
 		Username:           &username,
 		Email:              ptrStr(model.NewId() + "@example.com"),
-		Theme:              ptrStr(`{"awayIndicator":"#DCBD4E","buttonBg":"#23A2FF","buttonColor":"#FFFFFF","centerChannelBg":"#ffffff","centerChannelColor":"#333333","codeTheme":"github","image":"/static/files/a4a388b38b32678e83823ef1b3e17766.png","linkColor":"#2389d7","mentionBg":"#2389d7","mentionColor":"#ffffff","mentionHighlightBg":"#fff2bb","mentionHighlightLink":"#2f81b7","newMessageSeparator":"#FF8800","onlineIndicator":"#7DBE00","sidebarBg":"#fafafa","sidebarHeaderBg":"#3481B9","sidebarHeaderTextColor":"#ffffff","sidebarText":"#333333","sidebarTextActiveBorder":"#378FD2","sidebarTextActiveColor":"#111111","sidebarTextHoverBg":"#e6f2fa","sidebarUnreadText":"#333333","type":"Matterfoss"}`),
+		Theme:              ptrStr(`{"awayIndicator":"#DCBD4E","buttonBg":"#23A2FF","buttonColor":"#FFFFFF","centerChannelBg":"#ffffff","centerChannelColor":"#333333","codeTheme":"github","image":"/static/files/a4a388b38b32678e83823ef1b3e17766.png","linkColor":"#2389d7","mentionBg":"#2389d7","mentionColor":"#ffffff","mentionHighlightBg":"#fff2bb","mentionHighlightLink":"#2f81b7","newMessageSeparator":"#FF8800","onlineIndicator":"#7DBE00","sidebarBg":"#fafafa","sidebarHeaderBg":"#3481B9","sidebarHeaderTextColor":"#ffffff","sidebarText":"#333333","sidebarTextActiveBorder":"#378FD2","sidebarTextActiveColor":"#111111","sidebarTextHoverBg":"#e6f2fa","sidebarUnreadText":"#333333","type":"Mattermost"}`),
 		UseMilitaryTime:    ptrStr("true"),
 		CollapsePreviews:   ptrStr("true"),
 		MessageDisplay:     ptrStr("compact"),
@@ -1161,22 +1165,22 @@ func TestImportImportUser(t *testing.T) {
 	user, appErr = th.App.GetUserByUsername(username)
 	require.Nil(t, appErr, "Failed to get user from database.")
 
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_THEME, "", *data.Theme)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_USE_MILITARY_TIME, *data.UseMilitaryTime)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_COLLAPSE_SETTING, *data.CollapsePreviews)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_MESSAGE_DISPLAY, *data.MessageDisplay)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_CHANNEL_DISPLAY_MODE, *data.ChannelDisplayMode)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_TUTORIAL_STEPS, user.Id, *data.TutorialStep)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_ADVANCED_SETTINGS, "feature_enabled_markdown_preview", *data.UseMarkdownPreview)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_ADVANCED_SETTINGS, "formatting", *data.UseFormatting)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_SIDEBAR_SETTINGS, "show_unread_section", *data.ShowUnreadSection)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_NOTIFICATIONS, model.PREFERENCE_NAME_EMAIL_INTERVAL, "30")
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryTheme, "", *data.Theme)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameUseMilitaryTime, *data.UseMilitaryTime)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameCollapseSetting, *data.CollapsePreviews)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameMessageDisplay, *data.MessageDisplay)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameChannelDisplayMode, *data.ChannelDisplayMode)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryTutorialSteps, user.Id, *data.TutorialStep)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryAdvancedSettings, "feature_enabled_markdown_preview", *data.UseMarkdownPreview)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryAdvancedSettings, "formatting", *data.UseFormatting)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategorySidebarSettings, "show_unread_section", *data.ShowUnreadSection)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryNotifications, model.PreferenceNameEmailInterval, "30")
 
 	// Change those preferences.
 	data = UserImportData{
 		Username:           &username,
 		Email:              ptrStr(model.NewId() + "@example.com"),
-		Theme:              ptrStr(`{"awayIndicator":"#123456","buttonBg":"#23A2FF","buttonColor":"#FFFFFF","centerChannelBg":"#ffffff","centerChannelColor":"#333333","codeTheme":"github","image":"/static/files/a4a388b38b32678e83823ef1b3e17766.png","linkColor":"#2389d7","mentionBg":"#2389d7","mentionColor":"#ffffff","mentionHighlightBg":"#fff2bb","mentionHighlightLink":"#2f81b7","newMessageSeparator":"#FF8800","onlineIndicator":"#7DBE00","sidebarBg":"#fafafa","sidebarHeaderBg":"#3481B9","sidebarHeaderTextColor":"#ffffff","sidebarText":"#333333","sidebarTextActiveBorder":"#378FD2","sidebarTextActiveColor":"#111111","sidebarTextHoverBg":"#e6f2fa","sidebarUnreadText":"#333333","type":"Matterfoss"}`),
+		Theme:              ptrStr(`{"awayIndicator":"#123456","buttonBg":"#23A2FF","buttonColor":"#FFFFFF","centerChannelBg":"#ffffff","centerChannelColor":"#333333","codeTheme":"github","image":"/static/files/a4a388b38b32678e83823ef1b3e17766.png","linkColor":"#2389d7","mentionBg":"#2389d7","mentionColor":"#ffffff","mentionHighlightBg":"#fff2bb","mentionHighlightLink":"#2f81b7","newMessageSeparator":"#FF8800","onlineIndicator":"#7DBE00","sidebarBg":"#fafafa","sidebarHeaderBg":"#3481B9","sidebarHeaderTextColor":"#ffffff","sidebarText":"#333333","sidebarTextActiveBorder":"#378FD2","sidebarTextActiveColor":"#111111","sidebarTextHoverBg":"#e6f2fa","sidebarUnreadText":"#333333","type":"Mattermost"}`),
 		UseMilitaryTime:    ptrStr("false"),
 		CollapsePreviews:   ptrStr("false"),
 		MessageDisplay:     ptrStr("clean"),
@@ -1188,23 +1192,23 @@ func TestImportImportUser(t *testing.T) {
 	assert.Nil(t, appErr)
 
 	// Check their values again.
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_THEME, "", *data.Theme)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_USE_MILITARY_TIME, *data.UseMilitaryTime)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_COLLAPSE_SETTING, *data.CollapsePreviews)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_MESSAGE_DISPLAY, *data.MessageDisplay)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_DISPLAY_SETTINGS, model.PREFERENCE_NAME_CHANNEL_DISPLAY_MODE, *data.ChannelDisplayMode)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_TUTORIAL_STEPS, user.Id, *data.TutorialStep)
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_NOTIFICATIONS, model.PREFERENCE_NAME_EMAIL_INTERVAL, "3600")
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryTheme, "", *data.Theme)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameUseMilitaryTime, *data.UseMilitaryTime)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameCollapseSetting, *data.CollapsePreviews)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameMessageDisplay, *data.MessageDisplay)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryDisplaySettings, model.PreferenceNameChannelDisplayMode, *data.ChannelDisplayMode)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryTutorialSteps, user.Id, *data.TutorialStep)
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryNotifications, model.PreferenceNameEmailInterval, "3600")
 
 	// Set Notify Without mention keys
 	data.NotifyProps = &UserNotifyPropsImportData{
-		Desktop:          ptrStr(model.USER_NOTIFY_ALL),
+		Desktop:          ptrStr(model.UserNotifyAll),
 		DesktopSound:     ptrStr("true"),
 		Email:            ptrStr("true"),
-		Mobile:           ptrStr(model.USER_NOTIFY_ALL),
-		MobilePushStatus: ptrStr(model.STATUS_ONLINE),
+		Mobile:           ptrStr(model.UserNotifyAll),
+		MobilePushStatus: ptrStr(model.StatusOnline),
 		ChannelTrigger:   ptrStr("true"),
-		CommentsTrigger:  ptrStr(model.COMMENTS_NOTIFY_ROOT),
+		CommentsTrigger:  ptrStr(model.CommentsNotifyRoot),
 	}
 	appErr = th.App.importUser(&data, false)
 	assert.Nil(t, appErr)
@@ -1212,24 +1216,24 @@ func TestImportImportUser(t *testing.T) {
 	user, appErr = th.App.GetUserByUsername(username)
 	require.Nil(t, appErr, "Failed to get user from database.")
 
-	checkNotifyProp(t, user, model.DESKTOP_NOTIFY_PROP, model.USER_NOTIFY_ALL)
-	checkNotifyProp(t, user, model.DESKTOP_SOUND_NOTIFY_PROP, "true")
-	checkNotifyProp(t, user, model.EMAIL_NOTIFY_PROP, "true")
-	checkNotifyProp(t, user, model.PUSH_NOTIFY_PROP, model.USER_NOTIFY_ALL)
-	checkNotifyProp(t, user, model.PUSH_STATUS_NOTIFY_PROP, model.STATUS_ONLINE)
-	checkNotifyProp(t, user, model.CHANNEL_MENTIONS_NOTIFY_PROP, "true")
-	checkNotifyProp(t, user, model.COMMENTS_NOTIFY_PROP, model.COMMENTS_NOTIFY_ROOT)
-	checkNotifyProp(t, user, model.MENTION_KEYS_NOTIFY_PROP, "")
+	checkNotifyProp(t, user, model.DesktopNotifyProp, model.UserNotifyAll)
+	checkNotifyProp(t, user, model.DesktopSoundNotifyProp, "true")
+	checkNotifyProp(t, user, model.EmailNotifyProp, "true")
+	checkNotifyProp(t, user, model.PushNotifyProp, model.UserNotifyAll)
+	checkNotifyProp(t, user, model.PushStatusNotifyProp, model.StatusOnline)
+	checkNotifyProp(t, user, model.ChannelMentionsNotifyProp, "true")
+	checkNotifyProp(t, user, model.CommentsNotifyProp, model.CommentsNotifyRoot)
+	checkNotifyProp(t, user, model.MentionKeysNotifyProp, "")
 
 	// Set Notify Props with Mention keys
 	data.NotifyProps = &UserNotifyPropsImportData{
-		Desktop:          ptrStr(model.USER_NOTIFY_ALL),
+		Desktop:          ptrStr(model.UserNotifyAll),
 		DesktopSound:     ptrStr("true"),
 		Email:            ptrStr("true"),
-		Mobile:           ptrStr(model.USER_NOTIFY_ALL),
-		MobilePushStatus: ptrStr(model.STATUS_ONLINE),
+		Mobile:           ptrStr(model.UserNotifyAll),
+		MobilePushStatus: ptrStr(model.StatusOnline),
 		ChannelTrigger:   ptrStr("true"),
-		CommentsTrigger:  ptrStr(model.COMMENTS_NOTIFY_ROOT),
+		CommentsTrigger:  ptrStr(model.CommentsNotifyRoot),
 		MentionKeys:      ptrStr("valid,misc"),
 	}
 	appErr = th.App.importUser(&data, false)
@@ -1238,24 +1242,24 @@ func TestImportImportUser(t *testing.T) {
 	user, appErr = th.App.GetUserByUsername(username)
 	require.Nil(t, appErr, "Failed to get user from database.")
 
-	checkNotifyProp(t, user, model.DESKTOP_NOTIFY_PROP, model.USER_NOTIFY_ALL)
-	checkNotifyProp(t, user, model.DESKTOP_SOUND_NOTIFY_PROP, "true")
-	checkNotifyProp(t, user, model.EMAIL_NOTIFY_PROP, "true")
-	checkNotifyProp(t, user, model.PUSH_NOTIFY_PROP, model.USER_NOTIFY_ALL)
-	checkNotifyProp(t, user, model.PUSH_STATUS_NOTIFY_PROP, model.STATUS_ONLINE)
-	checkNotifyProp(t, user, model.CHANNEL_MENTIONS_NOTIFY_PROP, "true")
-	checkNotifyProp(t, user, model.COMMENTS_NOTIFY_PROP, model.COMMENTS_NOTIFY_ROOT)
-	checkNotifyProp(t, user, model.MENTION_KEYS_NOTIFY_PROP, "valid,misc")
+	checkNotifyProp(t, user, model.DesktopNotifyProp, model.UserNotifyAll)
+	checkNotifyProp(t, user, model.DesktopSoundNotifyProp, "true")
+	checkNotifyProp(t, user, model.EmailNotifyProp, "true")
+	checkNotifyProp(t, user, model.PushNotifyProp, model.UserNotifyAll)
+	checkNotifyProp(t, user, model.PushStatusNotifyProp, model.StatusOnline)
+	checkNotifyProp(t, user, model.ChannelMentionsNotifyProp, "true")
+	checkNotifyProp(t, user, model.CommentsNotifyProp, model.CommentsNotifyRoot)
+	checkNotifyProp(t, user, model.MentionKeysNotifyProp, "valid,misc")
 
 	// Change Notify Props with mention keys
 	data.NotifyProps = &UserNotifyPropsImportData{
-		Desktop:          ptrStr(model.USER_NOTIFY_MENTION),
+		Desktop:          ptrStr(model.UserNotifyMention),
 		DesktopSound:     ptrStr("false"),
 		Email:            ptrStr("false"),
-		Mobile:           ptrStr(model.USER_NOTIFY_NONE),
-		MobilePushStatus: ptrStr(model.STATUS_AWAY),
+		Mobile:           ptrStr(model.UserNotifyNone),
+		MobilePushStatus: ptrStr(model.StatusAway),
 		ChannelTrigger:   ptrStr("false"),
-		CommentsTrigger:  ptrStr(model.COMMENTS_NOTIFY_ANY),
+		CommentsTrigger:  ptrStr(model.CommentsNotifyAny),
 		MentionKeys:      ptrStr("misc"),
 	}
 	appErr = th.App.importUser(&data, false)
@@ -1264,24 +1268,24 @@ func TestImportImportUser(t *testing.T) {
 	user, appErr = th.App.GetUserByUsername(username)
 	require.Nil(t, appErr, "Failed to get user from database.")
 
-	checkNotifyProp(t, user, model.DESKTOP_NOTIFY_PROP, model.USER_NOTIFY_MENTION)
-	checkNotifyProp(t, user, model.DESKTOP_SOUND_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.EMAIL_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.PUSH_NOTIFY_PROP, model.USER_NOTIFY_NONE)
-	checkNotifyProp(t, user, model.PUSH_STATUS_NOTIFY_PROP, model.STATUS_AWAY)
-	checkNotifyProp(t, user, model.CHANNEL_MENTIONS_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.COMMENTS_NOTIFY_PROP, model.COMMENTS_NOTIFY_ANY)
-	checkNotifyProp(t, user, model.MENTION_KEYS_NOTIFY_PROP, "misc")
+	checkNotifyProp(t, user, model.DesktopNotifyProp, model.UserNotifyMention)
+	checkNotifyProp(t, user, model.DesktopSoundNotifyProp, "false")
+	checkNotifyProp(t, user, model.EmailNotifyProp, "false")
+	checkNotifyProp(t, user, model.PushNotifyProp, model.UserNotifyNone)
+	checkNotifyProp(t, user, model.PushStatusNotifyProp, model.StatusAway)
+	checkNotifyProp(t, user, model.ChannelMentionsNotifyProp, "false")
+	checkNotifyProp(t, user, model.CommentsNotifyProp, model.CommentsNotifyAny)
+	checkNotifyProp(t, user, model.MentionKeysNotifyProp, "misc")
 
 	// Change Notify Props without mention keys
 	data.NotifyProps = &UserNotifyPropsImportData{
-		Desktop:          ptrStr(model.USER_NOTIFY_MENTION),
+		Desktop:          ptrStr(model.UserNotifyMention),
 		DesktopSound:     ptrStr("false"),
 		Email:            ptrStr("false"),
-		Mobile:           ptrStr(model.USER_NOTIFY_NONE),
-		MobilePushStatus: ptrStr(model.STATUS_AWAY),
+		Mobile:           ptrStr(model.UserNotifyNone),
+		MobilePushStatus: ptrStr(model.StatusAway),
 		ChannelTrigger:   ptrStr("false"),
-		CommentsTrigger:  ptrStr(model.COMMENTS_NOTIFY_ANY),
+		CommentsTrigger:  ptrStr(model.CommentsNotifyAny),
 	}
 	appErr = th.App.importUser(&data, false)
 	assert.Nil(t, appErr)
@@ -1289,14 +1293,14 @@ func TestImportImportUser(t *testing.T) {
 	user, appErr = th.App.GetUserByUsername(username)
 	require.Nil(t, appErr, "Failed to get user from database.")
 
-	checkNotifyProp(t, user, model.DESKTOP_NOTIFY_PROP, model.USER_NOTIFY_MENTION)
-	checkNotifyProp(t, user, model.DESKTOP_SOUND_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.EMAIL_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.PUSH_NOTIFY_PROP, model.USER_NOTIFY_NONE)
-	checkNotifyProp(t, user, model.PUSH_STATUS_NOTIFY_PROP, model.STATUS_AWAY)
-	checkNotifyProp(t, user, model.CHANNEL_MENTIONS_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.COMMENTS_NOTIFY_PROP, model.COMMENTS_NOTIFY_ANY)
-	checkNotifyProp(t, user, model.MENTION_KEYS_NOTIFY_PROP, "misc")
+	checkNotifyProp(t, user, model.DesktopNotifyProp, model.UserNotifyMention)
+	checkNotifyProp(t, user, model.DesktopSoundNotifyProp, "false")
+	checkNotifyProp(t, user, model.EmailNotifyProp, "false")
+	checkNotifyProp(t, user, model.PushNotifyProp, model.UserNotifyNone)
+	checkNotifyProp(t, user, model.PushStatusNotifyProp, model.StatusAway)
+	checkNotifyProp(t, user, model.ChannelMentionsNotifyProp, "false")
+	checkNotifyProp(t, user, model.CommentsNotifyProp, model.CommentsNotifyAny)
+	checkNotifyProp(t, user, model.MentionKeysNotifyProp, "misc")
 
 	// Check Notify Props get set on *create* user.
 	username = model.NewId()
@@ -1305,13 +1309,13 @@ func TestImportImportUser(t *testing.T) {
 		Email:    ptrStr(model.NewId() + "@example.com"),
 	}
 	data.NotifyProps = &UserNotifyPropsImportData{
-		Desktop:          ptrStr(model.USER_NOTIFY_MENTION),
+		Desktop:          ptrStr(model.UserNotifyMention),
 		DesktopSound:     ptrStr("false"),
 		Email:            ptrStr("false"),
-		Mobile:           ptrStr(model.USER_NOTIFY_NONE),
-		MobilePushStatus: ptrStr(model.STATUS_AWAY),
+		Mobile:           ptrStr(model.UserNotifyNone),
+		MobilePushStatus: ptrStr(model.StatusAway),
 		ChannelTrigger:   ptrStr("false"),
-		CommentsTrigger:  ptrStr(model.COMMENTS_NOTIFY_ANY),
+		CommentsTrigger:  ptrStr(model.CommentsNotifyAny),
 		MentionKeys:      ptrStr("misc"),
 	}
 
@@ -1321,24 +1325,24 @@ func TestImportImportUser(t *testing.T) {
 	user, appErr = th.App.GetUserByUsername(username)
 	require.Nil(t, appErr, "Failed to get user from database.")
 
-	checkNotifyProp(t, user, model.DESKTOP_NOTIFY_PROP, model.USER_NOTIFY_MENTION)
-	checkNotifyProp(t, user, model.DESKTOP_SOUND_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.EMAIL_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.PUSH_NOTIFY_PROP, model.USER_NOTIFY_NONE)
-	checkNotifyProp(t, user, model.PUSH_STATUS_NOTIFY_PROP, model.STATUS_AWAY)
-	checkNotifyProp(t, user, model.CHANNEL_MENTIONS_NOTIFY_PROP, "false")
-	checkNotifyProp(t, user, model.COMMENTS_NOTIFY_PROP, model.COMMENTS_NOTIFY_ANY)
-	checkNotifyProp(t, user, model.MENTION_KEYS_NOTIFY_PROP, "misc")
+	checkNotifyProp(t, user, model.DesktopNotifyProp, model.UserNotifyMention)
+	checkNotifyProp(t, user, model.DesktopSoundNotifyProp, "false")
+	checkNotifyProp(t, user, model.EmailNotifyProp, "false")
+	checkNotifyProp(t, user, model.PushNotifyProp, model.UserNotifyNone)
+	checkNotifyProp(t, user, model.PushStatusNotifyProp, model.StatusAway)
+	checkNotifyProp(t, user, model.ChannelMentionsNotifyProp, "false")
+	checkNotifyProp(t, user, model.CommentsNotifyProp, model.CommentsNotifyAny)
+	checkNotifyProp(t, user, model.MentionKeysNotifyProp, "misc")
 
 	// Test importing a user with roles set to a team and a channel which are affected by an override scheme.
 	// The import subsystem should translate `channel_admin/channel_user/team_admin/team_user`
 	// to the appropriate scheme-managed-role booleans.
 
 	// Mark the phase 2 permissions migration as completed.
-	th.App.Srv().Store.System().Save(&model.System{Name: model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2, Value: "true"})
+	th.App.Srv().Store.System().Save(&model.System{Name: model.MigrationKeyAdvancedPermissionsPhase2, Value: "true"})
 
 	defer func() {
-		th.App.Srv().Store.System().PermanentDeleteByName(model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2)
+		th.App.Srv().Store.System().PermanentDeleteByName(model.MigrationKeyAdvancedPermissionsPhase2)
 	}()
 
 	teamSchemeData := &SchemeImportData{
@@ -1395,8 +1399,8 @@ func TestImportImportUser(t *testing.T) {
 		Team:        &teamName,
 		Name:        ptrStr(model.NewId()),
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
-		Header:      ptrStr("Channe Header"),
+		Type:        &chanTypeOpen,
+		Header:      ptrStr("Channel Header"),
 		Purpose:     ptrStr("Channel Purpose"),
 	}
 	appErr = th.App.importChannel(th.Context, channelData, false)
@@ -1595,7 +1599,7 @@ func TestImportUserTeams(t *testing.T) {
 			data: &[]UserTeamImportData{
 				{
 					Name:  &th.BasicTeam.Name,
-					Roles: model.NewString(model.TEAM_ADMIN_ROLE_ID),
+					Roles: model.NewString(model.TeamAdminRoleId),
 				},
 			},
 			expectedError:         false,
@@ -1639,7 +1643,7 @@ func TestImportUserTeams(t *testing.T) {
 					Name: &th.BasicTeam.Name,
 					Channels: &[]UserChannelImportData{
 						{
-							Name: ptrStr(model.DEFAULT_CHANNEL),
+							Name: ptrStr(model.DefaultChannelName),
 						},
 					},
 				},
@@ -1719,7 +1723,7 @@ func TestImportUserTeams(t *testing.T) {
 					require.Equal(t, tc.expectedExplicitRoles, teamMembers[0].ExplicitRoles, "Not matching expected explicit roles")
 					require.Equal(t, tc.expectedRoles, teamMembers[0].Roles, "not matching expected roles")
 					if tc.expectedTheme != "" {
-						pref, prefErr := th.App.Srv().Store.Preference().Get(user.Id, model.PREFERENCE_CATEGORY_THEME, teamMembers[0].TeamId)
+						pref, prefErr := th.App.Srv().Store.Preference().Get(user.Id, model.PreferenceCategoryTheme, teamMembers[0].TeamId)
 						require.NoError(t, prefErr)
 						require.Equal(t, tc.expectedTheme, pref.Value)
 					}
@@ -1729,7 +1733,7 @@ func TestImportUserTeams(t *testing.T) {
 				for _, teamMember := range teamMembers {
 					channelMembers, err := th.App.Srv().Store.Channel().GetMembersForUser(teamMember.TeamId, user.Id)
 					require.NoError(t, err)
-					totalMembers += len(*channelMembers)
+					totalMembers += len(channelMembers)
 				}
 				require.Equal(t, tc.expectedUserChannels, totalMembers)
 			}
@@ -1815,7 +1819,7 @@ func TestImportUserChannels(t *testing.T) {
 			data: &[]UserChannelImportData{
 				{
 					Name:  &th.BasicChannel.Name,
-					Roles: model.NewString(model.CHANNEL_ADMIN_ROLE_ID),
+					Roles: model.NewString(model.ChannelAdminRoleId),
 				},
 			},
 			expectedError:         false,
@@ -1855,7 +1859,8 @@ func TestImportUserChannels(t *testing.T) {
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
 			user := th.CreateUser()
-			th.App.joinUserToTeam(th.BasicTeam, user)
+			_, _, err := th.App.ch.srv.teamService.JoinUserToTeam(th.BasicTeam, user)
+			require.NoError(t, err)
 
 			// Two times import must end with the same results
 			for x := 0; x < 2; x++ {
@@ -1867,15 +1872,15 @@ func TestImportUserChannels(t *testing.T) {
 				}
 				channelMembers, err := th.App.Srv().Store.Channel().GetMembersForUser(th.BasicTeam.Id, user.Id)
 				require.NoError(t, err)
-				require.Len(t, *channelMembers, tc.expectedUserChannels)
+				require.Len(t, channelMembers, tc.expectedUserChannels)
 				if tc.expectedUserChannels == 1 {
-					channelMember := (*channelMembers)[0]
+					channelMember := channelMembers[0]
 					require.Equal(t, tc.expectedExplicitRoles, channelMember.ExplicitRoles, "Not matching expected explicit roles")
 					require.Equal(t, tc.expectedRoles, channelMember.Roles, "not matching expected roles")
 					if tc.expectedNotifyProps != nil {
-						require.Equal(t, *tc.expectedNotifyProps.Desktop, channelMember.NotifyProps[model.DESKTOP_NOTIFY_PROP])
-						require.Equal(t, *tc.expectedNotifyProps.Mobile, channelMember.NotifyProps[model.PUSH_NOTIFY_PROP])
-						require.Equal(t, *tc.expectedNotifyProps.MarkUnread, channelMember.NotifyProps[model.MARK_UNREAD_NOTIFY_PROP])
+						require.Equal(t, *tc.expectedNotifyProps.Desktop, channelMember.NotifyProps[model.DesktopNotifyProp])
+						require.Equal(t, *tc.expectedNotifyProps.Mobile, channelMember.NotifyProps[model.PushNotifyProp])
+						require.Equal(t, *tc.expectedNotifyProps.MarkUnread, channelMember.NotifyProps[model.MarkUnreadNotifyProp])
 					}
 				}
 			}
@@ -1903,7 +1908,7 @@ func TestImportUserDefaultNotifyProps(t *testing.T) {
 	require.Nil(t, err)
 
 	// Check the value of the notify prop we specified explicitly in the import data.
-	val, ok := user.NotifyProps[model.EMAIL_NOTIFY_PROP]
+	val, ok := user.NotifyProps[model.EmailNotifyProp]
 	assert.True(t, ok)
 	assert.Equal(t, "false", val)
 
@@ -1912,7 +1917,7 @@ func TestImportUserDefaultNotifyProps(t *testing.T) {
 	comparisonUser.SetDefaultNotifications()
 
 	for key, expectedValue := range comparisonUser.NotifyProps {
-		if key == model.EMAIL_NOTIFY_PROP {
+		if key == model.EmailNotifyProp {
 			continue
 		}
 
@@ -1938,11 +1943,12 @@ func TestImportimportMultiplePostLines(t *testing.T) {
 
 	// Create a Channel.
 	channelName := model.NewId()
+	chanTypeOpen := model.ChannelTypeOpen
 	th.App.importChannel(th.Context, &ChannelImportData{
 		Team:        &teamName,
 		Name:        &channelName,
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}, false)
 	channel, err := th.App.GetChannelByName(channelName, team.Id, false)
 	require.Nil(t, err, "Failed to get channel from database.")
@@ -2238,8 +2244,8 @@ func TestImportimportMultiplePostLines(t *testing.T) {
 	postBool = post.Message != *data.Post.Message || post.CreateAt != *data.Post.CreateAt || post.UserId != user.Id
 	require.False(t, postBool, "Post properties not as expected")
 
-	checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
-	checkPreference(t, th.App, user2.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
+	checkPreference(t, th.App, user.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
+	checkPreference(t, th.App, user2.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
 
 	// Post with reaction.
 	reactionPostTime := hashtagTime + 2
@@ -2402,6 +2408,46 @@ func TestImportimportMultiplePostLines(t *testing.T) {
 
 	AssertAllPostsCount(t, th.App, initialPostCount, 11, team.Id)
 
+	// Create new reply with type and edit_at for existing post with replies.
+
+	// Post with reply.
+	editedReplyPostTime := hashtagTime + 6
+	editedReplyTime := hashtagTime + 7
+	editedReplyEditTime := hashtagTime + 8
+
+	data = LineImportWorkerData{
+		LineImportData{
+			Post: &PostImportData{
+				Team:     &teamName,
+				Channel:  &channelName,
+				User:     &user2.Username,
+				Message:  ptrStr("Message with reply"),
+				CreateAt: &editedReplyPostTime,
+				Replies: &[]ReplyImportData{{
+					User:     &username,
+					Type:     ptrStr(model.PostTypeSystemGeneric),
+					Message:  ptrStr("Message reply 3"),
+					CreateAt: &editedReplyTime,
+					EditAt:   &editedReplyEditTime,
+				}},
+			},
+		},
+		1,
+	}
+	errLine, err = th.App.importMultiplePostLines(th.Context, []LineImportWorkerData{data}, false)
+	assert.Nil(t, err, "Expected success.")
+	assert.Equal(t, 0, errLine)
+
+	AssertAllPostsCount(t, th.App, initialPostCount, 13, team.Id)
+
+	// Check the reply values.
+	replies, nErr = th.App.Srv().Store.Post().GetPostsCreatedAt(channel.Id, editedReplyTime)
+	assert.NoError(t, nErr, "Expected success.")
+	reply = replies[0]
+	importReply := (*data.Post.Replies)[0]
+	replyBool = reply.Type != *importReply.Type || reply.Message != *importReply.Message || reply.CreateAt != *importReply.CreateAt || reply.EditAt != *importReply.EditAt || reply.UserId != user.Id
+	require.False(t, replyBool, "Post properties not as expected")
+
 	// Create another Team.
 	teamName2 := model.NewRandomTeamName()
 	th.App.importTeam(th.Context, &TeamImportData{
@@ -2417,7 +2463,7 @@ func TestImportimportMultiplePostLines(t *testing.T) {
 		Team:        &teamName2,
 		Name:        &channelName,
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}, false)
 	_, err = th.App.GetChannelByName(channelName, team2.Id, false)
 	require.Nil(t, err, "Failed to get channel from database.")
@@ -2457,7 +2503,7 @@ func TestImportimportMultiplePostLines(t *testing.T) {
 
 	// Posts should be added to the right team
 	AssertAllPostsCount(t, th.App, initialPostCountForTeam2, 1, team2.Id)
-	AssertAllPostsCount(t, th.App, initialPostCount, 12, team.Id)
+	AssertAllPostsCount(t, th.App, initialPostCount, 14, team.Id)
 }
 
 func TestImportImportPost(t *testing.T) {
@@ -2476,11 +2522,12 @@ func TestImportImportPost(t *testing.T) {
 
 	// Create a Channel.
 	channelName := model.NewId()
+	chanTypeOpen := model.ChannelTypeOpen
 	th.App.importChannel(th.Context, &ChannelImportData{
 		Team:        &teamName,
 		Name:        &channelName,
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}, false)
 	channel, appErr := th.App.GetChannelByName(channelName, team.Id, false)
 	require.Nil(t, appErr, "Failed to get channel from database.")
@@ -2510,6 +2557,9 @@ func TestImportImportPost(t *testing.T) {
 	hashtagTime := time + 2
 	replyPostTime := hashtagTime + 4
 	replyTime := hashtagTime + 5
+	posttypeTime := hashtagTime + 6
+	editatCreateTime := hashtagTime + 7
+	editatEditTime := hashtagTime + 8
 
 	t.Run("Try adding an invalid post in dry run mode", func(t *testing.T) {
 		data := LineImportWorkerData{
@@ -2784,8 +2834,8 @@ func TestImportImportPost(t *testing.T) {
 		postBool := post.Message != *data.Post.Message || post.CreateAt != *data.Post.CreateAt || post.UserId != user.Id
 		require.False(t, postBool, "Post properties not as expected")
 
-		checkPreference(t, th.App, user.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
-		checkPreference(t, th.App, user2.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
+		checkPreference(t, th.App, user.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
+		checkPreference(t, th.App, user2.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
 	})
 
 	t.Run("Post with reaction", func(t *testing.T) {
@@ -2951,6 +3001,70 @@ func TestImportImportPost(t *testing.T) {
 
 		AssertAllPostsCount(t, th.App, initialPostCount, 11, team.Id)
 	})
+
+	t.Run("Post with Type", func(t *testing.T) {
+		data := LineImportWorkerData{
+			LineImportData{
+				Post: &PostImportData{
+					Team:     &teamName,
+					Channel:  &channelName,
+					User:     &username,
+					Type:     ptrStr(model.PostTypeSystemGeneric),
+					Message:  ptrStr("Message with Type"),
+					CreateAt: &posttypeTime,
+				},
+			},
+			1,
+		}
+
+		errLine, err := th.App.importMultiplePostLines(th.Context, []LineImportWorkerData{data}, false)
+		require.Nil(t, err, "Expected success.")
+		require.Equal(t, 0, errLine)
+
+		AssertAllPostsCount(t, th.App, initialPostCount, 12, team.Id)
+
+		// Check the post values.
+		posts, nErr := th.App.Srv().Store.Post().GetPostsCreatedAt(channel.Id, posttypeTime)
+		require.NoError(t, nErr)
+
+		require.Len(t, posts, 1, "Unexpected number of posts found.")
+
+		post := posts[0]
+		postBool := post.Message != *data.Post.Message || post.CreateAt != *data.Post.CreateAt || post.UserId != user.Id || post.Type != *data.Post.Type
+		require.False(t, postBool, "Post properties not as expected")
+	})
+
+	t.Run("Post with EditAt", func(t *testing.T) {
+		data := LineImportWorkerData{
+			LineImportData{
+				Post: &PostImportData{
+					Team:     &teamName,
+					Channel:  &channelName,
+					User:     &username,
+					Message:  ptrStr("Message with Type"),
+					CreateAt: &editatCreateTime,
+					EditAt:   &editatEditTime,
+				},
+			},
+			1,
+		}
+
+		errLine, err := th.App.importMultiplePostLines(th.Context, []LineImportWorkerData{data}, false)
+		require.Nil(t, err, "Expected success.")
+		require.Equal(t, 0, errLine)
+
+		AssertAllPostsCount(t, th.App, initialPostCount, 13, team.Id)
+
+		// Check the post values.
+		posts, nErr := th.App.Srv().Store.Post().GetPostsCreatedAt(channel.Id, editatCreateTime)
+		require.NoError(t, nErr)
+
+		require.Len(t, posts, 1, "Unexpected number of posts found.")
+
+		post := posts[0]
+		postBool := post.Message != *data.Post.Message || post.CreateAt != *data.Post.CreateAt || post.UserId != user.Id || post.EditAt != *data.Post.EditAt
+		require.False(t, postBool, "Post properties not as expected")
+	})
 }
 
 func TestImportImportDirectChannel(t *testing.T) {
@@ -2958,10 +3072,10 @@ func TestImportImportDirectChannel(t *testing.T) {
 	defer th.TearDown()
 
 	// Check how many channels are in the database.
-	directChannelCount, err := th.App.Srv().Store.Channel().AnalyticsTypeCount("", model.CHANNEL_DIRECT)
+	directChannelCount, err := th.App.Srv().Store.Channel().AnalyticsTypeCount("", model.ChannelTypeDirect)
 	require.NoError(t, err, "Failed to get direct channel count.")
 
-	groupChannelCount, err := th.App.Srv().Store.Channel().AnalyticsTypeCount("", model.CHANNEL_GROUP)
+	groupChannelCount, err := th.App.Srv().Store.Channel().AnalyticsTypeCount("", model.ChannelTypeGroup)
 	require.NoError(t, err, "Failed to get group channel count.")
 
 	// Do an invalid channel in dry-run mode.
@@ -2975,8 +3089,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Error(t, err)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Do a valid DIRECT channel with a nonexistent member in dry-run mode.
 	data.Members = &[]string{
@@ -2987,8 +3101,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Do a valid GROUP channel with a nonexistent member in dry-run mode.
 	data.Members = &[]string{
@@ -3000,8 +3114,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Do an invalid channel in apply mode.
 	data.Members = &[]string{
@@ -3011,8 +3125,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Error(t, err)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Do a valid DIRECT channel.
 	data.Members = &[]string{
@@ -3023,16 +3137,16 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// Check that one more DIRECT channel is in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount+1)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Do the same DIRECT channel again.
 	appErr = th.App.importDirectChannel(&data, false)
 	require.Nil(t, appErr)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount+1)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Update the channel's HEADER
 	data.Header = ptrStr("New Channel Header 2")
@@ -3040,8 +3154,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount+1)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Get the channel to check that the header was updated.
 	channel, appErr := th.App.GetOrCreateDirectChannel(th.Context, th.BasicUser.Id, th.BasicUser2.Id)
@@ -3060,8 +3174,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.NotNil(t, appErr)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount+1)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount)
 
 	// Do a valid GROUP channel.
 	data.Members = &[]string{
@@ -3073,16 +3187,16 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// Check that one more GROUP channel is in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount+1)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount+1)
 
 	// Do the same DIRECT channel again.
 	appErr = th.App.importDirectChannel(&data, false)
 	require.Nil(t, appErr)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount+1)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount+1)
 
 	// Update the channel's HEADER
 	data.Header = ptrStr("New Channel Header 3")
@@ -3090,8 +3204,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// Check that no more channels are in the DB.
-	AssertChannelCount(t, th.App, model.CHANNEL_DIRECT, directChannelCount+1)
-	AssertChannelCount(t, th.App, model.CHANNEL_GROUP, groupChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeDirect, directChannelCount+1)
+	AssertChannelCount(t, th.App, model.ChannelTypeGroup, groupChannelCount+1)
 
 	// Get the channel to check that the header was updated.
 	userIDs := []string{
@@ -3117,8 +3231,8 @@ func TestImportImportDirectChannel(t *testing.T) {
 
 	channel, appErr = th.App.GetOrCreateDirectChannel(th.Context, th.BasicUser.Id, th.BasicUser2.Id)
 	require.Nil(t, appErr)
-	checkPreference(t, th.App, th.BasicUser.Id, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id, "true")
-	checkPreference(t, th.App, th.BasicUser2.Id, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id, "true")
+	checkPreference(t, th.App, th.BasicUser.Id, model.PreferenceCategoryFavoriteChannel, channel.Id, "true")
+	checkPreference(t, th.App, th.BasicUser2.Id, model.PreferenceCategoryFavoriteChannel, channel.Id, "true")
 }
 
 func TestImportImportDirectPost(t *testing.T) {
@@ -3147,6 +3261,9 @@ func TestImportImportDirectPost(t *testing.T) {
 	require.NoError(t, err)
 	initialPostCount := result
 	initialDate := model.GetMillis()
+	posttypeDate := initialDate + 3
+	editatCreateDate := initialDate + 4
+	editatEditDate := initialDate + 5
 
 	t.Run("Try adding an invalid post in dry run mode", func(t *testing.T) {
 		data := LineImportWorkerData{
@@ -3368,6 +3485,7 @@ func TestImportImportDirectPost(t *testing.T) {
 		errLine, err := th.App.importMultipleDirectPostLines(th.Context, []LineImportWorkerData{data}, false)
 		require.Nil(t, err)
 		require.Equal(t, 0, errLine)
+		AssertAllPostsCount(t, th.App, initialPostCount, 5, "")
 
 		// Check the post values.
 		posts, nErr := th.App.Srv().Store.Post().GetPostsCreatedAt(directChannel.Id, *data.DirectPost.CreateAt)
@@ -3375,8 +3493,72 @@ func TestImportImportDirectPost(t *testing.T) {
 		require.Len(t, posts, 1)
 
 		post := posts[0]
-		checkPreference(t, th.App, th.BasicUser.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
-		checkPreference(t, th.App, th.BasicUser2.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
+		checkPreference(t, th.App, th.BasicUser.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
+		checkPreference(t, th.App, th.BasicUser2.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
+	})
+
+	t.Run("Test with Type", func(t *testing.T) {
+		data := LineImportWorkerData{
+			LineImportData{
+				DirectPost: &DirectPostImportData{
+					ChannelMembers: &[]string{
+						th.BasicUser.Username,
+						th.BasicUser2.Username,
+					},
+					User:     ptrStr(th.BasicUser.Username),
+					Type:     ptrStr(model.PostTypeSystemGeneric),
+					Message:  ptrStr("Message with Type"),
+					CreateAt: ptrInt64(posttypeDate),
+				},
+			},
+			1,
+		}
+		errLine, err := th.App.importMultipleDirectPostLines(th.Context, []LineImportWorkerData{data}, false)
+		require.Nil(t, err)
+		require.Equal(t, 0, errLine)
+		AssertAllPostsCount(t, th.App, initialPostCount, 6, "")
+
+		posts, nErr := th.App.Srv().Store.Post().GetPostsCreatedAt(directChannel.Id, *data.DirectPost.CreateAt)
+		require.NoError(t, nErr)
+		require.Len(t, posts, 1)
+
+		post := posts[0]
+		assert.Equal(t, post.Type, *data.DirectPost.Type)
+		assert.Equal(t, post.Message, *data.DirectPost.Message)
+		assert.Equal(t, post.CreateAt, *data.DirectPost.CreateAt)
+		assert.Equal(t, post.UserId, th.BasicUser.Id)
+	})
+
+	t.Run("Test with EditAt", func(t *testing.T) {
+		data := LineImportWorkerData{
+			LineImportData{
+				DirectPost: &DirectPostImportData{
+					ChannelMembers: &[]string{
+						th.BasicUser.Username,
+						th.BasicUser2.Username,
+					},
+					User:     ptrStr(th.BasicUser.Username),
+					Message:  ptrStr("Message with EditAt"),
+					CreateAt: ptrInt64(editatCreateDate),
+					EditAt:   ptrInt64(editatEditDate),
+				},
+			},
+			1,
+		}
+		errLine, err := th.App.importMultipleDirectPostLines(th.Context, []LineImportWorkerData{data}, false)
+		require.Nil(t, err)
+		require.Equal(t, 0, errLine)
+		AssertAllPostsCount(t, th.App, initialPostCount, 7, "")
+
+		posts, nErr := th.App.Srv().Store.Post().GetPostsCreatedAt(directChannel.Id, *data.DirectPost.CreateAt)
+		require.NoError(t, nErr)
+		require.Len(t, posts, 1)
+
+		post := posts[0]
+		assert.Equal(t, post.Message, *data.DirectPost.Message)
+		assert.Equal(t, post.CreateAt, *data.DirectPost.CreateAt)
+		assert.Equal(t, post.EditAt, *data.DirectPost.EditAt)
+		assert.Equal(t, post.UserId, th.BasicUser.Id)
 	})
 
 	// ------------------ Group Channel -------------------------
@@ -3648,8 +3830,8 @@ func TestImportImportDirectPost(t *testing.T) {
 		require.Len(t, posts, 1)
 
 		post := posts[0]
-		checkPreference(t, th.App, th.BasicUser.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
-		checkPreference(t, th.App, th.BasicUser2.Id, model.PREFERENCE_CATEGORY_FLAGGED_POST, post.Id, "true")
+		checkPreference(t, th.App, th.BasicUser.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
+		checkPreference(t, th.App, th.BasicUser2.Id, model.PreferenceCategoryFlaggedPost, post.Id, "true")
 	})
 
 	t.Run("Post with reaction", func(t *testing.T) {
@@ -3809,9 +3991,10 @@ func TestImportImportDirectPost(t *testing.T) {
 		AssertAllPostsCount(t, th.App, initialPostCount, 10, "")
 	})
 
-	t.Run("Create new reply for existing post with replies", func(t *testing.T) {
-		replyPostTime := ptrInt64(initialDate + 25)
-		replyTime := ptrInt64(initialDate + 29)
+	t.Run("Post with reply having non-empty type and edit_at", func(t *testing.T) {
+		replyPostTime := ptrInt64(initialDate + 29)
+		replyTime := ptrInt64(initialDate + 30)
+		replyEditTime := ptrInt64(initialDate + 31)
 		data := LineImportWorkerData{
 			LineImportData{
 				DirectPost: &DirectPostImportData{
@@ -3825,8 +4008,10 @@ func TestImportImportDirectPost(t *testing.T) {
 					CreateAt: replyPostTime,
 					Replies: &[]ReplyImportData{{
 						User:     ptrStr(th.BasicUser.Username),
+						Type:     ptrStr(model.PostTypeSystemGeneric),
 						Message:  ptrStr("Message reply 2"),
 						CreateAt: replyTime,
+						EditAt:   replyEditTime,
 					}},
 				},
 			},
@@ -3836,7 +4021,18 @@ func TestImportImportDirectPost(t *testing.T) {
 		require.Nil(t, err, "Expected success.")
 		require.Equal(t, 0, errLine)
 
-		AssertAllPostsCount(t, th.App, initialPostCount, 11, "")
+		AssertAllPostsCount(t, th.App, initialPostCount, 12, "")
+
+		// Check the reply values.
+		replies, nErr := th.App.Srv().Store.Post().GetPostsCreatedAt(channel.Id, *replyTime)
+		require.NoError(t, nErr)
+
+		require.Len(t, replies, 1, "Unexpected number of posts found.")
+
+		reply := replies[0]
+		importReply := (*data.DirectPost.Replies)[0]
+		replyBool := reply.Type != *importReply.Type || reply.Message != *importReply.Message || reply.CreateAt != *importReply.CreateAt || reply.EditAt != *importReply.EditAt || reply.UserId != th.BasicUser.Id
+		require.False(t, replyBool, "Post properties not as expected")
 	})
 }
 
@@ -3879,6 +4075,10 @@ func TestImportImportEmoji(t *testing.T) {
 
 	err = th.App.importEmoji(&data, false)
 	assert.Nil(t, err, "Second run should have succeeded apply mode")
+
+	data = EmojiImportData{Name: ptrStr("smiley"), Image: ptrStr(testImage)}
+	err = th.App.importEmoji(&data, false)
+	assert.Nil(t, err, "System emoji should not fail")
 }
 
 func TestImportAttachment(t *testing.T) {
@@ -3919,11 +4119,12 @@ func TestImportPostAndRepliesWithAttachments(t *testing.T) {
 
 	// Create a Channel.
 	channelName := model.NewId()
+	chanTypeOpen := model.ChannelTypeOpen
 	th.App.importChannel(th.Context, &ChannelImportData{
 		Team:        &teamName,
 		Name:        &channelName,
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}, false)
 	_, appErr = th.App.GetChannelByName(channelName, team.Id, false)
 	require.Nil(t, appErr, "Failed to get channel from database.")
@@ -4025,7 +4226,7 @@ func TestImportPostAndRepliesWithAttachments(t *testing.T) {
 		AssertFileIdsInPost(attachments, th, t)
 	})
 
-	t.Run("Reply with Attachments in Direct Pos", func(t *testing.T) {
+	t.Run("Reply with Attachments in Direct Post", func(t *testing.T) {
 		directImportData := LineImportWorkerData{
 			LineImportData{
 				DirectPost: &DirectPostImportData{
@@ -4175,5 +4376,164 @@ func TestImportDirectPostWithAttachments(t *testing.T) {
 
 		attachments := GetAttachments(user1.Id, th, t)
 		require.Len(t, attachments, 3)
+	})
+}
+
+func TestZippedImportPostAndRepliesWithAttachments(t *testing.T) {
+	th := Setup(t)
+	defer th.TearDown()
+
+	// Create a Team.
+	teamName := model.NewRandomTeamName()
+	th.App.importTeam(th.Context, &TeamImportData{
+		Name:        &teamName,
+		DisplayName: ptrStr("Display Name"),
+		Type:        ptrStr("O"),
+	}, false)
+	team, appErr := th.App.GetTeamByName(teamName)
+	require.Nil(t, appErr, "Failed to get team from database.")
+
+	// Create a Channel.
+	channelName := model.NewId()
+	chanTypeOpen := model.ChannelTypeOpen
+	th.App.importChannel(th.Context, &ChannelImportData{
+		Team:        &teamName,
+		Name:        &channelName,
+		DisplayName: ptrStr("Display Name"),
+		Type:        &chanTypeOpen,
+	}, false)
+	_, appErr = th.App.GetChannelByName(channelName, team.Id, false)
+	require.Nil(t, appErr, "Failed to get channel from database.")
+
+	// Create users
+	username2 := model.NewId()
+	th.App.importUser(&UserImportData{
+		Username: &username2,
+		Email:    ptrStr(model.NewId() + "@example.com"),
+	}, false)
+	user2, appErr := th.App.GetUserByUsername(username2)
+	require.Nil(t, appErr, "Failed to get user3 from database.")
+
+	// Create direct post users.
+	username3 := model.NewId()
+	th.App.importUser(&UserImportData{
+		Username: &username3,
+		Email:    ptrStr(model.NewId() + "@example.com"),
+	}, false)
+	user3, appErr := th.App.GetUserByUsername(username3)
+	require.Nil(t, appErr, "Failed to get user3 from database.")
+
+	username4 := model.NewId()
+	th.App.importUser(&UserImportData{
+		Username: &username4,
+		Email:    ptrStr(model.NewId() + "@example.com"),
+	}, false)
+
+	user4, appErr := th.App.GetUserByUsername(username4)
+	require.Nil(t, appErr, "Failed to get user3 from database.")
+
+	// Post with attachments
+	time := model.GetMillis()
+	attachmentsPostTime := time
+	attachmentsReplyTime := time + 1
+	testsDir, _ := fileutils.FindDir("tests")
+	testImage := filepath.Join(testsDir, "test.png")
+	testZipFileName := filepath.Join(testsDir, "import_test.zip")
+	testZip, _ := os.Open(testZipFileName)
+
+	fi, err := testZip.Stat()
+	require.NoError(t, err, "failed to get file info")
+	testZipReader, err := zip.NewReader(testZip, fi.Size())
+	require.NoError(t, err, "failed to read test zip")
+
+	require.NotEmpty(t, testZipReader.File)
+	imageData := testZipReader.File[0]
+	require.NoError(t, err, "failed to copy test Image file into zip")
+
+	testMarkDown := filepath.Join(testsDir, "test-attachments.md")
+	data := LineImportWorkerData{
+		LineImportData{
+			Post: &PostImportData{
+				Team:        &teamName,
+				Channel:     &channelName,
+				User:        &username3,
+				Message:     ptrStr("Message with reply"),
+				CreateAt:    &attachmentsPostTime,
+				Attachments: &[]AttachmentImportData{{Path: &testImage}, {Path: &testMarkDown}},
+				Replies: &[]ReplyImportData{{
+					User:        &user4.Username,
+					Message:     ptrStr("Message reply"),
+					CreateAt:    &attachmentsReplyTime,
+					Attachments: &[]AttachmentImportData{{Path: &testImage, Data: imageData}},
+				}},
+			},
+		},
+		19,
+	}
+
+	t.Run("import with attachment", func(t *testing.T) {
+		errLine, err := th.App.importMultiplePostLines(th.Context, []LineImportWorkerData{data}, false)
+		require.Nil(t, err)
+		require.Equal(t, 0, errLine)
+
+		attachments := GetAttachments(user3.Id, th, t)
+		require.Len(t, attachments, 2)
+		assert.Contains(t, attachments[0].Path, team.Id)
+		assert.Contains(t, attachments[1].Path, team.Id)
+		AssertFileIdsInPost(attachments, th, t)
+
+		attachments = GetAttachments(user4.Id, th, t)
+		require.Len(t, attachments, 1)
+		assert.Contains(t, attachments[0].Path, team.Id)
+		AssertFileIdsInPost(attachments, th, t)
+	})
+
+	t.Run("import existing post with new attachment", func(t *testing.T) {
+		data.Post.Attachments = &[]AttachmentImportData{{Path: &testImage}}
+		errLine, err := th.App.importMultiplePostLines(th.Context, []LineImportWorkerData{data}, false)
+		require.Nil(t, err)
+		require.Equal(t, 0, errLine)
+
+		attachments := GetAttachments(user3.Id, th, t)
+		require.Len(t, attachments, 1)
+		assert.Contains(t, attachments[0].Path, team.Id)
+		AssertFileIdsInPost(attachments, th, t)
+
+		attachments = GetAttachments(user4.Id, th, t)
+		require.Len(t, attachments, 1)
+		assert.Contains(t, attachments[0].Path, team.Id)
+		AssertFileIdsInPost(attachments, th, t)
+	})
+
+	t.Run("Reply with Attachments in Direct Post", func(t *testing.T) {
+		directImportData := LineImportWorkerData{
+			LineImportData{
+				DirectPost: &DirectPostImportData{
+					ChannelMembers: &[]string{
+						user3.Username,
+						user2.Username,
+					},
+					User:     &user3.Username,
+					Message:  ptrStr("Message with Replies"),
+					CreateAt: ptrInt64(model.GetMillis()),
+					Replies: &[]ReplyImportData{{
+						User:        &user2.Username,
+						Message:     ptrStr("Message reply with attachment"),
+						CreateAt:    ptrInt64(model.GetMillis()),
+						Attachments: &[]AttachmentImportData{{Path: &testImage}},
+					}},
+				},
+			},
+			7,
+		}
+
+		errLine, err := th.App.importMultipleDirectPostLines(th.Context, []LineImportWorkerData{directImportData}, false)
+		require.Nil(t, err, "Expected success.")
+		require.Equal(t, 0, errLine)
+
+		attachments := GetAttachments(user2.Id, th, t)
+		require.Len(t, attachments, 1)
+		assert.Contains(t, attachments[0].Path, "noteam")
+		AssertFileIdsInPost(attachments, th, t)
 	})
 }

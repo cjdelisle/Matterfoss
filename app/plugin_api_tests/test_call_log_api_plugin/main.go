@@ -6,12 +6,12 @@ package main
 import (
 	"github.com/pkg/errors"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
 )
 
 type PluginUsingLogAPI struct {
-	plugin.MatterfossPlugin
+	plugin.MattermostPlugin
 }
 
 type Foo struct {

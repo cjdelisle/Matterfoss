@@ -10,14 +10,13 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/services/cache"
-	cachemocks "github.com/cjdelisle/matterfoss-server/v5/services/cache/mocks"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
-	"github.com/cjdelisle/matterfoss-server/v5/store/sqlstore"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
-	"github.com/cjdelisle/matterfoss-server/v5/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
+	cachemocks "github.com/cjdelisle/matterfoss-server/v6/services/cache/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 var mainHelper *testlib.MainHelper
@@ -172,7 +171,6 @@ func getMockStore() *mocks.Store {
 }
 
 func TestMain(m *testing.M) {
-	mlog.DisableZap()
 	mainHelper = testlib.NewMainHelperWithOptions(nil)
 	defer mainHelper.Close()
 

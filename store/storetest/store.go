@@ -9,9 +9,9 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 // Store can be used to provide mock stores for testing.
@@ -104,10 +104,13 @@ func (s *Store) UnlockFromMaster()                       { /* do nothing */ }
 func (s *Store) DropAllTables()                          { /* do nothing */ }
 func (s *Store) GetDbVersion(bool) (string, error)       { return "", nil }
 func (s *Store) RecycleDBConnections(time.Duration)      {}
-func (s *Store) TotalMasterDbConnections() int           { return 1 }
-func (s *Store) TotalReadDbConnections() int             { return 1 }
-func (s *Store) TotalSearchDbConnections() int           { return 1 }
-func (s *Store) GetCurrentSchemaVersion() string         { return "" }
+func (s *Store) GetDBSchemaVersion() (int, error)        { return 1, nil }
+func (s *Store) GetAppliedMigrations() ([]model.AppliedMigration, error) {
+	return []model.AppliedMigration{}, nil
+}
+func (s *Store) TotalMasterDbConnections() int { return 1 }
+func (s *Store) TotalReadDbConnections() int   { return 1 }
+func (s *Store) TotalSearchDbConnections() int { return 1 }
 func (s *Store) CheckIntegrity() <-chan model.IntegrityCheckResult {
 	return make(chan model.IntegrityCheckResult)
 }

@@ -11,8 +11,8 @@ import (
 	"net/http"
 	timePkg "time"
 
-	"github.com/cjdelisle/matterfoss-server/v5/einterfaces"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 type hooksTimerLayer struct {
@@ -167,4 +167,42 @@ func (hooks *hooksTimerLayer) OnPluginClusterEvent(c *Context, ev model.PluginCl
 	startTime := timePkg.Now()
 	hooks.hooksImpl.OnPluginClusterEvent(c, ev)
 	hooks.recordTime(startTime, "OnPluginClusterEvent", true)
+}
+
+func (hooks *hooksTimerLayer) OnWebSocketConnect(webConnID, userID string) {
+	startTime := timePkg.Now()
+	hooks.hooksImpl.OnWebSocketConnect(webConnID, userID)
+	hooks.recordTime(startTime, "OnWebSocketConnect", true)
+}
+
+func (hooks *hooksTimerLayer) OnWebSocketDisconnect(webConnID, userID string) {
+	startTime := timePkg.Now()
+	hooks.hooksImpl.OnWebSocketDisconnect(webConnID, userID)
+	hooks.recordTime(startTime, "OnWebSocketDisconnect", true)
+}
+
+func (hooks *hooksTimerLayer) WebSocketMessageHasBeenPosted(webConnID, userID string, req *model.WebSocketRequest) {
+	startTime := timePkg.Now()
+	hooks.hooksImpl.WebSocketMessageHasBeenPosted(webConnID, userID, req)
+	hooks.recordTime(startTime, "WebSocketMessageHasBeenPosted", true)
+}
+
+func (hooks *hooksTimerLayer) RunDataRetention(nowTime, batchSize int64) (int64, error) {
+	startTime := timePkg.Now()
+	_returnsA, _returnsB := hooks.hooksImpl.RunDataRetention(nowTime, batchSize)
+	hooks.recordTime(startTime, "RunDataRetention", _returnsB == nil)
+	return _returnsA, _returnsB
+}
+
+func (hooks *hooksTimerLayer) OnInstall(c *Context, event model.OnInstallEvent) error {
+	startTime := timePkg.Now()
+	_returnsA := hooks.hooksImpl.OnInstall(c, event)
+	hooks.recordTime(startTime, "OnInstall", _returnsA == nil)
+	return _returnsA
+}
+
+func (hooks *hooksTimerLayer) OnSendDailyTelemetry() {
+	startTime := timePkg.Now()
+	hooks.hooksImpl.OnSendDailyTelemetry()
+	hooks.recordTime(startTime, "OnSendDailyTelemetry", true)
 }

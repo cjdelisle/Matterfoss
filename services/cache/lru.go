@@ -11,7 +11,7 @@ import (
 	"github.com/tinylib/msgp/msgp"
 	"github.com/vmihailenco/msgpack/v5"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 // LRU is a thread-safe fixed size LRU cache.
@@ -24,7 +24,7 @@ type LRU struct {
 	items                  map[string]*list.Element
 	defaultExpiry          time.Duration
 	name                   string
-	invalidateClusterEvent string
+	invalidateClusterEvent model.ClusterEvent
 }
 
 // LRUOptions contains options for initializing LRU cache
@@ -32,7 +32,7 @@ type LRUOptions struct {
 	Name                   string
 	Size                   int
 	DefaultExpiry          time.Duration
-	InvalidateClusterEvent string
+	InvalidateClusterEvent model.ClusterEvent
 	// StripedBuckets is used only by LRUStriped and shouldn't be greater than the number
 	// of CPUs available on the machine running this cache.
 	StripedBuckets int
@@ -75,13 +75,13 @@ func (l *LRU) Set(key string, value interface{}) error {
 }
 
 // SetWithDefaultExpiry adds the given key and value to the store with the default expiry. If
-// the key already exists, it will overwrite the previoous value
+// the key already exists, it will overwrite the previous value
 func (l *LRU) SetWithDefaultExpiry(key string, value interface{}) error {
 	return l.SetWithExpiry(key, value, l.defaultExpiry)
 }
 
 // SetWithExpiry adds the given key and value to the cache with the given expiry. If the key
-// already exists, it will overwrite the previoous value
+// already exists, it will overwrite the previous value
 func (l *LRU) SetWithExpiry(key string, value interface{}, ttl time.Duration) error {
 	return l.set(key, value, ttl)
 }
@@ -128,7 +128,7 @@ func (l *LRU) Len() (int, error) {
 }
 
 // GetInvalidateClusterEvent returns the cluster event configured when this cache was created.
-func (l *LRU) GetInvalidateClusterEvent() string {
+func (l *LRU) GetInvalidateClusterEvent() model.ClusterEvent {
 	return l.invalidateClusterEvent
 }
 

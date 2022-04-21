@@ -2,6 +2,7 @@
 logs
 .DS_Store
 node_modules
+/data
 /dist
 /webapp/dist
 jobserver
@@ -120,3 +121,4 @@ __debug_bin
 report.xml
 go.*.orig
 config.override.mk
+docker-compose.override.yaml

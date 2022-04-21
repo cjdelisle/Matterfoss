@@ -7,8 +7,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func (a *App) GetUserTermsOfService(userID string) (*model.UserTermsOfService, *model.AppError) {

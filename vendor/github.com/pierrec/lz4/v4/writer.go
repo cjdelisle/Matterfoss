@@ -49,12 +49,12 @@ func (w *Writer) Apply(options ...Option) (err error) {
 	default:
 		return lz4errors.ErrOptionClosedOrError
 	}
+	w.Reset(w.src)
 	for _, o := range options {
 		if err = o(w); err != nil {
 			return
 		}
 	}
-	w.Reset(w.src)
 	return
 }
 
@@ -65,10 +65,8 @@ func (w *Writer) isNotConcurrent() bool {
 // init sets up the Writer when in newState. It does not change the Writer state.
 func (w *Writer) init() error {
 	w.frame.InitW(w.src, w.num, w.legacy)
-	if true || !w.isNotConcurrent() {
-		size := w.frame.Descriptor.Flags.BlockSizeIndex()
-		w.data = size.Get()
-	}
+	size := w.frame.Descriptor.Flags.BlockSizeIndex()
+	w.data = size.Get()
 	w.idx = 0
 	return w.frame.Descriptor.Write(w.frame, w.src)
 }
@@ -89,7 +87,7 @@ func (w *Writer) Write(buf []byte) (n int, err error) {
 
 	zn := len(w.data)
 	for len(buf) > 0 {
-		if w.idx == 0 && len(buf) >= zn {
+		if w.isNotConcurrent() && w.idx == 0 && len(buf) >= zn {
 			// Avoid a copy as there is enough data for a block.
 			if err = w.write(buf[:zn], false); err != nil {
 				return

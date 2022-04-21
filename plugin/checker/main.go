@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-const pluginPackagePath = "github.com/cjdelisle/matterfoss-server/v5/plugin"
+const pluginPackagePath = "github.com/cjdelisle/matterfoss-server/v6/plugin"
 
 type result struct {
 	Warnings []string
@@ -21,7 +21,6 @@ type checkFn func(pkgPath string) (result, error)
 
 var checks = []checkFn{
 	checkAPIVersionComments,
-	checkHelpersVersionComments,
 }
 
 func main() {

@@ -18,13 +18,13 @@ import (
 	_ "github.com/tylerb/graceful"
 	_ "gopkg.in/olivere/elastic.v6"
 
-	"github.com/cjdelisle/matterfoss-server/v5/cmd/matterfoss/commands"
+	"github.com/cjdelisle/matterfoss-server/v6/cmd/mattermost/commands"
 	// Import and register app layer slash commands
-	_ "github.com/cjdelisle/matterfoss-server/v5/app/slashcommands"
+	_ "github.com/cjdelisle/matterfoss-server/v6/app/slashcommands"
 	// Plugins
-	_ "github.com/cjdelisle/matterfoss-server/v5/model/gitlab"
+	_ "github.com/cjdelisle/matterfoss-server/v6/model/gitlab"
 	// Enterprise Imports
-	_ "github.com/cjdelisle/matterfoss-server/v5/imports"
+	_ "github.com/cjdelisle/matterfoss-server/v6/imports"
 )
 
 func main() {

@@ -85,7 +85,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "La configurazione email di Matterfoss è corretta!"
+    "translation": "La configurazione email di Mattermost è corretta!"
   },
   {
     "id": "api.admin.test_email.missing_server",
@@ -97,7 +97,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Matterfoss - Test delle impostazioni Email"
+    "translation": "Mattermost - Test delle impostazioni Email"
   },
   {
     "id": "api.admin.test_s3.missing_s3_bucket",
@@ -146,14 +146,6 @@
   {
     "id": "api.channel.change_channel_privacy.public_to_private",
     "translation": "Questo canale è stato convertito in un Canale Privato."
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.default_channel_error",
-    "translation": "Questo canale predefinito non può essere convertito in un canale privato."
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.private_channel_error",
-    "translation": "Il canale da convertire è già un canale privato."
   },
   {
     "id": "api.channel.create_channel.direct_channel.app_error",
@@ -353,7 +345,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "Manda un email di invito al tuo gruppo Matterfoss"
+    "translation": "Manda un email di invito al tuo gruppo Mattermost"
   },
   {
     "id": "api.command.invite_people.email_invitations_off",
@@ -628,7 +620,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Vai alla pagina di aiuto di Matterfoss"
+    "translation": "Vai alla pagina di aiuto di Mattermost"
   },
   {
     "id": "api.command_help.name",
@@ -640,7 +632,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "Impossibile trovare il canale {{.Channel}}. Usare [channel handle](https://about.Matterfoss.com/default-channel-handle-documentation) per identificare i canali."
+    "translation": "Impossibile trovare il canale {{.Channel}}. Usare [channel handle](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) per identificare i canali."
   },
   {
     "id": "api.command_invite.desc",
@@ -732,7 +724,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Logout da Matterfoss"
+    "translation": "Logout da Mattermost"
   },
   {
     "id": "api.command_logout.name",
@@ -784,7 +776,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "Impossibile trovare il canale {{.Channel}}. Usare [channel handle](https://about.Matterfoss.com/default-channel-handle-documentation) per identificare i canali."
+    "translation": "Impossibile trovare il canale {{.Channel}}. Usare [channel handle](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) per identificare i canali."
   },
   {
     "id": "api.command_mute.hint",
@@ -796,7 +788,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "Impossibile trovare il canale specificato. Usare [channel handle](https://about.Matterfoss.com/default-channel-handle-documentation) per identificare i canali."
+    "translation": "Impossibile trovare il canale specificato. Usare [channel handle](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) per identificare i canali."
   },
   {
     "id": "api.command_mute.not_member.error",
@@ -1183,7 +1175,7 @@
   },
   {
     "id": "api.marshal_error",
-    "translation": "errore raccolta"
+    "translation": "Errore nella raccolta."
   },
   {
     "id": "api.oauth.allow_oauth.redirect_callback.app_error",
@@ -1318,16 +1310,8 @@
     "translation": "ChannelId non valido per il parametro RootId."
   },
   {
-    "id": "api.post.create_post.parent_id.app_error",
-    "translation": "Parametro ParentId non valido."
-  },
-  {
     "id": "api.post.create_post.root_id.app_error",
     "translation": "Parametro RooId non valido."
-  },
-  {
-    "id": "api.post.create_post.town_square_read_only",
-    "translation": "Il canale è in sola lettura. Solo i membri con i permessi corretti possono pubblicare qui."
   },
   {
     "id": "api.post.create_webhook_post.creating.app_error",
@@ -1386,10 +1370,6 @@
   {
     "id": "api.post.patch_post.can_not_update_post_in_deleted.error",
     "translation": "Impossibile aggiornare una pubblicazione in un canale eliminato."
-  },
-  {
-    "id": "api.post.save_is_pinned_post.town_square_read_only",
-    "translation": "Il canale è in sola lettura. Solo i membri con i permessi corretti possono bloccare o sbloccare le pubblicazioni in questo canale."
   },
   {
     "id": "api.post.send_notification_and_forget.push_channel_mention",
@@ -1472,10 +1452,6 @@
     "translation": "Non puoi salvare le reazioni di un altro utente."
   },
   {
-    "id": "api.reaction.town_square_read_only",
-    "translation": "Non è possibile reagire alle pubblicazioni nei canali in sola lettura."
-  },
-  {
     "id": "api.restricted_system_admin",
     "translation": "Questa operazione è permessa solo ad un amministratore di sistema."
   },
@@ -1545,7 +1521,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "Il canale Slack {{.DisplayName}} è già esistente come canale Matterfoss. Entrambi i canali sono stati uniti.\r\n"
+    "translation": "Il canale Slack {{.DisplayName}} è già esistente come canale Mattermost. Entrambi i canali sono stati uniti.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.created",
@@ -1557,11 +1533,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "L'utente Slack è stato unito ad un utente Matterfoss con email {{.Email}} e nome-utente {{.Username}}.\r\n"
+    "translation": "L'utente Slack è stato unito ad un utente Mattermost con email {{.Email}} e nome-utente {{.Username}}.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "L'utente Slack è stato unito ad un utente Matterfoss con email {{.Email}} e nome-utente {{.Username}}, ma non è stato possibile aggiungere l'utente al team.\r\n"
+    "translation": "L'utente Slack è stato unito ad un utente Mattermost con email {{.Email}} e nome-utente {{.Username}}, ma non è stato possibile aggiungere l'utente al team.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1716,10 +1692,6 @@
     "translation": "Impossibile decodificare l'icona del gruppo."
   },
   {
-    "id": "api.team.set_team_icon.decode_config.app_error",
-    "translation": "Impossibile decodificare i metadati dell'icona del gruppo."
-  },
-  {
     "id": "api.team.set_team_icon.encode.app_error",
     "translation": "Impossibile codificare l'icona del gruppo."
   },
@@ -1845,7 +1817,7 @@
   },
   {
     "id": "api.templates.invite_body.title",
-    "translation": "Sei stato invitato"
+    "translation": "{{ .SenderName }} ti ha invitato ad unirti alla squadra {{ .TeamDisplayName }}."
   },
   {
     "id": "api.templates.invite_subject",
@@ -2184,24 +2156,8 @@
     "translation": "Impossibile inviare la notifica di disattivazione account"
   },
   {
-    "id": "api.user.send_email_change_email_and_forget.error",
-    "translation": "Invio notifica email di cambio email avvenuto con successo fallita"
-  },
-  {
-    "id": "api.user.send_email_change_username_and_forget.error",
-    "translation": "Invio notifica email di cambio username avvenuto con successo, fallita"
-  },
-  {
     "id": "api.user.send_email_change_verify_email_and_forget.error",
     "translation": "Invio email di verifica per il cambio email fallita"
-  },
-  {
-    "id": "api.user.send_mfa_change_email.error",
-    "translation": "Impossibile inviare l'email di notifica del cambio MFA."
-  },
-  {
-    "id": "api.user.send_password_change_email_and_forget.error",
-    "translation": "Invio email per la verifica dell'update della password fallito"
   },
   {
     "id": "api.user.send_password_reset.send.app_error",
@@ -2216,16 +2172,8 @@
     "translation": "Invio email per la verifica dell'update della password fallito"
   },
   {
-    "id": "api.user.send_user_access_token.error",
-    "translation": "Impossibile inviare l'email di notifica per la creazione del token di accesso"
-  },
-  {
     "id": "api.user.send_verify_email_and_forget.failed.error",
     "translation": "Invio email di verifica fallita"
-  },
-  {
-    "id": "api.user.send_welcome_email_and_forget.failed.error",
-    "translation": "Invio email di benvenuto fallito"
   },
   {
     "id": "api.user.update_active.not_enable.app_error",
@@ -2270,10 +2218,6 @@
   {
     "id": "api.user.upload_profile_user.decode.app_error",
     "translation": "Impossibile caricare l'immagine di profilo."
-  },
-  {
-    "id": "api.user.upload_profile_user.decode_config.app_error",
-    "translation": "Impossibile salvare l'immagine profilo. Il file non sembra essere un'immagine valida."
   },
   {
     "id": "api.user.upload_profile_user.encode.app_error",
@@ -2542,10 +2486,6 @@
   {
     "id": "app.import.validate_channel_import_data.display_name_length.error",
     "translation": "Il campo display_name del canale non è nella gamma di lunghezze consentita."
-  },
-  {
-    "id": "app.import.validate_channel_import_data.display_name_missing.error",
-    "translation": "Manca la proprietà del canale richiesta: display_name"
   },
   {
     "id": "app.import.validate_channel_import_data.header_length.error",
@@ -3040,10 +2980,6 @@
     "translation": "Impossibile decodificare i dati dell'immagine."
   },
   {
-    "id": "brand.save_brand_image.decode_config.app_error",
-    "translation": "Impossibile trovare i metadati dell'immagine."
-  },
-  {
     "id": "brand.save_brand_image.encode.app_error",
     "translation": "Impossibile convertire l'immagine in PNG. Riprovare."
   },
@@ -3054,14 +2990,6 @@
   {
     "id": "brand.save_brand_image.save_image.app_error",
     "translation": "Impossibile scrivere l'immagine nell'archivio file. Controllare la connessione e riprovare."
-  },
-  {
-    "id": "brand.save_brand_image.too_large.app_error",
-    "translation": "Impossibile leggere il file immagine. Assicurarsi che l'immagine sia più piccola di 2 MB e riprovare."
-  },
-  {
-    "id": "cli.license.critical",
-    "translation": "Questa opzione richiede una licenza Enterprise Edition valida. Per favore contatta il tuo Amministratore di Sistema."
   },
   {
     "id": "ent.account_migration.get_all_failed",
@@ -3305,7 +3233,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "Impossibile trovare gli utenti AD/LDAP. Controllare se il server Matterfoss riesce a collegarsi al server AD/LDAP e riprovare."
+    "translation": "Impossibile trovare gli utenti AD/LDAP. Controllare se il server Mattermost riesce a collegarsi al server AD/LDAP e riprovare."
   },
   {
     "id": "ent.ldap.validate_filter.app_error",
@@ -3401,7 +3329,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "Nome utente in uso da un altro utente Matterfoss."
+    "translation": "Nome utente in uso da un altro utente Mattermost."
   },
   {
     "id": "ent.saml.attribute.app_error",
@@ -3500,8 +3428,8 @@
     "translation": "Impossibile recuperare canali."
   },
   {
-    "id": "Matterfoss.bulletin.subject",
-    "translation": "Bollettino di Sicurezza di Matterfoss"
+    "id": "mattermost.bulletin.subject",
+    "translation": "Bollettino di Sicurezza di Mattermost"
   },
   {
     "id": "mfa.activate.bad_token.app_error",
@@ -3758,10 +3686,6 @@
   {
     "id": "model.command_hook.id.app_error",
     "translation": "Id comando hook non valido."
-  },
-  {
-    "id": "model.command_hook.parent_id.app_error",
-    "translation": "Id genitore non valido."
   },
   {
     "id": "model.command_hook.root_id.app_error",
@@ -4448,20 +4372,12 @@
     "translation": "Id originale non valido."
   },
   {
-    "id": "model.post.is_valid.parent_id.app_error",
-    "translation": "Id genitore non valido."
-  },
-  {
     "id": "model.post.is_valid.props.app_error",
     "translation": "Proprietà invalide."
   },
   {
     "id": "model.post.is_valid.root_id.app_error",
     "translation": "Id radice non valido."
-  },
-  {
-    "id": "model.post.is_valid.root_parent.app_error",
-    "translation": "Non valido l'ID root deve essere specificato se l'ID padre è presente."
   },
   {
     "id": "model.post.is_valid.type.app_error",
@@ -4673,7 +4589,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "I Termini del Servizio di GitLab sono stati aggiornati. Per favore visita gitlab.com per accettarli e poi eseguire il login su Matterfoss."
+    "translation": "I Termini del Servizio di GitLab sono stati aggiornati. Per favore visita gitlab.com per accettarli e poi eseguire il login su Mattermost."
   },
   {
     "id": "plugin.api.update_user_status.bad_status",
@@ -4698,18 +4614,6 @@
   {
     "id": "plugin_api.send_mail.missing_to",
     "translation": "Manca l'indirizzo del destinatario."
-  },
-  {
-    "id": "store.sql.convert_string_array",
-    "translation": "FromDb: Impossibile convertire StringArray a *string"
-  },
-  {
-    "id": "store.sql.convert_string_interface",
-    "translation": "FromDb: Impossibile convertire StringInterface a *string"
-  },
-  {
-    "id": "store.sql.convert_string_map",
-    "translation": "FromDb: Impossibile convertire StringMap a *string"
   },
   {
     "id": "store.sql_bot.get.missing.app_error",
@@ -5232,16 +5136,8 @@
     "translation": "La creazione di bot è stata disabilitata."
   },
   {
-    "id": "api.bot.get_bot_icon_image.read.app_error",
-    "translation": "Impossibile leggere il file dell'icona."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.parse.app_error",
-    "translation": "Errore durante l'analisi del multipart-form."
-  },
-  {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "Per favore aggiungimi alle squadre e ai canali con cui vuoi che interagisca. Per farlo utilizza il browser oppure l'app desktop di Matterfoss."
+    "translation": "Per favore aggiungimi alle squadre e ai canali con cui vuoi che interagisca. Per farlo utilizza il browser oppure l'app desktop di Mattermost."
   },
   {
     "id": "api.channel.get_channel_moderations.license.error",
@@ -5492,10 +5388,6 @@
     "translation": "La ricerca non è stata completata."
   },
   {
-    "id": "cli.outgoing_webhook.inconsistent_state.app_error",
-    "translation": "Il webhook in uscita è cancellato ma non è possibile crearne uno nuovo a causa di un errore."
-  },
-  {
     "id": "ent.compliance.csv.metadata.json.zipfile.appError",
     "translation": "Impossibile creare il file zip"
   },
@@ -5605,7 +5497,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "Scarica l'app Matterfoss oppure utilizza un browser supportato per un'esperienza migliore."
+    "translation": "Scarica l'app Mattermost oppure utilizza un browser supportato per un'esperienza migliore."
   },
   {
     "id": "model.config.is_valid.bleve_search.enable_autocomplete.app_error",
@@ -5617,7 +5509,7 @@
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "Impossibile ottenere una licenza di prova, per favore riprovare o contattare support@Matterfoss.com."
+    "translation": "Impossibile ottenere una licenza di prova, per favore riprovare o contattare support@mattermost.com."
   },
   {
     "id": "api.team.import_team.unknown_import_from.app_error",
@@ -5646,30 +5538,6 @@
   {
     "id": "api.admin.saml.set_certificate_from_metadata.invalid_content_type.app_error",
     "translation": "Tipo contenuto non valido."
-  },
-  {
-    "id": "api.bot.delete_bot_icon_image.app_error",
-    "translation": "Impossibile eliminare l'icona."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.app_error",
-    "translation": "Impossibile caricare l'icona."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.array.app_error",
-    "translation": "Lista vuota per il campo 'image' nella richiesta."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.no_file.app_error",
-    "translation": "Nessun file nel campo 'immagine' nella richiesta."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.open.app_error",
-    "translation": "Impossibile aprire il file immagine."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.too_large.app_error",
-    "translation": "Impossibile caricare il file. Il file è troppo grande."
   },
   {
     "id": "api.channel.add_members.error",
@@ -5752,10 +5620,6 @@
     "translation": "il nome di questo gruppo esiste già come nome utente"
   },
   {
-    "id": "api.plugin.add_public_key.open.app_error",
-    "translation": "Si è verificato un errore durante l'apertura del file di chiave pubblica."
-  },
-  {
     "id": "api.plugin.install.download_failed.app_error",
     "translation": "Si è verificato un errore scaricando il plugin."
   },
@@ -5825,7 +5689,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "Licenza Matterfoss Enteprise disabilitata."
+    "translation": "Licenza Mattermost Enteprise disabilitata."
   },
   {
     "id": "api.user.create_user.guest_accounts.disabled.app_error",
@@ -6017,11 +5881,11 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "Questo browser non è più supportato da Matterfoss"
+    "translation": "Questo browser non è più supportato da Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "La versione del tuo browser non è più supportata da Matterfoss"
+    "translation": "La versione del tuo browser non è più supportata da Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.open_system_browser.edge",
@@ -6101,15 +5965,11 @@
   },
   {
     "id": "api.license.request_trial_license.no-site-url.app_error",
-    "translation": "Impossibile richiedere una licenza di prova. Configurare l'URL del sito nella sezione server web della console di sistema di Matterfoss."
+    "translation": "Impossibile richiedere una licenza di prova. Configurare l'URL del sito nella sezione server web della console di sistema di Mattermost."
   },
   {
     "id": "api.channel.move_channel.type.invalid",
     "translation": "Impossibile spostare i canali di gruppo o di messaggi diretti"
-  },
-  {
-    "id": "ent.data_retention.reactions_batch.internal_error",
-    "translation": "Si è verificato un errore durante la cancellazione delle reazioni"
   },
   {
     "id": "app.reaction.save.save.app_error",
@@ -6181,7 +6041,7 @@
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "Devi accettare l'Accordo di Valutazione Software Matterfoss e la Politica sulla Privacy per richiedere una licenza."
+    "translation": "Devi accettare l'Accordo di Valutazione Software Mattermost e la Politica sulla Privacy per richiedere una licenza."
   },
   {
     "id": "api.invalid_channel",
@@ -6320,10 +6180,6 @@
     "translation": "Impossibile trovare gli utenti del canale durante il momento specificato"
   },
   {
-    "id": "ent.data_retention.channel_member_history_batch.internal_error",
-    "translation": "Impossibile cancellare i record"
-  },
-  {
     "id": "app.user_access_token.update_token_enable.app_error",
     "translation": "Impossibile attivare il token di accesso."
   },
@@ -6357,7 +6213,7 @@
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "Se ci sono ulteriori richieste, contattare support@Matterfoss.com"
+    "translation": "Se ci sono ulteriori richieste, contattare support@mattermost.com"
   },
   {
     "id": "api.templates.warn_metric_ack.body.site_url_header",
@@ -6381,15 +6237,15 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Aggiorna Matterfoss a edizione enterprise"
+    "translation": "Aggiorna Mattermost a edizione enterprise"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "Matterfoss consiglia caldamente che le installazioni con più di 500 utenti si aggiornino a Matterfoss Enterprise Edition, che offre funzionalità avanzate come la gestione utenti, il server clustering e il monitore delle performance.\n\nContattando il servizio clienti, le tue informazioni di contatto verranno inviate a Matterfoss, Inc. [Per saperne di più](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Mattermost consiglia caldamente che le installazioni con più di 500 utenti si aggiornino a Mattermost Enterprise Edition, che offre funzionalità avanzate come la gestione utenti, il server clustering e il monitore delle performance.\n\nContattando il servizio clienti, le tue informazioni di contatto verranno inviate a Mattermost, Inc. [Per saperne di più](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "Il tuo Matterfoss adesso ha 200 utenti. Man mano che la tua base di utenti cresce, gestire ulteriori account può richiedere molto tempo. Ti consigliamo di aggiornare il tuo sistema a Matterfoss Enterprise Edition e integrarlo nell'Active Directory/LDAP della tua organizzazione, che consentirà a chiunque con un account di accedere a Matterfoss. Gli utenti potranno accedere senza dover creare nuovi nomi utente e nuove password e gli amministratori risparmieranno tempo nel gestire gli account.\n\n[Scopri di più su come integrare AD/LDAP](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nContattando il servizio clienti, le tue informazioni di contatto verranno inviate a Matterfoss, Inc. [Per saperne di più](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Il tuo Mattermost adesso ha 200 utenti. Man mano che la tua base di utenti cresce, gestire ulteriori account può richiedere molto tempo. Ti consigliamo di aggiornare il tuo sistema a Mattermost Enterprise Edition e integrarlo nell'Active Directory/LDAP della tua organizzazione, che consentirà a chiunque con un account di accedere a Mattermost. Gli utenti potranno accedere senza dover creare nuovi nomi utente e nuove password e gli amministratori risparmieranno tempo nel gestire gli account.\n\n[Scopri di più su come integrare AD/LDAP](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nContattando il servizio clienti, le tue informazioni di contatto verranno inviate a Mattermost, Inc. [Per saperne di più](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
@@ -6400,16 +6256,8 @@
     "translation": "Scrivici"
   },
   {
-    "id": "api.server.warn_metric.contacting_us",
-    "translation": "Contattaci"
-  },
-  {
-    "id": "api.server.warn_metric.contact_us",
-    "translation": "Contattaci"
-  },
-  {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "Grazie per aver contattato Matterfoss. Ti daremo riscontro presto."
+    "translation": "Grazie per aver contattato Mattermost. Ti daremo riscontro presto."
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -6421,7 +6269,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Richiesta di contatto con Matterfoss"
+    "translation": "Richiesta di contatto con Mattermost"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -6433,7 +6281,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "Se ci sono ulteriori richieste, per favore contattare support@Matterfoss.com"
+    "translation": "Se ci sono ulteriori richieste, per favore contattare support@mattermost.com"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -6465,7 +6313,7 @@
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Richiesta di contatto con Matterfoss"
+    "translation": "Richiesta di contatto con Mattermost"
   },
   {
     "id": "ent.message_export.run_export.app_error",
@@ -6478,10 +6326,6 @@
   {
     "id": "app.compliance.get.finding.app_error",
     "translation": "Non è stato possibile recuperare i rapporti di compliance."
-  },
-  {
-    "id": "ent.data_retention.flags_batch.internal_error",
-    "translation": "Si è verificato un errore pulendo i flag"
   },
   {
     "id": "app.preference.save.updating.app_error",
@@ -6506,10 +6350,6 @@
   {
     "id": "app.preference.delete.app_error",
     "translation": "Errore riscontrato durante l'eliminazione delle preferenze."
-  },
-  {
-    "id": "app.system.warn_metric.notification.invalid_metric.app_error",
-    "translation": "Impossibile trovare la metrica di avviso."
   },
   {
     "id": "api.user.delete_user.not_enabled.app_error",
@@ -6660,16 +6500,8 @@
     "translation": "Errore durante il salvataggio del valore di {{.WarnMetricName}}"
   },
   {
-    "id": "app.system.warn_metric.notification.empty_admin_list.app_error",
-    "translation": "La lista degli amministratori è vuota."
-  },
-  {
-    "id": "app.system.warn_metric.bot_description",
-    "translation": "[Per saperne di più sul consigliere di Matterfoss](https://about.Matterfoss.com/default-channel-handle-documentation)"
-  },
-  {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Consigliere di Matterfoss"
+    "translation": "Consigliere di Mattermost"
   },
   {
     "id": "app.post.update.app_error",
@@ -6832,10 +6664,6 @@
     "translation": "Impossibile ottenere il lavoro"
   },
   {
-    "id": "ent.data_retention.file_infos_batch.internal_error",
-    "translation": "Si è verificato un errore durante la cancellazione delle informazioni sui file"
-  },
-  {
     "id": "app.file_info.save.app_error",
     "translation": "Impossibile salvare le informazioni sul file"
   },
@@ -6860,44 +6688,32 @@
     "translation": "La funzione di eliminazione definitiva squadra non è attiva. Contattare l'Amministratore di Sistema."
   },
   {
-    "id": "api.server.warn_metric.starting_trial",
-    "translation": "Ottieni prova"
-  },
-  {
-    "id": "api.server.warn_metric.start_trial",
-    "translation": "Richiedi prova"
-  },
-  {
     "id": "api.server.warn_metric.number_of_active_users_500.contact_us.email_body",
-    "translation": "Richiesta di contatto con Matterfoss. La mia squadra adesso ha {{.Limit}} utenti e sto considerando l'edizione Enteprise di Matterfoss.\n"
+    "translation": "Richiesta di contatto con Mattermost. La mia squadra adesso ha {{.Limit}} utenti e sto considerando l'edizione Enteprise di Mattermost.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
-    "translation": "Richiesta di contatto con Matterfoss. La mia squadra adesso ha {{.Limit}} utenti e sto considerando l'edizione Enteprise di Matterfoss.\n"
+    "translation": "Richiesta di contatto con Mattermost. La mia squadra adesso ha {{.Limit}} utenti e sto considerando l'edizione Enteprise di Mattermost.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
-    "translation": "Aggiorna Matterfoss a edizione enterprise"
+    "translation": "Aggiorna Mattermost a edizione enterprise"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "Il tuo Matterfoss adesso ha 200 utenti. Man mano che la tua base di utenti cresce, gestire ulteriori account può richiedere molto tempo. Ti consigliamo di aggiornare il tuo sistema a Matterfoss Enterprise Edition e integrarlo nell'Active Directory/LDAP della tua organizzazione, che consentirà a chiunque con un account di accedere a Matterfoss. Gli utenti potranno accedere senza dover creare nuovi nomi utente e nuove password e gli amministratori risparmieranno tempo nel gestire gli account.\n\n[Scopri di più su come integrare AD/LDAP](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nContattando il servizio clienti, le tue informazioni di contatto verranno inviate a Matterfoss, Inc. [Per saperne di più](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Il tuo Mattermost adesso ha 200 utenti. Man mano che la tua base di utenti cresce, gestire ulteriori account può richiedere molto tempo. Ti consigliamo di aggiornare il tuo sistema a Mattermost Enterprise Edition e integrarlo nell'Active Directory/LDAP della tua organizzazione, che consentirà a chiunque con un account di accedere a Mattermost. Gli utenti potranno accedere senza dover creare nuovi nomi utente e nuove password e gli amministratori risparmieranno tempo nel gestire gli account.\n\n[Scopri di più su come integrare AD/LDAP](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nContattando il servizio clienti, le tue informazioni di contatto verranno inviate a Mattermost, Inc. [Per saperne di più](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
-    "translation": "Richiesta di contatto con Matterfoss. La mia squadra adesso ha {{.Limit}} utenti e sto considerando l'edizione Enteprise di Matterfoss.\n"
+    "translation": "Richiesta di contatto con Mattermost. La mia squadra adesso ha {{.Limit}} utenti e sto considerando l'edizione Enteprise di Mattermost.\n"
   },
   {
     "id": "api.server.warn_metric.mfa.notification_title",
-    "translation": "Forza Autenticazione Multifattore:"
+    "translation": "Forza Autenticazione Multifattore"
   },
   {
     "id": "ent.elasticsearch.post.get_posts_batch_for_indexing.error",
     "translation": "Impossibile trovare la coda delle pubblicazioni da indicizzare"
-  },
-  {
-    "id": "ent.data_retention.posts_permanent_delete_batch.internal_error",
-    "translation": "Si è verifcato un errore durante la cancellazione delle pubblicazioni"
   },
   {
     "id": "app.post.overwrite.app_error",
@@ -7046,10 +6862,6 @@
   {
     "id": "app.channel.permanent_delete_members_by_user.app_error",
     "translation": "Impossibile eliminare il membro del canale"
-  },
-  {
-    "id": "app.channel.increment_mention_count.app_error",
-    "translation": "Impossibile incrementare il conteggio della citazione"
   },
   {
     "id": "app.channel.get_pinnedpost_count.app_error",
@@ -7266,5 +7078,45 @@
   {
     "id": "app.channel.clear_all_custom_role_assignments.select.app_error",
     "translation": "Impossibile recuperare i membri del canale"
+  },
+  {
+    "id": "api.cloud.license_error",
+    "translation": "La tua licenza non supporta le richieste di cloud."
+  },
+  {
+    "id": "api.cloud.get_subscription.error",
+    "translation": "Errore nell'ottenere l'abbonamento al cloud."
+  },
+  {
+    "id": "api.cloud.get_admins_emails.error",
+    "translation": "Impossibile ottenere le email degli amministratori di sistema."
+  },
+  {
+    "id": "api.cloud.cws_webhook_event_missing_error",
+    "translation": "L'evento webhook non è stato gestito. Manca oppure non è valido."
+  },
+  {
+    "id": "api.cloud.app_error",
+    "translation": "Errore interno durante la richiesta della cloud api."
+  },
+  {
+    "id": "api.channel.patch_channel_moderations.cache_invalidation.error",
+    "translation": "Errore nell'invalidazione della cache"
+  },
+  {
+    "id": "api.channel.create_channel.direct_channel.team_restricted_error",
+    "translation": "Un canale diretto non può essere creato tra questi utenti perché non condividono alcun team in comune."
+  },
+  {
+    "id": "api.back_to_app",
+    "translation": "Ritorna a {{.SiteName}}"
+  },
+  {
+    "id": "api.admin.saml.failure_reset_authdata_to_email.app_error",
+    "translation": "Impossibile azzerare il campo AuthData all'Email."
+  },
+  {
+    "id": "api.admin.ldap.not_available.app_error",
+    "translation": "LDAP non è disponibile."
   }
 ]

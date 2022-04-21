@@ -14,7 +14,7 @@ import (
 
 	"github.com/mattermost/go-i18n/i18n"
 
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const defaultLocale = "en"

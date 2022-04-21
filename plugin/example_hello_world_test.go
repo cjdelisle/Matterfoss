@@ -7,13 +7,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
 )
 
-// HelloWorldPlugin implements the interface expected by the Matterfoss server to communicate
+// HelloWorldPlugin implements the interface expected by the Mattermost server to communicate
 // between the server and plugin processes.
 type HelloWorldPlugin struct {
-	plugin.MatterfossPlugin
+	plugin.MattermostPlugin
 }
 
 // ServeHTTP demonstrates a plugin that handles HTTP requests by greeting the world.

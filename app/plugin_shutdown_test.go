@@ -24,11 +24,11 @@ func TestPluginShutdownTest(t *testing.T) {
 			package main
 
 			import (
-				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MatterfossPlugin
+				plugin.MattermostPlugin
 			}
 
 			func main() {
@@ -39,11 +39,11 @@ func TestPluginShutdownTest(t *testing.T) {
 			package main
 
 			import (
-				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MatterfossPlugin
+				plugin.MattermostPlugin
 			}
 
 			func (p *MyPlugin) OnDeactivate() error {
@@ -63,7 +63,7 @@ func TestPluginShutdownTest(t *testing.T) {
 	done := make(chan bool)
 	go func() {
 		defer close(done)
-		th.App.Srv().ShutDownPlugins()
+		th.App.ch.ShutDownPlugins()
 	}()
 
 	select {

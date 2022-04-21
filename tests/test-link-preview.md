@@ -36,9 +36,9 @@ Link 1 example: http://www.theglobeandmail.com/news/national/three-canadians-sho
 
 Link 2 example: https://twitter.com/ArchieComics/status/813007703861841920
 
-Link 3 example: https://github.com/matterfoss
+Link 3 example: https://github.com/mattermost
 
-Link 4 example: http://stackoverflow.com/questions/36650437/using-matterfoss-api-via-gitlab-oauth-as-an-end-user-with-username-and-password
+Link 4 example: http://stackoverflow.com/questions/36650437/using-mattermost-api-via-gitlab-oauth-as-an-end-user-with-username-and-password
 ```
 
 ```
@@ -48,6 +48,6 @@ If "Account Settings > Display > Default appearance of image link previews" is s
 
 Link 1 example: https://www.yahoo.com/news/panasonic-unveils-solar-roof-may-212400917.html
 
-Link 2 example: https://about.matterfoss.com
+Link 2 example: https://mattermost.com
 
 ```

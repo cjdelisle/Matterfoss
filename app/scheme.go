@@ -7,8 +7,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func (a *App) GetScheme(id string) (*model.Scheme, *model.AppError) {
@@ -83,6 +83,10 @@ func (a *App) CreateScheme(scheme *model.Scheme) (*model.Scheme, *model.AppError
 	scheme.DefaultChannelAdminRole = ""
 	scheme.DefaultChannelUserRole = ""
 	scheme.DefaultChannelGuestRole = ""
+	scheme.DefaultPlaybookAdminRole = ""
+	scheme.DefaultPlaybookMemberRole = ""
+	scheme.DefaultRunAdminRole = ""
+	scheme.DefaultRunMemberRole = ""
 	scheme.CreateAt = 0
 	scheme.UpdateAt = 0
 	scheme.DeleteAt = 0
@@ -202,7 +206,7 @@ func (s *Server) IsPhase2MigrationCompleted() *model.AppError {
 		return nil
 	}
 
-	if _, err := s.Store.System().GetByName(model.MIGRATION_KEY_ADVANCED_PERMISSIONS_PHASE_2); err != nil {
+	if _, err := s.Store.System().GetByName(model.MigrationKeyAdvancedPermissionsPhase2); err != nil {
 		return model.NewAppError("App.IsPhase2MigrationCompleted", "app.schemes.is_phase_2_migration_completed.not_completed.app_error", nil, err.Error(), http.StatusNotImplemented)
 	}
 

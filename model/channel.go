@@ -7,6 +7,7 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"sort"
@@ -14,23 +15,26 @@ import (
 	"unicode/utf8"
 )
 
-const (
-	CHANNEL_OPEN                   = "O"
-	CHANNEL_PRIVATE                = "P"
-	CHANNEL_DIRECT                 = "D"
-	CHANNEL_GROUP                  = "G"
-	CHANNEL_GROUP_MAX_USERS        = 8
-	CHANNEL_GROUP_MIN_USERS        = 3
-	DEFAULT_CHANNEL                = "town-square"
-	CHANNEL_DISPLAY_NAME_MAX_RUNES = 64
-	CHANNEL_NAME_MIN_LENGTH        = 2
-	CHANNEL_NAME_MAX_LENGTH        = 64
-	CHANNEL_HEADER_MAX_RUNES       = 1024
-	CHANNEL_PURPOSE_MAX_RUNES      = 250
-	CHANNEL_CACHE_SIZE             = 25000
+type ChannelType string
 
-	CHANNEL_SORT_BY_USERNAME = "username"
-	CHANNEL_SORT_BY_STATUS   = "status"
+const (
+	ChannelTypeOpen    ChannelType = "O"
+	ChannelTypePrivate ChannelType = "P"
+	ChannelTypeDirect  ChannelType = "D"
+	ChannelTypeGroup   ChannelType = "G"
+
+	ChannelGroupMaxUsers       = 8
+	ChannelGroupMinUsers       = 3
+	DefaultChannelName         = "town-square"
+	ChannelDisplayNameMaxRunes = 64
+	ChannelNameMinLength       = 2
+	ChannelNameMaxLength       = 64
+	ChannelHeaderMaxRunes      = 1024
+	ChannelPurposeMaxRunes     = 250
+	ChannelCacheSize           = 25000
+
+	ChannelSortByUsername = "username"
+	ChannelSortByStatus   = "status"
 )
 
 type Channel struct {
@@ -39,7 +43,7 @@ type Channel struct {
 	UpdateAt          int64                  `json:"update_at"`
 	DeleteAt          int64                  `json:"delete_at"`
 	TeamId            string                 `json:"team_id"`
-	Type              string                 `json:"type"`
+	Type              ChannelType            `json:"type"`
 	DisplayName       string                 `json:"display_name"`
 	Name              string                 `json:"name"`
 	Header            string                 `json:"header"`
@@ -49,11 +53,12 @@ type Channel struct {
 	ExtraUpdateAt     int64                  `json:"extra_update_at"`
 	CreatorId         string                 `json:"creator_id"`
 	SchemeId          *string                `json:"scheme_id"`
-	Props             map[string]interface{} `json:"props" db:"-"`
+	Props             map[string]interface{} `json:"props"`
 	GroupConstrained  *bool                  `json:"group_constrained"`
 	Shared            *bool                  `json:"shared"`
 	TotalMsgCountRoot int64                  `json:"total_msg_count_root"`
-	PolicyID          *string                `json:"policy_id" db:"-"`
+	PolicyID          *string                `json:"policy_id"`
+	LastRootPostAt    int64                  `json:"last_root_post_at"`
 }
 
 type ChannelWithTeamData struct {
@@ -64,8 +69,8 @@ type ChannelWithTeamData struct {
 }
 
 type ChannelsWithCount struct {
-	Channels   *ChannelListWithTeamData `json:"channels"`
-	TotalCount int64                    `json:"total_count"`
+	Channels   ChannelListWithTeamData `json:"channels"`
+	TotalCount int64                   `json:"total_count"`
 }
 
 type ChannelPatch struct {
@@ -138,12 +143,14 @@ type ChannelSearchOpts struct {
 	Private                  bool
 	Page                     *int
 	PerPage                  *int
+	LastDeleteAt             int
+	LastUpdateAt             int
 }
 
 type ChannelMemberCountByGroup struct {
-	GroupId                     string `db:"-" json:"group_id"`
-	ChannelMemberCount          int64  `db:"-" json:"channel_member_count"`
-	ChannelMemberTimezonesCount int64  `db:"-" json:"channel_member_timezones_count"`
+	GroupId                     string `json:"group_id"`
+	ChannelMemberCount          int64  `json:"channel_member_count"`
+	ChannelMemberTimezonesCount int64  `json:"channel_member_timezones_count"`
 }
 
 type ChannelOption func(channel *Channel)
@@ -154,63 +161,37 @@ func WithID(ID string) ChannelOption {
 	}
 }
 
+// The following are some GraphQL methods necessary to return the
+// data in float64 type. The spec doesn't support 64 bit integers,
+// so we have to pass the data in float64. The _ at the end is
+// a hack to keep the attribute name same in GraphQL schema.
+
+func (o *Channel) CreateAt_() float64 {
+	return float64(o.CreateAt)
+}
+
+func (o *Channel) UpdateAt_() float64 {
+	return float64(o.UpdateAt)
+}
+
+func (o *Channel) DeleteAt_() float64 {
+	return float64(o.DeleteAt)
+}
+
+func (o *Channel) LastPostAt_() float64 {
+	return float64(o.LastPostAt)
+}
+
+func (o *Channel) TotalMsgCount_() float64 {
+	return float64(o.TotalMsgCount)
+}
+
 func (o *Channel) DeepCopy() *Channel {
 	copy := *o
 	if copy.SchemeId != nil {
 		copy.SchemeId = NewString(*o.SchemeId)
 	}
 	return &copy
-}
-
-func (o *Channel) ToJson() string {
-	b, _ := json.Marshal(o)
-	return string(b)
-}
-
-func (o *ChannelPatch) ToJson() string {
-	b, _ := json.Marshal(o)
-	return string(b)
-}
-
-func (o *ChannelsWithCount) ToJson() []byte {
-	b, _ := json.Marshal(o)
-	return b
-}
-
-func ChannelsWithCountFromJson(data io.Reader) *ChannelsWithCount {
-	var o *ChannelsWithCount
-	json.NewDecoder(data).Decode(&o)
-	return o
-}
-
-func ChannelFromJson(data io.Reader) *Channel {
-	var o *Channel
-	json.NewDecoder(data).Decode(&o)
-	return o
-}
-
-func ChannelPatchFromJson(data io.Reader) *ChannelPatch {
-	var o *ChannelPatch
-	json.NewDecoder(data).Decode(&o)
-	return o
-}
-
-func ChannelModerationsFromJson(data io.Reader) []*ChannelModeration {
-	var o []*ChannelModeration
-	json.NewDecoder(data).Decode(&o)
-	return o
-}
-
-func ChannelModerationsPatchFromJson(data io.Reader) []*ChannelModerationPatch {
-	var o []*ChannelModerationPatch
-	json.NewDecoder(data).Decode(&o)
-	return o
-}
-
-func ChannelMemberCountsByGroupFromJson(data io.Reader) []*ChannelMemberCountByGroup {
-	var o []*ChannelMemberCountByGroup
-	json.NewDecoder(data).Decode(&o)
-	return o
 }
 
 func (o *Channel) Etag() string {
@@ -230,7 +211,7 @@ func (o *Channel) IsValid() *AppError {
 		return NewAppError("Channel.IsValid", "model.channel.is_valid.update_at.app_error", nil, "id="+o.Id, http.StatusBadRequest)
 	}
 
-	if utf8.RuneCountInString(o.DisplayName) > CHANNEL_DISPLAY_NAME_MAX_RUNES {
+	if utf8.RuneCountInString(o.DisplayName) > ChannelDisplayNameMaxRunes {
 		return NewAppError("Channel.IsValid", "model.channel.is_valid.display_name.app_error", nil, "id="+o.Id, http.StatusBadRequest)
 	}
 
@@ -238,15 +219,15 @@ func (o *Channel) IsValid() *AppError {
 		return NewAppError("Channel.IsValid", "model.channel.is_valid.2_or_more.app_error", nil, "id="+o.Id, http.StatusBadRequest)
 	}
 
-	if !(o.Type == CHANNEL_OPEN || o.Type == CHANNEL_PRIVATE || o.Type == CHANNEL_DIRECT || o.Type == CHANNEL_GROUP) {
+	if !(o.Type == ChannelTypeOpen || o.Type == ChannelTypePrivate || o.Type == ChannelTypeDirect || o.Type == ChannelTypeGroup) {
 		return NewAppError("Channel.IsValid", "model.channel.is_valid.type.app_error", nil, "id="+o.Id, http.StatusBadRequest)
 	}
 
-	if utf8.RuneCountInString(o.Header) > CHANNEL_HEADER_MAX_RUNES {
+	if utf8.RuneCountInString(o.Header) > ChannelHeaderMaxRunes {
 		return NewAppError("Channel.IsValid", "model.channel.is_valid.header.app_error", nil, "id="+o.Id, http.StatusBadRequest)
 	}
 
-	if utf8.RuneCountInString(o.Purpose) > CHANNEL_PURPOSE_MAX_RUNES {
+	if utf8.RuneCountInString(o.Purpose) > ChannelPurposeMaxRunes {
 		return NewAppError("Channel.IsValid", "model.channel.is_valid.purpose.app_error", nil, "id="+o.Id, http.StatusBadRequest)
 	}
 
@@ -255,7 +236,7 @@ func (o *Channel) IsValid() *AppError {
 	}
 
 	userIds := strings.Split(o.Name, "__")
-	if o.Type != CHANNEL_DIRECT && len(userIds) == 2 && IsValidId(userIds[0]) && IsValidId(userIds[1]) {
+	if o.Type != ChannelTypeDirect && len(userIds) == 2 && IsValidId(userIds[0]) && IsValidId(userIds[1]) {
 		return NewAppError("Channel.IsValid", "model.channel.is_valid.name.app_error", nil, "", http.StatusBadRequest)
 	}
 
@@ -282,11 +263,11 @@ func (o *Channel) PreUpdate() {
 }
 
 func (o *Channel) IsGroupOrDirect() bool {
-	return o.Type == CHANNEL_DIRECT || o.Type == CHANNEL_GROUP
+	return o.Type == ChannelTypeDirect || o.Type == ChannelTypeGroup
 }
 
 func (o *Channel) IsOpen() bool {
-	return o.Type == CHANNEL_OPEN
+	return o.Type == ChannelTypeOpen
 }
 
 func (o *Channel) Patch(patch *ChannelPatch) {
@@ -332,7 +313,7 @@ func (o *Channel) IsShared() bool {
 }
 
 func (o *Channel) GetOtherUserIdForDM(userId string) string {
-	if o.Type != CHANNEL_DIRECT {
+	if o.Type != ChannelTypeDirect {
 		return ""
 	}
 
@@ -349,6 +330,24 @@ func (o *Channel) GetOtherUserIdForDM(userId string) string {
 	}
 
 	return otherUserId
+}
+
+func (ChannelType) ImplementsGraphQLType(name string) bool {
+	return name == "ChannelType"
+}
+
+func (t ChannelType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(string(t))
+}
+
+func (t *ChannelType) UnmarshalGraphQL(input interface{}) error {
+	chType, ok := input.(string)
+	if !ok {
+		return errors.New("wrong type")
+	}
+
+	*t = ChannelType(chType)
+	return nil
 }
 
 func GetDMNameFromIds(userId1, userId2 string) string {
@@ -368,8 +367,8 @@ func GetGroupDisplayNameFromUsers(users []*User, truncate bool) string {
 
 	name := strings.Join(usernames, ", ")
 
-	if truncate && len(name) > CHANNEL_NAME_MAX_LENGTH {
-		name = name[:CHANNEL_NAME_MAX_LENGTH]
+	if truncate && len(name) > ChannelNameMaxLength {
+		name = name[:ChannelNameMaxLength]
 	}
 
 	return name

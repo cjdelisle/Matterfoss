@@ -8,8 +8,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func TestLicenseStore(t *testing.T, ss store.Store) {
@@ -31,7 +31,7 @@ func testLicenseStoreSave(t *testing.T, ss store.Store) {
 	l1.Id = ""
 
 	_, err = ss.License().Save(&l1)
-	require.NoError(t, err, "always saves a valid license")
+	require.Error(t, err, "should fail on invalid license")
 }
 
 func testLicenseStoreGet(t *testing.T, ss store.Store) {

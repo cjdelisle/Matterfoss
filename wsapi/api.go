@@ -4,7 +4,7 @@
 package wsapi
 
 import (
-	"github.com/cjdelisle/matterfoss-server/v5/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
 )
 
 type API struct {
@@ -13,7 +13,7 @@ type API struct {
 }
 
 func Init(s *app.Server) {
-	a := app.New(app.ServerConnector(s))
+	a := app.New(app.ServerConnector(s.Channels()))
 	api := &API{
 		App:    a,
 		Router: s.WebSocketRouter,

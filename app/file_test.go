@@ -16,10 +16,10 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/services/searchengine/mocks"
-	filesStoreMocks "github.com/cjdelisle/matterfoss-server/v5/shared/filestore/mocks"
-	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine/mocks"
+	filesStoreMocks "github.com/cjdelisle/matterfoss-server/v6/shared/filestore/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func TestGeneratePublicLinkHash(t *testing.T) {
@@ -234,7 +234,7 @@ func TestFindTeamIdForFilename(t *testing.T) {
 	teamID := th.App.findTeamIdForFilename(th.BasicPost, "someid", "somefile.png")
 	assert.Equal(t, th.BasicTeam.Id, teamID)
 
-	_, err := th.App.CreateTeamWithUser(th.Context, &model.Team{Email: th.BasicUser.Email, Name: "zz" + model.NewId(), DisplayName: "Joram's Test Team", Type: model.TEAM_OPEN}, th.BasicUser.Id)
+	_, err := th.App.CreateTeamWithUser(th.Context, &model.Team{Email: th.BasicUser.Email, Name: "zz" + model.NewId(), DisplayName: "Joram's Test Team", Type: model.TeamOpen}, th.BasicUser.Id)
 	require.Nil(t, err)
 
 	teamID = th.App.findTeamIdForFilename(th.BasicPost, "someid", "somefile.png")
@@ -331,11 +331,11 @@ func TestGenerateThumbnailImage(t *testing.T) {
 		defer th.TearDown()
 		img := createDummyImage()
 		dataPath, _ := fileutils.FindDir("data")
-		thumbailName := "thumb.jpg"
-		thumbnailPath := filepath.Join(dataPath, thumbailName)
+		thumbnailName := "thumb.jpg"
+		thumbnailPath := filepath.Join(dataPath, thumbnailName)
 
 		// when
-		th.App.generateThumbnailImage(img, thumbailName)
+		th.App.generateThumbnailImage(img, thumbnailName)
 		defer os.Remove(thumbnailPath)
 
 		// then

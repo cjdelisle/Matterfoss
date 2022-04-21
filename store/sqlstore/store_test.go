@@ -6,23 +6,27 @@ package sqlstore
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
+	"sort"
+	"strconv"
+	"strings"
 	"sync"
 	"testing"
 	"time"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/lib/pq"
-	"github.com/mattermost/gorp"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/einterfaces/mocks"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
-	"github.com/cjdelisle/matterfoss-server/v5/store/searchtest"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/db"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/searchtest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
 )
 
 type storeType struct {
@@ -90,7 +94,7 @@ func StoreTestWithSqlStore(t *testing.T, f func(*testing.T, store.Store, storete
 			if testing.Short() {
 				t.SkipNow()
 			}
-			f(t, st.Store, st.SqlStore)
+			f(t, st.Store, &StoreTestWrapper{st.SqlStore})
 		})
 	}
 }
@@ -104,13 +108,15 @@ func initStores() {
 	if os.Getenv("IS_CI") == "true" {
 		switch os.Getenv("MM_SQLSETTINGS_DRIVERNAME") {
 		case "mysql":
-			storeTypes = append(storeTypes, newStoreType("MySQL", model.DATABASE_DRIVER_MYSQL))
+			storeTypes = append(storeTypes, newStoreType("MySQL", model.DatabaseDriverMysql))
 		case "postgres":
-			storeTypes = append(storeTypes, newStoreType("PostgreSQL", model.DATABASE_DRIVER_POSTGRES))
+			storeTypes = append(storeTypes, newStoreType("PostgreSQL", model.DatabaseDriverPostgres))
 		}
 	} else {
-		storeTypes = append(storeTypes, newStoreType("MySQL", model.DATABASE_DRIVER_MYSQL),
-			newStoreType("PostgreSQL", model.DATABASE_DRIVER_POSTGRES))
+		storeTypes = append(storeTypes,
+			newStoreType("MySQL", model.DatabaseDriverMysql),
+			newStoreType("PostgreSQL", model.DatabaseDriverPostgres),
+		)
 	}
 
 	defer func() {
@@ -163,7 +169,7 @@ func tearDownStores() {
 // before the fix in MM-28397.
 // Keeping it here to help avoiding future regressions.
 func TestStoreLicenseRace(t *testing.T) {
-	settings := makeSqlSettings(model.DATABASE_DRIVER_POSTGRES)
+	settings := makeSqlSettings(model.DatabaseDriverPostgres)
 	store := New(*settings, nil)
 	defer func() {
 		store.Close()
@@ -179,12 +185,12 @@ func TestStoreLicenseRace(t *testing.T) {
 	}()
 
 	go func() {
-		store.GetReplica()
+		store.GetReplicaX()
 		wg.Done()
 	}()
 
 	go func() {
-		store.GetSearchReplica()
+		store.GetSearchReplicaX()
 		wg.Done()
 	}()
 
@@ -249,7 +255,7 @@ func TestGetReplica(t *testing.T) {
 		testCase := testCase
 		t.Run(testCase.Description+" with license", func(t *testing.T) {
 
-			settings := makeSqlSettings(model.DATABASE_DRIVER_POSTGRES)
+			settings := makeSqlSettings(model.DatabaseDriverPostgres)
 			dataSourceReplicas := []string{}
 			dataSourceSearchReplicas := []string{}
 			for i := 0; i < testCase.DataSourceReplicaNum; i++ {
@@ -269,14 +275,14 @@ func TestGetReplica(t *testing.T) {
 
 			store.UpdateLicense(&model.License{})
 
-			replicas := make(map[*gorp.DbMap]bool)
+			replicas := make(map[*sqlxDBWrapper]bool)
 			for i := 0; i < 5; i++ {
-				replicas[store.GetReplica()] = true
+				replicas[store.GetReplicaX()] = true
 			}
 
-			searchReplicas := make(map[*gorp.DbMap]bool)
+			searchReplicas := make(map[*sqlxDBWrapper]bool)
 			for i := 0; i < 5; i++ {
-				searchReplicas[store.GetSearchReplica()] = true
+				searchReplicas[store.GetSearchReplicaX()] = true
 			}
 
 			if testCase.DataSourceReplicaNum > 0 {
@@ -284,13 +290,13 @@ func TestGetReplica(t *testing.T) {
 				assert.Len(t, replicas, testCase.DataSourceReplicaNum)
 
 				for replica := range replicas {
-					assert.NotSame(t, store.GetMaster(), replica)
+					assert.NotSame(t, store.GetMasterX(), replica)
 				}
 
 			} else if assert.Len(t, replicas, 1) {
 				// Otherwise ensure the replicas contains only the master.
 				for replica := range replicas {
-					assert.Same(t, store.GetMaster(), replica)
+					assert.Same(t, store.GetMasterX(), replica)
 				}
 			}
 
@@ -299,7 +305,7 @@ func TestGetReplica(t *testing.T) {
 				assert.Len(t, searchReplicas, testCase.DataSourceSearchReplicaNum)
 
 				for searchReplica := range searchReplicas {
-					assert.NotSame(t, store.GetMaster(), searchReplica)
+					assert.NotSame(t, store.GetMasterX(), searchReplica)
 					for replica := range replicas {
 						assert.NotSame(t, searchReplica, replica)
 					}
@@ -312,14 +318,14 @@ func TestGetReplica(t *testing.T) {
 			} else if testCase.DataSourceReplicaNum == 0 && assert.Len(t, searchReplicas, 1) {
 				// Otherwise ensure the search replicas contains the master.
 				for searchReplica := range searchReplicas {
-					assert.Same(t, store.GetMaster(), searchReplica)
+					assert.Same(t, store.GetMasterX(), searchReplica)
 				}
 			}
 		})
 
 		t.Run(testCase.Description+" without license", func(t *testing.T) {
 
-			settings := makeSqlSettings(model.DATABASE_DRIVER_POSTGRES)
+			settings := makeSqlSettings(model.DatabaseDriverPostgres)
 			dataSourceReplicas := []string{}
 			dataSourceSearchReplicas := []string{}
 			for i := 0; i < testCase.DataSourceReplicaNum; i++ {
@@ -337,14 +343,14 @@ func TestGetReplica(t *testing.T) {
 				storetest.CleanupSqlSettings(settings)
 			}()
 
-			replicas := make(map[*gorp.DbMap]bool)
+			replicas := make(map[*sqlxDBWrapper]bool)
 			for i := 0; i < 5; i++ {
-				replicas[store.GetReplica()] = true
+				replicas[store.GetReplicaX()] = true
 			}
 
-			searchReplicas := make(map[*gorp.DbMap]bool)
+			searchReplicas := make(map[*sqlxDBWrapper]bool)
 			for i := 0; i < 5; i++ {
-				searchReplicas[store.GetSearchReplica()] = true
+				searchReplicas[store.GetSearchReplicaX()] = true
 			}
 
 			if testCase.DataSourceReplicaNum > 0 {
@@ -352,13 +358,13 @@ func TestGetReplica(t *testing.T) {
 				assert.Len(t, replicas, 1)
 
 				for replica := range replicas {
-					assert.Same(t, store.GetMaster(), replica)
+					assert.Same(t, store.GetMasterX(), replica)
 				}
 
 			} else if assert.Len(t, replicas, 1) {
 				// Otherwise ensure the replicas contains only the master.
 				for replica := range replicas {
-					assert.Same(t, store.GetMaster(), replica)
+					assert.Same(t, store.GetMasterX(), replica)
 				}
 			}
 
@@ -367,7 +373,7 @@ func TestGetReplica(t *testing.T) {
 				assert.Len(t, searchReplicas, 1)
 
 				for searchReplica := range searchReplicas {
-					assert.Same(t, store.GetMaster(), searchReplica)
+					assert.Same(t, store.GetMasterX(), searchReplica)
 				}
 
 			} else if testCase.DataSourceReplicaNum > 0 {
@@ -378,7 +384,7 @@ func TestGetReplica(t *testing.T) {
 			} else if assert.Len(t, searchReplicas, 1) {
 				// Otherwise ensure the search replicas contains the master.
 				for searchReplica := range searchReplicas {
-					assert.Same(t, store.GetMaster(), searchReplica)
+					assert.Same(t, store.GetMasterX(), searchReplica)
 				}
 			}
 		})
@@ -387,8 +393,8 @@ func TestGetReplica(t *testing.T) {
 
 func TestGetDbVersion(t *testing.T) {
 	testDrivers := []string{
-		model.DATABASE_DRIVER_POSTGRES,
-		model.DATABASE_DRIVER_MYSQL,
+		model.DatabaseDriverPostgres,
+		model.DatabaseDriverMysql,
 	}
 
 	for _, driver := range testDrivers {
@@ -404,15 +410,89 @@ func TestGetDbVersion(t *testing.T) {
 	}
 }
 
+func TestEnsureMinimumDBVersion(t *testing.T) {
+	tests := []struct {
+		driver string
+		ver    string
+		ok     bool
+		err    string
+	}{
+		{
+			driver: model.DatabaseDriverPostgres,
+			ver:    "100001",
+			ok:     true,
+			err:    "",
+		},
+		{
+			driver: model.DatabaseDriverPostgres,
+			ver:    "90603",
+			ok:     false,
+			err:    "minimum Postgres version requirements not met",
+		},
+		{
+			driver: model.DatabaseDriverPostgres,
+			ver:    "12.34.1",
+			ok:     false,
+			err:    "cannot parse DB version",
+		},
+		{
+			driver: model.DatabaseDriverMysql,
+			ver:    "10.4.5-MariaDB",
+			ok:     true,
+			err:    "",
+		},
+		{
+			driver: model.DatabaseDriverMysql,
+			ver:    "5.6.99-test",
+			ok:     false,
+			err:    "minimum MySQL version requirements not met",
+		},
+		{
+			driver: model.DatabaseDriverMysql,
+			ver:    "34-55.12",
+			ok:     false,
+			err:    "cannot parse MySQL DB version",
+		},
+		{
+			driver: model.DatabaseDriverMysql,
+			ver:    "8.0.0-log",
+			ok:     true,
+			err:    "",
+		},
+	}
+
+	pg := model.DatabaseDriverPostgres
+	pgSettings := &model.SqlSettings{
+		DriverName: &pg,
+	}
+	my := model.DatabaseDriverMysql
+	mySettings := &model.SqlSettings{
+		DriverName: &my,
+	}
+	for _, tc := range tests {
+		store := &SqlStore{}
+		switch tc.driver {
+		case pg:
+			store.settings = pgSettings
+		case my:
+			store.settings = mySettings
+		}
+		ok, err := store.ensureMinimumDBVersion(tc.ver)
+		assert.Equal(t, tc.ok, ok)
+		if tc.err != "" {
+			assert.Contains(t, err.Error(), tc.err)
+		}
+	}
+}
+
 func TestUpAndDownMigrations(t *testing.T) {
 	testDrivers := []string{
-		model.DATABASE_DRIVER_POSTGRES,
-		model.DATABASE_DRIVER_MYSQL,
+		model.DatabaseDriverPostgres,
+		model.DatabaseDriverMysql,
 	}
 
 	for _, driver := range testDrivers {
 		t.Run("Should be reversible for "+driver, func(t *testing.T) {
-			t.Parallel()
 			settings := makeSqlSettings(driver)
 			store := New(*settings, nil)
 			defer store.Close()
@@ -491,7 +571,7 @@ func TestGetAllConns(t *testing.T) {
 		testCase := testCase
 		t.Run(testCase.Description, func(t *testing.T) {
 			t.Parallel()
-			settings := makeSqlSettings(model.DATABASE_DRIVER_POSTGRES)
+			settings := makeSqlSettings(model.DatabaseDriverPostgres)
 			dataSourceReplicas := []string{}
 			dataSourceSearchReplicas := []string{}
 			for i := 0; i < testCase.DataSourceReplicaNum; i++ {
@@ -534,32 +614,46 @@ func TestIsDuplicate(t *testing.T) {
 func TestVersionString(t *testing.T) {
 	versions := []struct {
 		input  int
+		driver string
 		output string
 	}{
 		{
 			input:  100000,
+			driver: model.DatabaseDriverPostgres,
 			output: "10.0",
 		},
 		{
 			input:  90603,
+			driver: model.DatabaseDriverPostgres,
 			output: "9.603",
 		},
 		{
 			input:  120005,
+			driver: model.DatabaseDriverPostgres,
 			output: "12.5",
+		},
+		{
+			input:  5708,
+			driver: model.DatabaseDriverMysql,
+			output: "5.7.8",
+		},
+		{
+			input:  8000,
+			driver: model.DatabaseDriverMysql,
+			output: "8.0.0",
 		},
 	}
 
 	for _, v := range versions {
-		out := VersionString(v.input)
+		out := versionString(v.input, v.driver)
 		assert.Equal(t, v.output, out)
 	}
 }
 
 func TestReplicaLagQuery(t *testing.T) {
 	testDrivers := []string{
-		model.DATABASE_DRIVER_POSTGRES,
-		model.DATABASE_DRIVER_MYSQL,
+		model.DatabaseDriverPostgres,
+		model.DatabaseDriverMysql,
 	}
 
 	for _, driver := range testDrivers {
@@ -568,10 +662,10 @@ func TestReplicaLagQuery(t *testing.T) {
 		var tableName string
 		// Just any random query which returns a row in (string, int) format.
 		switch driver {
-		case model.DATABASE_DRIVER_POSTGRES:
+		case model.DatabaseDriverPostgres:
 			query = `SELECT relname, count(relname) FROM pg_class WHERE relname='posts' GROUP BY relname`
 			tableName = "posts"
-		case model.DATABASE_DRIVER_MYSQL:
+		case model.DatabaseDriverMysql:
 			query = `SELECT table_name, count(table_name) FROM information_schema.tables WHERE table_name='Posts' and table_schema=Database() GROUP BY table_name`
 			tableName = "Posts"
 		}
@@ -596,7 +690,7 @@ func TestReplicaLagQuery(t *testing.T) {
 
 		store.initConnection()
 		store.stores.post = newSqlPostStore(store, mockMetrics)
-		err := store.GetMaster().CreateTablesIfNotExists()
+		err := store.migrate(migrationsDirectionUp)
 		require.NoError(t, err)
 
 		defer store.Close()
@@ -619,19 +713,19 @@ func TestAppendMultipleStatementsFlagMysql(t *testing.T) {
 			"Should append multiStatements param to the DSN path with existing params",
 			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost?writeTimeout=30s",
 			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost?writeTimeout=30s&multiStatements=true",
-			model.DATABASE_DRIVER_MYSQL,
+			model.DatabaseDriverMysql,
 		},
 		{
 			"Should append multiStatements param to the DSN path with no existing params",
 			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost",
 			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost?multiStatements=true",
-			model.DATABASE_DRIVER_MYSQL,
+			model.DatabaseDriverMysql,
 		},
 		{
 			"Should not multiStatements param to the DSN when driver is not MySQL",
 			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost",
 			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost",
-			model.DATABASE_DRIVER_POSTGRES,
+			model.DatabaseDriverPostgres,
 		},
 	}
 
@@ -647,9 +741,9 @@ func TestAppendMultipleStatementsFlagMysql(t *testing.T) {
 
 func makeSqlSettings(driver string) *model.SqlSettings {
 	switch driver {
-	case model.DATABASE_DRIVER_POSTGRES:
+	case model.DatabaseDriverPostgres:
 		return storetest.MakeSqlSettings(driver, false)
-	case model.DATABASE_DRIVER_MYSQL:
+	case model.DatabaseDriverMysql:
 		return storetest.MakeSqlSettings(driver, false)
 	}
 
@@ -660,23 +754,23 @@ func TestExecNoTimeout(t *testing.T) {
 	StoreTest(t, func(t *testing.T, ss store.Store) {
 		sqlStore := ss.(*SqlStore)
 		var query string
-		timeout := sqlStore.master.QueryTimeout
-		sqlStore.master.QueryTimeout = 1
+		timeout := sqlStore.masterX.queryTimeout
+		sqlStore.masterX.queryTimeout = 1
 		defer func() {
-			sqlStore.master.QueryTimeout = timeout
+			sqlStore.masterX.queryTimeout = timeout
 		}()
-		if sqlStore.DriverName() == model.DATABASE_DRIVER_MYSQL {
+		if sqlStore.DriverName() == model.DatabaseDriverMysql {
 			query = `SELECT SLEEP(2);`
-		} else if sqlStore.DriverName() == model.DATABASE_DRIVER_POSTGRES {
+		} else if sqlStore.DriverName() == model.DatabaseDriverPostgres {
 			query = `SELECT pg_sleep(2);`
 		}
-		_, err := sqlStore.GetMaster().ExecNoTimeout(query)
+		_, err := sqlStore.GetMasterX().ExecNoTimeout(query)
 		require.NoError(t, err)
 	})
 }
 
 func TestMySQLReadTimeout(t *testing.T) {
-	settings := makeSqlSettings(model.DATABASE_DRIVER_MYSQL)
+	settings := makeSqlSettings(model.DatabaseDriverMysql)
 	dataSource := *settings.DataSource
 	config, err := mysql.ParseDSN(dataSource)
 	require.NoError(t, err)
@@ -691,6 +785,82 @@ func TestMySQLReadTimeout(t *testing.T) {
 	store.initConnection()
 	defer store.Close()
 
-	_, err = store.GetMaster().ExecNoTimeout(`SELECT SLEEP(3)`)
+	_, err = store.GetMasterX().ExecNoTimeout(`SELECT SLEEP(3)`)
 	require.NoError(t, err)
+}
+
+func TestGetDBSchemaVersion(t *testing.T) {
+	testDrivers := []string{
+		model.DatabaseDriverPostgres,
+		model.DatabaseDriverMysql,
+	}
+
+	assets := db.Assets()
+
+	for _, driver := range testDrivers {
+		t.Run("Should return latest version number of applied migrations for "+driver, func(t *testing.T) {
+			t.Parallel()
+			settings := makeSqlSettings(driver)
+			store := New(*settings, nil)
+
+			assetsList, err := assets.ReadDir(filepath.Join("migrations", driver))
+			require.NoError(t, err)
+
+			var assetNamesForDriver []string
+			for _, entry := range assetsList {
+				assetNamesForDriver = append(assetNamesForDriver, entry.Name())
+			}
+			sort.Strings(assetNamesForDriver)
+
+			require.NotEmpty(t, assetNamesForDriver)
+			lastMigration := assetNamesForDriver[len(assetNamesForDriver)-1]
+			expectedVersion := strings.Split(lastMigration, "_")[0]
+
+			version, err := store.GetDBSchemaVersion()
+			require.NoError(t, err)
+			require.Equal(t, expectedVersion, fmt.Sprintf("%06d", version))
+		})
+	}
+}
+
+func TestGetAppliedMigrations(t *testing.T) {
+	testDrivers := []string{
+		model.DatabaseDriverPostgres,
+		model.DatabaseDriverMysql,
+	}
+
+	assets := db.Assets()
+
+	for _, driver := range testDrivers {
+		t.Run("Should return db applied migrations for "+driver, func(t *testing.T) {
+			t.Parallel()
+			settings := makeSqlSettings(driver)
+			store := New(*settings, nil)
+
+			assetsList, err := assets.ReadDir(filepath.Join("migrations", driver))
+			require.NoError(t, err)
+
+			var migrationsFromFiles []model.AppliedMigration
+			for _, entry := range assetsList {
+				if strings.HasSuffix(entry.Name(), ".up.sql") {
+					versionString := strings.Split(entry.Name(), "_")[0]
+					version, vErr := strconv.Atoi(versionString)
+					require.NoError(t, vErr)
+
+					name := strings.TrimSuffix(strings.TrimLeft(entry.Name(), versionString+"_"), ".up.sql")
+
+					migrationsFromFiles = append(migrationsFromFiles, model.AppliedMigration{
+						Version: version,
+						Name:    name,
+					})
+				}
+			}
+
+			require.NotEmpty(t, migrationsFromFiles)
+
+			migrations, err := store.GetAppliedMigrations()
+			require.NoError(t, err)
+			require.ElementsMatch(t, migrationsFromFiles, migrations)
+		})
+	}
 }

@@ -10,9 +10,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/cjdelisle/matterfoss-server/v5/audit"
-	"github.com/cjdelisle/matterfoss-server/v5/config"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 var JobserverCmd = &cobra.Command{

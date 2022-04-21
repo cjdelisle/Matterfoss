@@ -13,7 +13,16 @@ import (
 // It should be maintained in chronological order with most current
 // release at the front of the list.
 var versions = []string{
-	"5.36.1",
+	"6.6.0",
+	"6.5.0",
+	"6.4.0",
+	"6.3.0",
+	"6.2.0",
+	"6.1.0",
+	"6.0.0",
+	"5.39.0",
+	"5.38.0",
+	"5.37.0",
 	"5.36.0",
 	"5.35.0",
 	"5.34.0",
@@ -96,7 +105,7 @@ var BuildNumber string
 var BuildDate string
 var BuildHash string
 var BuildHashEnterprise string
-var BuildEnterpriseReady string = "true"
+var BuildEnterpriseReady string
 var versionsWithoutHotFixes []string
 
 func init() {

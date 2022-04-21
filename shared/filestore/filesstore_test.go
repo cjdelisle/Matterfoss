@@ -16,7 +16,7 @@ import (
 	"github.com/stretchr/testify/suite"
 	"github.com/xtgo/uuid"
 
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 func randomString() string {
@@ -33,12 +33,10 @@ type FileBackendTestSuite struct {
 func TestLocalFileBackendTestSuite(t *testing.T) {
 	// Setup a global logger to catch tests logging outside of app context
 	// The global logger will be stomped by apps initializing but that's fine for testing. Ideally this won't happen.
-	mlog.InitGlobalLogger(mlog.NewLogger(&mlog.LoggerConfiguration{
-		EnableConsole: true,
-		ConsoleJson:   true,
-		ConsoleLevel:  "error",
-		EnableFile:    false,
-	}))
+	logger := mlog.CreateConsoleTestLogger(true, mlog.LvlError)
+	defer logger.Shutdown()
+
+	mlog.InitGlobalLogger(logger)
 
 	dir, err := ioutil.TempDir("", "")
 	require.NoError(t, err)
@@ -272,14 +270,19 @@ func (s *FileBackendTestSuite) TestListDirectory() {
 	s.Len(paths, 1)
 	s.Equal(path1, (paths)[0])
 
-	paths, err = s.backend.ListDirectory("19700101/")
+	paths, err = s.backend.ListDirectory("19800101/")
 	s.Nil(err)
 	s.Len(paths, 1)
-	s.Equal(path1, (paths)[0])
+	s.Equal(path2, (paths)[0])
+
+	if s.settings.DriverName == driverLocal {
+		paths, err = s.backend.ListDirectory("19800102")
+		s.Nil(err)
+		s.Len(paths, 0)
+	}
 
 	paths, err = s.backend.ListDirectory("")
 	s.Nil(err)
-
 	found1 := false
 	found2 := false
 	for _, path := range paths {
@@ -294,6 +297,69 @@ func (s *FileBackendTestSuite) TestListDirectory() {
 
 	s.backend.RemoveFile(path1)
 	s.backend.RemoveFile(path2)
+}
+
+func (s *FileBackendTestSuite) TestListDirectoryRecursively() {
+	b := []byte("test")
+	path1 := "19700101/" + randomString()
+	path2 := "19800101/" + randomString()
+	longPath := "19800102/this/is/a/way/too/long/path/for/this/function/to/handle" + randomString()
+
+	paths, err := s.backend.ListDirectoryRecursively("19700101")
+	s.Nil(err)
+	s.Len(paths, 0)
+
+	written, err := s.backend.WriteFile(bytes.NewReader(b), path1)
+	s.Nil(err)
+	s.EqualValues(len(b), written, "expected given number of bytes to have been written")
+
+	written, err = s.backend.WriteFile(bytes.NewReader(b), path2)
+	s.Nil(err)
+	s.EqualValues(len(b), written, "expected given number of bytes to have been written")
+
+	written, err = s.backend.WriteFile(bytes.NewReader(b), longPath)
+	s.Nil(err)
+	s.EqualValues(len(b), written, "expected given number of bytes to have been written")
+
+	paths, err = s.backend.ListDirectoryRecursively("19700101")
+	s.Nil(err)
+	s.Len(paths, 1)
+	s.Equal(path1, (paths)[0])
+
+	paths, err = s.backend.ListDirectoryRecursively("19800101/")
+	s.Nil(err)
+	s.Len(paths, 1)
+	s.Equal(path2, (paths)[0])
+
+	if s.settings.DriverName == driverLocal {
+		paths, err = s.backend.ListDirectory("19800102")
+		s.Nil(err)
+		s.Len(paths, 1)
+	}
+
+	paths, err = s.backend.ListDirectoryRecursively("")
+	s.Nil(err)
+	found1 := false
+	found2 := false
+	found3 := false
+	for _, path := range paths {
+		if path == path1 {
+			found1 = true
+		} else if path == path2 {
+			found2 = true
+		} else if path == longPath {
+			found3 = true
+		}
+	}
+	s.True(found1)
+	s.True(found2)
+	if s.settings.DriverName == driverLocal {
+		s.False(found3)
+	}
+
+	s.backend.RemoveFile(path1)
+	s.backend.RemoveFile(path2)
+	s.backend.RemoveFile(longPath)
 }
 
 func (s *FileBackendTestSuite) TestRemoveDirectory() {

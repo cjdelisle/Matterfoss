@@ -15,14 +15,14 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/cjdelisle/matterfoss-server/v5/api4"
-	"github.com/cjdelisle/matterfoss-server/v5/app"
-	"github.com/cjdelisle/matterfoss-server/v5/config"
-	"github.com/cjdelisle/matterfoss-server/v5/manualtesting"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
-	"github.com/cjdelisle/matterfoss-server/v5/web"
-	"github.com/cjdelisle/matterfoss-server/v5/wsapi"
+	"github.com/cjdelisle/matterfoss-server/v6/api4"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/manualtesting"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/web"
+	"github.com/cjdelisle/matterfoss-server/v6/wsapi"
 )
 
 var serverCmd = &cobra.Command{
@@ -38,9 +38,6 @@ func init() {
 }
 
 func serverCmdF(command *cobra.Command, args []string) error {
-	disableConfigWatch, _ := command.Flags().GetBool("disableconfigwatch")
-	usedPlatform, _ := command.Flags().GetBool("platform")
-
 	interruptChan := make(chan os.Signal, 1)
 
 	if err := utils.TranslationsPreInit(); err != nil {
@@ -52,16 +49,16 @@ func serverCmdF(command *cobra.Command, args []string) error {
 		mlog.Warn("Error loading custom configuration defaults: " + err.Error())
 	}
 
-	configStore, err := config.NewStoreFromDSN(getConfigDSN(command, config.GetEnvironment()), !disableConfigWatch, false, customDefaults)
+	configStore, err := config.NewStoreFromDSN(getConfigDSN(command, config.GetEnvironment()), false, customDefaults, true)
 	if err != nil {
 		return errors.Wrap(err, "failed to load configuration")
 	}
 	defer configStore.Close()
 
-	return runServer(configStore, usedPlatform, interruptChan)
+	return runServer(configStore, interruptChan)
 }
 
-func runServer(configStore *config.Store, usedPlatform bool, interruptChan chan os.Signal) error {
+func runServer(configStore *config.Store, interruptChan chan os.Signal) error {
 	// Setting the highest traceback level from the code.
 	// This is done to print goroutines from all threads (see golang.org/issue/13161)
 	// and also preserve a crash dump for later investigation.
@@ -76,7 +73,7 @@ func runServer(configStore *config.Store, usedPlatform bool, interruptChan chan 
 	}
 	server, err := app.NewServer(options...)
 	if err != nil {
-		mlog.Critical(err.Error())
+		mlog.Error(err.Error())
 		return err
 	}
 	defer server.Shutdown()
@@ -89,28 +86,25 @@ func runServer(configStore *config.Store, usedPlatform bool, interruptChan chan 
 		if x := recover(); x != nil {
 			var buf bytes.Buffer
 			pprof.Lookup("goroutine").WriteTo(&buf, 2)
-			mlog.Critical("A panic occurred",
+			mlog.Error("A panic occurred",
 				mlog.Any("error", x),
 				mlog.String("stack", buf.String()))
 			panic(x)
 		}
 	}()
 
-	if usedPlatform {
-		mlog.Warn("The platform binary has been deprecated, please switch to using the mattermost binary.")
+	api, err := api4.Init(server)
+	if err != nil {
+		mlog.Error(err.Error())
+		return err
 	}
-
-	a := app.New(app.ServerConnector(server))
-	api := api4.Init(a, server.Router)
-
 	wsapi.Init(server)
-	web.New(a, server.Router)
-	api4.InitLocal(a, server.LocalRouter)
+	web.New(server)
 
-	serverErr := server.Start()
-	if serverErr != nil {
-		mlog.Critical(serverErr.Error())
-		return serverErr
+	err = server.Start()
+	if err != nil {
+		mlog.Error(err.Error())
+		return err
 	}
 
 	// If we allow testing then listen for manual testing URL hits

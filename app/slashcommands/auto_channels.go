@@ -4,10 +4,10 @@
 package slashcommands
 
 import (
-	"github.com/cjdelisle/matterfoss-server/v5/app"
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 type AutoChannelCreator struct {
@@ -19,7 +19,7 @@ type AutoChannelCreator struct {
 	DisplayNameCharset string
 	NameLen            utils.Range
 	NameCharset        string
-	ChannelType        string
+	ChannelType        model.ChannelType
 }
 
 func NewAutoChannelCreator(a *app.App, team *model.Team, userID string) *AutoChannelCreator {
@@ -73,4 +73,24 @@ func (cfg *AutoChannelCreator) CreateTestChannels(c *request.Context, num utils.
 	}
 
 	return channels, nil
+}
+
+func (cfg *AutoChannelCreator) CreateTestDMs(c *request.Context, num utils.Range) ([]*model.Channel, error) {
+	numDMs := utils.RandIntFromRange(num)
+	dms := make([]*model.Channel, numDMs)
+
+	users, err := cfg.a.GetUsers(&model.UserGetOptions{Page: 0, PerPage: numDMs})
+	if err != nil {
+		return nil, err
+	}
+
+	for i, user := range users {
+		var err *model.AppError
+		dms[i], err = cfg.a.GetOrCreateDirectChannel(c, cfg.userID, user.Id)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return dms, nil
 }

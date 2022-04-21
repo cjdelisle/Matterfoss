@@ -11,7 +11,7 @@ import (
 
 	"github.com/cespare/xxhash/v2"
 
-	"github.com/cjdelisle/matterfoss-server/v5/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
 )
 
 const (

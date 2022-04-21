@@ -1,5 +1,31 @@
 # Changelog
 
+## v0.12.0
+
+- feat: Automatic Release detection (#363, #369, #386, #400)
+- fix: Do not change Hub.lastEventID for transactions (#379)
+- fix: Do not clear LastEventID when events are dropped (#382)
+- Updates to documentation (#366, #385)
+
+_NOTE:_
+This version drops support for Go 1.14, however no changes have been made that would make the SDK not work with Go 1.14. The currently supported Go versions are the last 3 stable releases: 1.15, 1.16 and 1.17.
+There are two behavior changes related to `LastEventID`, both of which were intended to align the behavior of the Sentry Go SDK with other Sentry SDKs.
+The new [automatic release detection feature](https://github.com/getsentry/sentry-go/issues/335) makes it easier to use Sentry and separate events per release without requiring extra work from users. We intend to improve this functionality in a future release by utilizing information that will be available in runtime starting with Go 1.18. The tracking issue is [#401](https://github.com/getsentry/sentry-go/issues/401).
+
+## v0.11.0
+
+- feat(transports): Category-based Rate Limiting ([#354](https://github.com/getsentry/sentry-go/pull/354))
+- feat(transports): Report User-Agent identifying SDK ([#357](https://github.com/getsentry/sentry-go/pull/357))
+- fix(scope): Include event processors in clone ([#349](https://github.com/getsentry/sentry-go/pull/349))
+- Improvements to `go doc` documentation ([#344](https://github.com/getsentry/sentry-go/pull/344), [#350](https://github.com/getsentry/sentry-go/pull/350), [#351](https://github.com/getsentry/sentry-go/pull/351))
+- Miscellaneous changes to our testing infrastructure with GitHub Actions
+  ([57123a40](https://github.com/getsentry/sentry-go/commit/57123a409be55f61b1d5a6da93c176c55a399ad0), [#128](https://github.com/getsentry/sentry-go/pull/128), [#338](https://github.com/getsentry/sentry-go/pull/338), [#345](https://github.com/getsentry/sentry-go/pull/345), [#346](https://github.com/getsentry/sentry-go/pull/346), [#352](https://github.com/getsentry/sentry-go/pull/352), [#353](https://github.com/getsentry/sentry-go/pull/353), [#355](https://github.com/getsentry/sentry-go/pull/355))
+
+_NOTE:_
+This version drops support for Go 1.13. The currently supported Go versions are the last 3 stable releases: 1.14, 1.15 and 1.16.
+Users of the tracing functionality (`StartSpan`, etc) should upgrade to this version to benefit from separate rate limits for errors and transactions.
+There are no breaking changes and upgrading should be a smooth experience for all users.
+
 ## v0.10.0
 
 - feat: Debug connection reuse (#323)

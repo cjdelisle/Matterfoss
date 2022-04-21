@@ -6,7 +6,7 @@ package einterfaces
 import (
 	"context"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 type MessageExportInterface interface {

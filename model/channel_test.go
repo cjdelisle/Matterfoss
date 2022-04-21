@@ -10,21 +10,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestChannelJson(t *testing.T) {
-	o := Channel{Id: NewId(), Name: NewId()}
-	json := o.ToJson()
-	ro := ChannelFromJson(strings.NewReader(json))
-
-	require.Equal(t, o.Id, ro.Id)
-
-	p := ChannelPatch{Name: new(string)}
-	*p.Name = NewId()
-	json = p.ToJson()
-	rp := ChannelPatchFromJson(strings.NewReader(json))
-
-	require.Equal(t, *p.Name, *rp.Name)
-}
-
 func TestChannelCopy(t *testing.T) {
 	o := Channel{Id: NewId(), Name: NewId()}
 	ro := o.DeepCopy()
@@ -77,7 +62,7 @@ func TestChannelIsValid(t *testing.T) {
 	o.Type = "U"
 	require.NotNil(t, o.IsValid())
 
-	o.Type = "P"
+	o.Type = ChannelTypePrivate
 	require.Nil(t, o.IsValid())
 
 	o.Header = strings.Repeat("01234567890", 100)
@@ -115,11 +100,11 @@ func TestGetGroupDisplayNameFromUsers(t *testing.T) {
 	users[3] = &User{Username: NewId()}
 
 	name := GetGroupDisplayNameFromUsers(users, true)
-	require.LessOrEqual(t, len(name), CHANNEL_NAME_MAX_LENGTH)
+	require.LessOrEqual(t, len(name), ChannelNameMaxLength)
 }
 
 func TestGetGroupNameFromUserIds(t *testing.T) {
 	name := GetGroupNameFromUserIds([]string{NewId(), NewId(), NewId(), NewId(), NewId()})
 
-	require.LessOrEqual(t, len(name), CHANNEL_NAME_MAX_LENGTH)
+	require.LessOrEqual(t, len(name), ChannelNameMaxLength)
 }

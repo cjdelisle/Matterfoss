@@ -15,7 +15,7 @@ func TestAutocompleteData(t *testing.T) {
 	assert.NoError(t, ad.IsValid())
 	ad.RoleID = "some_id"
 	assert.Error(t, ad.IsValid())
-	ad.RoleID = SYSTEM_ADMIN_ROLE_ID
+	ad.RoleID = SystemAdminRoleId
 	assert.NoError(t, ad.IsValid())
 	ad.AddDynamicListArgument("help", "/some/url", true)
 	assert.NoError(t, ad.IsValid())
@@ -65,20 +65,11 @@ func TestAutocompleteData(t *testing.T) {
 	assert.Error(t, ad.IsValid())
 }
 
-func TestAutocompleteDataJSON(t *testing.T) {
-	ad := getAutocompleteData()
-	b, err := ad.ToJSON()
-	assert.NoError(t, err)
-	ad2, err := AutocompleteDataFromJSON(b)
-	assert.NoError(t, err)
-	assert.True(t, ad2.Equals(ad))
-}
-
 func getAutocompleteData() *AutocompleteData {
 	ad := NewAutocompleteData("jira", "", "Available commands:")
-	ad.RoleID = SYSTEM_USER_ROLE_ID
-	command := NewAutocompleteData("connect", "", "Connect to matterfoss")
-	command.RoleID = SYSTEM_ADMIN_ROLE_ID
+	ad.RoleID = SystemUserRoleId
+	command := NewAutocompleteData("connect", "", "Connect to mattermost")
+	command.RoleID = SystemAdminRoleId
 	items := []AutocompleteListItem{
 		{
 			Hint:     "arg1",
@@ -99,10 +90,10 @@ func getAutocompleteData() *AutocompleteData {
 
 func TestUpdateRelativeURLsForPluginCommands(t *testing.T) {
 	ad := getAutocompleteData()
-	baseURL, _ := url.Parse("http://localhost:8065/plugins/com.matterfoss.demo-plugin")
+	baseURL, _ := url.Parse("http://localhost:8065/plugins/com.mattermost.demo-plugin")
 	err := ad.UpdateRelativeURLsForPluginCommands(baseURL)
 	assert.NoError(t, err)
 	arg, ok := ad.SubCommands[0].Arguments[2].Data.(*AutocompleteDynamicListArg)
 	assert.True(t, ok)
-	assert.Equal(t, "http://localhost:8065/plugins/com.matterfoss.demo-plugin/other/url", arg.FetchURL)
+	assert.Equal(t, "http://localhost:8065/plugins/com.mattermost.demo-plugin/other/url", arg.FetchURL)
 }

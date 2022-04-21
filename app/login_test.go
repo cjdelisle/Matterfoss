@@ -10,7 +10,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func TestCheckForClientSideCert(t *testing.T) {
@@ -48,8 +48,6 @@ func TestCWSLogin(t *testing.T) {
 	th.App.Srv().SetLicense(license)
 
 	t.Run("Should authenticate user when CWS login is enabled and tokens are equal", func(t *testing.T) {
-		t.SkipNow()
-
 		token := model.NewToken(TokenTypeCWSAccess, "")
 		defer th.App.DeleteToken(token)
 		os.Setenv("CWS_CLOUD_TOKEN", token.Token)

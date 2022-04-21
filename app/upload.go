@@ -12,15 +12,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 const minFirstPartSize = 5 * 1024 * 1024 // 5MB
-const IncompleteUploadSuffix = ".tmp"
 
 func (a *App) runPluginsHook(c *request.Context, info *model.FileInfo, file io.Reader) *model.AppError {
 	pluginsEnvironment := a.GetPluginsEnvironment()
@@ -166,23 +165,23 @@ func (a *App) GetUploadSessionsForUser(userID string) ([]*model.UploadSession, *
 func (a *App) UploadData(c *request.Context, us *model.UploadSession, rd io.Reader) (*model.FileInfo, *model.AppError) {
 	// prevent more than one caller to upload data at the same time for a given upload session.
 	// This is to avoid possible inconsistencies.
-	a.Srv().uploadLockMapMut.Lock()
-	locked := a.Srv().uploadLockMap[us.Id]
+	a.ch.uploadLockMapMut.Lock()
+	locked := a.ch.uploadLockMap[us.Id]
 	if locked {
 		// session lock is already taken, return error.
-		a.Srv().uploadLockMapMut.Unlock()
+		a.ch.uploadLockMapMut.Unlock()
 		return nil, model.NewAppError("UploadData", "app.upload.upload_data.concurrent.app_error",
 			nil, "", http.StatusBadRequest)
 	}
 	// grab the session lock.
-	a.Srv().uploadLockMap[us.Id] = true
-	a.Srv().uploadLockMapMut.Unlock()
+	a.ch.uploadLockMap[us.Id] = true
+	a.ch.uploadLockMapMut.Unlock()
 
 	// reset the session lock on exit.
 	defer func() {
-		a.Srv().uploadLockMapMut.Lock()
-		delete(a.Srv().uploadLockMap, us.Id)
-		a.Srv().uploadLockMapMut.Unlock()
+		a.ch.uploadLockMapMut.Lock()
+		delete(a.ch.uploadLockMap, us.Id)
+		a.ch.uploadLockMapMut.Unlock()
 	}()
 
 	// fetch the session from store to check for inconsistencies.
@@ -195,7 +194,7 @@ func (a *App) UploadData(c *request.Context, us *model.UploadSession, rd io.Read
 
 	uploadPath := us.Path
 	if us.Type == model.UploadTypeImport {
-		uploadPath += IncompleteUploadSuffix
+		uploadPath += model.IncompleteUploadSuffix
 	}
 
 	// make sure it's not possible to upload more data than what is expected.
@@ -265,14 +264,11 @@ func (a *App) UploadData(c *request.Context, us *model.UploadSession, rd io.Read
 
 	// image post-processing
 	if info.IsImage() {
-		// Check dimensions before loading the whole thing into memory later on
-		// This casting is done to prevent overflow on 32 bit systems (not needed
-		// in 64 bits systems because images can't have more than 32 bits height or
-		// width)
-		if int64(info.Width)*int64(info.Height) > MaxImageSize {
+		if limitErr := checkImageResolutionLimit(info.Width, info.Height, *a.Config().FileSettings.MaxImageResolution); limitErr != nil {
 			return nil, model.NewAppError("uploadData", "app.upload.upload_data.large_image.app_error",
 				map[string]interface{}{"Filename": us.Filename, "Width": info.Width, "Height": info.Height}, "", http.StatusBadRequest)
 		}
+
 		nameWithoutExtension := info.Name[:strings.LastIndex(info.Name, ".")]
 		info.PreviewPath = filepath.Dir(info.Path) + "/" + nameWithoutExtension + "_preview.jpg"
 		info.ThumbnailPath = filepath.Dir(info.Path) + "/" + nameWithoutExtension + "_thumb.jpg"

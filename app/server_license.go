@@ -4,7 +4,7 @@
 package app
 
 import (
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func (s *Server) License() *model.License {

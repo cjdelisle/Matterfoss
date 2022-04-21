@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -15,12 +16,12 @@ import (
 
 	"github.com/avct/uasurfer"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 const cwsTokenEnv = "CWS_CLOUD_TOKEN"
@@ -102,7 +103,7 @@ func (a *App) AuthenticateUserForLogin(c *request.Context, id, loginId, password
 	// If client side cert is enable and it's checking as a primary source
 	// then trust the proxy and cert that the correct user is supplied and allow
 	// them access
-	if *a.Config().ExperimentalSettings.ClientSideCertEnable && *a.Config().ExperimentalSettings.ClientSideCertCheck == model.CLIENT_SIDE_CERT_CHECK_PRIMARY_AUTH {
+	if *a.Config().ExperimentalSettings.ClientSideCertEnable && *a.Config().ExperimentalSettings.ClientSideCertCheck == model.ClientSideCertCheckPrimaryAuth {
 		// Unless the user is a bot.
 		if err = checkUserNotBot(user); err != nil {
 			return nil, err
@@ -145,7 +146,7 @@ func (a *App) GetUserForLogin(id, loginId string) (*model.User, *model.AppError)
 	// Try to get the user with LDAP if enabled
 	if *a.Config().LdapSettings.Enable && a.Ldap() != nil {
 		if ldapUser, err := a.Ldap().GetUser(loginId); err == nil {
-			if user, err := a.GetUserByAuth(ldapUser.AuthData, model.USER_AUTH_SERVICE_LDAP); err == nil {
+			if user, err := a.GetUserByAuth(ldapUser.AuthData, model.UserAuthServiceLdap); err == nil {
 				return user, nil
 			}
 			return ldapUser, nil
@@ -170,14 +171,14 @@ func (a *App) DoLogin(c *request.Context, w http.ResponseWriter, r *http.Request
 	}
 
 	session := &model.Session{UserId: user.Id, Roles: user.GetRawRoles(), DeviceId: deviceID, IsOAuth: false, Props: map[string]string{
-		model.USER_AUTH_SERVICE_IS_MOBILE: strconv.FormatBool(isMobile),
-		model.USER_AUTH_SERVICE_IS_SAML:   strconv.FormatBool(isSaml),
-		model.USER_AUTH_SERVICE_IS_OAUTH:  strconv.FormatBool(isOAuthUser),
+		model.UserAuthServiceIsMobile: strconv.FormatBool(isMobile),
+		model.UserAuthServiceIsSaml:   strconv.FormatBool(isSaml),
+		model.UserAuthServiceIsOAuth:  strconv.FormatBool(isOAuthUser),
 	}}
 	session.GenerateCSRF()
 
 	if deviceID != "" {
-		a.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthMobileInDays)
+		a.ch.srv.userService.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthMobileInDays)
 
 		// A special case where we logout of all other sessions with the same Id
 		if err := a.RevokeSessionsForDeviceId(user.Id, deviceID, ""); err != nil {
@@ -185,11 +186,11 @@ func (a *App) DoLogin(c *request.Context, w http.ResponseWriter, r *http.Request
 			return err
 		}
 	} else if isMobile {
-		a.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthMobileInDays)
+		a.ch.srv.userService.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthMobileInDays)
 	} else if isOAuthUser || isSaml {
-		a.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthSSOInDays)
+		a.ch.srv.userService.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthSSOInDays)
 	} else {
-		a.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthWebInDays)
+		a.ch.srv.userService.SetSessionExpireInDays(session, *a.Config().ServiceSettings.SessionLengthWebInDays)
 	}
 
 	ua := uasurfer.Parse(r.UserAgent())
@@ -199,13 +200,13 @@ func (a *App) DoLogin(c *request.Context, w http.ResponseWriter, r *http.Request
 	bname := getBrowserName(ua, r.UserAgent())
 	bversion := getBrowserVersion(ua, r.UserAgent())
 
-	session.AddProp(model.SESSION_PROP_PLATFORM, plat)
-	session.AddProp(model.SESSION_PROP_OS, os)
-	session.AddProp(model.SESSION_PROP_BROWSER, fmt.Sprintf("%v/%v", bname, bversion))
+	session.AddProp(model.SessionPropPlatform, plat)
+	session.AddProp(model.SessionPropOs, os)
+	session.AddProp(model.SessionPropBrowser, fmt.Sprintf("%v/%v", bname, bversion))
 	if user.IsGuest() {
-		session.AddProp(model.SESSION_PROP_IS_GUEST, "true")
+		session.AddProp(model.SessionPropIsGuest, "true")
 	} else {
-		session.AddProp(model.SESSION_PROP_IS_GUEST, "false")
+		session.AddProp(model.SessionPropIsGuest, "false")
 	}
 
 	var err *model.AppError
@@ -214,7 +215,7 @@ func (a *App) DoLogin(c *request.Context, w http.ResponseWriter, r *http.Request
 		return err
 	}
 
-	w.Header().Set(model.HEADER_TOKEN, session.Token)
+	w.Header().Set(model.HeaderToken, session.Token)
 
 	c.SetSession(session)
 	if a.Srv().License() != nil && *a.Srv().License().Features.LDAP && a.Ldap() != nil {
@@ -238,6 +239,53 @@ func (a *App) DoLogin(c *request.Context, w http.ResponseWriter, r *http.Request
 	return nil
 }
 
+func (a *App) AttachCloudSessionCookie(c *request.Context, w http.ResponseWriter, r *http.Request) {
+	secure := false
+	if GetProtocol(r) == "https" {
+		secure = true
+	}
+
+	maxAge := *a.Config().ServiceSettings.SessionLengthWebInDays * 60 * 60 * 24
+	subpath, _ := utils.GetSubpathFromConfig(a.Config())
+	expiresAt := time.Unix(model.GetMillis()/1000+int64(maxAge), 0)
+
+	domain := ""
+	if siteURL, err := url.Parse(a.GetSiteURL()); err == nil {
+		domain = siteURL.Hostname()
+	}
+
+	if domain == "" {
+		return
+	}
+
+	var workspaceName string
+	if strings.Contains(domain, "localhost") {
+		workspaceName = "localhost"
+	} else {
+
+		// ensure we have a format for a cloud workspace url i.e. example.cloud.mattermost.com
+		if len(strings.Split(domain, ".")) != 4 {
+			return
+		}
+		workspaceName = strings.SplitN(domain, ".", 2)[0]
+		domain = strings.SplitN(domain, ".", 3)[2]
+		domain = "." + domain
+	}
+
+	cookie := &http.Cookie{
+		Name:    model.SessionCookieCloudUrl,
+		Value:   workspaceName,
+		Path:    subpath,
+		MaxAge:  maxAge,
+		Expires: expiresAt,
+		Domain:  domain,
+		Secure:  secure,
+	}
+
+	http.SetCookie(w, cookie)
+
+}
+
 func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r *http.Request) {
 	secure := false
 	if GetProtocol(r) == "https" {
@@ -250,7 +298,7 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 
 	expiresAt := time.Unix(model.GetMillis()/1000+int64(maxAge), 0)
 	sessionCookie := &http.Cookie{
-		Name:     model.SESSION_COOKIE_TOKEN,
+		Name:     model.SessionCookieToken,
 		Value:    c.Session().Token,
 		Path:     subpath,
 		MaxAge:   maxAge,
@@ -261,7 +309,7 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 	}
 
 	userCookie := &http.Cookie{
-		Name:    model.SESSION_COOKIE_USER,
+		Name:    model.SessionCookieUser,
 		Value:   c.Session().UserId,
 		Path:    subpath,
 		MaxAge:  maxAge,
@@ -271,7 +319,7 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 	}
 
 	csrfCookie := &http.Cookie{
-		Name:    model.SESSION_COOKIE_CSRF,
+		Name:    model.SessionCookieCsrf,
 		Value:   c.Session().GetCSRF(),
 		Path:    subpath,
 		MaxAge:  maxAge,
@@ -286,7 +334,7 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 }
 
 func GetProtocol(r *http.Request) string {
-	if r.Header.Get(model.HEADER_FORWARDED_PROTO) == "https" || r.TLS != nil {
+	if r.Header.Get(model.HeaderForwardedProto) == "https" || r.TLS != nil {
 		return "https"
 	}
 	return "http"

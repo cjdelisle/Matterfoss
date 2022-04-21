@@ -7,7 +7,7 @@ package mocks
 import (
 	context "context"
 
-	model "github.com/cjdelisle/matterfoss-server/v5/model"
+	model "github.com/cjdelisle/matterfoss-server/v6/model"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -38,8 +38,17 @@ func (_m *SessionStore) AnalyticsSessionCount() (int64, error) {
 }
 
 // Cleanup provides a mock function with given fields: expiryTime, batchSize
-func (_m *SessionStore) Cleanup(expiryTime int64, batchSize int64) {
-	_m.Called(expiryTime, batchSize)
+func (_m *SessionStore) Cleanup(expiryTime int64, batchSize int64) error {
+	ret := _m.Called(expiryTime, batchSize)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(int64, int64) error); ok {
+		r0 = rf(expiryTime, batchSize)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
 }
 
 // Get provides a mock function with given fields: ctx, sessionIDOrToken
@@ -58,6 +67,27 @@ func (_m *SessionStore) Get(ctx context.Context, sessionIDOrToken string) (*mode
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
 		r1 = rf(ctx, sessionIDOrToken)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GetLastSessionRowCreateAt provides a mock function with given fields:
+func (_m *SessionStore) GetLastSessionRowCreateAt() (int64, error) {
+	ret := _m.Called()
+
+	var r0 int64
+	if rf, ok := ret.Get(0).(func() int64); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(int64)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func() error); ok {
+		r1 = rf()
 	} else {
 		r1 = ret.Error(1)
 	}

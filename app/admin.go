@@ -4,7 +4,7 @@
 package app
 
 import (
-	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -13,12 +13,17 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/i18n"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mail"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
+
+var latestVersionCache = cache.NewLRU(cache.LRUOptions{
+	Size: 1,
+})
 
 func (s *Server) GetLogs(page, perPage int) ([]string, *model.AppError) {
 	var lines []string
@@ -63,11 +68,8 @@ func (s *Server) GetLogsSkipSend(page, perPage int) ([]string, *model.AppError) 
 	var lines []string
 
 	if *s.Config().LogSettings.EnableFile {
-		timeoutCtx, timeoutCancel := context.WithTimeout(context.Background(), mlog.DefaultFlushTimeout)
-		defer timeoutCancel()
-		mlog.Flush(timeoutCtx)
-
-		logFile := utils.GetLogFileLocation(*s.Config().LogSettings.FileLocation)
+		s.Log.Flush()
+		logFile := config.GetLogFileLocation(*s.Config().LogSettings.FileLocation)
 		file, err := os.Open(logFile)
 		if err != nil {
 			return nil, model.NewAppError("getLogs", "api.admin.file_read_error", nil, err.Error(), http.StatusInternalServerError)
@@ -155,8 +157,8 @@ func (s *Server) InvalidateAllCaches() *model.AppError {
 	if s.Cluster != nil {
 
 		msg := &model.ClusterMessage{
-			Event:            model.CLUSTER_EVENT_INVALIDATE_ALL_CACHES,
-			SendType:         model.CLUSTER_SEND_RELIABLE,
+			Event:            model.ClusterEventInvalidateAllCaches,
+			SendType:         model.ClusterSendReliable,
 			WaitForAllToSend: true,
 		}
 
@@ -168,7 +170,7 @@ func (s *Server) InvalidateAllCaches() *model.AppError {
 
 func (s *Server) InvalidateAllCachesSkipSend() {
 	mlog.Info("Purging all caches")
-	s.sessionCache.Purge()
+	s.userService.ClearAllUsersSessionCacheLocal()
 	s.statusCache.Purge()
 	s.Store.Team().ClearCaches()
 	s.Store.Channel().ClearCaches()
@@ -176,6 +178,7 @@ func (s *Server) InvalidateAllCachesSkipSend() {
 	s.Store.Post().ClearCaches()
 	s.Store.FileInfo().ClearCaches()
 	s.Store.Webhook().ClearCaches()
+	linkCache.Purge()
 	s.LoadLicense()
 }
 
@@ -211,7 +214,7 @@ func (a *App) TestEmail(userID string, cfg *model.Config) *model.AppError {
 
 	// if the user hasn't changed their email settings, fill in the actual SMTP password so that
 	// the user can verify an existing SMTP connection
-	if *cfg.EmailSettings.SMTPPassword == model.FAKE_SETTING {
+	if *cfg.EmailSettings.SMTPPassword == model.FakeSetting {
 		if *cfg.EmailSettings.SMTPServer == *a.Config().EmailSettings.SMTPServer &&
 			*cfg.EmailSettings.SMTPPort == *a.Config().EmailSettings.SMTPPort &&
 			*cfg.EmailSettings.SMTPUsername == *a.Config().EmailSettings.SMTPUsername {
@@ -243,4 +246,44 @@ func (s *Server) serverBusyStateChanged(sbs *model.ServerBusyState) {
 	} else {
 		mlog.Info("server busy state cleared via cluster event - non-critical services enabled")
 	}
+}
+
+func (a *App) GetLatestVersion(latestVersionUrl string) (*model.GithubReleaseInfo, *model.AppError) {
+	var cachedLatestVersion *model.GithubReleaseInfo
+	if cacheErr := latestVersionCache.Get("latest_version_cache", &cachedLatestVersion); cacheErr == nil {
+		return cachedLatestVersion, nil
+	}
+
+	res, err := http.Get(latestVersionUrl)
+	if err != nil {
+		return nil, model.NewAppError("GetLatestVersion", "app.admin.latest_version_external_error.failure", nil, "", http.StatusInternalServerError)
+	}
+
+	defer res.Body.Close()
+
+	responseData, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return nil, model.NewAppError("GetLatestVersion", "app.admin.latest_version_read_all.failure", nil, "", http.StatusInternalServerError)
+	}
+
+	var releaseInfoResponse *model.GithubReleaseInfo
+	err = json.Unmarshal(responseData, &releaseInfoResponse)
+	if err != nil {
+		return nil, model.NewAppError("GetLatestVersion", "app.admin.latest_version_unmarshal.failure", nil, "", http.StatusInternalServerError)
+	}
+
+	if validErr := releaseInfoResponse.IsValid(); validErr != nil {
+		return nil, model.NewAppError("GetLatestVersion", "app.admin.latest_version_external_error.failure", nil, "", http.StatusInternalServerError)
+	}
+
+	err = latestVersionCache.Set("latest_version_cache", releaseInfoResponse)
+	if err != nil {
+		return nil, model.NewAppError("GetLatestVersion", "app.admin.latest_version_set_cache.failure", nil, "", http.StatusInternalServerError)
+	}
+
+	return releaseInfoResponse, nil
+}
+
+func (a *App) ClearLatestVersionCache() {
+	latestVersionCache.Remove("latest_version_cache")
 }

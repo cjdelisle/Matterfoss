@@ -6,16 +6,20 @@ package model
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"sync/atomic"
 	"time"
 
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+
 	"github.com/gorilla/websocket"
+	"github.com/vmihailenco/msgpack/v5"
 )
 
 const (
-	SOCKET_MAX_MESSAGE_SIZE_KB  = 8 * 1024 // 8KB
-	PING_TIMEOUT_BUFFER_SECONDS = 5
+	SocketMaxMessageSizeKb   = 8 * 1024 // 8KB
+	PingTimeoutBufferSeconds = 5
 )
 
 type msgType int
@@ -23,6 +27,7 @@ type msgType int
 const (
 	msgTypeJSON msgType = iota + 1
 	msgTypePong
+	msgTypeBinary
 )
 
 type writeMessage struct {
@@ -37,9 +42,9 @@ const avgReadMsgSizeBytes = 1024
 // A client must read from PingTimeoutChannel, EventChannel and ResponseChannel to prevent
 // deadlocks from occurring in the program.
 type WebSocketClient struct {
-	Url                string                  // The location of the server like "ws://localhost:8065"
-	ApiUrl             string                  // The API location of the server like "ws://localhost:8065/api/v3"
-	ConnectUrl         string                  // The WebSocket URL to connect to like "ws://localhost:8065/api/v3/path/to/websocket"
+	URL                string                  // The location of the server like "ws://localhost:8065"
+	APIURL             string                  // The API location of the server like "ws://localhost:8065/api/v3"
+	ConnectURL         string                  // The WebSocket URL to connect to like "ws://localhost:8065/api/v3/path/to/websocket"
 	Conn               *websocket.Conn         // The WebSocket connection
 	AuthToken          string                  // The token used to open the WebSocket connection
 	Sequence           int64                   // The ever-incrementing sequence attached to each WebSocket action
@@ -59,22 +64,38 @@ type WebSocketClient struct {
 
 // NewWebSocketClient constructs a new WebSocket client with convenience
 // methods for talking to the server.
-func NewWebSocketClient(url, authToken string) (*WebSocketClient, *AppError) {
+func NewWebSocketClient(url, authToken string) (*WebSocketClient, error) {
 	return NewWebSocketClientWithDialer(websocket.DefaultDialer, url, authToken)
+}
+
+func NewReliableWebSocketClientWithDialer(dialer *websocket.Dialer, url, authToken, connID string, seqNo int, withAuthHeader bool) (*WebSocketClient, error) {
+	connectURL := url + APIURLSuffix + "/websocket" + fmt.Sprintf("?connection_id=%s&sequence_number=%d", connID, seqNo)
+	var header http.Header
+	if withAuthHeader {
+		header = http.Header{
+			"Authorization": []string{"Bearer " + authToken},
+		}
+	}
+
+	return makeClient(dialer, url, connectURL, authToken, header)
 }
 
 // NewWebSocketClientWithDialer constructs a new WebSocket client with convenience
 // methods for talking to the server using a custom dialer.
-func NewWebSocketClientWithDialer(dialer *websocket.Dialer, url, authToken string) (*WebSocketClient, *AppError) {
-	conn, _, err := dialer.Dial(url+API_URL_SUFFIX+"/websocket", nil)
+func NewWebSocketClientWithDialer(dialer *websocket.Dialer, url, authToken string) (*WebSocketClient, error) {
+	return makeClient(dialer, url, url+APIURLSuffix+"/websocket", authToken, nil)
+}
+
+func makeClient(dialer *websocket.Dialer, url, connectURL, authToken string, header http.Header) (*WebSocketClient, error) {
+	conn, _, err := dialer.Dial(connectURL, header)
 	if err != nil {
 		return nil, NewAppError("NewWebSocketClient", "model.websocket_client.connect_fail.app_error", nil, err.Error(), http.StatusInternalServerError)
 	}
 
 	client := &WebSocketClient{
-		Url:                url,
-		ApiUrl:             url + API_URL_SUFFIX,
-		ConnectUrl:         url + API_URL_SUFFIX + "/websocket",
+		URL:                url,
+		APIURL:             url + APIURLSuffix,
+		ConnectURL:         connectURL,
 		Conn:               conn,
 		AuthToken:          authToken,
 		Sequence:           1,
@@ -90,34 +111,34 @@ func NewWebSocketClientWithDialer(dialer *websocket.Dialer, url, authToken strin
 	client.configurePingHandling()
 	go client.writer()
 
-	client.SendMessage(WEBSOCKET_AUTHENTICATION_CHALLENGE, map[string]interface{}{"token": authToken})
+	client.SendMessage(WebsocketAuthenticationChallenge, map[string]interface{}{"token": authToken})
 
 	return client, nil
 }
 
 // NewWebSocketClient4 constructs a new WebSocket client with convenience
 // methods for talking to the server. Uses the v4 endpoint.
-func NewWebSocketClient4(url, authToken string) (*WebSocketClient, *AppError) {
+func NewWebSocketClient4(url, authToken string) (*WebSocketClient, error) {
 	return NewWebSocketClient4WithDialer(websocket.DefaultDialer, url, authToken)
 }
 
 // NewWebSocketClient4WithDialer constructs a new WebSocket client with convenience
 // methods for talking to the server using a custom dialer. Uses the v4 endpoint.
-func NewWebSocketClient4WithDialer(dialer *websocket.Dialer, url, authToken string) (*WebSocketClient, *AppError) {
+func NewWebSocketClient4WithDialer(dialer *websocket.Dialer, url, authToken string) (*WebSocketClient, error) {
 	return NewWebSocketClientWithDialer(dialer, url, authToken)
 }
 
-// Connect creates a websocket connection with the given ConnectUrl.
+// Connect creates a websocket connection with the given ConnectURL.
 // This is racy and error-prone should not be used. Use any of the New* functions to create a websocket.
 func (wsc *WebSocketClient) Connect() *AppError {
 	return wsc.ConnectWithDialer(websocket.DefaultDialer)
 }
 
-// ConnectWithDialer creates a websocket connection with the given ConnectUrl using the dialer.
+// ConnectWithDialer creates a websocket connection with the given ConnectURL using the dialer.
 // This is racy and error-prone and should not be used. Use any of the New* functions to create a websocket.
 func (wsc *WebSocketClient) ConnectWithDialer(dialer *websocket.Dialer) *AppError {
 	var err error
-	wsc.Conn, _, err = dialer.Dial(wsc.ConnectUrl, nil)
+	wsc.Conn, _, err = dialer.Dial(wsc.ConnectURL, nil)
 	if err != nil {
 		return NewAppError("Connect", "model.websocket_client.connect_fail.app_error", nil, err.Error(), http.StatusInternalServerError)
 	}
@@ -136,7 +157,7 @@ func (wsc *WebSocketClient) ConnectWithDialer(dialer *websocket.Dialer) *AppErro
 	wsc.EventChannel = make(chan *WebSocketEvent, 100)
 	wsc.ResponseChannel = make(chan *WebSocketResponse, 100)
 
-	wsc.SendMessage(WEBSOCKET_AUTHENTICATION_CHALLENGE, map[string]interface{}{"token": wsc.AuthToken})
+	wsc.SendMessage(WebsocketAuthenticationChallenge, map[string]interface{}{"token": wsc.AuthToken})
 
 	return nil
 }
@@ -163,6 +184,10 @@ func (wsc *WebSocketClient) writer() {
 			switch msg.msgType {
 			case msgTypeJSON:
 				wsc.Conn.WriteJSON(msg.data)
+			case msgTypeBinary:
+				if data, ok := msg.data.([]byte); ok {
+					wsc.Conn.WriteMessage(websocket.BinaryMessage, data)
+				}
 			case msgTypePong:
 				wsc.Conn.WriteMessage(websocket.PongMessage, []byte{})
 			}
@@ -224,8 +249,9 @@ func (wsc *WebSocketClient) Listen() {
 				return
 			}
 
-			event := WebSocketEventFromJson(bytes.NewReader(buf.Bytes()))
-			if event == nil {
+			event, jsonErr := WebSocketEventFromJSON(bytes.NewReader(buf.Bytes()))
+			if jsonErr != nil {
+				mlog.Warn("Failed to decode from JSON", mlog.Err(jsonErr))
 				continue
 			}
 			if event.IsValid() {
@@ -255,6 +281,26 @@ func (wsc *WebSocketClient) SendMessage(action string, data map[string]interface
 	}
 }
 
+func (wsc *WebSocketClient) SendBinaryMessage(action string, data map[string]interface{}) error {
+	req := &WebSocketRequest{}
+	req.Seq = wsc.Sequence
+	req.Action = action
+	req.Data = data
+
+	binaryData, err := msgpack.Marshal(req)
+	if err != nil {
+		return fmt.Errorf("failed to marshal request to msgpack: %w", err)
+	}
+
+	wsc.Sequence++
+	wsc.writeChan <- writeMessage{
+		msgType: msgTypeBinary,
+		data:    binaryData,
+	}
+
+	return nil
+}
+
 // UserTyping will push a user_typing event out to all connected users
 // who are in the specified channel
 func (wsc *WebSocketClient) UserTyping(channelId, parentId string) {
@@ -282,7 +328,7 @@ func (wsc *WebSocketClient) GetStatusesByIds(userIds []string) {
 
 func (wsc *WebSocketClient) configurePingHandling() {
 	wsc.Conn.SetPingHandler(wsc.pingHandler)
-	wsc.pingTimeoutTimer = time.NewTimer(time.Second * (60 + PING_TIMEOUT_BUFFER_SECONDS))
+	wsc.pingTimeoutTimer = time.NewTimer(time.Second * (60 + PingTimeoutBufferSeconds))
 	go wsc.pingWatchdog()
 }
 
@@ -309,11 +355,11 @@ func (wsc *WebSocketClient) pingWatchdog() {
 			if !wsc.pingTimeoutTimer.Stop() {
 				<-wsc.pingTimeoutTimer.C
 			}
-			wsc.pingTimeoutTimer.Reset(time.Second * (60 + PING_TIMEOUT_BUFFER_SECONDS))
+			wsc.pingTimeoutTimer.Reset(time.Second * (60 + PingTimeoutBufferSeconds))
 
 		case <-wsc.pingTimeoutTimer.C:
 			wsc.PingTimeoutChannel <- true
-			wsc.pingTimeoutTimer.Reset(time.Second * (60 + PING_TIMEOUT_BUFFER_SECONDS))
+			wsc.pingTimeoutTimer.Reset(time.Second * (60 + PingTimeoutBufferSeconds))
 		case <-wsc.quitPingWatchdog:
 			return
 		}

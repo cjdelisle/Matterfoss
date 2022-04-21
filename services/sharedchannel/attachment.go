@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/services/remotecluster"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/remotecluster"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 // postsToAttachments returns the file attachments for a slice of posts that need to be synchronized.

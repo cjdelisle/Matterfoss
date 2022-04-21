@@ -14,9 +14,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 func TestNoticeValidation(t *testing.T) {
@@ -32,6 +32,7 @@ func TestNoticeValidation(t *testing.T) {
 	mockStore.On("User").Return(&mockUserStore)
 	mockStore.On("Post").Return(&mockPostStore)
 	mockStore.On("Preference").Return(&mockPreferenceStore)
+	mockStore.On("GetDBSchemaVersion").Return(1, nil)
 	mockSystemStore.On("SaveOrUpdate", &model.System{Name: "ActiveLicenseId", Value: ""}).Return(nil)
 	mockSystemStore.On("GetByName", "UpgradedFromTE").Return(&model.System{Name: "UpgradedFromTE", Value: "false"}, nil)
 	mockSystemStore.On("GetByName", "InstallationDate").Return(&model.System{Name: "InstallationDate", Value: "10"}, nil)
@@ -101,7 +102,7 @@ func TestNoticeValidation(t *testing.T) {
 
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						ClientType: model.NewNoticeClientType(model.NoticeClientType_Mobile),
+						ClientType: model.NewNoticeClientType(model.NoticeClientTypeMobile),
 					},
 				},
 			},
@@ -396,7 +397,7 @@ func TestNoticeValidation(t *testing.T) {
 				systemAdmin: true,
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Audience: model.NewNoticeAudience(model.NoticeAudience_Sysadmin),
+						Audience: model.NewNoticeAudience(model.NoticeAudienceSysadmin),
 					},
 				},
 			},
@@ -409,7 +410,7 @@ func TestNoticeValidation(t *testing.T) {
 				systemAdmin: false,
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Audience: model.NewNoticeAudience(model.NoticeAudience_Sysadmin),
+						Audience: model.NewNoticeAudience(model.NoticeAudienceSysadmin),
 					},
 				},
 			},
@@ -422,7 +423,7 @@ func TestNoticeValidation(t *testing.T) {
 				teamAdmin: true,
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Audience: model.NewNoticeAudience(model.NoticeAudience_TeamAdmin),
+						Audience: model.NewNoticeAudience(model.NoticeAudienceTeamAdmin),
 					},
 				},
 			},
@@ -435,7 +436,7 @@ func TestNoticeValidation(t *testing.T) {
 				teamAdmin: false,
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Audience: model.NewNoticeAudience(model.NoticeAudience_TeamAdmin),
+						Audience: model.NewNoticeAudience(model.NoticeAudienceTeamAdmin),
 					},
 				},
 			},
@@ -447,7 +448,7 @@ func TestNoticeValidation(t *testing.T) {
 			args: args{
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Audience: model.NewNoticeAudience(model.NoticeAudience_Member),
+						Audience: model.NewNoticeAudience(model.NoticeAudienceMember),
 					},
 				},
 			},
@@ -460,7 +461,7 @@ func TestNoticeValidation(t *testing.T) {
 				systemAdmin: true,
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Audience: model.NewNoticeAudience(model.NoticeAudience_Member),
+						Audience: model.NewNoticeAudience(model.NoticeAudienceMember),
 					},
 				},
 			},
@@ -473,7 +474,7 @@ func TestNoticeValidation(t *testing.T) {
 				sku: "e20",
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Sku: model.NewNoticeSKU(model.NoticeSKU_E20),
+						Sku: model.NewNoticeSKU(model.NoticeSKUE20),
 					},
 				},
 			},
@@ -486,7 +487,7 @@ func TestNoticeValidation(t *testing.T) {
 				sku: "e20",
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Sku: model.NewNoticeSKU(model.NoticeSKU_E10),
+						Sku: model.NewNoticeSKU(model.NoticeSKUE10),
 					},
 				},
 			},
@@ -499,7 +500,7 @@ func TestNoticeValidation(t *testing.T) {
 				sku: "",
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Sku: model.NewNoticeSKU(model.NoticeSKU_Team),
+						Sku: model.NewNoticeSKU(model.NoticeSKUTeam),
 					},
 				},
 			},
@@ -511,7 +512,7 @@ func TestNoticeValidation(t *testing.T) {
 			args: args{
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						Sku: model.NewNoticeSKU(model.NoticeSKU_All),
+						Sku: model.NewNoticeSKU(model.NoticeSKUAll),
 					},
 				},
 			},
@@ -524,7 +525,7 @@ func TestNoticeValidation(t *testing.T) {
 				cloud: true,
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						InstanceType: model.NewNoticeInstanceType(model.NoticeInstanceType_Cloud),
+						InstanceType: model.NewNoticeInstanceType(model.NoticeInstanceTypeCloud),
 					},
 				},
 			},
@@ -536,7 +537,7 @@ func TestNoticeValidation(t *testing.T) {
 			args: args{
 				notice: &model.ProductNotice{
 					Conditions: model.Conditions{
-						InstanceType: model.NewNoticeInstanceType(model.NoticeInstanceType_Both),
+						InstanceType: model.NewNoticeInstanceType(model.NoticeInstanceTypeBoth),
 					},
 				},
 			},
@@ -544,7 +545,7 @@ func TestNoticeValidation(t *testing.T) {
 			wantOk:  true,
 		},
 		{
-			name: "notice with depreacting an external dependency",
+			name: "notice with deprecating an external dependency",
 			args: args{
 				dbmsName: "mysql",
 				dbmsVer:  "5.6",
@@ -561,7 +562,7 @@ func TestNoticeValidation(t *testing.T) {
 			wantOk:  true,
 		},
 		{
-			name: "notice with depreacting an external dependency, on a future version",
+			name: "notice with deprecating an external dependency, on a future version",
 			args: args{
 				dbmsName:      "mysql",
 				dbmsVer:       "5.6",
@@ -719,7 +720,7 @@ func TestNoticeFetch(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// get them for specified user
-	messages, appErr := th.App.GetProductNotices(&request.Context{}, th.BasicUser.Id, th.BasicTeam.Id, model.NoticeClientType_All, "1.2.3", "en")
+	messages, appErr := th.App.GetProductNotices(&request.Context{}, th.BasicUser.Id, th.BasicTeam.Id, model.NoticeClientTypeAll, "1.2.3", "en")
 	require.Nil(t, appErr)
 	require.Len(t, messages, 1)
 
@@ -728,7 +729,7 @@ func TestNoticeFetch(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// get them again, see that none are returned
-	messages, appErr = th.App.GetProductNotices(&request.Context{}, th.BasicUser.Id, th.BasicTeam.Id, model.NoticeClientType_All, "1.2.3", "en")
+	messages, appErr = th.App.GetProductNotices(&request.Context{}, th.BasicUser.Id, th.BasicTeam.Id, model.NoticeClientTypeAll, "1.2.3", "en")
 	require.Nil(t, appErr)
 	require.Len(t, messages, 0)
 
@@ -747,7 +748,7 @@ func TestNoticeFetch(t *testing.T) {
 	require.Nil(t, appErr)
 
 	// get them again, since conditions don't match we should be zero
-	messages, appErr = th.App.GetProductNotices(&request.Context{}, th.BasicUser.Id, th.BasicTeam.Id, model.NoticeClientType_All, "1.2.3", "en")
+	messages, appErr = th.App.GetProductNotices(&request.Context{}, th.BasicUser.Id, th.BasicTeam.Id, model.NoticeClientTypeAll, "1.2.3", "en")
 	require.Nil(t, appErr)
 	require.Len(t, messages, 0)
 

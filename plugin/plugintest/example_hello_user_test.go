@@ -13,17 +13,17 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin/plugintest"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest"
 )
 
 type HelloUserPlugin struct {
-	plugin.MatterfossPlugin
+	plugin.MattermostPlugin
 }
 
 func (p *HelloUserPlugin) ServeHTTP(context *plugin.Context, w http.ResponseWriter, r *http.Request) {
-	userID := r.Header.Get("Matterfoss-User-Id")
+	userID := r.Header.Get("Mattermost-User-Id")
 	user, err := p.API.GetUser(userID)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -45,16 +45,12 @@ func Example() {
 	api.On("GetUser", user.Id).Return(user, nil)
 	defer api.AssertExpectations(t)
 
-	helpers := &plugintest.Helpers{}
-	defer helpers.AssertExpectations(t)
-
 	p := &HelloUserPlugin{}
 	p.SetAPI(api)
-	p.SetHelpers(helpers)
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r.Header.Add("Matterfoss-User-Id", user.Id)
+	r.Header.Add("Mattermost-User-Id", user.Id)
 	p.ServeHTTP(&plugin.Context{}, w, r)
 	body, err := ioutil.ReadAll(w.Result().Body)
 	require.NoError(t, err)

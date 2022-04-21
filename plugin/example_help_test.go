@@ -9,11 +9,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
 )
 
-// configuration represents the configuration for this plugin as exposed via the Matterfoss
+// configuration represents the configuration for this plugin as exposed via the Mattermost
 // server configuration.
 type configuration struct {
 	TeamName    string
@@ -23,10 +23,10 @@ type configuration struct {
 	channelID string
 }
 
-// HelpPlugin implements the interface expected by the Matterfoss server to communicate
+// HelpPlugin implements the interface expected by the Mattermost server to communicate
 // between the server and plugin processes.
 type HelpPlugin struct {
-	plugin.MatterfossPlugin
+	plugin.MattermostPlugin
 
 	// configurationLock synchronizes access to the configuration.
 	configurationLock sync.RWMutex
@@ -65,7 +65,7 @@ func (p *HelpPlugin) setConfiguration(configuration *configuration) {
 func (p *HelpPlugin) OnConfigurationChange() error {
 	var configuration = new(configuration)
 
-	// Load the public configuration fields from the Matterfoss server configuration.
+	// Load the public configuration fields from the Mattermost server configuration.
 	if err := p.API.LoadPluginConfiguration(configuration); err != nil {
 		return errors.Wrap(err, "failed to load plugin configuration")
 	}
@@ -108,7 +108,7 @@ func (p *HelpPlugin) MessageHasBeenPosted(c *plugin.Context, post *model.Post) {
 
 	p.API.SendEphemeralPost(post.UserId, &model.Post{
 		ChannelId: configuration.channelID,
-		Message:   "You asked for help? Checkout https://about.matterfoss.org/help/",
+		Message:   "You asked for help? Checkout https://support.mattermost.com/hc/en-us",
 		Props: map[string]interface{}{
 			"sent_by_plugin": true,
 		},

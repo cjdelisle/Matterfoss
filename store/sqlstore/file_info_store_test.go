@@ -6,8 +6,8 @@ package sqlstore
 import (
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/store/searchtest"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/searchtest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
 )
 
 func TestFileInfoStore(t *testing.T) {

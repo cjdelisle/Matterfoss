@@ -16,18 +16,18 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app"
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/config"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store/localcachelayer"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store/localcachelayer"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
-var ApiClient *model.Client4
+var apiClient *model.Client4
 var URL string
 
 type TestHelper struct {
@@ -45,6 +45,8 @@ type TestHelper struct {
 	tempWorkspace string
 
 	IncludeCacheLayer bool
+
+	TestLogger *mlog.Logger
 }
 
 func SetupWithStoreMock(tb testing.TB) *TestHelper {
@@ -52,7 +54,7 @@ func SetupWithStoreMock(tb testing.TB) *TestHelper {
 		tb.SkipNow()
 	}
 
-	th := setupTestHelper(false)
+	th := setupTestHelper(tb, false)
 	emptyMockStore := mocks.Store{}
 	emptyMockStore.On("Close").Return(nil)
 	th.App.Srv().Store = &emptyMockStore
@@ -65,10 +67,10 @@ func Setup(tb testing.TB) *TestHelper {
 	}
 	store := mainHelper.GetStore()
 	store.DropAllTables()
-	return setupTestHelper(true)
+	return setupTestHelper(tb, true)
 }
 
-func setupTestHelper(includeCacheLayer bool) *TestHelper {
+func setupTestHelper(tb testing.TB, includeCacheLayer bool) *TestHelper {
 	memoryStore := config.NewTestMemoryStore()
 	newConfig := memoryStore.Get().Clone()
 	*newConfig.AnnouncementSettings.AdminNoticesEnabled = false
@@ -79,7 +81,14 @@ func setupTestHelper(includeCacheLayer bool) *TestHelper {
 	options = append(options, app.ConfigStore(memoryStore))
 	options = append(options, app.StoreOverride(mainHelper.Store))
 
-	mlog.DisableZap()
+	testLogger, _ := mlog.NewLogger()
+	logCfg, _ := config.MloggerConfigFromLoggerConfig(&newConfig.LogSettings, nil, config.GetLogFileLocation)
+	if errCfg := testLogger.ConfigureTargets(logCfg, nil); errCfg != nil {
+		panic("failed to configure test logger: " + errCfg.Error())
+	}
+	// lock logger config so server init cannot override it during testing.
+	testLogger.LockConfiguration()
+	options = append(options, app.SetLogger(testLogger))
 
 	s, err := app.NewServer(options...)
 	if err != nil {
@@ -111,11 +120,11 @@ func setupTestHelper(includeCacheLayer bool) *TestHelper {
 	})
 
 	ctx := &request.Context{}
-	a := app.New(app.ServerConnector(s))
+	a := app.New(app.ServerConnector(s.Channels()))
 
-	web := New(a, s.Router)
+	web := New(s)
 	URL = fmt.Sprintf("http://localhost:%v", s.ListenAddr.Port)
-	ApiClient = model.NewAPIv4Client(URL)
+	apiClient = model.NewAPIv4Client(URL)
 
 	s.Store.MarkSystemRanUnitTests()
 
@@ -129,6 +138,7 @@ func setupTestHelper(includeCacheLayer bool) *TestHelper {
 		Server:            s,
 		Web:               web,
 		IncludeCacheLayer: includeCacheLayer,
+		TestLogger:        testLogger,
 	}
 
 	return th
@@ -148,15 +158,15 @@ func (th *TestHelper) NewPluginAPI(manifest *model.Manifest) plugin.API {
 }
 
 func (th *TestHelper) InitBasic() *TestHelper {
-	th.SystemAdminUser, _ = th.App.CreateUser(th.Context, &model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SYSTEM_ADMIN_ROLE_ID})
+	th.SystemAdminUser, _ = th.App.CreateUser(th.Context, &model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SystemAdminRoleId})
 
-	user, _ := th.App.CreateUser(th.Context, &model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SYSTEM_USER_ROLE_ID})
+	user, _ := th.App.CreateUser(th.Context, &model.User{Email: model.NewId() + "success+test@simulator.amazonses.com", Nickname: "Corey Hulen", Password: "passwd1", EmailVerified: true, Roles: model.SystemUserRoleId})
 
-	team, _ := th.App.CreateTeam(th.Context, &model.Team{DisplayName: "Name", Name: "z-z-" + model.NewId() + "a", Email: user.Email, Type: model.TEAM_OPEN})
+	team, _ := th.App.CreateTeam(th.Context, &model.Team{DisplayName: "Name", Name: "z-z-" + model.NewId() + "a", Email: user.Email, Type: model.TeamOpen})
 
 	th.App.JoinUserToTeam(th.Context, team, user, "")
 
-	channel, _ := th.App.CreateChannel(th.Context, &model.Channel{DisplayName: "Test API Name", Name: "zz" + model.NewId() + "a", Type: model.CHANNEL_OPEN, TeamId: team.Id, CreatorId: user.Id}, true)
+	channel, _ := th.App.CreateChannel(th.Context, &model.Channel{DisplayName: "Test API Name", Name: "zz" + model.NewId() + "a", Type: model.ChannelTypeOpen, TeamId: team.Id, CreatorId: user.Id}, true)
 
 	th.BasicUser = user
 	th.BasicChannel = channel
@@ -177,7 +187,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	th := Setup(t).InitPlugins()
 	defer th.TearDown()
 
-	pluginID := "com.matterfoss.sample"
+	pluginID := "com.mattermost.sample"
 
 	// Setup the directory directly in the plugin working path.
 	pluginDir := filepath.Join(*th.App.Config().PluginSettings.Directory, pluginID)
@@ -192,11 +202,11 @@ func TestStaticFilesRequest(t *testing.T) {
 	package main
 
 	import (
-		"github.com/cjdelisle/matterfoss-server/v5/plugin"
+		"github.com/cjdelisle/matterfoss-server/v6/plugin"
 	)
 
 	type MyPlugin struct {
-		plugin.MatterfossPlugin
+		plugin.MattermostPlugin
 	}
 
 	func main() {
@@ -213,7 +223,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	require.NoError(t, err)
 
 	// Write the plugin.json manifest
-	pluginManifest := `{"id": "com.matterfoss.sample", "server": {"executable": "backend.exe"}, "webapp": {"bundle_path":"main.js"}, "settings_schema": {"settings": []}}`
+	pluginManifest := `{"id": "com.mattermost.sample", "server": {"executable": "backend.exe"}, "webapp": {"bundle_path":"main.js"}, "settings_schema": {"settings": []}}`
 	ioutil.WriteFile(filepath.Join(pluginDir, "plugin.json"), []byte(pluginManifest), 0600)
 
 	// Activate the plugin
@@ -223,7 +233,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	require.True(t, activated)
 
 	// Verify access to the bundle with requisite headers
-	req, _ := http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/com.matterfoss.sample_724ed0e2ebb2b841_bundle.js", nil)
+	req, _ := http.NewRequest("GET", "/static/plugins/com.mattermost.sample/com.mattermost.sample_724ed0e2ebb2b841_bundle.js", nil)
 	res := httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, http.StatusOK, res.Code)
@@ -232,7 +242,7 @@ func TestStaticFilesRequest(t *testing.T) {
 
 	// Verify cached access to the bundle with an If-Modified-Since timestamp in the future
 	future := time.Now().Add(24 * time.Hour)
-	req, _ = http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/com.matterfoss.sample_724ed0e2ebb2b841_bundle.js", nil)
+	req, _ = http.NewRequest("GET", "/static/plugins/com.mattermost.sample/com.mattermost.sample_724ed0e2ebb2b841_bundle.js", nil)
 	req.Header.Add("If-Modified-Since", future.Format(time.RFC850))
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
@@ -242,7 +252,7 @@ func TestStaticFilesRequest(t *testing.T) {
 
 	// Verify access to the bundle with an If-Modified-Since timestamp in the past
 	past := time.Now().Add(-24 * time.Hour)
-	req, _ = http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/com.matterfoss.sample_724ed0e2ebb2b841_bundle.js", nil)
+	req, _ = http.NewRequest("GET", "/static/plugins/com.mattermost.sample/com.mattermost.sample_724ed0e2ebb2b841_bundle.js", nil)
 	req.Header.Add("If-Modified-Since", past.Format(time.RFC850))
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
@@ -251,7 +261,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	assert.Equal(t, []string{"max-age=31556926, public"}, res.Result().Header[http.CanonicalHeaderKey("Cache-Control")])
 
 	// Verify handling of 404.
-	req, _ = http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/404.js", nil)
+	req, _ = http.NewRequest("GET", "/static/plugins/com.mattermost.sample/404.js", nil)
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, http.StatusNotFound, res.Code)
@@ -270,20 +280,20 @@ func TestPublicFilesRequest(t *testing.T) {
 	defer os.RemoveAll(pluginDir)
 	defer os.RemoveAll(webappPluginDir)
 
-	env, err := plugin.NewEnvironment(th.NewPluginAPI, pluginDir, webappPluginDir, th.App.Log(), nil)
+	env, err := plugin.NewEnvironment(th.NewPluginAPI, app.NewDriverImpl(th.Server), pluginDir, webappPluginDir, th.App.Log(), nil)
 	require.NoError(t, err)
 
-	pluginID := "com.matterfoss.sample"
+	pluginID := "com.mattermost.sample"
 	pluginCode :=
 		`
 	package main
 
 	import (
-		"github.com/cjdelisle/matterfoss-server/v5/plugin"
+		"github.com/cjdelisle/matterfoss-server/v6/plugin"
 	)
 
 	type MyPlugin struct {
-		plugin.MatterfossPlugin
+		plugin.MattermostPlugin
 	}
 
 	func main() {
@@ -296,11 +306,11 @@ func TestPublicFilesRequest(t *testing.T) {
 	utils.CompileGo(t, pluginCode, backend)
 
 	// Write the plugin.json manifest
-	pluginManifest := `{"id": "com.matterfoss.sample", "server": {"executable": "backend.exe"}, "settings_schema": {"settings": []}}`
+	pluginManifest := `{"id": "com.mattermost.sample", "server": {"executable": "backend.exe"}, "settings_schema": {"settings": []}}`
 	ioutil.WriteFile(filepath.Join(pluginDir, pluginID, "plugin.json"), []byte(pluginManifest), 0600)
 
 	// Write the test public file
-	helloHTML := `Hello from the static files public folder for the com.matterfoss.sample plugin!`
+	helloHTML := `Hello from the static files public folder for the com.mattermost.sample plugin!`
 	htmlFolderPath := filepath.Join(pluginDir, pluginID, "public")
 	os.MkdirAll(htmlFolderPath, os.ModePerm)
 	htmlFilePath := filepath.Join(htmlFolderPath, "hello.html")
@@ -317,25 +327,25 @@ func TestPublicFilesRequest(t *testing.T) {
 	require.NotNil(t, manifest)
 	require.True(t, activated)
 
-	th.App.SetPluginsEnvironment(env)
+	th.App.Channels().SetPluginsEnvironment(env)
 
-	req, _ := http.NewRequest("GET", "/plugins/com.matterfoss.sample/public/hello.html", nil)
+	req, _ := http.NewRequest("GET", "/plugins/com.mattermost.sample/public/hello.html", nil)
 	res := httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, helloHTML, res.Body.String())
 
-	req, _ = http.NewRequest("GET", "/plugins/com.matterfoss.sample/nefarious-file-access.html", nil)
+	req, _ = http.NewRequest("GET", "/plugins/com.mattermost.sample/nefarious-file-access.html", nil)
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, 404, res.Code)
 
-	req, _ = http.NewRequest("GET", "/plugins/com.matterfoss.sample/public/../nefarious-file-access.html", nil)
+	req, _ = http.NewRequest("GET", "/plugins/com.mattermost.sample/public/../nefarious-file-access.html", nil)
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, 301, res.Code)
 }
 
-/* Test disabled for now so we don't requrie the client to build. Maybe re-enable after client gets moved out.
+/* Test disabled for now so we don't require the client to build. Maybe re-enable after client gets moved out.
 func TestStatic(t *testing.T) {
 	Setup()
 
