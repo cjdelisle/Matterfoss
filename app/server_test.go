@@ -24,12 +24,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/config"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/filestore"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest"
-	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func newServerWithConfig(t *testing.T, f func(cfg *model.Config)) (*Server, error) {
@@ -66,10 +66,10 @@ func TestReadReplicaDisabledBasedOnLicense(t *testing.T) {
 	cfg.SetDefaults()
 	driverName := os.Getenv("MM_SQLSETTINGS_DRIVERNAME")
 	if driverName == "" {
-		driverName = model.DATABASE_DRIVER_POSTGRES
+		driverName = model.DatabaseDriverPostgres
 	}
 	dsn := ""
-	if driverName == model.DATABASE_DRIVER_POSTGRES {
+	if driverName == model.DatabaseDriverPostgres {
 		dsn = os.Getenv("TEST_DATABASE_POSTGRESQL_DSN")
 	} else {
 		dsn = os.Getenv("TEST_DATABASE_MYSQL_DSN")
@@ -85,12 +85,12 @@ func TestReadReplicaDisabledBasedOnLicense(t *testing.T) {
 		s, err := NewServer(func(server *Server) error {
 			configStore := config.NewTestMemoryStore()
 			configStore.Set(&cfg)
-			server.configStore = configStore
+			server.configStore = &configWrapper{srv: server, Store: configStore}
 			return nil
 		})
 		require.NoError(t, err)
 		defer s.Shutdown()
-		require.Same(t, s.sqlStore.GetMaster(), s.sqlStore.GetReplica())
+		require.Same(t, s.sqlStore.GetMasterX(), s.sqlStore.GetReplicaX())
 		require.Len(t, s.Config().SqlSettings.DataSourceReplicas, 1)
 	})
 
@@ -103,7 +103,7 @@ func TestReadReplicaDisabledBasedOnLicense(t *testing.T) {
 		})
 		require.NoError(t, err)
 		defer s.Shutdown()
-		require.NotSame(t, s.sqlStore.GetMaster(), s.sqlStore.GetReplica())
+		require.NotSame(t, s.sqlStore.GetMasterX(), s.sqlStore.GetReplicaX())
 		require.Len(t, s.Config().SqlSettings.DataSourceReplicas, 1)
 	})
 
@@ -111,12 +111,12 @@ func TestReadReplicaDisabledBasedOnLicense(t *testing.T) {
 		s, err := NewServer(func(server *Server) error {
 			configStore := config.NewTestMemoryStore()
 			configStore.Set(&cfg)
-			server.configStore = configStore
+			server.configStore = &configWrapper{srv: server, Store: configStore}
 			return nil
 		})
 		require.NoError(t, err)
 		defer s.Shutdown()
-		require.Same(t, s.sqlStore.GetMaster(), s.sqlStore.GetSearchReplica())
+		require.Same(t, s.sqlStore.GetMasterX(), s.sqlStore.GetSearchReplicaX())
 		require.Len(t, s.Config().SqlSettings.DataSourceSearchReplicas, 1)
 	})
 
@@ -124,13 +124,13 @@ func TestReadReplicaDisabledBasedOnLicense(t *testing.T) {
 		s, err := NewServer(func(server *Server) error {
 			configStore := config.NewTestMemoryStore()
 			configStore.Set(&cfg)
-			server.configStore = configStore
+			server.configStore = &configWrapper{srv: server, Store: configStore}
 			server.licenseValue.Store(model.NewTestLicense())
 			return nil
 		})
 		require.NoError(t, err)
 		defer s.Shutdown()
-		require.NotSame(t, s.sqlStore.GetMaster(), s.sqlStore.GetSearchReplica())
+		require.NotSame(t, s.sqlStore.GetMasterX(), s.sqlStore.GetSearchReplicaX())
 		require.Len(t, s.Config().SqlSettings.DataSourceSearchReplicas, 1)
 	})
 }
@@ -169,27 +169,29 @@ func TestStartServerNoS3Bucket(t *testing.T) {
 	s, err := NewServer(func(server *Server) error {
 		configStore, _ := config.NewFileStore("config.json", true)
 		store, _ := config.NewStoreFromBacking(configStore, nil, false)
-		server.configStore = store
+		server.configStore = &configWrapper{srv: server, Store: store}
 		server.UpdateConfig(func(cfg *model.Config) {
 			cfg.FileSettings = model.FileSettings{
-				DriverName:              model.NewString(model.IMAGE_DRIVER_S3),
-				AmazonS3AccessKeyId:     model.NewString(model.MINIO_ACCESS_KEY),
-				AmazonS3SecretAccessKey: model.NewString(model.MINIO_SECRET_KEY),
+				DriverName:              model.NewString(model.ImageDriverS3),
+				AmazonS3AccessKeyId:     model.NewString(model.MinioAccessKey),
+				AmazonS3SecretAccessKey: model.NewString(model.MinioSecretKey),
 				AmazonS3Bucket:          model.NewString("nosuchbucket"),
 				AmazonS3Endpoint:        model.NewString(s3Endpoint),
 				AmazonS3Region:          model.NewString(""),
 				AmazonS3PathPrefix:      model.NewString(""),
 				AmazonS3SSL:             model.NewBool(false),
 			}
+			*cfg.ServiceSettings.ListenAddress = ":0"
 		})
 		return nil
 	})
 	require.NoError(t, err)
 
+	require.NoError(t, s.Start())
+	defer s.Shutdown()
+
 	// ensure that a new bucket was created
-	backend, appErr := s.FileBackend()
-	require.Nil(t, appErr)
-	err = backend.(*filestore.S3FileBackend).TestConnection()
+	err = s.FileBackend().(*filestore.S3FileBackend).TestConnection()
 	require.NoError(t, err)
 }
 
@@ -231,18 +233,18 @@ func TestDatabaseTypeAndMattermostVersion(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
 
-	databaseType, mattermostVersion := th.Server.DatabaseTypeAndMattermostVersion()
+	databaseType, mattermostVersion := th.Server.DatabaseTypeAndSchemaVersion()
 	assert.Equal(t, "postgres", databaseType)
-	assert.Equal(t, "5.31.0", mattermostVersion)
+	assert.GreaterOrEqual(t, mattermostVersion, strconv.Itoa(1))
 
 	os.Setenv("MM_SQLSETTINGS_DRIVERNAME", "mysql")
 
 	th2 := Setup(t)
 	defer th2.TearDown()
 
-	databaseType, mattermostVersion = th2.Server.DatabaseTypeAndMattermostVersion()
+	databaseType, mattermostVersion = th2.Server.DatabaseTypeAndSchemaVersion()
 	assert.Equal(t, "mysql", databaseType)
-	assert.Equal(t, "5.31.0", mattermostVersion)
+	assert.GreaterOrEqual(t, mattermostVersion, strconv.Itoa(1))
 }
 
 func TestGenerateSupportPacket(t *testing.T) {
@@ -250,13 +252,13 @@ func TestGenerateSupportPacket(t *testing.T) {
 	defer th.TearDown()
 
 	d1 := []byte("hello\ngo\n")
-	err := ioutil.WriteFile("matterfoss.log", d1, 0777)
+	err := ioutil.WriteFile("mattermost.log", d1, 0777)
 	require.NoError(t, err)
 	err = ioutil.WriteFile("notifications.log", d1, 0777)
 	require.NoError(t, err)
 
 	fileDatas := th.App.GenerateSupportPacket()
-	testFiles := []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "matterfoss.log", "notifications.log"}
+	testFiles := []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "mattermost.log", "notifications.log"}
 	for i, fileData := range fileDatas {
 		require.NotNil(t, fileData)
 		assert.Equal(t, testFiles[i], fileData.Filename)
@@ -266,7 +268,7 @@ func TestGenerateSupportPacket(t *testing.T) {
 	// Remove these two files and ensure that warning.txt file is generated
 	err = os.Remove("notifications.log")
 	require.NoError(t, err)
-	err = os.Remove("matterfoss.log")
+	err = os.Remove("mattermost.log")
 	require.NoError(t, err)
 	fileDatas = th.App.GenerateSupportPacket()
 	testFiles = []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "warning.txt"}
@@ -334,21 +336,21 @@ func TestGetMattermostLog(t *testing.T) {
 	})
 
 	// If any previous mattermost.log file, lets delete it
-	os.Remove("matterfoss.log")
+	os.Remove("mattermost.log")
 
 	fileData, warning = th.App.getMattermostLog()
 	assert.Nil(t, fileData)
-	assert.Contains(t, warning, "ioutil.ReadFile(matterfossLog) Error:")
+	assert.Contains(t, warning, "ioutil.ReadFile(mattermostLog) Error:")
 
 	// Happy path where we get a log file and no warning
 	d1 := []byte("hello\ngo\n")
-	err := ioutil.WriteFile("matterfoss.log", d1, 0777)
-	defer os.Remove("matterfoss.log")
+	err := ioutil.WriteFile("mattermost.log", d1, 0777)
+	defer os.Remove("mattermost.log")
 	require.NoError(t, err)
 
 	fileData, warning = th.App.getMattermostLog()
 	require.NotNil(t, fileData)
-	assert.Equal(t, "matterfoss.log", fileData.Filename)
+	assert.Equal(t, "mattermost.log", fileData.Filename)
 	assert.Positive(t, len(fileData.Body))
 	assert.Empty(t, warning)
 }
@@ -515,35 +517,35 @@ func checkEndpoint(t *testing.T, client *http.Client, url string) error {
 }
 
 func TestPanicLog(t *testing.T) {
-	// Creating a temp file to collect logs
-	tmpfile, err := ioutil.TempFile("", "mlog")
-	if err != nil {
-		require.NoError(t, err)
-	}
-
+	// Creating a temp dir for log
+	tmpDir, err := os.MkdirTemp("", "mlog-test")
+	require.NoError(t, err, "cannot create tmp dir for log file")
 	defer func() {
-		require.NoError(t, tmpfile.Close())
-		require.NoError(t, os.Remove(tmpfile.Name()))
+		err2 := os.RemoveAll(tmpDir)
+		assert.NoError(t, err2)
 	}()
 
-	// This test requires Zap file target for now.
-	mlog.EnableZap()
-	defer mlog.DisableZap()
-
 	// Creating logger to log to console and temp file
-	logger := mlog.NewLogger(&mlog.LoggerConfiguration{
-		EnableConsole: true,
-		ConsoleJson:   true,
-		EnableFile:    true,
-		FileLocation:  tmpfile.Name(),
-		FileLevel:     mlog.LevelInfo,
-	})
+	logger, _ := mlog.NewLogger()
+
+	logSettings := model.NewLogSettings()
+	logSettings.EnableConsole = model.NewBool(true)
+	logSettings.ConsoleJson = model.NewBool(true)
+	logSettings.EnableFile = model.NewBool(true)
+	logSettings.FileLocation = &tmpDir
+	logSettings.FileLevel = &mlog.LvlInfo.Name
+
+	cfg, err := config.MloggerConfigFromLoggerConfig(logSettings, nil, config.GetLogFileLocation)
+	require.NoError(t, err)
+	err = logger.ConfigureTargets(cfg, nil)
+	require.NoError(t, err)
+	logger.LockConfiguration()
 
 	// Creating a server with logger
 	s, err := NewServer(SetLogger(logger))
 	require.NoError(t, err)
 
-	// Route for just panicing
+	// Route for just panicking
 	s.Router.HandleFunc("/panic", func(writer http.ResponseWriter, request *http.Request) {
 		s.Log.Info("inside panic handler")
 		panic("log this panic")
@@ -566,16 +568,22 @@ func TestPanicLog(t *testing.T) {
 
 	client := &http.Client{Transport: tr}
 	client.Get("https://localhost:" + strconv.Itoa(s.ListenAddr.Port) + "/panic")
+
+	err = logger.Flush()
+	assert.NoError(t, err, "flush should succeed")
 	s.Shutdown()
 
 	// Checking whether panic was logged
 	var panicLogged = false
 	var infoLogged = false
 
-	_, err = tmpfile.Seek(0, 0)
+	logFile, err := os.Open(config.GetLogFileLocation(tmpDir))
+	require.NoError(t, err, "cannot open log file")
+
+	_, err = logFile.Seek(0, 0)
 	require.NoError(t, err)
 
-	scanner := bufio.NewScanner(tmpfile)
+	scanner := bufio.NewScanner(logFile)
 	for scanner.Scan() {
 		if !infoLogged && strings.Contains(scanner.Text(), "inside panic handler") {
 			infoLogged = true
@@ -674,7 +682,7 @@ func TestSentry(t *testing.T) {
 		})
 		require.NoError(t, err)
 
-		// Route for just panicing
+		// Route for just panicking
 		s.Router.HandleFunc("/panic", func(writer http.ResponseWriter, request *http.Request) {
 			panic("log this panic")
 		})
@@ -693,63 +701,5 @@ func TestSentry(t *testing.T) {
 		case <-time.After(time.Second * 10):
 			require.Fail(t, "Sentry report didn't arrive")
 		}
-	})
-}
-
-func TestAdminAdvisor(t *testing.T) {
-	th := Setup(t)
-	defer th.TearDown()
-
-	// creating a system user to whole admin advisor will send post
-	user := model.User{
-		Email:       strings.ToLower(model.NewId()) + "success+test@example.com",
-		Nickname:    "Darth Vader",
-		Username:    "vader" + model.NewId(),
-		Password:    "passwd1",
-		AuthService: "",
-		Roles:       model.SYSTEM_ADMIN_ROLE_ID,
-	}
-	ruser, err := th.App.CreateUser(th.Context, &user)
-	assert.Nil(t, err, "User should be created")
-	defer th.App.PermanentDeleteUser(th.Context, &user)
-
-	t.Run("Should notify admin of un-configured support email", func(t *testing.T) {
-		doCheckAdminSupportStatus(th.App, th.Context)
-
-		bot, err := th.App.GetUserByUsername(model.BOT_WARN_METRIC_BOT_USERNAME)
-		assert.NotNil(t, bot, "Bot should have been created now")
-		assert.Nil(t, err, "No error should be generated")
-
-		channel, err := th.App.getDirectChannel(bot.Id, ruser.Id)
-		assert.NotNil(t, channel, "DM channel should exist between Admin Advisor and system admin")
-		assert.Nil(t, err, "No error should be generated")
-	})
-
-	t.Run("Should NOT notify admin when support email is configured", func(t *testing.T) {
-		th.App.UpdateConfig(func(m *model.Config) {
-			email := "success+test@example.com"
-			m.SupportSettings.SupportEmail = &email
-		})
-
-		bot, err := th.App.GetUserByUsername(model.BOT_WARN_METRIC_BOT_USERNAME)
-		assert.NotNil(t, bot, "Bot should be already created")
-		assert.Nil(t, err, "No error should be generated")
-
-		channel, err := th.App.getDirectChannel(bot.Id, ruser.Id)
-		assert.NotNil(t, channel, "DM channel should already exist")
-		assert.Nil(t, err, "No error should be generated")
-
-		err = th.App.PermanentDeleteChannel(channel)
-		assert.Nil(t, err, "No error should be generated")
-
-		doCheckAdminSupportStatus(th.App, th.Context)
-
-		channel, err = th.App.getDirectChannel(bot.Id, ruser.Id)
-		assert.NotNil(t, channel, "DM channel should exist between Admin Advisor and system admin")
-		assert.Nil(t, err, "No error should be generated")
-
-		posts, err := th.App.GetPosts(channel.Id, 0, 100)
-		assert.Nil(t, err, "No error should be generated")
-		assert.Equal(t, 0, len(posts.Posts))
 	})
 }

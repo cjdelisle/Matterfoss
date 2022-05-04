@@ -85,7 +85,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "Здається, Ваша електронна пошта Matterfoss встановлена вірно!"
+    "translation": "Здається, Ваша електронна пошта Mattermost встановлена вірно!"
   },
   {
     "id": "api.admin.test_email.missing_server",
@@ -97,7 +97,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Matterfoss - Тестування налаштувань електронної пошти"
+    "translation": "Mattermost - Тестування налаштувань електронної пошти"
   },
   {
     "id": "api.admin.test_s3.missing_s3_bucket",
@@ -146,14 +146,6 @@
   {
     "id": "api.channel.change_channel_privacy.public_to_private",
     "translation": "Канал перетворений в приватний."
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.default_channel_error",
-    "translation": "Цей стандартний канал не може бути конвертований в приватний."
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.private_channel_error",
-    "translation": "Канал, що потрібно конвертувати, вже приватний."
   },
   {
     "id": "api.channel.create_channel.direct_channel.app_error",
@@ -353,7 +345,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "Надішліть запрошення електронною поштою до команди Matterfoss"
+    "translation": "Надішліть запрошення електронною поштою до команди Mattermost"
   },
   {
     "id": "api.command.invite_people.email_invitations_off",
@@ -629,7 +621,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Відкрийте сторінку за допомогою Matterfoss"
+    "translation": "Відкрийте сторінку за допомогою Mattermost"
   },
   {
     "id": "api.command_help.name",
@@ -641,7 +633,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "Не вдається знайти канал {{.Channel}}. Будь-ласка, скористайтесь [документацією](https://about.Matterfoss.com/default-channel-handle-documentation) для ідентифікаціі каналів."
+    "translation": "Не вдається знайти канал {{.Channel}}. Будь-ласка, скористайтесь [документацією](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) для ідентифікаціі каналів."
   },
   {
     "id": "api.command_invite.desc",
@@ -733,7 +725,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Вийти з Matterfoss"
+    "translation": "Вийти з Mattermost"
   },
   {
     "id": "api.command_logout.name",
@@ -785,7 +777,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "Не вдається знайти канал {{.Channel}}. Будь-ласка, скористайтесь [документацією](https://about.Matterfoss.com/default-channel-handle-documentation) для ідентифікаціі каналів. "
+    "translation": "Не вдається знайти канал {{.Channel}}. Будь-ласка, скористайтесь [документацією](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) для ідентифікаціі каналів. "
   },
   {
     "id": "api.command_mute.hint",
@@ -797,7 +789,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "Не вдається знайти канал {{.Channel}}. Будь-ласка, скористайтесь [документацією](https://about.Matterfoss.com/default-channel-handle-documentation) для ідентифікаціі каналів. "
+    "translation": "Не вдається знайти канал {{.Channel}}. Будь-ласка, скористайтесь [документацією](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) для ідентифікаціі каналів. "
   },
   {
     "id": "api.command_mute.not_member.error",
@@ -1320,16 +1312,8 @@
     "translation": "Недійсний параметр ChannelId для параметра RootId"
   },
   {
-    "id": "api.post.create_post.parent_id.app_error",
-    "translation": "Недійсний параметр ParentId"
-  },
-  {
     "id": "api.post.create_post.root_id.app_error",
     "translation": "Недійсний параметр RootId"
-  },
-  {
-    "id": "api.post.create_post.town_square_read_only",
-    "translation": "Цей канал доступний лише для читання. Тут можуть публікувати лише користувачі з дозволом."
   },
   {
     "id": "api.post.create_webhook_post.creating.app_error",
@@ -1390,10 +1374,6 @@
   {
     "id": "api.post.patch_post.can_not_update_post_in_deleted.error",
     "translation": "Can not update a post in a deleted channel."
-  },
-  {
-    "id": "api.post.save_is_pinned_post.town_square_read_only",
-    "translation": "Цей канал доступний лише для читання. Тут можуть публікувати лише користувачі з дозволом."
   },
   {
     "id": "api.post.send_notification_and_forget.push_channel_mention",
@@ -1474,10 +1454,6 @@
   {
     "id": "api.reaction.save_reaction.user_id.app_error",
     "translation": "Ви не можете зберегти реакцію для іншого користувача."
-  },
-  {
-    "id": "api.reaction.town_square_read_only",
-    "translation": "Реагування на повідомлення неможливе у каналах лише для читання."
   },
   {
     "id": "api.restricted_system_admin",
@@ -1561,11 +1537,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "Slack користувач об'єднано з існуючим користувачем Matterfoss з відповідною електронною адресою {{.Email}} та ім'ям користувача {{.Username}}.\r\n"
+    "translation": "Slack користувач об'єднано з існуючим користувачем Mattermost з відповідною електронною адресою {{.Email}} та ім'ям користувача {{.Username}}.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "Slack користувач об'єднався з існуючим користувачем Matterfoss з відповідною електронною адресою {{.Email}} та ім'ям користувача {{.Username}}, але не зміг додати користувача до своєї команди.\r\n"
+    "translation": "Slack користувач об'єднався з існуючим користувачем Mattermost з відповідною електронною адресою {{.Email}} та ім'ям користувача {{.Username}}, але не зміг додати користувача до своєї команди.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1577,7 +1553,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Лог імпорту Matterfoss Slack\r\n "
+    "translation": "Лог імпорту Mattermost Slack\r\n "
   },
   {
     "id": "api.slackimport.slack_import.note1",
@@ -1718,10 +1694,6 @@
   {
     "id": "api.team.set_team_icon.decode.app_error",
     "translation": "Не вдалося розібрати піктограму команди"
-  },
-  {
-    "id": "api.team.set_team_icon.decode_config.app_error",
-    "translation": "Не вдається розкрити метадані піктограми команди"
   },
   {
     "id": "api.team.set_team_icon.encode.app_error",
@@ -2188,24 +2160,8 @@
     "translation": "Не вдалося успішно деактивувати електронну адресу облікового запису"
   },
   {
-    "id": "api.user.send_email_change_email_and_forget.error",
-    "translation": "Не вдалося надіслати електронне повідомлення про зміну електронної пошти успішно"
-  },
-  {
-    "id": "api.user.send_email_change_username_and_forget.error",
-    "translation": "Не вдалося успішно відправити повідомлення про зміну імені користувача "
-  },
-  {
     "id": "api.user.send_email_change_verify_email_and_forget.error",
     "translation": "Не вдалося успішно надіслати лист підтвердження змін електронною поштою"
-  },
-  {
-    "id": "api.user.send_mfa_change_email.error",
-    "translation": "Неможливо відправити email повідомлення для зміни MFA."
-  },
-  {
-    "id": "api.user.send_password_change_email_and_forget.error",
-    "translation": "Не вдалося успішно надіслати пару електронних листів оновлення"
   },
   {
     "id": "api.user.send_password_reset.send.app_error",
@@ -2220,16 +2176,8 @@
     "translation": "Не вдалося відправити лист про оновлення пароля"
   },
   {
-    "id": "api.user.send_user_access_token.error",
-    "translation": "Не вдалося успішно надіслати \"Доданий токен особистого доступу\""
-  },
-  {
     "id": "api.user.send_verify_email_and_forget.failed.error",
     "translation": "Не вдалося успішно надіслати електронний лист для підтвердження"
-  },
-  {
-    "id": "api.user.send_welcome_email_and_forget.failed.error",
-    "translation": "Не вдалося успішно надіслати вітальний лист"
   },
   {
     "id": "api.user.update_active.not_enable.app_error",
@@ -2274,10 +2222,6 @@
   {
     "id": "api.user.upload_profile_user.decode.app_error",
     "translation": "Не вдається декодувати зображення профілю"
-  },
-  {
-    "id": "api.user.upload_profile_user.decode_config.app_error",
-    "translation": "Не вдалося зберегти зображення профілю. Файл не є дійсним зображенням."
   },
   {
     "id": "api.user.upload_profile_user.encode.app_error",
@@ -2546,10 +2490,6 @@
   {
     "id": "app.import.validate_channel_import_data.display_name_length.error",
     "translation": "Ім'я дисплея каналу не в межах дозволених обмежень довжини."
-  },
-  {
-    "id": "app.import.validate_channel_import_data.display_name_missing.error",
-    "translation": "Відсутнє необхідне властивість каналу: display_name"
   },
   {
     "id": "app.import.validate_channel_import_data.header_length.error",
@@ -3044,10 +2984,6 @@
     "translation": "Неможливо декодувати дані зображення."
   },
   {
-    "id": "brand.save_brand_image.decode_config.app_error",
-    "translation": "Неможливо отримати метадані зображення."
-  },
-  {
     "id": "brand.save_brand_image.encode.app_error",
     "translation": "Неможливо перетворити дані зображення у формат PNG. Будь ласка спробуйте ще раз."
   },
@@ -3058,14 +2994,6 @@
   {
     "id": "brand.save_brand_image.save_image.app_error",
     "translation": "Не вдається записати файл зображення у файловий накопичувач. Перевірте ваше з'єднання та повторіть спробу."
-  },
-  {
-    "id": "brand.save_brand_image.too_large.app_error",
-    "translation": "Неможливо прочитати файл зображення. Переконайтеся, що розмір зображення менше 2 МБ, і спробуйте ще раз."
-  },
-  {
-    "id": "cli.license.critical",
-    "translation": "Функція вимагає оновлення Enterprise Edition та включення ліцензійного ключа. Будь ласка, зв'яжіться зі своїм системним адміністратором."
   },
   {
     "id": "ent.account_migration.get_all_failed",
@@ -3289,7 +3217,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "Ваш обліковий запис AD/LDAP не має дозволу на використання цього сервера Matterfoss. Будь ласка, зверніться до системного адміністратора, щоб перевірити фільтр користувачів AD/LDAP."
+    "translation": "Ваш обліковий запис AD/LDAP не має дозволу на використання цього сервера Mattermost. Будь ласка, зверніться до системного адміністратора, щоб перевірити фільтр користувачів AD/LDAP."
   },
   {
     "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3309,7 +3237,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "Не вдалося знайти користувачів в AD/LDAP. Перевірте, чи сервер Matterfoss може підключитися до вашого сервера AD/LDAP і повторіть спробу."
+    "translation": "Не вдалося знайти користувачів в AD/LDAP. Перевірте, чи сервер Mattermost може підключитися до вашого сервера AD/LDAP і повторіть спробу."
   },
   {
     "id": "ent.ldap.validate_filter.app_error",
@@ -3405,7 +3333,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "Ім'я користувача, яке вже використовувалося іншим користувачем Matterfoss."
+    "translation": "Ім'я користувача, яке вже використовувалося іншим користувачем Mattermost."
   },
   {
     "id": "ent.saml.attribute.app_error",
@@ -3504,8 +3432,8 @@
     "translation": "Неможливо отримати канали"
   },
   {
-    "id": "Matterfoss.bulletin.subject",
-    "translation": "Бюлетень безпеки Matterfoss"
+    "id": "mattermost.bulletin.subject",
+    "translation": "Бюлетень безпеки Mattermost"
   },
   {
     "id": "mfa.activate.bad_token.app_error",
@@ -3762,10 +3690,6 @@
   {
     "id": "model.command_hook.id.app_error",
     "translation": "Недійсний ідентифікатор командного крюка"
-  },
-  {
-    "id": "model.command_hook.parent_id.app_error",
-    "translation": "Недійсний батьківський ідентифікатор"
   },
   {
     "id": "model.command_hook.root_id.app_error",
@@ -4452,20 +4376,12 @@
     "translation": "Некоректний оригінальний ідентифікатор"
   },
   {
-    "id": "model.post.is_valid.parent_id.app_error",
-    "translation": "Недійсний батьківський ідентифікатор"
-  },
-  {
     "id": "model.post.is_valid.props.app_error",
     "translation": "Неправильні властивості"
   },
   {
     "id": "model.post.is_valid.root_id.app_error",
     "translation": "Недійсний ідентифікатор кореня"
-  },
-  {
-    "id": "model.post.is_valid.root_parent.app_error",
-    "translation": "Необхідно встановити неправильний кореневий ідентифікатор, якщо встановлено батьківський"
   },
   {
     "id": "model.post.is_valid.type.app_error",
@@ -4677,7 +4593,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "Умови обслуговування GitLab оновлено. Будь ласка, заходьте на gitlab.com, щоб прийняти їх, а потім спробуйте знову увійти в Matterfoss."
+    "translation": "Умови обслуговування GitLab оновлено. Будь ласка, заходьте на gitlab.com, щоб прийняти їх, а потім спробуйте знову увійти в Mattermost."
   },
   {
     "id": "plugin.api.update_user_status.bad_status",
@@ -4702,18 +4618,6 @@
   {
     "id": "plugin_api.send_mail.missing_to",
     "translation": "Missing TO address."
-  },
-  {
-    "id": "store.sql.convert_string_array",
-    "translation": "FromDb: Неможливо перетворити StringArray в * string"
-  },
-  {
-    "id": "store.sql.convert_string_interface",
-    "translation": "FromDb: Неможливо перетворити StringInterface в * string"
-  },
-  {
-    "id": "store.sql.convert_string_map",
-    "translation": "FromDb: Неможливо перетворити StringMap в * string"
   },
   {
     "id": "store.sql_bot.get.missing.app_error",
@@ -4853,11 +4757,11 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "This version of your browser is no longer supported by Matterfoss"
+    "translation": "This version of your browser is no longer supported by Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "This browser is no longer supported by Matterfoss"
+    "translation": "This browser is no longer supported by Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -4901,7 +4805,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "Download the Matterfoss app or use a supported browser for a better experience."
+    "translation": "Download the Mattermost app or use a supported browser for a better experience."
   },
   {
     "id": "web.error.unsupported_browser.download",
@@ -5174,10 +5078,6 @@
   {
     "id": "ent.compliance.csv.metadata.json.zipfile.appError",
     "translation": "Неможливо створити файл eml."
-  },
-  {
-    "id": "cli.outgoing_webhook.inconsistent_state.app_error",
-    "translation": "The outgoing webhook is deleted but unable to create a new one due to some error."
   },
   {
     "id": "bleveengine.stop_user_index.error",
@@ -5581,7 +5481,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which have now been disabled.\n\n{{.BotNames}}{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which have now been disabled, including the following:\n\n{{.BotNames}}{{end}}You can take ownership of each bot by enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.mattermost.org/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which are still enabled.\n\n{{.BotNames}}\n{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which are still enabled, including the following:\n\n{{.BotNames}}{{end}}We strongly recommend you to take ownership of each bot by re-enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.mattermost.org/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nIf you want bot accounts to disable automatically after owner deactivation, set “Disable bot accounts when owner is deactivated” in **System Console > Integrations > Bot Accounts** to true.{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which have now been disabled.\n\n{{.BotNames}}{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which have now been disabled, including the following:\n\n{{.BotNames}}{{end}}You can take ownership of each bot by enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} was deactivated. They managed the following bot accounts which are still enabled.\n\n{{.BotNames}}\n{{else}}{{.UserName}} was deactivated. They managed {{.NumBots}} bot accounts which are still enabled, including the following:\n\n{{.BotNames}}{{end}}We strongly recommend you to take ownership of each bot by re-enabling it at **Integrations > Bot Accounts** and creating new tokens for the bot.\n\nFor more information, see our [documentation](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nIf you want bot accounts to disable automatically after owner deactivation, set “Disable bot accounts when owner is deactivated” in **System Console > Integrations > Bot Accounts** to true.{{end}}"
   },
   {
     "id": "app.bot.createbot.internal_error",
@@ -5673,7 +5573,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "Matterfoss Enterprise license has been disabled."
+    "translation": "Mattermost Enterprise license has been disabled."
   },
   {
     "id": "api.templates.remove_expired_license.body.title",
@@ -5790,10 +5690,6 @@
   {
     "id": "api.plugin.install.download_failed.app_error",
     "translation": "An error occurred while downloading the plugin."
-  },
-  {
-    "id": "api.plugin.add_public_key.open.app_error",
-    "translation": "Під час видалення додатка OAuth2 сталася помилка"
   },
   {
     "id": "api.license.remove_expired_license.failed.error",
@@ -5913,39 +5809,7 @@
   },
   {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "Please add me to teams and channels you want me to interact in. To do this, use the browser or Matterfoss Desktop App."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.too_large.app_error",
-    "translation": "Неможливо завантажити файл. Він занадто великий. "
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.parse.app_error",
-    "translation": "Неможливо обробити форму з декількох частин"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.open.app_error",
-    "translation": "Не вдається відкрити файл зображення"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.no_file.app_error",
-    "translation": "У запиті відсутній файл під атрибутом \"сертифікат\"."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.array.app_error",
-    "translation": "Порожній масив 'image' в запиті"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.app_error",
-    "translation": "Не вдалося завантажити зображення профілю"
-  },
-  {
-    "id": "api.bot.get_bot_icon_image.read.app_error",
-    "translation": "Не вдається прочитати файл зображення піктограми."
-  },
-  {
-    "id": "api.bot.delete_bot_icon_image.app_error",
-    "translation": "Не вдалося завантажити зображення профілю"
+    "translation": "Please add me to teams and channels you want me to interact in. To do this, use the browser or Mattermost Desktop App."
   },
   {
     "id": "api.bot.create_disabled",
@@ -5990,10 +5854,6 @@
   {
     "id": "api.admin.delete_brand_image.storage.not_found",
     "translation": "Unable to delete brand image, not found."
-  },
-  {
-    "id": "ent.data_retention.reactions_batch.internal_error",
-    "translation": "Ми зіткнулися з помилкою, остаточно видаляючи пакет перевірок"
   },
   {
     "id": "app.reaction.save.save.app_error",
@@ -6212,10 +6072,6 @@
     "translation": "Не вдалося отримати користувачів у каналі протягом певного періоду часу"
   },
   {
-    "id": "ent.data_retention.channel_member_history_batch.internal_error",
-    "translation": "Не вдалося очистити записи"
-  },
-  {
     "id": "app.emoji.create.internal_error",
     "translation": "Не вдається зберегти смайли"
   },
@@ -6274,10 +6130,6 @@
   {
     "id": "app.compliance.get.finding.app_error",
     "translation": "Виникла помилка при спробі прочитати файл"
-  },
-  {
-    "id": "ent.data_retention.flags_batch.internal_error",
-    "translation": "Ми зіткнулися з помилкою, очищаючи партію прапорів"
   },
   {
     "id": "app.preference.save.updating.app_error",
@@ -6560,10 +6412,6 @@
     "translation": "Не вдається отримати схему"
   },
   {
-    "id": "ent.data_retention.file_infos_batch.internal_error",
-    "translation": "Ми зіткнулися з помилкою, остаточно видаляючи пакет перевірок"
-  },
-  {
     "id": "app.file_info.save.app_error",
     "translation": "Не вдається зберегти інформацію про файл"
   },
@@ -6640,20 +6488,12 @@
     "translation": "Не вдалося оновити заголовок прямого каналу"
   },
   {
-    "id": "api.server.warn_metric.start_trial",
-    "translation": "Request trial"
-  },
-  {
     "id": "api.server.warn_metric.mfa.notification_title",
     "translation": "Забезпечити багатофакторну автентифікацію:"
   },
   {
     "id": "ent.elasticsearch.post.get_posts_batch_for_indexing.error",
     "translation": "Не вдалося отримати партію повідомлень для індексації"
-  },
-  {
-    "id": "ent.data_retention.posts_permanent_delete_batch.internal_error",
-    "translation": "Ми зіткнулися з помилкою, остаточно видаляючи пакет перевірок"
   },
   {
     "id": "app.post.overwrite.app_error",
@@ -6802,10 +6642,6 @@
   {
     "id": "app.channel.permanent_delete_members_by_user.app_error",
     "translation": "Не вдалося оновити заголовок прямого каналу"
-  },
-  {
-    "id": "app.channel.increment_mention_count.app_error",
-    "translation": "Не вдається збільшити кількість згадок"
   },
   {
     "id": "app.channel.get_pinnedpost_count.app_error",
@@ -6965,7 +6801,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "Якщо у вас є додаткові питання, будь ласка, зв'яжіться з support@Matterfoss.com"
+    "translation": "Якщо у вас є додаткові питання, будь ласка, зв'яжіться з support@mattermost.com"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -6992,20 +6828,20 @@
     "translation": "Кількість запитаних користувачів невірна."
   },
   {
-    "id": "api.templates.upgrade_Matterfoss_cloud",
+    "id": "api.templates.upgrade_mattermost_cloud",
     "translation": "Оновити"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Масштабування за допомогою Matterfoss"
+    "translation": "Масштабування за допомогою Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
-    "translation": "Масштабування за допомогою Matterfoss"
+    "translation": "Масштабування за допомогою Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
-    "translation": "Масштабування за допомогою Matterfoss"
+    "translation": "Масштабування за допомогою Mattermost"
   },
   {
     "id": "api.email.send_warn_metric_ack.failure.app_error",

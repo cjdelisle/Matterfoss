@@ -5,26 +5,85 @@ package app
 
 import (
 	"bytes"
+	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/pkg/errors"
 
-	"github.com/cjdelisle/matterfoss-server/v5/jobs"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 const (
-	requestTrialURL           = "https://customers.mattermost.com/api/v1/trials"
 	LicenseEnv                = "MM_LICENSE"
 	LicenseRenewalURL         = "https://customers.mattermost.com/subscribe/renew"
 	JWTDefaultTokenExpiration = 7 * 24 * time.Hour // 7 days of expiration
 )
+
+var RequestTrialURL = "https://customers.mattermost.com/api/v1/trials"
+
+// licenseWrapper is an adapter struct that only exposes the
+// config related functionality to be passed down to other products.
+type licenseWrapper struct {
+	srv *Server
+}
+
+func (w *licenseWrapper) Name() ServiceKey {
+	return LicenseKey
+}
+
+func (w *licenseWrapper) GetLicense() *model.License {
+	return w.srv.License()
+}
+
+func (w *licenseWrapper) RequestTrialLicense(requesterID string, users int, termsAccepted bool, receiveEmailsAccepted bool) *model.AppError {
+	if *w.srv.Config().ExperimentalSettings.RestrictSystemAdmin {
+		return model.NewAppError("RequestTrialLicense", "api.restricted_system_admin", nil, "", http.StatusForbidden)
+	}
+
+	if !termsAccepted {
+		return model.NewAppError("RequestTrialLicense", "api.license.request-trial.bad-request.terms-not-accepted", nil, "", http.StatusBadRequest)
+	}
+
+	if users == 0 {
+		return model.NewAppError("RequestTrialLicense", "api.license.request-trial.bad-request", nil, "", http.StatusBadRequest)
+	}
+
+	requester, err := w.srv.userService.GetUser(requesterID)
+	if err != nil {
+		var nfErr *store.ErrNotFound
+		switch {
+		case errors.As(err, &nfErr):
+			return model.NewAppError("RequestTrialLicense", MissingAccountError, nil, nfErr.Error(), http.StatusNotFound)
+		default:
+			return model.NewAppError("RequestTrialLicense", "app.user.get_by_username.app_error", nil, err.Error(), http.StatusInternalServerError)
+		}
+	}
+
+	if *w.srv.Config().ServiceSettings.SiteURL == "" {
+		return model.NewAppError("RequestTrialLicense", "api.license.request_trial_license.no-site-url.app_error", nil, "", http.StatusBadRequest)
+	}
+
+	trialLicenseRequest := &model.TrialLicenseRequest{
+		ServerID:              w.srv.TelemetryId(),
+		Name:                  requester.GetDisplayName(model.ShowFullName),
+		Email:                 requester.Email,
+		SiteName:              *w.srv.Config().TeamSettings.SiteName,
+		SiteURL:               *w.srv.Config().ServiceSettings.SiteURL,
+		Users:                 users,
+		TermsAccepted:         termsAccepted,
+		ReceiveEmailsAccepted: receiveEmailsAccepted,
+	}
+
+	return w.srv.RequestTrialLicense(trialLicenseRequest)
+}
 
 // JWTClaims custom JWT claims with the needed information for the
 // renewal process
@@ -38,31 +97,72 @@ func (s *Server) LoadLicense() {
 	// ENV var overrides all other sources of license.
 	licenseStr := os.Getenv(LicenseEnv)
 	if licenseStr != "" {
+		license, err := utils.LicenseValidator.LicenseFromBytes([]byte(licenseStr))
+		if err != nil {
+			mlog.Error("Failed to read license set in environment.", mlog.Err(err))
+			return
+		}
+
+		// skip the restrictions if license is a sanctioned trial
+		if !license.IsSanctionedTrial() && license.IsTrialLicense() {
+			canStartTrialLicense, err := s.LicenseManager.CanStartTrial()
+			if err != nil {
+				mlog.Error("Failed to validate trial eligibility.", mlog.Err(err))
+				return
+			}
+
+			if !canStartTrialLicense {
+				mlog.Info("Cannot start trial multiple times.")
+				return
+			}
+		}
+
 		if s.ValidateAndSetLicenseBytes([]byte(licenseStr)) {
 			mlog.Info("License key from ENV is valid, unlocking enterprise features.")
 		}
 		return
 	}
 
-   // Matterfoss: Enable all OSS features for everyone
-   f := model.Features{}
-   f.SetDefaults()
-   s.SetLicense(&model.License{
-		   Id:        "Anything that prevents you from being friendly, a good neighbour, is a terror tactic. -rms",
-		   IssuedAt:  0,
-		   ExpiresAt: 0x7fffffffffffffff,
-		   Customer:  &model.Customer{},
-		   Features:  &f,
-   })
-   mlog.Info("All features are enabled, do something good for someone today.")
+	licenseId := ""
+	props, nErr := s.Store.System().Get()
+	if nErr == nil {
+		licenseId = props[model.SystemActiveLicenseId]
+	}
+
+	if !model.IsValidId(licenseId) {
+		// Lets attempt to load the file from disk since it was missing from the DB
+		license, licenseBytes := utils.GetAndValidateLicenseFileFromDisk(*s.Config().ServiceSettings.LicenseFileLocation)
+
+		if license != nil {
+			if _, err := s.SaveLicense(licenseBytes); err != nil {
+				mlog.Error("Failed to save license key loaded from disk.", mlog.Err(err))
+			} else {
+				licenseId = license.Id
+			}
+		}
+	}
+
+	record, nErr := s.Store.License().Get(licenseId)
+	if nErr != nil {
+		mlog.Error("License key from https://mattermost.com required to unlock enterprise features.", mlog.Err(nErr))
+		s.SetLicense(nil)
+		return
+	}
+
+	s.ValidateAndSetLicenseBytes([]byte(record.Bytes))
+	mlog.Info("License key valid unlocking enterprise features.")
 }
 
 func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppError) {
-	success, licenseStr := utils.ValidateLicense(licenseBytes)
+	success, licenseStr := utils.LicenseValidator.ValidateLicense(licenseBytes)
 	if !success {
-		return nil, model.NewAppError("addLicense", model.INVALID_LICENSE_ERROR, nil, "", http.StatusBadRequest)
+		return nil, model.NewAppError("addLicense", model.InvalidLicenseError, nil, "", http.StatusBadRequest)
 	}
-	license := model.LicenseFromJson(strings.NewReader(licenseStr))
+
+	var license model.License
+	if jsonErr := json.Unmarshal([]byte(licenseStr), &license); jsonErr != nil {
+		return nil, model.NewAppError("addLicense", "api.unmarshal_error", nil, jsonErr.Error(), http.StatusInternalServerError)
+	}
 
 	uniqueUserCount, err := s.Store.User().Count(model.UserCountOptions{})
 	if err != nil {
@@ -73,12 +173,40 @@ func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppErr
 		return nil, model.NewAppError("addLicense", "api.license.add_license.unique_users.app_error", map[string]interface{}{"Users": *license.Features.Users, "Count": uniqueUserCount}, "", http.StatusBadRequest)
 	}
 
-	if license != nil && license.IsExpired() {
-		return nil, model.NewAppError("addLicense", model.EXPIRED_LICENSE_ERROR, nil, "", http.StatusBadRequest)
+	if license.IsExpired() {
+		return nil, model.NewAppError("addLicense", model.ExpiredLicenseError, nil, "", http.StatusBadRequest)
 	}
 
-	if ok := s.SetLicense(license); !ok {
-		return nil, model.NewAppError("addLicense", model.EXPIRED_LICENSE_ERROR, nil, "", http.StatusBadRequest)
+	if *s.Config().JobSettings.RunJobs && s.Jobs != nil {
+		if err := s.Jobs.StopWorkers(); err != nil && !errors.Is(err, jobs.ErrWorkersNotRunning) {
+			mlog.Warn("Stopping job server workers failed", mlog.Err(err))
+		}
+	}
+
+	if *s.Config().JobSettings.RunScheduler && s.Jobs != nil {
+		if err := s.Jobs.StopSchedulers(); err != nil && !errors.Is(err, jobs.ErrSchedulersNotRunning) {
+			mlog.Error("Stopping job server schedulers failed", mlog.Err(err))
+		}
+	}
+
+	defer func() {
+		// restart job server workers - this handles the edge case where a license file is uploaded, but the job server
+		// doesn't start until the server is restarted, which prevents the 'run job now' buttons in system console from
+		// functioning as expected
+		if *s.Config().JobSettings.RunJobs && s.Jobs != nil {
+			if err := s.Jobs.StartWorkers(); err != nil {
+				mlog.Error("Starting job server workers failed", mlog.Err(err))
+			}
+		}
+		if *s.Config().JobSettings.RunScheduler && s.Jobs != nil {
+			if err := s.Jobs.StartSchedulers(); err != nil && !errors.Is(err, jobs.ErrSchedulersRunning) {
+				mlog.Error("Starting job server schedulers failed", mlog.Err(err))
+			}
+		}
+	}()
+
+	if ok := s.SetLicense(&license); !ok {
+		return nil, model.NewAppError("addLicense", model.ExpiredLicenseError, nil, "", http.StatusBadRequest)
 	}
 
 	record := &model.LicenseRecord{}
@@ -98,7 +226,7 @@ func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppErr
 	}
 
 	sysVar := &model.System{}
-	sysVar.Name = model.SYSTEM_ACTIVE_LICENSE_ID
+	sysVar.Name = model.SystemActiveLicenseId
 	sysVar.Value = license.Id
 	if err := s.Store.System().SaveOrUpdate(sysVar); err != nil {
 		s.RemoveLicense()
@@ -108,26 +236,7 @@ func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppErr
 	s.ReloadConfig()
 	s.InvalidateAllCaches()
 
-	// restart job server workers - this handles the edge case where a license file is uploaded, but the job server
-	// doesn't start until the server is restarted, which prevents the 'run job now' buttons in system console from
-	// functioning as expected
-	if *s.Config().JobSettings.RunJobs && s.Jobs != nil {
-		if err := s.Jobs.StopWorkers(); err != nil && !errors.Is(err, jobs.ErrWorkersNotRunning) {
-			mlog.Warn("Stopping job server workers failed", mlog.Err(err))
-		}
-		if err := s.Jobs.InitWorkers(); err != nil {
-			mlog.Error("Initializing job server workers failed", mlog.Err(err))
-		} else if err := s.Jobs.StartWorkers(); err != nil {
-			mlog.Error("Starting job server workers failed", mlog.Err(err))
-		}
-	}
-	if *s.Config().JobSettings.RunScheduler && s.Jobs != nil {
-		if err := s.Jobs.StartSchedulers(); err != nil && !errors.Is(err, jobs.ErrSchedulersRunning) {
-			mlog.Error("Starting job server schedulers failed", mlog.Err(err))
-		}
-	}
-
-	return license, nil
+	return &license, nil
 }
 
 func (s *Server) SetLicense(license *model.License) bool {
@@ -157,9 +266,13 @@ func (s *Server) SetLicense(license *model.License) bool {
 }
 
 func (s *Server) ValidateAndSetLicenseBytes(b []byte) bool {
-	if success, licenseStr := utils.ValidateLicense(b); success {
-		license := model.LicenseFromJson(strings.NewReader(licenseStr))
-		s.SetLicense(license)
+	if success, licenseStr := utils.LicenseValidator.ValidateLicense(b); success {
+		var license model.License
+		if jsonErr := json.Unmarshal([]byte(licenseStr), &license); jsonErr != nil {
+			mlog.Warn("Failed to decode license from JSON", mlog.Err(jsonErr))
+			return false
+		}
+		s.SetLicense(&license)
 		return true
 	}
 
@@ -183,10 +296,10 @@ func (s *Server) RemoveLicense() *model.AppError {
 		return nil
 	}
 
-	mlog.Info("Remove license.", mlog.String("id", model.SYSTEM_ACTIVE_LICENSE_ID))
+	mlog.Info("Remove license.", mlog.String("id", model.SystemActiveLicenseId))
 
 	sysVar := &model.System{}
-	sysVar.Name = model.SYSTEM_ACTIVE_LICENSE_ID
+	sysVar.Name = model.SystemActiveLicenseId
 	sysVar.Value = ""
 
 	if err := s.Store.System().SaveOrUpdate(sysVar); err != nil {
@@ -211,32 +324,28 @@ func (s *Server) RemoveLicenseListener(id string) {
 }
 
 func (s *Server) GetSanitizedClientLicense() map[string]string {
-	sanitizedLicense := make(map[string]string)
-
-	for k, v := range s.ClientLicense() {
-		sanitizedLicense[k] = v
-	}
-
-	delete(sanitizedLicense, "Id")
-	delete(sanitizedLicense, "Name")
-	delete(sanitizedLicense, "Email")
-	delete(sanitizedLicense, "IssuedAt")
-	delete(sanitizedLicense, "StartsAt")
-	delete(sanitizedLicense, "ExpiresAt")
-	delete(sanitizedLicense, "SkuName")
-	delete(sanitizedLicense, "SkuShortName")
-
-	return sanitizedLicense
+	return utils.GetSanitizedClientLicense(s.ClientLicense())
 }
 
 // RequestTrialLicense request a trial license from the mattermost official license server
 func (s *Server) RequestTrialLicense(trialRequest *model.TrialLicenseRequest) *model.AppError {
-	resp, err := http.Post(requestTrialURL, "application/json", bytes.NewBuffer([]byte(trialRequest.ToJson())))
+	trialRequestJSON, jsonErr := json.Marshal(trialRequest)
+	if jsonErr != nil {
+		return model.NewAppError("RequestTrialLicense", "api.unmarshal_error", nil, jsonErr.Error(), http.StatusInternalServerError)
+	}
+
+	resp, err := http.Post(RequestTrialURL, "application/json", bytes.NewBuffer(trialRequestJSON))
 	if err != nil {
 		return model.NewAppError("RequestTrialLicense", "api.license.request_trial_license.app_error", nil, err.Error(), http.StatusBadRequest)
 	}
 	defer resp.Body.Close()
-	licenseResponse := model.MapFromJson(resp.Body)
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return model.NewAppError("RequestTrialLicense", "api.license.request_trial_license.app_error", nil,
+			fmt.Sprintf("Unexpected HTTP status code %q returned by server", resp.Status), http.StatusInternalServerError)
+	}
+
+	licenseResponse := model.MapFromJSON(resp.Body)
 
 	if _, ok := licenseResponse["license"]; !ok {
 		return model.NewAppError("RequestTrialLicense", "api.license.request_trial_license.app_error", nil, licenseResponse["message"], http.StatusBadRequest)
@@ -258,7 +367,7 @@ func (s *Server) GenerateRenewalToken(expiration time.Duration) (string, *model.
 	license := s.License()
 	if license == nil {
 		// Clean renewal token if there is no license present
-		if _, err := s.Store.System().PermanentDeleteByName(model.SYSTEM_LICENSE_RENEWAL_TOKEN); err != nil {
+		if _, err := s.Store.System().PermanentDeleteByName(model.SystemLicenseRenewalToken); err != nil {
 			mlog.Warn("error removing the renewal token", mlog.Err(err))
 		}
 		return "", model.NewAppError("GenerateRenewalToken", "app.license.generate_renewal_token.no_license", nil, "", http.StatusBadRequest)
@@ -268,12 +377,9 @@ func (s *Server) GenerateRenewalToken(expiration time.Duration) (string, *model.
 		return "", model.NewAppError("GenerateRenewalToken", "app.license.generate_renewal_token.bad_license", nil, "", http.StatusBadRequest)
 	}
 
-	currentToken, _ := s.Store.System().GetByName(model.SYSTEM_LICENSE_RENEWAL_TOKEN)
+	currentToken, _ := s.Store.System().GetByName(model.SystemLicenseRenewalToken)
 	if currentToken != nil {
-		tokenIsValid, err := s.renewalTokenValid(currentToken.Value, license.Customer.Email)
-		if err != nil {
-			mlog.Warn("error checking license renewal token validation", mlog.Err(err))
-		}
+		tokenIsValid, _ := s.renewalTokenValid(currentToken.Value, license.Customer.Email)
 		if currentToken.Value != "" && tokenIsValid {
 			return currentToken.Value, nil
 		}
@@ -300,7 +406,7 @@ func (s *Server) GenerateRenewalToken(expiration time.Duration) (string, *model.
 		return "", model.NewAppError("GenerateRenewalToken", "app.license.generate_renewal_token.app_error", nil, err.Error(), http.StatusInternalServerError)
 	}
 	err = s.Store.System().SaveOrUpdate(&model.System{
-		Name:  model.SYSTEM_LICENSE_RENEWAL_TOKEN,
+		Name:  model.SystemLicenseRenewalToken,
 		Value: tokenString,
 	})
 	if err != nil {
@@ -315,8 +421,11 @@ func (s *Server) renewalTokenValid(tokenString, signingKey string) (bool, error)
 	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte(signingKey), nil
 	})
-	if err != nil && !token.Valid {
+	if err != nil {
 		return false, errors.Wrapf(err, "Error validating JWT token")
+	}
+	if !token.Valid {
+		return false, errors.New("invalid JWT token")
 	}
 	expirationTime := time.Unix(claims.ExpiresAt, 0)
 	if expirationTime.Before(time.Now().UTC()) {
@@ -326,11 +435,11 @@ func (s *Server) renewalTokenValid(tokenString, signingKey string) (bool, error)
 }
 
 // GenerateLicenseRenewalLink returns a link that points to the CWS where clients can renew license
-func (s *Server) GenerateLicenseRenewalLink() (string, *model.AppError) {
+func (s *Server) GenerateLicenseRenewalLink() (string, string, *model.AppError) {
 	renewalToken, err := s.GenerateRenewalToken(JWTDefaultTokenExpiration)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 	renewalLink := LicenseRenewalURL + "?token=" + renewalToken
-	return renewalLink, nil
+	return renewalLink, renewalToken, nil
 }

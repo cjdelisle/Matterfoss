@@ -6,7 +6,7 @@ package bleveengine
 import (
 	"fmt"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func createPost(userId string, channelId string) *model.Post {

@@ -17,7 +17,7 @@ import (
 	"github.com/pkg/errors"
 	gomail "gopkg.in/mail.v2"
 
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (

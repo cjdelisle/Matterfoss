@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 // Test merging maps alone. This isolates the complexity of merging maps from merging maps recursively in
@@ -448,7 +448,7 @@ func TestMergeWithSlices(t *testing.T) {
 		assert.Equal(t, expected, merged)
 	})
 
-	t.Run("patch overwites when patch is empty struct", func(t *testing.T) {
+	t.Run("patch overwrites when patch is empty struct", func(t *testing.T) {
 		m1 := []string{"this", "will", "be", "overwritten"}
 		m2 := []string{}
 		expected := []string{}

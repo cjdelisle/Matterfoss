@@ -4,10 +4,10 @@
 package slashcommands
 
 import (
-	"github.com/cjdelisle/matterfoss-server/v5/app"
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
 )
 
 type ShrugProvider struct {
@@ -41,5 +41,5 @@ func (*ShrugProvider) DoCommand(a *app.App, c *request.Context, args *model.Comm
 		rmsg = message + " " + rmsg
 	}
 
-	return &model.CommandResponse{ResponseType: model.COMMAND_RESPONSE_TYPE_IN_CHANNEL, Text: rmsg}
+	return &model.CommandResponse{ResponseType: model.CommandResponseTypeInChannel, Text: rmsg}
 }

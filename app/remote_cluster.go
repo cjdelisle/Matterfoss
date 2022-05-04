@@ -8,10 +8,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/cjdelisle/matterfoss-server/v5/services/remotecluster"
-	"github.com/cjdelisle/matterfoss-server/v5/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/services/remotecluster"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func (a *App) AddRemoteCluster(rc *model.RemoteCluster) (*model.RemoteCluster, *model.AppError) {

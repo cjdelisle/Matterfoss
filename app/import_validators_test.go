@@ -12,8 +12,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func TestImportValidateSchemeImportData(t *testing.T) {
@@ -357,11 +357,12 @@ func TestImportValidateTeamImportData(t *testing.T) {
 func TestImportValidateChannelImportData(t *testing.T) {
 
 	// Test with minimum required valid properties.
+	chanTypeOpen := model.ChannelTypeOpen
 	data := ChannelImportData{
 		Team:        ptrStr("teamname"),
 		Name:        ptrStr("channelname"),
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}
 	err := validateChannelImportData(&data)
 	require.Nil(t, err, "Validation failed but should have been valid.")
@@ -370,7 +371,7 @@ func TestImportValidateChannelImportData(t *testing.T) {
 	data = ChannelImportData{
 		Name:        ptrStr("channelname"),
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}
 	err = validateChannelImportData(&data)
 	require.NotNil(t, err, "Should have failed due to missing team.")
@@ -379,7 +380,7 @@ func TestImportValidateChannelImportData(t *testing.T) {
 	data = ChannelImportData{
 		Team:        ptrStr("teamname"),
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 	}
 	err = validateChannelImportData(&data)
 	require.NotNil(t, err, "Should have failed due to missing name.")
@@ -400,14 +401,16 @@ func TestImportValidateChannelImportData(t *testing.T) {
 	data = ChannelImportData{
 		Team: ptrStr("teamname"),
 		Name: ptrStr("channelname"),
-		Type: ptrStr("O"),
+		Type: &chanTypeOpen,
 	}
 	err = validateChannelImportData(&data)
-	require.NotNil(t, err, "Should have failed due to missing display_name.")
+	require.Nil(t, err, "Should have accepted having an empty display_name.")
+	require.Equal(t, data.Name, data.DisplayName, "Name and DisplayName should be the same if DisplayName is missing")
 
 	data.DisplayName = ptrStr("")
 	err = validateChannelImportData(&data)
-	require.NotNil(t, err, "Should have failed due to empty display_name.")
+	require.Nil(t, err, "Should have accepted having an empty display_name.")
+	require.Equal(t, data.Name, data.DisplayName, "Name and DisplayName should be the same if DisplayName is missing")
 
 	data.DisplayName = ptrStr(strings.Repeat("abcdefghij", 7))
 	err = validateChannelImportData(&data)
@@ -422,11 +425,13 @@ func TestImportValidateChannelImportData(t *testing.T) {
 	err = validateChannelImportData(&data)
 	require.NotNil(t, err, "Should have failed due to missing type.")
 
-	data.Type = ptrStr("A")
+	invalidType := model.ChannelType("A")
+	data.Type = &invalidType
 	err = validateChannelImportData(&data)
 	require.NotNil(t, err, "Should have failed due to invalid type.")
 
-	data.Type = ptrStr("P")
+	chanTypePr := model.ChannelTypePrivate
+	data.Type = &chanTypePr
 	err = validateChannelImportData(&data)
 	require.Nil(t, err, "Should have succeeded with valid type.")
 
@@ -435,7 +440,7 @@ func TestImportValidateChannelImportData(t *testing.T) {
 		Team:        ptrStr("teamname"),
 		Name:        ptrStr("channelname"),
 		DisplayName: ptrStr("Display Name"),
-		Type:        ptrStr("O"),
+		Type:        &chanTypeOpen,
 		Header:      ptrStr("Channel Header Here"),
 		Purpose:     ptrStr("Channel Purpose Here"),
 	}
@@ -586,7 +591,7 @@ func TestImportValidateUserImportData(t *testing.T) {
 	data.NotifyProps.Desktop = ptrStr("invalid")
 	checkError(t, validateUserImportData(&data))
 
-	data.NotifyProps.Desktop = ptrStr(model.USER_NOTIFY_ALL)
+	data.NotifyProps.Desktop = ptrStr(model.UserNotifyAll)
 	data.NotifyProps.DesktopSound = ptrStr("invalid")
 	checkError(t, validateUserImportData(&data))
 
@@ -598,11 +603,11 @@ func TestImportValidateUserImportData(t *testing.T) {
 	data.NotifyProps.Mobile = ptrStr("invalid")
 	checkError(t, validateUserImportData(&data))
 
-	data.NotifyProps.Mobile = ptrStr(model.USER_NOTIFY_ALL)
+	data.NotifyProps.Mobile = ptrStr(model.UserNotifyAll)
 	data.NotifyProps.MobilePushStatus = ptrStr("invalid")
 	checkError(t, validateUserImportData(&data))
 
-	data.NotifyProps.MobilePushStatus = ptrStr(model.STATUS_ONLINE)
+	data.NotifyProps.MobilePushStatus = ptrStr(model.StatusOnline)
 	data.NotifyProps.ChannelTrigger = ptrStr("invalid")
 	checkError(t, validateUserImportData(&data))
 
@@ -610,11 +615,11 @@ func TestImportValidateUserImportData(t *testing.T) {
 	data.NotifyProps.CommentsTrigger = ptrStr("invalid")
 	checkError(t, validateUserImportData(&data))
 
-	data.NotifyProps.CommentsTrigger = ptrStr(model.COMMENTS_NOTIFY_ROOT)
+	data.NotifyProps.CommentsTrigger = ptrStr(model.CommentsNotifyRoot)
 	data.NotifyProps.MentionKeys = ptrStr("valid")
 	checkNoError(t, validateUserImportData(&data))
 
-	//Test the emai batching interval validators
+	//Test the email batching interval validators
 	//Happy paths
 	data.EmailInterval = ptrStr("immediately")
 	checkNoError(t, validateUserImportData(&data))
@@ -1013,7 +1018,7 @@ func TestImportValidatePostImportData(t *testing.T) {
 
 	t.Run("Test with props too large", func(t *testing.T) {
 		props := model.StringInterface{
-			"attachment": strings.Repeat("a", model.POST_PROPS_MAX_RUNES),
+			"attachment": strings.Repeat("a", model.PostPropsMaxRunes),
 		}
 
 		data := PostImportData{
@@ -1340,34 +1345,37 @@ func TestImportValidateDirectPostImportData(t *testing.T) {
 }
 
 func TestImportValidateEmojiImportData(t *testing.T) {
-	data := EmojiImportData{
-		Name:  ptrStr("parrot"),
-		Image: ptrStr("/path/to/image"),
+	var testCases = []struct {
+		testName          string
+		name              *string
+		image             *string
+		expectError       bool
+		expectSystemEmoji bool
+	}{
+		{"success", ptrStr("parrot2"), ptrStr("/path/to/image"), false, false},
+		{"system emoji", ptrStr("smiley"), ptrStr("/path/to/image"), true, true},
+		{"empty name", ptrStr(""), ptrStr("/path/to/image"), true, false},
+		{"empty image", ptrStr("parrot2"), ptrStr(""), true, false},
+		{"empty name and image", ptrStr(""), ptrStr(""), true, false},
+		{"nil name", nil, ptrStr("/path/to/image"), true, false},
+		{"nil image", ptrStr("parrot2"), nil, true, false},
+		{"nil name and image", nil, nil, true, false},
 	}
 
-	err := validateEmojiImportData(&data)
-	assert.Nil(t, err, "Validation should succeed")
+	for _, tc := range testCases {
+		t.Run(tc.testName, func(t *testing.T) {
+			data := EmojiImportData{
+				Name:  tc.name,
+				Image: tc.image,
+			}
 
-	*data.Name = "smiley"
-	err = validateEmojiImportData(&data)
-	assert.NotNil(t, err)
-
-	*data.Name = ""
-	err = validateEmojiImportData(&data)
-	assert.NotNil(t, err)
-
-	*data.Name = ""
-	*data.Image = ""
-	err = validateEmojiImportData(&data)
-	assert.NotNil(t, err)
-
-	*data.Image = "/path/to/image"
-	data.Name = nil
-	err = validateEmojiImportData(&data)
-	assert.NotNil(t, err)
-
-	data.Name = ptrStr("parrot")
-	data.Image = nil
-	err = validateEmojiImportData(&data)
-	assert.NotNil(t, err)
+			err := validateEmojiImportData(&data)
+			if tc.expectError {
+				require.NotNil(t, err)
+				assert.Equal(t, tc.expectSystemEmoji, err.Id == "model.emoji.system_emoji_name.app_error")
+			} else {
+				assert.Nil(t, err)
+			}
+		})
+	}
 }

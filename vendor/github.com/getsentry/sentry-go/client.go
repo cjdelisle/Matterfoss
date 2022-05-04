@@ -129,7 +129,9 @@ type ClientOptions struct {
 	// and if applicable, caught errors type and value.
 	// If the match is found, then a whole event will be dropped.
 	IgnoreErrors []string
-	// Before send callback.
+	// BeforeSend is called before error events are sent to Sentry.
+	// Use it to mutate the event or return nil to discard the event.
+	// See EventProcessor if you need to mutate transactions.
 	BeforeSend func(event *Event, hint *EventHint) *Event
 	// Before breadcrumb add callback.
 	BeforeBreadcrumb func(breadcrumb *Breadcrumb, hint *BreadcrumbHint) *Breadcrumb
@@ -143,6 +145,28 @@ type ClientOptions struct {
 	// The server name to be reported.
 	ServerName string
 	// The release to be sent with events.
+	//
+	// Some Sentry features are built around releases, and, thus, reporting
+	// events with a non-empty release improves the product experience. See
+	// https://docs.sentry.io/product/releases/.
+	//
+	// If Release is not set, the SDK will try to derive a default value
+	// from environment variables or the Git repository in the working
+	// directory.
+	//
+	// If you distribute a compiled binary, it is recommended to set the
+	// Release value explicitly at build time. As an example, you can use:
+	//
+	// 	go build -ldflags='-X main.release=VALUE'
+	//
+	// That will set the value of a predeclared variable 'release' in the
+	// 'main' package to 'VALUE'. Then, use that variable when initializing
+	// the SDK:
+	//
+	// 	sentry.Init(ClientOptions{Release: release})
+	//
+	// See https://golang.org/cmd/go/ and https://golang.org/cmd/link/ for
+	// the official documentation of -ldflags and -X, respectively.
 	Release string
 	// The dist to be sent with events.
 	Dist string
@@ -206,7 +230,7 @@ func NewClient(options ClientOptions) (*Client, error) {
 	}
 
 	if options.Release == "" {
-		options.Release = os.Getenv("SENTRY_RELEASE")
+		options.Release = defaultRelease()
 	}
 
 	if options.Environment == "" {

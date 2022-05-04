@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/testutils"
 	"github.com/stretchr/testify/require"
 )
 

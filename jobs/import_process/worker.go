@@ -4,197 +4,103 @@
 package import_process
 
 import (
+	"archive/zip"
 	"io"
-	"io/ioutil"
 	"net/http"
-	"os"
 	"path/filepath"
 	"runtime"
 	"strconv"
+	"strings"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app"
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/jobs"
-	tjobs "github.com/cjdelisle/matterfoss-server/v5/jobs/interfaces"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/configservice"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
 )
 
-func init() {
-	app.RegisterJobsImportProcessInterface(func(s *app.Server) tjobs.ImportProcessInterface {
-		a := app.New(app.ServerConnector(s))
-		return &ImportProcessInterfaceImpl{a}
-	})
+const jobName = "ImportProcess"
+
+type AppIface interface {
+	configservice.ConfigService
+	RemoveFile(path string) *model.AppError
+	FileExists(path string) (bool, *model.AppError)
+	FileSize(path string) (int64, *model.AppError)
+	FileReader(path string) (filestore.ReadCloseSeeker, *model.AppError)
+	BulkImportWithPath(c *request.Context, jsonlReader io.Reader, attachmentsReader *zip.Reader, dryRun bool, workers int, importPath string) (*model.AppError, int)
 }
 
-type ImportProcessInterfaceImpl struct {
-	app *app.App
-}
-
-type ImportProcessWorker struct {
-	name        string
-	stopChan    chan struct{}
-	stoppedChan chan struct{}
-	jobsChan    chan model.Job
-	jobServer   *jobs.JobServer
-	app         *app.App
-	appContext  *request.Context
-}
-
-func (i *ImportProcessInterfaceImpl) MakeWorker() model.Worker {
-	return &ImportProcessWorker{
-		name:        "ImportProcess",
-		stopChan:    make(chan struct{}),
-		stoppedChan: make(chan struct{}),
-		jobsChan:    make(chan model.Job),
-		jobServer:   i.app.Srv().Jobs,
-		app:         i.app,
-		appContext:  &request.Context{},
+func MakeWorker(jobServer *jobs.JobServer, app AppIface) model.Worker {
+	appContext := &request.Context{}
+	isEnabled := func(cfg *model.Config) bool {
+		return true
 	}
-}
-
-func (w *ImportProcessWorker) JobChannel() chan<- model.Job {
-	return w.jobsChan
-}
-
-func (w *ImportProcessWorker) Run() {
-	mlog.Debug("Worker started", mlog.String("worker", w.name))
-
-	defer func() {
-		mlog.Debug("Worker finished", mlog.String("worker", w.name))
-		close(w.stoppedChan)
-	}()
-
-	for {
-		select {
-		case <-w.stopChan:
-			mlog.Debug("Worker received stop signal", mlog.String("worker", w.name))
-			return
-		case job := <-w.jobsChan:
-			mlog.Debug("Worker received a new candidate job.", mlog.String("worker", w.name))
-			w.doJob(&job)
+	execute := func(job *model.Job) error {
+		importFileName, ok := job.Data["import_file"]
+		if !ok {
+			return model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.missing_file", nil, "", http.StatusBadRequest)
 		}
-	}
-}
 
-func (w *ImportProcessWorker) Stop() {
-	mlog.Debug("Worker stopping", mlog.String("worker", w.name))
-	close(w.stopChan)
-	<-w.stoppedChan
-}
+		importFilePath := filepath.Join(*app.Config().ImportSettings.Directory, importFileName)
+		if ok, err := app.FileExists(importFilePath); err != nil {
+			return err
+		} else if !ok {
+			return model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.file_exists", nil, "", http.StatusBadRequest)
+		}
 
-func (w *ImportProcessWorker) doJob(job *model.Job) {
-	if claimed, err := w.jobServer.ClaimJob(job); err != nil {
-		mlog.Warn("Worker experienced an error while trying to claim job",
-			mlog.String("worker", w.name),
-			mlog.String("job_id", job.Id),
-			mlog.String("error", err.Error()))
-		return
-	} else if !claimed {
-		return
-	}
+		importFileSize, appErr := app.FileSize(importFilePath)
+		if appErr != nil {
+			return appErr
+		}
 
-	importFileName, ok := job.Data["import_file"]
-	if !ok {
-		appError := model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.missing_file", nil, "", http.StatusBadRequest)
-		w.setJobError(job, appError)
-		return
-	}
+		importFile, appErr := app.FileReader(importFilePath)
+		if appErr != nil {
+			return appErr
+		}
+		defer importFile.Close()
 
-	importFilePath := filepath.Join(*w.app.Config().ImportSettings.Directory, importFileName)
-	if ok, err := w.app.FileExists(importFilePath); err != nil {
-		w.setJobError(job, err)
-		return
-	} else if !ok {
-		appError := model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.file_exists", nil, "", http.StatusBadRequest)
-		w.setJobError(job, appError)
-		return
-	}
+		importZipReader, err := zip.NewReader(importFile.(io.ReaderAt), importFileSize)
+		if err != nil {
+			return model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.open_file", nil, err.Error(), http.StatusInternalServerError)
+		}
 
-	importFileSize, appErr := w.app.FileSize(importFilePath)
-	if appErr != nil {
-		w.setJobError(job, appErr)
-		return
-	}
+		// find JSONL import file.
+		var jsonFile io.ReadCloser
+		for _, f := range importZipReader.File {
+			if filepath.Ext(f.Name) != ".jsonl" {
+				continue
+			}
+			// avoid "zip slip"
+			if strings.Contains(f.Name, "..") {
+				return model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.open_file", nil, "jsonFilePath contains path traversal", http.StatusForbidden)
+			}
 
-	importFile, appErr := w.app.FileReader(importFilePath)
-	if appErr != nil {
-		w.setJobError(job, appErr)
-		return
-	}
-	defer importFile.Close()
+			jsonFile, err = f.Open()
+			if err != nil {
+				return model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.open_file", nil, err.Error(), http.StatusInternalServerError)
+			}
 
-	// TODO (MM-30187): improve this process by eliminating the need to unzip the import
-	// file locally and instead do the whole bulk import process in memory by
-	// streaming the import file.
-
-	// create a temporary dir to extract the zipped import file.
-	dir, err := ioutil.TempDir("", "import")
-	if err != nil {
-		appError := model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.tmp_dir", nil, err.Error(), http.StatusInternalServerError)
-		w.setJobError(job, appError)
-		return
-	}
-	defer os.RemoveAll(dir)
-
-	// extract the contents of the zipped file.
-	paths, err := utils.UnzipToPath(importFile.(io.ReaderAt), importFileSize, dir)
-	if err != nil {
-		appError := model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.unzip", nil, err.Error(), http.StatusInternalServerError)
-		w.setJobError(job, appError)
-		return
-	}
-
-	// find JSONL import file.
-	var jsonFilePath string
-	for _, path := range paths {
-		if filepath.Ext(path) == ".jsonl" {
-			jsonFilePath = path
+			defer jsonFile.Close()
 			break
 		}
-	}
 
-	if jsonFilePath == "" {
-		appError := model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.missing_jsonl", nil, "", http.StatusBadRequest)
-		w.setJobError(job, appError)
-		return
-	}
+		if jsonFile == nil {
+			return model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.missing_jsonl", nil, "jsonFile was nil", http.StatusBadRequest)
+		}
 
-	jsonFile, err := os.Open(jsonFilePath)
-	if err != nil {
-		appError := model.NewAppError("ImportProcessWorker", "import_process.worker.do_job.open_file", nil, err.Error(), http.StatusInternalServerError)
-		w.setJobError(job, appError)
-		return
-	}
+		// do the actual import.
+		appErr, lineNumber := app.BulkImportWithPath(appContext, jsonFile, importZipReader, false, runtime.NumCPU(), model.ExportDataDir)
+		if appErr != nil {
+			job.Data["line_number"] = strconv.Itoa(lineNumber)
+			return appErr
+		}
 
-	// do the actual import.
-	appErr, lineNumber := w.app.BulkImportWithPath(w.appContext, jsonFile, false, runtime.NumCPU(), filepath.Join(dir, app.ExportDataDir))
-	if appErr != nil {
-		job.Data["line_number"] = strconv.Itoa(lineNumber)
-		w.setJobError(job, appErr)
-		return
+		// remove import file when done.
+		if appErr := app.RemoveFile(importFilePath); appErr != nil {
+			return appErr
+		}
+		return nil
 	}
-
-	// remove import file when done.
-	if appErr := w.app.RemoveFile(importFilePath); appErr != nil {
-		w.setJobError(job, appErr)
-		return
-	}
-
-	mlog.Info("Worker: Job is complete", mlog.String("worker", w.name), mlog.String("job_id", job.Id))
-	w.setJobSuccess(job)
-}
-
-func (w *ImportProcessWorker) setJobSuccess(job *model.Job) {
-	if err := w.app.Srv().Jobs.SetJobSuccess(job); err != nil {
-		mlog.Error("Worker: Failed to set success for job", mlog.String("worker", w.name), mlog.String("job_id", job.Id), mlog.String("error", err.Error()))
-		w.setJobError(job, err)
-	}
-}
-
-func (w *ImportProcessWorker) setJobError(job *model.Job, appError *model.AppError) {
-	if err := w.app.Srv().Jobs.SetJobError(job, appError); err != nil {
-		mlog.Error("Worker: Failed to set job error", mlog.String("worker", w.name), mlog.String("job_id", job.Id), mlog.String("error", err.Error()))
-	}
+	worker := jobs.NewSimpleWorker(jobName, jobServer, execute, isEnabled)
+	return worker
 }

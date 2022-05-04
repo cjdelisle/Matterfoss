@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin/plugintest/mock"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 func TestRequireHookId(t *testing.T) {
@@ -68,6 +68,7 @@ func TestMfaRequired(t *testing.T) {
 	mockStore.On("User").Return(&mockUserStore)
 	mockStore.On("Post").Return(&mockPostStore)
 	mockStore.On("System").Return(&mockSystemStore)
+	mockStore.On("GetDBSchemaVersion").Return(1, nil)
 
 	th.App.Srv().SetLicense(model.NewTestLicense("mfa"))
 

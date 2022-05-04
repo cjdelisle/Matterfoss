@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/testutils"
 )
 
 func TestCountFrames(t *testing.T) {

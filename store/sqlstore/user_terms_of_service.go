@@ -8,8 +8,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 type SqlUserTermsOfServiceStore struct {
@@ -17,48 +17,51 @@ type SqlUserTermsOfServiceStore struct {
 }
 
 func newSqlUserTermsOfServiceStore(sqlStore *SqlStore) store.UserTermsOfServiceStore {
-	s := SqlUserTermsOfServiceStore{sqlStore}
-
-	for _, db := range sqlStore.GetAllConns() {
-		table := db.AddTableWithName(model.UserTermsOfService{}, "UserTermsOfService").SetKeys(false, "UserId")
-		table.ColMap("UserId").SetMaxSize(26)
-		table.ColMap("TermsOfServiceId").SetMaxSize(26)
-	}
-
-	return s
-}
-
-func (s SqlUserTermsOfServiceStore) createIndexesIfNotExists() {
-	s.CreateIndexIfNotExists("idx_user_terms_of_service_user_id", "UserTermsOfService", "UserId")
+	return SqlUserTermsOfServiceStore{sqlStore}
 }
 
 func (s SqlUserTermsOfServiceStore) GetByUser(userId string) (*model.UserTermsOfService, error) {
-	var userTermsOfService *model.UserTermsOfService
-
-	err := s.GetReplica().SelectOne(&userTermsOfService, "SELECT * FROM UserTermsOfService WHERE UserId = :userId", map[string]interface{}{"userId": userId})
-	if err != nil {
+	var userTermsOfService model.UserTermsOfService
+	query := `
+		SELECT *
+		FROM UserTermsOfService
+		WHERE UserId = ?
+	`
+	if err := s.GetReplicaX().Get(&userTermsOfService, query, userId); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, store.NewErrNotFound("UserTermsOfService", "userId="+userId)
 		}
+
 		return nil, errors.Wrapf(err, "failed to get UserTermsOfService with userId=%s", userId)
 	}
-	return userTermsOfService, nil
+
+	return &userTermsOfService, nil
 }
 
 func (s SqlUserTermsOfServiceStore) Save(userTermsOfService *model.UserTermsOfService) (*model.UserTermsOfService, error) {
 	userTermsOfService.PreSave()
-
 	if err := userTermsOfService.IsValid(); err != nil {
 		return nil, err
 	}
 
-	c, err := s.GetMaster().Update(userTermsOfService)
+	query := `
+		UPDATE UserTermsOfService
+		SET UserId = :UserId, TermsOfServiceId = :TermsOfServiceId, CreateAt = :CreateAt
+		WHERE UserId = :UserId
+	`
+	result, err := s.GetMasterX().NamedExec(query, userTermsOfService)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to update UserTermsOfService with userId=%s and termsOfServiceId=%s", userTermsOfService.UserId, userTermsOfService.TermsOfServiceId)
 	}
 
-	if c == 0 {
-		if err := s.GetMaster().Insert(userTermsOfService); err != nil {
+	if updatedRows, _ := result.RowsAffected(); updatedRows == 0 {
+		query := `
+			INSERT INTO UserTermsOfService
+				(UserId, TermsOfServiceId, CreateAt)
+			VALUES
+				(:UserId, :TermsOfServiceId, :CreateAt)
+		`
+		if _, err := s.GetMasterX().NamedExec(query, userTermsOfService); err != nil {
 			return nil, errors.Wrapf(err, "failed to save UserTermsOfService with userId=%s and termsOfServiceId=%s", userTermsOfService.UserId, userTermsOfService.TermsOfServiceId)
 		}
 	}
@@ -67,8 +70,14 @@ func (s SqlUserTermsOfServiceStore) Save(userTermsOfService *model.UserTermsOfSe
 }
 
 func (s SqlUserTermsOfServiceStore) Delete(userId, termsOfServiceId string) error {
-	if _, err := s.GetMaster().Exec("DELETE FROM UserTermsOfService WHERE UserId = :UserId AND TermsOfServiceId = :TermsOfServiceId", map[string]interface{}{"UserId": userId, "TermsOfServiceId": termsOfServiceId}); err != nil {
+	query := `
+		DELETE
+		FROM UserTermsOfService
+		WHERE UserId = ? AND TermsOfServiceId = ?
+	`
+	if _, err := s.GetMasterX().Exec(query, userId, termsOfServiceId); err != nil {
 		return errors.Wrapf(err, "failed to delete UserTermsOfService with userId=%s and termsOfServiceId=%s", userId, termsOfServiceId)
 	}
+
 	return nil
 }

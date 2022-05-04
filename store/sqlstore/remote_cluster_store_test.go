@@ -6,7 +6,7 @@ package sqlstore
 import (
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
 )
 
 func TestRemoteClusterStore(t *testing.T) {

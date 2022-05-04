@@ -6,7 +6,7 @@ package featureflag
 import (
 	"fmt"
 
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 type splitLogger struct {

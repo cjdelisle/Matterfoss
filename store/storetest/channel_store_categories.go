@@ -12,8 +12,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func TestChannelStoreCategories(t *testing.T, ss store.Store, s SqlStore) {
@@ -141,7 +141,7 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		// Set up two channels, one favorited and one not
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			TeamId: teamId,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			Name:   "channel1",
 		}, 1000)
 		require.NoError(t, nErr)
@@ -154,7 +154,7 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 
 		channel2, nErr := ss.Channel().Save(&model.Channel{
 			TeamId: teamId,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			Name:   "channel2",
 		}, 1000)
 		require.NoError(t, nErr)
@@ -165,10 +165,10 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		require.NoError(t, err)
 
-		nErr = ss.Preference().Save(&model.Preferences{
+		nErr = ss.Preference().Save(model.Preferences{
 			{
 				UserId:   userId,
-				Category: model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL,
+				Category: model.PreferenceCategoryFavoriteChannel,
 				Name:     channel1.Id,
 				Value:    "true",
 			},
@@ -197,7 +197,7 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		// Set up two channels
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			TeamId:      teamId,
-			Type:        model.CHANNEL_OPEN,
+			Type:        model.ChannelTypeOpen,
 			Name:        "channel1",
 			DisplayName: "zebra",
 		}, 1000)
@@ -211,7 +211,7 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 
 		channel2, nErr := ss.Channel().Save(&model.Channel{
 			TeamId:      teamId,
-			Type:        model.CHANNEL_OPEN,
+			Type:        model.ChannelTypeOpen,
 			Name:        "channel2",
 			DisplayName: "aardvark",
 		}, 1000)
@@ -223,16 +223,16 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		require.NoError(t, err)
 
-		nErr = ss.Preference().Save(&model.Preferences{
+		nErr = ss.Preference().Save(model.Preferences{
 			{
 				UserId:   userId,
-				Category: model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL,
+				Category: model.PreferenceCategoryFavoriteChannel,
 				Name:     channel1.Id,
 				Value:    "true",
 			},
 			{
 				UserId:   userId,
-				Category: model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL,
+				Category: model.PreferenceCategoryFavoriteChannel,
 				Name:     channel2.Id,
 				Value:    "true",
 			},
@@ -263,7 +263,7 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		dmChannel1, err := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId1),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -279,7 +279,7 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		dmChannel2, err := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId2),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -292,10 +292,10 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		)
 		require.NoError(t, err)
 
-		err = ss.Preference().Save(&model.Preferences{
+		err = ss.Preference().Save(model.Preferences{
 			{
 				UserId:   userId,
-				Category: model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL,
+				Category: model.PreferenceCategoryFavoriteChannel,
 				Name:     dmChannel1.Id,
 				Value:    "true",
 			},
@@ -325,7 +325,7 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		// Set up a channel on another team and favorite it
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			TeamId: teamId2,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			Name:   "channel1",
 		}, 1000)
 		require.NoError(t, nErr)
@@ -336,10 +336,10 @@ func testCreateInitialSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		require.NoError(t, err)
 
-		nErr = ss.Preference().Save(&model.Preferences{
+		nErr = ss.Preference().Save(model.Preferences{
 			{
 				UserId:   userId,
-				Category: model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL,
+				Category: model.PreferenceCategoryFavoriteChannel,
 				Name:     channel1.Id,
 				Value:    "true",
 			},
@@ -451,13 +451,13 @@ func testCreateSidebarCategory(t *testing.T, ss store.Store) {
 
 		// Create some channels
 		channel1, err := ss.Channel().Save(&model.Channel{
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 			Name:   model.NewId(),
 		}, 100)
 		require.NoError(t, err)
 		channel2, err := ss.Channel().Save(&model.Channel{
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 			Name:   model.NewId(),
 		}, 100)
@@ -498,13 +498,13 @@ func testCreateSidebarCategory(t *testing.T, ss store.Store) {
 
 		// Create some channels
 		channel1, nErr := ss.Channel().Save(&model.Channel{
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 			Name:   model.NewId(),
 		}, 100)
 		require.NoError(t, nErr)
 		channel2, nErr := ss.Channel().Save(&model.Channel{
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 			Name:   model.NewId(),
 		}, 100)
@@ -594,7 +594,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 			Name:        "channel1",
 			DisplayName: "DEF",
 			TeamId:      teamId,
-			Type:        model.CHANNEL_PRIVATE,
+			Type:        model.ChannelTypePrivate,
 		}, 10)
 		require.NoError(t, nErr)
 		_, nErr = ss.Channel().SaveMember(&model.ChannelMember{
@@ -608,7 +608,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 			Name:        "channel2",
 			DisplayName: "ABC",
 			TeamId:      teamId,
-			Type:        model.CHANNEL_OPEN,
+			Type:        model.ChannelTypeOpen,
 		}, 10)
 		require.NoError(t, nErr)
 		_, nErr = ss.Channel().SaveMember(&model.ChannelMember{
@@ -619,13 +619,14 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		require.NoError(t, nErr)
 
 		// Confirm that they're not in the Channels category in the DB
-		count, countErr := s.GetMaster().SelectInt(`
+		var count int64
+		countErr := s.GetMasterX().Get(&count, `
 			SELECT
 				COUNT(*)
 			FROM
 				SidebarChannels
 			WHERE
-				CategoryId = :CategoryId`, map[string]interface{}{"CategoryId": channelsCategory.Id})
+				CategoryId = ?`, channelsCategory.Id)
 		require.NoError(t, countErr)
 		assert.Equal(t, int64(0), count)
 
@@ -656,7 +657,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "abc",
 			TeamId: model.NewId(),
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 		}, 10)
 		require.NoError(t, nErr)
 		defer ss.Channel().PermanentDelete(channel1.Id)
@@ -698,7 +699,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 			Name:        "channel1",
 			DisplayName: "DEF",
 			TeamId:      teamId,
-			Type:        model.CHANNEL_PRIVATE,
+			Type:        model.ChannelTypePrivate,
 		}, 10)
 		require.NoError(t, nErr)
 		_, nErr = ss.Channel().SaveMember(&model.ChannelMember{
@@ -712,7 +713,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 			Name:        "channel2",
 			DisplayName: "ABC",
 			TeamId:      teamId,
-			Type:        model.CHANNEL_OPEN,
+			Type:        model.ChannelTypeOpen,
 		}, 10)
 		require.NoError(t, nErr)
 		_, nErr = ss.Channel().SaveMember(&model.ChannelMember{
@@ -759,7 +760,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		dmChannel, nErr := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -799,7 +800,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		gmChannel, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "abc",
 			TeamId: "",
-			Type:   model.CHANNEL_GROUP,
+			Type:   model.ChannelTypeGroup,
 		}, 10)
 		require.NoError(t, nErr)
 		defer ss.Channel().PermanentDelete(gmChannel.Id)
@@ -818,7 +819,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		assert.Equal(t, []string{gmChannel.Id}, res2.Channels)
 	})
 
-	t.Run("should return orphaned DM channels in the DMs categorywhich are in a custom category on another team", func(t *testing.T) {
+	t.Run("should return orphaned DM channels in the DMs category which are in a custom category on another team", func(t *testing.T) {
 		userId := model.NewId()
 		teamId := model.NewId()
 
@@ -838,7 +839,7 @@ func testGetSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		dmChannel, nErr := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -1060,7 +1061,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		// Join a channel
 		channel, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "channel",
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 		}, 10)
 		require.NoError(t, nErr)
@@ -1080,7 +1081,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr := ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr := ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
@@ -1097,7 +1098,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.Error(t, nErr)
 		assert.True(t, errors.Is(nErr, sql.ErrNoRows))
 		assert.Nil(t, res2)
@@ -1124,7 +1125,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		dmChannel, nErr := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -1146,7 +1147,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr := ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, dmChannel.Id)
+		res2, nErr := ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, dmChannel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
@@ -1163,7 +1164,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, dmChannel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, dmChannel.Id)
 		assert.Error(t, nErr)
 		assert.True(t, errors.Is(nErr, sql.ErrNoRows))
 		assert.Nil(t, res2)
@@ -1201,7 +1202,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		dmChannel, nErr := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -1223,7 +1224,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr := ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, dmChannel.Id)
+		res2, nErr := ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, dmChannel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
@@ -1238,7 +1239,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		assert.NoError(t, err)
 		assert.Equal(t, []string{dmChannel.Id}, updated[0].Channels)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, dmChannel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, dmChannel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
@@ -1252,7 +1253,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, dmChannel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, dmChannel.Id)
 		require.Error(t, nErr)
 		assert.Nil(t, res2)
 
@@ -1265,7 +1266,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, dmChannel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, dmChannel.Id)
 		require.Error(t, nErr)
 		assert.Nil(t, res2)
 	})
@@ -1305,7 +1306,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		// Have both users join a channel
 		channel, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "channel",
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 		}, 10)
 		require.NoError(t, nErr)
@@ -1335,12 +1336,12 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr := ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr := ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
 
-		res2, nErr = ss.Preference().Get(userId2, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId2, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.True(t, errors.Is(nErr, sql.ErrNoRows))
 		assert.Nil(t, res2)
 
@@ -1357,12 +1358,12 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
 
-		res2, nErr = ss.Preference().Get(userId2, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId2, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
@@ -1380,11 +1381,11 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.True(t, errors.Is(nErr, sql.ErrNoRows))
 		assert.Nil(t, res2)
 
-		res2, nErr = ss.Preference().Get(userId2, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId2, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.NoError(t, nErr)
 		assert.NotNil(t, res2)
 		assert.Equal(t, "true", res2.Value)
@@ -1402,11 +1403,11 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		})
 		assert.NoError(t, err)
 
-		res2, nErr = ss.Preference().Get(userId, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.True(t, errors.Is(nErr, sql.ErrNoRows))
 		assert.Nil(t, res2)
 
-		res2, nErr = ss.Preference().Get(userId2, model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL, channel.Id)
+		res2, nErr = ss.Preference().Get(userId2, model.PreferenceCategoryFavoriteChannel, channel.Id)
 		assert.True(t, errors.Is(nErr, sql.ErrNoRows))
 		assert.Nil(t, res2)
 	})
@@ -1418,7 +1419,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		// Create some channels
 		channel, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "channel",
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 		}, 10)
 		require.NoError(t, nErr)
@@ -1433,7 +1434,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		dmChannel, nErr := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -1488,7 +1489,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		dmChannel, nErr := ss.Channel().SaveDirectChannel(
 			&model.Channel{
 				Name: model.GetDMNameFromIds(userId, otherUserId),
-				Type: model.CHANNEL_DIRECT,
+				Type: model.ChannelTypeDirect,
 			},
 			&model.ChannelMember{
 				UserId:      userId,
@@ -1577,7 +1578,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		// Join a channel
 		channel, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "channel",
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 		}, 10)
 		require.NoError(t, nErr)
@@ -1641,7 +1642,7 @@ func testUpdateSidebarCategories(t *testing.T, ss store.Store) {
 		// Join a channel
 		channel, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "channel",
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 		}, 10)
 		require.NoError(t, nErr)
@@ -1734,7 +1735,7 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			Name:   model.NewId(),
 			TeamId: teamId,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 		}, 1000)
 		require.NoError(t, nErr)
 
@@ -1749,11 +1750,12 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		require.NoError(t, err)
 
 		// Confirm that we start with the right number of categories and SidebarChannels entries
-		count, err := s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarCategories WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		var count int64
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarCategories WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		require.Equal(t, int64(4), count)
 
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarChannels WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarChannels WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		require.Equal(t, int64(2), count)
 
@@ -1762,11 +1764,11 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		assert.NoError(t, err)
 
 		// Confirm that all the categories and SidebarChannel entries have been deleted
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarCategories WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarCategories WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		assert.Equal(t, int64(0), count)
 
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarChannels WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarChannels WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		assert.Equal(t, int64(0), count)
 	})
@@ -1782,7 +1784,7 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			Name:   model.NewId(),
 			TeamId: teamId,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 		}, 1000)
 		require.NoError(t, nErr)
 
@@ -1797,11 +1799,12 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		require.NoError(t, err)
 
 		// Confirm that we start with the right number of categories and SidebarChannels entries
-		count, err := s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarCategories WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		var count int64
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarCategories WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		require.Equal(t, int64(4), count)
 
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarChannels WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarChannels WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		require.Equal(t, int64(2), count)
 
@@ -1810,11 +1813,11 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		assert.NoError(t, err)
 
 		// Confirm that nothing has been deleted
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarCategories WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarCategories WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		assert.Equal(t, int64(4), count)
 
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarChannels WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarChannels WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		assert.Equal(t, int64(2), count)
 	})
@@ -1844,7 +1847,7 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			Name:   model.NewId(),
 			TeamId: teamId,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 		}, 1000)
 		require.NoError(t, nErr)
 
@@ -1860,7 +1863,7 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		channel2, nErr := ss.Channel().Save(&model.Channel{
 			Name:   model.NewId(),
 			TeamId: teamId2,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 		}, 1000)
 		require.NoError(t, nErr)
 
@@ -1870,11 +1873,12 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		require.NoError(t, err)
 
 		// Confirm that we start with the right number of categories and SidebarChannels entries
-		count, err := s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarCategories WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		var count int64
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarCategories WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		require.Equal(t, int64(8), count)
 
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarChannels WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarChannels WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		require.Equal(t, int64(4), count)
 
@@ -1883,11 +1887,11 @@ func testClearSidebarOnTeamLeave(t *testing.T, ss store.Store, s SqlStore) {
 		assert.NoError(t, err)
 
 		// Confirm that we have the correct number of categories and SidebarChannels entries left over
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarCategories WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarCategories WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		assert.Equal(t, int64(4), count)
 
-		count, err = s.GetMaster().SelectInt("SELECT COUNT(*) FROM SidebarChannels WHERE UserId = :UserId", map[string]interface{}{"UserId": userId})
+		err = s.GetMasterX().Get(&count, "SELECT COUNT(*) FROM SidebarChannels WHERE UserId = ?", userId)
 		require.NoError(t, err)
 		assert.Equal(t, int64(2), count)
 
@@ -1936,7 +1940,7 @@ func testDeleteSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		channel1, nErr := ss.Channel().Save(&model.Channel{
 			Name:   model.NewId(),
 			TeamId: teamId,
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 		}, 1000)
 		require.NoError(t, nErr)
 		defer ss.Channel().PermanentDelete(channel1.Id)
@@ -1944,7 +1948,7 @@ func testDeleteSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		channel2, nErr := ss.Channel().Save(&model.Channel{
 			Name:   model.NewId(),
 			TeamId: teamId,
-			Type:   model.CHANNEL_PRIVATE,
+			Type:   model.ChannelTypePrivate,
 		}, 1000)
 		require.NoError(t, nErr)
 		defer ss.Channel().PermanentDelete(channel2.Id)
@@ -1980,13 +1984,14 @@ func testDeleteSidebarCategory(t *testing.T, ss store.Store, s SqlStore) {
 		assert.Len(t, res.Categories, 3)
 
 		// ...and that the corresponding SidebarChannel entries were deleted
-		count, countErr := s.GetMaster().SelectInt(`
+		var count int64
+		countErr := s.GetMasterX().Get(&count, `
 			SELECT
 				COUNT(*)
 			FROM
 				SidebarChannels
 			WHERE
-				CategoryId = :CategoryId`, map[string]interface{}{"CategoryId": newCategory.Id})
+				CategoryId = ?`, newCategory.Id)
 		require.NoError(t, countErr)
 		assert.Equal(t, int64(0), count)
 	})
@@ -2023,15 +2028,15 @@ func testUpdateSidebarChannelsByPreferences(t *testing.T, ss store.Store) {
 
 		channel, nErr := ss.Channel().Save(&model.Channel{
 			Name:   "channel",
-			Type:   model.CHANNEL_OPEN,
+			Type:   model.ChannelTypeOpen,
 			TeamId: teamId,
 		}, 10)
 		require.NoError(t, nErr)
 
-		err := ss.Channel().UpdateSidebarChannelsByPreferences(&model.Preferences{
+		err := ss.Channel().UpdateSidebarChannelsByPreferences(model.Preferences{
 			model.Preference{
 				Name:     channel.Id,
-				Category: model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL,
+				Category: model.PreferenceCategoryFavoriteChannel,
 				Value:    "true",
 			},
 		})
@@ -2047,10 +2052,10 @@ func testUpdateSidebarChannelsByPreferences(t *testing.T, ss store.Store) {
 		require.NotEmpty(t, res)
 
 		require.NotPanics(t, func() {
-			_ = ss.Channel().UpdateSidebarChannelsByPreferences(&model.Preferences{
+			_ = ss.Channel().UpdateSidebarChannelsByPreferences(model.Preferences{
 				model.Preference{
 					Name:     "fakeid",
-					Category: model.PREFERENCE_CATEGORY_FAVORITE_CHANNEL,
+					Category: model.PreferenceCategoryFavoriteChannel,
 					Value:    "true",
 				},
 			})
@@ -2068,7 +2073,7 @@ func testSidebarCategoryDeadlock(t *testing.T, ss store.Store) {
 	// Join a channel
 	channel, err := ss.Channel().Save(&model.Channel{
 		Name:   "channel",
-		Type:   model.CHANNEL_OPEN,
+		Type:   model.ChannelTypeOpen,
 		TeamId: teamID,
 	}, 10)
 	require.NoError(t, err)

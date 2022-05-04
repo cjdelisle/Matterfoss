@@ -6,15 +6,13 @@ package sqlstore_test
 import (
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store/sqlstore"
-	"github.com/cjdelisle/matterfoss-server/v5/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 var mainHelper *testlib.MainHelper
 
 func TestMain(m *testing.M) {
-	mlog.DisableZap()
 	mainHelper = testlib.NewMainHelperWithOptions(nil)
 	defer mainHelper.Close()
 

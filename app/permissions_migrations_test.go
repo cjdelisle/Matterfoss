@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func TestApplyPermissionsMap(t *testing.T) {

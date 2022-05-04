@@ -11,7 +11,7 @@ import (
 
 	"github.com/hashicorp/go-hclog"
 
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 type hclogAdapter struct {
@@ -115,7 +115,7 @@ func (h *hclogAdapter) ResetNamed(name string) hclog.Logger {
 }
 
 func (h *hclogAdapter) StandardLogger(opts *hclog.StandardLoggerOptions) *log.Logger {
-	return h.wrappedLogger.StdLog()
+	return h.wrappedLogger.StdLogger(mlog.LvlInfo)
 }
 
 func (h *hclogAdapter) StandardWriter(opts *hclog.StandardLoggerOptions) io.Writer {
@@ -129,5 +129,5 @@ func (h *hclogAdapter) ImpliedArgs() []interface{} {
 }
 
 func (h *hclogAdapter) Name() string {
-	return "MatterfossPluginLogger"
+	return "MattermostPluginLogger"
 }

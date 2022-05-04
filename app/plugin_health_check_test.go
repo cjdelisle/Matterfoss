@@ -8,8 +8,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
 )
 
 func TestHealthCheckJob(t *testing.T) {
@@ -21,12 +21,12 @@ func TestHealthCheckJob(t *testing.T) {
 			package main
 
 			import (
-				"github.com/cjdelisle/matterfoss-server/v5/model"
-				"github.com/cjdelisle/matterfoss-server/v5/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/model"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
 			)
 
 			type MyPlugin struct {
-				plugin.MatterfossPlugin
+				plugin.MattermostPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {

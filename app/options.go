@@ -6,10 +6,12 @@ package app
 import (
 	"github.com/pkg/errors"
 
-	"github.com/cjdelisle/matterfoss-server/v5/config"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 type Option func(s *Server) error
@@ -43,14 +45,14 @@ func StoreOverride(override interface{}) Option {
 // or a database connection string. It receives as well a set of
 // custom defaults that will be applied for any unset property of the
 // config loaded from the dsn on top of the normal defaults
-func Config(dsn string, watch, readOnly bool, configDefaults *model.Config) Option {
+func Config(dsn string, readOnly bool, configDefaults *model.Config) Option {
 	return func(s *Server) error {
-		configStore, err := config.NewStoreFromDSN(dsn, watch, readOnly, configDefaults)
+		configStore, err := config.NewStoreFromDSN(dsn, readOnly, configDefaults, true)
 		if err != nil {
 			return errors.Wrap(err, "failed to apply Config option")
 		}
 
-		s.configStore = configStore
+		s.configStore = &configWrapper{srv: s, Store: configStore}
 		return nil
 	}
 }
@@ -58,8 +60,15 @@ func Config(dsn string, watch, readOnly bool, configDefaults *model.Config) Opti
 // ConfigStore applies the given config store, typically to replace the traditional sources with a memory store for testing.
 func ConfigStore(configStore *config.Store) Option {
 	return func(s *Server) error {
-		s.configStore = configStore
+		s.configStore = &configWrapper{srv: s, Store: configStore}
 
+		return nil
+	}
+}
+
+func SetFileStore(filestore filestore.FileBackend) Option {
+	return func(s *Server) error {
+		s.filestore = filestore
 		return nil
 	}
 }
@@ -106,9 +115,15 @@ func SkipPostInitializiation() Option {
 type AppOption func(a *App)
 type AppOptionCreator func() []AppOption
 
-func ServerConnector(s *Server) AppOption {
+func ServerConnector(ch *Channels) AppOption {
 	return func(a *App) {
-		a.srv = s
-		a.searchEngine = s.SearchEngine
+		a.ch = ch
+	}
+}
+
+func setCluster(cluster einterfaces.ClusterInterface) Option {
+	return func(s *Server) error {
+		s.Cluster = cluster
+		return nil
 	}
 }

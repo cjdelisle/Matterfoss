@@ -13,7 +13,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func TestSanitizePath(t *testing.T) {

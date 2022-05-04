@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 func TestTeamStore(t *testing.T) {

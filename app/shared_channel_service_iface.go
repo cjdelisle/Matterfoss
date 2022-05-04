@@ -4,8 +4,8 @@
 package app
 
 import (
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/services/sharedchannel"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/sharedchannel"
 )
 
 // SharedChannelServiceIFace is the interface to the shared channel service

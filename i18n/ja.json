@@ -97,7 +97,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Matterfoss - 電子メール設定のテスト"
+    "translation": "Mattermost - 電子メール設定のテスト"
   },
   {
     "id": "api.admin.test_s3.missing_s3_bucket",
@@ -137,7 +137,7 @@
   },
   {
     "id": "api.channel.add_user_to_channel.type.app_error",
-    "translation": "この種類のチャンネルにはユーザーを追加することはできません。"
+    "translation": "この種別のチャンネルにはユーザーを追加することはできません。"
   },
   {
     "id": "api.channel.change_channel_privacy.private_to_public",
@@ -146,14 +146,6 @@
   {
     "id": "api.channel.change_channel_privacy.public_to_private",
     "translation": "このチャンネルは非公開チャンネルに変更されました。"
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.default_channel_error",
-    "translation": "このデフォルトチャンネルは非公開チャンネルに変更できません。"
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.private_channel_error",
-    "translation": "変更しようとしているチャンネルはすでに非公開チャンネルです。"
   },
   {
     "id": "api.channel.create_channel.direct_channel.app_error",
@@ -353,7 +345,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "あなたのMatterfossチームへ招待する電子メールを送る"
+    "translation": "あなたのMattermostチームへ招待する電子メールを送る"
   },
   {
     "id": "api.command.invite_people.email_invitations_off",
@@ -627,7 +619,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Matterfossヘルプページを開く"
+    "translation": "Mattermostヘルプページを開く"
   },
   {
     "id": "api.command_help.name",
@@ -639,7 +631,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.Matterfoss.com/default-channel-handle-documentation)を使用してください。"
+    "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)を使用してください。"
   },
   {
     "id": "api.command_invite.desc",
@@ -731,7 +723,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Matterfossからログアウトする"
+    "translation": "Mattermostからログアウトする"
   },
   {
     "id": "api.command_logout.name",
@@ -783,7 +775,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.Matterfoss.com/default-channel-handle-documentation)を使用してください。"
+    "translation": "チャンネル {{.Channel}} が見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)を使用してください。"
   },
   {
     "id": "api.command_mute.hint",
@@ -795,7 +787,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "指定したチャンネルが見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://about.Matterfoss.com/default-channel-handle-documentation)を使用してください。"
+    "translation": "指定したチャンネルが見つかりませんでした。チャンネルの指定には[チャンネルのハンドル名](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)を使用してください。"
   },
   {
     "id": "api.command_mute.not_member.error",
@@ -895,7 +887,7 @@
   },
   {
     "id": "api.command_settings.desc",
-    "translation": "アカウント設定ダイアログを開く"
+    "translation": "設定ダイアログを開く"
   },
   {
     "id": "api.command_settings.name",
@@ -1181,7 +1173,7 @@
   },
   {
     "id": "api.marshal_error",
-    "translation": "変換エラー"
+    "translation": "変換できませんでした。"
   },
   {
     "id": "api.oauth.allow_oauth.redirect_callback.app_error",
@@ -1316,16 +1308,8 @@
     "translation": "RootIdパラメーターのChannelIdが不正です。"
   },
   {
-    "id": "api.post.create_post.parent_id.app_error",
-    "translation": "ParentIdパラメーターが不正です。"
-  },
-  {
     "id": "api.post.create_post.root_id.app_error",
     "translation": "RootIdパラメーターが不正です。"
-  },
-  {
-    "id": "api.post.create_post.town_square_read_only",
-    "translation": "このチャンネルは読み取り専用です。権限のあるメンバーのみがここに投稿できます。"
   },
   {
     "id": "api.post.create_webhook_post.creating.app_error",
@@ -1382,10 +1366,6 @@
   {
     "id": "api.post.patch_post.can_not_update_post_in_deleted.error",
     "translation": "削除されたチャンネルの投稿は更新できません。"
-  },
-  {
-    "id": "api.post.save_is_pinned_post.town_square_read_only",
-    "translation": "このチャンネルは読み取り専用です。権限のあるメンバーのみがこのチャンネルの投稿をピン留めできます。"
   },
   {
     "id": "api.post.send_notification_and_forget.push_channel_mention",
@@ -1468,10 +1448,6 @@
     "translation": "他のユーザーのリアクションを保存することはできません。"
   },
   {
-    "id": "api.reaction.town_square_read_only",
-    "translation": "読み取り専用チャンネルで投稿へリアクションすることはできません。"
-  },
-  {
     "id": "api.restricted_system_admin",
     "translation": "この操作は制限されたシステム管理者には禁止されています。"
   },
@@ -1541,7 +1517,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "Slackチャンネル {{.DisplayName}} は有効なMatterfossのチャンネルとして既に存在しています。両方のチャンネルがマージされます。\r\n"
+    "translation": "Slackチャンネル {{.DisplayName}} は有効なMattermostのチャンネルとして既に存在しています。両方のチャンネルがマージされます。\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.created",
@@ -1553,11 +1529,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMatterfossユーザーとSlackユーザーをマージしました。\r\n"
+    "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMattermostユーザーとSlackユーザーをマージしました。\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMatterfossユーザーとSlackユーザーをマージしましたが、そのユーザーをチームに追加できませんでした。\r\n"
+    "translation": "電子メールアドレス {{.Email}} とユーザー名 {{.Username}} を持つ既存のMattermostユーザーとSlackユーザーをマージしましたが、そのユーザーをチームに追加できませんでした。\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1569,7 +1545,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Matterfoss Slackインポートログ\r\n"
+    "translation": "Mattermost Slackインポートログ\r\n"
   },
   {
     "id": "api.slackimport.slack_import.note1",
@@ -1712,10 +1688,6 @@
     "translation": "チームアイコンをデコードできませんでした。"
   },
   {
-    "id": "api.team.set_team_icon.decode_config.app_error",
-    "translation": "チームアイコンメタデータをデコードできませんでした。"
-  },
-  {
     "id": "api.team.set_team_icon.encode.app_error",
     "translation": "チームアイコンをエンコードできませんでした。"
   },
@@ -1813,7 +1785,7 @@
   },
   {
     "id": "api.templates.email_footer",
-    "translation": "通知設定を変更するには、チームにログインしアカウント設定から通知を選択してください。"
+    "translation": "通知設定を変更するには、チームにログインし設定から通知を選択してください。"
   },
   {
     "id": "api.templates.email_info1",
@@ -1941,7 +1913,7 @@
   },
   {
     "id": "api.templates.verify_body.info",
-    "translation": "この電子メールアドレスがMatterfossアカウントの作成に使用されました。"
+    "translation": "この電子メールアドレスがMattermostアカウントの作成に使用されました。"
   },
   {
     "id": "api.templates.verify_body.title",
@@ -1961,7 +1933,7 @@
   },
   {
     "id": "api.templates.welcome_body.info",
-    "translation": "この電子メールアドレスがMatterfossアカウントの作成に使用されました。"
+    "translation": "この電子メールアドレスがMattermostアカウントの作成に使用されました。"
   },
   {
     "id": "api.templates.welcome_body.title",
@@ -2180,24 +2152,8 @@
     "translation": "無効化されたアカウントへ電子メールを送信できませんでした"
   },
   {
-    "id": "api.user.send_email_change_email_and_forget.error",
-    "translation": "電子メールアドレス変更通知の電子メールを送信できませんでした"
-  },
-  {
-    "id": "api.user.send_email_change_username_and_forget.error",
-    "translation": "ユーザー名変更通知の電子メールを送信できませんでした"
-  },
-  {
     "id": "api.user.send_email_change_verify_email_and_forget.error",
     "translation": "電子メールアドレス変更確認の電子メールを送信できませんでした"
-  },
-  {
-    "id": "api.user.send_mfa_change_email.error",
-    "translation": "多要素認証変更に関する電子メール通知を送信できません。"
-  },
-  {
-    "id": "api.user.send_password_change_email_and_forget.error",
-    "translation": "パスワード更新の電子メールを送信できませんでした"
   },
   {
     "id": "api.user.send_password_reset.send.app_error",
@@ -2212,16 +2168,8 @@
     "translation": "パスワード更新の電子メールを送信できませんでした"
   },
   {
-    "id": "api.user.send_user_access_token.error",
-    "translation": "パーソナルアクセストークン追加の電子メールを送信できませんでした"
-  },
-  {
     "id": "api.user.send_verify_email_and_forget.failed.error",
     "translation": "確認の電子メールを送信できませんでした"
-  },
-  {
-    "id": "api.user.send_welcome_email_and_forget.failed.error",
-    "translation": "歓迎の電子メールを送信できませんでした"
   },
   {
     "id": "api.user.update_active.not_enable.app_error",
@@ -2266,10 +2214,6 @@
   {
     "id": "api.user.upload_profile_user.decode.app_error",
     "translation": "プロフィール画像をデコードできませんでした。"
-  },
-  {
-    "id": "api.user.upload_profile_user.decode_config.app_error",
-    "translation": "プロフィール画像を保存できませんでした。ファイルは有効な画像として表示されません。"
   },
   {
     "id": "api.user.upload_profile_user.encode.app_error",
@@ -2540,10 +2484,6 @@
     "translation": "チャンネルの表示名の長さが制限を超えています。"
   },
   {
-    "id": "app.import.validate_channel_import_data.display_name_missing.error",
-    "translation": "必須のチャンネル設定値 display_name が存在しません"
-  },
-  {
     "id": "app.import.validate_channel_import_data.header_length.error",
     "translation": "チャンネルヘッダーが長すぎます。"
   },
@@ -2573,7 +2513,7 @@
   },
   {
     "id": "app.import.validate_channel_import_data.type_invalid.error",
-    "translation": "チャンネルの種類が不正です。"
+    "translation": "チャンネル種別が不正です。"
   },
   {
     "id": "app.import.validate_channel_import_data.type_missing.error",
@@ -2913,7 +2853,7 @@
   },
   {
     "id": "app.notification.subject.direct.full",
-    "translation": "[{{.SiteName}}] {{.Month}} {{.Day}}, {{.Year}} @{{.SenderDisplayName}} からの新しいダイレクトメッセージ"
+    "translation": "[{{.SiteName}}] {{.Month}} {{.Day}}, {{.Year}} {{.SenderDisplayName}} からの新しいダイレクトメッセージ"
   },
   {
     "id": "app.notification.subject.group_message.full",
@@ -3036,10 +2976,6 @@
     "translation": "画像データをデコードできません。"
   },
   {
-    "id": "brand.save_brand_image.decode_config.app_error",
-    "translation": "画像メタデータを取得できません。"
-  },
-  {
     "id": "brand.save_brand_image.encode.app_error",
     "translation": "画像データをPNG形式に変換できません。再度実行してください。"
   },
@@ -3050,14 +2986,6 @@
   {
     "id": "brand.save_brand_image.save_image.app_error",
     "translation": "ファイルストレージに画像ファイルを書き込めません。接続を確認し、再度実行してください。"
-  },
-  {
-    "id": "brand.save_brand_image.too_large.app_error",
-    "translation": "画像ファイルを読み込み目線。画像サイズが2MB以下であることを確認し、再度実行してください。"
-  },
-  {
-    "id": "cli.license.critical",
-    "translation": "この機能はEnterprise Editionへのアップグレードとライセンスキーを要求しています。システム管理者に連絡してください。"
   },
   {
     "id": "ent.account_migration.get_all_failed",
@@ -3281,7 +3209,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "あなたのAD/LDAPアカウントにはMatterfossサーバを利用する権限がありません。システム管理者にAD/LDAPのユーザーフィルターをチェックするよう依頼してください。"
+    "translation": "あなたのAD/LDAPアカウントにはMattermostサーバを利用する権限がありません。システム管理者にAD/LDAPのユーザーフィルターをチェックするよう依頼してください。"
   },
   {
     "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3301,7 +3229,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "AD/LDAPでのユーザー検索に失敗しました。MatterfossサーバーがAD/LDAPサーバーに接続できることを確認し、再度実行してください。"
+    "translation": "AD/LDAPでのユーザー検索に失敗しました。MattermostサーバーがAD/LDAPサーバーに接続できることを確認し、再度実行してください。"
   },
   {
     "id": "ent.ldap.validate_filter.app_error",
@@ -3397,7 +3325,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "ユーザー名は既に別のMatterfossユーザーによって使用されています。"
+    "translation": "ユーザー名は既に別のMattermostユーザーによって使用されています。"
   },
   {
     "id": "ent.saml.attribute.app_error",
@@ -3496,8 +3424,8 @@
     "translation": "チャンネルが取得できません。"
   },
   {
-    "id": "Matterfoss.bulletin.subject",
-    "translation": "Matterfossセキュリティー通知"
+    "id": "mattermost.bulletin.subject",
+    "translation": "Mattermostセキュリティー通知"
   },
   {
     "id": "mfa.activate.bad_token.app_error",
@@ -3754,10 +3682,6 @@
   {
     "id": "model.command_hook.id.app_error",
     "translation": "不正なコマンドフックIDです。"
-  },
-  {
-    "id": "model.command_hook.parent_id.app_error",
-    "translation": "不正な親IDです。"
   },
   {
     "id": "model.command_hook.root_id.app_error",
@@ -4421,7 +4345,7 @@
   },
   {
     "id": "model.post.is_valid.file_ids.app_error",
-    "translation": "ファイルIDが不正です。アップロードは最大5ファイルまでに制限されています。それ以上のファイルをアップロードするには追加の投稿を行ってください。"
+    "translation": "ファイルIDが不正です。アップロードは最大10ファイルまでに制限されています。それ以上のファイルをアップロードするには追加の投稿を行ってください。"
   },
   {
     "id": "model.post.is_valid.filenames.app_error",
@@ -4444,20 +4368,12 @@
     "translation": "不正なオリジナルIDです。"
   },
   {
-    "id": "model.post.is_valid.parent_id.app_error",
-    "translation": "不正な親IDです。"
-  },
-  {
     "id": "model.post.is_valid.props.app_error",
     "translation": "不正な設定値です。"
   },
   {
     "id": "model.post.is_valid.root_id.app_error",
     "translation": "不正なルートIDです。"
-  },
-  {
-    "id": "model.post.is_valid.root_parent.app_error",
-    "translation": "親IDが設定されている場合、無効なルートIDが設定されていなければなりません。"
   },
   {
     "id": "model.post.is_valid.type.app_error",
@@ -4669,7 +4585,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "GitLabの利用規約が更新されました。gitlab.comで新しい利用規約に同意してから、もう一度Matterfossへログインしてみてください。"
+    "translation": "GitLabの利用規約が更新されました。gitlab.comで新しい利用規約に同意してから、もう一度Mattermostへログインしてみてください。"
   },
   {
     "id": "plugin.api.update_user_status.bad_status",
@@ -4694,18 +4610,6 @@
   {
     "id": "plugin_api.send_mail.missing_to",
     "translation": "送信先アドレスが存在しません。"
-  },
-  {
-    "id": "store.sql.convert_string_array",
-    "translation": "FromDb: StringArrayを*stringに変換できません"
-  },
-  {
-    "id": "store.sql.convert_string_interface",
-    "translation": "FromDb: StringInterfaceを*stringに変換できません"
-  },
-  {
-    "id": "store.sql.convert_string_map",
-    "translation": "FromDb: StringMapを*stringに変換できません"
   },
   {
     "id": "store.sql_bot.get.missing.app_error",
@@ -4845,27 +4749,27 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "あなたのブラウザのバージョンはMatterfossではサポートされていません"
+    "translation": "あなたのブラウザのバージョンはMattermostではサポートされていません"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "このブラウザはMatterfossではサポートされていません"
+    "translation": "このブラウザはMattermostではサポートされていません"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.windows",
-    "translation": "Windows 7+"
+    "translation": "Windows 8.1+"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.mac",
-    "translation": "macOS 10.9+"
+    "translation": "macOS 10.14+"
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.safari",
-    "translation": "Version 12+"
+    "translation": "Version 14.1+"
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.firefox",
-    "translation": "Version 60+"
+    "translation": "Version 91+"
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.edge",
@@ -4873,7 +4777,7 @@
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.chrome",
-    "translation": "Version 61+"
+    "translation": "Version 89+"
   },
   {
     "id": "web.error.unsupported_browser.learn_more",
@@ -4893,7 +4797,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "より良い体験のために、Matterfossアプリかサポートされたブラウザをダウンロードしてください。"
+    "translation": "より良い体験のために、Mattermostアプリかサポートされたブラウザをダウンロードしてください。"
   },
   {
     "id": "web.error.unsupported_browser.download",
@@ -5166,10 +5070,6 @@
   {
     "id": "ent.compliance.csv.metadata.json.zipfile.appError",
     "translation": "zipファイルを作成できません"
-  },
-  {
-    "id": "cli.outgoing_webhook.inconsistent_state.app_error",
-    "translation": "外向きのウェブフッは削除されましたが、エラーにより新しいウェブフックを作成できませんでした。"
   },
   {
     "id": "bleveengine.stop_user_index.error",
@@ -5669,7 +5569,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "Matterfossエンタープライズライセンスは無効になっています。"
+    "translation": "Mattermostエンタープライズライセンスは無効になっています。"
   },
   {
     "id": "api.templates.remove_expired_license.body.title",
@@ -5792,10 +5692,6 @@
     "translation": "プラグインをダウンロードする際にエラーが発生しました。"
   },
   {
-    "id": "api.plugin.add_public_key.open.app_error",
-    "translation": "公開鍵ファイルを開く際にエラーが発生しました。"
-  },
-  {
     "id": "api.license.remove_expired_license.failed.error",
     "translation": "無効化されたライセンスへの電子メールを送信できませんでした。"
   },
@@ -5873,7 +5769,7 @@
   },
   {
     "id": "api.channel.remove_user_from_channel.app_error",
-    "translation": "この種類のチャンネルからユーザーを削除することはできません。"
+    "translation": "この種別のチャンネルからユーザーを削除することはできません。"
   },
   {
     "id": "api.channel.remove_members.denied",
@@ -5913,39 +5809,7 @@
   },
   {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "ブラウザ、もしくはMatterfossデスクトップアプリから、Botをチーム・チャンネルに追加してください。"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.too_large.app_error",
-    "translation": "プロフィール画像をアップロードできません。ファイルが大き過ぎます。"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.parse.app_error",
-    "translation": "マルチパートフォームを解析できません。"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.open.app_error",
-    "translation": "画像ファイルを開けません。"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.no_file.app_error",
-    "translation": "リクエストの'image'以下にファイルがありません。"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.array.app_error",
-    "translation": "リクエストの'image'以下の配列が空です。"
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.app_error",
-    "translation": "アイコン画像をアップロードできませんでした。"
-  },
-  {
-    "id": "api.bot.get_bot_icon_image.read.app_error",
-    "translation": "アイコン画像ファイルを読み込めませんでした。"
-  },
-  {
-    "id": "api.bot.delete_bot_icon_image.app_error",
-    "translation": "アイコン画像を削除できませんでした。"
+    "translation": "ブラウザ、もしくはMattermostデスクトップアプリから、Botをチーム・チャンネルに追加してください。"
   },
   {
     "id": "api.bot.create_disabled",
@@ -6002,10 +5866,6 @@
   {
     "id": "ent.elasticsearch.delete_channel_posts.error",
     "translation": "チャンネル投稿を削除できませんでした"
-  },
-  {
-    "id": "ent.data_retention.reactions_batch.internal_error",
-    "translation": "リアクションの一括削除中にエラーが発生しました。"
   },
   {
     "id": "ent.cluster.timeout.error",
@@ -6105,11 +5965,11 @@
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "トライアルライセンスを取得できませんでした。再度試してみるか、support@Matterfoss.com に連絡してください。"
+    "translation": "トライアルライセンスを取得できませんでした。再度試してみるか、support@mattermost.com に連絡してください。"
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "ライセンスをリクエストするには、Matterfoss Software Evaluation Agreement と プライバシーポリシーに同意しなくてはなりません。"
+    "translation": "ライセンスをリクエストするには、Mattermost Software Evaluation Agreement と プライバシーポリシーに同意しなくてはなりません。"
   },
   {
     "id": "api.license.request-trial.bad-request",
@@ -6300,10 +6160,6 @@
     "translation": "指定日時内のチャンネル内ユーザーを取得できませんでした。"
   },
   {
-    "id": "ent.data_retention.channel_member_history_batch.internal_error",
-    "translation": "記録を破棄できませんでした。"
-  },
-  {
     "id": "app.command.listautocompletecommands.internal_error",
     "translation": "自動補完コマンドのリストを表示できませんでした。"
   },
@@ -6390,10 +6246,6 @@
   {
     "id": "app.compliance.get.finding.app_error",
     "translation": "コンプライアンスリポートを取得する際にエラーが発生しました。"
-  },
-  {
-    "id": "ent.data_retention.flags_batch.internal_error",
-    "translation": "複数のフラグをクリーンアップする際にエラーが発生しました。"
   },
   {
     "id": "app.preference.save.updating.app_error",
@@ -6513,7 +6365,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "あなたのMatterfossには200ユーザーが登録しています。Matterfossをあなたの組織のシングルサインオンプロバイダーに接続することで、ユーザーは再度認証情報を入力することなくMatterfossへアクセスできるようになります。MatterfossサーバーをSAML 2.0プロバイダーと連携することをおすすめします。詳しくは[SAML2.0連携に関する説明](https://www.Matterfoss.com/docs-saml/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml)を参照してください。\n\n問い合わせ をクリックすると、あなたの情報をMatterfoss, Inc. へ共有します。詳しくは[説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "あなたのMattermostには200ユーザーが登録しています。Mattermostをあなたの組織のシングルサインオンプロバイダーに接続することで、ユーザーは再度認証情報を入力することなくMattermostへアクセスできるようになります。MattermostサーバーをSAML 2.0プロバイダーと連携することをおすすめします。詳しくは[SAML2.0連携に関する説明](https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml)を参照してください。\n\n問い合わせ をクリックすると、あなたの情報をMattermost, Inc. へ共有します。詳しくは[説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "model.command.is_valid.plugin_id.app_error",
@@ -6524,20 +6376,8 @@
     "translation": "{{.WarnMetricName}}に値を保存できませんでした"
   },
   {
-    "id": "app.system.warn_metric.notification.invalid_metric.app_error",
-    "translation": "メトリックが見つかりませんでした。"
-  },
-  {
-    "id": "app.system.warn_metric.notification.empty_admin_list.app_error",
-    "translation": "管理者リストが空です。"
-  },
-  {
-    "id": "app.system.warn_metric.bot_description",
-    "translation": "[Matterfossアドバイザーについて詳しく知る](https://about.Matterfoss.com/default-channel-handle-documentation)"
-  },
-  {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Matterfossアドバイザー"
+    "translation": "Mattermostアドバイザー"
   },
   {
     "id": "app.job.download_export_results_not_enabled",
@@ -6553,31 +6393,23 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Matterfossをスケーリングする"
+    "translation": "Mattermostをスケーリングする"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "500ユーザーを超える場合は、ユーザー管理やサーバーのクラスタリング、パフォーマンスモニタリング機能の利用を強く推奨します。詳細についてはお問い合わせください。\n\n問い合わせる をクリックすると、あなたの情報をMatterfoss Inc.へ共有します。詳しくは [説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "500ユーザーを超える場合は、ユーザー管理やサーバーのクラスタリング、パフォーマンスモニタリング機能の利用を強く推奨します。詳細についてはお問い合わせください。\n\n問い合わせる をクリックすると、あなたの情報をMattermost Inc.へ共有します。詳しくは [説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
-    "translation": "Matterfossをスケーリングする"
+    "translation": "Mattermostをスケーリングする"
   },
   {
     "id": "api.server.warn_metric.email_us",
     "translation": "メールにてお問い合わせください"
   },
   {
-    "id": "api.server.warn_metric.contacting_us",
-    "translation": "問い合わせ中"
-  },
-  {
-    "id": "api.server.warn_metric.contact_us",
-    "translation": "問い合わせ"
-  },
-  {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "Matterfossへお問い合わせていただき、ありがとうございます。すぐにこちらからご連絡いたします。"
+    "translation": "Mattermostへお問い合わせていただき、ありがとうございます。すぐにこちらからご連絡いたします。"
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -6589,7 +6421,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Matterfoss Contact Usリクエスト"
+    "translation": "Mattermost Contact Usリクエスト"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -6601,7 +6433,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "追加の質問がある場合は、support@Matterfoss.comへお問い合わせください"
+    "translation": "追加の質問がある場合は、support@mattermost.comへお問い合わせください"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -6633,11 +6465,11 @@
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Matterfoss Contact Usリクエスト"
+    "translation": "Mattermost Contact Usリクエスト"
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "追加の質問がある場合は、support@Matterfoss.comへお問い合わせください"
+    "translation": "追加の質問がある場合は、support@mattermost.comへお問い合わせください"
   },
   {
     "id": "app.role.save.invalid_role.app_error",
@@ -6812,10 +6644,6 @@
     "translation": "ジョブを取得できませんでした。"
   },
   {
-    "id": "ent.data_retention.file_infos_batch.internal_error",
-    "translation": "複数のファイル情報を完全に削除する際にエラーが発生しました。"
-  },
-  {
     "id": "app.file_info.save.app_error",
     "translation": "ファイル情報を保存できませんでした。"
   },
@@ -6985,35 +6813,35 @@
   },
   {
     "id": "app.channel.analytics_type_count.app_error",
-    "translation": "チャンネル形式数を取得できませんでした。"
+    "translation": "チャンネル種別数を取得できませんでした。"
   },
   {
     "id": "api.upgrade_to_enterprise_status.signature.app_error",
-    "translation": "MatterfossをEnterprise Editionにアップグレードできませんでした。ダウンロードされたバイナリファイルのデジタル署名を検証できませんでした。"
+    "translation": "MattermostをEnterprise Editionにアップグレードできませんでした。ダウンロードされたバイナリファイルのデジタル署名を検証できませんでした。"
   },
   {
     "id": "api.upgrade_to_enterprise.system_not_supported.app_error",
-    "translation": "MatterfossをEnterprise Editionにアップグレードできませんでした。この機能はx86-64アーキテクチャのLinux上でのみ動作します。"
+    "translation": "MattermostをEnterprise Editionにアップグレードできませんでした。この機能はx86-64アーキテクチャのLinux上でのみ動作します。"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user.app_error",
-    "translation": "MatterfossをEnterprise Editionにアップグレードできませんでした。Matterfossシステムユーザー {{.MatterfossUsername}} がバイナリファイルへの書き込み権限を持っていません。システム管理者がMatterfossがインストールされたサーバーで下記のコマンドを実行することにより、ファイルに対する権限を更新することができます。\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\n```\n\nファイルの権限を変更した後、Matterfossのアップグレードを再度試してみてください。アップグレードが完了し再起動を行うことができた場合、バイナリファイルの権限を元に戻すことを忘れないでください。\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
+    "translation": "MattermostをEnterprise Editionにアップグレードできませんでした。Mattermostシステムユーザー {{.MattermostUsername}} がバイナリファイルへの書き込み権限を持っていません。システム管理者がMattermostがインストールされたサーバーで下記のコマンドを実行することにより、ファイルに対する権限を更新することができます。\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\n```\n\nファイルの権限を変更した後、Mattermostのアップグレードを再度試してみてください。アップグレードが完了し再起動を行うことができた場合、バイナリファイルの権限を元に戻すことを忘れないでください。\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user-and-permission.app_error",
-    "translation": "MatterfossをEnterprise Editionにアップグレードできませんでした。Matterfossシステムユーザー {{.MatterfossUsername}} がバイナリファイルへの書き込み権限を持っていません。システム管理者がMatterfossがインストールされたサーバーで下記のコマンドを実行することにより、ファイルに対する権限を更新することができます。\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nファイルの権限を変更した後、Matterfossのアップグレードを再度試してみてください。アップグレードが完了し再起動を行うことができた場合、バイナリファイルの権限を元に戻すことを忘れないでください。\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "MattermostをEnterprise Editionにアップグレードできませんでした。Mattermostシステムユーザー {{.MattermostUsername}} がバイナリファイルへの書き込み権限を持っていません。システム管理者がMattermostがインストールされたサーバーで下記のコマンドを実行することにより、ファイルに対する権限を更新することができます。\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nファイルの権限を変更した後、Mattermostのアップグレードを再度試してみてください。アップグレードが完了し再起動を行うことができた場合、バイナリファイルの権限を元に戻すことを忘れないでください。\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-permission.app_error",
-    "translation": "MatterfossをEnterprise Editionにアップグレードできませんでした。Matterfossシステムユーザー {{.MatterfossUsername}} がバイナリファイルへの書き込み権限を持っていません。システム管理者がMatterfossがインストールされたサーバーで下記のコマンドを実行することにより、ファイルに対する権限を更新することができます。\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nファイルの権限を変更した後、Matterfossのアップグレードを再度試してみてください。アップグレードが完了し再起動を行うことができた場合、バイナリファイルの権限を元に戻すことを忘れないでください。\n\n```\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "MattermostをEnterprise Editionにアップグレードできませんでした。Mattermostシステムユーザー {{.MattermostUsername}} がバイナリファイルへの書き込み権限を持っていません。システム管理者がMattermostがインストールされたサーバーで下記のコマンドを実行することにより、ファイルに対する権限を更新することができます。\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nファイルの権限を変更した後、Mattermostのアップグレードを再度試してみてください。アップグレードが完了し再起動を行うことができた場合、バイナリファイルの権限を元に戻すことを忘れないでください。\n\n```\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.generic_error.app_error",
-    "translation": "MatterfossをEnterprise Editionにアップグレードできませんでした。"
+    "translation": "MattermostをEnterprise Editionにアップグレードできませんでした。"
   },
   {
     "id": "api.upgrade_to_enterprise.already-enterprise.app_error",
-    "translation": "すでにMatterfoss Enterprise Editionが起動しているため、アップグレードできません。"
+    "translation": "すでにMattermost Enterprise Editionが起動しているため、アップグレードできません。"
   },
   {
     "id": "app.upload.upload_data.first_part_too_small.app_error",
@@ -7160,10 +6988,6 @@
     "translation": "チャンネルメンバーを削除できませんでした。"
   },
   {
-    "id": "app.channel.increment_mention_count.app_error",
-    "translation": "誰かについての投稿数を増加できませんでした。"
-  },
-  {
     "id": "app.channel.get_public_channels.get.app_error",
     "translation": "公開チャンネルを取得できませんでした。"
   },
@@ -7209,15 +7033,15 @@
   },
   {
     "id": "api.upgrade_to_enterprise_status.app_error",
-    "translation": "MatterfossをEnterprise Editionにアップグレードできませんでした。"
+    "translation": "MattermostをEnterprise Editionにアップグレードできませんでした。"
   },
   {
     "id": "api.upgrade_to_enterprise.app_error",
-    "translation": "Matterfoss Enterprise Editionへのアップグレードはすでに開始されています。"
+    "translation": "Mattermost Enterprise Editionへのアップグレードはすでに開始されています。"
   },
   {
     "id": "api.upgrade_to_enterprise.already-done.app_error",
-    "translation": "すでにMatterfoss Enterprise Editionにアップグレードされています。アップグレードを完了するにはサーバーを再起動してください。"
+    "translation": "すでにMattermost Enterprise Editionにアップグレードされています。アップグレードを完了するにはサーバーを再起動してください。"
   },
   {
     "id": "api.team.invite_members.limit_reached.app_error",
@@ -7356,20 +7180,12 @@
     "translation": "リクエストボディを解析できませんでした。"
   },
   {
-    "id": "api.server.warn_metric.starting_trial",
-    "translation": "トライアルを開始する"
-  },
-  {
-    "id": "api.server.warn_metric.start_trial",
-    "translation": "トライアル開始"
-  },
-  {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial_notification_success.message",
     "translation": "エンタープライズトライアルは有効です。**システムコンソール > ユーザー管理 > 権限**へ行き、高度な権限設定を有効にしてください。"
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial.notification_body",
-    "translation": "あなたのMatterfossにはいくつかのチームが存在します。多くのチームは、チャンネルの作成方法や、誰が新しいチームメイトを招待できるか、また、どのように統合機能を管理するかなどのチーム運営について各々が好む方法を持っています。チーム上書きスキームにより、それぞれの要求を満たすようチームごとにユーザー権限設定をカスタマイズできます。\n\n詳しくは[高度な権限設定に関する説明](https://www.Matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions-team-override)を参照してください。\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "あなたのMattermostにはいくつかのチームが存在します。多くのチームは、チャンネルの作成方法や、誰が新しいチームメイトを招待できるか、また、どのように統合機能を管理するかなどのチーム運営について各々が好む方法を持っています。チーム上書きスキームにより、それぞれの要求を満たすようチームごとにユーザー権限設定をカスタマイズできます。\n\n詳しくは[高度な権限設定に関する説明](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override)を参照してください。\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_title",
@@ -7377,11 +7193,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_body",
-    "translation": "あなたのMatterfossにはいくつかのチームが存在します。多くのチームは、チャンネルの作成方法や、誰が新しいチームメイトを招待できるか、また、どのように統合機能を管理するかなどのチーム運営について各々が好む方法を持っています。チーム上書きスキームにより、それぞれの要求を満たすようチームごとにユーザー権限設定をカスタマイズできます。\n\n詳しくは[高度な権限設定に関する説明](https://www.Matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions-team-override)を参照してください。\n\n問い合わせ をクリックすることで、あなたの情報を Matterfoss, Inc. へ共有します。詳しくは[説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "あなたのMattermostにはいくつかのチームが存在します。多くのチームは、チャンネルの作成方法や、誰が新しいチームメイトを招待できるか、また、どのように統合機能を管理するかなどのチーム運営について各々が好む方法を持っています。チーム上書きスキームにより、それぞれの要求を満たすようチームごとにユーザー権限設定をカスタマイズできます。\n\n詳しくは[高度な権限設定に関する説明](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override)を参照してください。\n\n問い合わせ をクリックすることで、あなたの情報を Mattermost, Inc. へ共有します。詳しくは[説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。チームスキームによる高度な権限設定に興味があります。\n"
+    "translation": "Mattermostへ問い合わせる。チームスキームによる高度な権限設定に興味があります。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_success.message",
@@ -7389,7 +7205,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_body",
-    "translation": "あなたのMatterfossシステムには非常に多くのメッセージがあります。Matterfossのデフォルトのデータベース検索は約250万投稿からパフォーマンスが劣化し始めます。500万投稿以上ある場合、Elasticsearchを導入することで、検索のタイムアウトなどの深刻なパフォーマンスの問題を回避することができます。Elasticsearchとの連携について詳しく知りたい場合や、何かサポートできることがないか私たちに問い合わせてください。\n\n詳しくは[パフォーマンス改善に関する説明](https://www.Matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=elasticsearch)を参照してください\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "あなたのMattermostシステムには非常に多くのメッセージがあります。Mattermostのデフォルトのデータベース検索は約250万投稿からパフォーマンスが劣化し始めます。500万投稿以上ある場合、Elasticsearchを導入することで、検索のタイムアウトなどの深刻なパフォーマンスの問題を回避することができます。Elasticsearchとの連携について詳しく知りたい場合や、何かサポートできることがないか私たちに問い合わせてください。\n\n詳しくは[パフォーマンス改善に関する説明](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)を参照してください\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_title",
@@ -7397,11 +7213,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_body",
-    "translation": "あなたのMatterfossシステムには非常に多くのメッセージがあります。Matterfossのデフォルトのデータベース検索は約250万投稿からパフォーマンスが劣化し始めます。500万投稿以上ある場合、Elasticsearchを導入することで、検索のタイムアウトなどの深刻なパフォーマンスの問題を回避することができます。Elasticsearchとの連携について詳しく知りたい場合や、何かサポートできることがないか私たちに問い合わせてください。\n\n詳しくは[パフォーマンス改善に関する説明](https://www.Matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=elasticsearch)を参照してください\n\n問い合わせ をクリックすると、あなたの情報は Matterfoss, Inc. へ共有されます。詳しくは[説明文書}(https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "あなたのMattermostシステムには非常に多くのメッセージがあります。Mattermostのデフォルトのデータベース検索は約250万投稿からパフォーマンスが劣化し始めます。500万投稿以上ある場合、Elasticsearchを導入することで、検索のタイムアウトなどの深刻なパフォーマンスの問題を回避することができます。Elasticsearchとの連携について詳しく知りたい場合や、何かサポートできることがないか私たちに問い合わせてください。\n\n詳しくは[パフォーマンス改善に関する説明](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)を参照してください\n\n問い合わせ をクリックすると、あなたの情報は Mattermost, Inc. へ共有されます。詳しくは[説明文書}(https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。Elasticsearchによるパフォーマンスの改善に興味があります。\n"
+    "translation": "Mattermostへ問い合わせる。Elasticsearchによるパフォーマンスの改善に興味があります。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_success.message",
@@ -7409,15 +7225,15 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_body",
-    "translation": "チャンネルはコミュニケーションの改善をサポートするものですが、Matterfoss全体でチャンネルの作成や参加が多くなるにつれ、システムを整理されたものにし続けることが課題になってきます。高度な権限設定により、どのユーザー、もしくはどの役割の人が何のアクションを実行可能かを設定することができます。例えば、チャンネル設定やメンバーの管理や、@channel、@hereなどのタグによるグループへの発信、新たなウェブフックの作成などを制限できます。\n\n詳しくは[高度な権限設定の利用に関する説明](https://www.Matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions)を参照してください\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "チャンネルはコミュニケーションの改善をサポートするものですが、Mattermost全体でチャンネルの作成や参加が多くなるにつれ、システムを整理されたものにし続けることが課題になってきます。高度な権限設定により、どのユーザー、もしくはどの役割の人が何のアクションを実行可能かを設定することができます。例えば、チャンネル設定やメンバーの管理や、@channel、@hereなどのタグによるグループへの発信、新たなウェブフックの作成などを制限できます。\n\n詳しくは[高度な権限設定の利用に関する説明](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)を参照してください\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。システムスキーマによる高度な権限設定に興味があります。\n"
+    "translation": "Mattermostへ問い合わせる。システムスキーマによる高度な権限設定に興味があります。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_body",
-    "translation": "チャンネルはコミュニケーションの改善をサポートするものですが、Matterfoss全体でチャンネルの作成や参加が多くなるにつれ、システムを整理されたものにし続けることが課題になってきます。高度な権限設定により、どのユーザー、もしくはどの役割の人が何のアクションを実行可能かを設定することができます。例えば、チャンネル設定やメンバーの管理や、@channel、@hereなどのタグによるグループへの発信、新たなウェブフックの作成などを制限できます。\n\n詳しくは[高度な権限設定の利用に関する説明](https://www.Matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions)を参照してください\n\n問い合わせ をクリックすると、あなたの情報が Matterfoss, Inc. へ共有されます。詳しくは[説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "チャンネルはコミュニケーションの改善をサポートするものですが、Mattermost全体でチャンネルの作成や参加が多くなるにつれ、システムを整理されたものにし続けることが課題になってきます。高度な権限設定により、どのユーザー、もしくはどの役割の人が何のアクションを実行可能かを設定することができます。例えば、チャンネル設定やメンバーの管理や、@channel、@hereなどのタグによるグループへの発信、新たなウェブフックの作成などを制限できます。\n\n詳しくは[高度な権限設定の利用に関する説明](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)を参照してください\n\n問い合わせ をクリックすると、あなたの情報が Mattermost, Inc. へ共有されます。詳しくは[説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_title",
@@ -7429,11 +7245,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_body",
-    "translation": "500ユーザーを超える場合は、ユーザー管理やサーバーのクラスタリング、パフォーマンスモニタリング機能の利用を強く推奨します。詳細についてはお問い合わせください。\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "500ユーザーを超える場合は、ユーザー管理やサーバーのクラスタリング、パフォーマンスモニタリング機能の利用を強く推奨します。詳細についてはお問い合わせください。\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.contact_us.email_body",
-    "translation": "Matterfossに問い合わせる。我々のチームには500名以上のユーザーがおり、Matterfoss Enterprise Editionを検討しています。\n"
+    "translation": "Mattermostに問い合わせる。我々のチームには500名以上のユーザーがおり、Mattermost Enterprise Editionを検討しています。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_title",
@@ -7445,15 +7261,15 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_body",
-    "translation": "Matterfoss全体で多くの会話がなされている場合、どこに重要な情報があるかを知るのは難しいことかもしれません。多くのユーザーに対してメッセージを配信したい場合、誰でも参加可能だがチャンネル管理者しかメッセージの投稿ができないような閲覧専用の連絡チャンネルを立てることができます。\n\n詳しくは[閲覧専用の連絡チャンネルの作成に関する説明](https://www.Matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=channel-moderation)を参照してください\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "Mattermost全体で多くの会話がなされている場合、どこに重要な情報があるかを知るのは難しいことかもしれません。多くのユーザーに対してメッセージを配信したい場合、誰でも参加可能だがチャンネル管理者しかメッセージの投稿ができないような閲覧専用の連絡チャンネルを立てることができます。\n\n詳しくは[閲覧専用の連絡チャンネルの作成に関する説明](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)を参照してください\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.notification_body",
-    "translation": "Matterfoss全体で多くの会話がなされている場合、どこに重要な情報があるかを知るのは難しいことかもしれません。多くのユーザーに対してメッセージを配信したい場合、誰でも参加可能だがチャンネル管理者しかメッセージの投稿ができないような閲覧専用の連絡チャンネルを立てることができます。\n\n詳しくは[閲覧専用の連絡チャンネルの作成に関する説明](https://www.Matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=channel-moderation)を参照してください\n\n問い合わせ をクリックすると、あなたの情報を Matterfoss, Inc. へ共有します。詳しくは[説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "Mattermost全体で多くの会話がなされている場合、どこに重要な情報があるかを知るのは難しいことかもしれません。多くのユーザーに対してメッセージを配信したい場合、誰でも参加可能だがチャンネル管理者しかメッセージの投稿ができないような閲覧専用の連絡チャンネルを立てることができます。\n\n詳しくは[閲覧専用の連絡チャンネルの作成に関する説明](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)を参照してください\n\n問い合わせ をクリックすると、あなたの情報を Mattermost, Inc. へ共有します。詳しくは[説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。閲覧専用の連絡チャンネル機能に興味があります。\n"
+    "translation": "Mattermostへ問い合わせる。閲覧専用の連絡チャンネル機能に興味があります。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_success.message",
@@ -7461,11 +7277,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_body",
-    "translation": "あなたのMatterfossには200ユーザーが登録しています。Matterfossをあなたの組織のシングルサインオンプロバイダーに接続することで、ユーザーは再度認証情報を入力することなくMatterfossへアクセスできるようになります。MatterfossサーバーをSAML 2.0プロバイダーと連携することをおすすめします。詳しくは[SAML2.0連携に関する説明](https://www.Matterfoss.com/docs-saml/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml)を参照してください。\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "あなたのMattermostには200ユーザーが登録しています。Mattermostをあなたの組織のシングルサインオンプロバイダーに接続することで、ユーザーは再度認証情報を入力することなくMattermostへアクセスできるようになります。MattermostサーバーをSAML 2.0プロバイダーと連携することをおすすめします。詳しくは[SAML2.0連携に関する説明](https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml)を参照してください。\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。我々のチームには200名以上のユーザーがおり、Matterfoss Enterprise Editionを検討しています。\n"
+    "translation": "Mattermostへ問い合わせる。我々のチームには200名以上のユーザーがおり、Mattermost Enterprise Editionを検討しています。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_success.message",
@@ -7473,19 +7289,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_body",
-    "translation": "あなたのMatterfossには100名以上のユーザーがいます。ユーザー数が増加するにつれ、新しいアカウントの準備などは時間のかかる作業となっていく可能性があります。組織のActive Directory/LDAPと連携し、誰でも組織のアカウントでMatterfossにアクセス可能となるよう設定することをおすすめします。\n\n詳しくは[AD/LDAP連携に関する説明](https://www.Matterfoss.com/docs-adldap/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)を参照してください\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/) に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "あなたのMattermostには100名以上のユーザーがいます。ユーザー数が増加するにつれ、新しいアカウントの準備などは時間のかかる作業となっていく可能性があります。組織のActive Directory/LDAPと連携し、誰でも組織のアカウントでMattermostにアクセス可能となるよう設定することをおすすめします。\n\n詳しくは[AD/LDAP連携に関する説明](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)を参照してください\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/) に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
-    "translation": "Matterfossをスケールする"
+    "translation": "Mattermostをスケールする"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "あなたのMatterfossには100名以上のユーザーがいます。ユーザー数が増加するにつれ、新しいアカウントの準備などは時間のかかる作業となっていく可能性があります。組織のActive Directory/LDAPと連携し、誰でも組織のアカウントでMatterfossにアクセス可能となるよう設定することをおすすめします。\n\n詳しくは[AD/LDAP連携に関する説明](https://www.Matterfoss.com/docs-adldap/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)を参照してください\n\n問い合わせ をクリックすると、あなたの情報を Matterfoss, Inc. へ共有します。詳しくは[説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "あなたのMattermostには100名以上のユーザーがいます。ユーザー数が増加するにつれ、新しいアカウントの準備などは時間のかかる作業となっていく可能性があります。組織のActive Directory/LDAPと連携し、誰でも組織のアカウントでMattermostにアクセス可能となるよう設定することをおすすめします。\n\n詳しくは[AD/LDAP連携に関する説明](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)を参照してください\n\n問い合わせ をクリックすると、あなたの情報を Mattermost, Inc. へ共有します。詳しくは[説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。我々のチームには100名以上のユーザーがおり、Matterfoss Enterprise Editionを検討しています。\n"
+    "translation": "Mattermostへ問い合わせる。我々のチームには100名以上のユーザーがおり、Mattermost Enterprise Editionを検討しています。\n"
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial_notification_success.message",
@@ -7493,7 +7309,7 @@
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial.notification_body",
-    "translation": "このMatterfossでは多要素認証が有効になっており、ユーザーはパスワードとは別の認証を追加することで、アカウントをより安全にすることを選択できます。システム全体のセキュリティを改善するために、すべてのアカウントに対して多要素認証の利用を要求することもできます。\n\n詳しくは[多要素認証の強制についての説明](https://www.Matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=multi-factor-authentication)を参照してください。\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "このMattermostでは多要素認証が有効になっており、ユーザーはパスワードとは別の認証を追加することで、アカウントをより安全にすることを選択できます。システム全体のセキュリティを改善するために、すべてのアカウントに対して多要素認証の利用を要求することもできます。\n\n詳しくは[多要素認証の強制についての説明](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication)を参照してください。\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/)に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.mfa.notification_title",
@@ -7501,11 +7317,11 @@
   },
   {
     "id": "api.server.warn_metric.mfa.notification_body",
-    "translation": "このMatterfossでは多要素認証が有効になっており、ユーザーはパスワードとは別の認証を追加することで、アカウントをより安全にすることを選択できます。システム全体のセキュリティを改善するために、すべてのアカウントに対して多要素認証の利用を要求することもできます。\n\n詳しくは[多要素認証の強制についての説明](https://www.Matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=multi-factor-authentication)を参照してください。\n\n問い合わせ をクリックすると、あなたの情報が Matterfoss, Inc. へ共有されます。詳しくは[説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "このMattermostでは多要素認証が有効になっており、ユーザーはパスワードとは別の認証を追加することで、アカウントをより安全にすることを選択できます。システム全体のセキュリティを改善するために、すべてのアカウントに対して多要素認証の利用を要求することもできます。\n\n詳しくは[多要素認証の強制についての説明](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication)を参照してください。\n\n問い合わせ をクリックすると、あなたの情報が Mattermost, Inc. へ共有されます。詳しくは[説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.mfa.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。多要素認証の強制機能について興味があります。\n"
+    "translation": "Mattermostへ問い合わせる。多要素認証の強制機能について興味があります。\n"
   },
   {
     "id": "api.server.warn_metric.email_domain.start_trial_notification_success.message",
@@ -7513,7 +7329,7 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.start_trial.notification_body",
-    "translation": "プロジェクトには組織内、組織外の両方の人が参画することがあります。ゲストアカウント機能により、外部のパートナーをMatterfossに参加させることができ、ゲストが閲覧可能な情報などの設定を行うことができます。\n\n詳しくは[ゲストアカウントに関する説明](https://www.Matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=guest-accounts)を参照してください。\n\nトライアル開始 をクリックすると、[Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/) と [プライバシーポリシー](https://Matterfoss.com/privacy-policy/) に同意し、製品に関する電子メールを受信するようになります。"
+    "translation": "プロジェクトには組織内、組織外の両方の人が参画することがあります。ゲストアカウント機能により、外部のパートナーをMattermostに参加させることができ、ゲストが閲覧可能な情報などの設定を行うことができます。\n\n詳しくは[ゲストアカウントに関する説明](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts)を参照してください。\n\nトライアル開始 をクリックすると、[Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/) と [プライバシーポリシー](https://mattermost.com/privacy-policy/) に同意し、製品に関する電子メールを受信するようになります。"
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_title",
@@ -7521,19 +7337,19 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_body",
-    "translation": "プロジェクトには組織内、組織外の両方の人が参画することがあります。ゲストアカウント機能により、外部のパートナーをMatterfossに参加させることができ、ゲストが閲覧可能な情報などの設定を行うことができます。\n\n詳しくは[ゲストアカウントに関する説明](https://www.Matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=guest-accounts)を参照してください。\n\n問い合わせ をクリックすると、あなたの情報が Matterfoss Inc. へ送信されます。詳しくは[説明文書](https://Matterfoss.com/pl/default-admin-advisory)を参照してください"
+    "translation": "プロジェクトには組織内、組織外の両方の人が参画することがあります。ゲストアカウント機能により、外部のパートナーをMattermostに参加させることができ、ゲストが閲覧可能な情報などの設定を行うことができます。\n\n詳しくは[ゲストアカウントに関する説明](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts)を参照してください。\n\n問い合わせ をクリックすると、あなたの情報が Mattermost Inc. へ送信されます。詳しくは[説明文書](https://mattermost.com/pl/default-admin-advisory)を参照してください"
   },
   {
     "id": "api.server.warn_metric.email_domain.contact_us.email_body",
-    "translation": "Matterfossへ問い合わせる。ゲストアカウント機能について興味があります。\n"
+    "translation": "Mattermostへ問い合わせる。ゲストアカウント機能について興味があります。\n"
   },
   {
     "id": "api.server.warn_metric.bot_response.start_trial_failure.message",
-    "translation": "トライアルライセンスを取得できませんでした。 https://Matterfoss.com/trial/ からライセンスをリクエストしてください。"
+    "translation": "トライアルライセンスを取得できませんでした。 https://mattermost.com/trial/ からライセンスをリクエストしてください。"
   },
   {
     "id": "api.license.request_trial_license.fail_get_user_count.app_error",
-    "translation": "トライアルライセンスを取得できませんでした。 support@Matterfoss.comまで連絡してください。登録ユーザー数を取得できません。"
+    "translation": "トライアルライセンスを取得できませんでした。 support@mattermost.comまで連絡してください。登録ユーザー数を取得できません。"
   },
   {
     "id": "ent.elasticsearch.index_channels_batch.error",
@@ -7594,10 +7410,6 @@
   {
     "id": "ent.elasticsearch.post.get_posts_batch_for_indexing.error",
     "translation": "インデックス付与のための投稿のバッチ処理を取得できませんでした。"
-  },
-  {
-    "id": "ent.data_retention.posts_permanent_delete_batch.internal_error",
-    "translation": "複数の投稿を完全に削除する際にエラーが発生しました。"
   },
   {
     "id": "app.post.search.app_error",
@@ -7681,7 +7493,7 @@
   },
   {
     "id": "api.templates.copyright",
-    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "api.templates.at_limit_title",
@@ -7689,7 +7501,7 @@
   },
   {
     "id": "api.templates.at_limit_subject",
-    "translation": "Matterfoss Cloudのユーザー数制限に達しました"
+    "translation": "Mattermost Cloudのユーザー数制限に達しました"
   },
   {
     "id": "api.templates.at_limit_info2",
@@ -7697,7 +7509,7 @@
   },
   {
     "id": "api.templates.at_limit_info1",
-    "translation": "現在、ワークスペースには10名を超えるユーザーが存在します - 素晴らしい！さらにチームメンバーを招待する予定がある場合、Matterfoss Cloud Professoinalへのアップグレードを是非ご検討ください。"
+    "translation": "現在、ワークスペースには10名を超えるユーザーが存在します - 素晴らしい！さらにチームメンバーを招待する予定がある場合、Mattermost Cloud Professのアップグレードを是非ご検討ください。"
   },
   {
     "id": "app.user.permanent_delete.app_error",
@@ -7776,7 +7588,7 @@
     "translation": "メンションされたユーザーについてのスレッドメンバーシップを更新できませんでした"
   },
   {
-    "id": "api.templates.upgrade_Matterfoss_cloud",
+    "id": "api.templates.upgrade_mattermost_cloud",
     "translation": "アップグレードする"
   },
   {
@@ -7785,7 +7597,7 @@
   },
   {
     "id": "api.templates.over_limit_subject",
-    "translation": "Matterfoss Cloud Workspace ユーザー数超過"
+    "translation": "Mattermost Cloud Workspace ユーザー数超過"
   },
   {
     "id": "api.templates.over_limit_info2",
@@ -7793,7 +7605,7 @@
   },
   {
     "id": "api.templates.over_limit_info1",
-    "translation": "ワークスペースにMatterfoss Cloud Professionalの無料枠を超える10名以上のユーザーがいるようです。ワークスペースの混乱を避けるために、アップグレードしてください。"
+    "translation": "ワークスペースにMattermost Cloudの無料枠を超える10名以上のユーザーがいるようです。ワークスペースの混乱を避けるために、アップグレードしてください。"
   },
   {
     "id": "model.config.is_valid.import.retention_days_too_low.app_error",
@@ -7806,14 +7618,6 @@
   {
     "id": "model.config.is_valid.collapsed_threads.app_error",
     "translation": "CollapsedThreads設定は、無効、デフォルトON、デフォルトOFFのいずれかでなければなりません"
-  },
-  {
-    "id": "import_process.worker.do_job.unzip",
-    "translation": "インポートを処理できませんでした: ファイルをunzipできませんでした。"
-  },
-  {
-    "id": "import_process.worker.do_job.tmp_dir",
-    "translation": "インポートを処理できませんでした: 一時ディレクトリを作成できませんでした。"
   },
   {
     "id": "import_process.worker.do_job.open_file",
@@ -7953,11 +7757,11 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.subject",
-    "translation": "Matterfoss Cloudサブスクリプションへの支払い予定"
+    "translation": "Mattermost Cloudサブスクリプションへの支払い予定"
   },
   {
     "id": "api.templates.payment_failed_no_card.title",
-    "translation": "Matterfoss Cloud請求期限"
+    "translation": "Mattermost Cloud請求期限"
   },
   {
     "id": "api.templates.payment_failed_no_card.info3",
@@ -7965,7 +7769,7 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.info1",
-    "translation": "直近支払い期限に対するMatterfoss Cloudの請求書が処理されましたが、有効な支払い情報がありません。"
+    "translation": "直近支払い期限に対するMattermost Cloudの請求書が処理されましたが、有効な支払い情報がありません。"
   },
   {
     "id": "api.templates.payment_failed_no_card.button",
@@ -7977,11 +7781,11 @@
   },
   {
     "id": "api.templates.payment_failed.subject",
-    "translation": "注意: Matterfoss Cloudへの支払いができませんでした"
+    "translation": "注意: Mattermost Cloudへの支払いができませんでした"
   },
   {
     "id": "api.templates.payment_failed.info3",
-    "translation": "Matterfoss Cloudへの支払いを続けるために、支払いの問題についてあなたの金融機関に問い合わせるか、支払い情報を更新してください。支払い情報が更新されると、Matterfossは未払いの支払いを解決しようとします。"
+    "translation": "Mattermost Cloudへの支払いを続けるために、支払いの問題についてあなたの金融機関に問い合わせるか、支払い情報を更新してください。支払い情報が更新されると、Mattermostは未払いの支払いを解決しようとします。"
   },
   {
     "id": "api.templates.payment_failed.info2",
@@ -7989,15 +7793,15 @@
   },
   {
     "id": "api.templates.payment_failed.info1",
-    "translation": "Matterfoss Cloudワークスペースに関連付けられたあなたの {{.CardBrand}} ****{{.LastFour}} からの支払いを金融機関が拒否しました。"
+    "translation": "Mattermost Cloudワークスペースに関連付けられたあなたの {{.CardBrand}} ****{{.LastFour}} からの支払いを金融機関が拒否しました。"
   },
   {
     "id": "api.templates.over_limit_suspended_title",
-    "translation": "Matterfoss Cloudワークスペースの停止"
+    "translation": "Mattermost Cloudワークスペースの停止"
   },
   {
     "id": "api.templates.over_limit_suspended_subject",
-    "translation": "あなたのMatterfoss Cloudサブスクリプションは停止されました"
+    "translation": "あなたのMattermost Cloudサブスクリプションは停止されました"
   },
   {
     "id": "api.templates.over_limit_suspended_info2",
@@ -8005,7 +7809,7 @@
   },
   {
     "id": "api.templates.over_limit_suspended_info1",
-    "translation": "あなたのMatterfossワークスペースは停止されました。すべてのコンテンツやデータは1~3ヶ月以内に削除されます。"
+    "translation": "あなたのMattermostワークスペースは停止されました。すべてのコンテンツやデータは1~3ヶ月以内に削除されます。"
   },
   {
     "id": "api.templates.over_limit_fix_now",
@@ -8013,11 +7817,11 @@
   },
   {
     "id": "api.templates.over_limit_90_days_title",
-    "translation": "あなたのMatterfoss Cloudワークスペースの停止が明日に予定されています"
+    "translation": "あなたのMattermost Cloudワークスペースの停止が明日に予定されています"
   },
   {
     "id": "api.templates.over_limit_90_days_subject",
-    "translation": "あなたのMatterfoss Cloudサブスクリプションがもうすぐ停止されます"
+    "translation": "あなたのMattermost Cloudサブスクリプションがもうすぐ停止されます"
   },
   {
     "id": "api.templates.over_limit_90_days_info4",
@@ -8033,7 +7837,7 @@
   },
   {
     "id": "api.templates.over_limit_90_days_info1",
-    "translation": "これは、{{.OverLimitDate}}を過ぎてもMatterfoss Cloudワークスペースへの支払いがないことに対する最後の通知です。明日、あなたのサービスは停止されます。"
+    "translation": "これは、{{.OverLimitDate}}を過ぎてもMattermost Cloudワークスペースへの支払いがないことに対する最後の通知です。明日、あなたのサービスは停止されます。"
   },
   {
     "id": "api.templates.over_limit_7_days_title",
@@ -8041,19 +7845,19 @@
   },
   {
     "id": "api.templates.over_limit_7_days_subject",
-    "translation": "Matterfossサブスクリプションの支払いが滞納されています"
+    "translation": "Mattermostサブスクリプションの支払いが滞納されています"
   },
   {
     "id": "api.templates.over_limit_7_days_info1",
-    "translation": "Matterfossは自動支払いを処理できませんでした。サービスを使い続けるには、すぐに支払い情報を追加してください。でなければ、あなたのサービスが停止される可能性があります。"
+    "translation": "Mattermostは自動支払いを処理できませんでした。サービスを使い続けるには、すぐに支払い情報を追加してください。でなければ、あなたのサービスが停止される可能性があります。"
   },
   {
     "id": "api.templates.over_limit_30_days_title",
-    "translation": "Matterfoss Cloud ワークスペースの停止"
+    "translation": "Mattermost Cloud ワークスペースの停止"
   },
   {
     "id": "api.templates.over_limit_30_days_subject",
-    "translation": " Matterfoss Cloudサブスクリプションを使い続けるためのお願い"
+    "translation": " Mattermost Cloudサブスクリプションを使い続けるためのお願い"
   },
   {
     "id": "api.templates.over_limit_30_days_info2_item3",
@@ -8073,7 +7877,7 @@
   },
   {
     "id": "api.templates.over_limit_30_days_info1",
-    "translation": "支払い方法に関する問題を解決することで、Matterfoss Cloudのワークスペースを有効なままにし続けることができます。ワークスペースが停止されるのを避けるために、支払い方法を更新してください。"
+    "translation": "支払い方法に関する問題を解決することで、Mattermost Cloudのワークスペースを有効なままにし続けることができます。ワークスペースが停止されるのを避けるために、支払い方法を更新してください。"
   },
   {
     "id": "api.templates.over_limit_14_days_title",
@@ -8081,11 +7885,11 @@
   },
   {
     "id": "api.templates.over_limit_14_days_subject",
-    "translation": "Matterfoss Cloudサブスクリプションの支払いが滞納されています"
+    "translation": "Mattermost Cloudサブスクリプションの支払いが滞納されています"
   },
   {
     "id": "api.templates.over_limit_14_days_info1",
-    "translation": "{{.OverLimitDate}} に設定されたMatterfossサブスクリプションの支払日までに支払いがありませんでした。支払いが確認できない場合、あなたのサービスの一時停止プロセスを開始します。"
+    "translation": "{{.OverLimitDate}} に設定されたMattermostサブスクリプションの支払日までに支払いがありませんでした。支払いが確認できない場合、あなたのサービスの一時停止プロセスを開始します。"
   },
   {
     "id": "api.system.update_viewed_notices.failed",
@@ -8376,20 +8180,16 @@
     "translation": "エクスポート中にファイルをコピーできませんでした。"
   },
   {
-    "id": "api.user.send_upgrade_request_email.error",
-    "translation": "ユーザー制限通知の電子メールを管理者に送信できませんでした"
-  },
-  {
     "id": "api.templates.upgrade_request_title",
     "translation": "{{ .UserName }} があなたのワークスペースにメンバーを招待したいようです"
   },
   {
     "id": "api.templates.upgrade_request_subject",
-    "translation": "Matterfossユーザーがワークスペースのアップグレードを要求しています"
+    "translation": "Mattermostユーザーがワークスペースのアップグレードを要求しています"
   },
   {
     "id": "api.templates.upgrade_request_info4",
-    "translation": "あなたのワークスペースが無償版Matterfoss Cloudのユーザー制限に達したため、招待を送信できませんでした。追加のユーザーをあなたのワークスペースに参加させるには、アップグレードしてください。"
+    "translation": "あなたのワークスペースが無償版Mattermost Cloudのユーザー制限に達したため、招待を送信できませんでした。追加のユーザーをあなたのワークスペースに参加させるには、アップグレードしてください。"
   },
   {
     "id": "api.templates.at_limit_info5",
@@ -8453,7 +8253,7 @@
   },
   {
     "id": "api.templates.email_footer_v2",
-    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2022 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "store.sql_file_info.search.disabled",
@@ -8505,7 +8305,7 @@
   },
   {
     "id": "api.templates.upgrade_request_info4_2",
-    "translation": "誰かがあなたのワークスペースへ参加しようとしましたが、 無料版Matterfossクラウドのユーザー数制限に達しているため参加できませんでした。さらに多くのユーザーをワークスペースに参加させるには、今すぐアップグレードしてください。"
+    "translation": "誰かがあなたのワークスペースへ参加しようとしましたが、 無料版Mattermostクラウドのユーザー数制限に達しているため参加できませんでした。さらに多くのユーザーをワークスペースに参加させるには、今すぐアップグレードしてください。"
   },
   {
     "id": "api.templates.questions_footer.title",
@@ -8589,19 +8389,19 @@
   },
   {
     "id": "api.templates.invite_body_footer.title",
-    "translation": "Matterfossとは?"
+    "translation": "Mattermostとは?"
   },
   {
     "id": "api.templates.invite_body_footer.learn_more",
-    "translation": "詳しく知る"
+    "translation": "さらに詳しく"
   },
   {
     "id": "api.templates.invite_body_footer.info",
-    "translation": "Matterfossは、セキュアなチームコラボレーションを可能にする、柔軟なオープンソースのメッセージングプラットフォームです。"
+    "translation": "Mattermostは、セキュアなチームコラボレーションを可能にする、柔軟なオープンソースのメッセージングプラットフォームです。"
   },
   {
     "id": "api.templates.invite_body.subTitle",
-    "translation": "Matterfossでチームとの共同作業を始める"
+    "translation": "Mattermostでチームとの共同作業を始める"
   },
   {
     "id": "api.templates.cloud_welcome_email.title",
@@ -8625,7 +8425,7 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.signin_sub_info2",
-    "translation": "PC、Mac、iOS、Androidで最高の体験を。"
+    "translation": "Windows、Linux、Mac、iOS、Androidで最高の体験を。"
   },
   {
     "id": "api.templates.cloud_welcome_email.signin_sub_info",
@@ -8653,7 +8453,7 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.download_mm_info",
-    "translation": "Matterfossアプリをダウンロードする"
+    "translation": "Mattermostアプリをダウンロードする"
   },
   {
     "id": "api.templates.cloud_welcome_email.app_market_place",
@@ -8661,11 +8461,11 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.add_apps_sub_info",
-    "translation": "Github、Googleカレンダー、Chromeなどのツールを使って仕事を効率化しましょう。我々のマーケットプレースですべての統合機能をご覧ください"
+    "translation": "GitHub、Jira、Zoomなどのツールを使って仕事を効率化しましょう。我々のマーケットプレースですべての統合機能をご覧ください"
   },
   {
     "id": "api.templates.cloud_welcome_email.button",
-    "translation": "Matterfossを開く"
+    "translation": "Mattermostを開く"
   },
   {
     "id": "api.templates.cloud_welcome_email.add_apps_info",
@@ -8837,7 +8637,7 @@
   },
   {
     "id": "api.command_share.invite_remote.help",
-    "translation": "現在の共有チャネルに外部Matterfossインスタンスを招待する"
+    "translation": "現在の共有チャネルに外部Mattermostインスタンスを招待する"
   },
   {
     "id": "api.command_share.invitation_sent",
@@ -8861,7 +8661,7 @@
   },
   {
     "id": "api.command_share.desc",
-    "translation": "現在のチャンネルを外部Matterfossインスタンスへ共有します。"
+    "translation": "現在のチャンネルを外部Mattermostインスタンスへ共有します。"
   },
   {
     "id": "api.command_share.check_channel_exist.error",
@@ -8917,7 +8717,7 @@
   },
   {
     "id": "api.command_remote.remove_remote_id.help",
-    "translation": "削除する安全な接続のID"
+    "translation": "削除する安全な接続のIDです。"
   },
   {
     "id": "api.command_remote.remove_remote.error",
@@ -8965,7 +8765,7 @@
   },
   {
     "id": "api.command_remote.invite_summary",
-    "translation": "以下の AES-256bit で暗号化されたデータを、パスワードと共に外部Matterfossのシステム管理者に送信します。彼らは `{{.Command}}` のスラッシュコマンドを使って招待を受け付けます。\n\n```\n{{.Invitation}}\n```\n\n**安全な接続により、あなたのMatterfossインスタンスに次のURLでアクセスできるようにします** {{.SiteURL}}"
+    "translation": "以下の AES-256bit で暗号化されたデータを、パスワードと共に外部Mattermostのシステム管理者に送信します。彼らは `{{.Command}}` のスラッシュコマンドを使って招待を受け付けます。\n\n```\n{{.Invitation}}\n```\n\n**安全な接続により、あなたのMattermostインスタンスに次のURLでアクセスできるようにします** {{.SiteURL}}"
   },
   {
     "id": "api.command_remote.invite_password.hint",
@@ -9009,7 +8809,7 @@
   },
   {
     "id": "api.command_remote.desc",
-    "translation": "Matterfossインスタンス間のコミュニケーションのために、安全な接続を構築します。"
+    "translation": "Mattermostインスタンス間のコミュニケーションのために、安全な接続を構築します。"
   },
   {
     "id": "api.command_remote.decode_invitation.error",
@@ -9033,7 +8833,7 @@
   },
   {
     "id": "api.command_remote.accept.help",
-    "translation": "外部のMatterfossインスタンスからの招待を受け付ける"
+    "translation": "外部のMattermostインスタンスからの招待を受け付ける"
   },
   {
     "id": "api.cloud.cws_webhook_event_missing_error",
@@ -9060,28 +8860,20 @@
     "translation": "ユーザーからの自動返信を送信できませんでした。"
   },
   {
-    "id": "api.user.cloud_trial_ending_email.error",
-    "translation": "トライアル終了警告の電子メールを送信できませんでした"
-  },
-  {
-    "id": "api.user.cloud_trial_ended_email.error",
-    "translation": "トライアル終了の電子メールを送信できませんでした"
-  },
-  {
     "id": "api.templates.cloud_trial_ending_email.title",
-    "translation": "Matterfossの14日間のトライアルは、まもなく終了します"
+    "translation": "Mattermostの14日間のトライアルは、まもなく終了します"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subtitle",
-    "translation": "{{.Name}} さん、あなたのMatterfoss Cloud Professionalの14日間のトライアルは3日後の{{.TrialEnd}}に終了します。お客様のチームが引き続きCloud Professionalのメリットを享受できるよう、お支払い情報を追加してください。"
+    "translation": "{{.Name}} さん、あなたのMattermostの14日間のトライアルは3日後の{{.TrialEnd}}に終了します。お客様のチームが引き続きMattermost Cloudのメリットを享受できるよう、お支払い情報を追加してください。"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subtitle",
-    "translation": "{{.Name}}、Matterfoss Cloud Professionalの14日間の無料トライアルが本日 {{.TodayDate}} 終了しました。引き続きCloud Professionalを利用するには、支払い情報を追加してください。"
+    "translation": "{{.Name}}、Mattermost Cloud Enterpriseの14日間の無料トライアルが本日 {{.TodayDate}} 終了しました。引き続きCloud Enterpriseを利用するには、支払い情報を追加してください。30日以内に支払い情報が追加されない場合、あなたのクラウドワークスペースは削除され、関連するデータもすべて失われます。"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subject",
-    "translation": "Matterfoss Cloudトライアルが終了しました"
+    "translation": "Mattermost Cloudトライアルが終了しました"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.add_payment_method",
@@ -9089,23 +8881,15 @@
   },
   {
     "id": "api.templates.cloud_trial_ended_email.title",
-    "translation": "Matterfossの14日間のトライアルは本日で終了しました"
+    "translation": "Mattermostの14日間のトライアルは本日で終了しました"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subject",
-    "translation": "Matterfoss Cloudのトライアルは終了しました"
+    "translation": "Mattermost Cloudのトライアルは終了しました"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.start_subscription",
     "translation": "サブスクリプションを開始する"
-  },
-  {
-    "id": "api.server.warn_metric.support_email_not_configured.start_trial.notification_body",
-    "translation": "利用者のフィードバック、電子メール通知、サポートリクエストを受け付けるために、**システムコンソール > サイト設定 > カスタマイズ**に移動し、あなたの組織の内部ITサポートデスクの電子メールアドレスを [サポート電子メールアドレス](https://docs.mattermost.com/administration/config-settings.html#support-email)として設定してください。"
-  },
-  {
-    "id": "api.server.warn_metric.support_email_not_configured.notification_title",
-    "translation": "サポート電子メールアドレスを設定してください"
   },
   {
     "id": "api.command_remote.displayname.hint",
@@ -9137,11 +8921,11 @@
   },
   {
     "id": "app.notification.footer.infoLogin",
-    "translation": "Matterfossへログインし"
+    "translation": "Mattermostへログインし"
   },
   {
     "id": "app.notification.footer.info",
-    "translation": " 、アカウント設定 > 通知 へ移動してください"
+    "translation": " 、設定 > 通知 へ移動してください"
   },
   {
     "id": "app.notification.body.mention.title",
@@ -9177,9 +8961,7 @@
   },
   {
     "id": "api.email_batching.send_batched_email_notification.title",
-    "translation": {
-      "other": "{{ .SenderName }} と 他 {{.Count}} 名があなたに新しいメッセージを送信しました"
-    }
+    "translation": "新しいメッセージがあります"
   },
   {
     "id": "api.email_batching.send_batched_email_notification.time",
@@ -9195,10 +8977,418 @@
   },
   {
     "id": "api.email_batching.send_batched_email_notification.button",
-    "translation": "Matterfossを開く"
+    "translation": "Mattermostを開く"
   },
   {
     "id": "api.channel.create_channel.direct_channel.team_restricted_error",
     "translation": "これらのユーザーはチームを共有していないため、ダイレクトチャネルを作成することはできません。"
+  },
+  {
+    "id": "app.valid_password_generic.app_error",
+    "translation": "パスワードが不正です"
+  },
+  {
+    "id": "api.config.update_config.diff.app_error",
+    "translation": "設定の差分を取得できませんでした"
+  },
+  {
+    "id": "api.config.patch_config.diff.app_error",
+    "translation": "設定の差分を取得できませんでした"
+  },
+  {
+    "id": "brand.save_brand_image.check_image_limits.app_error",
+    "translation": "画像制限チェックに失敗しました。解像度が高すぎます。"
+  },
+  {
+    "id": "api.user.upload_profile_user.check_image_limits.app_error",
+    "translation": "画像制限チェックに失敗しました。解像度が高すぎます。"
+  },
+  {
+    "id": "api.team.set_team_icon.check_image_limits.app_error",
+    "translation": "画像制限チェックに失敗しました。解像度が高すぎます。"
+  },
+  {
+    "id": "ent.data_retention.run_failed.error",
+    "translation": "データ保持ジョブが失敗しました。"
+  },
+  {
+    "id": "app.user.get_thread_membership_for_user.not_found",
+    "translation": "ユーザースレッドのメンバーシップが存在しません"
+  },
+  {
+    "id": "app.user.get_thread_membership_for_user.app_error",
+    "translation": "ユーザースレッドのメンバーシップを取得できませんでした"
+  },
+  {
+    "id": "app.system.system_bot.bot_displayname",
+    "translation": "システム"
+  },
+  {
+    "id": "app.bot.get_warn_metrics_bot.empty_admin_list.app_error",
+    "translation": "管理者リストが空です。"
+  },
+  {
+    "id": "app.bot.get_system_bot.empty_admin_list.app_error",
+    "translation": "管理者リストが空です。"
+  },
+  {
+    "id": "api.user.update_active.cloud_at_or_over_limit_check_overcapacity",
+    "translation": "クラウドアカウント数が制限を超えているため、これ以上ユーザーを増やすことはできません。"
+  },
+  {
+    "id": "api.user.update_active.cloud_at_limit_check_error",
+    "translation": "Mattermostクラウドインスタンスのユーザー数を確認できませんでした。"
+  },
+  {
+    "id": "api.license.request-trial.can-start-trial.not-allowed",
+    "translation": "このMattermost Enterprise Editionのトライアルライセンスキーは期限が切れており、有効ではありません。トライアル期間の延長をご希望の場合は[営業までご連絡ください](https://mattermost.com/contact-us/)。"
+  },
+  {
+    "id": "api.license.request-trial.can-start-trial.error",
+    "translation": "トライアルが開始可能か確認できませんでした"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subtitle_two",
+    "translation": "カスタマーアカウントでログインして更新"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subtitle",
+    "translation": "{{.UserName}}さん、あなたのサブスクリプションは{{.Days}}日で期限切れになるように設定されています。Mattermostが可能にする柔軟で安全なチームコラボレーションを体験していただければ幸いです。チームがこれらのメリットを引き続き享受できるように、今すぐ更新してください。"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subject",
+    "translation": "ライセンスは更新中です"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_renew_now",
+    "translation": "更新する"
+  },
+  {
+    "id": "api.server.license_up_for_renewal.error_sending_email",
+    "translation": "ライセンスの確認メールを送信できませんでした"
+  },
+  {
+    "id": "api.server.license_up_for_renewal.error_generating_link",
+    "translation": "ライセンスの更新リンク生成に失敗しました"
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens_parse.error",
+    "translation": "電子メール確認トークンを無効にする際にトークンを解析できませんでした"
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens_delete.error",
+    "translation": "電子メール確認トークンを無効にする際にトークンを削除できませんでした"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_title",
+    "translation": "あなたのMattermostのサブスクリプションは更新が必要です"
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens.error",
+    "translation": "電子メール確認トークンを無効にする際にタイプ別のトークンを取得できませんでした"
+  },
+  {
+    "id": "api.license.upgrade_needed.app_error",
+    "translation": "この機能を利用するには、Enterprise Editionへのアップグレードが必要です。"
+  },
+  {
+    "id": "app.user.store_is_empty.app_error",
+    "translation": "ユーザーストアが空であるかどうか確認できませんでした。"
+  },
+  {
+    "id": "model.config.is_valid.collapsed_threads.autofollow.app_error",
+    "translation": "スレッドの折り畳み機能を有効にするには、ThreadAutoFollowが有効である必要があります"
+  },
+  {
+    "id": "app.post.marshal.app_error",
+    "translation": "投稿を変換できませんでした。"
+  },
+  {
+    "id": "app.notification.body.thread.title",
+    "translation": "{{.SenderName}} がスレッドへ返信しました"
+  },
+  {
+    "id": "api.unmarshal_error",
+    "translation": "復元できませんでした。"
+  },
+  {
+    "id": "api.push_notification.title.collapsed_threads",
+    "translation": "{{.channelName}} へ返信する"
+  },
+  {
+    "id": "api.post.send_notification_and_forget.push_comment_on_crt_thread",
+    "translation": " フォローしているスレッドへ返信がありました。"
+  },
+  {
+    "id": "api.config.reload_config.app_error",
+    "translation": "設定をリロードできませんでした。"
+  },
+  {
+    "id": "app.notification.body.thread_channel.subTitle",
+    "translation": "あなたが離席中に、あなたがフォローしているスレッドへ {{.SenderName}} が返信しました。"
+  },
+  {
+    "id": "app.notification.body.thread_gm.subTitle",
+    "translation": "あなたが離席中に、{{.SenderName}}があなたのグループのスレッドに返信しました。"
+  },
+  {
+    "id": "app.notification.body.thread_dm.subTitle",
+    "translation": "あなたが離席中に、{{.SenderName}} がダイレクトメッセージのスレッドに返信しました。"
+  },
+  {
+    "id": "app.notification.body.thread_channel_full.subTitle",
+    "translation": "あなたが離席中に、{{.ChannelName}} であなたがフォローしているスレッドに {{.SenderName}} が返信しました。"
+  },
+  {
+    "id": "api.push_notification.title.collapsed_threads_dm",
+    "translation": "ダイレクトメッセージへ返信する"
+  },
+  {
+    "id": "api.post.send_notification_and_forget.push_comment_on_crt_thread_dm",
+    "translation": " がスレッドへ返信しました。"
+  },
+  {
+    "id": "app.import.bulk_import.process_attachments.error",
+    "translation": "添付ファイルの一括インポート中にエラーが発生しました。"
+  },
+  {
+    "id": "model.user.is_valid.roles_limit.app_error",
+    "translation": "{{.Limit}}文字以上の不正なユーザーの役割です。"
+  },
+  {
+    "id": "model.team_member.is_valid.roles_limit.app_error",
+    "translation": "{{.Limit}} 文字より長い不正なチームメンバーの役割です。"
+  },
+  {
+    "id": "model.session.is_valid.user_id.app_error",
+    "translation": "セッションのUserIdフィールドが無効です。"
+  },
+  {
+    "id": "model.channel_member.is_valid.roles_limit.app_error",
+    "translation": "{{.Limit}} 文字より長い不正なチャンネルメンバーの役割です。"
+  },
+  {
+    "id": "model.session.is_valid.roles_limit.app_error",
+    "translation": "{{.Limit}}文字以上の不正なセッションロールです。"
+  },
+  {
+    "id": "model.session.is_valid.id.app_error",
+    "translation": "セッションのIdフィールドが無効です。"
+  },
+  {
+    "id": "model.session.is_valid.create_at.app_error",
+    "translation": "セッションのCreateAtフィールドが無効です。"
+  },
+  {
+    "id": "api.user.create_user.bad_token_email_data.app_error",
+    "translation": "トークンの電子メールアドレスがユーザーデータのものと一致しません。"
+  },
+  {
+    "id": "ent.elasticsearch.getAllTeamMembers.error",
+    "translation": "すべてのチームメンバーを取得できませんでした"
+  },
+  {
+    "id": "ent.elasticsearch.getAllChannelMembers.error",
+    "translation": "すべてのチャンネルメンバーを取得できませんでした"
+  },
+  {
+    "id": "api.custom_status.set_custom_statuses.update.app_error",
+    "translation": "カスタムステータスを更新できませんでした。絵文字とテキストステータスのどちらかまたは両方を指定してください。"
+  },
+  {
+    "id": "app.user.get_thread_count_for_user.app_error",
+    "translation": "そのユーザーのスレッド数を取得できませんでした。"
+  },
+  {
+    "id": "app.session.extend_session_expiry.app_error",
+    "translation": "セッションの長さを延長できませんでした"
+  },
+  {
+    "id": "app.role.get_all.app_error",
+    "translation": "全ての役割を取得できませんでした。"
+  },
+  {
+    "id": "api.user.view_archived_channels.get_users_in_channel.app_error",
+    "translation": "アーカイブされたチャネルのユーザーを取得できません"
+  },
+  {
+    "id": "api.user.view_archived_channels.get_posts_for_channel.app_error",
+    "translation": "アーカイブされたチャンネルの投稿を取得できません"
+  },
+  {
+    "id": "api.templates.invite_body.title.reminder",
+    "translation": "リマインダー"
+  },
+  {
+    "id": "api.post.posts_by_ids.invalid_body.request_error",
+    "translation": "受信したPost IDの数が{{.MaxLength}}の最大サイズを超えています"
+  },
+  {
+    "id": "api.license.request_renewal_link.cannot_renew_on_cws",
+    "translation": "ポータルでこのライセンスを更新することはできません"
+  },
+  {
+    "id": "app.system.complete_onboarding_request.no_first_user",
+    "translation": "オンボーディングの完了はシステム管理者のみが行えます。"
+  },
+  {
+    "id": "app.system.complete_onboarding_request.app_error",
+    "translation": "オンボーディングの完了リクエストをデコードできませんでした。"
+  },
+  {
+    "id": "app.admin.latest_version_read_all.failure",
+    "translation": " "
+  },
+  {
+    "id": "app.admin.latest_version_external_error.failure",
+    "translation": " "
+  },
+  {
+    "id": "api.user.authorize_oauth_user.saml_response_too_long.app_error",
+    "translation": "SAMLの応答が長すぎます"
+  },
+  {
+    "id": "api.custom_groups.no_remote_id",
+    "translation": "カスタムグループの場合、remote_idは空白でなければなりません"
+  },
+  {
+    "id": "api.custom_groups.must_be_referenceable",
+    "translation": "カスタムグループの場合、allow_referenceは 'true'でなければなりません"
+  },
+  {
+    "id": "api.custom_groups.license_error",
+    "translation": "カスタムグループのためのライセンスがありません"
+  },
+  {
+    "id": "api.custom_groups.feature_disabled",
+    "translation": "カスタムグループ機能は無効化されています"
+  },
+  {
+    "id": "api.custom_groups.count_err",
+    "translation": "グループのカウント中にエラーが発生しました"
+  },
+  {
+    "id": "Playbooks",
+    "translation": "プレイブック"
+  },
+  {
+    "id": "Channels",
+    "translation": "チャンネル"
+  },
+  {
+    "id": "Boards",
+    "translation": "ボード"
+  },
+  {
+    "id": "model.github_release_info.is_valid.id.app_error",
+    "translation": " "
+  },
+  {
+    "id": "model.emoji.system_emoji_name.app_error",
+    "translation": "既存のシステム絵文字名と名前が競合しています。"
+  },
+  {
+    "id": "app.system.get_onboarding_request.app_error",
+    "translation": "オンボーディングの完了ステータスの取得に失敗しました。"
+  },
+  {
+    "id": "app.member_count",
+    "translation": "メンバー数をカウントする際にエラーが発生しました"
+  },
+  {
+    "id": "app.job.get_all_jobs_by_type_and_status.app_error",
+    "translation": "typeとstatusによる全ジョブ取得に失敗しました。"
+  },
+  {
+    "id": "app.group.crud_permission",
+    "translation": "そのsource typeに対して操作を行うことができません。"
+  },
+  {
+    "id": "app.custom_group.unique_name",
+    "translation": "グループ名が重複しています"
+  },
+  {
+    "id": "app.admin.latest_version_unmarshal.failure",
+    "translation": " "
+  },
+  {
+    "id": "app.admin.latest_version_set_cache.failure",
+    "translation": " "
+  },
+  {
+    "id": "api.users.invalid_emails.enable_open_server.app_error",
+    "translation": " "
+  },
+  {
+    "id": "api.templates.server_inactivity_title",
+    "translation": "これらの機能による生産性の向上をアンロックする"
+  },
+  {
+    "id": "api.templates.server_inactivity_subtitle",
+    "translation": "{{.Name}} さん、あなたのMattermostサーバーが少し埃をかぶっていることに気づきました。チームの作業負荷を軽減するのに役立ついくつかの機能を確認してみてください。"
+  },
+  {
+    "id": "api.templates.server_inactivity_subject",
+    "translation": "Mattermostを開いてチームの生産性を向上しましょう!"
+  },
+  {
+    "id": "api.templates.server_inactivity_info_bullet2",
+    "translation": "タスク管理のための "
+  },
+  {
+    "id": "api.templates.server_inactivity_info_bullet1",
+    "translation": "ワークフロー管理のための "
+  },
+  {
+    "id": "api.templates.server_inactivity_info_bullet",
+    "translation": "ゲストアクセス可能な "
+  },
+  {
+    "id": "api.templates.server_inactivity_info",
+    "translation": "ぜひご覧ください!"
+  },
+  {
+    "id": "api.templates.server_inactivity_button",
+    "translation": "Mattermostを開く"
+  },
+  {
+    "id": "api.license_error",
+    "translation": "APIエンドポイントにはライセンスが必要です"
+  },
+  {
+    "id": "api.error_set_first_admin_complete_setup",
+    "translation": "ストアに最初の管理者向けセットアップを保存する際にエラーが発生しました。"
+  },
+  {
+    "id": "api.error_get_first_admin_complete_setup",
+    "translation": "ストアから最初の管理者向けセットアップを取得する際にエラーが発生しました。"
+  },
+  {
+    "id": "app.prepackged-plugin.invalid_version.app_error",
+    "translation": "パッケージ済みプラグインのバージョンを解析できませんでした。"
+  },
+  {
+    "id": "api.team.invite_members.unable_to_send_email_with_defaults.app_error",
+    "translation": "システムコンソールでSMTPが設定されていません"
+  },
+  {
+    "id": "api.team.invite_members.unable_to_send_email.app_error",
+    "translation": "メール送信時にエラーが発生しました"
+  },
+  {
+    "id": "app.user.group_name_conflict",
+    "translation": " "
+  },
+  {
+    "id": "app.user.get_by_name_failure",
+    "translation": " "
+  },
+  {
+    "id": "app.group.username_conflict",
+    "translation": " "
+  },
+  {
+    "id": "app.group.get_by_username_failure",
+    "translation": " "
   }
 ]

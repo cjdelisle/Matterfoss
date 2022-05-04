@@ -13,9 +13,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/services/httpservice"
-	"github.com/cjdelisle/matterfoss-server/v5/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/testutils"
 )
 
 func makeTestLocalProxy() *ImageProxy {
@@ -27,7 +27,7 @@ func makeTestLocalProxy() *ImageProxy {
 			},
 			ImageProxySettings: model.ImageProxySettings{
 				Enable:         model.NewBool(true),
-				ImageProxyType: model.NewString(model.IMAGE_PROXY_TYPE_LOCAL),
+				ImageProxyType: model.NewString(model.ImageProxyTypeLocal),
 			},
 		},
 	}
@@ -154,7 +154,7 @@ func TestLocalBackend_GetImage(t *testing.T) {
 		proxy := makeTestLocalProxy()
 
 		// Modify the timeout to be much shorter than the default 30 seconds
-		proxy.backend.(*LocalBackend).impl.Timeout = time.Millisecond
+		proxy.backend.(*LocalBackend).client.Timeout = time.Millisecond
 
 		recorder := httptest.NewRecorder()
 		request, _ := http.NewRequest(http.MethodGet, "", nil)
@@ -310,7 +310,7 @@ func TestLocalBackend_GetImageDirect(t *testing.T) {
 		proxy := makeTestLocalProxy()
 
 		// Modify the timeout to be much shorter than the default 30 seconds
-		proxy.backend.(*LocalBackend).impl.Timeout = time.Millisecond
+		proxy.backend.(*LocalBackend).client.Timeout = time.Millisecond
 
 		body, contentType, err := proxy.GetImageDirect(mock.URL + "/image.png")
 

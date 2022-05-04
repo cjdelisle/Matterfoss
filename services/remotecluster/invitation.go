@@ -8,7 +8,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 // AcceptInvitation is called when accepting an invitation to connect with a remote cluster.

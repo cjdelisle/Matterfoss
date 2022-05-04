@@ -53,19 +53,19 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "Den här versionen av webbläsaren stöds inte längre av Matterfoss"
+    "translation": "Den här versionen av webbläsaren stöds inte längre av Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "Den här webbläsaren stöds inte längre av Matterfoss"
+    "translation": "Den här webbläsaren stöds inte längre av Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.windows",
-    "translation": "Windows 7+"
+    "translation": "Windows 8.1+"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.mac",
-    "translation": "macOS 10.9+"
+    "translation": "macOS 10.14+"
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.safari",
@@ -73,7 +73,7 @@
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.firefox",
-    "translation": "Version 60+"
+    "translation": "Version 91+"
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.edge",
@@ -81,7 +81,7 @@
   },
   {
     "id": "web.error.unsupported_browser.min_browser_version.chrome",
-    "translation": "Version 61+"
+    "translation": "Version 89+"
   },
   {
     "id": "web.error.unsupported_browser.learn_more",
@@ -101,7 +101,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "Ladda ner Matterfossappen eller använd en supporterad webbläsare för en bättre användarupplevelse."
+    "translation": "Ladda ner Mattermostappen eller använd en supporterad webbläsare för en bättre användarupplevelse."
   },
   {
     "id": "web.error.unsupported_browser.download",
@@ -204,18 +204,6 @@
     "translation": "Bot:en finns inte."
   },
   {
-    "id": "store.sql.convert_string_map",
-    "translation": "Från Db: Kunde inte konvertera StringMap till *string"
-  },
-  {
-    "id": "store.sql.convert_string_interface",
-    "translation": "Från Db: Kunde inte konvertera StringInterface till *string"
-  },
-  {
-    "id": "store.sql.convert_string_array",
-    "translation": "Från Db: Kunde inte konvertera StringArray till *string"
-  },
-  {
     "id": "searchengine.bleve.disabled.error",
     "translation": "Fel vid rensning av Bleve-index: Funktionen är inaktiverad"
   },
@@ -253,7 +241,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "GitLab's användningsvillkor har uppdaterats. Logga in på gitlab.com för att acceptera dem och logga sedan in i Matterfoss igen."
+    "translation": "GitLab's användningsvillkor har uppdaterats. Logga in på gitlab.com för att acceptera dem och logga sedan in i Mattermost igen."
   },
   {
     "id": "model.group_syncable.syncable_id.app_error",
@@ -768,10 +756,6 @@
     "translation": "Ogiltigt root-id."
   },
   {
-    "id": "model.command_hook.parent_id.app_error",
-    "translation": "Ogiltigt parent-id."
-  },
-  {
     "id": "model.command_hook.id.app_error",
     "translation": "Ogiltigt command hook id."
   },
@@ -1044,8 +1028,8 @@
     "translation": "Ogiltigt MFA-token."
   },
   {
-    "id": "Matterfoss.bulletin.subject",
-    "translation": "Matterfoss Tavlan för säkerheten"
+    "id": "mattermost.bulletin.subject",
+    "translation": "Mattermost Tavlan för säkerheten"
   },
   {
     "id": "manaultesting.test_autolink.unable.app_error",
@@ -1092,14 +1076,6 @@
     "translation": "Fel vid base64-avkodningen av trigger ID i den interaktiva dialogen."
   },
   {
-    "id": "import_process.worker.do_job.unzip",
-    "translation": "Kunde inte hantera importen: kunde inte packa upp filen."
-  },
-  {
-    "id": "import_process.worker.do_job.tmp_dir",
-    "translation": "Kunde inte hantera importen: misslyckades med att skapa temporär mapp."
-  },
-  {
     "id": "ent.actiance.export.write_file.appError",
     "translation": "Kunde inte spara exportfil."
   },
@@ -1116,18 +1092,6 @@
     "translation": "Kunde inte hämta användare."
   },
   {
-    "id": "cli.outgoing_webhook.inconsistent_state.app_error",
-    "translation": "Den utgående webhooken är raderad men av någon outgrundlig anledning går det inte att skapa en ny."
-  },
-  {
-    "id": "cli.license.critical",
-    "translation": "Funktionen kräver en uppgradering till Enterpriseversionen och tillhörande licensnyckel. Kontakta din systemadministratör."
-  },
-  {
-    "id": "brand.save_brand_image.too_large.app_error",
-    "translation": "Kunde inte läsa bildfilen. Kontrollera att bildstorleken är mindre än 2 MB och försök igen."
-  },
-  {
     "id": "brand.save_brand_image.save_image.app_error",
     "translation": "Kunde inte spara bildfilen på din lagringsyta. Kolla din uppkoppling och försök igen."
   },
@@ -1138,10 +1102,6 @@
   {
     "id": "brand.save_brand_image.encode.app_error",
     "translation": "Kunde inte konvertera bilddatat till PNG-format. Försök igen."
-  },
-  {
-    "id": "brand.save_brand_image.decode_config.app_error",
-    "translation": "Kunde inte hämta bildmetadatat."
   },
   {
     "id": "brand.save_brand_image.decode.app_error",
@@ -1641,7 +1601,7 @@
   },
   {
     "id": "model.team.is_valid.invite_id.app_error",
-    "translation": "Ogiltigt inbjudans-id."
+    "translation": "Ogiltigt inbjudnings-id."
   },
   {
     "id": "model.team.is_valid.id.app_error",
@@ -1724,20 +1684,12 @@
     "translation": "Ogiltig typ."
   },
   {
-    "id": "model.post.is_valid.root_parent.app_error",
-    "translation": "Ogiltigt root ID. Root ID måste anges om parent ID anges."
-  },
-  {
     "id": "model.post.is_valid.root_id.app_error",
     "translation": "Ogiltigt root-id."
   },
   {
     "id": "model.post.is_valid.props.app_error",
     "translation": "Ogiltig props."
-  },
-  {
-    "id": "model.post.is_valid.parent_id.app_error",
-    "translation": "Ogiltigt parent-id."
   },
   {
     "id": "model.post.is_valid.original_id.app_error",
@@ -1761,7 +1713,7 @@
   },
   {
     "id": "model.post.is_valid.file_ids.app_error",
-    "translation": "Ogiltiga fil-id. Notera begränsningen av maximalt 5 filer. För att ladda upp fler filer, posta fler meddelanden."
+    "translation": "Ogiltiga fil-id. Notera begränsningen av maximalt 10 filer. För att ladda upp fler filer, posta fler meddelanden."
   },
   {
     "id": "model.post.is_valid.create_at.app_error",
@@ -2388,20 +2340,8 @@
     "translation": "Misslyckades spara värdet för {{.WarnMetricName}}"
   },
   {
-    "id": "app.system.warn_metric.notification.invalid_metric.app_error",
-    "translation": "Kunde inte hitta mätdata."
-  },
-  {
-    "id": "app.system.warn_metric.notification.empty_admin_list.app_error",
-    "translation": "Listan med administratörer är tom."
-  },
-  {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Matterfoss-råd"
-  },
-  {
-    "id": "app.system.warn_metric.bot_description",
-    "translation": "[Läs mer om Matterfoss Advisor](https://about.Matterfoss.com/default-channel-handle-documentation)"
+    "translation": "Mattermost-råd"
   },
   {
     "id": "app.system.save.app_error",
@@ -2897,7 +2837,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "Användarnamnet används redan av en annan Matterfoss-användare."
+    "translation": "Användarnamnet används redan av en annan Mattermost-användare."
   },
   {
     "id": "ent.migration.migratetosaml.user_not_found_in_users_mapping_file",
@@ -3025,7 +2965,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "Kunde inte söka på användare i AD/LDAP. Testa om Matterfoss-servern kan ansluta till din AD/LDAP-server och försök igen."
+    "translation": "Kunde inte söka på användare i AD/LDAP. Testa om Mattermost-servern kan ansluta till din AD/LDAP-server och försök igen."
   },
   {
     "id": "ent.ldap.syncronize.populate_syncables",
@@ -3065,7 +3005,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "Ditt AD/LDAP-konto har inte behörighet för att använda denna Matterfoss-server. Be din systemadministratör att kolla användarfiltret för AD/LDAP."
+    "translation": "Ditt AD/LDAP-konto har inte behörighet för att använda denna Mattermost-server. Be din systemadministratör att kolla användarfiltret för AD/LDAP."
   },
   {
     "id": "ent.ldap.do_login.unable_to_connect.app_error",
@@ -3320,28 +3260,8 @@
     "translation": "Elasticsearch aggregator worker misslyckades med att skapa indexeringsjobbet"
   },
   {
-    "id": "ent.data_retention.reactions_batch.internal_error",
-    "translation": "Ett fel uppstod när batchen av reaktioner skulle raderas."
-  },
-  {
-    "id": "ent.data_retention.posts_permanent_delete_batch.internal_error",
-    "translation": "Ett fel uppstod när batchen av meddelanden skulle raderas."
-  },
-  {
     "id": "ent.data_retention.generic.license.error",
     "translation": "Din licens ger inte stöd för datalagring."
-  },
-  {
-    "id": "ent.data_retention.flags_batch.internal_error",
-    "translation": "Ett fel uppstod när batchen av flaggor skulle rensas."
-  },
-  {
-    "id": "ent.data_retention.file_infos_batch.internal_error",
-    "translation": "Ett fel uppstod när batchen av filinformation skulle raderas."
-  },
-  {
-    "id": "ent.data_retention.channel_member_history_batch.internal_error",
-    "translation": "Misslyckades att rensa posterna."
   },
   {
     "id": "ent.compliance.run_failed.error",
@@ -3808,10 +3728,6 @@
     "translation": "Kanalrubriken är för lång."
   },
   {
-    "id": "app.import.validate_channel_import_data.display_name_missing.error",
-    "translation": "Det fattas en obligatorisk kanalegenskap: display_name"
-  },
-  {
     "id": "app.import.validate_channel_import_data.display_name_length.error",
     "translation": "Kanalens display_name är för långt."
   },
@@ -4182,10 +4098,6 @@
   {
     "id": "app.channel.migrate_channel_members.select.app_error",
     "translation": "Misslyckades att ta fram batchen med kanalmedlemmar."
-  },
-  {
-    "id": "app.channel.increment_mention_count.app_error",
-    "translation": "Kunde inte öka värdet för antal omnämnanden."
   },
   {
     "id": "app.channel.get_unread.app_error",
@@ -4696,10 +4608,6 @@
     "translation": "Kunde inte koda profilbilden."
   },
   {
-    "id": "api.user.upload_profile_user.decode_config.app_error",
-    "translation": "Kunde inte spara profilbilden. Filen verkar inte vara en giltig bildfil."
-  },
-  {
     "id": "api.user.upload_profile_user.decode.app_error",
     "translation": "Kunde inte avkoda profilbilden."
   },
@@ -4764,16 +4672,8 @@
     "translation": "Du kan inte aktivera ett gästkonto då gästfunktionen ej är aktiverad."
   },
   {
-    "id": "api.user.send_welcome_email_and_forget.failed.error",
-    "translation": "Misslyckades att skicka välkomstmail via e-post"
-  },
-  {
     "id": "api.user.send_verify_email_and_forget.failed.error",
     "translation": "Lyckades inte skicka e-post verifieringen"
-  },
-  {
-    "id": "api.user.send_user_access_token.error",
-    "translation": "Misslyckades att skicka epost för \"Personligt access_token tillagd\""
   },
   {
     "id": "api.user.send_sign_in_change_email_and_forget.error",
@@ -4788,24 +4688,8 @@
     "translation": "Misslyckades att skicka lösenordsåterställning via e-post."
   },
   {
-    "id": "api.user.send_password_change_email_and_forget.error",
-    "translation": "Kunde inte skicka e-postmeddelande för lösenordsbyte"
-  },
-  {
-    "id": "api.user.send_mfa_change_email.error",
-    "translation": "Kunde inte skicka e-postnotifikatoin för MFA-byte."
-  },
-  {
     "id": "api.user.send_email_change_verify_email_and_forget.error",
     "translation": "Misslyckades att skicka ändringar via e-post verifieringen"
-  },
-  {
-    "id": "api.user.send_email_change_username_and_forget.error",
-    "translation": "Misslyckades med att skicka ändring av användarnamnet via e-posten"
-  },
-  {
-    "id": "api.user.send_email_change_email_and_forget.error",
-    "translation": "Misslyckades med att skicka meddelandet med e-poständring"
   },
   {
     "id": "api.user.send_deactivate_email_and_forget.failed.error",
@@ -5045,7 +4929,7 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.title",
-    "translation": "Din faktura för Matterfoss Cloud förfaller"
+    "translation": "Din faktura för Mattermost Cloud förfaller"
   },
   {
     "id": "api.templates.payment_failed_no_card.subject",
@@ -5057,7 +4941,7 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.info1",
-    "translation": "Matterfoss Cloud-fakturan för den senaste perioden har skapats. Men, vi saknar dina kort-uppgifter för betalning."
+    "translation": "Mattermost Cloud-fakturan för den senaste perioden har skapats. Men, vi saknar dina kort-uppgifter för betalning."
   },
   {
     "id": "api.templates.payment_failed_no_card.button",
@@ -5069,11 +4953,11 @@
   },
   {
     "id": "api.templates.payment_failed.subject",
-    "translation": "Åtgärd krävs: Betalning för Matterfoss Cloud misslyckades"
+    "translation": "Åtgärd krävs: Betalning för Mattermost Cloud misslyckades"
   },
   {
     "id": "api.templates.payment_failed.info3",
-    "translation": "För att säkerställa en fortsatt prenumeration på Matterfoss Cloud bör du kontakta din kortutgivare för att åtgärda problemet, alternativt uppdatera dina betaluppgifter. När betalinformationen är uppdaterad kommer Matterfoss försöka reglera eventuellt utestående saldo."
+    "translation": "För att säkerställa en fortsatt prenumeration på Mattermost Cloud bör du kontakta din kortutgivare för att åtgärda problemet, alternativt uppdatera dina betaluppgifter. När betalinformationen är uppdaterad kommer Mattermost försöka reglera eventuellt utestående saldo."
   },
   {
     "id": "api.templates.payment_failed.info2",
@@ -5081,7 +4965,7 @@
   },
   {
     "id": "api.templates.payment_failed.info1",
-    "translation": "Den senaste betalningen med betalkort {{.CardBrand}} ****{{.LastFour}} som angetts för Matterfoss Cloud workspace gick inte igenom."
+    "translation": "Den senaste betalningen med betalkort {{.CardBrand}} ****{{.LastFour}} som angetts för Mattermost Cloud workspace gick inte igenom."
   },
   {
     "id": "api.templates.password_change_subject",
@@ -5101,11 +4985,11 @@
   },
   {
     "id": "api.templates.over_limit_suspended_title",
-    "translation": "Matterfoss Cloud-arbetsyta har stängts av"
+    "translation": "Mattermost Cloud-arbetsyta har stängts av"
   },
   {
     "id": "api.templates.over_limit_suspended_subject",
-    "translation": "Din Matterfoss Cloud-prenumeration har stängts av"
+    "translation": "Din Mattermost Cloud-prenumeration har stängts av"
   },
   {
     "id": "api.templates.over_limit_suspended_info2",
@@ -5113,7 +4997,7 @@
   },
   {
     "id": "api.templates.over_limit_suspended_info1",
-    "translation": "Din Matterfoss-arbetsyta har stängts av. Allt innehåll och data kommer raderas inom 1-3 månader."
+    "translation": "Din Mattermost-arbetsyta har stängts av. Allt innehåll och data kommer raderas inom 1-3 månader."
   },
   {
     "id": "api.templates.over_limit_suspended_contact_support",
@@ -5121,7 +5005,7 @@
   },
   {
     "id": "api.templates.over_limit_subject",
-    "translation": "Över användargränsen i Matterfoss Cloud Workspace"
+    "translation": "Över användargränsen i Mattermost Cloud Workspace"
   },
   {
     "id": "api.templates.over_limit_info2",
@@ -5129,7 +5013,7 @@
   },
   {
     "id": "api.templates.over_limit_info1",
-    "translation": "Det ser ut som om du har fler än 10 användare i din miljö och det är över gränsen för den kostnadsfria versionen av Matterfoss Cloud Professional. För att undvika avbrott i din Matterfossmiljö bör du uppgradera."
+    "translation": "Det ser ut som om du har fler än 10 användare i din miljö och det är över gränsen för den kostnadsfria versionen av Mattermost Cloud. För att undvika avbrott i din Mattermostmiljö bör du uppgradera."
   },
   {
     "id": "api.templates.over_limit_fix_now",
@@ -5137,11 +5021,11 @@
   },
   {
     "id": "api.templates.over_limit_90_days_title",
-    "translation": "Din arbetsyta i Matterfoss Cloud är schemalagd att avslutas under morgondagen"
+    "translation": "Din arbetsyta i Mattermost Cloud är schemalagd att avslutas under morgondagen"
   },
   {
     "id": "api.templates.over_limit_90_days_subject",
-    "translation": "Din Matterfoss Cloud-prenumeration kommer snart att avslutas"
+    "translation": "Din Mattermost Cloud-prenumeration kommer snart att avslutas"
   },
   {
     "id": "api.templates.over_limit_90_days_info4",
@@ -5157,7 +5041,7 @@
   },
   {
     "id": "api.templates.over_limit_90_days_info1",
-    "translation": "Detta är en sista påminnelsen om att vi inte mottagit din betalning för din Matterfoss-prenumeration som varit försenad sedan {{.OverLimitDate}}. Imorgon kommer vi stänga din tjänst."
+    "translation": "Detta är en sista påminnelsen om att vi inte mottagit din betalning för din Mattermost-prenumeration som varit försenad sedan {{.OverLimitDate}}. Imorgon kommer vi stänga din tjänst."
   },
   {
     "id": "api.templates.over_limit_7_days_title",
@@ -5165,19 +5049,19 @@
   },
   {
     "id": "api.templates.over_limit_7_days_subject",
-    "translation": "Din betalning av Matterfoss Cloud prenumerationen är försenad"
+    "translation": "Din betalning av Mattermost Cloud prenumerationen är försenad"
   },
   {
     "id": "api.templates.over_limit_7_days_info1",
-    "translation": "Matterfoss kunde inte behandla din senaste automatiska betalning. För att hålla din tjänst aktiv, vänligen lägg till betalningsuppgifter så snart som möjligt eller så kan din tjänst stängas av."
+    "translation": "Mattermost kunde inte behandla din senaste automatiska betalning. För att hålla din tjänst aktiv, vänligen lägg till betalningsuppgifter så snart som möjligt eller så kan din tjänst stängas av."
   },
   {
     "id": "api.templates.over_limit_30_days_title",
-    "translation": "Skjut upp Matterfoss Cloud Workspace"
+    "translation": "Skjut upp Mattermost Cloud Workspace"
   },
   {
     "id": "api.templates.over_limit_30_days_subject",
-    "translation": " Agera för att behålla prenumerationen på din Matterfoss Cloud"
+    "translation": " Agera för att behålla prenumerationen på din Mattermost Cloud"
   },
   {
     "id": "api.templates.over_limit_30_days_info2_item3",
@@ -5197,7 +5081,7 @@
   },
   {
     "id": "api.templates.over_limit_30_days_info1",
-    "translation": "Det finns fortfarande tid att behålla din Matterfoss Cloud workspace aktiv genom att lösa problemen med din betalning. För att undvika avbrott bör du uppdatera din betalningsmetod."
+    "translation": "Det finns fortfarande tid att behålla din Mattermost Cloud workspace aktiv genom att lösa problemen med din betalning. För att undvika avbrott bör du uppdatera din betalningsmetod."
   },
   {
     "id": "api.templates.over_limit_14_days_title",
@@ -5205,11 +5089,11 @@
   },
   {
     "id": "api.templates.over_limit_14_days_subject",
-    "translation": "Din faktura för Matterfoss Cloud prenumeration har förfallit"
+    "translation": "Din faktura för Mattermost Cloud prenumeration har förfallit"
   },
   {
     "id": "api.templates.over_limit_14_days_info1",
-    "translation": "En liten påminnelse om att vi inte mottagit din betalning för din Matterfoss-prenumeration med sista betaldag {{.OverLimitDate}}. Vi kommer snart påbörja processen att stänga dina tjänster om vi inte mottar betalning."
+    "translation": "En liten påminnelse om att vi inte mottagit din betalning för din Mattermost-prenumeration med sista betaldag {{.OverLimitDate}}. Vi kommer snart påbörja processen att stänga dina tjänster om vi inte mottar betalning."
   },
   {
     "id": "api.templates.mfa_deactivated_body.title",
@@ -5273,7 +5157,7 @@
   },
   {
     "id": "api.templates.email_footer",
-    "translation": "För att ändra dina notifieringsinställningar, logga in på din grupps sida och gå till Kontoinställningar > Notifieringar."
+    "translation": "För att ändra dina notifieringsinställningar, logga in på din grupps sida och gå till Inställningar > Notifieringar."
   },
   {
     "id": "api.templates.email_change_verify_subject",
@@ -5321,7 +5205,7 @@
   },
   {
     "id": "api.templates.copyright",
-    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "api.templates.at_limit_title",
@@ -5329,7 +5213,7 @@
   },
   {
     "id": "api.templates.at_limit_subject",
-    "translation": "Du har nått gränsen för antal användare i Matterfoss Cloud"
+    "translation": "Du har nått gränsen för antal användare i Mattermost Cloud"
   },
   {
     "id": "api.templates.at_limit_info2",
@@ -5337,7 +5221,7 @@
   },
   {
     "id": "api.templates.at_limit_info1",
-    "translation": "Det ser ut som om du nu har 10 användare eller fler — Vad kul! Om du vill bjuda in fler teammedlemmar bör du nu uppgradera till Matterfoss Cloud Professional."
+    "translation": "Det ser ut som om du nu har 10 användare eller fler — Vad kul! Om du vill bjuda in fler teammedlemmar bör du nu uppgradera till Mattermost Cloud."
   },
   {
     "id": "api.team.update_team_scheme.scheme_scope.error",
@@ -5470,10 +5354,6 @@
   {
     "id": "api.team.set_team_icon.encode.app_error",
     "translation": "Kunde inte koda teamikonen."
-  },
-  {
-    "id": "api.team.set_team_icon.decode_config.app_error",
-    "translation": "Kunde inte avkoda teamikonens metadata."
   },
   {
     "id": "api.team.set_team_icon.decode.app_error",
@@ -5709,7 +5589,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Matterfoss log för Slack-import\n"
+    "translation": "Mattermost log för Slack-import\n"
   },
   {
     "id": "api.slackimport.slack_add_users.unable_import",
@@ -5721,11 +5601,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "Slack-användare sammanslagen med en befintlig Matterfoss-användare med {{.Email}} och användarid {{.Username}}, men kunde inte läggas till i gruppen.\n"
+    "translation": "Slack-användare sammanslagen med en befintlig Mattermost-användare med {{.Email}} och användarid {{.Username}}, men kunde inte läggas till i gruppen.\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "Slack-användare sammanslagen med en befintlig Matterfoss-användare med {{.Email}} och användarid {{.Username}}.\n"
+    "translation": "Slack-användare sammanslagen med en befintlig Mattermost-användare med {{.Email}} och användarid {{.Username}}.\n"
   },
   {
     "id": "api.slackimport.slack_add_users.email_pwd",
@@ -5737,7 +5617,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "Slack-kanalen {{.DisplayName}} finns redan som en aktiv kanal i Matterfoss. Kanalerna har slagits samman.\n"
+    "translation": "Slack-kanalen {{.DisplayName}} finns redan som en aktiv kanal i Mattermost. Kanalerna har slagits samman.\n"
   },
   {
     "id": "api.slackimport.slack_add_channels.import_failed",
@@ -5760,20 +5640,12 @@
     "translation": "Integrations-/Slack Bot-Användaren med epost {{.Email}} och lösenord {{.Password}} har importerats.\n"
   },
   {
-    "id": "api.server.warn_metric.starting_trial",
-    "translation": "Hämtar prova-på"
-  },
-  {
-    "id": "api.server.warn_metric.start_trial",
-    "translation": "Starta prova-på-period"
-  },
-  {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial_notification_success.message",
     "translation": "Din Enterprise prova-på är nu aktiv. Gå till **Systemkonsol > Användaradministration > Behörigheter** för att aktivera Avancerade Behörigheter."
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial.notification_body",
-    "translation": "Din Matterfossinstallation innehåller nu flera team. Olika Team kan ha olika sätt som samarbetet organiseras och koordineras, exempelvis hur kanaler skapas, vem som bjuda in nya teammedlemmar eller hur integrationer hanteras. Med Team Override Schemes har du möjligheten att skräddarsy användarbehörigheter inom specifika team så att deras behov kan mötas.\n\n[Läs mer om avancerade behörigheter](https://www.Matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions-team-override).\n\nGenom att klicka på Starta test godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Din Mattermostinstallation innehåller nu flera team. Olika Team kan ha olika sätt som samarbetet organiseras och koordineras, exempelvis hur kanaler skapas, vem som bjuda in nya teammedlemmar eller hur integrationer hanteras. Med Team Override Schemes har du möjligheten att skräddarsy användarbehörigheter inom specifika team så att deras behov kan mötas.\n\n[Läs mer om avancerade behörigheter](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override).\n\nGenom att klicka på Starta test godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_title",
@@ -5781,11 +5653,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_body",
-    "translation": "Din Matterfossinstallation innehåller nu flera team. Olika Team kan ha olika sätt som samarbetet organiseras och koordineras, exempelvis hur kanaler skapas, vem som bjuda in nya teammedlemmar eller hur integrationer hanteras. Med Team Override Schemes har du möjligheten att skräddarsy användarbehörigheter inom specifika team så att deras behov kan mötas.\n\n[Läs mer om avancerade behörigheter](https://www.Matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions-team-override).\n\nGenom att klicka på Kontakta oss delar du information med Matterfoss Inc. och lär dig mer om uppgradering. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Din Mattermostinstallation innehåller nu flera team. Olika Team kan ha olika sätt som samarbetet organiseras och koordineras, exempelvis hur kanaler skapas, vem som bjuda in nya teammedlemmar eller hur integrationer hanteras. Med Team Override Schemes har du möjligheten att skräddarsy användarbehörigheter inom specifika team så att deras behov kan mötas.\n\n[Läs mer om avancerade behörigheter](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override).\n\nGenom att klicka på Kontakta oss delar du information med Mattermost Inc. och lär dig mer om uppgradering. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.contact_us.email_body",
-    "translation": "Matterfoss contact us request. I'm interested in learning more about Advanced Permissions with Team Schemes.\n"
+    "translation": "Mattermost contact us request. I'm interested in learning more about Advanced Permissions with Team Schemes.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_success.message",
@@ -5793,7 +5665,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_body",
-    "translation": "Din Matterfoss-installation innehåller en stor mängd meddelanden. Sökfunktionen i Matterfoss standarddatabas kommer tappa prestanda efter ca 2,5 miljoner meddelanden. Med över 5 miljoner meddelanden kan Elasticsearch förhindra påverkande prestandaproblem, som exempelvis timeout vid sökningar och @-omnämnanden. Kontakta oss för att veta mer och låt oss hjälpa dig.\n\n[Läs mer om prestandaförbättringar](https://www.Matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=elasticsearch)\n\nGenom att klicka på Starta prova-på godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Din Mattermost-installation innehåller en stor mängd meddelanden. Sökfunktionen i Mattermost standarddatabas kommer tappa prestanda efter ca 2,5 miljoner meddelanden. Med över 5 miljoner meddelanden kan Elasticsearch förhindra påverkande prestandaproblem, som exempelvis timeout vid sökningar och @-omnämnanden. Kontakta oss för att veta mer och låt oss hjälpa dig.\n\n[Läs mer om prestandaförbättringar](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nGenom att klicka på Starta prova-på godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_title",
@@ -5801,11 +5673,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_body",
-    "translation": "Din Matterfoss-installation innehåller en stor mängd meddelanden. Sökfunktionen i Matterfoss standarddatabas kommer tappa prestanda efter ca 2,5 miljoner meddelanden. Med över 5 miljoner meddelanden kan Elasticsearch förhindra påverkande prestandaproblem, som exempelvis timeout vid sökningar och @-omnämnanden. Kontakta oss för att veta mer och låt oss hjälpa dig.\n\n[Läs mer om prestandaförbättringar](https://www.Matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=elasticsearch)\n\nGenom att klicka på Kontakta oss delar du information med Matterfoss Inc. och lär dig mer om uppgradering. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Din Mattermost-installation innehåller en stor mängd meddelanden. Sökfunktionen i Mattermost standarddatabas kommer tappa prestanda efter ca 2,5 miljoner meddelanden. Med över 5 miljoner meddelanden kan Elasticsearch förhindra påverkande prestandaproblem, som exempelvis timeout vid sökningar och @-omnämnanden. Kontakta oss för att veta mer och låt oss hjälpa dig.\n\n[Läs mer om prestandaförbättringar](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nGenom att klicka på Kontakta oss delar du information med Mattermost Inc. och lär dig mer om uppgradering. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.contact_us.email_body",
-    "translation": "Matterfoss contact us request. I'm interested in learning more about improving performance with Elasticsearch.\n"
+    "translation": "Mattermost contact us request. I'm interested in learning more about improving performance with Elasticsearch.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_success.message",
@@ -5813,7 +5685,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_body",
-    "translation": "Kanaler ger möjlighet att förbättra kommunikation men med alla användare i Matterfoss som skapar och ansluter till kanaler ökar utmaningen att hålla ordning. Med avancerade behörigheter ges du möjligheten att styra vilka användare eller roller som kan göra vad, inklusive hantera kanalinställningar och medlemmar, använda @channel eller @here för att notifiera stora mängder användare eller vem som får skapa nya webhooks.\n\n[Läs mer om hur du använder avancerade behörigheter](https://www.Matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nGenom att klicka på Starta prova-på godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Kanaler ger möjlighet att förbättra kommunikation men med alla användare i Mattermost som skapar och ansluter till kanaler ökar utmaningen att hålla ordning. Med avancerade behörigheter ges du möjligheten att styra vilka användare eller roller som kan göra vad, inklusive hantera kanalinställningar och medlemmar, använda @channel eller @here för att notifiera stora mängder användare eller vem som får skapa nya webhooks.\n\n[Läs mer om hur du använder avancerade behörigheter](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nGenom att klicka på Starta prova-på godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_title",
@@ -5821,11 +5693,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_body",
-    "translation": "Kanaler ger möjlighet att förbättra kommunikation men med alla användare i Matterfoss som skapar och ansluter till kanaler ökar utmaningen att hålla ordning. Med avancerade behörigheter ges du möjligheten att styra vilka användare eller roller som kan göra vad, inklusive hantera kanalinställningar och medlemmar, använda @channel eller @here för att notifiera stora mängder användare eller vem som får skapa nya webhooks.\n\n[Läs mer om hur du använder avancerade behörigheter](https://www.Matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nGenom att klicka på Kontakta oss delar du information med Matterfoss Inc. och lär dig mer om uppgradering. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Kanaler ger möjlighet att förbättra kommunikation men med alla användare i Mattermost som skapar och ansluter till kanaler ökar utmaningen att hålla ordning. Med avancerade behörigheter ges du möjligheten att styra vilka användare eller roller som kan göra vad, inklusive hantera kanalinställningar och medlemmar, använda @channel eller @here för att notifiera stora mängder användare eller vem som får skapa nya webhooks.\n\n[Läs mer om hur du använder avancerade behörigheter](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nGenom att klicka på Kontakta oss delar du information med Mattermost Inc. och lär dig mer om uppgradering. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.contact_us.email_body",
-    "translation": "Matterfoss contact us request. I'm interested in learning more about using Advanced Permissions with System Schemes.\n"
+    "translation": "Mattermost contact us request. I'm interested in learning more about using Advanced Permissions with System Schemes.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_success.message",
@@ -5833,19 +5705,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_body",
-    "translation": "Matterfoss rekommenderar att installationer med fler än 500 användare nyttjar funktionerna för användarhantering, klusterteknik och prestandamätning. Kontakta oss för att veta mer och berätta på vilket sätt vi kan hjälpa till.\n\nGenom att klicka på Starta prova-på godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Mattermost rekommenderar att installationer med fler än 500 användare nyttjar funktionerna för användarhantering, klusterteknik och prestandamätning. Kontakta oss för att veta mer och berätta på vilket sätt vi kan hjälpa till.\n\nGenom att klicka på Starta prova-på godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Väx med Matterfoss"
+    "translation": "Väx med Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "Matterfoss rekommenderar att installationer med fler än 500 användare nyttjar funktionerna för användarhantering, klusterteknik och prestandamätning. Kontakta oss för att veta mer och berätta på vilket sätt vi kan hjälpa till.\n\nGenom att klicka på Kontakta oss delar du information med Matterfoss Inc. och lär dig mer om uppgradering. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Mattermost rekommenderar att installationer med fler än 500 användare nyttjar funktionerna för användarhantering, klusterteknik och prestandamätning. Kontakta oss för att veta mer och berätta på vilket sätt vi kan hjälpa till.\n\nGenom att klicka på Kontakta oss delar du information med Mattermost Inc. och lär dig mer om uppgradering. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.contact_us.email_body",
-    "translation": "Matterfoss contact us request. My team now has 500 users, and I'm considering Matterfoss Enterprise Edition.\n"
+    "translation": "Mattermost contact us request. My team now has 500 users, and I'm considering Mattermost Enterprise Edition.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_title",
@@ -5857,15 +5729,15 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_body",
-    "translation": "Med all kommunikation som sker i Matterfoss kan det vara utmanande att veta var man hittar viktig information. Om du vill komma ut med ditt budskap till en stor publik kan du skapa read-only Informationskanaler som vem som helst kan ansluta till men där endast administratören kan posta meddelanden.\n\n[Läs mer om att skapa Informationskanaler](https://www.Matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=channel-moderation)\n\nGenom att klicka på Starta test godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Med all kommunikation som sker i Mattermost kan det vara utmanande att veta var man hittar viktig information. Om du vill komma ut med ditt budskap till en stor publik kan du skapa read-only Informationskanaler som vem som helst kan ansluta till men där endast administratören kan posta meddelanden.\n\n[Läs mer om att skapa Informationskanaler](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\nGenom att klicka på Starta test godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.notification_body",
-    "translation": "Med all kommunikation som sker i Matterfoss kan det vara utmanande att veta var man hittar viktig information. Om du vill komma ut med ditt budskap till en stor publik kan du skapa read-only Informationskanaler som vem som helst kan ansluta till men där endast administratören kan posta meddelanden.\n\n[Läs mer om att skapa Informationskanaler](https://www.Matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=channel-moderation)\n\n Genom att klicka på Kontakta oss delar du information med Matterfoss Inc. och lär dig mer om uppgradering. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Med all kommunikation som sker i Mattermost kan det vara utmanande att veta var man hittar viktig information. Om du vill komma ut med ditt budskap till en stor publik kan du skapa read-only Informationskanaler som vem som helst kan ansluta till men där endast administratören kan posta meddelanden.\n\n[Läs mer om att skapa Informationskanaler](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\n Genom att klicka på Kontakta oss delar du information med Mattermost Inc. och lär dig mer om uppgradering. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.contact_us.email_body",
-    "translation": "Matterfoss contact us request. I'm interested in learning more about creating read-only Announcement Channels.\n"
+    "translation": "Mattermost contact us request. I'm interested in learning more about creating read-only Announcement Channels.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_success.message",
@@ -5873,19 +5745,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_body",
-    "translation": "Din Matterfoss-installation har nu 200 användare. När din ansluter Matterfoss med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Matterfoss utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Matterfoss.server [Läs mer om integration med SAML 2.0] (https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml).\n\nGenom att klicka på Starta test godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Din Mattermost-installation har nu 200 användare. När din ansluter Mattermost med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Mattermost utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Mattermost.server [Läs mer om integration med SAML 2.0] (https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml).\n\nGenom att klicka på Starta test godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
-    "translation": "Väx med Matterfoss"
+    "translation": "Väx med Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "Din Matterfoss-installation har nu 200 användare. När din ansluter Matterfoss med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Matterfoss utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Matterfoss.server [Läs mer om integration med SAML 2.0] (https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml).\n\nGenom att klicka på Kontakta oss kommer du dela information med Matterfoss Inc. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Din Mattermost-installation har nu 200 användare. När din ansluter Mattermost med din organisations single sign-on tjänst kommer dina användare kunna ansluta till Mattermost utan att ange inloggningsuppgifterna igen. Vi rekommenderar att du integrerar din SAML 2.0-tjänst med din Mattermost.server [Läs mer om integration med SAML 2.0] (https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml).\n\nGenom att klicka på Kontakta oss kommer du dela information med Mattermost Inc. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
-    "translation": "Matterfoss contact us request. My team now has 200 users, and I'm considering Matterfoss Enterprise Edition.\n"
+    "translation": "Mattermost contact us request. My team now has 200 users, and I'm considering Mattermost Enterprise Edition.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_success.message",
@@ -5893,19 +5765,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_body",
-    "translation": "Din Matterfossinstallation har nu fler än 100 användare. När användarbasen växer kan kontoskapande vara tidskrävande. Vi rekommenderar att integrera din organisations Active Directory/LDAP med Matterfoss så att alla med ett konto får tillgång till Matterfoss.\n\n[Läs mer om integration med AD/LDAP](https://www.Matterfoss.com/docs-adldap/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nGenom att klicka på Starta prova-på godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Din Mattermostinstallation har nu fler än 100 användare. När användarbasen växer kan kontoskapande vara tidskrävande. Vi rekommenderar att integrera din organisations Active Directory/LDAP med Mattermost så att alla med ett konto får tillgång till Mattermost.\n\n[Läs mer om integration med AD/LDAP](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nGenom att klicka på Starta prova-på godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
-    "translation": "Väx med Matterfoss"
+    "translation": "Väx med Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "Din Matterfossinstallation har nu fler än 100 användare. När användarbasen växer kan kontoskapande vara tidskrävande. Vi rekommenderar att integrera din organisations Active Directory/LDAP med Matterfoss så att alla med ett konto får tillgång till Matterfoss.\n\n[Läs mer om integration med AD/LDAP](https://www.Matterfoss.com/docs-adldap/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nGenom att klicka på Kontakta oss kommer du dela information med Matterfoss Inc. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Din Mattermostinstallation har nu fler än 100 användare. När användarbasen växer kan kontoskapande vara tidskrävande. Vi rekommenderar att integrera din organisations Active Directory/LDAP med Mattermost så att alla med ett konto får tillgång till Mattermost.\n\n[Läs mer om integration med AD/LDAP](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nGenom att klicka på Kontakta oss kommer du dela information med Mattermost Inc. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
-    "translation": "Matterfoss contact us request. My team now has 100 users, and I'm considering Matterfoss Enterprise Edition.\n"
+    "translation": "Mattermost contact us request. My team now has 100 users, and I'm considering Mattermost Enterprise Edition.\n"
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial_notification_success.message",
@@ -5913,7 +5785,7 @@
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial.notification_body",
-    "translation": "Din Matterfossinstallation har flerfaktorsautentisering aktiverad som ger användaren möjlighet att säkra sitt konto med fler autentiseringslösningar utöver traditionellt lösenord. För att utöka säkerheten för hela installationen kan du kräva flerfaktorsiautentisering av alla anvädare.\n\n[Läs mer om flerfaktorsautentisering](https://www.Matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=multi-factor-authentication). \n\nGenom att klicka på Starta prova-på godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot mejl om produkten."
+    "translation": "Din Mattermostinstallation har flerfaktorsautentisering aktiverad som ger användaren möjlighet att säkra sitt konto med fler autentiseringslösningar utöver traditionellt lösenord. För att utöka säkerheten för hela installationen kan du kräva flerfaktorsiautentisering av alla anvädare.\n\n[Läs mer om flerfaktorsautentisering](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication). \n\nGenom att klicka på Starta prova-på godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot mejl om produkten."
   },
   {
     "id": "api.server.warn_metric.mfa.notification_title",
@@ -5921,11 +5793,11 @@
   },
   {
     "id": "api.server.warn_metric.mfa.notification_body",
-    "translation": "Din Matterfossinstallation har flerfaktorsautentisering aktiverad som ger användaren möjlighet att säkra sitt konto med fler autentiseringslösningar utöver traditionellt lösenord. För att utöka säkerheten för hela installationen kan du kräva flerfaktorsiautentisering av alla anvädare.\n\n[Läs mer om flerfaktorsautentisering](https://www.Matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=multi-factor-authentication). \n\nGenom att klicka på Kontakta oss kommer du dela information med Matterfoss Inc. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Din Mattermostinstallation har flerfaktorsautentisering aktiverad som ger användaren möjlighet att säkra sitt konto med fler autentiseringslösningar utöver traditionellt lösenord. För att utöka säkerheten för hela installationen kan du kräva flerfaktorsiautentisering av alla anvädare.\n\n[Läs mer om flerfaktorsautentisering](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication). \n\nGenom att klicka på Kontakta oss kommer du dela information med Mattermost Inc. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.mfa.contact_us.email_body",
-    "translation": "Matterfoss contact us request. I'm interested in learning more about enforcing Multi-Factor Authentication.\n"
+    "translation": "Mattermost contact us request. I'm interested in learning more about enforcing Multi-Factor Authentication.\n"
   },
   {
     "id": "api.server.warn_metric.email_us",
@@ -5937,7 +5809,7 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.start_trial.notification_body",
-    "translation": "I projekt involveras ofta personer både från din organisation och från andra. Med Gäst-konton kan externa parter bli en del av ditt Matterfoss-system och du kan ange vem de kan jobba tillsammans med och vad de kan se.\n\n[Läs mer om att tillåta gäst-konton](https://www.Matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=guest-accounts).\n\nGenom att klicka på Starta prova-på godkänner du [Matterfoss Software Evaluation Agreement](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/) och att ta emot produktmejl."
+    "translation": "I projekt involveras ofta personer både från din organisation och från andra. Med Gäst-konton kan externa parter bli en del av ditt Mattermost-system och du kan ange vem de kan jobba tillsammans med och vad de kan se.\n\n[Läs mer om att tillåta gäst-konton](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts).\n\nGenom att klicka på Starta prova-på godkänner du [Mattermost Software Evaluation Agreement](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/) och att ta emot produktmejl."
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_title",
@@ -5945,23 +5817,15 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_body",
-    "translation": "I projekt involveras ofta personer både från din organisation och från andra. Med Gäst-konton kan externa parter bli en del av ditt Matterfoss-system och du kan ange vem de kan jobba tillsammans med och vad de kan se.\n\n[Läs mer om att tillåta gäst-konton](https://www.Matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=guest-accounts).\n\nGenom att klicka på Kontakta oss kommer du dela med dig av din information med Matterfoss Inc. [Läs mer](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "I projekt involveras ofta personer både från din organisation och från andra. Med Gäst-konton kan externa parter bli en del av ditt Mattermost-system och du kan ange vem de kan jobba tillsammans med och vad de kan se.\n\n[Läs mer om att tillåta gäst-konton](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts).\n\nGenom att klicka på Kontakta oss kommer du dela med dig av din information med Mattermost Inc. [Läs mer](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.email_domain.contact_us.email_body",
-    "translation": "Matterfoss contact us request. I'm interested in learning more about using Guest Accounts.\n"
-  },
-  {
-    "id": "api.server.warn_metric.contacting_us",
-    "translation": "Kontakta oss"
-  },
-  {
-    "id": "api.server.warn_metric.contact_us",
-    "translation": "Kontakta oss"
+    "translation": "Mattermost contact us request. I'm interested in learning more about using Guest Accounts.\n"
   },
   {
     "id": "api.server.warn_metric.bot_response.start_trial_failure.message",
-    "translation": "Prova-på-licensen kunde inte hämtas. Besök https://Matterfoss.com/trial/ för att be om en testlicens."
+    "translation": "Prova-på-licensen kunde inte hämtas. Besök https://mattermost.com/trial/ för att be om en testlicens."
   },
   {
     "id": "api.post.deduplicate_create_post.failed_to_get",
@@ -5972,16 +5836,8 @@
     "translation": "Fel vid skapande av meddelande."
   },
   {
-    "id": "api.post.create_post.town_square_read_only",
-    "translation": "Kanalen är read-only. Användare med behörighet kan posta."
-  },
-  {
     "id": "api.post.create_post.root_id.app_error",
     "translation": "Ogiltig RootId-parameter."
-  },
-  {
-    "id": "api.post.create_post.parent_id.app_error",
-    "translation": "Felaktig ParentId-parameter."
   },
   {
     "id": "api.post.create_post.channel_root_id.app_error",
@@ -6030,10 +5886,6 @@
   {
     "id": "api.plugin.install.download_failed.app_error",
     "translation": "Ett fel inträffade när tillägget skulle laddas ner."
-  },
-  {
-    "id": "api.plugin.add_public_key.open.app_error",
-    "translation": "Ett fel uppstod när den publika nyckel-filen skulle öppnas."
   },
   {
     "id": "api.outgoing_webhook.disabled.app_error",
@@ -6145,19 +5997,19 @@
   },
   {
     "id": "api.marshal_error",
-    "translation": "rangeringsfel"
+    "translation": "Misslyckades att arrangera."
   },
   {
     "id": "api.license.request_trial_license.no-site-url.app_error",
-    "translation": "Kunde inte efterfråga en prova-på-licens. Konfigurera en sajt-URL under web-server-delen Matterfoss System Console."
+    "translation": "Kunde inte efterfråga en prova-på-licens. Konfigurera en sajt-URL under web-server-delen Mattermost System Console."
   },
   {
     "id": "api.license.request_trial_license.fail_get_user_count.app_error",
-    "translation": "Kunde inte få en prova-på-licens, försök igen eller kontakta support@Matterfoss.com. Kunde inte ta fram antalet registrerade användare."
+    "translation": "Kunde inte få en prova-på-licens, försök igen eller kontakta support@mattermost.com. Kunde inte ta fram antalet registrerade användare."
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "Kunde inte få en prova-på-licens. Försök igen eller kontakta support@Matterfoss.com."
+    "translation": "Kunde inte få en prova-på-licens. Försök igen eller kontakta support@mattermost.com."
   },
   {
     "id": "api.license.request_renewal_link.app_error",
@@ -6165,7 +6017,7 @@
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "Du måste acceptera Matterfoss Software Evaluation Agreement och Privacy Policy för att efterfråga en licens."
+    "translation": "Du måste acceptera Mattermost Software Evaluation Agreement och Privacy Policy för att efterfråga en licens."
   },
   {
     "id": "api.license.request-trial.bad-request",
@@ -6369,43 +6221,43 @@
   },
   {
     "id": "api.upgrade_to_enterprise_status.signature.app_error",
-    "translation": "Matterfoss kunde inte uppgradera till Enterprise Edition. Signaturen på den nedladdade filen kunde inte verifieras rätt."
+    "translation": "Mattermost kunde inte uppgradera till Enterprise Edition. Signaturen på den nedladdade filen kunde inte verifieras rätt."
   },
   {
     "id": "api.upgrade_to_enterprise_status.app_error",
-    "translation": "Matterfoss kunde inte uppgradera till Enterprise Edition."
+    "translation": "Mattermost kunde inte uppgradera till Enterprise Edition."
   },
   {
     "id": "api.upgrade_to_enterprise.system_not_supported.app_error",
-    "translation": "Matterfoss kunde inte uppgradera till Enterprise Edition. Denna funktion fungerar bara på Linux-system med x86-64-arkitektur."
+    "translation": "Mattermost kunde inte uppgradera till Enterprise Edition. Denna funktion fungerar bara på Linux-system med x86-64-arkitektur."
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user.app_error",
-    "translation": "Matterfoss kunde inte uppgradera till Enterprise Edition. Matterfoss system-användare {{.MatterfossUsername}} har inte skrivrättigheter till nödvändiga programfiler. En systemadministratör kan uppdatera filrättigheterna genom att köra kommandot nedan på den server där Matterfoss är installerat:\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\n```\n\nEfter att filrättigheterna är ändrade, försök uppgradera Matterfoss igen. När Matterfoss är uppgraderad och omstartad, kom ihåg att återställa filrättigheterna med:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
+    "translation": "Mattermost kunde inte uppgradera till Enterprise Edition. Mattermost system-användare {{.MattermostUsername}} har inte skrivrättigheter till nödvändiga programfiler. En systemadministratör kan uppdatera filrättigheterna genom att köra kommandot nedan på den server där Mattermost är installerat:\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\n```\n\nEfter att filrättigheterna är ändrade, försök uppgradera Mattermost igen. När Mattermost är uppgraderad och omstartad, kom ihåg att återställa filrättigheterna med:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user-and-permission.app_error",
-    "translation": "Matterfoss kunde inte uppgradera till Enterprise Edition. Matterfoss system-användare {{.MatterfossUsername}} har inte skrivrättigheter till nödvändiga programfiler. En systemadministratör kan uppdatera filrättigheterna genom att köra kommandot nedan på den server där Matterfoss är installerat:\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nEfter att filrättigheterna är ändrade, försök uppgradera Matterfoss igen. När Matterfoss är uppgraderad och omstartad, kom ihåg att återställa filrättigheterna med:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "Mattermost kunde inte uppgradera till Enterprise Edition. Mattermost system-användare {{.MattermostUsername}} har inte skrivrättigheter till nödvändiga programfiler. En systemadministratör kan uppdatera filrättigheterna genom att köra kommandot nedan på den server där Mattermost är installerat:\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nEfter att filrättigheterna är ändrade, försök uppgradera Mattermost igen. När Mattermost är uppgraderad och omstartad, kom ihåg att återställa filrättigheterna med:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-permission.app_error",
-    "translation": "Matterfoss kunde inte uppgradera till Enterprise Edition. Matterfoss system-användare {{.MatterfossUsername}} har inte skrivrättigheter till nödvändiga programfiler. En systemadministratör kan uppdatera filrättigheterna genom att köra kommandot nedan på den server där Matterfoss är installerat:\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nEfter att filrättigheterna är ändrade, försök uppgradera Matterfoss igen. När Matterfoss är uppgraderad och omstartad, kom ihåg att återställa filrättigheterna med:\n\n```\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "Mattermost kunde inte uppgradera till Enterprise Edition. Mattermost system-användare {{.MattermostUsername}} har inte skrivrättigheter till nödvändiga programfiler. En systemadministratör kan uppdatera filrättigheterna genom att köra kommandot nedan på den server där Mattermost är installerat:\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nEfter att filrättigheterna är ändrade, försök uppgradera Mattermost igen. När Mattermost är uppgraderad och omstartad, kom ihåg att återställa filrättigheterna med:\n\n```\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.generic_error.app_error",
-    "translation": "Matterfoss kunde inte uppgradera till Matterfoss Enterprise Edition."
+    "translation": "Mattermost kunde inte uppgradera till Mattermost Enterprise Edition."
   },
   {
     "id": "api.upgrade_to_enterprise.app_error",
-    "translation": "En uppgradering till Matterfoss Enterprise Edition är redan startad."
+    "translation": "En uppgradering till Mattermost Enterprise Edition är redan startad."
   },
   {
     "id": "api.upgrade_to_enterprise.already-enterprise.app_error",
-    "translation": "Du kan inte uppgradera då du redan kör Matterfoss Enterprise Edition."
+    "translation": "Du kan inte uppgradera då du redan kör Mattermost Enterprise Edition."
   },
   {
     "id": "api.upgrade_to_enterprise.already-done.app_error",
-    "translation": "Du har redan uppgraderat till Matterfoss Enterprise Edition. Starta om servern för att slutföra uppgraderingen."
+    "translation": "Du har redan uppgraderat till Mattermost Enterprise Edition. Starta om servern för att slutföra uppgraderingen."
   },
   {
     "id": "api.templates.welcome_subject",
@@ -6417,7 +6269,7 @@
   },
   {
     "id": "api.templates.welcome_body.info",
-    "translation": "Din mejladress användes för att skapa ett konto hos Matterfoss."
+    "translation": "Din mejladress användes för att skapa ett konto hos Mattermost."
   },
   {
     "id": "api.templates.welcome_body.button",
@@ -6429,11 +6281,11 @@
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Matterfoss Kontakta oss-begäran"
+    "translation": "Mattermost Kontakta oss-begäran"
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "Om du har fler frågor, kontakta support@Matterfoss.com"
+    "translation": "Om du har fler frågor, kontakta support@mattermost.com"
   },
   {
     "id": "api.templates.warn_metric_ack.body.site_url_header",
@@ -6465,7 +6317,7 @@
   },
   {
     "id": "api.templates.verify_body.info",
-    "translation": "Denna mejladress användes för att skapa ett konto hos Matterfoss."
+    "translation": "Denna mejladress användes för att skapa ett konto hos Mattermost."
   },
   {
     "id": "api.templates.verify_body.button",
@@ -6496,7 +6348,7 @@
     "translation": "Ett access_token lades till i ditt konto på {{.SiteURL}}. Det kan användas för att nå {{.SiteName}} med ditt konto."
   },
   {
-    "id": "api.templates.upgrade_Matterfoss_cloud",
+    "id": "api.templates.upgrade_mattermost_cloud",
     "translation": "Uppgradera"
   },
   {
@@ -6529,7 +6381,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "Matterfoss Enterprise-licensen har inaktiverats."
+    "translation": "Mattermost Enterprise-licensen har inaktiverats."
   },
   {
     "id": "api.templates.remove_expired_license.body.title",
@@ -6828,7 +6680,7 @@
   },
   {
     "id": "api.command_settings.desc",
-    "translation": "Öppna kontoinställningar"
+    "translation": "Öppna inställningar"
   },
   {
     "id": "api.command_search.unsupported.app_error",
@@ -6932,7 +6784,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "Hittar ej den utpekade kanalen. Använd [channel handle](https://about.Matterfoss.com/default-channel-handle-documentation) för att identifiera kanaler."
+    "translation": "Hittar ej den utpekade kanalen. Använd [channel handle](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) för att identifiera kanaler."
   },
   {
     "id": "api.command_mute.name",
@@ -6944,7 +6796,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "Hittar ej kanalen {{.Channel}}. Använd [channel handle](https://about.Matterfoss.com/default-channel-handle-documentation) för att identifiera kanaler."
+    "translation": "Hittar ej kanalen {{.Channel}}. Använd [channel handle](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) för att identifiera kanaler."
   },
   {
     "id": "api.command_mute.desc",
@@ -6996,7 +6848,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Logga ut från Matterfoss"
+    "translation": "Logga ut från Mattermost"
   },
   {
     "id": "api.command_leave.name",
@@ -7096,7 +6948,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "Hittar ej kanalen {{.Channel}}. Använd [channel handle](https://about.Matterfoss.com/default-channel-handle-documentation) för att identifiera kanaler."
+    "translation": "Hittar ej kanalen {{.Channel}}. Använd [channel handle](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) för att identifiera kanaler."
   },
   {
     "id": "api.command_invite.channel.app_error",
@@ -7108,7 +6960,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Öppna Matterfoss hjälp sida"
+    "translation": "Öppna Mattermost hjälp sida"
   },
   {
     "id": "api.command_groupmsg.permission.app_error",
@@ -7383,7 +7235,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "Tack för att du kontaktar Matterfoss. Vi återkommer snart till dig."
+    "translation": "Tack för att du kontaktar Mattermost. Vi återkommer snart till dig."
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -7395,7 +7247,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Matterfoss Kontakta oss-förfrågan"
+    "translation": "Mattermost Kontakta oss-förfrågan"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -7407,7 +7259,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "Om du har fler frågor kan du kontakta support@Matterfoss.com"
+    "translation": "Om du har fler frågor kan du kontakta support@mattermost.com"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -7472,10 +7324,6 @@
   {
     "id": "api.restricted_system_admin",
     "translation": "Denna åtgärd är förbjuden för en begränsad systemadministratör."
-  },
-  {
-    "id": "api.reaction.town_square_read_only",
-    "translation": "Det går inte att kommentera meddelanden i en read-only kanal."
   },
   {
     "id": "api.reaction.save_reaction.user_id.app_error",
@@ -7598,10 +7446,6 @@
     "translation": "Kunde inte tolka förfrågan."
   },
   {
-    "id": "api.post.save_is_pinned_post.town_square_read_only",
-    "translation": "Kanalen är endast läsbar. Bara användare med behörighet kan posta."
-  },
-  {
     "id": "api.post.patch_post.can_not_update_post_in_deleted.error",
     "translation": "Går ej att uppdatera ett meddelande i en raderad kanal."
   },
@@ -7657,7 +7501,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "Skicka en e-postinbjudan till din Matterfoss grupp"
+    "translation": "Skicka en e-postinbjudan till din Mattermost grupp"
   },
   {
     "id": "api.command.execute_command.start.app_error",
@@ -7928,14 +7772,6 @@
     "translation": "Måste använda createDirectChannel API tjänst för direktmeddelande skapande av kanaler."
   },
   {
-    "id": "api.channel.convert_channel_to_private.private_channel_error",
-    "translation": "Kanalen är redan konverterad till en privat kanal."
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.default_channel_error",
-    "translation": "Denna standardkanal kan inte konverteras till en privat kanal."
-  },
-  {
     "id": "api.channel.channel_member_counts_by_group.license.error",
     "translation": "Din licens tillåter inte användande av grupper"
   },
@@ -7977,39 +7813,7 @@
   },
   {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "Lägg till mig i grupper och kanaler som du vill att jag ska interagera i. För att göra detta, använd webbläsare eller Matterfoss skrivbordsapp."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.too_large.app_error",
-    "translation": "Gick inte att ladda upp ikonbild. Filen är för stor."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.parse.app_error",
-    "translation": "Gick inte att tolka multipart-formuläret."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.open.app_error",
-    "translation": "Kunde inte öppna bildfilen."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.no_file.app_error",
-    "translation": "Inga filer under 'image' i förfrågan."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.array.app_error",
-    "translation": "Tom matris för 'bild' i förfrågan."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.app_error",
-    "translation": "Kunde inte ladda upp ikonbilden."
-  },
-  {
-    "id": "api.bot.get_bot_icon_image.read.app_error",
-    "translation": "Kan ej läsa filen för ikonbild."
-  },
-  {
-    "id": "api.bot.delete_bot_icon_image.app_error",
-    "translation": "Kunde inte radera ikonbilden."
+    "translation": "Lägg till mig i grupper och kanaler som du vill att jag ska interagera i. För att göra detta, använd webbläsare eller Mattermost skrivbordsapp."
   },
   {
     "id": "api.bot.create_disabled",
@@ -8041,7 +7845,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Matterfoss - Testar epostinställningar"
+    "translation": "Mattermost - Testar epostinställningar"
   },
   {
     "id": "api.admin.test_email.reenter_password",
@@ -8053,7 +7857,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "Det verkar som om Matterfoss e-postinställningar är korrekta!"
+    "translation": "Det verkar som om Mattermost e-postinställningar är korrekta!"
   },
   {
     "id": "api.admin.saml.set_certificate_from_metadata.missing_content_type.app_error",
@@ -8401,7 +8205,7 @@
   },
   {
     "id": "api.templates.upgrade_request_info4",
-    "translation": "Inbjudningar kan inte skickas eftersom ditt workspace har nått användargränsen för den kostnadsfria av Matterfoss Cloud. Uppgradera nu för att tillåta fler användare att ansluta till ditt workspace."
+    "translation": "Inbjudningar kan inte skickas eftersom ditt workspace har nått användargränsen för den kostnadsfria av Mattermost Cloud. Uppgradera nu för att tillåta fler användare att ansluta till ditt workspace."
   },
   {
     "id": "api.templates.at_limit_info5",
@@ -8420,16 +8224,12 @@
     "translation": "Inga mejl blev skickade"
   },
   {
-    "id": "api.user.send_upgrade_request_email.error",
-    "translation": "Det gick inte att skicka mejl till administratören om uppnådd användarnivå"
-  },
-  {
     "id": "api.templates.upgrade_request_title",
     "translation": "{{ .UserName }} vill bjuda in användare till ditt workspace"
   },
   {
     "id": "api.templates.upgrade_request_subject",
-    "translation": "Begäran om uppgradering av workspace från Matterfoss-användare"
+    "translation": "Begäran om uppgradering av workspace från Mattermost-användare"
   },
   {
     "id": "api.custom_status.recent_custom_statuses.delete.app_error",
@@ -8457,11 +8257,11 @@
   },
   {
     "id": "api.templates.upgrade_request_info4_2",
-    "translation": "Någon försökte nyligen gå med i er arbetsyta men kunde inte fullfölja pga att arbetsytan har nått gränsen för den kostnadsfria versionen av Matterfoss cloud. Uppgradera nu för att tillåta fler användare att gå med i er arbetsyta."
+    "translation": "Någon försökte nyligen gå med i er arbetsyta men kunde inte fullfölja pga att arbetsytan har nått gränsen för den kostnadsfria versionen av Mattermost cloud. Uppgradera nu för att tillåta fler användare att gå med i er arbetsyta."
   },
   {
     "id": "api.templates.email_footer_v2",
-    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "api.templates.welcome_body.serverURL",
@@ -8565,7 +8365,7 @@
   },
   {
     "id": "api.templates.invite_body_footer.title",
-    "translation": "Vad är Matterfoss?"
+    "translation": "Vad är Mattermost?"
   },
   {
     "id": "api.templates.invite_body_footer.learn_more",
@@ -8573,11 +8373,11 @@
   },
   {
     "id": "api.templates.invite_body_footer.info",
-    "translation": "Matterfoss är en flexibel meddelandeplattform byggd med öppen källkod som möjliggör säkert samarbete i temaet."
+    "translation": "Mattermost är en flexibel meddelandeplattform byggd med öppen källkod som möjliggör säkert samarbete i temaet."
   },
   {
     "id": "api.templates.invite_body.subTitle",
-    "translation": "Börja samarbeta med ditt team med Matterfoss"
+    "translation": "Börja samarbeta med ditt team med Mattermost"
   },
   {
     "id": "api.templates.cloud_welcome_email.title",
@@ -8601,7 +8401,7 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.signin_sub_info2",
-    "translation": "för bästa upplevelsen på PC, Mac, iOS och Android."
+    "translation": "för bästa upplevelsen på Windows, Linux, Mac, iOS och Android."
   },
   {
     "id": "api.templates.cloud_welcome_email.signin_sub_info",
@@ -8629,11 +8429,11 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.download_mm_info",
-    "translation": "Ladda ner Matterfoss App"
+    "translation": "Ladda ner Mattermost App"
   },
   {
     "id": "api.templates.cloud_welcome_email.button",
-    "translation": "Öppna Matterfoss"
+    "translation": "Öppna Mattermost"
   },
   {
     "id": "api.templates.cloud_welcome_email.app_market_place",
@@ -8641,7 +8441,7 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.add_apps_sub_info",
-    "translation": "Effektivisera ditt arbete med verktyg som Github, Google kalender chrome. Utforska alla integrationer vi har på vår"
+    "translation": "Effektivisera ditt arbete med verktyg som Github, Jira och Zoom. Utforska alla integrationer vi har på vår"
   },
   {
     "id": "model.user.is_valid.marshal.app_error",
@@ -8689,7 +8489,7 @@
   },
   {
     "id": "api.command_remote.remove_remote_id.help",
-    "translation": "Id på säker anslutning att ta bort"
+    "translation": "Id på säker anslutning att ta bort."
   },
   {
     "id": "api.command_remote.remove_remote.error",
@@ -8737,7 +8537,7 @@
   },
   {
     "id": "api.command_remote.invite_summary",
-    "translation": "Skicka följande AES256-bit krypterade inbjudan till den extern Matterfossinstansens administratören tillsammans med lösenordet. De använder sedan slash-kommandot `{{.Command}}` för att acceptera inbjudan.\n\n```\n{{.Invitation}}\n```\n\n**Säkerställ att den extern Matterfossinstansens kan nå ditt kluster på** {{.SiteURL}}"
+    "translation": "Skicka följande AES256-bit krypterade inbjudan till den extern Mattermostinstansens administratören tillsammans med lösenordet. De använder sedan slash-kommandot `{{.Command}}` för att acceptera inbjudan.\n\n```\n{{.Invitation}}\n```\n\n**Säkerställ att den extern Mattermostinstansens kan nå ditt kluster på** {{.SiteURL}}"
   },
   {
     "id": "api.command_remote.invite_password.hint",
@@ -8781,7 +8581,7 @@
   },
   {
     "id": "api.command_remote.desc",
-    "translation": "Bjud in till en säker anslutning för kommunikation mellan Matterfossinstanser."
+    "translation": "Bjud in till en säker anslutning för kommunikation mellan Mattermostinstanser."
   },
   {
     "id": "api.command_remote.decode_invitation.error",
@@ -8805,7 +8605,7 @@
   },
   {
     "id": "api.command_remote.accept.help",
-    "translation": "Acceptera en inbjudan från en extern Matterfossinstans"
+    "translation": "Acceptera en inbjudan från en extern Mattermostinstans"
   },
   {
     "id": "api.command_share.not_shared_channel_unshare",
@@ -8829,7 +8629,7 @@
   },
   {
     "id": "api.command_share.invite_remote.help",
-    "translation": "Bjuder in en extern Matterfossinstans till den aktuella delade kanalen"
+    "translation": "Bjuder in en extern Mattermostinstans till den aktuella delade kanalen"
   },
   {
     "id": "api.command_share.invitation_sent",
@@ -8853,7 +8653,7 @@
   },
   {
     "id": "api.command_share.desc",
-    "translation": "Delar denna kanal med en extern Matterfossinstans."
+    "translation": "Delar denna kanal med en extern Mattermostinstans."
   },
   {
     "id": "api.command_share.could_not_uninvite.error",
@@ -9052,20 +8852,16 @@
     "translation": "Det gick inte att hämta statusen för det första administratörsbesöket på marknadsplatsen från butiken."
   },
   {
-    "id": "api.user.cloud_trial_ending_email.error",
-    "translation": "Det gick inte att skicka mejl med information om att testperioden är på väg att ta slut"
-  },
-  {
     "id": "api.templates.cloud_trial_ending_email.title",
     "translation": "Din kostnadsfria testperiod på 14 dagar slutar snart"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subtitle",
-    "translation": "{{.Name}}, din 14 dagars testperiod av Matterfoss Cloud Professional avslutas om tre dagar, den {{.TrialEnd}}. Lägg till din betalinformation för att säkerställa att ditt team kan fortsätta nyttja funktionerna i Cloud Professional."
+    "translation": "{{.Name}}, din 14 dagars testperiod av Mattermost avslutas om tre dagar, den {{.TrialEnd}}. Lägg till din betalinformation för att säkerställa att ditt team kan fortsätta nyttja funktionerna i Mattermost Cloud."
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subject",
-    "translation": "Matterfoss cloud testperiod avslutas"
+    "translation": "Mattermost cloud testperiod avslutas"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.add_payment_method",
@@ -9096,32 +8892,20 @@
     "translation": "Kunde inte skicka automatisk svar från användaren."
   },
   {
-    "id": "api.user.cloud_trial_ended_email.error",
-    "translation": "Misslyckades att skicka mejl om att testperioden avslutas"
-  },
-  {
     "id": "api.templates.cloud_trial_ended_email.title",
-    "translation": "Din kostnadsfria testperiod av Matterfoss avslutas idag"
+    "translation": "Din kostnadsfria testperiod av Mattermost avslutas idag"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subtitle",
-    "translation": "{{.Name}}, din 14-dagars kostnadsfria testperiod av Matterfoss Cloud Professional avslutas idag, {{.TodayDate}}. Uppdatera din betalinformation för att säkerställa att ditt team kan fortsätta nyttja funktionerna i Cloud Professional."
+    "translation": "{{.Name}}, din 14-dagars kostnadsfria testperiod av Mattermost Cloud Enterprise avslutas idag, {{.TodayDate}}. Uppdatera din betalinformation för att säkerställa att ditt team kan fortsätta nyttja funktionerna i Cloud Enterprise."
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subject",
-    "translation": "Din testperiod av Matterfoss Cloud är slut"
+    "translation": "Din testperiod av Mattermost Cloud är slut"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.start_subscription",
     "translation": "Börja din prenumeration"
-  },
-  {
-    "id": "api.server.warn_metric.support_email_not_configured.start_trial.notification_body",
-    "translation": "Gå till **Systemkonsolen > Sajtkonfiguration > Anpassa** för att ställa in [Support mejl](https://docs.mattermost.com/administration/config-settings.html#support-email) till organisationens interna e-postadress för it-support för återkoppling från slutanvändare, e-postmeddelanden och supportförfrågningar."
-  },
-  {
-    "id": "api.server.warn_metric.support_email_not_configured.notification_title",
-    "translation": "Konfigurera mejladress för support"
   },
   {
     "id": "api.command_channel_purpose.update_channel.max_length",
@@ -9134,8 +8918,8 @@
   {
     "id": "api.email_batching.send_batched_email_notification.title",
     "translation": {
-      "one": "{{ .SenderName }} skickade ett nytt meddelande",
-      "other": "{{ .SenderName }} och {{.Count}} andra har skickat nya meddelanden"
+      "one": "Du har ett nytt meddelande",
+      "other": "Du har nya meddelanden"
     }
   },
   {
@@ -9156,11 +8940,11 @@
   },
   {
     "id": "app.notification.footer.infoLogin",
-    "translation": "Logga in på Matterfoss"
+    "translation": "Logga in på Mattermost"
   },
   {
     "id": "app.notification.footer.info",
-    "translation": " och gå till Kontoinställningar > Notifieringar"
+    "translation": " och gå till Inställningar > Notifieringar"
   },
   {
     "id": "app.notification.body.mention.title",
@@ -9192,7 +8976,7 @@
   },
   {
     "id": "api.email_batching.send_batched_email_notification.button",
-    "translation": "Öppna Matterfoss"
+    "translation": "Öppna Mattermost"
   },
   {
     "id": "api.oauth.click_redirect",
@@ -9213,5 +8997,253 @@
   {
     "id": "api.config.patch_config.diff.app_error",
     "translation": "Kunde inte identifiera konfigurationsförändringar"
+  },
+  {
+    "id": "app.valid_password_generic.app_error",
+    "translation": "Lösenordet är inte giltigt"
+  },
+  {
+    "id": "brand.save_brand_image.check_image_limits.app_error",
+    "translation": "Kontroll av bildstorlek misslyckades. Upplösningen är för hög."
+  },
+  {
+    "id": "api.user.upload_profile_user.check_image_limits.app_error",
+    "translation": "Kontroll av bildstorlek misslyckades. Upplösningen är för hög."
+  },
+  {
+    "id": "api.team.set_team_icon.check_image_limits.app_error",
+    "translation": "Kontroll av bildstorlek misslyckades. Upplösningen är för hög."
+  },
+  {
+    "id": "api.user.update_active.cloud_at_or_over_limit_check_overcapacity",
+    "translation": "Det går inte att aktivera fler användare eftersom du nått gränsen för ditt Mattermost Cloud-konto."
+  },
+  {
+    "id": "api.user.update_active.cloud_at_limit_check_error",
+    "translation": "Det gick inte att kontrollera antalet användare i din Mattermost cloud-instans."
+  },
+  {
+    "id": "app.bot.get_warn_metrics_bot.empty_admin_list.app_error",
+    "translation": "Listan med administratörer är tom."
+  },
+  {
+    "id": "app.bot.get_system_bot.empty_admin_list.app_error",
+    "translation": "Listan med administratörer är tom."
+  },
+  {
+    "id": "app.system.system_bot.bot_displayname",
+    "translation": "System"
+  },
+  {
+    "id": "app.user.get_thread_membership_for_user.not_found",
+    "translation": "Användarens trådmedlemskap finns inte"
+  },
+  {
+    "id": "app.user.get_thread_membership_for_user.app_error",
+    "translation": "Kunde inte få fram användarens trådmedlemskap"
+  },
+  {
+    "id": "api.license.request-trial.can-start-trial.not-allowed",
+    "translation": "Licensnyckeln för testperioden av Mattermost Enterprise Edition är inte längre giltig. [Kontakta Sales team] (https://mattermost.com/contact-us/) om du vill utöka testperionden."
+  },
+  {
+    "id": "api.license.request-trial.can-start-trial.error",
+    "translation": "Kunde inte kontrollera om en testperiod kan startas"
+  },
+  {
+    "id": "ent.data_retention.run_failed.error",
+    "translation": "Datagallringsjobbet misslyckades."
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens_parse.error",
+    "translation": "Det går inte att analysera token för att göra mejlverifieringstoken ogiltiga"
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens_delete.error",
+    "translation": "Det går inte att ta bort token för att göra mejlverifieringstoken ogiltiga"
+  },
+  {
+    "id": "api.server.license_up_for_renewal.error_generating_link",
+    "translation": "Misslyckades med att generera länken för licensförnyelse"
+  },
+  {
+    "id": "api.license.upgrade_needed.app_error",
+    "translation": "Den här funktionen kräver en uppgradering till Enterprise Edition."
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens.error",
+    "translation": "Det går inte att hämta tokens efter typ för att göra mejlverifieringstoken ogiltiga"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_title",
+    "translation": "Din Mattermost-prenumeration ska förnyas"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subtitle_two",
+    "translation": "Logga in på ditt kundkonto för att förnya"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subtitle",
+    "translation": "{{.UserName}}, din prenumeration löper ut om {{.Days}} dagar. Vi hoppas att du uppskattar det flexibla och säkra teamsamarbete som Mattermost möjliggör. Förnya prenumerationen för att ditt team ska kunna fortsätta njuta av funktionerna."
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subject",
+    "translation": "Din licens ska förnyas"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_renew_now",
+    "translation": "Förnya nu"
+  },
+  {
+    "id": "api.server.license_up_for_renewal.error_sending_email",
+    "translation": "Misslyckades med att skicka e-postmeddelanden för förnyelse av licensen"
+  },
+  {
+    "id": "app.user.store_is_empty.app_error",
+    "translation": "Kontrollen av tomt användarlagring misslyckades."
+  },
+  {
+    "id": "app.notification.body.thread.title",
+    "translation": "{{.SenderName}} svarade i en tråd"
+  },
+  {
+    "id": "api.push_notification.title.collapsed_threads",
+    "translation": "Svara i {{.channelName}}"
+  },
+  {
+    "id": "api.post.send_notification_and_forget.push_comment_on_crt_thread",
+    "translation": " svarade i en tråd du följer."
+  },
+  {
+    "id": "model.config.is_valid.collapsed_threads.autofollow.app_error",
+    "translation": "ThreadAutoFollow måste aktiveras för att CollapsedThreads ska vara tillgängligt"
+  },
+  {
+    "id": "api.config.reload_config.app_error",
+    "translation": "Misslyckades med att ladda om konfigurationen."
+  },
+  {
+    "id": "app.post.marshal.app_error",
+    "translation": "Misslyckades att arrangera meddelandet."
+  },
+  {
+    "id": "api.unmarshal_error",
+    "translation": "Misslyckades att återskapa."
+  },
+  {
+    "id": "app.notification.body.thread_gm.subTitle",
+    "translation": "Medan du var frånvarande, {{.SenderName}} svarade i en tråd i din grupp."
+  },
+  {
+    "id": "app.notification.body.thread_dm.subTitle",
+    "translation": "Medan du var frånvarande, {{.SenderName}} svarade i en tråd bland dina direktmeddelanden."
+  },
+  {
+    "id": "app.notification.body.thread_channel_full.subTitle",
+    "translation": "Medan du var frånvarande, {{.SenderName}} svarade i en tråd du följer i {{.ChannelName}}."
+  },
+  {
+    "id": "app.notification.body.thread_channel.subTitle",
+    "translation": "Medan du var frånvarande, {{.SenderName}} svarade i en tråd du följer."
+  },
+  {
+    "id": "api.push_notification.title.collapsed_threads_dm",
+    "translation": "Svarade i ett direktmeddelande"
+  },
+  {
+    "id": "api.post.send_notification_and_forget.push_comment_on_crt_thread_dm",
+    "translation": " svarade i en tråd."
+  },
+  {
+    "id": "app.import.bulk_import.process_attachments.error",
+    "translation": "Fel vid bulkimport av bifogade filer."
+  },
+  {
+    "id": "model.session.is_valid.user_id.app_error",
+    "translation": "Ogiltigt UserId-fält för sessionen."
+  },
+  {
+    "id": "model.session.is_valid.id.app_error",
+    "translation": "Ogiltigt Id-fält för sessionen."
+  },
+  {
+    "id": "model.session.is_valid.create_at.app_error",
+    "translation": "Ogiltigt CreateAt-fält för sessionen."
+  },
+  {
+    "id": "model.user.is_valid.roles_limit.app_error",
+    "translation": "Ogiltig användarroll som är längre än {{.Limit}} tecken."
+  },
+  {
+    "id": "model.team_member.is_valid.roles_limit.app_error",
+    "translation": "Ogiltig team-medlemsroll som är längre än {{.Limit}} tecken."
+  },
+  {
+    "id": "model.session.is_valid.roles_limit.app_error",
+    "translation": "Ogiltig sessionsroll som är längre än {{.Limit}} tecken."
+  },
+  {
+    "id": "model.channel_member.is_valid.roles_limit.app_error",
+    "translation": "Ogiltig kanalmedlemsroll som är längre än {{.Limit}} tecken."
+  },
+  {
+    "id": "api.user.create_user.bad_token_email_data.app_error",
+    "translation": "Mejladressen i tokenet stämmer inte med mejladressen i användardata."
+  },
+  {
+    "id": "ent.elasticsearch.getAllTeamMembers.error",
+    "translation": "Misslyckades att hämta alla teammedlemmar"
+  },
+  {
+    "id": "ent.elasticsearch.getAllChannelMembers.error",
+    "translation": "Misslyckades att hämta alla kanalmedlemmar"
+  },
+  {
+    "id": "app.role.get_all.app_error",
+    "translation": "Kunde inte hämta alla roller."
+  },
+  {
+    "id": "api.custom_status.set_custom_statuses.update.app_error",
+    "translation": "Misslyckades att uppdatera anpassad status. Lägg till emoij och/eller egen statustext."
+  },
+  {
+    "id": "app.user.get_thread_count_for_user.app_error",
+    "translation": "Det gick inte att ta fram användarens antal trådar."
+  },
+  {
+    "id": "app.session.extend_session_expiry.app_error",
+    "translation": "Kunde inte förlänga sessionens längd"
+  },
+  {
+    "id": "api.templates.invite_body.title.reminder",
+    "translation": "Påminnelse"
+  },
+  {
+    "id": "api.user.view_archived_channels.get_users_in_channel.app_error",
+    "translation": "Det går inte att hämta användare från en arkiverad kanal"
+  },
+  {
+    "id": "api.post.posts_by_ids.invalid_body.request_error",
+    "translation": "Antalet mottagna inläggs-ID:n har överskridit den maximala storleken {{.MaxLength}}"
+  },
+  {
+    "id": "api.user.view_archived_channels.get_posts_for_channel.app_error",
+    "translation": "Det går inte att hämta inlägg från en arkiverad kanal"
+  },
+  {
+    "id": "api.license.request_renewal_link.cannot_renew_on_cws",
+    "translation": "Det går inte att förnya licensen via portalen"
+  },
+  {
+    "id": "api.user.authorize_oauth_user.saml_response_too_long.app_error",
+    "translation": "SAML-svaret är för långt"
+  },
+  {
+    "id": "app.system.complete_onboarding_request.no_first_user",
+    "translation": "Onboarding kan bara slutföras av systemadministratören."
+  },
+  {
+    "id": "app.system.complete_onboarding_request.app_error",
+    "translation": "Misslyckades att tolka onboarding-anropet."
   }
 ]

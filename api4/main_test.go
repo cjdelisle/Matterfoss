@@ -7,8 +7,7 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 var replicaFlag bool
@@ -24,8 +23,6 @@ func TestMain(m *testing.M) {
 		EnableResources: true,
 		WithReadReplica: replicaFlag,
 	}
-
-	mlog.DisableZap()
 
 	mainHelper = testlib.NewMainHelperWithOptions(&options)
 	defer mainHelper.Close()

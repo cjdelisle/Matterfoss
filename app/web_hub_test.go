@@ -15,9 +15,11 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/i18n"
-	"github.com/cjdelisle/matterfoss-server/v5/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/app/users"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 func dummyWebsocketHandler(t *testing.T) http.HandlerFunc {
@@ -65,7 +67,7 @@ func TestHubStopWithMultipleConnections(t *testing.T) {
 	s := httptest.NewServer(dummyWebsocketHandler(t))
 	defer s.Close()
 
-	th.App.HubStart()
+	th.Server.HubStart()
 	wc1 := registerDummyWebConn(t, th.App, s.Listener.Addr(), th.BasicUser.Id)
 	wc2 := registerDummyWebConn(t, th.App, s.Listener.Addr(), th.BasicUser.Id)
 	wc3 := registerDummyWebConn(t, th.App, s.Listener.Addr(), th.BasicUser.Id)
@@ -83,12 +85,12 @@ func TestHubStopRaceCondition(t *testing.T) {
 	// So we just use this quick hack for the test.
 	s := httptest.NewServer(dummyWebsocketHandler(t))
 
-	th.App.HubStart()
+	th.Server.HubStart()
 	wc1 := registerDummyWebConn(t, th.App, s.Listener.Addr(), th.BasicUser.Id)
 	defer wc1.Close()
 
 	hub := th.App.Srv().hubs[0]
-	th.App.HubStop()
+	th.Server.HubStop()
 
 	done := make(chan bool)
 	go func() {
@@ -148,15 +150,30 @@ func TestHubSessionRevokeRace(t *testing.T) {
 	mockSessionStore.On("Remove", "id1").Return(nil)
 
 	mockStatusStore := mocks.StatusStore{}
-	mockStatusStore.On("Get", "user1").Return(&model.Status{UserId: "user1", Status: model.STATUS_ONLINE}, nil)
+	mockStatusStore.On("Get", "user1").Return(&model.Status{UserId: "user1", Status: model.StatusOnline}, nil)
 	mockStatusStore.On("UpdateLastActivityAt", "user1", mock.Anything).Return(nil)
 	mockStatusStore.On("SaveOrUpdate", mock.AnythingOfType("*model.Status")).Return(nil)
 
+	mockOAuthStore := mocks.OAuthStore{}
 	mockStore.On("Session").Return(&mockSessionStore)
+	mockStore.On("OAuth").Return(&mockOAuthStore)
 	mockStore.On("Status").Return(&mockStatusStore)
 	mockStore.On("User").Return(&mockUserStore)
 	mockStore.On("Post").Return(&mockPostStore)
 	mockStore.On("System").Return(&mockSystemStore)
+	mockStore.On("GetDBSchemaVersion").Return(1, nil)
+
+	userService, err := users.New(users.ServiceConfig{
+		UserStore:    &mockUserStore,
+		SessionStore: &mockSessionStore,
+		OAuthStore:   &mockOAuthStore,
+		ConfigFn:     th.App.ch.srv.Config,
+		Metrics:      th.App.Metrics(),
+		Cluster:      th.App.Cluster(),
+		LicenseFn:    th.App.ch.srv.License,
+	})
+	require.NoError(t, err)
+	th.App.ch.srv.userService = userService
 
 	// This needs to be false for the condition to trigger
 	th.App.UpdateConfig(func(cfg *model.Config) {
@@ -174,7 +191,7 @@ func TestHubSessionRevokeRace(t *testing.T) {
 	time.Sleep(time.Second)
 	// We override the LastActivityAt which happens in NewWebConn.
 	// This is needed to call RevokeSessionById which triggers the race.
-	th.App.AddSessionToCache(sess1)
+	th.App.ch.srv.userService.AddSessionToCache(sess1)
 
 	go func() {
 		for i := 0; i <= broadcastQueueSize; i++ {
@@ -301,10 +318,6 @@ func TestHubConnIndexInactive(t *testing.T) {
 	connIndex.Add(wc2)
 	connIndex.Add(wc3)
 
-	assert.Nil(t, connIndex.GetInactiveByConnectionID(wc2.UserId, "conn2"))
-	assert.NotNil(t, connIndex.GetInactiveByConnectionID(wc2.UserId, "conn3"))
-	assert.Nil(t, connIndex.GetInactiveByConnectionID(wc1.UserId, "conn3"))
-
 	assert.Nil(t, connIndex.RemoveInactiveByConnectionID(wc2.UserId, "conn2"))
 	assert.NotNil(t, connIndex.RemoveInactiveByConnectionID(wc2.UserId, "conn3"))
 	assert.Nil(t, connIndex.RemoveInactiveByConnectionID(wc1.UserId, "conn3"))
@@ -325,6 +338,40 @@ func TestHubConnIndexInactive(t *testing.T) {
 	assert.Len(t, connIndex.All(), 2)
 }
 
+func TestReliableWebSocketSend(t *testing.T) {
+	testCluster := &testlib.FakeClusterInterface{}
+
+	th := SetupWithClusterMock(t, testCluster)
+	defer th.TearDown()
+
+	ev := model.NewWebSocketEvent("test_unreliable_event", "", "", "", nil)
+	ev = ev.SetBroadcast(&model.WebsocketBroadcast{})
+	th.App.Publish(ev)
+	ev2 := model.NewWebSocketEvent("test_reliable_event", "", "", "", nil)
+	ev2 = ev2.SetBroadcast(&model.WebsocketBroadcast{
+		ReliableClusterSend: true,
+	})
+	th.App.Publish(ev2)
+
+	messages := testCluster.GetMessages()
+
+	evJSON, err := ev.ToJSON()
+	require.NoError(t, err)
+	ev2JSON, err := ev2.ToJSON()
+	require.NoError(t, err)
+
+	require.Contains(t, messages, &model.ClusterMessage{
+		Event:    model.ClusterEventPublish,
+		Data:     evJSON,
+		SendType: model.ClusterSendBestEffort,
+	})
+	require.Contains(t, messages, &model.ClusterMessage{
+		Event:    model.ClusterEventPublish,
+		Data:     ev2JSON,
+		SendType: model.ClusterSendReliable,
+	})
+}
+
 func TestHubIsRegistered(t *testing.T) {
 	th := Setup(t).InitBasic()
 	defer th.TearDown()
@@ -332,7 +379,7 @@ func TestHubIsRegistered(t *testing.T) {
 	s := httptest.NewServer(dummyWebsocketHandler(t))
 	defer s.Close()
 
-	th.App.HubStart()
+	th.Server.HubStart()
 	wc1 := registerDummyWebConn(t, th.App, s.Listener.Addr(), th.BasicUser.Id)
 	wc2 := registerDummyWebConn(t, th.App, s.Listener.Addr(), th.BasicUser.Id)
 	wc3 := registerDummyWebConn(t, th.App, s.Listener.Addr(), th.BasicUser.Id)
@@ -403,7 +450,7 @@ func BenchmarkGetHubForUserId(b *testing.B) {
 	th := Setup(b).InitBasic()
 	defer th.TearDown()
 
-	th.App.HubStart()
+	th.Server.HubStart()
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

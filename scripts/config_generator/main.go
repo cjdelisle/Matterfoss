@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 // generateDefaultConfig writes default config to outputFile.

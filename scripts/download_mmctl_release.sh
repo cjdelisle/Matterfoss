@@ -5,7 +5,7 @@ if [[ "$OS" = "Windows_NT" ]]
 then
   PLATFORM="Windows"
 else
-  PLATFORM=$(uname)
+  PLATFORM=$(uname)-$(uname -m)
 fi
 
 if [[ ! -z "$1" ]];
@@ -15,7 +15,14 @@ fi
 
 BIN_PATH=${2:-bin}
 
-RELEASE_TO_DOWNLOAD=release-5.36
+# strip whitespace
+THIS_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ "$THIS_BRANCH" =~ 'release-'[0-9] ]];
+then
+  RELEASE_TO_DOWNLOAD=$(echo $THIS_BRANCH | grep -Eo 'release-.*')
+else
+  RELEASE_TO_DOWNLOAD=master
+fi
 
 echo "Downloading prepackaged binary: https://releases.mattermost.com/mmctl/$RELEASE_TO_DOWNLOAD";
 
@@ -28,12 +35,20 @@ fi
 
 case "$PLATFORM" in
 
-Linux)
+Linux-x86_64)
   MMCTL_FILE="linux_amd64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
   ;;
 
-Darwin)
+Linux-aarch64)
+  MMCTL_FILE="linux_arm64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
+  ;;
+
+Darwin-x86_64)
   MMCTL_FILE="darwin_amd64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
+  ;;
+
+Darwin-arm64)
+  MMCTL_FILE="darwin_arm64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
   ;;
 
 Windows)

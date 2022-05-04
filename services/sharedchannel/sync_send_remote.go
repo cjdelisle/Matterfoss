@@ -11,9 +11,9 @@ import (
 
 	"github.com/wiggin77/merror"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/services/remotecluster"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/remotecluster"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 type sendSyncMsgResultFunc func(syncResp SyncResponse, err error)

@@ -4,6 +4,7 @@
 package plugin
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -11,10 +12,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
-func TestAvaliablePlugins(t *testing.T) {
+func TestAvailablePlugins(t *testing.T) {
 	dir, err1 := ioutil.TempDir("", "mm-plugin-test")
 	require.NoError(t, err1)
 	t.Cleanup(func() {
@@ -27,7 +28,6 @@ func TestAvaliablePlugins(t *testing.T) {
 
 	t.Run("Should be able to load available plugins", func(t *testing.T) {
 		bundle1 := model.BundleInfo{
-			ManifestPath: "",
 			Manifest: &model.Manifest{
 				Id:      "someid",
 				Version: "1",
@@ -38,7 +38,9 @@ func TestAvaliablePlugins(t *testing.T) {
 		defer os.RemoveAll(filepath.Join(dir, "plugin1"))
 
 		path := filepath.Join(dir, "plugin1", "plugin.json")
-		err = ioutil.WriteFile(path, []byte(bundle1.Manifest.ToJson()), 0644)
+		manifestJSON, jsonErr := json.Marshal(bundle1.Manifest)
+		require.NoError(t, jsonErr)
+		err = ioutil.WriteFile(path, manifestJSON, 0644)
 		require.NoError(t, err)
 
 		bundles, err := env.Available()

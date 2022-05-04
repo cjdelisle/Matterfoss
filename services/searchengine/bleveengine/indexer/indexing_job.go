@@ -1,20 +1,19 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-package ebleveengine
+package indexer
 
 import (
 	"context"
 	"net/http"
 	"strconv"
+	"sync/atomic"
 	"time"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app"
-	"github.com/cjdelisle/matterfoss-server/v5/jobs"
-	tjobs "github.com/cjdelisle/matterfoss-server/v5/jobs/interfaces"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/services/searchengine/bleveengine"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine/bleveengine"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (
@@ -26,38 +25,27 @@ const (
 	EstimatedUserCount    = 10000
 )
 
-func init() {
-	app.RegisterJobsBleveIndexerInterface(func(s *app.Server) tjobs.IndexerJobInterface {
-		return &BleveIndexerInterfaceImpl{s}
-	})
-}
-
-type BleveIndexerInterfaceImpl struct {
-	Server *app.Server
-}
-
 type BleveIndexerWorker struct {
 	name      string
-	stop      chan bool
+	stop      chan struct{}
 	stopped   chan bool
 	jobs      chan model.Job
 	jobServer *jobs.JobServer
-
-	engine *bleveengine.BleveEngine
+	engine    *bleveengine.BleveEngine
+	closed    int32
 }
 
-func (bi *BleveIndexerInterfaceImpl) MakeWorker() model.Worker {
-	if bi.Server.SearchEngine.BleveEngine == nil {
+func MakeWorker(jobServer *jobs.JobServer, engine *bleveengine.BleveEngine) model.Worker {
+	if engine == nil {
 		return nil
 	}
 	return &BleveIndexerWorker{
 		name:      "BleveIndexer",
-		stop:      make(chan bool, 1),
+		stop:      make(chan struct{}),
 		stopped:   make(chan bool, 1),
 		jobs:      make(chan model.Job),
-		jobServer: bi.Server.Jobs,
-
-		engine: bi.Server.SearchEngine.BleveEngine.(*bleveengine.BleveEngine),
+		jobServer: jobServer,
+		engine:    engine,
 	}
 }
 
@@ -92,7 +80,15 @@ func (worker *BleveIndexerWorker) JobChannel() chan<- model.Job {
 	return worker.jobs
 }
 
+func (worker *BleveIndexerWorker) IsEnabled(cfg *model.Config) bool {
+	return true
+}
+
 func (worker *BleveIndexerWorker) Run() {
+	// Set to open if closed before. We are not bothered about multiple opens.
+	if atomic.CompareAndSwapInt32(&worker.closed, 1, 0) {
+		worker.stop = make(chan struct{})
+	}
 	mlog.Debug("Worker Started", mlog.String("workername", worker.name))
 
 	defer func() {
@@ -113,8 +109,12 @@ func (worker *BleveIndexerWorker) Run() {
 }
 
 func (worker *BleveIndexerWorker) Stop() {
+	// Set to close, and if already closed before, then return.
+	if !atomic.CompareAndSwapInt32(&worker.closed, 0, 1) {
+		return
+	}
 	mlog.Debug("Worker Stopping", mlog.String("workername", worker.name))
-	worker.stop <- true
+	close(worker.stop)
 	<-worker.stopped
 }
 
@@ -200,7 +200,7 @@ func (worker *BleveIndexerWorker) DoJob(job *model.Job) {
 	}
 
 	// Same possible fail as above can happen when counting channels
-	if count, err := worker.jobServer.Store.Channel().AnalyticsTypeCount("", "O"); err != nil {
+	if count, err := worker.jobServer.Store.Channel().AnalyticsTypeCount("", model.ChannelTypeOpen); err != nil {
 		mlog.Warn("Worker: Failed to fetch total channel count for job. An estimated value will be used for progress reporting.", mlog.String("workername", worker.name), mlog.String("job_id", job.Id), mlog.Err(err))
 		progress.TotalChannelsCount = EstimatedChannelCount
 	} else {
@@ -225,7 +225,7 @@ func (worker *BleveIndexerWorker) DoJob(job *model.Job) {
 	}
 
 	cancelCtx, cancelCancelWatcher := context.WithCancel(context.Background())
-	cancelWatcherChan := make(chan interface{}, 1)
+	cancelWatcherChan := make(chan struct{}, 1)
 	go worker.jobServer.CancellationWatcher(cancelCtx, job.Id, cancelWatcherChan)
 
 	defer cancelCancelWatcher()
@@ -510,7 +510,22 @@ func (worker *BleveIndexerWorker) BulkIndexChannels(channels []*model.Channel, p
 
 	for _, channel := range channels {
 		if channel.DeleteAt == 0 {
-			searchChannel := bleveengine.BLVChannelFromChannel(channel)
+			var userIDs []string
+			var err error
+			if channel.Type == model.ChannelTypePrivate {
+				userIDs, err = worker.jobServer.Store.Channel().GetAllChannelMembersById(channel.Id)
+				if err != nil {
+					return 0, model.NewAppError("BleveIndexerWorker.BulkIndexChannels", "bleveengine.indexer.do_job.bulk_index_channels.batch_error", nil, err.Error(), http.StatusInternalServerError)
+				}
+			}
+
+			// Get teamMember ids from channelid
+			teamMemberIDs, err := worker.jobServer.Store.Channel().GetTeamMembersForChannel(channel.Id)
+			if err != nil {
+				return 0, model.NewAppError("BleveIndexerWorker.BulkIndexChannels", "bleveengine.indexer.do_job.bulk_index_channels.batch_error", nil, err.Error(), http.StatusInternalServerError)
+			}
+
+			searchChannel := bleveengine.BLVChannelFromChannel(channel, userIDs, teamMemberIDs)
 			batch.Index(searchChannel.Id, searchChannel)
 		} else {
 			batch.Delete(channel.Id)

@@ -21,10 +21,10 @@ import (
 	"syscall"
 
 	"github.com/pkg/errors"
-	"golang.org/x/crypto/openpgp"
+	"golang.org/x/crypto/openpgp" //nolint:staticcheck
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const mattermostBuildPublicKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -36,14 +36,14 @@ fl6WltLrepiExTp6NMZ50k+Em4JGM6CWBMo22ucy0jYjZXO5hEGb3o6NGiG+Dx2z
 b2J78LksCKGsSrn0F1rLJeA933bFL4g9ozv9asBlzmpgG77ESg6YE1N/Rh7WDzVA
 prIR0MuB5JjElASw5LDVxDV6RZsxEVQr7ETLABEBAAG0KU1hdHRlcm1vc3QgQnVp
 bGQgPGRldi1vcHNAbWF0dGVybW9zdC5jb20+iQFUBBMBCAA+AhsDBQsJCAcCBhUI
-CQoLAgQWAgMBAh4BAheAFiEEobMdRvDzoQsCzy1E+PLDF0R3SygFAl6HYr0FCQlw
-hqEACgkQ+PLDF0R3SyheNQgAnkiT2vFMCtU5FmC16HVYXzDpYMtdCQPh/gmeEkiI
-80rFRg/cn6f0BNnaTfDu6r6cepmhLNpDAowjQ7uBnv8fL2dzCydIGFv2r7FfmcOJ
-zhEQ3zXPwP6mYlxPCCgxAozsLv9Yv41KGCHIlzYwkAazc0BhpAW/h8L3VGkE+b+g
-x6lKVoufm4rKnT49Dgly6fVOxuR/BqZo87B5jksV3izLTHt5hiY8Pc5GW8WwO/tr
-pNAw+6HRXq1Dr/JRz5PIOr5KP5tVLBed4IteZ1xaTRd4++07ZbiZjhXY8WKpVp3y
-iN7Om24jQpxbJI9+KKJ3+yhcwhr8/PJ8ZVuhJo3BNv1PcQ==
-=9Qk8
+CQoLAgQWAgMBAh4BAheAFiEEobMdRvDzoQsCzy1E+PLDF0R3SygFAmJOqWgFCQ03
+zUwACgkQ+PLDF0R3Syg/rQf8D5BgvVFnGuHDYNu2eiasZdfxmuhg1C7JGSLHqoCT
+SB/0SLLQyMeHsJLye/gbo3yhK8G9XYOm+obGF+NDxB0LtRaPv5Q6pIQYt88ZxOGA
+Kh6RG2DjYA5j410wYrN0mNzhudqnS2yZdyq215nEr7Z6l1T7L9OPcz0u0mF9RraQ
+nawzxbxc8mPuC5tMLTedViSkTYLgMY12TCSYhykseUIGrl/FBfMbmKwBHM52SZJh
+maBevuNymlFbODTciyE9Q7mJHkaamGKTXaa3Enlcf16oSoemawSBJuspaS0sZOW8
+dgi5l3V5YvfFvSk45axiZbnGYfN81G5mkSGAENSGSKVtMA==
+=kkvg
 -----END PGP PUBLIC KEY BLOCK-----`
 
 var upgradePercentage int64
@@ -69,7 +69,7 @@ func (wc *writeCounter) Write(p []byte) (int, error) {
 	return n, nil
 }
 
-func getCurrentVersionTgzUrl() string {
+func getCurrentVersionTgzURL() string {
 	version := model.CurrentVersion
 	if strings.HasPrefix(model.BuildNumber, version+"-rc") {
 		version = model.BuildNumber
@@ -184,24 +184,24 @@ func UpgradeToE0() error {
 		return err
 	}
 
-	filename, err := download(getCurrentVersionTgzUrl(), 1024*1024*300)
+	filename, err := download(getCurrentVersionTgzURL(), 1024*1024*300)
 	if err != nil {
 		if filename != "" {
 			os.Remove(filename)
 		}
 		upgradeError = fmt.Errorf("error downloading the new Mattermost server binary file (percentage: %d)", upgradePercentage)
-		mlog.Error("Unable to download the Mattermost server binary file", mlog.Int64("percentage", upgradePercentage), mlog.String("url", getCurrentVersionTgzUrl()), mlog.Err(err))
+		mlog.Error("Unable to download the Mattermost server binary file", mlog.Int64("percentage", upgradePercentage), mlog.String("url", getCurrentVersionTgzURL()), mlog.Err(err))
 		upgradePercentage = 0
 		return err
 	}
 	defer os.Remove(filename)
-	sigfilename, err := download(getCurrentVersionTgzUrl()+".sig", 1024)
+	sigfilename, err := download(getCurrentVersionTgzURL()+".sig", 1024)
 	if err != nil {
 		if sigfilename != "" {
 			os.Remove(sigfilename)
 		}
 		upgradeError = errors.New("error downloading the signature file of the new server")
-		mlog.Error("Unable to download the signature file of the new Mattermost server", mlog.String("url", getCurrentVersionTgzUrl()+".sig"), mlog.Err(err))
+		mlog.Error("Unable to download the signature file of the new Mattermost server", mlog.String("url", getCurrentVersionTgzURL()+".sig"), mlog.Err(err))
 		upgradePercentage = 0
 		return err
 	}

@@ -17,13 +17,40 @@ const (
 
 var MockCWS string
 
+type BillingScheme string
+
+const (
+	BillingSchemePerSeat    = BillingScheme("per_seat")
+	BillingSchemeFlatFee    = BillingScheme("flat_fee")
+	BillingSchemeSalesServe = BillingScheme("sales_serve")
+)
+
+type RecurringInterval string
+
+const (
+	RecurringIntervalYearly  = RecurringInterval("year")
+	RecurringIntervalMonthly = RecurringInterval("month")
+)
+
+type SubscriptionFamily string
+
+const (
+	SubscriptionFamilyCloud  = SubscriptionFamily("cloud")
+	SubscriptionFamilyOnPrem = SubscriptionFamily("on-prem")
+)
+
 // Product model represents a product on the cloud system.
 type Product struct {
-	ID           string   `json:"id"`
-	Name         string   `json:"name"`
-	Description  string   `json:"description"`
-	PricePerSeat float64  `json:"price_per_seat"`
-	AddOns       []*AddOn `json:"add_ons"`
+	ID                string             `json:"id"`
+	Name              string             `json:"name"`
+	Description       string             `json:"description"`
+	PricePerSeat      float64            `json:"price_per_seat"`
+	AddOns            []*AddOn           `json:"add_ons"`
+	SKU               string             `json:"sku"`
+	PriceID           string             `json:"price_id"`
+	Family            SubscriptionFamily `json:"product_family"`
+	RecurringInterval RecurringInterval  `json:"recurring_interval"`
+	BillingScheme     BillingScheme      `json:"billing_scheme"`
 }
 
 // AddOn represents an addon to a product.
@@ -43,6 +70,7 @@ type StripeSetupIntent struct {
 // ConfirmPaymentMethodRequest contains the fields for the customer payment update API.
 type ConfirmPaymentMethodRequest struct {
 	StripeSetupIntentID string `json:"stripe_setup_intent_id"`
+	SubscriptionID      string `json:"subscription_id"`
 }
 
 // Customer model represents a customer on the system.
@@ -78,7 +106,7 @@ type Address struct {
 // PaymentMethod represents methods of payment for a customer.
 type PaymentMethod struct {
 	Type      string `json:"type"`
-	LastFour  int    `json:"last_four"`
+	LastFour  string `json:"last_four"`
 	ExpMonth  int    `json:"exp_month"`
 	ExpYear   int    `json:"exp_year"`
 	CardBrand string `json:"card_brand"`
@@ -110,24 +138,25 @@ func (s *Subscription) GetWorkSpaceNameFromDNS() string {
 
 // Invoice model represents a cloud invoice
 type Invoice struct {
-	ID             string             `json:"id"`
-	Number         string             `json:"number"`
-	CreateAt       int64              `json:"create_at"`
-	Total          int64              `json:"total"`
-	Tax            int64              `json:"tax"`
-	Status         string             `json:"status"`
-	Description    string             `json:"description"`
-	PeriodStart    int64              `json:"period_start"`
-	PeriodEnd      int64              `json:"period_end"`
-	SubscriptionID string             `json:"subscription_id"`
-	Items          []*InvoiceLineItem `json:"line_items"`
+	ID                 string             `json:"id"`
+	Number             string             `json:"number"`
+	CreateAt           int64              `json:"create_at"`
+	Total              int64              `json:"total"`
+	Tax                int64              `json:"tax"`
+	Status             string             `json:"status"`
+	Description        string             `json:"description"`
+	PeriodStart        int64              `json:"period_start"`
+	PeriodEnd          int64              `json:"period_end"`
+	SubscriptionID     string             `json:"subscription_id"`
+	Items              []*InvoiceLineItem `json:"line_items"`
+	CurrentProductName string             `json:"current_product_name"`
 }
 
 // InvoiceLineItem model represents a cloud invoice lineitem tied to an invoice.
 type InvoiceLineItem struct {
 	PriceID      string                 `json:"price_id"`
 	Total        int64                  `json:"total"`
-	Quantity     int64                  `json:"quantity"`
+	Quantity     float64                `json:"quantity"`
 	PricePerUnit int64                  `json:"price_per_unit"`
 	Description  string                 `json:"description"`
 	Type         string                 `json:"type"`
@@ -143,7 +172,7 @@ type CWSWebhookPayload struct {
 
 type FailedPayment struct {
 	CardBrand      string `json:"card_brand"`
-	LastFour       int    `json:"last_four"`
+	LastFour       string `json:"last_four"`
 	FailureMessage string `json:"failure_message"`
 }
 
@@ -155,4 +184,8 @@ type SubscriptionStats struct {
 	RemainingSeats int    `json:"remaining_seats"`
 	IsPaidTier     string `json:"is_paid_tier"`
 	IsFreeTrial    string `json:"is_free_trial"`
+}
+
+type SubscriptionChange struct {
+	ProductID string `json:"product_id"`
 }

@@ -6,8 +6,8 @@ package config
 import (
 	"sync"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 // Listener is a callback function invoked when the configuration changes.
@@ -57,7 +57,7 @@ func (e *logSrcEmitter) RemoveListener(id string) {
 }
 
 // invokeConfigListeners synchronously notifies all listeners about the configuration change.
-func (e *logSrcEmitter) invokeConfigListeners(oldCfg, newCfg mlog.LogTargetCfg) {
+func (e *logSrcEmitter) invokeConfigListeners(oldCfg, newCfg mlog.LoggerConfiguration) {
 	e.listeners.Range(func(key, value interface{}) bool {
 		listener := value.(LogSrcListener)
 		listener(oldCfg, newCfg)

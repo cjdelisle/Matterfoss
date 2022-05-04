@@ -4,12 +4,13 @@
 package app
 
 import (
+	"encoding/json"
 	"errors"
 	"net/http"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func (a *App) createInitialSidebarCategories(userID, teamID string) (*model.OrderedSidebarCategories, *model.AppError) {
@@ -86,7 +87,7 @@ func (a *App) CreateSidebarCategory(userID, teamID string, newCategory *model.Si
 			return nil, model.NewAppError("CreateSidebarCategory", "app.channel.sidebar_categories.app_error", nil, err.Error(), http.StatusInternalServerError)
 		}
 	}
-	message := model.NewWebSocketEvent(model.WEBSOCKET_EVENT_SIDEBAR_CATEGORY_CREATED, teamID, "", userID, nil)
+	message := model.NewWebSocketEvent(model.WebsocketEventSidebarCategoryCreated, teamID, "", userID, nil)
 	message.Add("category_id", category.Id)
 	a.Publish(message)
 	return category, nil
@@ -106,7 +107,7 @@ func (a *App) UpdateSidebarCategoryOrder(userID, teamID string, categoryOrder []
 			return model.NewAppError("UpdateSidebarCategoryOrder", "app.channel.sidebar_categories.app_error", nil, err.Error(), http.StatusInternalServerError)
 		}
 	}
-	message := model.NewWebSocketEvent(model.WEBSOCKET_EVENT_SIDEBAR_CATEGORY_ORDER_UPDATED, teamID, "", userID, nil)
+	message := model.NewWebSocketEvent(model.WebsocketEventSidebarCategoryOrderUpdated, teamID, "", userID, nil)
 	message.Add("order", categoryOrder)
 	a.Publish(message)
 	return nil
@@ -118,7 +119,15 @@ func (a *App) UpdateSidebarCategories(userID, teamID string, categories []*model
 		return nil, model.NewAppError("UpdateSidebarCategories", "app.channel.sidebar_categories.app_error", nil, err.Error(), http.StatusInternalServerError)
 	}
 
-	message := model.NewWebSocketEvent(model.WEBSOCKET_EVENT_SIDEBAR_CATEGORY_UPDATED, teamID, "", userID, nil)
+	message := model.NewWebSocketEvent(model.WebsocketEventSidebarCategoryUpdated, teamID, "", userID, nil)
+
+	updatedCategoriesJSON, jsonErr := json.Marshal(updatedCategories)
+	if jsonErr != nil {
+		mlog.Warn("Failed to encode original categories to JSON", mlog.Err(jsonErr))
+	}
+
+	message.Add("updatedCategories", string(updatedCategoriesJSON))
+
 	a.Publish(message)
 
 	a.muteChannelsForUpdatedCategories(userID, updatedCategories, originalCategories)
@@ -243,7 +252,7 @@ func (a *App) DeleteSidebarCategory(userID, teamID, categoryId string) *model.Ap
 		}
 	}
 
-	message := model.NewWebSocketEvent(model.WEBSOCKET_EVENT_SIDEBAR_CATEGORY_DELETED, teamID, "", userID, nil)
+	message := model.NewWebSocketEvent(model.WebsocketEventSidebarCategoryDeleted, teamID, "", userID, nil)
 	message.Add("category_id", categoryId)
 	a.Publish(message)
 

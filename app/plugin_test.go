@@ -20,11 +20,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
-	"github.com/cjdelisle/matterfoss-server/v5/testlib"
-	"github.com/cjdelisle/matterfoss-server/v5/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func getHashedKey(key string) string {
@@ -342,7 +343,7 @@ func TestServePluginRequest(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/plugins/foo/bar", nil)
-	th.App.srv.ServePluginRequest(w, r)
+	th.App.ch.ServePluginRequest(w, r)
 	assert.Equal(t, http.StatusNotImplemented, w.Result().StatusCode)
 }
 
@@ -386,7 +387,7 @@ func TestPrivateServePluginRequest(t *testing.T) {
 
 			request = mux.SetURLVars(request, map[string]string{"plugin_id": "id"})
 
-			th.App.srv.servePluginRequest(recorder, request, handler)
+			th.App.ch.servePluginRequest(recorder, request, handler)
 		})
 	}
 
@@ -409,7 +410,7 @@ func TestHandlePluginRequest(t *testing.T) {
 	var assertions func(*http.Request)
 	router := mux.NewRouter()
 	router.HandleFunc("/plugins/{plugin_id:[A-Za-z0-9\\_\\-\\.]+}/{anything:.*}", func(_ http.ResponseWriter, r *http.Request) {
-		th.App.srv.servePluginRequest(nil, r, func(_ *plugin.Context, _ http.ResponseWriter, r *http.Request) {
+		th.App.ch.servePluginRequest(nil, r, func(_ *plugin.Context, _ http.ResponseWriter, r *http.Request) {
 			assertions(r)
 		})
 	})
@@ -466,8 +467,6 @@ func TestGetPluginStatuses(t *testing.T) {
 }
 
 func TestPluginSync(t *testing.T) {
-	t.SkipNow()
-
 	th := Setup(t)
 	defer th.TearDown()
 
@@ -478,7 +477,7 @@ func TestPluginSync(t *testing.T) {
 		{
 			"local",
 			func(cfg *model.Config) {
-				cfg.FileSettings.DriverName = model.NewString(model.IMAGE_DRIVER_LOCAL)
+				cfg.FileSettings.DriverName = model.NewString(model.ImageDriverLocal)
 			},
 		},
 		{
@@ -495,10 +494,10 @@ func TestPluginSync(t *testing.T) {
 				}
 
 				s3Endpoint := fmt.Sprintf("%s:%s", s3Host, s3Port)
-				cfg.FileSettings.DriverName = model.NewString(model.IMAGE_DRIVER_S3)
-				cfg.FileSettings.AmazonS3AccessKeyId = model.NewString(model.MINIO_ACCESS_KEY)
-				cfg.FileSettings.AmazonS3SecretAccessKey = model.NewString(model.MINIO_SECRET_KEY)
-				cfg.FileSettings.AmazonS3Bucket = model.NewString(model.MINIO_BUCKET)
+				cfg.FileSettings.DriverName = model.NewString(model.ImageDriverS3)
+				cfg.FileSettings.AmazonS3AccessKeyId = model.NewString(model.MinioAccessKey)
+				cfg.FileSettings.AmazonS3SecretAccessKey = model.NewString(model.MinioSecretKey)
+				cfg.FileSettings.AmazonS3Bucket = model.NewString(model.MinioBucket)
 				cfg.FileSettings.AmazonS3PathPrefix = model.NewString("")
 				cfg.FileSettings.AmazonS3Endpoint = model.NewString(s3Endpoint)
 				cfg.FileSettings.AmazonS3Region = model.NewString("")
@@ -623,11 +622,42 @@ func TestPluginSync(t *testing.T) {
 				appErr = th.App.DeletePublicKey("pub_key")
 				checkNoError(t, appErr)
 
-				appErr = th.App.RemovePlugin("testplugin")
+				appErr = th.App.ch.RemovePlugin("testplugin")
 				checkNoError(t, appErr)
 			})
 		})
 	}
+}
+
+// See https://github.com/cjdelisle/matterfoss-server/issues/19189
+func TestChannelsPluginsInit(t *testing.T) {
+	th := Setup(t)
+	defer th.TearDown()
+
+	runNoPanicTest := func(t *testing.T) {
+		ctx := request.EmptyContext()
+		path, _ := fileutils.FindDir("tests")
+
+		require.NotPanics(t, func() {
+			th.Server.Channels().initPlugins(ctx, path, path)
+		})
+	}
+
+	t.Run("no panics when plugins enabled", func(t *testing.T) {
+		th.App.UpdateConfig(func(cfg *model.Config) {
+			*cfg.PluginSettings.Enable = true
+		})
+
+		runNoPanicTest(t)
+	})
+
+	t.Run("no panics when plugins disabled", func(t *testing.T) {
+		th.App.UpdateConfig(func(cfg *model.Config) {
+			*cfg.PluginSettings.Enable = false
+		})
+
+		runNoPanicTest(t)
+	})
 }
 
 func TestSyncPluginsActiveState(t *testing.T) {
@@ -699,12 +729,12 @@ func TestPluginPanicLogs(t *testing.T) {
 		package main
 
 		import (
-			"github.com/cjdelisle/matterfoss-server/v5/plugin"
-			"github.com/cjdelisle/matterfoss-server/v5/model"
+			"github.com/cjdelisle/matterfoss-server/v6/plugin"
+			"github.com/cjdelisle/matterfoss-server/v6/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MatterfossPlugin
+			plugin.MattermostPlugin
 		}
 
 		func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -726,11 +756,14 @@ func TestPluginPanicLogs(t *testing.T) {
 		}
 		_, err := th.App.CreatePost(th.Context, post, th.BasicChannel, false, true)
 		assert.Nil(t, err)
+
+		th.TestLogger.Flush()
+
 		// We shutdown plugins first so that the read on the log buffer is race-free.
-		th.App.Srv().ShutDownPlugins()
+		th.App.ch.ShutDownPlugins()
 		tearDown()
 
-		testlib.AssertLog(t, th.LogBuffer, mlog.LevelDebug, "panic: some text from panic")
+		testlib.AssertLog(t, th.LogBuffer, mlog.LvlDebug.Name, "panic: some text from panic")
 	})
 }
 
@@ -757,7 +790,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, pluginBytes)
 
-		manifest, appErr := th.App.installPluginLocally(bytes.NewReader(pluginBytes), nil, installPluginLocallyAlways)
+		manifest, appErr := th.App.ch.installPluginLocally(bytes.NewReader(pluginBytes), nil, installPluginLocallyAlways)
 		require.Nil(t, appErr)
 		require.Equal(t, "testplugin", manifest.Id)
 
@@ -774,7 +807,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 			*cfg.PluginSettings.EnableRemoteMarketplace = false
 		})
 
-		plugins := th.App.Srv().processPrepackagedPlugins(prepackagedPluginsDir)
+		plugins := th.App.ch.processPrepackagedPlugins(prepackagedPluginsDir)
 		require.Len(t, plugins, 1)
 		require.Equal(t, plugins[0].Manifest.Id, "testplugin")
 		require.Empty(t, plugins[0].Signature, 0)
@@ -784,7 +817,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 		require.Len(t, pluginStatus, 1)
 		require.Equal(t, pluginStatus[0].PluginId, "testplugin")
 
-		appErr = th.App.RemovePlugin("testplugin")
+		appErr = th.App.ch.RemovePlugin("testplugin")
 		checkNoError(t, appErr)
 
 		pluginStatus, err = env.Statuses()
@@ -801,7 +834,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 
 		env := th.App.GetPluginsEnvironment()
 
-		plugins := th.App.Srv().processPrepackagedPlugins(prepackagedPluginsDir)
+		plugins := th.App.ch.processPrepackagedPlugins(prepackagedPluginsDir)
 		require.Len(t, plugins, 1)
 		require.Equal(t, plugins[0].Manifest.Id, "testplugin")
 		require.Empty(t, plugins[0].Signature, 0)
@@ -834,7 +867,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 		err = testlib.CopyFile(testPlugin2SignaturePath, filepath.Join(prepackagedPluginsDir, "testplugin2.tar.gz.sig"))
 		require.NoError(t, err)
 
-		plugins := th.App.Srv().processPrepackagedPlugins(prepackagedPluginsDir)
+		plugins := th.App.ch.processPrepackagedPlugins(prepackagedPluginsDir)
 		require.Len(t, plugins, 2)
 		require.Contains(t, []string{"testplugin", "testplugin2"}, plugins[0].Manifest.Id)
 		require.NotEmpty(t, plugins[0].Signature)
@@ -865,7 +898,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 		require.NoError(t, err)
 		require.NotNil(t, pluginBytes)
 
-		manifest, appErr := th.App.installPluginLocally(bytes.NewReader(pluginBytes), nil, installPluginLocallyAlways)
+		manifest, appErr := th.App.ch.installPluginLocally(bytes.NewReader(pluginBytes), nil, installPluginLocallyAlways)
 		require.Nil(t, appErr)
 		require.Equal(t, "testplugin", manifest.Id)
 
@@ -883,7 +916,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 		err = testlib.CopyFile(testPlugin2SignaturePath, filepath.Join(prepackagedPluginsDir, "testplugin2.tar.gz.sig"))
 		require.NoError(t, err)
 
-		plugins := th.App.Srv().processPrepackagedPlugins(prepackagedPluginsDir)
+		plugins := th.App.ch.processPrepackagedPlugins(prepackagedPluginsDir)
 		require.Len(t, plugins, 2)
 		require.Contains(t, []string{"testplugin", "testplugin2"}, plugins[0].Manifest.Id)
 		require.NotEmpty(t, plugins[0].Signature)
@@ -895,7 +928,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 		require.Len(t, pluginStatus, 1)
 		require.Equal(t, pluginStatus[0].PluginId, "testplugin")
 
-		appErr = th.App.RemovePlugin("testplugin")
+		appErr = th.App.ch.RemovePlugin("testplugin")
 		checkNoError(t, appErr)
 
 		pluginStatus, err = env.Statuses()
@@ -920,7 +953,7 @@ func TestProcessPrepackagedPlugins(t *testing.T) {
 		err = testlib.CopyFile(testPlugin2SignaturePath, filepath.Join(prepackagedPluginsDir, "testplugin2.tar.gz.sig"))
 		require.NoError(t, err)
 
-		plugins := th.App.Srv().processPrepackagedPlugins(prepackagedPluginsDir)
+		plugins := th.App.ch.processPrepackagedPlugins(prepackagedPluginsDir)
 		require.Len(t, plugins, 2)
 		require.Contains(t, []string{"testplugin", "testplugin2"}, plugins[0].Manifest.Id)
 		require.NotEmpty(t, plugins[0].Signature)

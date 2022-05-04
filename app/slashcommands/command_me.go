@@ -4,10 +4,10 @@
 package slashcommands
 
 import (
-	"github.com/cjdelisle/matterfoss-server/v5/app"
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
 )
 
 type MeProvider struct {
@@ -37,8 +37,8 @@ func (*MeProvider) GetCommand(a *app.App, T i18n.TranslateFunc) *model.Command {
 
 func (*MeProvider) DoCommand(a *app.App, c *request.Context, args *model.CommandArgs, message string) *model.CommandResponse {
 	return &model.CommandResponse{
-		ResponseType: model.COMMAND_RESPONSE_TYPE_IN_CHANNEL,
-		Type:         model.POST_ME,
+		ResponseType: model.CommandResponseTypeInChannel,
+		Type:         model.PostTypeMe,
 		Text:         "*" + message + "*",
 	}
 }

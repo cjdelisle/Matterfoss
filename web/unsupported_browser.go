@@ -8,8 +8,8 @@ import (
 
 	"github.com/avct/uasurfer"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app/request"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/templates"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/templates"
 )
 
 // MattermostApp describes downloads for the Mattermost App

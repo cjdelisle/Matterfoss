@@ -5,11 +5,13 @@ package app
 
 import (
 	"context"
+	"database/sql"
+	"errors"
 	"net/http"
 	"strings"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 func (a *App) MakePermissionError(s *model.Session, permissions []*model.Permission) *model.AppError {
@@ -88,6 +90,25 @@ func (a *App) SessionHasPermissionToChannel(session model.Session, channelID str
 	return a.SessionHasPermissionTo(session, permission)
 }
 
+func (a *App) SessionHasPermissionToGroup(session model.Session, groupID string, permission *model.Permission) bool {
+	groupMember, err := a.Srv().Store.Group().GetMember(groupID, session.UserId)
+	// don't reject immediately on ErrNoRows error because there's further authz logic below for non-groupmembers
+	if err != nil && !errors.Is(err, sql.ErrNoRows) {
+		return false
+	}
+
+	// each member of a group is implicitly considered to have the 'custom_group_user' role in that group, so if the user is a member of the
+	// group and custom_group_user on their system has the requested permission then return true
+	if groupMember != nil && a.RolesGrantPermission([]string{model.CustomGroupUserRoleId}, permission.Id) {
+		return true
+	}
+
+	// Not implemented: group-override schemes.
+
+	// ...otherwise check their system roles to see if they have the requested permission system-wide
+	return a.SessionHasPermissionTo(session, permission)
+}
+
 func (a *App) SessionHasPermissionToChannelByPost(session model.Session, postID string, permission *model.Permission) bool {
 	if channelMember, err := a.Srv().Store.Channel().GetMemberForPost(postID, session.UserId); err == nil {
 
@@ -106,7 +127,7 @@ func (a *App) SessionHasPermissionToChannelByPost(session model.Session, postID 
 }
 
 func (a *App) SessionHasPermissionToCategory(session model.Session, userID, teamID, categoryId string) bool {
-	if a.SessionHasPermissionTo(session, model.PERMISSION_EDIT_OTHER_USERS) {
+	if a.SessionHasPermissionTo(session, model.PermissionEditOtherUsers) {
 		return true
 	}
 	category, err := a.GetSidebarCategory(categoryId)
@@ -125,7 +146,7 @@ func (a *App) SessionHasPermissionToUser(session model.Session, userID string) b
 		return true
 	}
 
-	if a.SessionHasPermissionTo(session, model.PERMISSION_EDIT_OTHER_USERS) {
+	if a.SessionHasPermissionTo(session, model.PermissionEditOtherUsers) {
 		return true
 	}
 
@@ -212,7 +233,7 @@ func (a *App) HasPermissionToUser(askingUserId string, userID string) bool {
 		return true
 	}
 
-	if a.HasPermissionTo(askingUserId, model.PERMISSION_EDIT_OTHER_USERS) {
+	if a.HasPermissionTo(askingUserId, model.PermissionEditOtherUsers) {
 		return true
 	}
 
@@ -257,24 +278,28 @@ func (a *App) SessionHasPermissionToManageBot(session model.Session, botUserId s
 	}
 
 	if existingBot.OwnerId == session.UserId {
-		if !a.SessionHasPermissionTo(session, model.PERMISSION_MANAGE_BOTS) {
-			if !a.SessionHasPermissionTo(session, model.PERMISSION_READ_BOTS) {
+		if !a.SessionHasPermissionTo(session, model.PermissionManageBots) {
+			if !a.SessionHasPermissionTo(session, model.PermissionReadBots) {
 				// If the user doesn't have permission to read bots, pretend as if
 				// the bot doesn't exist at all.
 				return model.MakeBotNotFoundError(botUserId)
 			}
-			return a.MakePermissionError(&session, []*model.Permission{model.PERMISSION_MANAGE_BOTS})
+			return a.MakePermissionError(&session, []*model.Permission{model.PermissionManageBots})
 		}
 	} else {
-		if !a.SessionHasPermissionTo(session, model.PERMISSION_MANAGE_OTHERS_BOTS) {
-			if !a.SessionHasPermissionTo(session, model.PERMISSION_READ_OTHERS_BOTS) {
+		if !a.SessionHasPermissionTo(session, model.PermissionManageOthersBots) {
+			if !a.SessionHasPermissionTo(session, model.PermissionReadOthersBots) {
 				// If the user doesn't have permission to read others' bots,
 				// pretend as if the bot doesn't exist at all.
 				return model.MakeBotNotFoundError(botUserId)
 			}
-			return a.MakePermissionError(&session, []*model.Permission{model.PERMISSION_MANAGE_OTHERS_BOTS})
+			return a.MakePermissionError(&session, []*model.Permission{model.PermissionManageOthersBots})
 		}
 	}
 
 	return nil
+}
+
+func (a *App) HasPermissionToReadChannel(userID string, channel *model.Channel) bool {
+	return a.HasPermissionToChannel(userID, channel.Id, model.PermissionReadChannel) || (channel.Type == model.ChannelTypeOpen && a.HasPermissionToTeam(userID, channel.TeamId, model.PermissionReadPublicChannel))
 }

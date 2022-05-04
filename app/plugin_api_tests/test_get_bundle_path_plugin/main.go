@@ -7,13 +7,13 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/cjdelisle/matterfoss-server/v5/app/plugin_api_tests"
-	"github.com/cjdelisle/matterfoss-server/v5/model"
-	"github.com/cjdelisle/matterfoss-server/v5/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/app/plugin_api_tests"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
 )
 
 type MyPlugin struct {
-	plugin.MatterfossPlugin
+	plugin.MattermostPlugin
 	configuration plugin_api_tests.BasicConfig
 }
 

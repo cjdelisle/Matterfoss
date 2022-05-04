@@ -9,7 +9,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/cjdelisle/matterfoss-server/v5/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 type StoreResult struct {
@@ -63,7 +63,8 @@ type Store interface {
 	UnlockFromMaster()
 	DropAllTables()
 	RecycleDBConnections(d time.Duration)
-	GetCurrentSchemaVersion() string
+	GetDBSchemaVersion() (int, error)
+	GetAppliedMigrations() ([]model.AppliedMigration, error)
 	GetDbVersion(numerical bool) (string, error)
 	TotalMasterDbConnections() int
 	TotalReadDbConnections() int
@@ -90,6 +91,7 @@ type RetentionPolicyStore interface {
 	GetTeamsCount(policyId string) (int64, error)
 	AddTeams(policyId string, teamIds []string) error
 	RemoveTeams(policyId string, teamIds []string) error
+	DeleteOrphanedRows(limit int) (int64, error)
 	GetTeamPoliciesForUser(userID string, offset, limit int) ([]*model.RetentionPolicyForTeam, error)
 	GetTeamPoliciesCountForUser(userID string) (int64, error)
 	GetChannelPoliciesForUser(userID string, offset, limit int) ([]*model.RetentionPolicyForChannel, error)
@@ -176,24 +178,31 @@ type ChannelStore interface {
 	GetByNames(team_id string, names []string, allowFromCache bool) ([]*model.Channel, error)
 	GetByNameIncludeDeleted(team_id string, name string, allowFromCache bool) (*model.Channel, error)
 	GetDeletedByName(team_id string, name string) (*model.Channel, error)
-	GetDeleted(team_id string, offset int, limit int, userID string) (*model.ChannelList, error)
-	GetChannels(teamID string, userID string, includeDeleted bool, lastDeleteAt int) (*model.ChannelList, error)
-	GetAllChannels(page, perPage int, opts ChannelSearchOpts) (*model.ChannelListWithTeamData, error)
+	GetDeleted(team_id string, offset int, limit int, userID string) (model.ChannelList, error)
+	GetChannels(teamID, userID string, opts *model.ChannelSearchOpts) (model.ChannelList, error)
+	GetChannelsWithCursor(teamId string, userId string, opts *model.ChannelSearchOpts, afterChannelID string) (model.ChannelList, error)
+	GetChannelsByUser(userID string, includeDeleted bool, lastDeleteAt, pageSize int, fromChannelID string) (model.ChannelList, error)
+	GetAllChannelMembersById(id string) ([]string, error)
+	GetAllChannels(page, perPage int, opts ChannelSearchOpts) (model.ChannelListWithTeamData, error)
 	GetAllChannelsCount(opts ChannelSearchOpts) (int64, error)
-	GetMoreChannels(teamID string, userID string, offset int, limit int) (*model.ChannelList, error)
-	GetPrivateChannelsForTeam(teamID string, offset int, limit int) (*model.ChannelList, error)
-	GetPublicChannelsForTeam(teamID string, offset int, limit int) (*model.ChannelList, error)
-	GetPublicChannelsByIdsForTeam(teamID string, channelIds []string) (*model.ChannelList, error)
+	GetMoreChannels(teamID string, userID string, offset int, limit int) (model.ChannelList, error)
+	GetPrivateChannelsForTeam(teamID string, offset int, limit int) (model.ChannelList, error)
+	GetPublicChannelsForTeam(teamID string, offset int, limit int) (model.ChannelList, error)
+	GetPublicChannelsByIdsForTeam(teamID string, channelIds []string) (model.ChannelList, error)
 	GetChannelCounts(teamID string, userID string) (*model.ChannelCounts, error)
-	GetTeamChannels(teamID string) (*model.ChannelList, error)
+	GetTeamChannels(teamID string) (model.ChannelList, error)
 	GetAll(teamID string) ([]*model.Channel, error)
 	GetChannelsByIds(channelIds []string, includeDeleted bool) ([]*model.Channel, error)
+	GetChannelsWithTeamDataByIds(channelIds []string, includeDeleted bool) ([]*model.ChannelWithTeamData, error)
 	GetForPost(postID string) (*model.Channel, error)
 	SaveMultipleMembers(members []*model.ChannelMember) ([]*model.ChannelMember, error)
 	SaveMember(member *model.ChannelMember) (*model.ChannelMember, error)
 	UpdateMember(member *model.ChannelMember) (*model.ChannelMember, error)
 	UpdateMultipleMembers(members []*model.ChannelMember) ([]*model.ChannelMember, error)
-	GetMembers(channelID string, offset, limit int) (*model.ChannelMembers, error)
+	// UpdateMemberNotifyProps patches the notifyProps field with the given props map.
+	// It replaces existing fields and creates new ones which don't exist.
+	UpdateMemberNotifyProps(channelID, userID string, props map[string]string) (*model.ChannelMember, error)
+	GetMembers(channelID string, offset, limit int) (model.ChannelMembers, error)
 	GetMember(ctx context.Context, channelID string, userID string) (*model.ChannelMember, error)
 	GetChannelMembersTimezones(channelID string) ([]model.StringMap, error)
 	GetAllChannelMembersForUser(userID string, allowFromCache bool, includeDeleted bool) (map[string]string, error)
@@ -215,31 +224,34 @@ type ChannelStore interface {
 	RemoveMembers(channelID string, userIds []string) error
 	PermanentDeleteMembersByUser(userID string) error
 	PermanentDeleteMembersByChannel(channelID string) error
-	UpdateLastViewedAt(channelIds []string, userID string, updateThreads bool) (map[string]int64, error)
-	UpdateLastViewedAtPost(unreadPost *model.Post, userID string, mentionCount, mentionCountRoot int, updateThreads bool) (*model.ChannelUnreadAt, error)
+	UpdateLastViewedAt(channelIds []string, userID string) (map[string]int64, error)
+	UpdateLastViewedAtPost(unreadPost *model.Post, userID string, mentionCount, mentionCountRoot int, setUnreadCountRoot bool) (*model.ChannelUnreadAt, error)
 	CountPostsAfter(channelID string, timestamp int64, userID string) (int, int, error)
-	IncrementMentionCount(channelID string, userID string, updateThreads, isRoot bool) error
-	AnalyticsTypeCount(teamID string, channelType string) (int64, error)
-	GetMembersForUser(teamID string, userID string) (*model.ChannelMembers, error)
-	GetMembersForUserWithPagination(teamID, userID string, page, perPage int) (*model.ChannelMembers, error)
-	AutocompleteInTeam(teamID string, term string, includeDeleted bool) (*model.ChannelList, error)
-	AutocompleteInTeamForSearch(teamID string, userID string, term string, includeDeleted bool) (*model.ChannelList, error)
-	SearchAllChannels(term string, opts ChannelSearchOpts) (*model.ChannelListWithTeamData, int64, error)
-	SearchInTeam(teamID string, term string, includeDeleted bool) (*model.ChannelList, error)
-	SearchArchivedInTeam(teamID string, term string, userID string) (*model.ChannelList, error)
-	SearchForUserInTeam(userID string, teamID string, term string, includeDeleted bool) (*model.ChannelList, error)
-	SearchMore(userID string, teamID string, term string) (*model.ChannelList, error)
-	SearchGroupChannels(userID, term string) (*model.ChannelList, error)
-	GetMembersByIds(channelID string, userIds []string) (*model.ChannelMembers, error)
-	GetMembersByChannelIds(channelIds []string, userID string) (*model.ChannelMembers, error)
-	AnalyticsDeletedTypeCount(teamID string, channelType string) (int64, error)
+	IncrementMentionCount(channelID string, userIDs []string, isRoot bool) error
+	AnalyticsTypeCount(teamID string, channelType model.ChannelType) (int64, error)
+	GetMembersForUser(teamID string, userID string) (model.ChannelMembers, error)
+	GetTeamMembersForChannel(channelID string) ([]string, error)
+	GetMembersForUserWithPagination(userID string, page, perPage int) (model.ChannelMembersWithTeamData, error)
+	GetMembersForUserWithCursor(userID, afterChannel, afterUser string, limit, lastUpdateAt int) (model.ChannelMembers, error)
+	Autocomplete(userID, term string, includeDeleted bool) (model.ChannelListWithTeamData, error)
+	AutocompleteInTeam(teamID, userID, term string, includeDeleted bool) (model.ChannelList, error)
+	AutocompleteInTeamForSearch(teamID string, userID string, term string, includeDeleted bool) (model.ChannelList, error)
+	SearchAllChannels(term string, opts ChannelSearchOpts) (model.ChannelListWithTeamData, int64, error)
+	SearchInTeam(teamID string, term string, includeDeleted bool) (model.ChannelList, error)
+	SearchArchivedInTeam(teamID string, term string, userID string) (model.ChannelList, error)
+	SearchForUserInTeam(userID string, teamID string, term string, includeDeleted bool) (model.ChannelList, error)
+	SearchMore(userID string, teamID string, term string) (model.ChannelList, error)
+	SearchGroupChannels(userID, term string) (model.ChannelList, error)
+	GetMembersByIds(channelID string, userIds []string) (model.ChannelMembers, error)
+	GetMembersByChannelIds(channelIds []string, userID string) (model.ChannelMembers, error)
+	GetMembersInfoByChannelIds(channelIDs []string) (map[string][]*model.User, error)
+	AnalyticsDeletedTypeCount(teamID string, channelType model.ChannelType) (int64, error)
 	GetChannelUnread(channelID, userID string) (*model.ChannelUnread, error)
 	ClearCaches()
 	GetChannelsByScheme(schemeID string, offset int, limit int) (model.ChannelList, error)
 	MigrateChannelMembers(fromChannelID string, fromUserID string) (map[string]string, error)
 	ResetAllChannelSchemes() error
 	ClearAllCustomRoleAssignments() error
-	MigratePublicChannels() error
 	CreateInitialSidebarCategories(userID, teamID string) (*model.OrderedSidebarCategories, error)
 	GetSidebarCategories(userID, teamID string) (*model.OrderedSidebarCategories, error)
 	GetSidebarCategory(categoryID string) (*model.SidebarCategoryWithChannels, error)
@@ -247,8 +259,8 @@ type ChannelStore interface {
 	CreateSidebarCategory(userID, teamID string, newCategory *model.SidebarCategoryWithChannels) (*model.SidebarCategoryWithChannels, error)
 	UpdateSidebarCategoryOrder(userID, teamID string, categoryOrder []string) error
 	UpdateSidebarCategories(userID, teamID string, categories []*model.SidebarCategoryWithChannels) ([]*model.SidebarCategoryWithChannels, []*model.SidebarCategoryWithChannels, error)
-	UpdateSidebarChannelsByPreferences(preferences *model.Preferences) error
-	DeleteSidebarChannelsByPreferences(preferences *model.Preferences) error
+	UpdateSidebarChannelsByPreferences(preferences model.Preferences) error
+	DeleteSidebarChannelsByPreferences(preferences model.Preferences) error
 	DeleteSidebarCategory(categoryID string) error
 	GetAllChannelsForExportAfter(limit int, afterID string) ([]*model.ChannelForExport, error)
 	GetAllDirectChannelsForExportAfter(limit int, afterID string) ([]*model.DirectChannelForExport, error)
@@ -273,31 +285,37 @@ type ChannelMemberHistoryStore interface {
 	LogJoinEvent(userID string, channelID string, joinTime int64) error
 	LogLeaveEvent(userID string, channelID string, leaveTime int64) error
 	GetUsersInChannelDuring(startTime int64, endTime int64, channelID string) ([]*model.ChannelMemberHistoryResult, error)
+	PermanentDeleteBatchForRetentionPolicies(now, globalPolicyEndTime, limit int64, cursor model.RetentionPolicyCursor) (int64, model.RetentionPolicyCursor, error)
+	DeleteOrphanedRows(limit int) (deleted int64, err error)
 	PermanentDeleteBatch(endTime int64, limit int64) (int64, error)
+	GetChannelsLeftSince(userID string, since int64) ([]string, error)
 }
 type ThreadStore interface {
-	GetThreadFollowers(threadID string) ([]string, error)
+	GetThreadFollowers(threadID string, fetchOnlyActive bool) ([]string, error)
 
-	SaveMultiple(thread []*model.Thread) ([]*model.Thread, int, error)
-	Save(thread *model.Thread) (*model.Thread, error)
-	Update(thread *model.Thread) (*model.Thread, error)
 	Get(id string) (*model.Thread, error)
-	GetThreadsForUser(userId, teamID string, opts model.GetUserThreadsOpts) (*model.Threads, error)
-	GetThreadForUser(userID, teamID, threadId string, extended bool) (*model.ThreadResponse, error)
-	Delete(postID string) error
+	GetTotalUnreadThreads(userId, teamID string, opts model.GetUserThreadsOpts) (int64, error)
+	GetTotalThreads(userId, teamID string, opts model.GetUserThreadsOpts) (int64, error)
+	GetTotalUnreadMentions(userId, teamID string, opts model.GetUserThreadsOpts) (int64, error)
+	GetThreadsForUser(userId, teamID string, opts model.GetUserThreadsOpts) ([]*model.ThreadResponse, error)
+	GetThreadForUser(teamID string, threadMembership *model.ThreadMembership, extended bool) (*model.ThreadResponse, error)
+	GetTeamsUnreadForUser(userID string, teamIDs []string) (map[string]*model.TeamUnread, error)
 	GetPosts(threadID string, since int64) ([]*model.Post, error)
 
-	MarkAllAsRead(userID, teamID string) error
+	MarkAllAsRead(userID string, threadIds []string) error
+	MarkAllAsReadByTeam(userID, teamID string) error
+	MarkAllAsReadByChannels(userID string, channelIDs []string) error
 	MarkAsRead(userID, threadID string, timestamp int64) error
 
-	SaveMembership(membership *model.ThreadMembership) (*model.ThreadMembership, error)
 	UpdateMembership(membership *model.ThreadMembership) (*model.ThreadMembership, error)
 	GetMembershipsForUser(userId, teamID string) ([]*model.ThreadMembership, error)
 	GetMembershipForUser(userId, postID string) (*model.ThreadMembership, error)
 	DeleteMembershipForUser(userId, postID string) error
-	MaintainMembership(userID, postID string, following, incrementMentions, updateFollowing, updateViewedTimestamp, updateParticipants bool) (*model.ThreadMembership, error)
-	CollectThreadsWithNewerReplies(userId string, channelIds []string, timestamp int64) ([]string, error)
-	UpdateUnreadsByChannel(userId string, changedThreads []string, timestamp int64, updateViewedTimestamp bool) error
+	MaintainMembership(userID, postID string, opts ThreadMembershipOpts) (*model.ThreadMembership, error)
+	PermanentDeleteBatchForRetentionPolicies(now, globalPolicyEndTime, limit int64, cursor model.RetentionPolicyCursor) (int64, model.RetentionPolicyCursor, error)
+	PermanentDeleteBatchThreadMembershipsForRetentionPolicies(now, globalPolicyEndTime, limit int64, cursor model.RetentionPolicyCursor) (int64, model.RetentionPolicyCursor, error)
+	DeleteOrphanedRows(limit int) (deleted int64, err error)
+	GetThreadUnreadReplyCount(threadMembership *model.ThreadMembership) (int64, error)
 }
 
 type PostStore interface {
@@ -327,18 +345,21 @@ type PostStore interface {
 	AnalyticsPostCount(teamID string, mustHaveFile bool, mustHaveHashtag bool) (int64, error)
 	ClearCaches()
 	InvalidateLastPostTimeCache(channelID string)
+	GetLastPostRowCreateAt() (int64, error)
 	GetPostsCreatedAt(channelID string, time int64) ([]*model.Post, error)
 	Overwrite(post *model.Post) (*model.Post, error)
 	OverwriteMultiple(posts []*model.Post) ([]*model.Post, int, error)
 	GetPostsByIds(postIds []string) ([]*model.Post, error)
 	GetPostsBatchForIndexing(startTime int64, endTime int64, limit int) ([]*model.PostForIndexing, error)
+	PermanentDeleteBatchForRetentionPolicies(now, globalPolicyEndTime, limit int64, cursor model.RetentionPolicyCursor) (int64, model.RetentionPolicyCursor, error)
+	DeleteOrphanedRows(limit int) (deleted int64, err error)
 	PermanentDeleteBatch(endTime int64, limit int64) (int64, error)
 	GetOldest() (*model.Post, error)
 	GetMaxPostSize() int
 	GetParentsForExportAfter(limit int, afterID string) ([]*model.PostForExport, error)
 	GetRepliesForExport(parentID string) ([]*model.ReplyForExport, error)
 	GetDirectPostParentsForExportAfter(limit int, afterID string) ([]*model.DirectPostForExport, error)
-	SearchPostsInTeamForUser(paramsList []*model.SearchParams, userID, teamID string, page, perPage int) (*model.PostSearchResults, error)
+	SearchPostsForUser(paramsList []*model.SearchParams, userID, teamID string, page, perPage int) (*model.PostSearchResults, error)
 	GetOldestEntityCreationTime() (int64, error)
 	HasAutoResponsePostByUserSince(options model.GetPostsSinceOptions, userId string) (bool, error)
 	GetPostsSinceForSync(options model.GetPostsSinceForSyncOptions, cursor model.GetPostsSinceForSyncCursor, limit int) ([]*model.Post, model.GetPostsSinceForSyncCursor, error)
@@ -347,6 +368,7 @@ type PostStore interface {
 type UserStore interface {
 	Save(user *model.User) (*model.User, error)
 	Update(user *model.User, allowRoleUpdate bool) (*model.UserUpdate, error)
+	UpdateNotifyProps(userID string, props map[string]string) error
 	UpdateLastPictureUpdate(userID string) error
 	ResetLastPictureUpdate(userID string) error
 	UpdatePassword(userID, newPassword string) error
@@ -397,6 +419,7 @@ type UserStore interface {
 	SearchNotInChannel(teamID string, channelID string, term string, options *model.UserSearchOptions) ([]*model.User, error)
 	SearchWithoutTeam(term string, options *model.UserSearchOptions) ([]*model.User, error)
 	SearchInGroup(groupID string, term string, options *model.UserSearchOptions) ([]*model.User, error)
+	SearchNotInGroup(groupID string, term string, options *model.UserSearchOptions) ([]*model.User, error)
 	AnalyticsGetInactiveUsersCount() (int64, error)
 	AnalyticsGetExternalUsers(hostDomain string) (bool, error)
 	AnalyticsGetSystemAdminCount() (int64, error)
@@ -415,6 +438,9 @@ type UserStore interface {
 	DeactivateGuests() ([]string, error)
 	AutocompleteUsersInChannel(teamID, channelID, term string, options *model.UserSearchOptions) (*model.UserAutocompleteInChannel, error)
 	GetKnownUsers(userID string) ([]string, error)
+	IsEmpty(excludeBots bool) (bool, error)
+	GetUsersWithInvalidEmails(page int, perPage int, restrictedDomains string) ([]*model.User, error)
+	InsertUsers(users []*model.User) error
 }
 
 type BotStore interface {
@@ -435,13 +461,14 @@ type SessionStore interface {
 	Remove(sessionIDOrToken string) error
 	RemoveAllSessions() error
 	PermanentDeleteSessionsByUser(teamID string) error
+	GetLastSessionRowCreateAt() (int64, error)
 	UpdateExpiresAt(sessionID string, time int64) error
 	UpdateLastActivityAt(sessionID string, time int64) error
 	UpdateRoles(userID string, roles string) (string, error)
 	UpdateDeviceId(id string, deviceID string, expiresAt int64) (string, error)
 	UpdateProps(session *model.Session) error
 	AnalyticsSessionCount() (int64, error)
-	Cleanup(expiryTime int64, batchSize int64)
+	Cleanup(expiryTime int64, batchSize int64) error
 }
 
 type AuditStore interface {
@@ -563,7 +590,7 @@ type CommandWebhookStore interface {
 }
 
 type PreferenceStore interface {
-	Save(preferences *model.Preferences) error
+	Save(preferences model.Preferences) error
 	GetCategory(userID string, category string) (model.Preferences, error)
 	Get(userID string, category string, name string) (*model.Preference, error)
 	GetAll(userID string) (model.Preferences, error)
@@ -571,19 +598,22 @@ type PreferenceStore interface {
 	DeleteCategory(userID string, category string) error
 	DeleteCategoryAndName(category string, name string) error
 	PermanentDeleteByUser(userID string) error
+	DeleteOrphanedRows(limit int) (deleted int64, err error)
 	CleanupFlagsBatch(limit int64) (int64, error)
 }
 
 type LicenseStore interface {
 	Save(license *model.LicenseRecord) (*model.LicenseRecord, error)
 	Get(id string) (*model.LicenseRecord, error)
+	GetAll() ([]*model.LicenseRecord, error)
 }
 
 type TokenStore interface {
 	Save(recovery *model.Token) error
 	Delete(token string) error
 	GetByToken(token string) (*model.Token, error)
-	Cleanup()
+	Cleanup(expiryTime int64)
+	GetAllTokensByType(tokenType string) ([]*model.Token, error)
 	RemoveAllTokensByType(tokenType string) error
 }
 
@@ -604,6 +634,7 @@ type StatusStore interface {
 	ResetAll() error
 	GetTotalActiveUsersCount() (int64, error)
 	UpdateLastActivityAt(userID string, lastActivityAt int64) error
+	UpdateExpiredDNDStatuses() ([]*model.Status, error)
 }
 
 type FileInfoStore interface {
@@ -643,8 +674,9 @@ type ReactionStore interface {
 	GetForPost(postID string, allowFromCache bool) ([]*model.Reaction, error)
 	GetForPostSince(postId string, since int64, excludeRemoteId string, inclDeleted bool) ([]*model.Reaction, error)
 	DeleteAllWithEmojiName(emojiName string) error
-	PermanentDeleteBatch(endTime int64, limit int64) (int64, error)
 	BulkGetForPosts(postIds []string) ([]*model.Reaction, error)
+	DeleteOrphanedRows(limit int) (int64, error)
+	PermanentDeleteBatch(endTime int64, limit int64) (int64, error)
 }
 
 type JobStore interface {
@@ -655,6 +687,7 @@ type JobStore interface {
 	Get(id string) (*model.Job, error)
 	GetAllPage(offset int, limit int) ([]*model.Job, error)
 	GetAllByType(jobType string) ([]*model.Job, error)
+	GetAllByTypeAndStatus(jobType string, status string) ([]*model.Job, error)
 	GetAllByTypePage(jobType string, offset int, limit int) ([]*model.Job, error)
 	GetAllByTypesPage(jobTypes []string, offset int, limit int) ([]*model.Job, error)
 	GetAllByStatus(status string) ([]*model.Job, error)
@@ -662,6 +695,7 @@ type JobStore interface {
 	GetNewestJobByStatusesAndType(statuses []string, jobType string) (*model.Job, error)
 	GetCountByStatusAndType(status string, jobType string) (int64, error)
 	Delete(id string) (string, error)
+	Cleanup(expiryTime int64, batchSize int) error
 }
 
 type UserAccessTokenStore interface {
@@ -730,7 +764,7 @@ type TermsOfServiceStore interface {
 type ProductNoticesStore interface {
 	View(userID string, notices []string) error
 	Clear(notices []string) error
-	ClearOldNotices(currentNotices *model.ProductNotices) error
+	ClearOldNotices(currentNotices model.ProductNotices) error
 	GetViews(userID string) ([]model.ProductNoticeViewState, error)
 }
 
@@ -742,6 +776,7 @@ type UserTermsOfServiceStore interface {
 
 type GroupStore interface {
 	Create(group *model.Group) (*model.Group, error)
+	CreateWithUserIds(group *model.GroupWithUserIds) (*model.Group, error)
 	Get(groupID string) (*model.Group, error)
 	GetByName(name string, opts model.GroupSearchOpts) (*model.Group, error)
 	GetByIDs(groupIDs []string) ([]*model.Group, error)
@@ -754,6 +789,8 @@ type GroupStore interface {
 	GetMemberUsers(groupID string) ([]*model.User, error)
 	GetMemberUsersPage(groupID string, page int, perPage int) ([]*model.User, error)
 	GetMemberCount(groupID string) (int64, error)
+
+	GetNonMemberUsersPage(groupID string, page int, perPage int) ([]*model.User, error)
 
 	GetMemberUsersInTeam(groupID string, teamID string) ([]*model.User, error)
 	GetMemberUsersNotInChannel(groupID string, channelID string) ([]*model.User, error)
@@ -829,6 +866,11 @@ type GroupStore interface {
 
 	// GroupCountWithAllowReference returns the count of records in the Groups table with AllowReference set to true.
 	GroupCountWithAllowReference() (int64, error)
+
+	UpsertMembers(groupID string, userIDs []string) ([]*model.GroupMember, error)
+	DeleteMembers(groupID string, userIDs []string) ([]*model.GroupMember, error)
+
+	GetMember(groupID string, userID string) (*model.GroupMember, error)
 }
 
 type LinkMetadataStore interface {
@@ -895,6 +937,8 @@ type ChannelSearchOpts struct {
 	Private                  bool
 	Page                     *int
 	PerPage                  *int
+	LastDeleteAt             int
+	LastUpdateAt             int
 }
 
 func (c *ChannelSearchOpts) IsPaginated() bool {
@@ -910,4 +954,22 @@ type UserGetByIdsOpts struct {
 
 	// Since filters the users based on their UpdateAt timestamp.
 	Since int64
+}
+
+// ThreadMembershipOpts defines some properties to be passed to
+// ThreadStore.MaintainMembership()
+type ThreadMembershipOpts struct {
+	// Following indicates whether or not the user is following the thread.
+	Following bool
+	// IncrementMentions indicates whether or not the mentions count for
+	// the thread should be incremented.
+	IncrementMentions bool
+	// UpdateFollowing indicates whether or not the following state should be changed.
+	UpdateFollowing bool
+	// UpdateViewedTimestamp indicates whether or not the LastViewed field of the
+	// membership should be updated.
+	UpdateViewedTimestamp bool
+	// UpdateParticipants indicates whether or not the thread's participants list
+	// should be updated.
+	UpdateParticipants bool
 }

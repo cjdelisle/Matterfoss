@@ -9,9 +9,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/mattermost/gorp"
-
-	"github.com/cjdelisle/matterfoss-server/v5/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 var escapeLikeSearchChar = []string{
@@ -47,8 +45,8 @@ func MapStringsToQueryParams(list []string, paramPrefix string) (string, map[str
 	return "(" + keys.String() + ")", params
 }
 
-// finalizeTransaction ensures a transaction is closed after use, rolling back if not already committed.
-func finalizeTransaction(transaction *gorp.Transaction) {
+// finalizeTransactionX ensures a transaction is closed after use, rolling back if not already committed.
+func finalizeTransactionX(transaction *sqlxTxWrapper) {
 	// Rollback returns sql.ErrTxDone if the transaction was already closed.
 	if err := transaction.Rollback(); err != nil && err != sql.ErrTxDone {
 		mlog.Error("Failed to rollback transaction", mlog.Err(err))
@@ -88,4 +86,64 @@ func isQuotedWord(s string) bool {
 	}
 
 	return s[0] == '"' && s[len(s)-1] == '"'
+}
+
+// constructMySQLJSONArgs returns the arg list to pass to a query along with
+// the string of placeholders which is needed to be to the JSON_SET function.
+// Use this function in this way:
+// UPDATE Table
+// SET Col = JSON_SET(Col, `+argString+`)
+// WHERE Id=?`, args...)
+// after appending the Id param to the args slice.
+func constructMySQLJSONArgs(props map[string]string) ([]interface{}, string) {
+	if len(props) == 0 {
+		return nil, ""
+	}
+
+	// Unpack the keys and values to pass to MySQL.
+	args := make([]interface{}, 0, len(props))
+	for k, v := range props {
+		args = append(args, "$."+k, v)
+	}
+
+	// We calculate the number of ? to set in the query string.
+	argString := strings.Repeat("?, ", len(props)*2)
+	// Strip off the trailing comma.
+	argString = strings.TrimSuffix(argString, ", ")
+
+	return args, argString
+}
+
+func makeStringArgs(params []string) []interface{} {
+	args := make([]interface{}, len(params))
+	for i, name := range params {
+		args[i] = name
+	}
+	return args
+}
+
+func constructArrayArgs(ids []string) (string, []interface{}) {
+	var placeholder strings.Builder
+	values := make([]interface{}, 0, len(ids))
+	for _, entry := range ids {
+		if placeholder.Len() > 0 {
+			placeholder.WriteString(",")
+		}
+
+		placeholder.WriteString("?")
+		values = append(values, entry)
+	}
+
+	return "(" + placeholder.String() + ")", values
+}
+
+// morphWriter is a target to pass to the logger instance of morph.
+// For now, everything is just logged at a debug level. If we need to log
+// errors/warnings from the library also, that needs to be seen later.
+type morphWriter struct {
+}
+
+func (l *morphWriter) Write(in []byte) (int, error) {
+	mlog.Debug(string(in))
+	return len(in), nil
 }

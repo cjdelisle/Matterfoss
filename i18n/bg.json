@@ -53,11 +53,11 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "Тази версия на вашия браузър вече не се поддържа от Matterfoss"
+    "translation": "Тази версия на вашия браузър вече не се поддържа от Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "Този браузър вече не се поддържа от Matterfoss"
+    "translation": "Този браузър вече не се поддържа от Mattermost"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -101,7 +101,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "Изтеглете приложението Matterfoss или използвайте поддържан браузър за по-добро изживяване."
+    "translation": "Изтеглете приложението Mattermost или използвайте поддържан браузър за по-добро изживяване."
   },
   {
     "id": "web.error.unsupported_browser.download",
@@ -204,18 +204,6 @@
     "translation": "Бота не съществува."
   },
   {
-    "id": "store.sql.convert_string_map",
-    "translation": "FromDb: Не може да конвертира StringMap в *низ"
-  },
-  {
-    "id": "store.sql.convert_string_interface",
-    "translation": "FromDb: Не може да конвертира StringInterface в *низ"
-  },
-  {
-    "id": "store.sql.convert_string_array",
-    "translation": "FromDb: Не може да конвертира StringArray в *низ"
-  },
-  {
     "id": "searchengine.bleve.disabled.error",
     "translation": "Грешка при прочистване на Bleve индекси: двигателят е забранен"
   },
@@ -253,7 +241,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "Общите условия на GitLab са актуализирани. Моля, отидете на gitlab.com, за да ги приемете и след това опитайте да влезете в Matterfoss отново."
+    "translation": "Общите условия на GitLab са актуализирани. Моля, отидете на gitlab.com, за да ги приемете и след това опитайте да влезете в Mattermost отново."
   },
   {
     "id": "model.websocket_client.connect_fail.app_error",
@@ -984,10 +972,6 @@
     "translation": "Невалиден root id."
   },
   {
-    "id": "model.command_hook.parent_id.app_error",
-    "translation": "Невалиден родителски id."
-  },
-  {
     "id": "model.command_hook.id.app_error",
     "translation": "Невалиден hook id на командата."
   },
@@ -1337,7 +1321,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "Потребителско име вече се използва от друг потребител на Matterfoss."
+    "translation": "Потребителско име вече се използва от друг потребител на Mattermost."
   },
   {
     "id": "ent.migration.migratetosaml.user_not_found_in_users_mapping_file",
@@ -1552,20 +1536,12 @@
     "translation": "Невалиден тип."
   },
   {
-    "id": "model.post.is_valid.root_parent.app_error",
-    "translation": "Невалиден идентификатор на корена, трябва да бъде зададен, ако родителският идентификатор е зададен."
-  },
-  {
     "id": "model.post.is_valid.root_id.app_error",
     "translation": "Невалиден id на корена."
   },
   {
     "id": "model.post.is_valid.props.app_error",
     "translation": "Невалидни свойства."
-  },
-  {
-    "id": "model.post.is_valid.parent_id.app_error",
-    "translation": "Невалиден родителски id."
   },
   {
     "id": "model.post.is_valid.original_id.app_error",
@@ -1833,7 +1809,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "Неуспешно търсене на потребители в AD/LDAP. Проверете дали Matterfoss сървъра може да се свърже с вашия AD/LDAP сървър и опитайте отново."
+    "translation": "Неуспешно търсене на потребители в AD/LDAP. Проверете дали Mattermost сървъра може да се свърже с вашия AD/LDAP сървър и опитайте отново."
   },
   {
     "id": "ent.ldap.syncronize.populate_syncables",
@@ -1873,7 +1849,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "Вашият AD/LDAP профил няма разрешение за използване на този Matterfoss сървър. Моля, помолете вашия системен администратор да провери AD/LDAP потребителския филтър."
+    "translation": "Вашият AD/LDAP профил няма разрешение за използване на този Mattermost сървър. Моля, помолете вашия системен администратор да провери AD/LDAP потребителския филтър."
   },
   {
     "id": "ent.ldap.do_login.unable_to_connect.app_error",
@@ -2128,28 +2104,8 @@
     "translation": "Работникът на агрегатора Elasticsearch не успя да създаде заданието за индексиране"
   },
   {
-    "id": "ent.data_retention.reactions_batch.internal_error",
-    "translation": "Срещнахме грешка при трайното изтриване партида от реакции."
-  },
-  {
-    "id": "ent.data_retention.posts_permanent_delete_batch.internal_error",
-    "translation": "Срещнахме грешка при трайното изтриване на партида от публикации."
-  },
-  {
     "id": "ent.data_retention.generic.license.error",
     "translation": "Вашият лиценз не поддържа съхранение на данни."
-  },
-  {
-    "id": "ent.data_retention.flags_batch.internal_error",
-    "translation": "Срещнахме грешка при прочистването на партида от флагове."
-  },
-  {
-    "id": "ent.data_retention.file_infos_batch.internal_error",
-    "translation": "Срещнахме грешка при трайно изтриване на пакет от файлова информация."
-  },
-  {
-    "id": "ent.data_retention.channel_member_history_batch.internal_error",
-    "translation": "Неуспешно почистване на записи."
   },
   {
     "id": "ent.compliance.run_failed.error",
@@ -2268,18 +2224,6 @@
     "translation": "Не могат да се получат потребители."
   },
   {
-    "id": "cli.outgoing_webhook.inconsistent_state.app_error",
-    "translation": "Изходящия webhook се изтрива, но не може да създаде нов поради някаква грешка."
-  },
-  {
-    "id": "cli.license.critical",
-    "translation": "Функцията изисква надграждане до Enterprise Edition и включване на лицензен ключ. Моля, свържете се със системния си администратор."
-  },
-  {
-    "id": "brand.save_brand_image.too_large.app_error",
-    "translation": "Файлът с изображения не може да се прочете. Уверете се, че размерът на изображението е по-малък от 2 MB и опитайте отново."
-  },
-  {
     "id": "brand.save_brand_image.save_image.app_error",
     "translation": "Не може да се запише файлът с изображения във вашето хранилище на файлове. Моля, проверете връзката си и опитайте отново."
   },
@@ -2290,10 +2234,6 @@
   {
     "id": "brand.save_brand_image.encode.app_error",
     "translation": "Неуспешно преобразуване на данните от изображението във формат PNG. Моля, опитайте отново."
-  },
-  {
-    "id": "brand.save_brand_image.decode_config.app_error",
-    "translation": "Не могат да се получат метаданни за изображения."
   },
   {
     "id": "brand.save_brand_image.decode.app_error",
@@ -2508,20 +2448,8 @@
     "translation": "Не можа да се запази стойността за {{.WarnMetricName}}"
   },
   {
-    "id": "app.system.warn_metric.notification.invalid_metric.app_error",
-    "translation": "Не може да се намери показател."
-  },
-  {
-    "id": "app.system.warn_metric.notification.empty_admin_list.app_error",
-    "translation": "Списъкът на администраторите е празен."
-  },
-  {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Matterfoss съветник"
-  },
-  {
-    "id": "app.system.warn_metric.bot_description",
-    "translation": "[Научете повече за Matterfoss съветника](https://about.Matterfoss.com/default-channel-handle-documentation)"
+    "translation": "Mattermost съветник"
   },
   {
     "id": "app.system.save.app_error",
@@ -2604,8 +2532,8 @@
     "translation": "Невалиден маркер на МФУ."
   },
   {
-    "id": "Matterfoss.bulletin.subject",
-    "translation": "Matterfoss бюлетин за сигурност"
+    "id": "mattermost.bulletin.subject",
+    "translation": "Mattermost бюлетин за сигурност"
   },
   {
     "id": "manaultesting.test_autolink.unable.app_error",
@@ -2650,14 +2578,6 @@
   {
     "id": "interactive_message.decode_trigger_id.base64_decode_failed",
     "translation": "Неуспешно декодиране base64 за задействащо ID на интерактивен диалог."
-  },
-  {
-    "id": "import_process.worker.do_job.unzip",
-    "translation": "Не можа да се обработи внасянето: неуспешно разархивиране на файла."
-  },
-  {
-    "id": "import_process.worker.do_job.tmp_dir",
-    "translation": "Не можа да се обработи внасянето: неуспешно създаване на временна директория."
   },
   {
     "id": "import_process.worker.do_job.open_file",
@@ -3449,39 +3369,39 @@
   },
   {
     "id": "api.upgrade_to_enterprise_status.signature.app_error",
-    "translation": "Matterfoss не можа да надстрои до корпоративна версия. Цифровия подпис на сваления двоичен файл не може да се провери."
+    "translation": "Mattermost не можа да надстрои до корпоративна версия. Цифровия подпис на сваления двоичен файл не може да се провери."
   },
   {
     "id": "api.upgrade_to_enterprise_status.app_error",
-    "translation": "Matterfoss не може да се надстрои до корпоративна версия."
+    "translation": "Mattermost не може да се надстрои до корпоративна версия."
   },
   {
     "id": "api.upgrade_to_enterprise.system_not_supported.app_error",
-    "translation": "Matterfoss не можа да надстрои до корпоративна версия. Тази функция ще работи само в Linux системи с x86-64 архитектура."
+    "translation": "Mattermost не можа да надстрои до корпоративна версия. Тази функция ще работи само в Linux системи с x86-64 архитектура."
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user.app_error",
-    "translation": "Matterfoss не можа да надстрои до корпоративна версия. Системния потребител Matterfoss {{.MatterfossUsername}} няма права за запис до необходимия двоичен файл. Системният администратор може да актуализира правата за файлове, като изпълни следната команда на сървъра, където е инсталиран Matterfoss:\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\n```\n\nСлед като промените правата за файлове, опитайте да надстроите отново Matterfoss. След като надстроите и рестартирате, не забравяйте да възстановите оригиналните права на двоичния файл:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
+    "translation": "Mattermost не можа да надстрои до корпоративна версия. Системния потребител Mattermost {{.MattermostUsername}} няма права за запис до необходимия двоичен файл. Системният администратор може да актуализира правата за файлове, като изпълни следната команда на сървъра, където е инсталиран Mattermost:\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\n```\n\nСлед като промените правата за файлове, опитайте да надстроите отново Mattermost. След като надстроите и рестартирате, не забравяйте да възстановите оригиналните права на двоичния файл:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user-and-permission.app_error",
-    "translation": "Matterfoss не можа да надстрои до корпоративна версия. Системния потребител Matterfoss {{.MatterfossUsername}} няма права за запис до необходимия двоичен файл. Системният администратор може да актуализира правата за файлове, като изпълни следната команда на сървъра, където е инсталиран Matterfoss:\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nСлед като промените правата за файлове, опитайте да надстроите отново Matterfoss. След като надстроите и рестартирате, не забравяйте да възстановите оригиналните права на двоичния файл:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "Mattermost не можа да надстрои до корпоративна версия. Системния потребител Mattermost {{.MattermostUsername}} няма права за запис до необходимия двоичен файл. Системният администратор може да актуализира правата за файлове, като изпълни следната команда на сървъра, където е инсталиран Mattermost:\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nСлед като промените правата за файлове, опитайте да надстроите отново Mattermost. След като надстроите и рестартирате, не забравяйте да възстановите оригиналните права на двоичния файл:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-permission.app_error",
-    "translation": "Matterfoss не можа да надстрои до корпоративна версия. Системния потребител Matterfoss {{.MatterfossUsername}} няма права за запис до необходимия двоичен файл. Системният администратор може да актуализира разрешенията за файлове, като изпълни следната команда на сървъра, където е инсталиран Matterfoss:\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nСлед като промените правата за файлове, опитайте да надстроите отново Matterfoss. След като надстроите и рестартирате, не забравяйте да възстановите оригиналните права на двоичния файл:\n\n```\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "Mattermost не можа да надстрои до корпоративна версия. Системния потребител Mattermost {{.MattermostUsername}} няма права за запис до необходимия двоичен файл. Системният администратор може да актуализира разрешенията за файлове, като изпълни следната команда на сървъра, където е инсталиран Mattermost:\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nСлед като промените правата за файлове, опитайте да надстроите отново Mattermost. След като надстроите и рестартирате, не забравяйте да възстановите оригиналните права на двоичния файл:\n\n```\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.generic_error.app_error",
-    "translation": "Matterfoss не може да се надстрои до корпоративна версия."
+    "translation": "Mattermost не може да се надстрои до корпоративна версия."
   },
   {
     "id": "api.upgrade_to_enterprise.app_error",
-    "translation": "Надстройката до Matterfoss корпоративна версия е вече пусната."
+    "translation": "Надстройката до Mattermost корпоративна версия е вече пусната."
   },
   {
     "id": "api.upgrade_to_enterprise.already-enterprise.app_error",
-    "translation": "Не можете да надстроите, защото вече използвате Matterfoss корпоративна версия."
+    "translation": "Не можете да надстроите, защото вече използвате Mattermost корпоративна версия."
   },
   {
     "id": "app.webhooks.get_outgoing.app_error",
@@ -3933,7 +3853,7 @@
   },
   {
     "id": "api.upgrade_to_enterprise.already-done.app_error",
-    "translation": "Вече надградихте до Matterfoss корпоративна версия. Моля, рестартирайте сървъра, за да завършите надстройката."
+    "translation": "Вече надградихте до Mattermost корпоративна версия. Моля, рестартирайте сървъра, за да завършите надстройката."
   },
   {
     "id": "api.templates.welcome_subject",
@@ -3945,7 +3865,7 @@
   },
   {
     "id": "api.templates.welcome_body.info",
-    "translation": "Този адрес на ел.поща е използван за създаване на профил в Matterfoss."
+    "translation": "Този адрес на ел.поща е използван за създаване на профил в Mattermost."
   },
   {
     "id": "api.templates.welcome_body.button",
@@ -3957,11 +3877,11 @@
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Matterfoss Свържете се с нас"
+    "translation": "Mattermost Свържете се с нас"
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "Ако имате някакви допълнителни запитвания, моля, свържете се с support@Matterfoss.com"
+    "translation": "Ако имате някакви допълнителни запитвания, моля, свържете се с support@mattermost.com"
   },
   {
     "id": "api.templates.warn_metric_ack.body.site_url_header",
@@ -3993,7 +3913,7 @@
   },
   {
     "id": "api.templates.verify_body.info",
-    "translation": "Този адрес на ел.поща е използван за създаване на профил в Matterfoss."
+    "translation": "Този адрес на ел.поща е използван за създаване на профил в Mattermost."
   },
   {
     "id": "api.templates.verify_body.button",
@@ -4024,7 +3944,7 @@
     "translation": "Личен маркер за достъп беше добавен към вашия профил на {{.SiteURL}}. Той може да бъде използван за достъп до {{.SiteName}} с вашия профил."
   },
   {
-    "id": "api.templates.upgrade_Matterfoss_cloud",
+    "id": "api.templates.upgrade_mattermost_cloud",
     "translation": "Надстрой"
   },
   {
@@ -4057,7 +3977,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "Лицензът за Matterfoss корпоративна е деактивиран."
+    "translation": "Лицензът за Mattermost корпоративна е деактивиран."
   },
   {
     "id": "api.templates.remove_expired_license.body.title",
@@ -4073,11 +3993,11 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.title",
-    "translation": "Вашата Matterfoss Cloud фактура е дължима"
+    "translation": "Вашата Mattermost Cloud фактура е дължима"
   },
   {
     "id": "api.templates.payment_failed_no_card.subject",
-    "translation": "Плащането се дължи за вашия Matterfoss Cloud абонамент"
+    "translation": "Плащането се дължи за вашия Mattermost Cloud абонамент"
   },
   {
     "id": "api.templates.payment_failed_no_card.info3",
@@ -4085,7 +4005,7 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.info1",
-    "translation": "Вашата фактура за Matterfoss Cloud за последния период на фактуриране е обработена. Ние обаче не разполагаме с вашите данни за плащане."
+    "translation": "Вашата фактура за Mattermost Cloud за последния период на фактуриране е обработена. Ние обаче не разполагаме с вашите данни за плащане."
   },
   {
     "id": "api.templates.payment_failed_no_card.button",
@@ -4097,11 +4017,11 @@
   },
   {
     "id": "api.templates.payment_failed.subject",
-    "translation": "Изисква се действие: Неуспешно плащане за Matterfoss Cloud"
+    "translation": "Изисква се действие: Неуспешно плащане за Mattermost Cloud"
   },
   {
     "id": "api.templates.payment_failed.info3",
-    "translation": "За да осигурите непрекъснат абонамент за Matterfoss Cloud, моля, свържете се с вашата финансова институция, за да отстраните проблема или актуализирайте данните си за плащане. След като се актуализира информацията за плащане, Matterfoss ще се опита да уреди неплатеното салдо."
+    "translation": "За да осигурите непрекъснат абонамент за Mattermost Cloud, моля, свържете се с вашата финансова институция, за да отстраните проблема или актуализирайте данните си за плащане. След като се актуализира информацията за плащане, Mattermost ще се опита да уреди неплатеното салдо."
   },
   {
     "id": "api.templates.payment_failed.info2",
@@ -4109,7 +4029,7 @@
   },
   {
     "id": "api.templates.payment_failed.info1",
-    "translation": "Вашата финансова институция отказа плащане от вашата {{.CardBrand}} **** {{.LastFour}}, свързана с вашето работно пространство в Matterfoss Cloud."
+    "translation": "Вашата финансова институция отказа плащане от вашата {{.CardBrand}} **** {{.LastFour}}, свързана с вашето работно пространство в Mattermost Cloud."
   },
   {
     "id": "api.templates.password_change_subject",
@@ -4129,11 +4049,11 @@
   },
   {
     "id": "api.templates.over_limit_suspended_title",
-    "translation": "Matterfoss облачното работно пространство е спряно"
+    "translation": "Mattermost облачното работно пространство е спряно"
   },
   {
     "id": "api.templates.over_limit_suspended_subject",
-    "translation": "Абонаментът ви за Matterfoss Cloud беше спрян"
+    "translation": "Абонаментът ви за Mattermost Cloud беше спрян"
   },
   {
     "id": "api.templates.over_limit_suspended_info2",
@@ -4149,7 +4069,7 @@
   },
   {
     "id": "api.templates.over_limit_subject",
-    "translation": "Matterfoss Cloud работното пространство превишава потребителското ограничение"
+    "translation": "Mattermost Cloud работното пространство превишава потребителското ограничение"
   },
   {
     "id": "api.templates.over_limit_info2",
@@ -4157,7 +4077,7 @@
   },
   {
     "id": "api.templates.over_limit_info1",
-    "translation": "Изглежда, че имате повече от 10 потребители във вашето работно пространство, което е извън ограниченията на безплатното ниво в Matterfoss Cloud Professional. За да избегнете прекъсвания във вашето работно пространство Matterfoss, моля надстройте."
+    "translation": "Изглежда, че имате повече от 10 потребители във вашето работно пространство, което е извън ограниченията на безплатното ниво в Mattermost Cloud Professional. За да избегнете прекъсвания във вашето работно пространство Mattermost, моля надстройте."
   },
   {
     "id": "api.templates.over_limit_fix_now",
@@ -4165,11 +4085,11 @@
   },
   {
     "id": "api.templates.over_limit_90_days_title",
-    "translation": "Спирането на работното ви пространство в Matterfoss Cloud е насрочено за утре"
+    "translation": "Спирането на работното ви пространство в Mattermost Cloud е насрочено за утре"
   },
   {
     "id": "api.templates.over_limit_90_days_subject",
-    "translation": "Абонаментът ви за Matterfoss Cloud скоро ще бъде спрян"
+    "translation": "Абонаментът ви за Mattermost Cloud скоро ще бъде спрян"
   },
   {
     "id": "api.templates.over_limit_90_days_info4",
@@ -4185,7 +4105,7 @@
   },
   {
     "id": "api.templates.over_limit_90_days_info1",
-    "translation": "Това е последно напомняне, че не сме получили плащане за вашето работно пространство Matterfoss Cloud, то е просрочено от {{.OverLimitDate}}. Утре ще спрем услугата ви."
+    "translation": "Това е последно напомняне, че не сме получили плащане за вашето работно пространство Mattermost Cloud, то е просрочено от {{.OverLimitDate}}. Утре ще спрем услугата ви."
   },
   {
     "id": "api.templates.over_limit_7_days_title",
@@ -4193,19 +4113,19 @@
   },
   {
     "id": "api.templates.over_limit_7_days_subject",
-    "translation": "Плащането е просрочено за вашия Matterfoss Cloud абонамент"
+    "translation": "Плащането е просрочено за вашия Mattermost Cloud абонамент"
   },
   {
     "id": "api.templates.over_limit_7_days_info1",
-    "translation": "Matterfoss не можа да обработи последното Ви автоматично плащане. За да поддържате услугата си активна, моля, добавете данните за плащане възможно най-скоро или услугата Ви може да бъде спряна."
+    "translation": "Mattermost не можа да обработи последното Ви автоматично плащане. За да поддържате услугата си активна, моля, добавете данните за плащане възможно най-скоро или услугата Ви може да бъде спряна."
   },
   {
     "id": "api.templates.over_limit_30_days_title",
-    "translation": "Спиране на Matterfoss облачното работно пространство"
+    "translation": "Спиране на Mattermost облачното работно пространство"
   },
   {
     "id": "api.templates.over_limit_30_days_subject",
-    "translation": " Действайте, за да запазите абонамента си за Matterfoss Cloud"
+    "translation": " Действайте, за да запазите абонамента си за Mattermost Cloud"
   },
   {
     "id": "api.templates.over_limit_30_days_info2_item3",
@@ -4225,7 +4145,7 @@
   },
   {
     "id": "api.templates.over_limit_30_days_info1",
-    "translation": "Все още има време да поддържате работното си пространство на Matterfoss Cloud активно чрез разрешаване на проблема с начина на плащане. За да избегнете спиране, актуализирайте начина си на плащане."
+    "translation": "Все още има време да поддържате работното си пространство на Mattermost Cloud активно чрез разрешаване на проблема с начина на плащане. За да избегнете спиране, актуализирайте начина си на плащане."
   },
   {
     "id": "api.templates.over_limit_14_days_title",
@@ -4233,11 +4153,11 @@
   },
   {
     "id": "api.templates.over_limit_14_days_subject",
-    "translation": "Плащането е просрочено за вашия Matterfoss Cloud абонамент"
+    "translation": "Плащането е просрочено за вашия Mattermost Cloud абонамент"
   },
   {
     "id": "api.templates.over_limit_14_days_info1",
-    "translation": "Само напомняне, че не сме получили плащане за вашия Matterfoss абонамент, фактуриран на {{.OverLimitDate}}. Скоро ще започнем процес за спиране на вашата услуга, ако не бъде получено плащане."
+    "translation": "Само напомняне, че не сме получили плащане за вашия Mattermost абонамент, фактуриран на {{.OverLimitDate}}. Скоро ще започнем процес за спиране на вашата услуга, ако не бъде получено плащане."
   },
   {
     "id": "api.templates.mfa_deactivated_body.title",
@@ -4349,7 +4269,7 @@
   },
   {
     "id": "api.templates.copyright",
-    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, втори етаж, Пало Алто, Калифорния, 94301"
+    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, втори етаж, Пало Алто, Калифорния, 94301"
   },
   {
     "id": "api.templates.at_limit_title",
@@ -4357,7 +4277,7 @@
   },
   {
     "id": "api.templates.at_limit_subject",
-    "translation": "Достигнато е Matterfoss Cloud ограничението за потребители"
+    "translation": "Достигнато е Mattermost Cloud ограничението за потребители"
   },
   {
     "id": "api.templates.at_limit_info2",
@@ -4365,7 +4285,7 @@
   },
   {
     "id": "api.templates.at_limit_info1",
-    "translation": "Изглежда, че вече имате 10 или повече потребители в работното си пространство - това е страхотно! Ако искате да поканите повече членове на екипа, помислете за надграждане на Matterfoss Cloud Professional сега."
+    "translation": "Изглежда, че вече имате 10 или повече потребители в работното си пространство - това е страхотно! Ако искате да поканите повече членове на екипа, помислете за надграждане на Mattermost Cloud Professional сега."
   },
   {
     "id": "api.team.update_team_scheme.scheme_scope.error",
@@ -4422,10 +4342,6 @@
   {
     "id": "api.team.set_team_icon.encode.app_error",
     "translation": "Иконата на екипа не можа да се кодира."
-  },
-  {
-    "id": "api.team.set_team_icon.decode_config.app_error",
-    "translation": "Не можаха да се декодират метаданните на иконата на екипа."
   },
   {
     "id": "api.team.set_team_icon.decode.app_error",
@@ -4636,10 +4552,6 @@
     "translation": "Не може да се анализира тялото на заявката."
   },
   {
-    "id": "api.post.save_is_pinned_post.town_square_read_only",
-    "translation": "Този канал е само за четене. Само членове с разрешение могат да закачат или откачат публикации тук."
-  },
-  {
     "id": "api.post.patch_post.can_not_update_post_in_deleted.error",
     "translation": "Не може да се обнови публикация в изтрит канал."
   },
@@ -4702,16 +4614,8 @@
     "translation": "Грешка при създаване на публикация."
   },
   {
-    "id": "api.post.create_post.town_square_read_only",
-    "translation": "Този канал е само за четене. Тук могат да публикуват само членове с разрешение."
-  },
-  {
     "id": "api.post.create_post.root_id.app_error",
     "translation": "Невалиден RootId параметър."
-  },
-  {
-    "id": "api.post.create_post.parent_id.app_error",
-    "translation": "Невалиден ParentId параметър."
   },
   {
     "id": "api.post.create_post.channel_root_id.app_error",
@@ -4760,10 +4664,6 @@
   {
     "id": "api.plugin.install.download_failed.app_error",
     "translation": "При изтеглянето на приставката възникна грешка."
-  },
-  {
-    "id": "api.plugin.add_public_key.open.app_error",
-    "translation": "Възникна грешка при отварянето на файла с публичния ключ."
   },
   {
     "id": "api.outgoing_webhook.disabled.app_error",
@@ -4892,10 +4792,6 @@
   {
     "id": "app.channel.migrate_channel_members.select.app_error",
     "translation": "Неуспешно избиране на пакета от членове на канала."
-  },
-  {
-    "id": "app.channel.increment_mention_count.app_error",
-    "translation": "Броят на споменаванията не може да се увеличи."
   },
   {
     "id": "app.channel.get_unread.app_error",
@@ -5218,10 +5114,6 @@
     "translation": "Изображението на профила не можа да се кодира."
   },
   {
-    "id": "api.user.upload_profile_user.decode_config.app_error",
-    "translation": "Изображението на профила не можа да бъде запазено. Изглежда, че файлът не е валидно изображение."
-  },
-  {
     "id": "api.user.upload_profile_user.decode.app_error",
     "translation": "Изображението на профила не можа да се декодира."
   },
@@ -5286,16 +5178,8 @@
     "translation": "Не можете да активирате профил за гости, тъй като функцията за достъп на гости не е разрешена."
   },
   {
-    "id": "api.user.send_welcome_email_and_forget.failed.error",
-    "translation": "Не можа да се изпрати ел.поща за добре дошли"
-  },
-  {
     "id": "api.user.send_verify_email_and_forget.failed.error",
     "translation": "Не можа да се изпрати ел.поща за потвърждение"
-  },
-  {
-    "id": "api.user.send_user_access_token.error",
-    "translation": "Не можа да се изпрати ел.поща \"личен маркер за достъп е добавен\""
   },
   {
     "id": "api.user.send_sign_in_change_email_and_forget.error",
@@ -5310,24 +5194,8 @@
     "translation": "Не можа да се изпрати ел.поща за нулиране на паролата."
   },
   {
-    "id": "api.user.send_password_change_email_and_forget.error",
-    "translation": "Не можа да се изпрати ел.поща за актуализация на парола"
-  },
-  {
-    "id": "api.user.send_mfa_change_email.error",
-    "translation": "Не можа да се изпрати ел.поща с известие за промяна в МФУ."
-  },
-  {
     "id": "api.user.send_email_change_verify_email_and_forget.error",
     "translation": "Не можа да се изпрати ел.поща за потвърждаване промяна на ел.поща"
-  },
-  {
-    "id": "api.user.send_email_change_username_and_forget.error",
-    "translation": "Не можа да се изпрати ел.поща с известие за промяна на потребителско име"
-  },
-  {
-    "id": "api.user.send_email_change_email_and_forget.error",
-    "translation": "Не можа да се изпрати ел.поща с известие за промяна на ел.поща"
   },
   {
     "id": "api.user.send_deactivate_email_and_forget.failed.error",
@@ -5639,15 +5507,15 @@
   },
   {
     "id": "api.license.request_trial_license.no-site-url.app_error",
-    "translation": "Не може да се поиска пробен лиценз. Моля, конфигурирайте URL адрес на сайта в секцията за уеб сървъра на Matterfoss Системна конзола."
+    "translation": "Не може да се поиска пробен лиценз. Моля, конфигурирайте URL адрес на сайта в секцията за уеб сървъра на Mattermost Системна конзола."
   },
   {
     "id": "api.license.request_trial_license.fail_get_user_count.app_error",
-    "translation": "Не можете да получите пробен лиценз, моля, опитайте отново или се свържете със support@Matterfoss.com. Не може да се получи броят на регистрираните потребители."
+    "translation": "Не можете да получите пробен лиценз, моля, опитайте отново или се свържете със support@mattermost.com. Не може да се получи броят на регистрираните потребители."
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "Не можете да получите пробен лиценз, моля опитайте отново или се свържете със support@Matterfoss.com."
+    "translation": "Не можете да получите пробен лиценз, моля опитайте отново или се свържете със support@mattermost.com."
   },
   {
     "id": "api.license.request_renewal_link.app_error",
@@ -5655,7 +5523,7 @@
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "Трябва да приемете Matterfoss споразумение за оценка на софтуера и политиката за поверителност, за да поискате лиценз."
+    "translation": "Трябва да приемете Mattermost споразумение за оценка на софтуера и политиката за поверителност, за да поискате лиценз."
   },
   {
     "id": "api.license.request-trial.bad-request",
@@ -6174,7 +6042,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "Не е намерен зададения канал. Моля, използвайте [адреса на канала](https://about.Matterfoss.com/default-channel-handle-documentation) за да определяте канали."
+    "translation": "Не е намерен зададения канал. Моля, използвайте [адреса на канала](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) за да определяте канали."
   },
   {
     "id": "api.command_mute.name",
@@ -6186,7 +6054,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "Не е намерен канала {{.Channel}}. Моля, използвайте [адреса на канала](https://about.Matterfoss.com/default-channel-handle-documentation) за да определяте канали."
+    "translation": "Не е намерен канала {{.Channel}}. Моля, използвайте [адреса на канала](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) за да определяте канали."
   },
   {
     "id": "api.command_mute.desc",
@@ -6238,7 +6106,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Излез от Matterfoss"
+    "translation": "Излез от Mattermost"
   },
   {
     "id": "api.command_leave.name",
@@ -6338,7 +6206,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "Не е намерен канала {{.Channel}}. Моля, използвайте [адреса на канала](https://about.Matterfoss.com/default-channel-handle-documentation) за да определяте канали."
+    "translation": "Не е намерен канала {{.Channel}}. Моля, използвайте [адреса на канала](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) за да определяте канали."
   },
   {
     "id": "api.command_invite.channel.app_error",
@@ -6350,7 +6218,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Отвори помощната страница на Matterfoss"
+    "translation": "Отвори помощната страница на Mattermost"
   },
   {
     "id": "api.command_groupmsg.permission.app_error",
@@ -6578,10 +6446,6 @@
   {
     "id": "app.import.validate_channel_import_data.header_length.error",
     "translation": "Заглавката на канала е твърде дълга."
-  },
-  {
-    "id": "app.import.validate_channel_import_data.display_name_missing.error",
-    "translation": "Липсва задължително свойство на канала: display_name"
   },
   {
     "id": "app.import.validate_channel_import_data.display_name_length.error",
@@ -6941,7 +6805,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Matterfoss Slack импорт дневник\n"
+    "translation": "Mattermost Slack импорт дневник\n"
   },
   {
     "id": "api.slackimport.slack_add_users.unable_import",
@@ -6953,11 +6817,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "Slack потребител е обединен с Matterfoss потребител поради съвпадащи ел.поща {{.Email}} и потребителско име {{.Username}}., но потребителя не може да бъде добавен към екипа.\n"
+    "translation": "Slack потребител е обединен с Mattermost потребител поради съвпадащи ел.поща {{.Email}} и потребителско име {{.Username}}., но потребителя не може да бъде добавен към екипа.\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "Slack потребител е обединен с Matterfoss поради съвпадащи ел.поща {{.Email}} и потребителско име {{.Username}}.\n"
+    "translation": "Slack потребител е обединен с Mattermost поради съвпадащи ел.поща {{.Email}} и потребителско име {{.Username}}.\n"
   },
   {
     "id": "api.slackimport.slack_add_users.email_pwd",
@@ -6969,7 +6833,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "Slack канала {{.DisplayName}} вече съществува като активен Matterfoss канал. Двата канала са обединени.\n"
+    "translation": "Slack канала {{.DisplayName}} вече съществува като активен Mattermost канал. Двата канала са обединени.\n"
   },
   {
     "id": "api.slackimport.slack_add_channels.import_failed",
@@ -6992,20 +6856,12 @@
     "translation": "Интеграцията/Slack Bot потребителя с ел.поща {{.Email}} и парола {{.Password}} е внесен.\n"
   },
   {
-    "id": "api.server.warn_metric.starting_trial",
-    "translation": "Вземи пробно"
-  },
-  {
-    "id": "api.server.warn_metric.start_trial",
-    "translation": "Започни пробен период"
-  },
-  {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial_notification_success.message",
     "translation": "Пробната версия на Enterprise вече е активна. Отидете на **Системна конзола > Управление на потребители > Права**, за да активирате разширени права."
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial.notification_body",
-    "translation": "Вашата система Matterfoss вече има няколко екипа. Много отбори имат свой предпочитан начин за координация и сътрудничество, включително как се създават канали, кой може да покани нови съотборници и как се управляват интеграциите. Схемите за отмяна на екипа ви позволяват да персонализирате потребителските разрешения във всеки екип, за да отговорите на техните специфични нужди.\n\n[Научете повече за използването на разширени права](https://www.Matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions-team-override).\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Matterfoss Споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [политика за поверителност](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Вашата система Mattermost вече има няколко екипа. Много отбори имат свой предпочитан начин за координация и сътрудничество, включително как се създават канали, кой може да покани нови съотборници и как се управляват интеграциите. Схемите за отмяна на екипа ви позволяват да персонализирате потребителските разрешения във всеки екип, за да отговорите на техните специфични нужди.\n\n[Научете повече за използването на разширени права](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override).\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Mattermost Споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [политика за поверителност](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_title",
@@ -7013,11 +6869,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_body",
-    "translation": "Вашата система Matterfoss вече има няколко екипа. Много отбори имат свой предпочитан начин за координация и сътрудничество, включително как се създават канали, кой може да покани нови съотборници и как се управляват интеграциите. Схемите за отмяна на екипа ви позволяват да персонализирате потребителските разрешения във всеки екип, за да отговорите на техните специфични нужди.\n\n[Научете повече за използването на разширени права](https://www.Matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions-team-override).\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Matterfoss, Inc. [Виж още](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Вашата система Mattermost вече има няколко екипа. Много отбори имат свой предпочитан начин за координация и сътрудничество, включително как се създават канали, кой може да покани нови съотборници и как се управляват интеграциите. Схемите за отмяна на екипа ви позволяват да персонализирате потребителските разрешения във всеки екип, за да отговорите на техните специфични нужди.\n\n[Научете повече за използването на разширени права](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override).\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Mattermost, Inc. [Виж още](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.contact_us.email_body",
-    "translation": "Matterfoss свържете се с нас заявка. Интересно ми е да науча повече за разширени права чрез схеми за екип.\n"
+    "translation": "Mattermost свържете се с нас заявка. Интересно ми е да науча повече за разширени права чрез схеми за екип.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_success.message",
@@ -7025,7 +6881,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_body",
-    "translation": "Вашата система Matterfoss има голям брой съобщения. Търсенето на база данни по подразбиране на Matterfoss започва да показва влошаване на производителността при около 2,5 милиона публикации. При над 5 милиона публикации, Elasticsearch може да помогне да се избегнат значителни проблеми с производителността, като изчаквания при търсене и споменавания. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\n[Научете повече за подобряване на производителността](https://www.Matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=elasticsearch)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Matterfoss Споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [политика за поверителност](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Вашата система Mattermost има голям брой съобщения. Търсенето на база данни по подразбиране на Mattermost започва да показва влошаване на производителността при около 2,5 милиона публикации. При над 5 милиона публикации, Elasticsearch може да помогне да се избегнат значителни проблеми с производителността, като изчаквания при търсене и споменавания. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\n[Научете повече за подобряване на производителността](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Mattermost Споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [политика за поверителност](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_title",
@@ -7033,11 +6889,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_body",
-    "translation": "Вашата система Matterfoss има голям брой съобщения. Търсенето на база данни по подразбиране на Matterfoss започва да показва влошаване на производителността при около 2,5 милиона публикации. При над 5 милиона публикации, Elasticsearch може да помогне да се избегнат значителни проблеми с производителността, като изчаквания при търсене и споменавания. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\n[Научете повече за подобряване на производителността](https://www.Matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=elasticsearch)\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Matterfoss, Inc. [Виж още](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Вашата система Mattermost има голям брой съобщения. Търсенето на база данни по подразбиране на Mattermost започва да показва влошаване на производителността при около 2,5 милиона публикации. При над 5 милиона публикации, Elasticsearch може да помогне да се избегнат значителни проблеми с производителността, като изчаквания при търсене и споменавания. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\n[Научете повече за подобряване на производителността](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Mattermost, Inc. [Виж още](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.contact_us.email_body",
-    "translation": "Matterfoss свържете се с нас заявка. Интересно ми е да науча повече за подобряване на производителността с Elasticsearch.\n"
+    "translation": "Mattermost свържете се с нас заявка. Интересно ми е да науча повече за подобряване на производителността с Elasticsearch.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_success.message",
@@ -7045,7 +6901,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_body",
-    "translation": "Каналите помагат за подобряване на комуникацията, но тъй като потребителите от Matterfoss се присъединяват и създават канали, предизвикателството да поддържате системата организирана се увеличава. Разширените права ви позволяват да зададете кои потребители или роли могат да извършват определени действия, включително управление на настройки на канали и членове, използване на @channel или @here за маркиране на широки групи потребители и създаване на нови webhook.\n\n[Научете повече за използването на разширени права](https://www.Matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Matterfoss Споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [политика за поверителност](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Каналите помагат за подобряване на комуникацията, но тъй като потребителите от Mattermost се присъединяват и създават канали, предизвикателството да поддържате системата организирана се увеличава. Разширените права ви позволяват да зададете кои потребители или роли могат да извършват определени действия, включително управление на настройки на канали и членове, използване на @channel или @here за маркиране на широки групи потребители и създаване на нови webhook.\n\n[Научете повече за използването на разширени права](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Mattermost Споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [политика за поверителност](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_title",
@@ -7053,11 +6909,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_body",
-    "translation": "Каналите помагат за подобряване на комуникацията, но тъй като потребителите от Matterfoss се присъединяват и създават канали, предизвикателството да поддържате системата организирана се увеличава. Разширените права ви позволяват да зададете кои потребители или роли могат да извършват определени действия, включително управление на настройки на канали и членове, използване на @channel или @here за маркиране на широки групи потребители и създаване на нови webhook.\n\n[Научете повече за използването на разширени права](https://www.Matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Matterfoss, Inc. [Виж още](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Каналите помагат за подобряване на комуникацията, но тъй като потребителите от Mattermost се присъединяват и създават канали, предизвикателството да поддържате системата организирана се увеличава. Разширените права ви позволяват да зададете кои потребители или роли могат да извършват определени действия, включително управление на настройки на канали и членове, използване на @channel или @here за маркиране на широки групи потребители и създаване на нови webhook.\n\n[Научете повече за използването на разширени права](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Mattermost, Inc. [Виж още](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.contact_us.email_body",
-    "translation": "Matterfoss свържете се с нас заявка. Интересно ми е да науча повече за използването на разширени права със системни схеми.\n"
+    "translation": "Mattermost свържете се с нас заявка. Интересно ми е да науча повече за използването на разширени права със системни схеми.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_success.message",
@@ -7065,19 +6921,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_body",
-    "translation": "Matterfoss настоятелно препоръчва инсталациите с над 500 потребители да се възползват от функции като управление на потребители, клъстеризиране на сървъри и мониторинг на производителността. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Matterfoss Споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [политика за поверителност](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Mattermost настоятелно препоръчва инсталациите с над 500 потребители да се възползват от функции като управление на потребители, клъстеризиране на сървъри и мониторинг на производителността. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Mattermost Споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [политика за поверителност](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Мащабиране с Matterfoss"
+    "translation": "Мащабиране с Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "Matterfoss настоятелно препоръчва инсталации с над 500 потребители да се възползват от функции като управление на потребители, клъстеризиране на сървъри и мониторинг на производителността. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\nС натискане върху Свържете се с нас, ще споделите информацията си с Matterfoss, Inc. [Научете повече](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Mattermost настоятелно препоръчва инсталации с над 500 потребители да се възползват от функции като управление на потребители, клъстеризиране на сървъри и мониторинг на производителността. Свържете се с нас, за да научите повече и да ни уведомите как можем да помогнем.\n\nС натискане върху Свържете се с нас, ще споделите информацията си с Mattermost, Inc. [Научете повече](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.contact_us.email_body",
-    "translation": "Matterfoss свържете се с нас заявка. Сега екипът ми има 500 потребители и обмислям Matterfoss корпоративна версия.\n"
+    "translation": "Mattermost свържете се с нас заявка. Сега екипът ми има 500 потребители и обмислям Mattermost корпоративна версия.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_title",
@@ -7089,15 +6945,15 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_body",
-    "translation": "Тъй като толкова много разговори се случват в Matterfoss, може да бъде предизвикателство да знаете къде да търсите важна информация. Ако искате да излъчите съобщение до голяма аудитория, можете да настроите канали за съобщения само за четене, където всеки може да се присъедини, но само администраторите на каналите могат да публикуват съобщения.\n\n[Научете повече за създаването на канали за съобщения само за четене](https://www.Matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=channel-moderation)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Matterfoss Споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [политика за поверителност](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Тъй като толкова много разговори се случват в Mattermost, може да бъде предизвикателство да знаете къде да търсите важна информация. Ако искате да излъчите съобщение до голяма аудитория, можете да настроите канали за съобщения само за четене, където всеки може да се присъедини, но само администраторите на каналите могат да публикуват съобщения.\n\n[Научете повече за създаването на канали за съобщения само за четене](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Mattermost Споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [политика за поверителност](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.notification_body",
-    "translation": "Тъй като толкова много разговори се случват в Matterfoss, може да бъде предизвикателство да знаете къде да търсите важна информация. Ако искате да излъчите съобщение до голяма аудитория, можете да настроите канали за съобщения само за четене, където всеки може да се присъедини, но само администраторите на каналите могат да публикуват съобщения.\n\n[Научете повече за създаването на канали за съобщения само за четене](https://www.Matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=channel-moderation)\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Matterfoss, Inc. [Виж още](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Тъй като толкова много разговори се случват в Mattermost, може да бъде предизвикателство да знаете къде да търсите важна информация. Ако искате да излъчите съобщение до голяма аудитория, можете да настроите канали за съобщения само за четене, където всеки може да се присъедини, но само администраторите на каналите могат да публикуват съобщения.\n\n[Научете повече за създаването на канали за съобщения само за четене](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\nКато натиснете върху Свържете се с нас, ще споделите информацията си с Mattermost, Inc. [Виж още](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.contact_us.email_body",
-    "translation": "Matterfoss свържете се с нас заявка. Интересно ми е да науча повече за създаването на канали за съобщения само за четене.\n"
+    "translation": "Mattermost свържете се с нас заявка. Интересно ми е да науча повече за създаването на канали за съобщения само за четене.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_success.message",
@@ -7105,19 +6961,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_body",
-    "translation": "Вашата система Matterfoss вече има 200 потребители. Когато свържете Matterfoss с доставчика за еднократно удостоверяване на вашата организация, потребителите имат достъп до Matterfoss, без да се налага да въвеждат повторно своите идентификационни данни. Препоръчваме ви да интегрирате вашия доставчик на SAML 2.0 с вашия сървър Matterfoss.[Научете повече за интегрирането със SAML 2.0](https://www.Matterfoss.com/docs-saml/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Matterfoss Споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Вашата система Mattermost вече има 200 потребители. Когато свържете Mattermost с доставчика за еднократно удостоверяване на вашата организация, потребителите имат достъп до Mattermost, без да се налага да въвеждат повторно своите идентификационни данни. Препоръчваме ви да интегрирате вашия доставчик на SAML 2.0 с вашия сървър Mattermost.[Научете повече за интегрирането със SAML 2.0](https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Mattermost Споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
-    "translation": "Мащабиране с Matterfoss"
+    "translation": "Мащабиране с Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "Вашата система Matterfoss вече има 200 потребители. Когато свържете Matterfoss с доставчика за влизане на вашата организация, потребителите могат да получат достъп до Matterfoss, без да се налага да въвеждат повторно своите идентификационни данни. Препоръчваме ви да интегрирате вашия доставчик на SAML 2.0 с вашия сървър Matterfoss. [Научете повече за интегрирането със SAML 2.0](https://www.Matterfoss.com/docs-saml/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=saml)\n\nС натискане върху Свържете се с нас, ще споделите информацията си с Matterfoss, Inc. [Научете повече](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Вашата система Mattermost вече има 200 потребители. Когато свържете Mattermost с доставчика за влизане на вашата организация, потребителите могат да получат достъп до Mattermost, без да се налага да въвеждат повторно своите идентификационни данни. Препоръчваме ви да интегрирате вашия доставчик на SAML 2.0 с вашия сървър Mattermost. [Научете повече за интегрирането със SAML 2.0](https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml)\n\nС натискане върху Свържете се с нас, ще споделите информацията си с Mattermost, Inc. [Научете повече](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
-    "translation": "Matterfoss Свържете се с нас. Сега екипът ми има 200 потребители и обмислям Matterfoss Корпоративна версия.\n"
+    "translation": "Mattermost Свържете се с нас. Сега екипът ми има 200 потребители и обмислям Mattermost Корпоративна версия.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_success.message",
@@ -7125,19 +6981,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_body",
-    "translation": "Вашата система Matterfoss има над 100 потребители. С нарастването на вашата потребителска база предоставянето на нови профили може да отнеме много време. Препоръчваме ви да интегрирате Active Directory / LDAP на вашата организация, което ще позволи на всеки с профил да има достъп до Matterfoss.\n\n[Научете повече за интегрирането с AD/LDAP](https://www.Matterfoss.com/docs-adldap/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Matterfoss споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [Политика на поверителност](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Вашата система Mattermost има над 100 потребители. С нарастването на вашата потребителска база предоставянето на нови профили може да отнеме много време. Препоръчваме ви да интегрирате Active Directory / LDAP на вашата организация, което ще позволи на всеки с профил да има достъп до Mattermost.\n\n[Научете повече за интегрирането с AD/LDAP](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nС натискането върху Старт пробна версия, аз се съгласявам с [Mattermost споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [Политика на поверителност](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
-    "translation": "Мащабиране с Matterfoss"
+    "translation": "Мащабиране с Mattermost"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "Вашата система Matterfoss има над 100 потребители. С нарастването на вашата потребителска база предоставянето на нови профили може да отнеме много време. Препоръчваме ви да интегрирате Active Directory / LDAP на вашата организация, което ще позволи на всеки с профил да има достъп до Matterfoss.\n\n[Научете повече за интегрирането с AD/LDAP](https://www.Matterfoss.com/docs-adldap/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=adldap)\n\nКогато натиснете върху Свържете се с нас, ще споделите информацията си с Matterfoss, Inc. [Виж още](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Вашата система Mattermost има над 100 потребители. С нарастването на вашата потребителска база предоставянето на нови профили може да отнеме много време. Препоръчваме ви да интегрирате Active Directory / LDAP на вашата организация, което ще позволи на всеки с профил да има достъп до Mattermost.\n\n[Научете повече за интегрирането с AD/LDAP](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nКогато натиснете върху Свържете се с нас, ще споделите информацията си с Mattermost, Inc. [Виж още](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
-    "translation": "Matterfoss Свържете с нас заявка. Сега екипът ми има 100 потребители и обмислям Matterfoss корпоративна версия.\n"
+    "translation": "Mattermost Свържете с нас заявка. Сега екипът ми има 100 потребители и обмислям Mattermost корпоративна версия.\n"
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial_notification_success.message",
@@ -7145,7 +7001,7 @@
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial.notification_body",
-    "translation": "Вашата система Matterfoss има активирано многофакторно удостоверяване, което дава на потребителите избор да защитят своите акаунти с допълнителни средства за удостоверяване, освен паролата. За да подобрите сигурността в системата, можете да изискате всички акаунти на Matterfoss да използват многофакторно удостоверяване.\n\n[Научете повече за изискване на многофакторно удостоверяване](https://www.Matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=multi-factor-authentication). \n\nС натискането върху Започни пробен период, се съгласяте с. [Matterfoss споразумение за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [Privacy Policy](https://Matterfoss.com/privacy-policy/), и получаването на ел.поща за продукта."
+    "translation": "Вашата система Mattermost има активирано многофакторно удостоверяване, което дава на потребителите избор да защитят своите акаунти с допълнителни средства за удостоверяване, освен паролата. За да подобрите сигурността в системата, можете да изискате всички акаунти на Mattermost да използват многофакторно удостоверяване.\n\n[Научете повече за изискване на многофакторно удостоверяване](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication). \n\nС натискането върху Започни пробен период, се съгласяте с. [Mattermost споразумение за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [Privacy Policy](https://mattermost.com/privacy-policy/), и получаването на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.mfa.notification_title",
@@ -7153,11 +7009,11 @@
   },
   {
     "id": "api.server.warn_metric.mfa.notification_body",
-    "translation": "Вашата система Matterfoss има активирано многофакторно удостоверяване, което дава на потребителите избор да защитят своите акаунти с допълнителни средства за удостоверяване, освен паролата. За да подобрите сигурността в системата, можете да изискате всички акаунти на Matterfoss да използват многофакторно удостоверяване.\n\n[Научете повече за изискване на многофакторно удостоверяване](https://www.Matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=multi-factor-authentication). \n\nС натискането върху Свържете се с нас, ще споделяте информацията си с Matterfoss, Inc. [Виж още](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Вашата система Mattermost има активирано многофакторно удостоверяване, което дава на потребителите избор да защитят своите акаунти с допълнителни средства за удостоверяване, освен паролата. За да подобрите сигурността в системата, можете да изискате всички акаунти на Mattermost да използват многофакторно удостоверяване.\n\n[Научете повече за изискване на многофакторно удостоверяване](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication). \n\nС натискането върху Свържете се с нас, ще споделяте информацията си с Mattermost, Inc. [Виж още](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.mfa.contact_us.email_body",
-    "translation": "Заявка Matterfoss свържете с нас. Интересно ми е да науча повече за използването на многофакторно удостоверяване.\n"
+    "translation": "Заявка Mattermost свържете с нас. Интересно ми е да науча повече за използването на многофакторно удостоверяване.\n"
   },
   {
     "id": "api.server.warn_metric.email_us",
@@ -7169,7 +7025,7 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.start_trial.notification_body",
-    "translation": "Проектите често включват хора както от организацията, така и извън нея. С профилите за гости можете да привлечете външни партньори във вашата система Matterfoss и да посочите с кого да работят и какво могат да виждат.\n\n[Научете повече за разрешаване акаунтите за гости](https://www.Matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=guest-accounts)\n\nС натискането върху Старт пробна версия, се съгласявам с [споразумение на Matterfoss за оценка на софтуера](https://Matterfoss.com/software-evaluation-agreement/), [политика за поверителност](https://Matterfoss.com/privacy-policy/), и получаване на ел.поща за продукта."
+    "translation": "Проектите често включват хора както от организацията, така и извън нея. С профилите за гости можете да привлечете външни партньори във вашата система Mattermost и да посочите с кого да работят и какво могат да виждат.\n\n[Научете повече за разрешаване акаунтите за гости](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts)\n\nС натискането върху Старт пробна версия, се съгласявам с [споразумение на Mattermost за оценка на софтуера](https://mattermost.com/software-evaluation-agreement/), [политика за поверителност](https://mattermost.com/privacy-policy/), и получаване на ел.поща за продукта."
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_title",
@@ -7177,27 +7033,19 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_body",
-    "translation": "Проектите често включват хора както от организацията, така и извън нея. С профилите за гости можете да привлечете външни партньори във вашата система Matterfoss и да посочите с кого да работят и какво могат да виждат.\n\n[Научете повече за разрешаване акаунтите за гости](https://www.Matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=Matterfoss-advisor-bot&utm_content=guest-accounts).\n\nС натискането върху Свържете се с нас, ще споделяте информацията си с Matterfoss, Inc. [Виж още](https://Matterfoss.com/pl/default-admin-advisory)"
+    "translation": "Проектите често включват хора както от организацията, така и извън нея. С профилите за гости можете да привлечете външни партньори във вашата система Mattermost и да посочите с кого да работят и какво могат да виждат.\n\n[Научете повече за разрешаване акаунтите за гости](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts).\n\nС натискането върху Свържете се с нас, ще споделяте информацията си с Mattermost, Inc. [Виж още](https://mattermost.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.email_domain.contact_us.email_body",
-    "translation": "Заявка Matterfoss свържете с нас. Интересно ми е да науча повече за използването на профили за гости.\n"
-  },
-  {
-    "id": "api.server.warn_metric.contacting_us",
-    "translation": "Свързване с нас"
-  },
-  {
-    "id": "api.server.warn_metric.contact_us",
-    "translation": "Свържете се с нас"
+    "translation": "Заявка Mattermost свържете с нас. Интересно ми е да науча повече за използването на профили за гости.\n"
   },
   {
     "id": "api.server.warn_metric.bot_response.start_trial_failure.message",
-    "translation": "Пробният лиценз не можа да бъде извлечен. Посетете https://Matterfoss.com/trial/, за да поискате лиценз."
+    "translation": "Пробният лиценз не можа да бъде извлечен. Посетете https://mattermost.com/trial/, за да поискате лиценз."
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "Благодарим Ви, че се свързахте с Matterfoss. Ще се свържем с Вас скоро."
+    "translation": "Благодарим Ви, че се свързахте с Mattermost. Ще се свържем с Вас скоро."
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -7209,7 +7057,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Matterfoss свържете се с нас заявка"
+    "translation": "Mattermost свържете се с нас заявка"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -7221,7 +7069,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "Ако имате някакви допълнителни запитвания, моля, свържете се с support@Matterfoss.com"
+    "translation": "Ако имате някакви допълнителни запитвания, моля, свържете се с support@mattermost.com"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -7286,10 +7134,6 @@
   {
     "id": "api.restricted_system_admin",
     "translation": "Това действие е забранено за ограничен системен администратор."
-  },
-  {
-    "id": "api.reaction.town_square_read_only",
-    "translation": "Реагирането на публикации не е възможно в канали само за четене."
   },
   {
     "id": "api.reaction.save_reaction.user_id.app_error",
@@ -7653,7 +7497,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "Изпратете ел.поща с покана във вашия екип на Matterfoss"
+    "translation": "Изпратете ел.поща с покана във вашия екип на Mattermost"
   },
   {
     "id": "api.command.execute_command.start.app_error",
@@ -7924,14 +7768,6 @@
     "translation": "Трябва да използвате услугата на API createDirectChannel за създаването на канал за директни съобщения."
   },
   {
-    "id": "api.channel.convert_channel_to_private.private_channel_error",
-    "translation": "Каналът, който се опитахте да преобразувате е вече частен."
-  },
-  {
-    "id": "api.channel.convert_channel_to_private.default_channel_error",
-    "translation": "Този канал по подразбиране не може да бъде преобразуван в частен."
-  },
-  {
     "id": "api.channel.channel_member_counts_by_group.license.error",
     "translation": "Вашият лиценз не поддържа групи"
   },
@@ -7973,39 +7809,7 @@
   },
   {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "Моля, добавете ме към екипи и канали, в които искате да взаимодействам. За целта използвайте браузър или Matterfoss настолното приложение."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.too_large.app_error",
-    "translation": "Не можа да се качи изображение на икона. Файлът е твърде голям."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.parse.app_error",
-    "translation": "Формуляра от множество части не можа да се обработи."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.open.app_error",
-    "translation": "Файла с изображението не може да се отвори."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.no_file.app_error",
-    "translation": "Липсва файл под 'image' в заявката."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.array.app_error",
-    "translation": "Празен масив под 'image' в заявката."
-  },
-  {
-    "id": "api.bot.set_bot_icon_image.app_error",
-    "translation": "Изображението на икона не можа да се качи."
-  },
-  {
-    "id": "api.bot.get_bot_icon_image.read.app_error",
-    "translation": "Не може да се прочете файла с изображение на икона."
-  },
-  {
-    "id": "api.bot.delete_bot_icon_image.app_error",
-    "translation": "Изображението на иконата не можа да бъде изтрито."
+    "translation": "Моля, добавете ме към екипи и канали, в които искате да взаимодействам. За целта използвайте браузър или Mattermost настолното приложение."
   },
   {
     "id": "api.bot.create_disabled",
@@ -8037,7 +7841,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Matterfoss - Тестване на настройките за ел.поща"
+    "translation": "Mattermost - Тестване на настройките за ел.поща"
   },
   {
     "id": "api.admin.test_email.reenter_password",
@@ -8049,7 +7853,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "Изглежда вашата Matterfoss ел.поща е настроена правилно!"
+    "translation": "Изглежда вашата Mattermost ел.поща е настроена правилно!"
   },
   {
     "id": "api.admin.saml.set_certificate_from_metadata.missing_content_type.app_error",
@@ -8376,20 +8180,16 @@
     "translation": "Няма успешно изпратена ел.поща"
   },
   {
-    "id": "api.user.send_upgrade_request_email.error",
-    "translation": "Неуспешно изпращане на ел.поща за ограничението на потребители до администратора"
-  },
-  {
     "id": "api.templates.upgrade_request_title",
     "translation": "{{ .UserName }} желае да покани членове във Вашето работно пространство"
   },
   {
     "id": "api.templates.upgrade_request_subject",
-    "translation": "Matterfoss потребителска заявка за надстройка на работното пространство"
+    "translation": "Mattermost потребителска заявка за надстройка на работното пространство"
   },
   {
     "id": "api.templates.upgrade_request_info4",
-    "translation": "Тъй като работното ви пространство е достигнало потребителското ограничение за безплатната версия на Matterfoss cloud, покани не могат да бъдат изпращани. Надстройте сега, за да позволите на повече потребители да се присъединят към вашето работно пространство."
+    "translation": "Тъй като работното ви пространство е достигнало потребителското ограничение за безплатната версия на Mattermost cloud, покани не могат да бъдат изпращани. Надстройте сега, за да позволите на повече потребители да се присъединят към вашето работно пространство."
   },
   {
     "id": "api.templates.at_limit_info5",
@@ -8457,7 +8257,7 @@
   },
   {
     "id": "api.templates.upgrade_request_info4_2",
-    "translation": "Някой наскоро се опита да се присъедини към Вашето работно пространство, но не успя, тъй като е достигнато ограничението за потребители в безплатната версия на Matterfoss cloud. Надстройте сега, за да позволите на повече потребители да се присъединят към Вашето работно пространство."
+    "translation": "Някой наскоро се опита да се присъедини към Вашето работно пространство, но не успя, тъй като е достигнато ограничението за потребители в безплатната версия на Mattermost cloud. Надстройте сега, за да позволите на повече потребители да се присъединят към Вашето работно пространство."
   },
   {
     "id": "api.templates.questions_footer.title",
@@ -8469,7 +8269,7 @@
   },
   {
     "id": "api.templates.email_footer_v2",
-    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, втори етаж, Пало Алто, Калифорния, 94301"
+    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, втори етаж, Пало Алто, Калифорния, 94301"
   },
   {
     "id": "api.post.search_files.invalid_body.app_error",
@@ -8557,7 +8357,7 @@
   },
   {
     "id": "api.templates.invite_body_footer.title",
-    "translation": "Какво е Matterfoss?"
+    "translation": "Какво е Mattermost?"
   },
   {
     "id": "api.templates.invite_body_footer.learn_more",
@@ -8565,11 +8365,11 @@
   },
   {
     "id": "api.templates.invite_body_footer.info",
-    "translation": "Matterfoss е гъвкава платформа за съобщения с отворен код, която позволява сигурна работа в екип."
+    "translation": "Mattermost е гъвкава платформа за съобщения с отворен код, която позволява сигурна работа в екип."
   },
   {
     "id": "api.templates.invite_body.subTitle",
-    "translation": "Започнете да сътрудничите с екипа си в Matterfoss"
+    "translation": "Започнете да сътрудничите с екипа си в Mattermost"
   },
   {
     "id": "api.templates.cloud_welcome_email.title",
@@ -8621,11 +8421,11 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.download_mm_info",
-    "translation": "Изтеглете приложението Matterfoss"
+    "translation": "Изтеглете приложението Mattermost"
   },
   {
     "id": "api.templates.cloud_welcome_email.button",
-    "translation": "Отворете Matterfoss"
+    "translation": "Отворете Mattermost"
   },
   {
     "id": "api.templates.cloud_welcome_email.app_market_place",
@@ -8657,7 +8457,7 @@
   },
   {
     "id": "api.command_remote.accept.help",
-    "translation": "Приемане на покана от отдалечен клъстер"
+    "translation": "Приемане на покана от външна инстанция на Mattermost"
   },
   {
     "id": "api.channel.patch_channel_moderations.cache_invalidation.error",
@@ -8665,7 +8465,7 @@
   },
   {
     "id": "api.command_share.desc",
-    "translation": "Споделя текущия канал с отдалечена инстанция на Matterfoss."
+    "translation": "Споделя текущия канал с външна инстанция на Mattermost."
   },
   {
     "id": "api.command_share.could_not_uninvite.error",
@@ -8677,7 +8477,7 @@
   },
   {
     "id": "api.command_share.channel_status_id",
-    "translation": "Състояние на канал с ИН `{{.ChannelId}}"
+    "translation": "Състояние на канал с ИН `{{.ChannelId}}`"
   },
   {
     "id": "api.command_share.channel_status.help",
@@ -8713,19 +8513,19 @@
   },
   {
     "id": "api.command_remote.site_url_not_set",
-    "translation": "URL на сайта не е зададен. Моля, задайте го чрез системната конзола."
+    "translation": "URL на сайта не е зададен. Моля, задайте го в Системна конзола > Среда > Уеб сървър."
   },
   {
     "id": "api.command_remote.service_not_enabled",
-    "translation": "Услугата Remote Cluster не е разрешена."
+    "translation": "Услугата за сигурна връзка не е разрешена."
   },
   {
     "id": "api.command_remote.service_disabled",
-    "translation": "Отдалечената клъстерна услуга е забранена."
+    "translation": "Услугата за защитена връзка е забранена."
   },
   {
     "id": "api.command_remote.remove_remote_id.help",
-    "translation": "Премахване ИН на защитена връзка"
+    "translation": "ИН на защитена връзка за премахване."
   },
   {
     "id": "api.command_remote.remove_remote.error",
@@ -8741,7 +8541,7 @@
   },
   {
     "id": "api.command_remote.remote_table_header",
-    "translation": "| Сигурна връзка | Име | URL на сайт | ИН на връзка | Приета покана | На линия | Последен пинг |"
+    "translation": "| Сигурна връзка | Показвано име | ИН на връзката | URL на сайта | Приета покана | Онлайн | Последен пинг |"
   },
   {
     "id": "api.command_remote.remote_add_remove.help",
@@ -8773,7 +8573,7 @@
   },
   {
     "id": "api.command_remote.invite_summary",
-    "translation": "Изпратете следния криптиран (AES256 + Base64) блок на администратора на отдалечения сайт заедно с паролата. Той ще използва командата `{{.Command}}` с наклонена черта, за да приеме поканата.\n\n```\n{{.Invitation}}\n```\n\n**Осигурете достъп на отдалечения сайт до вашия клъстер чрез** {{.SiteURL}}"
+    "translation": "Изпратете следната AES 256-битова криптирана покана на външния системен администратор на Mattermost заедно с паролата. Те ще използват командата с наклонена черта `{{.Command}}` , за да приемат поканата.\n\n```\n{{.Invitation}}\n```\n\n**Осигурете достъп на защитената връзка до вашата инстанция на Mattermost чрез** {{.SiteURL}}"
   },
   {
     "id": "api.command_remote.invite_password.hint",
@@ -8785,7 +8585,7 @@
   },
   {
     "id": "api.command_remote.invite.help",
-    "translation": "Създаване на защитена връзка"
+    "translation": "Покана за сигурна връзка"
   },
   {
     "id": "api.command_remote.invitation_created",
@@ -8825,7 +8625,7 @@
   },
   {
     "id": "api.command_remote.desc",
-    "translation": "Поканете отдалечени Matterfoss клъстери за междуклъстерна комуникация."
+    "translation": "Покана за защитени връзки за комуникация между инстанциите на Mattermost."
   },
   {
     "id": "api.command_remote.decode_invitation.error",
@@ -8846,5 +8646,453 @@
   {
     "id": "api.admin.saml.failure_reset_authdata_to_email.app_error",
     "translation": "Неуспешно нулиране полето AuthData на Email."
+  },
+  {
+    "id": "sharedchannel.permalink.not_found",
+    "translation": "Тази публикация съдържа постоянни връзки към други канали, които може да не са видими за потребителите в други сайтове."
+  },
+  {
+    "id": "sharedchannel.cannot_deliver_post",
+    "translation": "Една или повече публикации не могат да бъдат доставени на отдалечения сайт {{.Remote}}, защото той е офлайн. Публикацията(ите) ще бъде(ат) доставена(и), когато сайтът е онлайн."
+  },
+  {
+    "id": "model.user.is_valid.marshal.app_error",
+    "translation": "Неуспешно кодиране на полето в JSON"
+  },
+  {
+    "id": "ent.data_retention.policies.invalid_policy",
+    "translation": "Политиката е невалидна."
+  },
+  {
+    "id": "ent.data_retention.policies.internal_error",
+    "translation": "Срещнахме грешка при изпълнението на заявената операция."
+  },
+  {
+    "id": "app.user.send_auto_response.app_error",
+    "translation": "Невъзможно е да се изпрати автоматичен отговор от потребителя."
+  },
+  {
+    "id": "app.team.get_common_team_ids_for_users.app_error",
+    "translation": "Не мога да получа общите ИН на екипите."
+  },
+  {
+    "id": "app.sharedchannel.dm_channel_creation.internal_error",
+    "translation": "Срещната е грешка при създаването на директен споделен канал."
+  },
+  {
+    "id": "app.notification.footer.title",
+    "translation": "Желаете ли да промените настройките си за известия?"
+  },
+  {
+    "id": "app.notification.footer.infoLogin",
+    "translation": "Влезте в Mattermost"
+  },
+  {
+    "id": "app.notification.footer.info",
+    "translation": " и отидете в Настройки на профила > Известия"
+  },
+  {
+    "id": "app.notification.body.mention.title",
+    "translation": "{{.SenderName}} Ви спомена в съобщение"
+  },
+  {
+    "id": "app.notification.body.mention.subTitle",
+    "translation": "Докато отсъствахте, {{.SenderName}} Ви спомена в канала {{.ChannelName}}."
+  },
+  {
+    "id": "app.notification.body.group.title",
+    "translation": "{{.SenderName}} Ви изпрати ново съобщение"
+  },
+  {
+    "id": "app.notification.body.group.subTitle",
+    "translation": "Докато отсъствахте, {{.SenderName}} изпрати съобщение до Вашата група."
+  },
+  {
+    "id": "app.notification.body.dm.title",
+    "translation": "{{.SenderName}} Ви изпрати ново съобщение"
+  },
+  {
+    "id": "app.notification.body.dm.time",
+    "translation": "{{.Hour}}:{{.Minute}} {{.TimeZone}}"
+  },
+  {
+    "id": "app.notification.body.dm.subTitle",
+    "translation": "Докато отсъствахте, {{.SenderName}} Ви изпрати ново директно съобщение."
+  },
+  {
+    "id": "app.import.generate_password.app_error",
+    "translation": "Грешка при генериране на паролата."
+  },
+  {
+    "id": "api.user.upload_profile_user.login_provider_attribute_set.app_error",
+    "translation": "Профилната снимка трябва да бъде зададена чрез доставчика за удостоверяване на потребители."
+  },
+  {
+    "id": "api.user.update_user.login_provider_attribute_set.app_error",
+    "translation": "Полето '{{.Field}}' трябва да бъде зададено чрез доставчика за удостоверяване на потребители."
+  },
+  {
+    "id": "api.user.patch_user.login_provider_attribute_set.app_error",
+    "translation": "Полето '{{.Field}}' трябва да бъде зададено чрез доставчика за удостоверяване на потребители."
+  },
+  {
+    "id": "api.templates.cloud_trial_ending_email.title",
+    "translation": "Безплатната Ви 14-дневна пробна версия на Mattermost приключва скоро"
+  },
+  {
+    "id": "api.templates.cloud_trial_ending_email.subtitle",
+    "translation": "{{.Name}}, 14-дневният Ви безплатен пробен период на Mattermost Cloud Professional приключи след 3 дни, на {{.TrialEnd}}. Моля, добавете информация за плащане за да гарантирате, че екипът Ви може да продължи да се възползва от предимствата на Cloud Professional."
+  },
+  {
+    "id": "api.templates.cloud_trial_ending_email.subject",
+    "translation": "Приключва пробната версия на Mattermost cloud"
+  },
+  {
+    "id": "api.templates.cloud_trial_ending_email.add_payment_method",
+    "translation": "Добавяне на метод за плащане"
+  },
+  {
+    "id": "api.templates.cloud_trial_ended_email.title",
+    "translation": "Безплатната ви 14-дневна пробна версия на Mattermost приключи днес"
+  },
+  {
+    "id": "api.templates.cloud_trial_ended_email.subtitle",
+    "translation": "{{.Name}}, 14-дневният Ви безплатен пробен период на Mattermost Cloud Professional приключи днес, {{.TodayDate}}. Моля, добавете информация за плащане, за да гарантирате, че екипът Ви може да продължи да се възползва от предимствата на Cloud Professional."
+  },
+  {
+    "id": "api.templates.cloud_trial_ended_email.subject",
+    "translation": "Пробната версия на Mattermost cloud приключи"
+  },
+  {
+    "id": "api.templates.cloud_trial_ended_email.start_subscription",
+    "translation": "Започни абонамент"
+  },
+  {
+    "id": "api.remote_cluster.update_not_unique.app_error",
+    "translation": "Вече съществува защитена връзка със същия url адрес."
+  },
+  {
+    "id": "api.remote_cluster.update.app_error",
+    "translation": "Срещнахме грешка при актуализирането на защитената връзка."
+  },
+  {
+    "id": "api.remote_cluster.service_not_enabled.app_error",
+    "translation": "Услугата за отдалечен клъстер не е разрешена."
+  },
+  {
+    "id": "api.remote_cluster.save_not_unique.app_error",
+    "translation": "Защитената връзка е вече добавена."
+  },
+  {
+    "id": "api.remote_cluster.save.app_error",
+    "translation": "Срещнахме грешка при запазване на защитената връзка."
+  },
+  {
+    "id": "api.remote_cluster.invalid_topic.app_error",
+    "translation": "Невалидна тема."
+  },
+  {
+    "id": "api.remote_cluster.invalid_id.app_error",
+    "translation": "Невалиден ИН."
+  },
+  {
+    "id": "api.remote_cluster.get.app_error",
+    "translation": "Срещнахме грешка при получаването на защитена връзка."
+  },
+  {
+    "id": "api.remote_cluster.delete.app_error",
+    "translation": "Срещнахме грешка при изтриването на защитена връзка."
+  },
+  {
+    "id": "api.oauth.click_redirect",
+    "translation": "Ако не бъдете пренасочени автоматично, моля натиснете върху <a href='{{.Link}}'>връзката</a>"
+  },
+  {
+    "id": "api.job.unable_to_create_job.incorrect_job_type",
+    "translation": "Типът на задачата, която се опитвате да създадете е невалиден"
+  },
+  {
+    "id": "api.job.retrieve.nopermissions",
+    "translation": "Типовете задачи в задачата, която се опитвате да извлечете не съдържат права"
+  },
+  {
+    "id": "api.file.test_connection_s3_bucket_does_not_exist.app_error",
+    "translation": "Уверете се, че Amazon S3 bucket е налично и проверете Вашите права в него."
+  },
+  {
+    "id": "api.file.test_connection_s3_auth.app_error",
+    "translation": "Невъзможно свързване с S3. Проверете параметрите за удостоверяване на връзката с Amazon S3 и настройките за удостоверяване."
+  },
+  {
+    "id": "api.error_set_first_admin_visit_marketplace_status",
+    "translation": "Грешка при опит за запис в хранилището статуса първо администраторско посещение на пазара ."
+  },
+  {
+    "id": "api.error_get_first_admin_visit_marketplace_status",
+    "translation": "Грешка при опит за извличане от хранилището статуса първо администраторско посещение на пазара ."
+  },
+  {
+    "id": "api.email_batching.send_batched_email_notification.time",
+    "translation": "{{.Hour}}:{{.Minute}} {{.TimeZone}}"
+  },
+  {
+    "id": "api.email_batching.send_batched_email_notification.subTitle",
+    "translation": "Вижте по-долу обобщение на новите Ви съобщения."
+  },
+  {
+    "id": "api.email_batching.send_batched_email_notification.messageButton",
+    "translation": "Вижте това съобщение"
+  },
+  {
+    "id": "api.email_batching.send_batched_email_notification.button",
+    "translation": "Отворете Mattermost"
+  },
+  {
+    "id": "api.context.remote_id_missing.app_error",
+    "translation": "Липсва ИН на защитена връзка."
+  },
+  {
+    "id": "api.context.remote_id_mismatch.app_error",
+    "translation": "Несъответствие в ИН на защитената връзка."
+  },
+  {
+    "id": "api.context.remote_id_invalid.app_error",
+    "translation": "Невъзможно е да се намери ИН на сигурната връзка {{.RemoteId}}."
+  },
+  {
+    "id": "api.context.json_encoding.app_error",
+    "translation": "Грешка при кодирането на JSON."
+  },
+  {
+    "id": "api.context.invitation_expired.error",
+    "translation": "Поканата е изтекла."
+  },
+  {
+    "id": "api.config.update_config.diff.app_error",
+    "translation": "Неуспешно различаване на конфигурациите"
+  },
+  {
+    "id": "api.config.patch_config.diff.app_error",
+    "translation": "Неуспешно различаване на конфигурациите"
+  },
+  {
+    "id": "api.command_share.unshare_channel.help",
+    "translation": "Отменя споделянето на текущия канал"
+  },
+  {
+    "id": "api.command_share.unknown_action",
+    "translation": "Неизвестно действие `{{.Action}}`. Налични действия: {{.Actions}}"
+  },
+  {
+    "id": "api.command_share.uninvite_remote_id.help",
+    "translation": "ИН на защитената връзка за отмяна на поканата."
+  },
+  {
+    "id": "api.command_share.uninvite_remote.help",
+    "translation": "Отмяна поканата за защитена връзка за този споделен канал"
+  },
+  {
+    "id": "api.command_share.shared_channel_unshare.error",
+    "translation": "Не може да се отмени споделянето на този канал: {{.Error}}."
+  },
+  {
+    "id": "api.command_share.shared_channel_unavailable",
+    "translation": "Този канал вече не се споделя."
+  },
+  {
+    "id": "api.command_share.share_read_only.hint",
+    "translation": "[само за четене] - 'Д' или 'Н'.  По подразбиране е 'Н'"
+  },
+  {
+    "id": "api.command_share.share_read_only.help",
+    "translation": "Каналът ще бъде споделен в режим само за четене"
+  },
+  {
+    "id": "api.command_share.share_channel.error",
+    "translation": "Не може да се сподели този канал: {{.Error}}"
+  },
+  {
+    "id": "api.command_share.service_disabled",
+    "translation": "Услугата \"Споделени канали\" е забранена."
+  },
+  {
+    "id": "api.command_share.remote_uninvited",
+    "translation": "Поканата за сигурната връзка `{{.RemoteId}}` е премахната."
+  },
+  {
+    "id": "api.command_share.remote_table_header",
+    "translation": "| Сигурна връзка | URL на сайта | Само за четене | Приета покана | Онлайн | Последна синхронизация |"
+  },
+  {
+    "id": "api.command_share.remote_not_valid",
+    "translation": "Трябва да посочите валиден ИН на защитена връзка, за да отмените поканата"
+  },
+  {
+    "id": "api.command_share.remote_id_invalid.error",
+    "translation": "ИН на защитената връзка е невалиден: {{.Error}}"
+  },
+  {
+    "id": "api.command_share.remote_id.help",
+    "translation": "ИН на съществуваща защитена връзка. Вижте командата `secure-connection`, за да добавите защитена връзка."
+  },
+  {
+    "id": "api.command_share.remote_already_invited",
+    "translation": "Сигурната връзка вече е поканена."
+  },
+  {
+    "id": "api.command_share.permission_required",
+    "translation": "За да управлявате споделени канали, се изискват права на `{{.Permission}}`."
+  },
+  {
+    "id": "api.command_share.not_shared_channel_unshare",
+    "translation": "Не може да се отмени споделянето на канал, който не е споделен."
+  },
+  {
+    "id": "api.command_share.no_remote_invited",
+    "translation": "Към този канал не са поканени защитени връзки."
+  },
+  {
+    "id": "api.command_share.name",
+    "translation": "Канал за споделяне"
+  },
+  {
+    "id": "api.command_share.must_specify_valid_remote",
+    "translation": "Трябва да посочите валиден ИН на защитена връзка в поканата."
+  },
+  {
+    "id": "api.command_share.missing_action",
+    "translation": "Липсващо действие. Налични действия: {{.Actions}}"
+  },
+  {
+    "id": "api.command_share.invite_remote.help",
+    "translation": "Покани външна инстанция на Mattermost към текущия споделен канал"
+  },
+  {
+    "id": "api.command_share.invitation_sent",
+    "translation": "Поканата за споделен канал е изпратена до `{{.Name}} {{.SiteURL}}`."
+  },
+  {
+    "id": "api.command_share.invalid_value.error",
+    "translation": "Невалидна стойност за '{{.Arg}}': {{.Error}}"
+  },
+  {
+    "id": "api.command_share.hint",
+    "translation": "[действие]"
+  },
+  {
+    "id": "api.command_share.fetch_remote_status.error",
+    "translation": "Не може да се извлече статуса за сигурни връзки: {{.Error}}."
+  },
+  {
+    "id": "api.command_share.fetch_remote.error",
+    "translation": "Грешка при извличането на защитени връзки: {{.Error}}"
+  },
+  {
+    "id": "api.channel.create_channel.direct_channel.team_restricted_error",
+    "translation": "Не може да се създаде директен канал между тези потребители, тъй като те нямат общ екип."
+  },
+  {
+    "id": "app.valid_password_generic.app_error",
+    "translation": "Паролата не е валидна"
+  },
+  {
+    "id": "brand.save_brand_image.check_image_limits.app_error",
+    "translation": "Проверката за ограничения на изображението е неуспешна. Разделителната способност е твърде висока."
+  },
+  {
+    "id": "api.user.upload_profile_user.check_image_limits.app_error",
+    "translation": "Проверката за ограничения на изображението е неуспешна. Разделителната способност е твърде висока."
+  },
+  {
+    "id": "api.user.update_active.cloud_at_or_over_limit_check_overcapacity",
+    "translation": "Не мога да активирам повече потребители, тъй като капацитетът на профила в облака е надхвърлен."
+  },
+  {
+    "id": "api.user.update_active.cloud_at_limit_check_error",
+    "translation": "Неуспешна проверка броя на потребителите във Вашата Mattermost облачна инстанция."
+  },
+  {
+    "id": "api.team.set_team_icon.check_image_limits.app_error",
+    "translation": "Проверката за ограничения на изображението е неуспешна. Разделителната способност е твърде висока."
+  },
+  {
+    "id": "app.system.system_bot.bot_displayname",
+    "translation": "Система"
+  },
+  {
+    "id": "app.bot.get_warn_metrics_bot.empty_admin_list.app_error",
+    "translation": "Списъкът на администраторите е празен."
+  },
+  {
+    "id": "app.bot.get_system_bot.empty_admin_list.app_error",
+    "translation": "Списъкът на администраторите е празен."
+  },
+  {
+    "id": "app.user.get_thread_membership_for_user.not_found",
+    "translation": "Членството на потребител в разговор не съществува"
+  },
+  {
+    "id": "app.user.get_thread_membership_for_user.app_error",
+    "translation": "Неуспешно получаване членството на потребител в разговор"
+  },
+  {
+    "id": "api.license.request-trial.can-start-trial.not-allowed",
+    "translation": "Този лицензен ключ за пробен период на Mattermost Enterprise Edition е изтекъл и вече не е валиден. Ако желаете да удължите пробния си период, моля [свържете се с нашия екип по продажбите](https://mattermost.com/contact-us/)."
+  },
+  {
+    "id": "api.license.request-trial.can-start-trial.error",
+    "translation": "Не може да се провери възможността за започване на пробна версия"
+  },
+  {
+    "id": "ent.data_retention.run_failed.error",
+    "translation": "Задачата по запазване на данни е неуспешна."
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_title",
+    "translation": "Вашият абонамент за Mattermost подлежи на подновяване"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subtitle_two",
+    "translation": "Влезте в клиентския си профил, за да подновите"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subtitle",
+    "translation": "{{.UserName}}, абонаментът Ви изтича след {{.Days}} дни. Надяваме се, че ще се насладите на гъвкавото и сигурно екипно сътрудничество, което Mattermost позволява. Подновете абонамента си скоро, за да гарантирате, че екипът Ви ще продължи да се възползва от тези предимства."
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_subject",
+    "translation": "Лицензът Ви подлежи на подновяване"
+  },
+  {
+    "id": "api.templates.license_up_for_renewal_renew_now",
+    "translation": "Поднови сега"
+  },
+  {
+    "id": "api.server.license_up_for_renewal.error_sending_email",
+    "translation": "Неуспешно изпращане на ел.поща за подновяване на лиценза"
+  },
+  {
+    "id": "api.server.license_up_for_renewal.error_generating_link",
+    "translation": "Неуспешно генериране връзката за подновяване на лиценза"
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens_parse.error",
+    "translation": "Невъзможно анализирането на маркера при анулиране на маркерите за проверка по ел.поща"
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens_delete.error",
+    "translation": "Невъзможно премахването на маркера при анулиране на маркерите за проверка по ел.поща"
+  },
+  {
+    "id": "api.user.invalidate_verify_email_tokens.error",
+    "translation": "Невъзможно получаването на маркери по тип при анулирането на маркери за проверка по ел.поща"
+  },
+  {
+    "id": "app.user.store_is_empty.app_error",
+    "translation": "Неуспешна проверка дали потребителското хранилище е празно."
+  },
+  {
+    "id": "api.license.upgrade_needed.app_error",
+    "translation": "Функцията изисква надграждане до версия Enterprise Edition."
   }
 ]
