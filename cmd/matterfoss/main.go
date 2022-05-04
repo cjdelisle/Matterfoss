@@ -18,7 +18,7 @@ import (
 	_ "github.com/tylerb/graceful"
 	_ "gopkg.in/olivere/elastic.v6"
 
-	"github.com/cjdelisle/matterfoss-server/v6/cmd/mattermost/commands"
+	"github.com/cjdelisle/matterfoss-server/v6/cmd/matterfoss/commands"
 	// Import and register app layer slash commands
 	_ "github.com/cjdelisle/matterfoss-server/v6/app/slashcommands"
 	// Plugins

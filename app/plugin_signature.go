@@ -78,7 +78,7 @@ func (a *App) VerifyPlugin(plugin, signature io.ReadSeeker) *model.AppError {
 }
 
 func (ch *Channels) verifyPlugin(plugin, signature io.ReadSeeker) *model.AppError {
-	if err := verifySignature(bytes.NewReader(mattermostPluginPublicKey), plugin, signature); err == nil {
+	if err := verifySignature(bytes.NewReader(matterfossPluginPublicKey), plugin, signature); err == nil {
 		return nil
 	}
 	publicKeys := ch.cfgSvc.Config().PluginSettings.SignaturePublicKeyFiles
