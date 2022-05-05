@@ -7,8 +7,8 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 type sqlClusterDiscoveryStore struct {
@@ -26,7 +26,7 @@ func (s sqlClusterDiscoveryStore) Save(ClusterDiscovery *model.ClusterDiscovery)
 	}
 
 	if _, err := s.GetMasterX().NamedExec(`
-		INSERT INTO 
+		INSERT INTO
 			ClusterDiscovery
 			(Id, Type, ClusterName, Hostname, GossipPort, Port, CreateAt, LastPingAt)
 		VALUES

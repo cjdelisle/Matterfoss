@@ -16,10 +16,10 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine/mocks"
-	filesStoreMocks "github.com/mattermost/mattermost-server/v6/shared/filestore/mocks"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine/mocks"
+	filesStoreMocks "github.com/cjdelisle/matterfoss-server/v6/shared/filestore/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func TestGeneratePublicLinkHash(t *testing.T) {

@@ -1,23 +1,23 @@
 
 {{define "unsupported_browser-browser"}}
-    <div 
-        class='browser-container' 
-        data-mattermost-hover='browser'
+    <div
+        class='browser-container'
+        data-matterfoss-hover='browser'
     >
         <div class='browser'>
-            <img 
-                class='browser-image' 
+            <img
+                class='browser-image'
                 src='{{.LogoSrc}}'
             />
             <div class='browser-top-text'>{{.Title}}</div>
             <div class='browser-bottom-text'>{{.SupportedVersionString}}</div>
         </div>
-        <div 
-            class='browser browser-hover hidden' 
-            data-mattermost-click='{{.Src}}'
+        <div
+            class='browser browser-hover hidden'
+            data-matterfoss-click='{{.Src}}'
         >
-            <img 
-                class='browser-image' 
+            <img
+                class='browser-image'
                 src='{{.LogoSrc}}'
             />
             <div class='browser-top-text'>{{.GetLatestString}}</div>
@@ -25,33 +25,33 @@
     </div>
 {{end}}
 {{define "unsupported_browser-system_browser"}}
-    <div 
-        class='browser-container' 
-        data-mattermost-hover='browser'
+    <div
+        class='browser-container'
+        data-matterfoss-hover='browser'
     >
         <div class='browser'>
-            <img 
-                class='browser-image' 
+            <img
+                class='browser-image'
                 src='{{.LogoSrc}}'
             />
             <div class='browser-top-text'>{{.Title}}</div>
             <div class='browser-bottom-text'>{{.SupportedVersionString}}</div>
         </div>
         <div class='browser browser-hover no-pointer hidden'>
-            <img 
-                class='browser-image' 
+            <img
+                class='browser-image'
                 src='{{.LogoSrc}}'
             />
-            <div 
-                class='browser-top-text pointer' 
-                data-mattermost-click='{{.LinkOpen}}'
+            <div
+                class='browser-top-text pointer'
+                data-matterfoss-click='{{.LinkOpen}}'
             >
                 <p>{{.LabelOpen}}</p>
             </div>
             <div class='browser-bottom-text'>{{.OrString}}</div>
-            <div 
-                class='browser-top-text pointer' 
-                data-mattermost-click='{{.LinkMakeDefault}}'
+            <div
+                class='browser-top-text pointer'
+                data-matterfoss-click='{{.LinkMakeDefault}}'
             >
                 <p>{{.MakeDefaultString}}</p>
             </div>
@@ -59,30 +59,30 @@
     </div>
 {{end}}
 {{define "unsupported_browser-app"}}
-    <div 
-        class='mattermost-app-container' 
-        data-mattermost-hover='mattermost-app'
+    <div
+        class='matterfoss-app-container'
+        data-matterfoss-hover='matterfoss-app'
     >
-        <div class='mattermost-app'>
-            <img 
-                class='mattermost-app-image' 
+        <div class='matterfoss-app'>
+            <img
+                class='matterfoss-app-image'
                 src='{{.LogoSrc}}'
             />
             <div class='browser-top-text'>{{.Title}}</div>
             <div class='browser-bottom-text'>{{.SupportedVersionString}}</div>
         </div>
-        <div class='mattermost-app mattermost-app-hover hidden'>
-            <img 
-                class='mattermost-app-image' 
+        <div class='matterfoss-app matterfoss-app-hover hidden'>
+            <img
+                class='matterfoss-app-image'
                 src='{{.LogoSrc}}'
             />
-            <button 
-                class='mattermost-app-button' 
-                data-mattermost-click='{{.Link}}'
+            <button
+                class='matterfoss-app-button'
+                data-matterfoss-click='{{.Link}}'
             >
                 {{.Label}}
             </button>
-            <div class='mattermost-app-hover-alt'>
+            <div class='matterfoss-app-hover-alt'>
                 <a href='{{.InstallGuideLink}}' target='_blank'>{{.InstallGuide}}</a>
             </div>
         </div>
@@ -99,52 +99,52 @@
                 .hidden {
                     display: none;
                 }
-                .content {	
+                .content {
                     height: 540px;
                     width: 100%;
                     position: absolute;
                     top: 50%;
                     margin-top: -270px;
                 }
-                .we-no-longer-support {	
-                    height: 55px;	
-                    color: #3D3C40;	
-                    font-family: "Open Sans";	
-                    font-size: 40px;	
-                    font-weight: 600;	
-                    letter-spacing: -0.2px;	
-                    line-height: 55px;	
+                .we-no-longer-support {
+                    height: 55px;
+                    color: #3D3C40;
+                    font-family: "Open Sans";
+                    font-size: 40px;
+                    font-weight: 600;
+                    letter-spacing: -0.2px;
+                    line-height: 55px;
                     text-align: center;
                 }
-                .download-the-matterm {	
-                    height: 26px;	
-                    color: #3D3C40;	
-                    font-family: "Open Sans";	
-                    font-size: 20px;	
-                    line-height: 26px;	
+                .download-the-matterm {
+                    height: 26px;
+                    color: #3D3C40;
+                    font-family: "Open Sans";
+                    font-size: 20px;
+                    line-height: 26px;
                     text-align: center;
                     padding-top: 24px;
                 }
-                .downloads {	
-                    height: 212px;	
+                .downloads {
+                    height: 212px;
                     width: 100%;
                     padding-top: 40px;
                     text-align: center;
                     font-size: 0;
                 }
-                .learn-more-about-sup {	
+                .learn-more-about-sup {
                     height: 22px;
-                    width: 100%;	
-                    line-height: 22px;	
+                    width: 100%;
+                    line-height: 22px;
                     text-align: center;
                     position: absolute;
                     bottom: 0px;
                 }
-                .learn-more-about-sup a {	
+                .learn-more-about-sup a {
                     color: #145DBF;
                     text-decoration: none;
-                    font-family: "Open Sans";	
-                    font-size: 14px;	
+                    font-family: "Open Sans";
+                    font-size: 14px;
                 }
                 .learn-more-about-sup a:hover {
                     text-decoration: underline;
@@ -160,25 +160,25 @@
                     position: relative;
                     top: 24px;
                 }
-                .mattermost-app {	
-                    height: 148px;	
+                .matterfoss-app {
+                    height: 148px;
                     width: 188px;
                     padding: 32px 30px;
                 }
-                .mattermost-app-container {	
-                    height: 212px;	
+                .matterfoss-app-container {
+                    height: 212px;
                     width: 248px;
                     display: inline-block;
                     vertical-align: top;
                 }
-                .browser {	
-                    height: 212px;	
+                .browser {
+                    height: 212px;
                     width: 164px;
                     padding-left: 14px;
                     padding-right: 14px;
                 }
-                .browser-container {	
-                    height: 212px;	
+                .browser-container {
+                    height: 212px;
                     width: 192px;
                     display: inline-block;
                     vertical-align: top;
@@ -188,14 +188,14 @@
                     height: 80px;
                     padding: 32px 42px 24px 42px;
                 }
-                .mattermost-app-image {
+                .matterfoss-app-image {
                     height: 80px;
                     padding: 0px 54px 24px 54px;
                 }
-                .browser-bottom-text {	
+                .browser-bottom-text {
                     font-family: "Open Sans";
-                    font-size: 14px;	
-                    line-height: 22px;	
+                    font-size: 14px;
+                    line-height: 22px;
                     text-align: center;
                     color: rgba(61,60,64,0.7);
                 }
@@ -226,20 +226,20 @@
                     width: 128px;
                     padding: 0 18px;
                 }
-                .mattermost-app-button {
-                    height: 36px;	
-                    width: 156px;	
+                .matterfoss-app-button {
+                    height: 36px;
+                    width: 156px;
                     border: 0;
-                    border-radius: 4px;	
+                    border-radius: 4px;
                     background-color: #145DBF;
                     padding: 8px 16px;
-                    color: #FFFFFF;	
-                    font-family: "Open Sans";	
-                    font-size: 14px;	
+                    color: #FFFFFF;
+                    font-family: "Open Sans";
+                    font-size: 14px;
                     line-height: 20px;
                     cursor: pointer;
                 }
-                .mattermost-app.mattermost-app-hover {
+                .matterfoss-app.matterfoss-app-hover {
                     padding-bottom: 0;
                 }
                 .no-pointer {
@@ -248,28 +248,28 @@
                 .pointer {
                     cursor: pointer;
                 }
-                .mattermost-app-hover-alt {
+                .matterfoss-app-hover-alt {
                     height: 18px;
-                    font-family: "Open Sans";	
-                    font-size: 12px;	
-                    line-height: 18px;	
+                    font-family: "Open Sans";
+                    font-size: 12px;
+                    line-height: 18px;
                     text-align: center;
                     padding-top: 10px;
                 }
-                .mattermost-app-hover-alt a {
+                .matterfoss-app-hover-alt a {
                     text-decoration: none;
-                    color: #145DBF;	
+                    color: #145DBF;
                 }
-                .mattermost-app-hover-alt a:hover {
+                .matterfoss-app-hover-alt a:hover {
                     text-decoration: underline;
                 }
             </style>
-            <link 
-                href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap' 
+            <link
+                href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'
                 rel='stylesheet'
             />
-            <script 
-                type='text/javascript' 
+            <script
+                type='text/javascript'
                 src='/unsupported_browser.js'
             >
             </script>

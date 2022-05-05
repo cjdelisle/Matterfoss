@@ -20,12 +20,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/testlib"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func getHashedKey(key string) string {
@@ -629,7 +629,7 @@ func TestPluginSync(t *testing.T) {
 	}
 }
 
-// See https://github.com/mattermost/mattermost-server/issues/19189
+// See https://github.com/cjdelisle/matterfoss-server/issues/19189
 func TestChannelsPluginsInit(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
@@ -729,8 +729,8 @@ func TestPluginPanicLogs(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v6/plugin"
-			"github.com/mattermost/mattermost-server/v6/model"
+			"github.com/cjdelisle/matterfoss-server/v6/plugin"
+			"github.com/cjdelisle/matterfoss-server/v6/model"
 		)
 
 		type MyPlugin struct {

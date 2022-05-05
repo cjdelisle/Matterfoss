@@ -12,11 +12,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/jobs"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/configservice"
-	"github.com/mattermost/mattermost-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/configservice"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
 )
 
 const jobName = "ImportProcess"

@@ -23,10 +23,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
-	"github.com/mattermost/mattermost-server/v6/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/testutils"
 )
 
 var testDir = ""

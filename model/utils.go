@@ -23,7 +23,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
 	"github.com/pborman/uuid"
 	"github.com/pkg/errors"
 )

@@ -4,7 +4,7 @@
 package model
 
 import (
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 type BundleInfo struct {

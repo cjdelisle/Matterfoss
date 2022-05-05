@@ -6,7 +6,7 @@ package audit
 import (
 	"fmt"
 
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 type Audit struct {

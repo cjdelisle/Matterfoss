@@ -167,7 +167,7 @@ type Manifest struct {
 	// A version number for your plugin. Semantic versioning is recommended: http://semver.org
 	Version string `json:"version" yaml:"version"`
 
-	// The minimum Mattermost server version required for your plugin.
+	// The minimum Matterfoss server version required for your plugin.
 	//
 	// Minimum server version: 5.6
 	MinServerVersion string `json:"min_server_version,omitempty" yaml:"min_server_version,omitempty"`
@@ -178,7 +178,7 @@ type Manifest struct {
 	// If your plugin extends the web app, you'll need to define webapp.
 	Webapp *ManifestWebapp `json:"webapp,omitempty" yaml:"webapp,omitempty"`
 
-	// To allow administrators to configure your plugin via the Mattermost system console, you can
+	// To allow administrators to configure your plugin via the Matterfoss system console, you can
 	// provide your settings schema.
 	SettingsSchema *PluginSettingsSchema `json:"settings_schema,omitempty" yaml:"settings_schema,omitempty"`
 

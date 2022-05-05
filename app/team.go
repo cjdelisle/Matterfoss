@@ -16,17 +16,17 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/app/email"
-	"github.com/mattermost/mattermost-server/v6/app/imaging"
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/app/teams"
-	"github.com/mattermost/mattermost-server/v6/app/users"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/app/email"
+	"github.com/cjdelisle/matterfoss-server/v6/app/imaging"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/app/teams"
+	"github.com/cjdelisle/matterfoss-server/v6/app/users"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
 )
 
 func (a *App) CreateTeam(c *request.Context, team *model.Team) (*model.Team, *model.AppError) {

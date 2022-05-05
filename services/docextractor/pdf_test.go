@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v6/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/testutils"
 	"github.com/stretchr/testify/require"
 )
 

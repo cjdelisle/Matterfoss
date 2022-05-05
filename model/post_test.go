@@ -326,7 +326,7 @@ func TestPost_AttachmentsEqual(t *testing.T) {
 								URL: "http://localhost",
 								Context: map[string]interface{}{
 									"context": "foobar",
-									"test":    "mattermost",
+									"test":    "matterfoss",
 								},
 							},
 						},

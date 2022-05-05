@@ -5,8 +5,8 @@
 package mocks
 
 import (
-	model "github.com/mattermost/mattermost-server/v6/model"
-	store "github.com/mattermost/mattermost-server/v6/store"
+	model "github.com/cjdelisle/matterfoss-server/v6/model"
+	store "github.com/cjdelisle/matterfoss-server/v6/store"
 	mock "github.com/stretchr/testify/mock"
 )
 
