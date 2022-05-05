@@ -14,13 +14,13 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/searchlayer"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v6/store/storetest"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/searchlayer"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 type MainHelper struct {

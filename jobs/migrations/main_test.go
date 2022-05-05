@@ -6,7 +6,7 @@ package migrations
 import (
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v6/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 var mainHelper *testlib.MainHelper

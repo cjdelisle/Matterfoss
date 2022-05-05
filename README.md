@@ -1,90 +1,101 @@
-# [![Mattermost](https://user-images.githubusercontent.com/7205829/137170381-fe86eef0-bccc-4fdd-8e92-b258884ebdd7.png)](https://mattermost.com)
+# Matterfoss
 
-[Mattermost](https://mattermost.com) is an open source platform for secure collaboration across the entire software development lifecycle. This repo is the primary source for core development on the Mattermost platform; it's written in Go and React and runs as a single Linux binary with MySQL or PostgreSQL. A new compiled version is released under an MIT license every month on the 16th.
+Matterfoss is a community chat server based on code copied from the Mattermost™ project. It 
+adds the following important features:
 
-<img width="1006" alt="mattermost-hero" src="https://user-images.githubusercontent.com/7205829/136107976-7a894c9e-290a-490d-8501-e5fdbfc3785a.png">
+* **No trademarks**: Mattermost™ is a trademark of Mattermost Inc. In respect of their
+[trademark policy](https://mattermost.org/trademark-standards-of-use/), we find it
+inappropriate to use that name in a community free software project which can be changed and
+remixed by anybody. As far as we know, the Matterfoss name is not trademarked.
 
-Useful Resources:
+* **No CLAs**: When you make a contribution to Matterfoss, you don't need to sign your code
+over to anybody. There are no commercial licenses, everybody gets to copy this software under
+the terms of the AGPL.
 
-- [Deployment Guide](https://docs.mattermost.com/guides/deployment.html) - Install, setup, and configure your own Mattermost instance.
-- [Admin and User Documentation](https://docs.mattermost.com/) - Learn how to run a Mattermost instance and take advantage of all the features.
-- [Developer Documentation](https://developers.mattermost.com/) - Contribute code to Mattermost or build an integration via APIs, Webhooks, slash commands, Apps, and plugins.
+* **No DRM**: Every feature that is present in the open source software is fully unlocked, you
+don't need any "license" file in order to use them.
 
-Table of Contents
-=================
+* **No Tracking**: There is no telemetry, update-check or other "call home" feature which can
+be used to track you. Note that if you use a 3rd party push notification provider, they will
+have access to whatever data is sent to them.
 
-  * [Try out Mattermost](#try-out-mattermost)
-  * [Install Mattermost](#install-mattermost)
-  * [Native Mobile and Desktop Apps](#native-mobile-and-desktop-apps)
-  * [Get Security Bulletins](#get-security-bulletins)
-  * [Get Involved](#get-involved)
-  * [Learn More](#learn-more)
-  * [Get the Latest News](#get-the-latest-news)
-  * [Contributing](#contributing)
+## No warranties, no support
 
-## Try out Mattermost
+If you are considering using Matterfoss in a commercial setting, please note that this
+software comes with no warranty. As far as we know, there is no available commercial
+support.
 
-- [Join the Mattermost Contributor's server](https://community.mattermost.com/signup_user_complete/?id=codoy5s743rq5mk18i7u5ksz7e) to join community discussions about contributions, development and more
-- [Get started with Mattermost Cloud](https://customers.mattermost.com/cloud/signup) to try out Mattermost
+This is a volunteer community project and we cannot even promise to fix important security
+issues in a timely manner, so if you intend to use Matterfoss in a commercial setting, we
+highly recommend that you instead choose Mattermost™. That way, you will be supporting the 
+development of great open source software.
 
-[![Deploy a Preview](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mattermost/mattermost-heroku)
+## Why?
 
-_Note: Heroku preview does not include email or persistent storage_
+Free communities need an alternative to closed proprietary systems like Slack. Unfortunately,
+Mattermost™ has two features which made it unsuitable for such use:
 
-## Install Mattermost
+1. Unless you buy an "enterprise license", even simple features like channel ownership are 
+disabled, meaning anyone can delete any channel. Similarly, without an enterprise license,
+you can't set a data retention policy, which can make GDPR compliance problematic.
 
-- [Quick Install Guide](https://docs.mattermost.com/getting-started/light-install.html) - Deploy in minutes via Mattermost Omnibus on Ubuntu.
-- [Run Mattermost via Docker](https://docs.mattermost.com/install/setting-up-local-machine-using-docker.html) - Launch a Mattermost server instantly to test functionality and build integrations.
-- [Developer Machine Setup](https://developers.mattermost.com/contribute/server/developer-setup) - Follow this guide if you want to write code for Mattermost.
+2. Enterprise licenses are sold per head, so anyone hoping to set up a public server faces
+potentially unlimited and significant license costs.
 
-Other Install Guides:
-- [Ubuntu 20.04 LTS](https://docs.mattermost.com/install/installing-ubuntu-2004-LTS.html)
-- [Kubernetes](https://docs.mattermost.com/install/install-kubernetes.html)
-- [Helm](https://docs.mattermost.com/install/install-kubernetes.html#installing-the-operators-via-helm)
-- [Debian Buster](https://docs.mattermost.com/install/install-debian.html)
-- [RHEL 8](https://docs.mattermost.com/install/install-rhel-8.html)
-- [More server install guides](https://docs.mattermost.com/guides/deployment.html)
+Attempts were made to engage with Mattermost Inc concerning these issues, but they were not
+interested.
 
-## Native Mobile and Desktop Apps
+## Installing
 
-In addition to the web interface, you can also download Mattermost clients for [Android](https://mattermost.com/mattermost-android-app/), [iOS](https://mattermost.com/mattermost-ios-app/), [Windows PC](https://docs.mattermost.com/install/desktop-app-install.html#windows-10-windows-8-1), [Mac OSX](https://docs.mattermost.com/install/desktop-app-install.html#macos-10-9), and [Linux](https://docs.mattermost.com/install/desktop-app-install.html#linux).
+We recommend that you compile Matterfoss on the server where you intend to use it, so that you
+can quickly and easily make any changes that you need to. To compile it you will need
+[golang](https://golang.org/dl/) and a database, either MariaDB or PostgreSQL.
 
-[![Google Play](https://user-images.githubusercontent.com/33878967/33095356-39b6fbf8-ceb8-11e7-8a61-c3a18fa5e658.png)](https://mattermost.com/mattermost-android-app/)  [![App Store](https://user-images.githubusercontent.com/33878967/33095353-397e69b4-ceb8-11e7-8175-f95a97d5274f.png)](https://itunes.apple.com/us/app/mattermost/id1257222717?mt=8)  [![Windows PC](https://user-images.githubusercontent.com/33878967/33095357-39cab8d2-ceb8-11e7-89a6-67dccc571ca3.png)](https://docs.mattermost.com/install/desktop.html#windows-10-windows-8-1-windows-7)  [![Mac OSX](https://user-images.githubusercontent.com/33878967/33095355-39a36f2a-ceb8-11e7-9b33-73d4f6d5d6c1.png)](https://docs.mattermost.com/install/desktop.html#macos-10-9)  [![Linux](https://user-images.githubusercontent.com/33878967/33095354-3990e256-ceb8-11e7-965d-b00a16e578de.png)](https://docs.mattermost.com/install/desktop.html#linux)
+```bash
+# Download this server and the frontend
+git clone https://github.com/cjdelisle/Matterfoss
+git clone https://github.com/cjdelisle/MatterfossWeb
 
-## Get Security Bulletins
+# Compile the frontend
+cd MatterfossWeb
+npm install
+npm run build
 
-Receive notifications of critical security updates. The sophistication of online attackers is perpetually increasing. If you are deploying Mattermost it is highly recommended you subscribe to the Mattermost Security Bulletin mailing list for updates on critical security releases.
+# Compile matterfoss
+cd ../Matterfoss
+go build -o ./bin ./...
 
-[Subscribe here](https://mattermost.com/security-updates/#sign-up)
+# Setup the database - note that mfuser and mfpass are defaults in the
+# configuration. If your MariaDB instance is on another server, you will
+# need to change 'mfuser'@'localhost' to 'mfuser'@'%' to allow outside
+# access and clearly you will need to use a strong password.
+echo "
+create user 'mfuser'@'localhost' identified by 'mfpass';
+create database matterfoss;
+grant all privileges on matterfoss.* to 'mfuser'@'localhost';
+" | mariadb
 
-## Get Involved
+# Move the frontend into the server so that it will be served
+mv ../MatterfossWeb/dist ./client
 
-- [Contribute to Mattermost](https://handbook.mattermost.com/contributors/contributors/ways-to-contribute)
-- [Find "Help Wanted" projects](https://github.com/mattermost/mattermost-server/issues?page=1&q=is%3Aissue+is%3Aopen+%22Help+Wanted%22&utf8=%E2%9C%93)
-- [Join Developer Discussion on a Mattermost Server for contributors](https://community.mattermost.com/signup_user_complete/?id=f1924a8db44ff3bb41c96424cdc20676)
-- [Get Help With Mattermost](https://docs.mattermost.com/guides/get-help.html)
+# Start matterfoss
+./bin/matterfoss
+```
 
-## Learn More
+## Customization
 
-- [API Options - webhooks, slash commands, drivers and web service](https://api.mattermost.com/)
-- [See who's using Mattermost](https://mattermost.com/blog/category/customer-stories/)
-- [Browse over 700 Mattermost integrations](https://integrations.mattermost.com/)
+If you just clicked on a link and found yourself here, it's probably because you or
+the admin of your Matterfoss instance did not configure the links for their instance
+properly. In order to avoid getting linked here, you need to edit your `config.json` file
+or go into the System Console and edit the following entries:
+
+* TermsOfServiceLink: url of your terms of service for your server
+* PrivacyPolicyLink: url of your privacy policy
+* AboutLink: url about the purpose of your server
+* HelpLink: url with a link to help and support
+* ReportAProblemLink: url where people can go to report problems with your service
 
 ## License
 
 See the [LICENSE file](LICENSE.txt) for license rights and limitations.
 
-## Get the Latest News
-
-- **Twitter** - Follow [Mattermost](https://twitter.com/mattermost).
-- **Blog** - Get the latest updates from the [Mattermost blog](https://mattermost.com/blog/).
-- **Facebook** - Follow [Mattermost](https://www.facebook.com/MattermostHQ).
-- **LinkedIn** - Follow [Mattermost](https://www.linkedin.com/company/mattermost/).
-- **Email** - Subscribe to our [newsletter](https://mattermost.us11.list-manage.com/subscribe?u=6cdba22349ae374e188e7ab8e&id=2add1c8034) (1 or 2 per month).
-- **Mattermost** - Join the ~contributors channel on [the Mattermost Community Server](https://community.mattermost.com). 
-- **IRC** - Join the #matterbridge channel on [Freenode](https://freenode.net/) (thanks to [matterircd](https://github.com/42wim/matterircd)).
-
-## Contributing
-Please see [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-Any other questions, mail us at info@mattermost.com. We’d love to meet you!

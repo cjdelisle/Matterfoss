@@ -6,12 +6,12 @@ package remotecluster
 import (
 	"context"
 
-	"github.com/mattermost/mattermost-server/v6/einterfaces"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin/plugintest/mock"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 type mockServer struct {

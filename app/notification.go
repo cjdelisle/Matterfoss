@@ -15,11 +15,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/markdown"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/markdown"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func (a *App) SendNotifications(post *model.Post, team *model.Team, channel *model.Channel, sender *model.User, parentPostList *model.PostList, setOnline bool) ([]string, error) {

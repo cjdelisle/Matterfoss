@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 type LogSrcListener func(old, new mlog.LoggerConfiguration)

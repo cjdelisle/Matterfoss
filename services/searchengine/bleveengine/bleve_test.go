@@ -12,13 +12,13 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
-	"github.com/mattermost/mattermost-server/v6/store/searchlayer"
-	"github.com/mattermost/mattermost-server/v6/store/searchtest"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v6/store/storetest"
-	"github.com/mattermost/mattermost-server/v6/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/store/searchlayer"
+	"github.com/cjdelisle/matterfoss-server/v6/store/searchtest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 type BleveEngineTestSuite struct {

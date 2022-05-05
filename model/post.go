@@ -14,7 +14,7 @@ import (
 	"sync"
 	"unicode/utf8"
 
-	"github.com/mattermost/mattermost-server/v6/shared/markdown"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/markdown"
 )
 
 const (

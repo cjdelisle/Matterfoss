@@ -6,8 +6,8 @@ package app
 import (
 	"net/http"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
 )
 
 func (a *App) TestElasticsearch(cfg *model.Config) *model.AppError {

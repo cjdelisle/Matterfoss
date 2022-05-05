@@ -6,8 +6,8 @@ package searchtest
 import (
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 const (

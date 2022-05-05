@@ -6,7 +6,7 @@ package sqlstore
 import (
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v6/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
 )
 
 func TestChannelStoreCategories(t *testing.T) {

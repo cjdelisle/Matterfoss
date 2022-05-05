@@ -20,8 +20,8 @@ import (
 
 	"github.com/mattermost/ldap"
 
-	"github.com/mattermost/mattermost-server/v6/shared/filestore"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (

@@ -19,10 +19,10 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/vmihailenco/msgpack/v5"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (

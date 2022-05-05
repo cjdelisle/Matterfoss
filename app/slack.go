@@ -13,10 +13,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/slackimport"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/slackimport"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func (a *App) SlackImport(c *request.Context, fileData multipart.File, fileSize int64, teamID string) (*model.AppError, *bytes.Buffer) {

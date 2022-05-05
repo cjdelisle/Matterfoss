@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 // createDefaultChannelMemberships adds users to channels based on their group memberships and how those groups are

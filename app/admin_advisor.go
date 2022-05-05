@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mail"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 func (a *App) GetWarnMetricsStatus() (map[string]*model.WarnMetricStatus, *model.AppError) {

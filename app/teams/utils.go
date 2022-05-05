@@ -6,7 +6,7 @@ package teams
 import (
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 // By default the list will be (not necessarily in this order):

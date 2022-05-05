@@ -14,9 +14,9 @@ import (
 	"golang.org/x/crypto/openpgp"       //nolint:staticcheck
 	"golang.org/x/crypto/openpgp/armor" //nolint:staticcheck
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 // GetPublicKey will return the actual public key saved in the `name` file.
@@ -78,7 +78,7 @@ func (a *App) VerifyPlugin(plugin, signature io.ReadSeeker) *model.AppError {
 }
 
 func (ch *Channels) verifyPlugin(plugin, signature io.ReadSeeker) *model.AppError {
-	if err := verifySignature(bytes.NewReader(mattermostPluginPublicKey), plugin, signature); err == nil {
+	if err := verifySignature(bytes.NewReader(matterfossPluginPublicKey), plugin, signature); err == nil {
 		return nil
 	}
 	publicKeys := ch.cfgSvc.Config().PluginSettings.SignaturePublicKeyFiles

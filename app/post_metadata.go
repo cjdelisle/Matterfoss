@@ -18,11 +18,11 @@ import (
 
 	"github.com/dyatlov/go-opengraph/opengraph"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/cache"
-	"github.com/mattermost/mattermost-server/v6/shared/markdown"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils/imgutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/markdown"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/imgutils"
 )
 
 type linkMetadataCache struct {

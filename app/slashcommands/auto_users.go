@@ -7,11 +7,11 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/mattermost/mattermost-server/v6/app"
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 type AutoUserCreator struct {

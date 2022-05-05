@@ -11,14 +11,14 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 // DefaultChannelNames returns the list of system-wide default channel names.

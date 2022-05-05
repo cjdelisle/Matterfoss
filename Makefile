@@ -81,11 +81,11 @@ GOFLAGS ?= $(GOFLAGS:)
 export GOBIN ?= $(PWD)/bin
 GO=go
 DELVE=dlv
-LDFLAGS += -X "github.com/mattermost/mattermost-server/v6/model.BuildNumber=$(BUILD_NUMBER)"
-LDFLAGS += -X "github.com/mattermost/mattermost-server/v6/model.BuildDate=$(BUILD_DATE)"
-LDFLAGS += -X "github.com/mattermost/mattermost-server/v6/model.BuildHash=$(BUILD_HASH)"
-LDFLAGS += -X "github.com/mattermost/mattermost-server/v6/model.BuildHashEnterprise=$(BUILD_HASH_ENTERPRISE)"
-LDFLAGS += -X "github.com/mattermost/mattermost-server/v6/model.BuildEnterpriseReady=$(BUILD_ENTERPRISE_READY)"
+LDFLAGS += -X "github.com/cjdelisle/matterfoss-server/v6/model.BuildNumber=$(BUILD_NUMBER)"
+LDFLAGS += -X "github.com/cjdelisle/matterfoss-server/v6/model.BuildDate=$(BUILD_DATE)"
+LDFLAGS += -X "github.com/cjdelisle/matterfoss-server/v6/model.BuildHash=$(BUILD_HASH)"
+LDFLAGS += -X "github.com/cjdelisle/matterfoss-server/v6/model.BuildHashEnterprise=$(BUILD_HASH_ENTERPRISE)"
+LDFLAGS += -X "github.com/cjdelisle/matterfoss-server/v6/model.BuildEnterpriseReady=$(BUILD_ENTERPRISE_READY)"
 
 GO_MAJOR_VERSION = $(shell $(GO) version | cut -c 14- | cut -d' ' -f1 | cut -d'.' -f1)
 GO_MINOR_VERSION = $(shell $(GO) version | cut -c 14- | cut -d' ' -f1 | cut -d'.' -f2)
@@ -158,7 +158,7 @@ all: run ## Alias for 'run'.
 include config.mk
 include build/*.mk
 
-LDFLAGS += -X "github.com/mattermost/mattermost-server/v6/model.MockCWS=$(MM_ENABLE_CWS_MOCK)"
+LDFLAGS += -X "github.com/cjdelisle/matterfoss-server/v6/model.MockCWS=$(MM_ENABLE_CWS_MOCK)"
 
 RUN_IN_BACKGROUND ?=
 ifeq ($(RUN_SERVER_IN_BACKGROUND),true)
@@ -481,20 +481,20 @@ run-server: prepackaged-binaries validate-go-version start-docker ## Starts the 
 debug-server: start-docker ## Compile and start server using delve.
 	mkdir -p $(BUILD_WEBAPP_DIR)/dist/files
 	$(DELVE) debug $(PLATFORM_FILES) --build-flags="-ldflags '\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildNumber=$(BUILD_NUMBER)\
-		-X \"github.com/mattermost/mattermost-server/v6/model.BuildDate=$(BUILD_DATE)\"\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildHash=$(BUILD_HASH)\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildHashEnterprise=$(BUILD_HASH_ENTERPRISE)\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildEnterpriseReady=$(BUILD_ENTERPRISE_READY)'"
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildNumber=$(BUILD_NUMBER)\
+		-X \"github.com/cjdelisle/matterfoss-server/v6/model.BuildDate=$(BUILD_DATE)\"\
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildHash=$(BUILD_HASH)\
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildHashEnterprise=$(BUILD_HASH_ENTERPRISE)\
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildEnterpriseReady=$(BUILD_ENTERPRISE_READY)'"
 
 debug-server-headless: start-docker ## Debug server from within an IDE like VSCode or IntelliJ.
 	mkdir -p $(BUILD_WEBAPP_DIR)/dist/files
 	$(DELVE) debug --headless --listen=:2345 --api-version=2 --accept-multiclient $(PLATFORM_FILES) --build-flags="-ldflags '\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildNumber=$(BUILD_NUMBER)\
-		-X \"github.com/mattermost/mattermost-server/v6/model.BuildDate=$(BUILD_DATE)\"\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildHash=$(BUILD_HASH)\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildHashEnterprise=$(BUILD_HASH_ENTERPRISE)\
-		-X github.com/mattermost/mattermost-server/v6/model.BuildEnterpriseReady=$(BUILD_ENTERPRISE_READY)'"
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildNumber=$(BUILD_NUMBER)\
+		-X \"github.com/cjdelisle/matterfoss-server/v6/model.BuildDate=$(BUILD_DATE)\"\
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildHash=$(BUILD_HASH)\
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildHashEnterprise=$(BUILD_HASH_ENTERPRISE)\
+		-X github.com/cjdelisle/matterfoss-server/v6/model.BuildEnterpriseReady=$(BUILD_ENTERPRISE_READY)'"
 
 run-cli: start-docker ## Runs CLI.
 	@echo Running mattermost for development
@@ -669,7 +669,7 @@ gen-serialized: ## Generates serialization methods for hot structs
 	@mv tmp.go ./model/team_member_serial_gen.go
 
 todo: ## Display TODO and FIXME items in the source code.
-	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime '(TODO|XXX|FIXME|"FIX ME")[: ]+' 
+	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime '(TODO|XXX|FIXME|"FIX ME")[: ]+'
 ifeq ($(BUILD_ENTERPRISE_READY),true)
 	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime '(TODO|XXX|FIXME|"FIX ME")[: ]+' enterprise/
 endif

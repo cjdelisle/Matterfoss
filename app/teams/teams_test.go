@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 	"github.com/stretchr/testify/require"
 )
 

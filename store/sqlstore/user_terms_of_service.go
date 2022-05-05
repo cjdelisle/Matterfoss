@@ -8,8 +8,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 type SqlUserTermsOfServiceStore struct {
@@ -23,8 +23,8 @@ func newSqlUserTermsOfServiceStore(sqlStore *SqlStore) store.UserTermsOfServiceS
 func (s SqlUserTermsOfServiceStore) GetByUser(userId string) (*model.UserTermsOfService, error) {
 	var userTermsOfService model.UserTermsOfService
 	query := `
-		SELECT * 
-		FROM UserTermsOfService 
+		SELECT *
+		FROM UserTermsOfService
 		WHERE UserId = ?
 	`
 	if err := s.GetReplicaX().Get(&userTermsOfService, query, userId); err != nil {
@@ -71,8 +71,8 @@ func (s SqlUserTermsOfServiceStore) Save(userTermsOfService *model.UserTermsOfSe
 
 func (s SqlUserTermsOfServiceStore) Delete(userId, termsOfServiceId string) error {
 	query := `
-		DELETE 
-		FROM UserTermsOfService 
+		DELETE
+		FROM UserTermsOfService
 		WHERE UserId = ? AND TermsOfServiceId = ?
 	`
 	if _, err := s.GetMasterX().Exec(query, userId, termsOfServiceId); err != nil {

@@ -86,9 +86,9 @@ func TestTextRanges(t *testing.T) {
 			ExpectedValues: []string{"&amp test"},
 		},
 		"notcharref2": {
-			Markdown:       "this is &mattermost;",
+			Markdown:       "this is &matterfoss;",
 			ExpectedRanges: []Range{{0, 20}},
-			ExpectedValues: []string{"this is &mattermost;"},
+			ExpectedValues: []string{"this is &matterfoss;"},
 		},
 		"standalone-ampersand": {
 			Markdown:       "Hello & World",

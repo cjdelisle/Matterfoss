@@ -6,7 +6,7 @@ package users
 import (
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func maxInt(a, b int) int {

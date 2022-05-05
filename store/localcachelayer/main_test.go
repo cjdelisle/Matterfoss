@@ -10,13 +10,13 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/cache"
-	cachemocks "github.com/mattermost/mattermost-server/v6/services/cache/mocks"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
-	"github.com/mattermost/mattermost-server/v6/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
+	cachemocks "github.com/cjdelisle/matterfoss-server/v6/services/cache/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 var mainHelper *testlib.MainHelper

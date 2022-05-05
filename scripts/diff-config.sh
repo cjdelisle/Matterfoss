@@ -16,8 +16,8 @@ fi
 
 # Returns the config file for a specific release
 fetch_config() {
-  local url="https://releases.mattermost.com/$1/mattermost-$1-linux-amd64.tar.gz"
-  curl -sf "$url" | tar -xzOf - mattermost/config/config.json | jq -S .
+  local url="https://releases.matterfoss.com/$1/matterfoss-$1-linux-amd64.tar.gz"
+  curl -sf "$url" | tar -xzOf - matterfoss/config/config.json | jq -S .
 }
 
 echo Fetching config files

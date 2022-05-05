@@ -11,7 +11,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 
 	"github.com/gorilla/websocket"
 	"github.com/vmihailenco/msgpack/v5"

@@ -6,8 +6,8 @@ package active_users
 import (
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/jobs"
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 const schedFreq = 10 * time.Minute

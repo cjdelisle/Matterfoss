@@ -9,10 +9,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/mattermost/mattermost-server/v6/einterfaces"
-	"github.com/mattermost/mattermost-server/v6/einterfaces/mocks"
-	"github.com/mattermost/mattermost-server/v6/model"
-	storemocks "github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	storemocks "github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 func TestSAMLSettings(t *testing.T) {

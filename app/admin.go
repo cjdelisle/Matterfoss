@@ -13,12 +13,12 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/config"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/cache"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mail"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 var latestVersionCache = cache.NewLRU(cache.LRUOptions{

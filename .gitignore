@@ -8,8 +8,8 @@ node_modules
 jobserver
 npm-debug.log
 webapp/yarn-error.log
-mattermost.mattermost-license
-config/mattermost.mattermost-license
+matterfoss.matterfoss-license
+config/matterfoss.matterfoss-license
 config/config.json
 config/*.crt
 
@@ -27,7 +27,7 @@ imports/imports.go
 
 #license files
 *.license
-*.mattermost-license
+*.matterfoss-license
 
 # Build Targets
 .prebuild
@@ -84,7 +84,7 @@ Session.vim
 *.code-workspace
 
 # Gogland project files
-mattermost-server.iml
+matterfoss-server.iml
 
 # Build files
 *bundle.js

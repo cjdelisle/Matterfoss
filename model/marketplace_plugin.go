@@ -14,7 +14,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// BaseMarketplacePlugin is a Mattermost plugin received from the Marketplace server.
+// BaseMarketplacePlugin is a Matterfoss plugin received from the Marketplace server.
 type BaseMarketplacePlugin struct {
 	HomepageURL     string             `json:"homepage_url"`
 	IconData        string             `json:"icon_data"`

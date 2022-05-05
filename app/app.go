@@ -9,15 +9,15 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/einterfaces"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/httpservice"
-	"github.com/mattermost/mattermost-server/v6/services/imageproxy"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
-	"github.com/mattermost/mattermost-server/v6/services/timezones"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/shared/templates"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v6/services/imageproxy"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/services/timezones"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/templates"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 // App is a pure functional component that does not have any fields, except Server.

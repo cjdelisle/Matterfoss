@@ -20,15 +20,15 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/config"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/plugin/plugintest"
-	"github.com/mattermost/mattermost-server/v6/services/httpservice"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
-	"github.com/mattermost/mattermost-server/v6/services/telemetry/mocks"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	storeMocks "github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest"
+	"github.com/cjdelisle/matterfoss-server/v6/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/services/telemetry/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	storeMocks "github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 type FakeConfigService struct {

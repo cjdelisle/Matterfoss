@@ -6,7 +6,7 @@ package app
 import (
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func ImportLineFromTeam(team *model.TeamForExport) *LineImportData {

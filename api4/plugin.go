@@ -13,10 +13,10 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/mattermost/mattermost-server/v6/audit"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 	"github.com/pkg/errors"
 )
 

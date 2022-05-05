@@ -11,8 +11,8 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 type selectType int
@@ -435,11 +435,11 @@ func (s *SqlGroupStore) GetNonMemberUsersPage(groupID string, page int, perPage 
 	}
 
 	query := `
-	SELECT 
+	SELECT
 		Users.*
 	FROM
 		Users
-	LEFT JOIN 
+	LEFT JOIN
 		GroupMembers ON (GroupMembers.UserId = Users.Id AND GroupMembers.GroupId = ?)
 	WHERE
 		Users.DeleteAt = 0

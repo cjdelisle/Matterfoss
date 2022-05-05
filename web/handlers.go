@@ -19,15 +19,15 @@ import (
 	"github.com/opentracing/opentracing-go/ext"
 	spanlog "github.com/opentracing/opentracing-go/log"
 
-	"github.com/mattermost/mattermost-server/v6/app"
-	app_opentracing "github.com/mattermost/mattermost-server/v6/app/opentracing"
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/tracing"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store/opentracinglayer"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	app_opentracing "github.com/cjdelisle/matterfoss-server/v6/app/opentracing"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/tracing"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store/opentracinglayer"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 func GetHandlerName(h func(*Context, http.ResponseWriter, *http.Request)) string {

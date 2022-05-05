@@ -21,8 +21,8 @@ import (
 	// Load the Postgres driver
 	_ "github.com/lib/pq"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 	"github.com/mattermost/morph"
 
 	"github.com/mattermost/morph/drivers"

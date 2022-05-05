@@ -25,13 +25,13 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/einterfaces/mocks"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/utils"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func getDefaultPluginSettingsSchema() string {
@@ -143,7 +143,7 @@ func TestPublicFilesPathConfiguration(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v6/plugin"
+			"github.com/cjdelisle/matterfoss-server/v6/plugin"
 		)
 
 		type MyPlugin struct {
@@ -818,7 +818,7 @@ func TestPluginAPIGetPlugins(t *testing.T) {
     package main
 
     import (
-      "github.com/mattermost/mattermost-server/v6/plugin"
+      "github.com/cjdelisle/matterfoss-server/v6/plugin"
     )
 
     type MyPlugin struct {
@@ -970,7 +970,7 @@ func TestInstallPlugin(t *testing.T) {
 
 			"github.com/pkg/errors"
 
-			"github.com/mattermost/mattermost-server/v6/plugin"
+			"github.com/cjdelisle/matterfoss-server/v6/plugin"
 		)
 
 		type configuration struct {
@@ -1467,7 +1467,7 @@ func TestInterpluginPluginHTTP(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v6/plugin"
+			"github.com/cjdelisle/matterfoss-server/v6/plugin"
 			"bytes"
 			"net/http"
 		)
@@ -1508,8 +1508,8 @@ func TestInterpluginPluginHTTP(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v6/plugin"
-			"github.com/mattermost/mattermost-server/v6/model"
+			"github.com/cjdelisle/matterfoss-server/v6/plugin"
+			"github.com/cjdelisle/matterfoss-server/v6/model"
 			"bytes"
 			"net/http"
 			"io/ioutil"
@@ -1613,8 +1613,8 @@ func TestAPIMetrics(t *testing.T) {
 	package main
 
 	import (
-		"github.com/mattermost/mattermost-server/v6/model"
-		"github.com/mattermost/mattermost-server/v6/plugin"
+		"github.com/cjdelisle/matterfoss-server/v6/model"
+		"github.com/cjdelisle/matterfoss-server/v6/plugin"
 	)
 
 	type MyPlugin struct {
