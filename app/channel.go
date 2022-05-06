@@ -337,8 +337,12 @@ func (a *App) GetOrCreateDirectChannel(c *request.Context, userID, otherUserID s
 			}
 		}
 	}
+	user, err := a.GetUser(userID)
+	if err == nil && user.IsGuest() {
+		return nil, model.NewAppError("createDirectChannel", "api.channel.create_channel.direct_channel.guest_restricted_error", nil, "", http.StatusBadRequest)
+	}
 
-	channel, err := a.createDirectChannel(userID, otherUserID, channelOptions...)
+	channel, err = a.createDirectChannel(userID, otherUserID, channelOptions...)
 	if err != nil {
 		if err.Id == store.ChannelExistsError {
 			return channel, nil
@@ -2262,6 +2266,10 @@ func (a *App) PostAddToChannelMessage(c *request.Context, user *model.User, adde
 	if addedUser.IsGuest() {
 		message = fmt.Sprintf(i18n.T("api.channel.add_guest.added"), addedUser.Username, user.Username)
 		postType = model.PostTypeAddGuestToChannel
+	}
+
+	if postType == model.PostTypeAddGuestToChannel {
+		return nil
 	}
 
 	post := &model.Post{

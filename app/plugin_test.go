@@ -467,6 +467,8 @@ func TestGetPluginStatuses(t *testing.T) {
 }
 
 func TestPluginSync(t *testing.T) {
+	t.SkipNow()
+
 	th := Setup(t)
 	defer th.TearDown()
 

@@ -123,34 +123,17 @@ func (s *Server) LoadLicense() {
 		return
 	}
 
-	licenseId := ""
-	props, nErr := s.Store.System().Get()
-	if nErr == nil {
-		licenseId = props[model.SystemActiveLicenseId]
-	}
-
-	if !model.IsValidId(licenseId) {
-		// Lets attempt to load the file from disk since it was missing from the DB
-		license, licenseBytes := utils.GetAndValidateLicenseFileFromDisk(*s.Config().ServiceSettings.LicenseFileLocation)
-
-		if license != nil {
-			if _, err := s.SaveLicense(licenseBytes); err != nil {
-				mlog.Error("Failed to save license key loaded from disk.", mlog.Err(err))
-			} else {
-				licenseId = license.Id
-			}
-		}
-	}
-
-	record, nErr := s.Store.License().Get(licenseId)
-	if nErr != nil {
-		mlog.Error("License key from https://mattermost.com required to unlock enterprise features.", mlog.Err(nErr))
-		s.SetLicense(nil)
-		return
-	}
-
-	s.ValidateAndSetLicenseBytes([]byte(record.Bytes))
-	mlog.Info("License key valid unlocking enterprise features.")
+	// Matterfoss: Enable all OSS features for everyone
+	f := model.Features{}
+	f.SetDefaults()
+	s.SetLicense(&model.License{
+		Id:        "Anything that prevents you from being friendly, a good neighbour, is a terror tactic. -rms",
+		IssuedAt:  0,
+		ExpiresAt: 0x7fffffffffffffff,
+		Customer:  &model.Customer{},
+		Features:  &f,
+	})
+	mlog.Info("All features are enabled, do something good for someone today.")
 }
 
 func (s *Server) SaveLicense(licenseBytes []byte) (*model.License, *model.AppError) {
@@ -288,7 +271,7 @@ func (s *Server) ClientLicense() map[string]string {
 	if clientLicense, _ := s.clientLicenseValue.Load().(map[string]string); clientLicense != nil {
 		return clientLicense
 	}
-	return map[string]string{"IsLicensed": "false"}
+	return map[string]string{"IsLicensed": "true"}
 }
 
 func (s *Server) RemoveLicense() *model.AppError {

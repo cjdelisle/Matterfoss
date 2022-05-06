@@ -89,6 +89,6 @@ func TestMsgProvider(t *testing.T) {
 
 	channelName = model.GetDMNameFromIds(guest.Id, user.Id)
 
-	assert.Equal(t, "", resp.Text)
-	assert.Equal(t, "http://test.url/"+th.BasicTeam.Name+"/channels/"+channelName, resp.GotoLocation)
+	assert.Equal(t, "api.channel.create_channel.direct_channel.guest_restricted_error", resp.Text)
+	assert.Equal(t, "", resp.GotoLocation)
 }

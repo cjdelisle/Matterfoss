@@ -51,7 +51,7 @@ else
 	BUILD_ENTERPRISE_READY = false
 	BUILD_TYPE_NAME = team
 endif
-BUILD_WEBAPP_DIR ?= ../mattermost-webapp
+BUILD_WEBAPP_DIR ?= ../matterfoss-webapp
 BUILD_CLIENT = false
 BUILD_HASH_CLIENT = independant
 ifneq ($(wildcard $(BUILD_WEBAPP_DIR)/.),)
@@ -96,7 +96,7 @@ GO_VERSION_VALIDATION_ERR_MSG = Golang version is not supported, please update t
 # GOOS/GOARCH of the build host, used to determine whether we're cross-compiling or not
 BUILDER_GOOS_GOARCH="$(shell $(GO) env GOOS)_$(shell $(GO) env GOARCH)"
 
-PLATFORM_FILES="./cmd/mattermost"
+PLATFORM_FILES="./cmd/matterfoss"
 
 # Output paths
 DIST_ROOT=dist
@@ -595,8 +595,8 @@ clean: stop-docker ## Clean up everything except persistent server data.
 	find . -type d -name data -not -path './vendor/*' | xargs rm -rf
 	rm -rf logs
 
-	rm -f mattermost.log
-	rm -f mattermost.log.jsonl
+	rm -f matterfoss.log
+	rm -f matterfoss.log.jsonl
 	rm -f npm-debug.log
 	rm -f .prepare-go
 	rm -f enterprise
@@ -605,7 +605,7 @@ clean: stop-docker ## Clean up everything except persistent server data.
 	rm -f *.out
 	rm -f *.test
 	rm -f imports/imports.go
-	rm -f cmd/mattermost/cprofile*.out
+	rm -f cmd/matterfoss/cprofile*.out
 
 nuke: clean clean-docker ## Clean plus removes persistent server data.
 	@echo BOOM

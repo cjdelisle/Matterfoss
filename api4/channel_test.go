@@ -467,7 +467,7 @@ func TestCreateDirectChannel(t *testing.T) {
 	user4 := th.CreateUser()
 	_, resp, err = th.Client.CreateDirectChannel(user1.Id, user4.Id)
 	require.Error(t, err)
-	CheckForbiddenStatus(t, resp)
+	CheckBadRequestStatus(t, resp)
 	th.LinkUserToTeam(user4, th.BasicTeam)
 	_, _, err = th.Client.CreateDirectChannel(user1.Id, user4.Id)
 	require.NoError(t, err)

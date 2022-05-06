@@ -19,7 +19,7 @@ const (
 	LogCompress             = true
 	LogRotateMaxAge         = 0
 	LogRotateMaxBackups     = 0
-	LogFilename             = "mattermost.log"
+	LogFilename             = "matterfoss.log"
 	LogNotificationFilename = "notifications.log"
 	LogMinLevelLen          = 5
 	LogMinMsgLen            = 45

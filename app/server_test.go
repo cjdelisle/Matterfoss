@@ -20,7 +20,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/getsentry/sentry-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
@@ -219,7 +218,7 @@ func TestStartServerTLSSuccess(t *testing.T) {
 	require.NoError(t, serverErr)
 }
 
-func TestDatabaseTypeAndMattermostVersion(t *testing.T) {
+func TestDatabaseTypeAndMatterfossVersion(t *testing.T) {
 	sqlDrivernameEnvironment := os.Getenv("MM_SQLSETTINGS_DRIVERNAME")
 
 	if sqlDrivernameEnvironment != "" {
@@ -233,18 +232,18 @@ func TestDatabaseTypeAndMattermostVersion(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
 
-	databaseType, mattermostVersion := th.Server.DatabaseTypeAndSchemaVersion()
+	databaseType, matterfossVersion := th.Server.DatabaseTypeAndSchemaVersion()
 	assert.Equal(t, "postgres", databaseType)
-	assert.GreaterOrEqual(t, mattermostVersion, strconv.Itoa(1))
+	assert.GreaterOrEqual(t, matterfossVersion, strconv.Itoa(1))
 
 	os.Setenv("MM_SQLSETTINGS_DRIVERNAME", "mysql")
 
 	th2 := Setup(t)
 	defer th2.TearDown()
 
-	databaseType, mattermostVersion = th2.Server.DatabaseTypeAndSchemaVersion()
+	databaseType, matterfossVersion = th2.Server.DatabaseTypeAndSchemaVersion()
 	assert.Equal(t, "mysql", databaseType)
-	assert.GreaterOrEqual(t, mattermostVersion, strconv.Itoa(1))
+	assert.GreaterOrEqual(t, matterfossVersion, strconv.Itoa(1))
 }
 
 func TestGenerateSupportPacket(t *testing.T) {
@@ -252,13 +251,13 @@ func TestGenerateSupportPacket(t *testing.T) {
 	defer th.TearDown()
 
 	d1 := []byte("hello\ngo\n")
-	err := ioutil.WriteFile("mattermost.log", d1, 0777)
+	err := ioutil.WriteFile("matterfoss.log", d1, 0777)
 	require.NoError(t, err)
 	err = ioutil.WriteFile("notifications.log", d1, 0777)
 	require.NoError(t, err)
 
 	fileDatas := th.App.GenerateSupportPacket()
-	testFiles := []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "mattermost.log", "notifications.log"}
+	testFiles := []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "matterfoss.log", "notifications.log"}
 	for i, fileData := range fileDatas {
 		require.NotNil(t, fileData)
 		assert.Equal(t, testFiles[i], fileData.Filename)
@@ -268,7 +267,7 @@ func TestGenerateSupportPacket(t *testing.T) {
 	// Remove these two files and ensure that warning.txt file is generated
 	err = os.Remove("notifications.log")
 	require.NoError(t, err)
-	err = os.Remove("mattermost.log")
+	err = os.Remove("matterfoss.log")
 	require.NoError(t, err)
 	fileDatas = th.App.GenerateSupportPacket()
 	testFiles = []string{"support_packet.yaml", "plugins.json", "sanitized_config.json", "warning.txt"}
@@ -317,40 +316,40 @@ func TestGetNotificationsLog(t *testing.T) {
 	assert.Empty(t, warning)
 }
 
-func TestGetMattermostLog(t *testing.T) {
+func TestGetMatterfossLog(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
 
-	// disable mattermost log file setting in config so we should get an warning
+	// disable matterfoss log file setting in config so we should get an warning
 	th.App.UpdateConfig(func(cfg *model.Config) {
 		*cfg.LogSettings.EnableFile = false
 	})
 
-	fileData, warning := th.App.getMattermostLog()
+	fileData, warning := th.App.getMatterfossLog()
 	assert.Nil(t, fileData)
-	assert.Equal(t, "Unable to retrieve mattermost.log because LogSettings: EnableFile is false in config.json", warning)
+	assert.Equal(t, "Unable to retrieve matterfoss.log because LogSettings: EnableFile is false in config.json", warning)
 
-	// We enable the setting but delete any mattermost log file
+	// We enable the setting but delete any matterfoss log file
 	th.App.UpdateConfig(func(cfg *model.Config) {
 		*cfg.LogSettings.EnableFile = true
 	})
 
-	// If any previous mattermost.log file, lets delete it
-	os.Remove("mattermost.log")
+	// If any previous matterfoss.log file, lets delete it
+	os.Remove("matterfoss.log")
 
-	fileData, warning = th.App.getMattermostLog()
+	fileData, warning = th.App.getMatterfossLog()
 	assert.Nil(t, fileData)
-	assert.Contains(t, warning, "ioutil.ReadFile(mattermostLog) Error:")
+	assert.Contains(t, warning, "ioutil.ReadFile(matterfossLog) Error:")
 
 	// Happy path where we get a log file and no warning
 	d1 := []byte("hello\ngo\n")
-	err := ioutil.WriteFile("mattermost.log", d1, 0777)
-	defer os.Remove("mattermost.log")
+	err := ioutil.WriteFile("matterfoss.log", d1, 0777)
+	defer os.Remove("matterfoss.log")
 	require.NoError(t, err)
 
-	fileData, warning = th.App.getMattermostLog()
+	fileData, warning = th.App.getMatterfossLog()
 	require.NotNil(t, fileData)
-	assert.Equal(t, "mattermost.log", fileData.Filename)
+	assert.Equal(t, "matterfoss.log", fileData.Filename)
 	assert.Positive(t, len(fileData.Body))
 	assert.Empty(t, warning)
 }

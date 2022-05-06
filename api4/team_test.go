@@ -2942,6 +2942,8 @@ func TestImportTeam(t *testing.T) {
 	})
 
 	t.Run("Cloud Forbidden", func(t *testing.T) {
+		t.Skipf("Cloud license is not supported by MatterFOSS.")
+
 		var data []byte
 		var err error
 		data, err = testutils.ReadTestFile("Fake_Team_Import.zip")

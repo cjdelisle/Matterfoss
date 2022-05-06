@@ -20,7 +20,6 @@ import (
 	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
 	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 	"github.com/cjdelisle/matterfoss-server/v6/store"
-	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 const (
@@ -1250,11 +1249,6 @@ func (ts *TelemetryService) doTelemetryIfNeeded(firstRun time.Time) {
 }
 
 func (ts *TelemetryService) RunTelemetryJob(firstRun int64) {
-	// Send on boot
-	ts.doTelemetry()
-	model.CreateRecurringTask("Telemetry", func() {
-		ts.doTelemetryIfNeeded(utils.TimeFromMillis(firstRun))
-	}, time.Minute*10)
 }
 
 func (ts *TelemetryService) doTelemetry() {
@@ -1266,9 +1260,6 @@ func (ts *TelemetryService) doTelemetry() {
 
 // Shutdown closes the telemetry client.
 func (ts *TelemetryService) Shutdown() error {
-	if ts.rudderClient != nil {
-		return ts.rudderClient.Close()
-	}
 	return nil
 }
 
@@ -1290,7 +1281,7 @@ func (ts *TelemetryService) trackWarnMetrics() {
 
 func (ts *TelemetryService) trackPluginConfig(cfg *model.Config, marketplaceURL string) {
 	pluginConfigData := map[string]interface{}{
-		"enable_nps_survey":             pluginSetting(&cfg.PluginSettings, "com.mattermost.nps", "enablesurvey", true),
+		"enable_nps_survey":             pluginSetting(&cfg.PluginSettings, "com.mattermost.nps", "enablesurvey", false),
 		"enable":                        *cfg.PluginSettings.Enable,
 		"enable_uploads":                *cfg.PluginSettings.EnableUploads,
 		"allow_insecure_download_url":   *cfg.PluginSettings.AllowInsecureDownloadURL,
@@ -1316,7 +1307,6 @@ func (ts *TelemetryService) trackPluginConfig(cfg *model.Config, marketplaceURL 
 		"com.mattermost.mscalendar",
 		"com.mattermost.nps",
 		"com.mattermost.plugin-channel-export",
-		"com.mattermost.plugin-incident-management",
 		"playbooks",
 		"com.mattermost.plugin-todo",
 		"com.mattermost.webex",

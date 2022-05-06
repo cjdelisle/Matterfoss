@@ -1995,10 +1995,7 @@ func (s *Server) initJobs() {
 }
 
 func (s *Server) TelemetryId() string {
-	if s.telemetryService == nil {
-		return ""
-	}
-	return s.telemetryService.TelemetryID
+	return ""
 }
 
 func (s *Server) HTTPService() httpservice.HTTPService {
@@ -2125,24 +2122,24 @@ func (a *App) getNotificationsLog() (*model.FileData, string) {
 func (a *App) getMattermostLog() (*model.FileData, string) {
 	var warning string
 
-	// Getting mattermost.log
+	// Getting matterfoss.log
 	if *a.Config().LogSettings.EnableFile {
-		// mattermost.log
-		mattermostLog := config.GetLogFileLocation(*a.Config().LogSettings.FileLocation)
+		// matterfoss.log
+		matterfossLog := config.GetLogFileLocation(*a.Config().LogSettings.FileLocation)
 
-		mattermostLogFileData, mattermostLogFileDataErr := ioutil.ReadFile(mattermostLog)
+		matterfossLogFileData, matterfossLogFileDataErr := ioutil.ReadFile(matterfossLog)
 
-		if mattermostLogFileDataErr == nil {
+		if matterfossLogFileDataErr == nil {
 			fileData := model.FileData{
-				Filename: "mattermost.log",
-				Body:     mattermostLogFileData,
+				Filename: "matterfoss.log",
+				Body:     matterfossLogFileData,
 			}
 			return &fileData, ""
 		}
-		warning = fmt.Sprintf("ioutil.ReadFile(mattermostLog) Error: %s", mattermostLogFileDataErr.Error())
+		warning = fmt.Sprintf("ioutil.ReadFile(matterfossLog) Error: %s", matterfossLogFileDataErr.Error())
 
 	} else {
-		warning = "Unable to retrieve mattermost.log because LogSettings: EnableFile is false in config.json"
+		warning = "Unable to retrieve matterfoss.log because LogSettings: EnableFile is false in config.json"
 	}
 
 	return nil, warning

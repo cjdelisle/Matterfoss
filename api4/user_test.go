@@ -3702,6 +3702,8 @@ func TestLoginCookies(t *testing.T) {
 }
 
 func TestCBALogin(t *testing.T) {
+	t.Skipf("SAML feature is always disabled")
+
 	t.Run("primary", func(t *testing.T) {
 		th := Setup(t).InitBasic()
 		defer th.TearDown()

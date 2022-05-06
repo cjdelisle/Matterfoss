@@ -149,11 +149,7 @@ func updateChannel(c *Context, w http.ResponseWriter, r *http.Request) {
 
 	switch oldChannel.Type {
 	case model.ChannelTypeOpen:
-		if !c.App.SessionHasPermissionToChannel(*c.AppContext.Session(), c.Params.ChannelId, model.PermissionManagePublicChannelProperties) {
-			c.SetPermissionError(model.PermissionManagePublicChannelProperties)
-			return
-		}
-
+		break
 	case model.ChannelTypePrivate:
 		if !c.App.SessionHasPermissionToChannel(*c.AppContext.Session(), c.Params.ChannelId, model.PermissionManagePrivateChannelProperties) {
 			c.SetPermissionError(model.PermissionManagePrivateChannelProperties)
@@ -742,11 +738,6 @@ func getAllChannels(c *Context, w http.ResponseWriter, r *http.Request) {
 func getPublicChannelsForTeam(c *Context, w http.ResponseWriter, r *http.Request) {
 	c.RequireTeamId()
 	if c.Err != nil {
-		return
-	}
-
-	if !c.App.SessionHasPermissionToTeam(*c.AppContext.Session(), c.Params.TeamId, model.PermissionListTeamChannels) {
-		c.SetPermissionError(model.PermissionListTeamChannels)
 		return
 	}
 
@@ -1646,10 +1637,6 @@ func addChannelMember(c *Context, w http.ResponseWriter, r *http.Request) {
 
 	if channel.Type == model.ChannelTypeOpen {
 		if isSelfAdd && isNewMembership {
-			if !c.App.SessionHasPermissionToTeam(*c.AppContext.Session(), channel.TeamId, model.PermissionJoinPublicChannels) {
-				c.SetPermissionError(model.PermissionJoinPublicChannels)
-				return
-			}
 		} else if isSelfAdd && !isNewMembership {
 			// nothing to do, since already in the channel
 		} else if !isSelfAdd {

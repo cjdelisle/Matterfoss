@@ -245,7 +245,7 @@ func TestPatchRole(t *testing.T) {
 
 		_, resp, err = client.PatchRole(systemManager.Id, patchManageRoles)
 		require.Error(t, err)
-		CheckNotImplementedStatus(t, resp)
+		CheckNoError(t, resp)
 	})
 
 	th.TestForSystemAdminAndLocal(t, func(t *testing.T, client *model.Client4) {

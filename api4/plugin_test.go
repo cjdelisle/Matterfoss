@@ -572,7 +572,7 @@ func TestGetMarketplacePlugins(t *testing.T) {
 			licenseType, ok := req.URL.Query()["enterprise_plugins"]
 			require.True(t, ok)
 			require.Len(t, licenseType, 1)
-			require.Equal(t, "false", licenseType[0])
+			require.Equal(t, "true", licenseType[0])
 
 			res.WriteHeader(http.StatusOK)
 			json, err := json.Marshal([]*model.MarketplacePlugin{})
@@ -675,7 +675,7 @@ func TestGetMarketplacePlugins(t *testing.T) {
 			cloud, ok := req.URL.Query()["cloud"]
 			require.True(t, ok)
 			require.Len(t, cloud, 1)
-			require.Equal(t, "true", cloud[0])
+			require.Equal(t, "false", cloud[0])
 
 			res.WriteHeader(http.StatusOK)
 			json, err := json.Marshal([]*model.MarketplacePlugin{})
@@ -1233,6 +1233,8 @@ func TestGetPrepackagedPluginInMarketplace(t *testing.T) {
 	})
 
 	t.Run("prepackaged plugins are not shown in Cloud", func(t *testing.T) {
+		t.Skipf("There is no cloud license with MatterFOSS.")
+
 		th.App.UpdateConfig(func(cfg *model.Config) {
 			*cfg.PluginSettings.EnableRemoteMarketplace = true
 			*cfg.PluginSettings.EnableUploads = true
