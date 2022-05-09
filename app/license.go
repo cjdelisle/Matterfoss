@@ -14,20 +14,20 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/jobs"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 const (
 	LicenseEnv                = "MM_LICENSE"
-	LicenseRenewalURL         = "https://customers.mattermost.com/subscribe/renew"
+	LicenseRenewalURL         = "https://customers.matterfoss.org/subscribe/renew"
 	JWTDefaultTokenExpiration = 7 * 24 * time.Hour // 7 days of expiration
 )
 
-var RequestTrialURL = "https://customers.mattermost.com/api/v1/trials"
+var RequestTrialURL = "https://customers.matterfoss.org/api/v1/trials"
 
 // licenseWrapper is an adapter struct that only exposes the
 // config related functionality to be passed down to other products.
@@ -144,7 +144,7 @@ func (s *Server) LoadLicense() {
 
 	record, nErr := s.Store.License().Get(licenseId)
 	if nErr != nil {
-		mlog.Error("License key from https://mattermost.com required to unlock enterprise features.", mlog.Err(nErr))
+		mlog.Error("License key from https://matterfoss.org required to unlock enterprise features.", mlog.Err(nErr))
 		s.SetLicense(nil)
 		return
 	}
@@ -327,7 +327,7 @@ func (s *Server) GetSanitizedClientLicense() map[string]string {
 	return utils.GetSanitizedClientLicense(s.ClientLicense())
 }
 
-// RequestTrialLicense request a trial license from the mattermost official license server
+// RequestTrialLicense request a trial license from the matterfoss official license server
 func (s *Server) RequestTrialLicense(trialRequest *model.TrialLicenseRequest) *model.AppError {
 	trialRequestJSON, jsonErr := json.Marshal(trialRequest)
 	if jsonErr != nil {

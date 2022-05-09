@@ -85,7 +85,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "¡Parece que tu correo electrónico para Mattermost fue configurado correctamente!"
+    "translation": "¡Parece que tu correo electrónico para Matterfoss fue configurado correctamente!"
   },
   {
     "id": "api.admin.test_email.missing_server",
@@ -97,7 +97,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Mattermost - Configuración de pruebas de correo"
+    "translation": "Matterfoss - Configuración de pruebas de correo"
   },
   {
     "id": "api.admin.test_s3.missing_s3_bucket",
@@ -345,7 +345,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "Envía un correo de invitación a tu equipo de Mattermost"
+    "translation": "Envía un correo de invitación a tu equipo de Matterfoss"
   },
   {
     "id": "api.command.invite_people.email_invitations_off",
@@ -620,7 +620,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Abrir la página de ayuda de Mattermost"
+    "translation": "Abrir la página de ayuda de Matterfoss"
   },
   {
     "id": "api.command_help.name",
@@ -632,7 +632,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "No se encontró el canal {{.Channel}}. Por favor utiliza el [identificador del canal](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) para identificar canales."
+    "translation": "No se encontró el canal {{.Channel}}. Por favor utiliza el [identificador del canal](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel) para identificar canales."
   },
   {
     "id": "api.command_invite.desc",
@@ -724,7 +724,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Salir de Mattermost"
+    "translation": "Salir de Matterfoss"
   },
   {
     "id": "api.command_logout.name",
@@ -776,7 +776,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "No se encontró el canal {{.Channel}}. Por favor utiliza el [identificador del canal](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) para identificar los canales."
+    "translation": "No se encontró el canal {{.Channel}}. Por favor utiliza el [identificador del canal](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel) para identificar los canales."
   },
   {
     "id": "api.command_mute.hint",
@@ -788,7 +788,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "No se encontró el canal especificado. Por favor utiliza el [identificador del canal](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel) para identificar canales."
+    "translation": "No se encontró el canal especificado. Por favor utiliza el [identificador del canal](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel) para identificar canales."
   },
   {
     "id": "api.command_mute.not_member.error",
@@ -1521,7 +1521,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "El canal de Slack {{.DisplayName}} ya existe como un canal activo en Mattermost. Ambos canales se han fusionado.\r\n"
+    "translation": "El canal de Slack {{.DisplayName}} ya existe como un canal activo en Matterfoss. Ambos canales se han fusionado.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.created",
@@ -1533,11 +1533,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "El usuario de Slack ha sido combinado con el usuario existente en Mattermost ya que el correo electrónico {{.Email}} y el nombre de usuario {{.Username}} coinciden.\r\n"
+    "translation": "El usuario de Slack ha sido combinado con el usuario existente en Matterfoss ya que el correo electrónico {{.Email}} y el nombre de usuario {{.Username}} coinciden.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "El usuario de Slack ha sido combinado con el usuario existente en Mattermost ya que el correo electrónico {{.Email}} y el nombre de usuario {{.Username}} coinciden, pero el usuario no pudo ser agregado a su equipo.\r\n"
+    "translation": "El usuario de Slack ha sido combinado con el usuario existente en Matterfoss ya que el correo electrónico {{.Email}} y el nombre de usuario {{.Username}} coinciden, pero el usuario no pudo ser agregado a su equipo.\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1549,7 +1549,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Mattermost Registros de importación de Slack\r\n"
+    "translation": "Matterfoss Registros de importación de Slack\r\n"
   },
   {
     "id": "api.slackimport.slack_import.note1",
@@ -1917,7 +1917,7 @@
   },
   {
     "id": "api.templates.verify_body.info",
-    "translation": "Esta dirección de correo electrónico se utilizó para crear una cuenta en Mattermost."
+    "translation": "Esta dirección de correo electrónico se utilizó para crear una cuenta en Matterfoss."
   },
   {
     "id": "api.templates.verify_body.title",
@@ -1937,7 +1937,7 @@
   },
   {
     "id": "api.templates.welcome_body.info",
-    "translation": "Esta dirección de correo electrónico se utilizó para crear una cuenta en Mattermost."
+    "translation": "Esta dirección de correo electrónico se utilizó para crear una cuenta en Matterfoss."
   },
   {
     "id": "api.templates.welcome_body.title",
@@ -3213,7 +3213,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "Tu cuenta AD/LDAP no tiene permiso para utilizar este servidor de Mattermost. Por favor, solicita a tu Administrador de Sistema que revise el filtro de usuarios AD/LDAP."
+    "translation": "Tu cuenta AD/LDAP no tiene permiso para utilizar este servidor de Matterfoss. Por favor, solicita a tu Administrador de Sistema que revise el filtro de usuarios AD/LDAP."
   },
   {
     "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3233,7 +3233,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "Ocurrió un error al buscar los usuarios en AD/LDAP. Prueba si el servidor de Mattermost se puede conectar con el servidor AD/LDAP e inténtalo de nuevo."
+    "translation": "Ocurrió un error al buscar los usuarios en AD/LDAP. Prueba si el servidor de Matterfoss se puede conectar con el servidor AD/LDAP e inténtalo de nuevo."
   },
   {
     "id": "ent.ldap.validate_filter.app_error",
@@ -3329,7 +3329,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "Nombre de usuario ya se encuentra en uso por otro usuario de Mattermost."
+    "translation": "Nombre de usuario ya se encuentra en uso por otro usuario de Matterfoss."
   },
   {
     "id": "ent.saml.attribute.app_error",
@@ -3428,8 +3428,8 @@
     "translation": "No se pudo obtener los canales."
   },
   {
-    "id": "mattermost.bulletin.subject",
-    "translation": "Boletín de Seguridad Mattermost"
+    "id": "matterfoss.bulletin.subject",
+    "translation": "Boletín de Seguridad Matterfoss"
   },
   {
     "id": "mfa.activate.bad_token.app_error",
@@ -4589,7 +4589,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "Los Términos de Servicio de GitLab se han actualizado. Por favor, vaya a gitlab.com a aceptar y, a continuación, intente iniciar sesión en Mattermost de nuevo."
+    "translation": "Los Términos de Servicio de GitLab se han actualizado. Por favor, vaya a gitlab.com a aceptar y, a continuación, intente iniciar sesión en Matterfoss de nuevo."
   },
   {
     "id": "plugin.api.update_user_status.bad_status",
@@ -4721,7 +4721,7 @@
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "No se puede obtener una licencia de prueba, intente nuevamente o póngase en contacto con support@mattermost.com."
+    "translation": "No se puede obtener una licencia de prueba, intente nuevamente o póngase en contacto con support@matterfoss.com."
   },
   {
     "id": "model.group.name.invalid_length.app_error",
@@ -4761,11 +4761,11 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "Esta versión de tu navegador ya no es soportado por Mattermost"
+    "translation": "Esta versión de tu navegador ya no es soportado por Matterfoss"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "Este navegador ya no es soportado por Mattermost"
+    "translation": "Este navegador ya no es soportado por Matterfoss"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -4809,7 +4809,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "Descarga la app de Mattermost o utiliza uno de los navegadores soportados para una mejor experiencia."
+    "translation": "Descarga la app de Matterfoss o utiliza uno de los navegadores soportados para una mejor experiencia."
   },
   {
     "id": "web.error.unsupported_browser.download",
@@ -5437,7 +5437,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} fue inhabilitado. Gestionaba los siguientes bots, los cuales ahora también han sido inhabilitados.\n\n{{.BotNames}}{{else}}{{.UserName}} fue inhabilitado. Gestionaba {{.NumBots}} cuentas de bot, las cuales también han sido inhabilitadas, incluyendo las siguientes:\n\n{{.BotNames}}{{end}}Puedes apropiarte de cada uno de estos bots habilitando en **Integraciones > Cuentas de Bot** y creando nuevos tokens para el bot.\n\nPara más información, ver nuestra [documentación](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} fue inhabilitado. Gestionaba los siguientes bots, los cuales aun están habilitados.\n\n{{.BotNames}}\n{{else}}{{.UserName}} fue inhabilitado. Gestionaba {{.NumBots}} cuentas de bot que aun están habilitadas, incluyendo las siguientes:\n\n{{.BotNames}}{{end}}Te recomendamos apropiarte de cada uno de estas cuentas habilitando cada una de nuevo en **Integraciones > Cuentas de Bot** y creando nuevos tokens para el bot.\n\nPara más información, ver nuestra [documentación](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nSi deseas que las cuentas de bot se inhabiliten automáticamente tras la desactivación del dueño, establece la opción “Inhabilitar cuentas de bot cuando el dueño es desactivado” en **Consola de Sistema > Integraciones > Cuentas de Bot** a verdadero.{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} fue inhabilitado. Gestionaba los siguientes bots, los cuales ahora también han sido inhabilitados.\n\n{{.BotNames}}{{else}}{{.UserName}} fue inhabilitado. Gestionaba {{.NumBots}} cuentas de bot, las cuales también han sido inhabilitadas, incluyendo las siguientes:\n\n{{.BotNames}}{{end}}Puedes apropiarte de cada uno de estos bots habilitando en **Integraciones > Cuentas de Bot** y creando nuevos tokens para el bot.\n\nPara más información, ver nuestra [documentación](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} fue inhabilitado. Gestionaba los siguientes bots, los cuales aun están habilitados.\n\n{{.BotNames}}\n{{else}}{{.UserName}} fue inhabilitado. Gestionaba {{.NumBots}} cuentas de bot que aun están habilitadas, incluyendo las siguientes:\n\n{{.BotNames}}{{end}}Te recomendamos apropiarte de cada uno de estas cuentas habilitando cada una de nuevo en **Integraciones > Cuentas de Bot** y creando nuevos tokens para el bot.\n\nPara más información, ver nuestra [documentación](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nSi deseas que las cuentas de bot se inhabiliten automáticamente tras la desactivación del dueño, establece la opción “Inhabilitar cuentas de bot cuando el dueño es desactivado” en **Consola de Sistema > Integraciones > Cuentas de Bot** a verdadero.{{end}}"
   },
   {
     "id": "app.bot.createbot.internal_error",
@@ -5529,7 +5529,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "La licencia de Mattermost Enterprise ha sido desactivada."
+    "translation": "La licencia de Matterfoss Enterprise ha sido desactivada."
   },
   {
     "id": "api.templates.remove_expired_license.body.title",
@@ -5769,7 +5769,7 @@
   },
   {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "Por favor agregame a los equipos y canales en los que quieres que interactúe. Para ello, utiliza el navegador o la Aplicación de Escritorio de Mattermost."
+    "translation": "Por favor agregame a los equipos y canales en los que quieres que interactúe. Para ello, utiliza el navegador o la Aplicación de Escritorio de Matterfoss."
   },
   {
     "id": "api.bot.create_disabled",
@@ -5817,7 +5817,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "Superado el Límite del Tamaño. Intente comprobar el [tamaño máximo de página](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
+    "translation": "Superado el Límite del Tamaño. Intente comprobar el [tamaño máximo de página](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
   },
   {
     "id": "ent.ldap.syncronize.delete_group_constained_memberships",
@@ -5973,7 +5973,7 @@
   },
   {
     "id": "api.license.request_trial_license.no-site-url.app_error",
-    "translation": "No se puede solicitar una licencia de prueba. Configure una URL del sitio en la sección del servidor web de la consola del sistema de Mattermost."
+    "translation": "No se puede solicitar una licencia de prueba. Configure una URL del sitio en la sección del servidor web de la consola del sistema de Matterfoss."
   },
   {
     "id": "api.file.upload_file.incorrect_channelId.app_error",
@@ -6033,7 +6033,7 @@
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "Tienes que aceptar el Mattermost Acuerdo de Evaluación del Software y Política de privacidad para pedir una licencia."
+    "translation": "Tienes que aceptar el Matterfoss Acuerdo de Evaluación del Software y Política de privacidad para pedir una licencia."
   },
   {
     "id": "app.command.listteamcommands.internal_error",
@@ -6245,7 +6245,7 @@
   },
   {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Asesor de Mattermost"
+    "translation": "Asesor de Matterfoss"
   },
   {
     "id": "app.job.download_export_results_not_enabled",
@@ -6257,11 +6257,11 @@
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Solicitud de Contacto de Mattermost"
+    "translation": "Solicitud de Contacto de Matterfoss"
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "Si tiene alguna consulta adicional, comuníquese con support@mattermost.com"
+    "translation": "Si tiene alguna consulta adicional, comuníquese con support@matterfoss.com"
   },
   {
     "id": "api.templates.warn_metric_ack.body.site_url_header",
@@ -6285,19 +6285,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Escalando con Mattermost"
+    "translation": "Escalando con Matterfoss"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "Mattermost recomienda encarecidamente que las implementaciones de más de 500 usuarios aprovechen funciones como la administración de usuarios, la agrupación de servidores y la supervisión del rendimiento. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Mattermost, Inc. [Más información] (https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Matterfoss recomienda encarecidamente que las implementaciones de más de 500 usuarios aprovechen funciones como la administración de usuarios, la agrupación de servidores y la supervisión del rendimiento. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Matterfoss, Inc. [Más información] (https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
-    "translation": "Escalando con Mattermost"
+    "translation": "Escalando con Matterfoss"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "Su sistema Mattermost ahora tiene 200 usuarios. Cuando conecta Mattermost con el proveedor de inicio de sesión único de su organización, los usuarios pueden acceder a Mattermost sin tener que volver a ingresar sus credenciales. Le recomendamos que integre su proveedor SAML 2.0 con su servidor Mattermost. [Obtenga más información sobre la integración con SAML 2.0] (https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml) .\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Mattermost, Inc. [Más información] (https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Su sistema Matterfoss ahora tiene 200 usuarios. Cuando conecta Matterfoss con el proveedor de inicio de sesión único de su organización, los usuarios pueden acceder a Matterfoss sin tener que volver a ingresar sus credenciales. Le recomendamos que integre su proveedor SAML 2.0 con su servidor Matterfoss. [Obtenga más información sobre la integración con SAML 2.0] (https://www.matterfoss.com/docs-saml/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=saml) .\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Matterfoss, Inc. [Más información] (https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.email_us",
@@ -6305,7 +6305,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "Gracias por contactar a Mattermost. Pronto nos pondremos en contacto contigo."
+    "translation": "Gracias por contactar a Matterfoss. Pronto nos pondremos en contacto contigo."
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -6317,7 +6317,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Solicitud de contacto de Mattermost"
+    "translation": "Solicitud de contacto de Matterfoss"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -6329,7 +6329,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "Si tiene alguna consulta adicional, comuníquese con support@mattermost.com"
+    "translation": "Si tiene alguna consulta adicional, comuníquese con support@matterfoss.com"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -6625,43 +6625,43 @@
   },
   {
     "id": "api.upgrade_to_enterprise_status.signature.app_error",
-    "translation": "Mattermost Era incapaz a upgrade a Edición de Empresa. La firma digital de la lima binaria descargada no podría ser verificada."
+    "translation": "Matterfoss Era incapaz a upgrade a Edición de Empresa. La firma digital de la lima binaria descargada no podría ser verificada."
   },
   {
     "id": "api.upgrade_to_enterprise_status.app_error",
-    "translation": "Mattermost Era incapaz a upgrade a Edición de Empresa."
+    "translation": "Matterfoss Era incapaz a upgrade a Edición de Empresa."
   },
   {
     "id": "api.upgrade_to_enterprise.system_not_supported.app_error",
-    "translation": "Mattermost Era incapaz a upgrade a Edición de Empresa. Esta característica sólo obrará encima sistemas de Linux con x86-64 arquitectura."
+    "translation": "Matterfoss Era incapaz a upgrade a Edición de Empresa. Esta característica sólo obrará encima sistemas de Linux con x86-64 arquitectura."
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user.app_error",
-    "translation": "Mattermost no pudo actualizar a Enterprise Edition. El usuario del sistema Mattermost {{.MattermostUsername}} no tiene acceso de escritura al archivo binario necesario. Un administrador del sistema puede actualizar los permisos del archivo ejecutando el siguiente comando en el servidor donde está instalado Mattermost:\n\n''\nchown {{.MattermostUsername}} \"{{.Path}}\"\n''\n\nDespués de cambiar los permisos del archivo, intente actualizar Mattermost nuevamente. Cuando haya actualizado y reiniciado, recuerde restaurar los permisos del archivo binario original:\n\n''\nchown {{.FileUsername}} \"{{.Path}}\"\n''"
+    "translation": "Matterfoss no pudo actualizar a Enterprise Edition. El usuario del sistema Matterfoss {{.MatterfossUsername}} no tiene acceso de escritura al archivo binario necesario. Un administrador del sistema puede actualizar los permisos del archivo ejecutando el siguiente comando en el servidor donde está instalado Matterfoss:\n\n''\nchown {{.MatterfossUsername}} \"{{.Path}}\"\n''\n\nDespués de cambiar los permisos del archivo, intente actualizar Matterfoss nuevamente. Cuando haya actualizado y reiniciado, recuerde restaurar los permisos del archivo binario original:\n\n''\nchown {{.FileUsername}} \"{{.Path}}\"\n''"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user-and-permission.app_error",
-    "translation": "Mattermost no pudo actualizar a Enterprise Edition. El usuario del sistema Mattermost {{.MattermostUsername}} no tiene acceso de escritura al archivo binario necesario. Un administrador del sistema puede actualizar los permisos del archivo ejecutando el siguiente comando en el servidor donde está instalado Mattermost:\n\n''\nchown {{.MattermostUsername}} \"{{.Path}}\"\nchmod + w \"{{.Path}}\"\n''\n\nDespués de cambiar los permisos del archivo, intente actualizar Mattermost nuevamente. Cuando haya actualizado y reiniciado, recuerde restaurar los permisos del archivo binario original:\n\n''\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n''"
+    "translation": "Matterfoss no pudo actualizar a Enterprise Edition. El usuario del sistema Matterfoss {{.MatterfossUsername}} no tiene acceso de escritura al archivo binario necesario. Un administrador del sistema puede actualizar los permisos del archivo ejecutando el siguiente comando en el servidor donde está instalado Matterfoss:\n\n''\nchown {{.MatterfossUsername}} \"{{.Path}}\"\nchmod + w \"{{.Path}}\"\n''\n\nDespués de cambiar los permisos del archivo, intente actualizar Matterfoss nuevamente. Cuando haya actualizado y reiniciado, recuerde restaurar los permisos del archivo binario original:\n\n''\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n''"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-permission.app_error",
-    "translation": "Mattermost no pudo actualizar a Enterprise Edition. El usuario del sistema Mattermost {{.MattermostUsername}} no tiene acceso de escritura al archivo binario necesario. Un administrador del sistema puede actualizar los permisos del archivo ejecutando el siguiente comando en el servidor donde está instalado Mattermost:\n\n''\nchmod + w \"{{.Path}}\"\n''\n\nDespués de cambiar los permisos del archivo, intente actualizar Mattermost nuevamente. Cuando haya actualizado y reiniciado, recuerde restaurar los permisos del archivo binario original:\n\n''\nchmod -w \"{{.Path}}\"\n''"
+    "translation": "Matterfoss no pudo actualizar a Enterprise Edition. El usuario del sistema Matterfoss {{.MatterfossUsername}} no tiene acceso de escritura al archivo binario necesario. Un administrador del sistema puede actualizar los permisos del archivo ejecutando el siguiente comando en el servidor donde está instalado Matterfoss:\n\n''\nchmod + w \"{{.Path}}\"\n''\n\nDespués de cambiar los permisos del archivo, intente actualizar Matterfoss nuevamente. Cuando haya actualizado y reiniciado, recuerde restaurar los permisos del archivo binario original:\n\n''\nchmod -w \"{{.Path}}\"\n''"
   },
   {
     "id": "api.upgrade_to_enterprise.generic_error.app_error",
-    "translation": "Mattermost Era incapaz a upgrade a Edición de Empresa."
+    "translation": "Matterfoss Era incapaz a upgrade a Edición de Empresa."
   },
   {
     "id": "api.upgrade_to_enterprise.app_error",
-    "translation": "Un upgrade a Mattermost Edición de Empresa ya está corriendo."
+    "translation": "Un upgrade a Matterfoss Edición de Empresa ya está corriendo."
   },
   {
     "id": "api.upgrade_to_enterprise.already-enterprise.app_error",
-    "translation": "No puede actualizar porque ya estás ejecutando Mattermost Enterprise Edition."
+    "translation": "No puede actualizar porque ya estás ejecutando Matterfoss Enterprise Edition."
   },
   {
     "id": "api.upgrade_to_enterprise.already-done.app_error",
-    "translation": "Ya se ha actualizado a Mattermost Enterprise Edition. Reinicie el servidor para finalizar la actualización."
+    "translation": "Ya se ha actualizado a Matterfoss Enterprise Edition. Reinicie el servidor para finalizar la actualización."
   },
   {
     "id": "app.job.update.app_error",
@@ -7109,7 +7109,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial.notification_body",
-    "translation": "Su sistema Mattermost ahora tiene varios equipos. Muchos equipos tienen su propia forma preferida de coordinarse y colaborar, incluida la forma en que se crean los canales, quién puede invitar a nuevos compañeros de equipo y cómo se gestionan las integraciones. Los esquemas de anulación de equipo le permiten personalizar los permisos de usuario dentro de cada equipo para satisfacer sus necesidades específicas.\n\n[Obtenga más información sobre el uso de permisos avanzados] (https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos de productos."
+    "translation": "Su sistema Matterfoss ahora tiene varios equipos. Muchos equipos tienen su propia forma preferida de coordinarse y colaborar, incluida la forma en que se crean los canales, quién puede invitar a nuevos compañeros de equipo y cómo se gestionan las integraciones. Los esquemas de anulación de equipo le permiten personalizar los permisos de usuario dentro de cada equipo para satisfacer sus necesidades específicas.\n\n[Obtenga más información sobre el uso de permisos avanzados] (https://www.matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions-team-override)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos de productos."
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_title",
@@ -7117,11 +7117,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_body",
-    "translation": "Su sistema Mattermost ahora tiene varios equipos. Muchos equipos tienen su propia forma preferida de coordinarse y colaborar, incluida la forma en que se crean los canales, quién puede invitar a nuevos compañeros de equipo y cómo se gestionan las integraciones. Los esquemas de anulación de equipo le permiten personalizar los permisos de usuario dentro de cada equipo para satisfacer sus necesidades específicas.\n\n[Más información sobre el uso de permisos avanzados] (https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override).\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Mattermost, Inc. [Más información] (https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Su sistema Matterfoss ahora tiene varios equipos. Muchos equipos tienen su propia forma preferida de coordinarse y colaborar, incluida la forma en que se crean los canales, quién puede invitar a nuevos compañeros de equipo y cómo se gestionan las integraciones. Los esquemas de anulación de equipo le permiten personalizar los permisos de usuario dentro de cada equipo para satisfacer sus necesidades específicas.\n\n[Más información sobre el uso de permisos avanzados] (https://www.matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions-team-override).\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Matterfoss, Inc. [Más información] (https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.contact_us.email_body",
-    "translation": "Solicitud de contacto de Mattermost. Estoy interesado en obtener más información sobre los permisos avanzados con esquemas de equipo.\n"
+    "translation": "Solicitud de contacto de Matterfoss. Estoy interesado en obtener más información sobre los permisos avanzados con esquemas de equipo.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_success.message",
@@ -7129,7 +7129,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_body",
-    "translation": "Su sistema Mattermost tiene una gran cantidad de mensajes. La búsqueda predeterminada de la base de datos de Mattermost comienza a mostrar una degradación del rendimiento en alrededor de 2,5 millones de publicaciones. Con más de 5 millones de publicaciones, Elasticsearch puede ayudar a evitar problemas de rendimiento importantes, como tiempos de espera, con búsquedas y menciones. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\n[Obtenga más información sobre cómo mejorar el rendimiento] (https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos de productos."
+    "translation": "Su sistema Matterfoss tiene una gran cantidad de mensajes. La búsqueda predeterminada de la base de datos de Matterfoss comienza a mostrar una degradación del rendimiento en alrededor de 2,5 millones de publicaciones. Con más de 5 millones de publicaciones, Elasticsearch puede ayudar a evitar problemas de rendimiento importantes, como tiempos de espera, con búsquedas y menciones. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\n[Obtenga más información sobre cómo mejorar el rendimiento] (https://www.matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=elasticsearch)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos de productos."
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_title",
@@ -7137,11 +7137,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_body",
-    "translation": "Su sistema Mattermost tiene una gran cantidad de mensajes. La búsqueda predeterminada de la base de datos de Mattermost comienza a mostrar una degradación del rendimiento en alrededor de 2,5 millones de publicaciones. Con más de 5 millones de publicaciones, Elasticsearch puede ayudar a evitar problemas de rendimiento importantes, como tiempos de espera, con búsquedas y menciones. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\n[Obtenga más información sobre cómo mejorar el rendimiento] (https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Mattermost, Inc. [Más información] (https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Su sistema Matterfoss tiene una gran cantidad de mensajes. La búsqueda predeterminada de la base de datos de Matterfoss comienza a mostrar una degradación del rendimiento en alrededor de 2,5 millones de publicaciones. Con más de 5 millones de publicaciones, Elasticsearch puede ayudar a evitar problemas de rendimiento importantes, como tiempos de espera, con búsquedas y menciones. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\n[Obtenga más información sobre cómo mejorar el rendimiento] (https://www.matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=elasticsearch)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Matterfoss, Inc. [Más información] (https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.contact_us.email_body",
-    "translation": "Solicitud de contacto de Mattermost. Estoy interesado en aprender más sobre cómo mejorar el rendimiento con Elasticsearch.\n"
+    "translation": "Solicitud de contacto de Matterfoss. Estoy interesado en aprender más sobre cómo mejorar el rendimiento con Elasticsearch.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_success.message",
@@ -7149,7 +7149,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_body",
-    "translation": "Los canales ayudan a mejorar la comunicación, pero con los usuarios de Mattermost que se unen y crean canales, el desafío de mantener el sistema organizado aumenta. Los permisos avanzados le permiten establecer qué usuarios o roles pueden realizar ciertas acciones, incluida la administración de la configuración y los miembros del canal, el uso de @channel o @here para etiquetar grupos amplios de usuarios y la creación de nuevos webhooks.\n\n[Obtenga más información sobre el uso de permisos avanzados] (https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos de productos."
+    "translation": "Los canales ayudan a mejorar la comunicación, pero con los usuarios de Matterfoss que se unen y crean canales, el desafío de mantener el sistema organizado aumenta. Los permisos avanzados le permiten establecer qué usuarios o roles pueden realizar ciertas acciones, incluida la administración de la configuración y los miembros del canal, el uso de @channel o @here para etiquetar grupos amplios de usuarios y la creación de nuevos webhooks.\n\n[Obtenga más información sobre el uso de permisos avanzados] (https://www.matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos de productos."
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_title",
@@ -7157,11 +7157,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_body",
-    "translation": "Los canales ayudan a mejorar la comunicación, pero con los usuarios de Mattermost que se unen y crean canales, el desafío de mantener el sistema organizado aumenta. Los permisos avanzados le permiten establecer qué usuarios o roles pueden realizar ciertas acciones, incluida la administración de la configuración y los miembros del canal, el uso de @channel o @here para etiquetar grupos amplios de usuarios y la creación de nuevos webhooks.\n\n[Obtenga más información sobre el uso de permisos avanzados] (https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Mattermost, Inc. [Más información] (https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Los canales ayudan a mejorar la comunicación, pero con los usuarios de Matterfoss que se unen y crean canales, el desafío de mantener el sistema organizado aumenta. Los permisos avanzados le permiten establecer qué usuarios o roles pueden realizar ciertas acciones, incluida la administración de la configuración y los miembros del canal, el uso de @channel o @here para etiquetar grupos amplios de usuarios y la creación de nuevos webhooks.\n\n[Obtenga más información sobre el uso de permisos avanzados] (https://www.matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Matterfoss, Inc. [Más información] (https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.contact_us.email_body",
-    "translation": "Solicitud de contacto de Mattermost. Estoy interesado en aprender más sobre el uso de permisos avanzados con esquemas del sistema.\n"
+    "translation": "Solicitud de contacto de Matterfoss. Estoy interesado en aprender más sobre el uso de permisos avanzados con esquemas del sistema.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_success.message",
@@ -7169,11 +7169,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_body",
-    "translation": "Mattermost recomienda encarecidamente que las implementaciones de más de 500 usuarios aprovechen funciones como la administración de usuarios, la agrupación de servidores y la supervisión del rendimiento. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos de productos."
+    "translation": "Matterfoss recomienda encarecidamente que las implementaciones de más de 500 usuarios aprovechen funciones como la administración de usuarios, la agrupación de servidores y la supervisión del rendimiento. Contáctenos para obtener más información y háganos saber cómo podemos ayudar.\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos de productos."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.contact_us.email_body",
-    "translation": "Solicitud de contacto de Mattermost. Mi equipo tiene ahora 500 usuarios y estoy considerando Mattermost Enterprise Edition.\n"
+    "translation": "Solicitud de contacto de Matterfoss. Mi equipo tiene ahora 500 usuarios y estoy considerando Matterfoss Enterprise Edition.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_title",
@@ -7185,15 +7185,15 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_body",
-    "translation": "Con tantas conversaciones ocurriendo en Mattermost, puede ser un desafío saber dónde buscar información importante. Si desea transmitir un mensaje a una gran audiencia, puede configurar canales de anuncios de solo lectura en los que cualquiera puede unirse, pero solo los administradores de canales pueden publicar mensajes.\n\n[Obtenga más información sobre cómo crear canales de anuncios de solo lectura] (https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos de productos."
+    "translation": "Con tantas conversaciones ocurriendo en Matterfoss, puede ser un desafío saber dónde buscar información importante. Si desea transmitir un mensaje a una gran audiencia, puede configurar canales de anuncios de solo lectura en los que cualquiera puede unirse, pero solo los administradores de canales pueden publicar mensajes.\n\n[Obtenga más información sobre cómo crear canales de anuncios de solo lectura] (https://www.matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=channel-moderation)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos de productos."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.notification_body",
-    "translation": "Con tantas conversaciones ocurriendo en Mattermost, puede ser un desafío saber dónde buscar información importante. Si desea transmitir un mensaje a una gran audiencia, puede configurar canales de anuncios de solo lectura en los que cualquiera puede unirse, pero solo los administradores de canales pueden publicar mensajes.\n\n[Obtenga más información sobre cómo crear canales de anuncios de solo lectura] (https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Mattermost, Inc. [Más información] (https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Con tantas conversaciones ocurriendo en Matterfoss, puede ser un desafío saber dónde buscar información importante. Si desea transmitir un mensaje a una gran audiencia, puede configurar canales de anuncios de solo lectura en los que cualquiera puede unirse, pero solo los administradores de canales pueden publicar mensajes.\n\n[Obtenga más información sobre cómo crear canales de anuncios de solo lectura] (https://www.matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=channel-moderation)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Matterfoss, Inc. [Más información] (https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.contact_us.email_body",
-    "translation": "Solicitud de contacto de Mattermost. Me interesa obtener más información sobre la creación de canales de anuncios de solo lectura.\n"
+    "translation": "Solicitud de contacto de Matterfoss. Me interesa obtener más información sobre la creación de canales de anuncios de solo lectura.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_success.message",
@@ -7201,11 +7201,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_body",
-    "translation": "Su sistema Mattermost ahora tiene 200 usuarios. Cuando conecta Mattermost con el proveedor de inicio de sesión único de su organización, los usuarios pueden acceder a Mattermost sin tener que volver a ingresar sus credenciales. Le recomendamos que integre su proveedor SAML 2.0 con su servidor Mattermost. [Obtenga más información sobre la integración con SAML 2.0] (https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos de productos."
+    "translation": "Su sistema Matterfoss ahora tiene 200 usuarios. Cuando conecta Matterfoss con el proveedor de inicio de sesión único de su organización, los usuarios pueden acceder a Matterfoss sin tener que volver a ingresar sus credenciales. Le recomendamos que integre su proveedor SAML 2.0 con su servidor Matterfoss. [Obtenga más información sobre la integración con SAML 2.0] (https://www.matterfoss.com/docs-saml/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=saml)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos de productos."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
-    "translation": "Solicitud de contacto de Mattermost. Mi equipo tiene ahora 200 usuarios y estoy considerando Mattermost Enterprise Edition.\n"
+    "translation": "Solicitud de contacto de Matterfoss. Mi equipo tiene ahora 200 usuarios y estoy considerando Matterfoss Enterprise Edition.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_success.message",
@@ -7213,19 +7213,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_body",
-    "translation": "Su sistema Mattermost tiene más de 100 usuarios. A medida que crece su base de usuarios, el aprovisionamiento de nuevas cuentas puede llevar mucho tiempo. Le recomendamos que integre el Active Directory/LDAP de su organización, lo que permitirá a cualquier persona con una cuenta acceder a Mattermost.\n\n[Obtenga más información sobre la integración con AD/LDAP] (https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos de productos."
+    "translation": "Su sistema Matterfoss tiene más de 100 usuarios. A medida que crece su base de usuarios, el aprovisionamiento de nuevas cuentas puede llevar mucho tiempo. Le recomendamos que integre el Active Directory/LDAP de su organización, lo que permitirá a cualquier persona con una cuenta acceder a Matterfoss.\n\n[Obtenga más información sobre la integración con AD/LDAP] (https://www.matterfoss.com/docs-adldap/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos de productos."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
-    "translation": "Escalando con Mattermost"
+    "translation": "Escalando con Matterfoss"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "Su sistema Mattermost tiene más de 100 usuarios. A medida que crece su base de usuarios, el aprovisionamiento de nuevas cuentas puede llevar mucho tiempo. Le recomendamos que integre el Active Directory/LDAP de su organización, lo que permitirá a cualquier persona con una cuenta acceder a Mattermost.\n\n[Obtenga más información sobre la integración con AD/LDAP] (https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Mattermost, Inc. [Más información] (https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Su sistema Matterfoss tiene más de 100 usuarios. A medida que crece su base de usuarios, el aprovisionamiento de nuevas cuentas puede llevar mucho tiempo. Le recomendamos que integre el Active Directory/LDAP de su organización, lo que permitirá a cualquier persona con una cuenta acceder a Matterfoss.\n\n[Obtenga más información sobre la integración con AD/LDAP] (https://www.matterfoss.com/docs-adldap/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)\n\nAl hacer clic en Contáctenos, estará compartiendo su información con Matterfoss, Inc. [Más información] (https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
-    "translation": "Solicitud de contacto con Mattermost. Mi equipo tiene ahora 100 usuarios y estoy considerando Mattermost Enterprise Edition.\n"
+    "translation": "Solicitud de contacto con Matterfoss. Mi equipo tiene ahora 100 usuarios y estoy considerando Matterfoss Enterprise Edition.\n"
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial_notification_success.message",
@@ -7233,7 +7233,7 @@
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial.notification_body",
-    "translation": "Su sistema Mattermost tiene habilitado el factor de autenticación múltiple, lo que brinda a los usuarios la opción de proteger sus cuentas con medios adicionales de autenticación más allá de una contraseña. Para mejorar la seguridad en todo el sistema, puede solicitar que todas las cuentas de Mattermost utilicen la autenticación multifactor.\n\n[Obtenga más información sobre cómo aplicar la autenticación multifactor] (https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Mattermost] (https://mattermost.com/software-evaluation-agreement/), [Política de privacidad] (https://mattermost.com/privacy-policy/) y recibir correos electrónicos del producto."
+    "translation": "Su sistema Matterfoss tiene habilitado el factor de autenticación múltiple, lo que brinda a los usuarios la opción de proteger sus cuentas con medios adicionales de autenticación más allá de una contraseña. Para mejorar la seguridad en todo el sistema, puede solicitar que todas las cuentas de Matterfoss utilicen la autenticación multifactor.\n\n[Obtenga más información sobre cómo aplicar la autenticación multifactor] (https://www.matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=multi-factor-authentication)\n\nAl hacer clic en Iniciar prueba, acepto el [Acuerdo de evaluación de software de Matterfoss] (https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad] (https://matterfoss.com/privacy-policy/) y recibir correos electrónicos del producto."
   },
   {
     "id": "api.server.warn_metric.mfa.notification_title",
@@ -7241,11 +7241,11 @@
   },
   {
     "id": "api.server.warn_metric.mfa.notification_body",
-    "translation": "El sistema Mattermost tiene habilitado el factor de autenticación multiple, lo que permite a los usuarios asegurar sus cuentas más allá que por medio de la autenticación con contraseña. Para mejorar la seguridad a través del sistema puedes requerir que todas las cuentas de Mattermost utilicen el factor de autenticación multiple.\n\n[Aprende más sobre hacer cumplir el Factor de Autenticación Multiple](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication). \n\nAl hacer click en Contáctanos, estarás compartiendo tu información con Mattermost, Inc. [Conoce más](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "El sistema Matterfoss tiene habilitado el factor de autenticación multiple, lo que permite a los usuarios asegurar sus cuentas más allá que por medio de la autenticación con contraseña. Para mejorar la seguridad a través del sistema puedes requerir que todas las cuentas de Matterfoss utilicen el factor de autenticación multiple.\n\n[Aprende más sobre hacer cumplir el Factor de Autenticación Multiple](https://www.matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=multi-factor-authentication). \n\nAl hacer click en Contáctanos, estarás compartiendo tu información con Matterfoss, Inc. [Conoce más](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.mfa.contact_us.email_body",
-    "translation": "Petición de contacto de Mattermost. Estoy interesado en aprender más acerca de hacer cumplir el Factor de Autenticación Multiple.\n"
+    "translation": "Petición de contacto de Matterfoss. Estoy interesado en aprender más acerca de hacer cumplir el Factor de Autenticación Multiple.\n"
   },
   {
     "id": "api.server.warn_metric.email_domain.start_trial_notification_success.message",
@@ -7253,7 +7253,7 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.start_trial.notification_body",
-    "translation": "Los proyectos a menudo implican personas tanto internas como externas a una organización. Con Cuentas de Huésped, puedes traer socios externos a tu sistema Mattermost y especificar con quién pueden trabajar y qué pueden ver.\n\n[Aprende más sobre Cuentas de Huésped](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts).\n\nAl hacer clic en Iniciar prueba, estás de acuerdo con el [Acuerdo de Evaluación del Software Mattermost](https://mattermost.com/software-evaluation-agreement/), [Política de privacidad](https://mattermost.com/privacy-policy/), y recibir correos electrónicos del producto."
+    "translation": "Los proyectos a menudo implican personas tanto internas como externas a una organización. Con Cuentas de Huésped, puedes traer socios externos a tu sistema Matterfoss y especificar con quién pueden trabajar y qué pueden ver.\n\n[Aprende más sobre Cuentas de Huésped](https://www.matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=guest-accounts).\n\nAl hacer clic en Iniciar prueba, estás de acuerdo con el [Acuerdo de Evaluación del Software Matterfoss](https://matterfoss.com/software-evaluation-agreement/), [Política de privacidad](https://matterfoss.com/privacy-policy/), y recibir correos electrónicos del producto."
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_title",
@@ -7261,19 +7261,19 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_body",
-    "translation": "Los proyectos a menudo implican personas tanto internas como externas a una organización. Con Cuentas de Huésped, puedes traer socios externos a tu sistema Mattermost y especificar con quién pueden trabajar y qué pueden ver.\n\n[Aprende más sobre Cuentas de Huésped](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts).\n\nAl hacer clic en Contáctanos, compartirás tu información con Mattermost, Inc. [Aprende más](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Los proyectos a menudo implican personas tanto internas como externas a una organización. Con Cuentas de Huésped, puedes traer socios externos a tu sistema Matterfoss y especificar con quién pueden trabajar y qué pueden ver.\n\n[Aprende más sobre Cuentas de Huésped](https://www.matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=guest-accounts).\n\nAl hacer clic en Contáctanos, compartirás tu información con Matterfoss, Inc. [Aprende más](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.email_domain.contact_us.email_body",
-    "translation": "Petición de contacto de Mattermost. Estoy interesado en aprender más acerca del uso de Cuentas de Huésped.\n"
+    "translation": "Petición de contacto de Matterfoss. Estoy interesado en aprender más acerca del uso de Cuentas de Huésped.\n"
   },
   {
     "id": "api.server.warn_metric.bot_response.start_trial_failure.message",
-    "translation": "No se pudo obtener la licencia de prueba. Visita https://mattermost.com/trial/ para solicitar una licencia."
+    "translation": "No se pudo obtener la licencia de prueba. Visita https://matterfoss.com/trial/ para solicitar una licencia."
   },
   {
     "id": "api.license.request_trial_license.fail_get_user_count.app_error",
-    "translation": "No se puede obtener una licencia de prueba, vuelva a intentarlo o póngase en contacto con support@mattermost.com. No se puede obtener el número de usuarios registrados."
+    "translation": "No se puede obtener una licencia de prueba, vuelva a intentarlo o póngase en contacto con support@matterfoss.com. No se puede obtener el número de usuarios registrados."
   },
   {
     "id": "ent.ldap.no.users.checkcertificate",
@@ -7496,7 +7496,7 @@
     "translation": "No se pudo actualizar la membresía de la conversación para el usuario mencionado"
   },
   {
-    "id": "api.templates.upgrade_mattermost_cloud",
+    "id": "api.templates.upgrade_matterfoss_cloud",
     "translation": "Actualizar"
   },
   {
@@ -7509,11 +7509,11 @@
   },
   {
     "id": "api.templates.over_limit_14_days_subject",
-    "translation": "El pago de su suscripción a Mattermost Cloud está atrasado"
+    "translation": "El pago de su suscripción a Matterfoss Cloud está atrasado"
   },
   {
     "id": "api.templates.over_limit_14_days_info1",
-    "translation": "Sólo un recordatorio de que no hemos recibido el pago de su suscripción de Mattermost facturado el {{ .OverLimitDate }}.  Pronto comenzaremos un proceso para suspender su servicio si no se recibe el pago."
+    "translation": "Sólo un recordatorio de que no hemos recibido el pago de su suscripción de Matterfoss facturado el {{ .OverLimitDate }}.  Pronto comenzaremos un proceso para suspender su servicio si no se recibe el pago."
   },
   {
     "id": "api.templates.email_us_anytime_at",
@@ -7521,7 +7521,7 @@
   },
   {
     "id": "api.templates.copyright",
-    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "api.templates.at_limit_title",
@@ -7529,7 +7529,7 @@
   },
   {
     "id": "api.templates.at_limit_subject",
-    "translation": "Se alcanzó el límite de usuarios de Mattermost Cloud"
+    "translation": "Se alcanzó el límite de usuarios de Matterfoss Cloud"
   },
   {
     "id": "api.templates.at_limit_info2",
@@ -7537,7 +7537,7 @@
   },
   {
     "id": "api.templates.at_limit_info1",
-    "translation": "Parece que ahora tienes 10 o más usuarios en tu espacio de trabajo — ¡eso es genial! Si quieres invitar a más miembros del equipo, considera actualizar a Mattermost Cloud ahora."
+    "translation": "Parece que ahora tienes 10 o más usuarios en tu espacio de trabajo — ¡eso es genial! Si quieres invitar a más miembros del equipo, considera actualizar a Matterfoss Cloud ahora."
   },
   {
     "id": "api.system.update_viewed_notices.failed",
@@ -7605,7 +7605,7 @@
   },
   {
     "id": "api.templates.over_limit_30_days_info1",
-    "translation": "Todavía hay tiempo para mantener su espacio de trabajo activo en Mattermost Cloud resolviendo los problemas con su método de pago. Para evitar la suspensión, actualice su método de pago."
+    "translation": "Todavía hay tiempo para mantener su espacio de trabajo activo en Matterfoss Cloud resolviendo los problemas con su método de pago. Para evitar la suspensión, actualice su método de pago."
   },
   {
     "id": "app.user.get.app_error",
@@ -7697,11 +7697,11 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.title",
-    "translation": "Su factura de Mattermost Cloud está por vencer"
+    "translation": "Su factura de Matterfoss Cloud está por vencer"
   },
   {
     "id": "api.templates.payment_failed_no_card.subject",
-    "translation": "El pago de su suscripción a Mattermost Cloud está pendiente"
+    "translation": "El pago de su suscripción a Matterfoss Cloud está pendiente"
   },
   {
     "id": "api.templates.payment_failed_no_card.info3",
@@ -7709,7 +7709,7 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.info1",
-    "translation": "Su factura de Mattermost Cloud para el período de facturación más reciente ha sido procesada. Sin embargo, no tenemos los detalles de su pago guardados."
+    "translation": "Su factura de Matterfoss Cloud para el período de facturación más reciente ha sido procesada. Sin embargo, no tenemos los detalles de su pago guardados."
   },
   {
     "id": "api.templates.payment_failed_no_card.button",
@@ -7721,11 +7721,11 @@
   },
   {
     "id": "api.templates.payment_failed.subject",
-    "translation": "Se requiere una acción: El pago de Mattermost Cloud no se ha realizado"
+    "translation": "Se requiere una acción: El pago de Matterfoss Cloud no se ha realizado"
   },
   {
     "id": "api.templates.payment_failed.info3",
-    "translation": "Para asegurar una suscripción ininterrumpida a Mattermost Cloud, por favor, póngase en contacto con su institución financiera para arreglar el problema subyacente o actualizar su información de pago. Una vez actualizada la información de pago, Mattermost intentará liquidar cualquier saldo pendiente."
+    "translation": "Para asegurar una suscripción ininterrumpida a Matterfoss Cloud, por favor, póngase en contacto con su institución financiera para arreglar el problema subyacente o actualizar su información de pago. Una vez actualizada la información de pago, Matterfoss intentará liquidar cualquier saldo pendiente."
   },
   {
     "id": "api.templates.payment_failed.info2",
@@ -7733,7 +7733,7 @@
   },
   {
     "id": "api.templates.payment_failed.info1",
-    "translation": "Su institución financiera rechazó un pago de su {{.CardBrand}} ****{{.LastFour}} asociado a su espacio de trabajo de Mattermost Cloud."
+    "translation": "Su institución financiera rechazó un pago de su {{.CardBrand}} ****{{.LastFour}} asociado a su espacio de trabajo de Matterfoss Cloud."
   },
   {
     "id": "api.templates.over_limit_title",
@@ -7741,11 +7741,11 @@
   },
   {
     "id": "api.templates.over_limit_suspended_title",
-    "translation": "Espacio de trabajo de Mattermost Cloud suspendido"
+    "translation": "Espacio de trabajo de Matterfoss Cloud suspendido"
   },
   {
     "id": "api.templates.over_limit_suspended_subject",
-    "translation": "Su suscripción a Mattermost Cloud ha sido suspendida"
+    "translation": "Su suscripción a Matterfoss Cloud ha sido suspendida"
   },
   {
     "id": "api.templates.over_limit_suspended_info2",
@@ -7753,11 +7753,11 @@
   },
   {
     "id": "api.templates.over_limit_suspended_info1",
-    "translation": "Su espacio de trabajo en Mattermost ha sido suspendido. Todos los contenidos y datos de su espacio de trabajo serán eliminados en un plazo de 1 a 3 meses."
+    "translation": "Su espacio de trabajo en Matterfoss ha sido suspendido. Todos los contenidos y datos de su espacio de trabajo serán eliminados en un plazo de 1 a 3 meses."
   },
   {
     "id": "api.templates.over_limit_subject",
-    "translation": "El espacio de trabajo de Mattermost Cloud está sobre el límite de usuarios"
+    "translation": "El espacio de trabajo de Matterfoss Cloud está sobre el límite de usuarios"
   },
   {
     "id": "api.templates.over_limit_info2",
@@ -7765,7 +7765,7 @@
   },
   {
     "id": "api.templates.over_limit_info1",
-    "translation": "Parece que tienes más de 10 usuarios en tu espacio de trabajo, lo cual está más allá de los límites de la versión gratuita de Mattermost Cloud. Para evitar cualquier interrupción en su espacio de trabajo de Mattermost, por favor, actualícelo."
+    "translation": "Parece que tienes más de 10 usuarios en tu espacio de trabajo, lo cual está más allá de los límites de la versión gratuita de Matterfoss Cloud. Para evitar cualquier interrupción en su espacio de trabajo de Matterfoss, por favor, actualícelo."
   },
   {
     "id": "api.templates.over_limit_fix_now",
@@ -7773,11 +7773,11 @@
   },
   {
     "id": "api.templates.over_limit_90_days_title",
-    "translation": "La suspensión de su espacio de trabajo en Mattermost Cloud está programada para mañana"
+    "translation": "La suspensión de su espacio de trabajo en Matterfoss Cloud está programada para mañana"
   },
   {
     "id": "api.templates.over_limit_90_days_subject",
-    "translation": "Su suscripción a Mattermost Cloud será suspendida pronto"
+    "translation": "Su suscripción a Matterfoss Cloud será suspendida pronto"
   },
   {
     "id": "api.templates.over_limit_90_days_info4",
@@ -7793,7 +7793,7 @@
   },
   {
     "id": "api.templates.over_limit_90_days_info1",
-    "translation": "Este es un recordatorio final de que no hemos recibido el pago por su espacio de trabajo de Mattermost Cloud, el cual ha estado retrasado desde {{ .OverLimitDate }}. Mañana suspenderemos su servicio."
+    "translation": "Este es un recordatorio final de que no hemos recibido el pago por su espacio de trabajo de Matterfoss Cloud, el cual ha estado retrasado desde {{ .OverLimitDate }}. Mañana suspenderemos su servicio."
   },
   {
     "id": "api.templates.over_limit_7_days_title",
@@ -7801,19 +7801,19 @@
   },
   {
     "id": "api.templates.over_limit_7_days_subject",
-    "translation": "El pago de su suscripción a Mattermost Cloud está atrasado"
+    "translation": "El pago de su suscripción a Matterfoss Cloud está atrasado"
   },
   {
     "id": "api.templates.over_limit_7_days_info1",
-    "translation": "Mattermost no pudo procesar su pago automático más reciente. Para mantener su servicio activo, por favor añada los detalles de pago tan pronto como sea posible o su servicio puede ser suspendido."
+    "translation": "Matterfoss no pudo procesar su pago automático más reciente. Para mantener su servicio activo, por favor añada los detalles de pago tan pronto como sea posible o su servicio puede ser suspendido."
   },
   {
     "id": "api.templates.over_limit_30_days_title",
-    "translation": "Suspensión del espacio de trabajo en Mattermost Cloud"
+    "translation": "Suspensión del espacio de trabajo en Matterfoss Cloud"
   },
   {
     "id": "api.templates.over_limit_30_days_subject",
-    "translation": " Actúa para mantener tu suscripción a Mattermost Cloud"
+    "translation": " Actúa para mantener tu suscripción a Matterfoss Cloud"
   },
   {
     "id": "api.templates.over_limit_30_days_info2_item3",
@@ -7973,7 +7973,7 @@
   },
   {
     "id": "app.notification.footer.infoLogin",
-    "translation": "Iniciar sesión en Mattermost"
+    "translation": "Iniciar sesión en Matterfoss"
   },
   {
     "id": "app.notification.footer.info",
@@ -8089,7 +8089,7 @@
   },
   {
     "id": "api.user.update_active.cloud_at_limit_check_error",
-    "translation": "No se puede comprobar el número de usuarios en su instancia de nube Mattermost."
+    "translation": "No se puede comprobar el número de usuarios en su instancia de nube Matterfoss."
   },
   {
     "id": "api.user.send_cloud_welcome_email.error",
@@ -8173,15 +8173,15 @@
   },
   {
     "id": "api.templates.upgrade_request_subject",
-    "translation": "Un usuario realizó una petición de actualización del espacio de trabajo de Mattermost"
+    "translation": "Un usuario realizó una petición de actualización del espacio de trabajo de Matterfoss"
   },
   {
     "id": "api.templates.upgrade_request_info4_2",
-    "translation": "Alguien ha intentado recientemente unirse a tu espacio de trabajo pero no ha podido hacerlo porque tu espacio de trabajo ha alcanzado el límite de usuarios para la versión gratuita de Mattermost cloud. Actualice ahora para permitir que más usuarios se unan a su espacio de trabajo."
+    "translation": "Alguien ha intentado recientemente unirse a tu espacio de trabajo pero no ha podido hacerlo porque tu espacio de trabajo ha alcanzado el límite de usuarios para la versión gratuita de Matterfoss cloud. Actualice ahora para permitir que más usuarios se unan a su espacio de trabajo."
   },
   {
     "id": "api.templates.upgrade_request_info4",
-    "translation": "Como tu espacio de trabajo ha alcanzado el límite de usuarios para la versión gratuita de Mattermost cloud, no se pueden enviar invitaciones. Actualice ahora para permitir que más usuarios se unan a su espacio de trabajo."
+    "translation": "Como tu espacio de trabajo ha alcanzado el límite de usuarios para la versión gratuita de Matterfoss cloud, no se pueden enviar invitaciones. Actualice ahora para permitir que más usuarios se unan a su espacio de trabajo."
   },
   {
     "id": "api.templates.reset_body.subTitle",
@@ -8201,7 +8201,7 @@
   },
   {
     "id": "api.templates.license_up_for_renewal_title",
-    "translation": "Su suscripción a Mattermost está pendiente de renovación"
+    "translation": "Su suscripción a Matterfoss está pendiente de renovación"
   },
   {
     "id": "api.templates.license_up_for_renewal_subtitle_two",
@@ -8209,7 +8209,7 @@
   },
   {
     "id": "api.templates.license_up_for_renewal_subtitle",
-    "translation": "{{.UserName}}, tu suscripción caduca en {{.Days}} días. Esperamos que esté experimentando la colaboración en equipo flexible y segura que permite Mattermost. Renueva pronto para asegurarte de que tu equipo pueda seguir disfrutando de estos beneficios."
+    "translation": "{{.UserName}}, tu suscripción caduca en {{.Days}} días. Esperamos que esté experimentando la colaboración en equipo flexible y segura que permite Matterfoss. Renueva pronto para asegurarte de que tu equipo pueda seguir disfrutando de estos beneficios."
   },
   {
     "id": "api.templates.license_up_for_renewal_subject",
@@ -8225,7 +8225,7 @@
   },
   {
     "id": "api.templates.invite_body_footer.title",
-    "translation": "¿Qué es Mattermost?"
+    "translation": "¿Qué es Matterfoss?"
   },
   {
     "id": "api.templates.invite_body_footer.learn_more",
@@ -8233,15 +8233,15 @@
   },
   {
     "id": "api.templates.invite_body_footer.info",
-    "translation": "Mattermost es una plataforma de mensajería flexible y de código abierto que permite la colaboración segura en equipo."
+    "translation": "Matterfoss es una plataforma de mensajería flexible y de código abierto que permite la colaboración segura en equipo."
   },
   {
     "id": "api.templates.invite_body.subTitle",
-    "translation": "Empieza a colaborar con tu equipo en Mattermost"
+    "translation": "Empieza a colaborar con tu equipo en Matterfoss"
   },
   {
     "id": "api.templates.email_footer_v2",
-    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "api.templates.cloud_welcome_email.title",
@@ -8293,11 +8293,11 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.download_mm_info",
-    "translation": "Descargue la aplicación Mattermost"
+    "translation": "Descargue la aplicación Matterfoss"
   },
   {
     "id": "api.templates.cloud_welcome_email.button",
-    "translation": "Abrir Mattermost"
+    "translation": "Abrir Matterfoss"
   },
   {
     "id": "api.templates.cloud_welcome_email.app_market_place",
@@ -8309,7 +8309,7 @@
   },
   {
     "id": "api.templates.cloud_trial_ending_email.title",
-    "translation": "Tu prueba gratuita de 14 días de Mattermost finaliza pronto"
+    "translation": "Tu prueba gratuita de 14 días de Matterfoss finaliza pronto"
   },
   {
     "id": "api.command_share.unknown_action",
@@ -8341,11 +8341,11 @@
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subtitle",
-    "translation": "{{.Name}}, su prueba de 14 días de Mattermost finaliza en 3 días, en {{.TrialEnd}}. Por favor, añada su información de pago para garantizar que su equipo pueda seguir disfrutando de los beneficios de Mattermost Cloud."
+    "translation": "{{.Name}}, su prueba de 14 días de Matterfoss finaliza en 3 días, en {{.TrialEnd}}. Por favor, añada su información de pago para garantizar que su equipo pueda seguir disfrutando de los beneficios de Matterfoss Cloud."
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subject",
-    "translation": "Fin de la prueba de la nube de Mattermost"
+    "translation": "Fin de la prueba de la nube de Matterfoss"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.add_payment_method",
@@ -8353,15 +8353,15 @@
   },
   {
     "id": "api.templates.cloud_trial_ended_email.title",
-    "translation": "Su prueba gratuita de 14 días de Mattermost ha terminado hoy"
+    "translation": "Su prueba gratuita de 14 días de Matterfoss ha terminado hoy"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subtitle",
-    "translation": "{{.Name}}, su prueba gratuita de 14 días de Mattermost Cloud Enterprise ha terminado hoy, {{.TodayDate}}. Por favor, añada su información de pago para asegurarse de que su equipo pueda seguir disfrutando de los beneficios de Cloud Enterprise."
+    "translation": "{{.Name}}, su prueba gratuita de 14 días de Matterfoss Cloud Enterprise ha terminado hoy, {{.TodayDate}}. Por favor, añada su información de pago para asegurarse de que su equipo pueda seguir disfrutando de los beneficios de Cloud Enterprise."
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subject",
-    "translation": "La prueba en la nube de Mattermost ha terminado"
+    "translation": "La prueba en la nube de Matterfoss ha terminado"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.start_subscription",
@@ -8441,7 +8441,7 @@
   },
   {
     "id": "api.license.request-trial.can-start-trial.not-allowed",
-    "translation": "Esta licencia de prueba para Mattermost Enterprise Edition ha caducado y ya no es válida. Si desea ampliar el periodo de prueba, póngase en contacto con [nuestro equipo de ventas](https://mattermost.com/contact-us/)."
+    "translation": "Esta licencia de prueba para Matterfoss Enterprise Edition ha caducado y ya no es válida. Si desea ampliar el periodo de prueba, póngase en contacto con [nuestro equipo de ventas](https://matterfoss.com/contact-us/)."
   },
   {
     "id": "api.license.request-trial.can-start-trial.error",
@@ -8489,7 +8489,7 @@
   },
   {
     "id": "api.email_batching.send_batched_email_notification.button",
-    "translation": "Abrir Mattermost"
+    "translation": "Abrir Matterfoss"
   },
   {
     "id": "api.context.remote_id_missing.app_error",
@@ -8605,7 +8605,7 @@
   },
   {
     "id": "api.command_share.invite_remote.help",
-    "translation": "Invita a una instancia externa de Mattermost al canal compartido actual"
+    "translation": "Invita a una instancia externa de Matterfoss al canal compartido actual"
   },
   {
     "id": "api.command_share.invalid_value.error",
@@ -8625,7 +8625,7 @@
   },
   {
     "id": "api.command_share.desc",
-    "translation": "Comparte el canal actual con una instancia externa de Mattermost."
+    "translation": "Comparte el canal actual con una instancia externa de Matterfoss."
   },
   {
     "id": "api.command_share.could_not_uninvite.error",
@@ -8693,7 +8693,7 @@
   },
   {
     "id": "api.command_remote.invite_summary",
-    "translation": "Envíe la siguiente invitación encriptada AES de 256 bits al administrador del sistema Mattermost externo junto con la contraseña. Utilizarán el comando de barra `{{.Command}} para aceptar la invitación.\n\n```\n{{.Invitation}}\n```\n\n**Asegúrese de que la conexión segura pueda acceder a su instancia de Mattermost a través de** {{.SiteURL}}"
+    "translation": "Envíe la siguiente invitación encriptada AES de 256 bits al administrador del sistema Matterfoss externo junto con la contraseña. Utilizarán el comando de barra `{{.Command}} para aceptar la invitación.\n\n```\n{{.Invitation}}\n```\n\n**Asegúrese de que la conexión segura pueda acceder a su instancia de Matterfoss a través de** {{.SiteURL}}"
   },
   {
     "id": "api.command_remote.invite_password.hint",
@@ -8745,7 +8745,7 @@
   },
   {
     "id": "api.command_remote.desc",
-    "translation": "Invite a conexiones seguras para la comunicación entre instancias de Mattermost."
+    "translation": "Invite a conexiones seguras para la comunicación entre instancias de Matterfoss."
   },
   {
     "id": "api.command_remote.decode_invitation.error",
@@ -8769,7 +8769,7 @@
   },
   {
     "id": "api.command_remote.accept.help",
-    "translation": "Aceptar una invitación de una instancia externa de Mattermost"
+    "translation": "Aceptar una invitación de una instancia externa de Matterfoss"
   },
   {
     "id": "api.command_channel_purpose.update_channel.max_length",

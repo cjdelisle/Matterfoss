@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// https://github.com/mattermost/mattermost-plugin-starter-template/issues/115
+// https://github.com/matterfoss/matterfoss-plugin-starter-template/issues/115
 func TestClient4TrimTrailingSlash(t *testing.T) {
 	slashes := []int{0, 1, 5}
 	baseURL := "https://foo.com:1234"
@@ -26,7 +26,7 @@ func TestClient4TrimTrailingSlash(t *testing.T) {
 	}
 }
 
-// https://github.com/mattermost/mattermost-server/v6/issues/8205
+// https://github.com/cjdelisle/matterfoss-server/v6/issues/8205
 func TestClient4CreatePost(t *testing.T) {
 	post := &Post{
 		Props: map[string]interface{}{

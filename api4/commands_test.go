@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	_ "github.com/mattermost/mattermost-server/v6/app/slashcommands"
+	_ "github.com/cjdelisle/matterfoss-server/v6/app/slashcommands"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func TestEchoCommand(t *testing.T) {
@@ -184,7 +184,7 @@ func TestLoadTestHelpCommands(t *testing.T) {
 
 	rs, _, err := client.ExecuteCommand(channel.Id, "/test help")
 	require.NoError(t, err)
-	require.True(t, strings.Contains(rs.Text, "Mattermost testing commands to help"), rs.Text)
+	require.True(t, strings.Contains(rs.Text, "Matterfoss testing commands to help"), rs.Text)
 
 	time.Sleep(2 * time.Second)
 }

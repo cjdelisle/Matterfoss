@@ -69,13 +69,13 @@ func TestGetLicenseFileLocation(t *testing.T) {
 	fileName := GetLicenseFileLocation("")
 	require.NotEmpty(t, fileName, "invalid default file name")
 
-	fileName = GetLicenseFileLocation("mattermost.mattermost-license")
-	require.Equal(t, fileName, "mattermost.mattermost-license", "invalid file name")
+	fileName = GetLicenseFileLocation("matterfoss.matterfoss-license")
+	require.Equal(t, fileName, "matterfoss.matterfoss-license", "invalid file name")
 }
 
 func TestGetLicenseFileFromDisk(t *testing.T) {
 	t.Run("missing file", func(t *testing.T) {
-		fileBytes := GetLicenseFileFromDisk("thisfileshouldnotexist.mattermost-license")
+		fileBytes := GetLicenseFileFromDisk("thisfileshouldnotexist.matterfoss-license")
 		assert.Empty(t, fileBytes, "invalid bytes")
 	})
 

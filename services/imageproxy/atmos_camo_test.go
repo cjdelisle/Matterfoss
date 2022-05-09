@@ -13,16 +13,16 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/httpservice"
-	"github.com/mattermost/mattermost-server/v6/utils/testutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/testutils"
 )
 
 func makeTestAtmosCamoProxy() *ImageProxy {
 	configService := &testutils.StaticConfigService{
 		Cfg: &model.Config{
 			ServiceSettings: model.ServiceSettings{
-				SiteURL:                             model.NewString("https://mattermost.example.com"),
+				SiteURL:                             model.NewString("https://matterfoss.example.com"),
 				AllowedUntrustedInternalConnections: model.NewString("127.0.0.1"),
 			},
 			ImageProxySettings: model.ImageProxySettings{
@@ -38,7 +38,7 @@ func makeTestAtmosCamoProxy() *ImageProxy {
 }
 
 func TestAtmosCamoBackend_GetImage(t *testing.T) {
-	imageURL := "https://www.mattermost.com/wp-content/uploads/2022/02/logoHorizontalWhite.png"
+	imageURL := "https://www.matterfoss.org/wp-content/uploads/2022/02/logoHorizontalWhite.png"
 	proxiedURL := "http://images.example.com/b569ce17f1be4550cffa8d8dd3a9e80e6d209584/68747470733a2f2f7777772e6d61747465726d6f73742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032322f30322f6c6f676f486f72697a6f6e74616c57686974652e706e67"
 
 	proxy := makeTestAtmosCamoProxy()
@@ -90,10 +90,10 @@ func TestAtmosCamoBackend_GetImageDirect(t *testing.T) {
 }
 
 func TestGetAtmosCamoImageURL(t *testing.T) {
-	imageURL := "https://mattermost.com/wp-content/uploads/2022/02/logoHorizontal.png"
+	imageURL := "https://matterfoss.org/wp-content/uploads/2022/02/logoHorizontal.png"
 	proxiedURL := "http://images.example.com/03b122734ae088d10cb46ea05512ec7dc852299e/68747470733a2f2f6d61747465726d6f73742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032322f30322f6c6f676f486f72697a6f6e74616c2e706e67"
 
-	defaultSiteURL := "https://mattermost.example.com"
+	defaultSiteURL := "https://matterfoss.example.com"
 	proxyURL := "http://images.example.com"
 
 	for _, test := range []struct {
@@ -124,7 +124,7 @@ func TestGetAtmosCamoImageURL(t *testing.T) {
 			Name:     "should not proxy a relative image",
 			Input:    "/static/logo.png",
 			SiteURL:  defaultSiteURL,
-			Expected: "https://mattermost.example.com/static/logo.png",
+			Expected: "https://matterfoss.example.com/static/logo.png",
 		},
 		{
 			Name:     "should bypass opaque URLs",
@@ -133,16 +133,16 @@ func TestGetAtmosCamoImageURL(t *testing.T) {
 			Expected: defaultSiteURL,
 		},
 		{
-			Name:     "should not proxy an image on the Mattermost server",
-			Input:    "https://mattermost.example.com/static/logo.png",
+			Name:     "should not proxy an image on the Matterfoss server",
+			Input:    "https://matterfoss.example.com/static/logo.png",
 			SiteURL:  defaultSiteURL,
-			Expected: "https://mattermost.example.com/static/logo.png",
+			Expected: "https://matterfoss.example.com/static/logo.png",
 		},
 		{
-			Name:     "should not proxy an image on the Mattermost server when a subpath is set",
-			Input:    "https://mattermost.example.com/static/logo.png",
+			Name:     "should not proxy an image on the Matterfoss server when a subpath is set",
+			Input:    "https://matterfoss.example.com/static/logo.png",
 			SiteURL:  defaultSiteURL + "/static",
-			Expected: "https://mattermost.example.com/static/logo.png",
+			Expected: "https://matterfoss.example.com/static/logo.png",
 		},
 		{
 			Name:     "should not proxy an image that has already been proxied",
@@ -152,19 +152,19 @@ func TestGetAtmosCamoImageURL(t *testing.T) {
 		},
 		{
 			Name:     "should not bypass protocol relative URLs",
-			Input:    "https://mattermost.com/wp-content/uploads/2022/02/logoHorizontal.png",
-			SiteURL:  "http://mattermost.example.com",
+			Input:    "https://matterfoss.org/wp-content/uploads/2022/02/logoHorizontal.png",
+			SiteURL:  "http://matterfoss.example.com",
 			Expected: proxiedURL,
 		},
 		{
 			Name:     "should not bypass if the host prefix is same",
-			Input:    "https://mattermost.com/wp-content/uploads/2022/02/logoHorizontal.png",
+			Input:    "https://matterfoss.org/wp-content/uploads/2022/02/logoHorizontal.png",
 			SiteURL:  defaultSiteURL,
 			Expected: "http://images.example.com/03b122734ae088d10cb46ea05512ec7dc852299e/68747470733a2f2f6d61747465726d6f73742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032322f30322f6c6f676f486f72697a6f6e74616c2e706e67",
 		},
 		{
 			Name:     "should not bypass for user auth URLs",
-			Input:    "https://mattermost.com/wp-content/uploads/2022/02/logoHorizontal.png",
+			Input:    "https://matterfoss.org/wp-content/uploads/2022/02/logoHorizontal.png",
 			SiteURL:  defaultSiteURL,
 			Expected: "http://images.example.com/03b122734ae088d10cb46ea05512ec7dc852299e/68747470733a2f2f6d61747465726d6f73742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032322f30322f6c6f676f486f72697a6f6e74616c2e706e67",
 		},

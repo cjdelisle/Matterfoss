@@ -508,8 +508,8 @@
     "translation": "Nem sikerült frissíteni az MFA aktív állapotot a felhasználónak."
   },
   {
-    "id": "mattermost.bulletin.subject",
-    "translation": "Mattermost biztonsági értesítő"
+    "id": "matterfoss.bulletin.subject",
+    "translation": "Matterfoss biztonsági értesítő"
   },
   {
     "id": "manaultesting.test_autolink.unable.app_error",
@@ -661,7 +661,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "Ez a felhasználónév már használatban van egy másik Mattermost felhasználó által."
+    "translation": "Ez a felhasználónév már használatban van egy másik Matterfoss felhasználó által."
   },
   {
     "id": "ent.migration.migratetosaml.user_not_found_in_users_mapping_file",
@@ -789,11 +789,11 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "Méret korlát túllépve. Próbálja meg ellenőrizni a [maximális oldalméretet](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
+    "translation": "Méret korlát túllépve. Próbálja meg ellenőrizni a [maximális oldalméretet](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)."
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "Nem sikerült a felhasználók keresése az AD/LDAP-ban. Ellenőrizze, hogy a Mattermost szerver képes-e csatlakozni az AD/LDAP szerverhez, és próbálja újra."
+    "translation": "Nem sikerült a felhasználók keresése az AD/LDAP-ban. Ellenőrizze, hogy a Matterfoss szerver képes-e csatlakozni az AD/LDAP szerverhez, és próbálja újra."
   },
   {
     "id": "ent.ldap.syncronize.populate_syncables",
@@ -833,7 +833,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "Az Ön AD/LDAP fiókjának nincs jogosultsága, hogy használja ezt a Mattermost szervert. Kérje meg a rendszergazdát, hogy ellenőrizze az AD/LDAP felhasználói szűrőt."
+    "translation": "Az Ön AD/LDAP fiókjának nincs jogosultsága, hogy használja ezt a Matterfoss szervert. Kérje meg a rendszergazdát, hogy ellenőrizze az AD/LDAP felhasználói szűrőt."
   },
   {
     "id": "ent.ldap.do_login.unable_to_connect.app_error",
@@ -2945,11 +2945,11 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "A Mattermost már nem támogatja a böngésző ezen verzióját"
+    "translation": "A Matterfoss már nem támogatja a böngésző ezen verzióját"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "Ezt a böngészőt a Mattermost már nem támogatja"
+    "translation": "Ezt a böngészőt a Matterfoss már nem támogatja"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -2993,7 +2993,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "Töltse le a Mattermost alkalmazást, vagy használjon támogatott böngészőt a jobb élmény érdekében."
+    "translation": "Töltse le a Matterfoss alkalmazást, vagy használjon támogatott böngészőt a jobb élmény érdekében."
   },
   {
     "id": "web.error.unsupported_browser.download",
@@ -3141,7 +3141,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "A GitLab Általános Szerződési Feltételei frissültek. Kérjük, látogassa meg a gitlab.com webhelyet, hogy elfogadja őket, majd próbáljon meg újra bejelentkezni a Mattermost-ba."
+    "translation": "A GitLab Általános Szerződési Feltételei frissültek. Kérjük, látogassa meg a gitlab.com webhelyet, hogy elfogadja őket, majd próbáljon meg újra bejelentkezni a Matterfoss-ba."
   },
   {
     "id": "model.websocket_client.connect_fail.app_error",
@@ -4333,7 +4333,7 @@
   },
   {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Mattermost Tanácsadó"
+    "translation": "Matterfoss Tanácsadó"
   },
   {
     "id": "app.system.save.app_error",
@@ -5009,43 +5009,43 @@
   },
   {
     "id": "api.upgrade_to_enterprise_status.signature.app_error",
-    "translation": "A Mattermost nem tudott frissíteni az Enterprise Edition-re. A letöltött bináris fájl digitális aláírását nem sikerült ellenőrizni."
+    "translation": "A Matterfoss nem tudott frissíteni az Enterprise Edition-re. A letöltött bináris fájl digitális aláírását nem sikerült ellenőrizni."
   },
   {
     "id": "api.upgrade_to_enterprise_status.app_error",
-    "translation": "A Mattermost nem tudott frissíteni az Enterprise Edition-re."
+    "translation": "A Matterfoss nem tudott frissíteni az Enterprise Edition-re."
   },
   {
     "id": "api.upgrade_to_enterprise.system_not_supported.app_error",
-    "translation": "A Mattermost nem tudott frissíteni az Enterprise Edition-re. Ez a szolgáltatás csak x86-64 architektúrájú Linux rendszereken működik."
+    "translation": "A Matterfoss nem tudott frissíteni az Enterprise Edition-re. Ez a szolgáltatás csak x86-64 architektúrájú Linux rendszereken működik."
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user.app_error",
-    "translation": "A Mattermost nem tudott frissíteni az Enterprise Kuadásra. A {{.MattermostUsername}} Mattermost rendszer felhasználó nem rendelkezik írási engedéllyel a szükséges bináris fájlhoz. A rendszergazda frissítheti a fájl engedélyeket a következő parancs végrehajtásával azon a kiszolgálón, amelyre a Mattermost telepítve van:\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\n```\n\nA fájl engedélyek megváltoztatása után próbálkozzon újra a Mattermost frissítésével. Ha frissített és újraindított, ne felejtse el visszaállítani az eredeti fájl engedélyeket:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
+    "translation": "A Matterfoss nem tudott frissíteni az Enterprise Kuadásra. A {{.MatterfossUsername}} Matterfoss rendszer felhasználó nem rendelkezik írási engedéllyel a szükséges bináris fájlhoz. A rendszergazda frissítheti a fájl engedélyeket a következő parancs végrehajtásával azon a kiszolgálón, amelyre a Matterfoss telepítve van:\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\n```\n\nA fájl engedélyek megváltoztatása után próbálkozzon újra a Matterfoss frissítésével. Ha frissített és újraindított, ne felejtse el visszaállítani az eredeti fájl engedélyeket:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user-and-permission.app_error",
-    "translation": "A Mattermost nem tudott frissíteni az Enterprise Kiadásra. A {{.MattermostUsername}} Mattermost rendszer felhasználó nem rendelkezik írási engedéllyel a szükséges bináris fájlhoz. A rendszergazda frissítheti a fájl engedélyeket a következő parancs végrehajtásával azon a kiszolgálón, amelyre a Mattermost telepítve van:\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nA fájl engedélyek megváltoztatása után próbálkozzon újra a Mattermost frissítésével. Ha frissített és újraindított, ne felejtse el visszaállítani az eredeti fájl engedélyeket:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "A Matterfoss nem tudott frissíteni az Enterprise Kiadásra. A {{.MatterfossUsername}} Matterfoss rendszer felhasználó nem rendelkezik írási engedéllyel a szükséges bináris fájlhoz. A rendszergazda frissítheti a fájl engedélyeket a következő parancs végrehajtásával azon a kiszolgálón, amelyre a Matterfoss telepítve van:\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\nA fájl engedélyek megváltoztatása után próbálkozzon újra a Matterfoss frissítésével. Ha frissített és újraindított, ne felejtse el visszaállítani az eredeti fájl engedélyeket:\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-permission.app_error",
-    "translation": "A Mattermost nem tudott frissíteni az Enterprise Kiadásra. A {{.MattermostUsername}} Mattermost rendszer felhasználó nem rendelkezik írási jogosultsággal a szükséges bináris fájlhoz. A rendszergazda frissítheti a fájl engedélyeket a következő parancs végrehajtásával azon a szerveren, amelyre a Mattermost telepítve van:\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nA fájl engedélyek megváltoztatása után próbálkozzon újra a Mattermost frissítésével. Ha frissített és újraindított, ne felejtse el visszaállítani az eredeti fájl engedélyeket:\n\n```\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "A Matterfoss nem tudott frissíteni az Enterprise Kiadásra. A {{.MatterfossUsername}} Matterfoss rendszer felhasználó nem rendelkezik írási jogosultsággal a szükséges bináris fájlhoz. A rendszergazda frissítheti a fájl engedélyeket a következő parancs végrehajtásával azon a szerveren, amelyre a Matterfoss telepítve van:\n\n```\nchmod +w \"{{.Path}}\"\n```\n\nA fájl engedélyek megváltoztatása után próbálkozzon újra a Matterfoss frissítésével. Ha frissített és újraindított, ne felejtse el visszaállítani az eredeti fájl engedélyeket:\n\n```\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.generic_error.app_error",
-    "translation": "A Mattermost nem tudott frissíteni az Enterprise Edition-re."
+    "translation": "A Matterfoss nem tudott frissíteni az Enterprise Edition-re."
   },
   {
     "id": "api.upgrade_to_enterprise.app_error",
-    "translation": "A Mattermost Enterprise Edition frissítése már fut."
+    "translation": "A Matterfoss Enterprise Edition frissítése már fut."
   },
   {
     "id": "api.upgrade_to_enterprise.already-enterprise.app_error",
-    "translation": "Nem frissíthet, mert már a Mattermost Enterprise Edition -t használja."
+    "translation": "Nem frissíthet, mert már a Matterfoss Enterprise Edition -t használja."
   },
   {
     "id": "api.upgrade_to_enterprise.already-done.app_error",
-    "translation": "Sikeresen frissített a Mattermost Enterprise Edition-re. Kérjük, indítsa újra a szervert a frissítés befejezéséhez."
+    "translation": "Sikeresen frissített a Matterfoss Enterprise Edition-re. Kérjük, indítsa újra a szervert a frissítés befejezéséhez."
   },
   {
     "id": "api.unable_to_read_file_from_backend",
@@ -5081,7 +5081,7 @@
   },
   {
     "id": "api.templates.welcome_body.info",
-    "translation": "Ezt az e-mail címet használták Mattermost fiók létrehozásához."
+    "translation": "Ezt az e-mail címet használták Matterfoss fiók létrehozásához."
   },
   {
     "id": "api.templates.welcome_body.button",
@@ -5101,11 +5101,11 @@
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Mattermost kapcsolat felvételi kérelem"
+    "translation": "Matterfoss kapcsolat felvételi kérelem"
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "Ha további kérdése van, forduljon a support@mattermost.com e-mail címhez"
+    "translation": "Ha további kérdése van, forduljon a support@matterfoss.com e-mail címhez"
   },
   {
     "id": "api.templates.warn_metric_ack.body.site_url_header",
@@ -5153,7 +5153,7 @@
   },
   {
     "id": "api.templates.verify_body.info",
-    "translation": "Ez az e-mail cím volt használva a Mattermost fiók létrehozásakor."
+    "translation": "Ez az e-mail cím volt használva a Matterfoss fiók létrehozásakor."
   },
   {
     "id": "api.templates.verify_body.button",
@@ -5421,18 +5421,18 @@
   },
   {
     "id": "api.templates.upgrade_request_subject",
-    "translation": "Mattermost felhasználó munkaterület előfizetés megemelést kért"
+    "translation": "Matterfoss felhasználó munkaterület előfizetés megemelést kért"
   },
   {
     "id": "api.templates.upgrade_request_info4_2",
-    "translation": "Valaki nemrég megpróbált csatlakozni a munkaterületéhez, de nem sikerült, mivel a munkaterülete elérte az Mattermost Cloud ingyenes verziójának felhasználói korlátját. Emelje meg előfizetését most, hogy több felhasználó is csatlakozhasson a munkaterületéhez."
+    "translation": "Valaki nemrég megpróbált csatlakozni a munkaterületéhez, de nem sikerült, mivel a munkaterülete elérte az Matterfoss Cloud ingyenes verziójának felhasználói korlátját. Emelje meg előfizetését most, hogy több felhasználó is csatlakozhasson a munkaterületéhez."
   },
   {
     "id": "api.templates.upgrade_request_info4",
-    "translation": "Mivel munkaterülete elérte a Mattermost felhő ingyenes verziójának felhasználói korlátját, a meghívókat nem lehet elküldeni. Emelje meg előfizetését most, hogy több felhasználó is csatlakozhasson a munkaterületéhez."
+    "translation": "Mivel munkaterülete elérte a Matterfoss felhő ingyenes verziójának felhasználói korlátját, a meghívókat nem lehet elküldeni. Emelje meg előfizetését most, hogy több felhasználó is csatlakozhasson a munkaterületéhez."
   },
   {
-    "id": "api.templates.upgrade_mattermost_cloud",
+    "id": "api.templates.upgrade_matterfoss_cloud",
     "translation": "Megemelés"
   },
   {
@@ -5473,7 +5473,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "A Mattermost Enterprise licensz le van tiltva."
+    "translation": "A Matterfoss Enterprise licensz le van tiltva."
   },
   {
     "id": "api.templates.remove_expired_license.body.title",
@@ -5497,11 +5497,11 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.title",
-    "translation": "Az Ön Mattermost Cloud számlája lejárt"
+    "translation": "Az Ön Matterfoss Cloud számlája lejárt"
   },
   {
     "id": "api.templates.payment_failed_no_card.subject",
-    "translation": "Fizetés esedékes a Mattermost Cloud előfizetéséhez"
+    "translation": "Fizetés esedékes a Matterfoss Cloud előfizetéséhez"
   },
   {
     "id": "api.templates.payment_failed_no_card.info3",
@@ -5509,7 +5509,7 @@
   },
   {
     "id": "api.templates.payment_failed_no_card.info1",
-    "translation": "A legutóbbi számlázási időszakra vonatkozó Mattermost Cloud számlája feldolgozásra került. A fizetési adataink azonban nincsenek nyilvántartva."
+    "translation": "A legutóbbi számlázási időszakra vonatkozó Matterfoss Cloud számlája feldolgozásra került. A fizetési adataink azonban nincsenek nyilvántartva."
   },
   {
     "id": "api.templates.payment_failed_no_card.button",
@@ -5521,11 +5521,11 @@
   },
   {
     "id": "api.templates.payment_failed.subject",
-    "translation": "Művelet szükséges: Sikertelen fizetés a Mattermost Cloudra"
+    "translation": "Művelet szükséges: Sikertelen fizetés a Matterfoss Cloudra"
   },
   {
     "id": "api.templates.payment_failed.info3",
-    "translation": "A Mattermost Cloud zavartalan előfizetésének biztosítása érdekében kérjük, vegye fel a kapcsolatot a pénzintézetével a probléma megoldása érdekében, vagy frissítse fizetési adatait. A fizetési adatok frissítése után a Mattermost megpróbálja rendezni a fennmaradó egyenleget."
+    "translation": "A Matterfoss Cloud zavartalan előfizetésének biztosítása érdekében kérjük, vegye fel a kapcsolatot a pénzintézetével a probléma megoldása érdekében, vagy frissítse fizetési adatait. A fizetési adatok frissítése után a Matterfoss megpróbálja rendezni a fennmaradó egyenleget."
   },
   {
     "id": "api.templates.payment_failed.info2",
@@ -5533,7 +5533,7 @@
   },
   {
     "id": "api.templates.payment_failed.info1",
-    "translation": "Pénzintézete elutasította a Mattermost Cloud munkaterületéhez társított {{.CardBrand}} **** {{.LastFour}} kártyáról a fizetést."
+    "translation": "Pénzintézete elutasította a Matterfoss Cloud munkaterületéhez társított {{.CardBrand}} **** {{.LastFour}} kártyáról a fizetést."
   },
   {
     "id": "api.templates.password_change_subject",
@@ -5553,11 +5553,11 @@
   },
   {
     "id": "api.templates.over_limit_suspended_title",
-    "translation": "Mattermost Cloud munkaterület fel lett függesztve"
+    "translation": "Matterfoss Cloud munkaterület fel lett függesztve"
   },
   {
     "id": "api.templates.over_limit_suspended_subject",
-    "translation": "Az Ön Mattermost Cloud munkaterületét felfüggesztették"
+    "translation": "Az Ön Matterfoss Cloud munkaterületét felfüggesztették"
   },
   {
     "id": "api.templates.over_limit_suspended_info2",
@@ -5565,7 +5565,7 @@
   },
   {
     "id": "api.templates.over_limit_suspended_info1",
-    "translation": "Az Ön Mattermost munkaterületét felfüggesztették. A munkaterületen lévő minden adat és tartalom 1-3 hónapon belül törlésre kerül."
+    "translation": "Az Ön Matterfoss munkaterületét felfüggesztették. A munkaterületen lévő minden adat és tartalom 1-3 hónapon belül törlésre kerül."
   },
   {
     "id": "api.templates.over_limit_suspended_contact_support",
@@ -5573,7 +5573,7 @@
   },
   {
     "id": "api.templates.over_limit_subject",
-    "translation": "Mattermost Cloud munkaterület meghaladja a felhasználói limitet"
+    "translation": "Matterfoss Cloud munkaterület meghaladja a felhasználói limitet"
   },
   {
     "id": "api.templates.over_limit_info2",
@@ -5581,7 +5581,7 @@
   },
   {
     "id": "api.templates.over_limit_info1",
-    "translation": "Úgy tűnik, hogy több mint 10 felhasználója van a munkaterületén, amely meghaladja a Mattermost Cloud ingyenes szintjét. Kérjük emelje meg előfizetését a Mattermost munkaterület további zavartalan működés érdekében."
+    "translation": "Úgy tűnik, hogy több mint 10 felhasználója van a munkaterületén, amely meghaladja a Matterfoss Cloud ingyenes szintjét. Kérjük emelje meg előfizetését a Matterfoss munkaterület további zavartalan működés érdekében."
   },
   {
     "id": "api.templates.over_limit_fix_now",
@@ -5589,11 +5589,11 @@
   },
   {
     "id": "api.templates.over_limit_90_days_title",
-    "translation": "A Mattermost Cloud munkaterület felfüggesztése holnap fog megtörténni"
+    "translation": "A Matterfoss Cloud munkaterület felfüggesztése holnap fog megtörténni"
   },
   {
     "id": "api.templates.over_limit_90_days_subject",
-    "translation": "A Mattermost Cloud előfizetését hamarosan fel fogjuk függeszteni"
+    "translation": "A Matterfoss Cloud előfizetését hamarosan fel fogjuk függeszteni"
   },
   {
     "id": "api.templates.over_limit_90_days_info4",
@@ -5609,7 +5609,7 @@
   },
   {
     "id": "api.templates.over_limit_90_days_info1",
-    "translation": "Ez egy utolsó emlékeztető arra, hogy nem kaptunk fizetést a Mattermost Cloud munkaterületéért, amely {{ .OverLimitDate }} napja esedékes. Holnap felfüggesztjük szolgáltatását."
+    "translation": "Ez egy utolsó emlékeztető arra, hogy nem kaptunk fizetést a Matterfoss Cloud munkaterületéért, amely {{ .OverLimitDate }} napja esedékes. Holnap felfüggesztjük szolgáltatását."
   },
   {
     "id": "api.templates.over_limit_7_days_title",
@@ -5617,19 +5617,19 @@
   },
   {
     "id": "api.templates.over_limit_7_days_subject",
-    "translation": "A fizetési határidő lejárt a Mattermost Cloud előfizetéséhez"
+    "translation": "A fizetési határidő lejárt a Matterfoss Cloud előfizetéséhez"
   },
   {
     "id": "api.templates.over_limit_7_days_info1",
-    "translation": "A Mattermost nem tudta feldolgozni a legutóbbi automatikus fizetést. A szolgáltatás aktív állapotának fenntartása érdekében kérjük a lehető leghamarabb adja meg a fizetési adatokat, különben a szolgáltatás fel lesz függesztve."
+    "translation": "A Matterfoss nem tudta feldolgozni a legutóbbi automatikus fizetést. A szolgáltatás aktív állapotának fenntartása érdekében kérjük a lehető leghamarabb adja meg a fizetési adatokat, különben a szolgáltatás fel lesz függesztve."
   },
   {
     "id": "api.templates.over_limit_30_days_title",
-    "translation": "Mattermost Cloud munaterület felfüggesztés"
+    "translation": "Matterfoss Cloud munaterület felfüggesztés"
   },
   {
     "id": "api.templates.over_limit_30_days_subject",
-    "translation": " Tegyen lépéseket a Mattermost Cloud előfizetésének megtartására"
+    "translation": " Tegyen lépéseket a Matterfoss Cloud előfizetésének megtartására"
   },
   {
     "id": "api.templates.over_limit_30_days_info2_item3",
@@ -5649,7 +5649,7 @@
   },
   {
     "id": "api.templates.over_limit_30_days_info1",
-    "translation": "Van még idő arra, hogy a fizetési móddal kapcsolatos problémák megoldásával aktív maradjon a Mattermost Cloud munkaterülete. A felfüggesztés elkerülése érdekében frissítse a fizetési módot."
+    "translation": "Van még idő arra, hogy a fizetési móddal kapcsolatos problémák megoldásával aktív maradjon a Matterfoss Cloud munkaterülete. A felfüggesztés elkerülése érdekében frissítse a fizetési módot."
   },
   {
     "id": "api.templates.over_limit_14_days_title",
@@ -5657,11 +5657,11 @@
   },
   {
     "id": "api.templates.over_limit_14_days_subject",
-    "translation": "Fizetése késedelemben van a Mattermost Cloud előfizetéséhez"
+    "translation": "Fizetése késedelemben van a Matterfoss Cloud előfizetéséhez"
   },
   {
     "id": "api.templates.over_limit_14_days_info1",
-    "translation": "Csak egy emlékeztető, hogy nem kaptunk fizetést a {{ .OverLimitDate }} napon számlázott Mattermost előfizetésért. Hamarosan megkezdjük a szolgáltatás felfüggesztését, ha a fizetés nem érkezik meg."
+    "translation": "Csak egy emlékeztető, hogy nem kaptunk fizetést a {{ .OverLimitDate }} napon számlázott Matterfoss előfizetésért. Hamarosan megkezdjük a szolgáltatás felfüggesztését, ha a fizetés nem érkezik meg."
   },
   {
     "id": "api.templates.mfa_deactivated_body.title",
@@ -5697,7 +5697,7 @@
   },
   {
     "id": "api.templates.invite_body_footer.title",
-    "translation": "Mi az a Mattermost?"
+    "translation": "Mi az a Matterfoss?"
   },
   {
     "id": "api.templates.invite_body_footer.learn_more",
@@ -5705,7 +5705,7 @@
   },
   {
     "id": "api.templates.invite_body_footer.info",
-    "translation": "A Mattermost egy rugalmas, nyílt forráskódú üzenetküldő platform, amely biztonságos csapat együttműködést tesz lehetővé."
+    "translation": "A Matterfoss egy rugalmas, nyílt forráskódú üzenetküldő platform, amely biztonságos csapat együttműködést tesz lehetővé."
   },
   {
     "id": "api.templates.invite_body.title",
@@ -5713,7 +5713,7 @@
   },
   {
     "id": "api.templates.invite_body.subTitle",
-    "translation": "Kezdjen el együttműködni a csapatával a Mattermost-on"
+    "translation": "Kezdjen el együttműködni a csapatával a Matterfoss-on"
   },
   {
     "id": "api.templates.invite_body.button",
@@ -5745,7 +5745,7 @@
   },
   {
     "id": "api.templates.email_footer_v2",
-    "translation": "© 2022 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2022 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "api.templates.email_footer",
@@ -5805,11 +5805,11 @@
   },
   {
     "id": "api.templates.cloud_welcome_email.download_mm_info",
-    "translation": "Mattermost alkalmazás letöltése"
+    "translation": "Matterfoss alkalmazás letöltése"
   },
   {
     "id": "api.templates.cloud_welcome_email.button",
-    "translation": "Mattermost megnyitása"
+    "translation": "Matterfoss megnyitása"
   },
   {
     "id": "api.templates.cloud_welcome_email.app_market_place",
@@ -5825,15 +5825,15 @@
   },
   {
     "id": "api.templates.cloud_trial_ending_email.title",
-    "translation": "A Mattermost 14 napos ingyenes próbaverziója hamarosan véget ér"
+    "translation": "A Matterfoss 14 napos ingyenes próbaverziója hamarosan véget ér"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subtitle",
-    "translation": "{{.Name}}, a Mattermost 14 napos próbaverziója 3 nap múlva ér véget, {{.TrialEnd}} napon. Kérjük, adja hozzá a fizetési adatait, hogy csapata továbbra is élvezhesse a Mattermost Cloud előnyeit."
+    "translation": "{{.Name}}, a Matterfoss 14 napos próbaverziója 3 nap múlva ér véget, {{.TrialEnd}} napon. Kérjük, adja hozzá a fizetési adatait, hogy csapata továbbra is élvezhesse a Matterfoss Cloud előnyeit."
   },
   {
     "id": "api.templates.cloud_trial_ending_email.subject",
-    "translation": "Mattermost cloud próbaidő vége"
+    "translation": "Matterfoss cloud próbaidő vége"
   },
   {
     "id": "api.templates.cloud_trial_ending_email.add_payment_method",
@@ -5845,7 +5845,7 @@
   },
   {
     "id": "api.templates.at_limit_subject",
-    "translation": "Mattermost Cloud felhasználói limit elérve"
+    "translation": "Matterfoss Cloud felhasználói limit elérve"
   },
   {
     "id": "api.templates.at_limit_info5",
@@ -5857,7 +5857,7 @@
   },
   {
     "id": "api.templates.at_limit_info1",
-    "translation": "Úgy tűnik, hogy 10 vagy több felhasználója van a munkaterületben — ez remek! Ha több csapattagot szeretne meghívni, fontolja meg a Mattermost Cloud-ra való frissítést."
+    "translation": "Úgy tűnik, hogy 10 vagy több felhasználója van a munkaterületben — ez remek! Ha több csapattagot szeretne meghívni, fontolja meg a Matterfoss Cloud-ra való frissítést."
   },
   {
     "id": "api.team.update_team_scheme.scheme_scope.error",
@@ -6157,7 +6157,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Mattermost Slack Importálás napló\n"
+    "translation": "Matterfoss Slack Importálás napló\n"
   },
   {
     "id": "api.slackimport.slack_add_users.unable_import",
@@ -6169,11 +6169,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "Slack felhasználó összevonva egy létező Mattermost felhasználóval egyező e-mail címmel {{.Email}} és felhasználónévvel {{.Username}}, de nem sikerült hozzáadni a csapatukhoz.\n"
+    "translation": "Slack felhasználó összevonva egy létező Matterfoss felhasználóval egyező e-mail címmel {{.Email}} és felhasználónévvel {{.Username}}, de nem sikerült hozzáadni a csapatukhoz.\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "Slack felhasználó összevonva egy létező Mattermost felhasználóval egyező e-mail címmel {{.Email}} és felhasználónévvel {{.Username}}.\n"
+    "translation": "Slack felhasználó összevonva egy létező Matterfoss felhasználóval egyező e-mail címmel {{.Email}} és felhasználónévvel {{.Username}}.\n"
   },
   {
     "id": "api.slackimport.slack_add_users.email_pwd",
@@ -6185,7 +6185,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "A {{.DisplayName}} Slack csatorna már létezik aktív Mattermost csatornaként. Mindkét csatorna összevonva.\n"
+    "translation": "A {{.DisplayName}} Slack csatorna már létezik aktív Matterfoss csatornaként. Mindkét csatorna összevonva.\n"
   },
   {
     "id": "api.slackimport.slack_add_channels.import_failed",
@@ -6213,7 +6213,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.start_trial.notification_body",
-    "translation": "A Mattermost rendszerének jelenleg több csapata van. Sok csapatnak megvan a maga preferált módja a koordinációra és az együttműködésre, beleértve a csatornák létrehozásának módját, kik hívhatnak meg új csapat tagokat és hogy hogyan kezelik az integrációkat. A csapat felülbírálási sémái lehetővé teszik a felhasználói engedélyek testreszabását az egyes csapatokon belül, hogy megfeleljenek a saját igényeiknek.\n\n[További információk a fejlett engedélyek használatáról](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "A Matterfoss rendszerének jelenleg több csapata van. Sok csapatnak megvan a maga preferált módja a koordinációra és az együttműködésre, beleértve a csatornák létrehozásának módját, kik hívhatnak meg új csapat tagokat és hogy hogyan kezelik az integrációkat. A csapat felülbírálási sémái lehetővé teszik a felhasználói engedélyek testreszabását az egyes csapatokon belül, hogy megfeleljenek a saját igényeiknek.\n\n[További információk a fejlett engedélyek használatáról](https://www.matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions-team-override)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_title",
@@ -6221,11 +6221,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.notification_body",
-    "translation": "A Mattermost rendszerének jelenleg több csapata van. Sok csapatnak megvan a maga preferált módja a koordinációra és az együttműködésre, beleértve a csatornák létrehozásának módját, kik hívhatnak meg új csapat tagokat és hogy hogyan kezelik az integrációkat. A csapat felülbírálási sémái lehetővé teszik a felhasználói engedélyek testreszabását az egyes csapatokon belül, hogy megfeleljenek a saját igényeiknek.\n\n[További információk a fejlett engedélyek használatáról](https://www.mattermost.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions-team-override).\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "A Matterfoss rendszerének jelenleg több csapata van. Sok csapatnak megvan a maga preferált módja a koordinációra és az együttműködésre, beleértve a csatornák létrehozásának módját, kik hívhatnak meg új csapat tagokat és hogy hogyan kezelik az integrációkat. A csapat felülbírálási sémái lehetővé teszik a felhasználói engedélyek testreszabását az egyes csapatokon belül, hogy megfeleljenek a saját igényeiknek.\n\n[További információk a fejlett engedélyek használatáról](https://www.matterfoss.com/docs-advanced-permissions-team-override/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions-team-override).\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_teams_5.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. Szeretnék többet megtudni a haladó engedélyekről a csapatsémákkal.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. Szeretnék többet megtudni a haladó engedélyekről a csapatsémákkal.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_success.message",
@@ -6233,7 +6233,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.start_trial.notification_body",
-    "translation": "A Mattermost rendszerében nagy számú üzenet van. Az alapértelmezett Mattermost adatbázis keresés körülbelül 2,5 millió bejegyzésnél kezdi mutatni a teljesítmény romlását. Több mint 5 millió bejegyzéssel az Elasticsearch segíthet elkerülni a jelentős teljesítmény problémákat, például az időtúllépéseket. Vegye fel velünk a kapcsolatot, ha többet szeretne megtudni és tudassa velünk, hogy hogyan tudunk segíteni.\n\n[További információk a teljesítmény javításáról](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "A Matterfoss rendszerében nagy számú üzenet van. Az alapértelmezett Matterfoss adatbázis keresés körülbelül 2,5 millió bejegyzésnél kezdi mutatni a teljesítmény romlását. Több mint 5 millió bejegyzéssel az Elasticsearch segíthet elkerülni a jelentős teljesítmény problémákat, például az időtúllépéseket. Vegye fel velünk a kapcsolatot, ha többet szeretne megtudni és tudassa velünk, hogy hogyan tudunk segíteni.\n\n[További információk a teljesítmény javításáról](https://www.matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=elasticsearch)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_title",
@@ -6241,11 +6241,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.notification_body",
-    "translation": "A Mattermost rendszerében nagy számú üzenet van. Az alapértelmezett Mattermost adatbázis keresés körülbelül 2,5 millió bejegyzésnél kezdi mutatni a teljesítmény romlását. Több mint 5 millió bejegyzéssel az Elasticsearch segíthet elkerülni a jelentős teljesítmény problémákat, például az időtúllépéseket. Vegye fel velünk a kapcsolatot, ha többet szeretne megtudni és tudassa velünk, hogy hogyan tudunk segíteni.\n\n[További információk a teljesítmény javításáról](https://www.mattermost.com/docs-elasticsearch/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=elasticsearch)\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "A Matterfoss rendszerében nagy számú üzenet van. Az alapértelmezett Matterfoss adatbázis keresés körülbelül 2,5 millió bejegyzésnél kezdi mutatni a teljesítmény romlását. Több mint 5 millió bejegyzéssel az Elasticsearch segíthet elkerülni a jelentős teljesítmény problémákat, például az időtúllépéseket. Vegye fel velünk a kapcsolatot, ha többet szeretne megtudni és tudassa velünk, hogy hogyan tudunk segíteni.\n\n[További információk a teljesítmény javításáról](https://www.matterfoss.com/docs-elasticsearch/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=elasticsearch)\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_posts_2M.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. Szeretnék többet megtudni a teljesítmény javításáról az Elasticsearch segítségével.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. Szeretnék többet megtudni a teljesítmény javításáról az Elasticsearch segítségével.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_success.message",
@@ -6253,7 +6253,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.start_trial.notification_body",
-    "translation": "A csatornák segítenek a kommunikáció javításában, de azáltal, hogy a Mattermost felhasználók csatlakoznak és létrehoznak csatornákat, nő a rendszer szervezetten tartásának kihívása. A fejlett engedélyek segítségével beállíthatja, hogy mely felhasználók vagy szerepkörök hajthatnak végre bizonyos műveleteket, ideértve a csatornák beállítását és tagjainak kezelését, @channel vagy @here használatával a felhasználók széles körének címzését, valamint új webhorog létrehozását.\n\n[További információk a fejlett engedélyek használatáról](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "A csatornák segítenek a kommunikáció javításában, de azáltal, hogy a Matterfoss felhasználók csatlakoznak és létrehoznak csatornákat, nő a rendszer szervezetten tartásának kihívása. A fejlett engedélyek segítségével beállíthatja, hogy mely felhasználók vagy szerepkörök hajthatnak végre bizonyos műveleteket, ideértve a csatornák beállítását és tagjainak kezelését, @channel vagy @here használatával a felhasználók széles körének címzését, valamint új webhorog létrehozását.\n\n[További információk a fejlett engedélyek használatáról](https://www.matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_title",
@@ -6265,11 +6265,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.notification_body",
-    "translation": "A csatornák segítenek a kommunikáció javításában, de azáltal, hogy a Mattermost felhasználók csatlakoznak és létrehoznak csatornákat, nő a rendszer szervezetten tartásának kihívása. A fejlett engedélyek segítségével beállíthatja, hogy mely felhasználók vagy szerepkörök hajthatnak végre bizonyos műveleteket, ideértve a csatornák beállítását és tagjainak kezelését, @channel vagy @here használatával a felhasználók széles körének címzését, valamint új webhorog létrehozását.\n\n[További információk a fejlett engedélyek használatáról](https://www.mattermost.com/docs-advanced-permissions/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=advanced-permissions)\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "A csatornák segítenek a kommunikáció javításában, de azáltal, hogy a Matterfoss felhasználók csatlakoznak és létrehoznak csatornákat, nő a rendszer szervezetten tartásának kihívása. A fejlett engedélyek segítségével beállíthatja, hogy mely felhasználók vagy szerepkörök hajthatnak végre bizonyos műveleteket, ideértve a csatornák beállítását és tagjainak kezelését, @channel vagy @here használatával a felhasználók széles körének címzését, valamint új webhorog létrehozását.\n\n[További információk a fejlett engedélyek használatáról](https://www.matterfoss.com/docs-advanced-permissions/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=advanced-permissions)\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_channels_50.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. Szeretnék többet megtudni a Speciális engedélyek rendszer sémákkal történő használatáról.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. Szeretnék többet megtudni a Speciális engedélyek rendszer sémákkal történő használatáról.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_success.message",
@@ -6277,19 +6277,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.start_trial.notification_body",
-    "translation": "A Mattermost nyomatékosan javasolja, hogy több mint 500 felhasználó telepítéséhez használja ki az olyan funkciók előnyeit, mint a felhasználó kezelés, a szerver fürtösítés és a teljesítmény figyelés. Vegye fel velünk a kapcsolatot, hogy többet tudjon meg és tudassa velünk, hogy hogyan tudunk segíteni.\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "A Matterfoss nyomatékosan javasolja, hogy több mint 500 felhasználó telepítéséhez használja ki az olyan funkciók előnyeit, mint a felhasználó kezelés, a szerver fürtösítés és a teljesítmény figyelés. Vegye fel velünk a kapcsolatot, hogy többet tudjon meg és tudassa velünk, hogy hogyan tudunk segíteni.\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_title",
-    "translation": "Méretezés a Mattermost segítségével"
+    "translation": "Méretezés a Matterfoss segítségével"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "A Mattermost nyomatékosan javasolja, hogy több mint 500 felhasználó telepítéséhez használja ki az olyan funkciók előnyeit, mint a felhasználó kezelés, a szerver fürtösítés és a teljesítmény figyelés. Vegye fel velünk a kapcsolatot, hogy többet tudjon meg és tudassa velünk, hogy hogyan tudunk segíteni.\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "A Matterfoss nyomatékosan javasolja, hogy több mint 500 felhasználó telepítéséhez használja ki az olyan funkciók előnyeit, mint a felhasználó kezelés, a szerver fürtösítés és a teljesítmény figyelés. Vegye fel velünk a kapcsolatot, hogy többet tudjon meg és tudassa velünk, hogy hogyan tudunk segíteni.\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. A csapatomnak most 500 felhasználója van, és a Mattermost Enterprise kiadást fontolgatom.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. A csapatomnak most 500 felhasználója van, és a Matterfoss Enterprise kiadást fontolgatom.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_title",
@@ -6301,15 +6301,15 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.start_trial.notification_body",
-    "translation": "Amikor rengeteg beszélgetés folyik az egész Mattermoston, kihívást jelenthet tudni, hogy hol keressünk fontos információkat. Ha nagy közönségnek szeretne üzenetet küldeni, beállíthat írásvédett bejelentési csatornákat, ahová bárki csatlakozhat, de csak a csatornák rendszergazdái küldhetnek üzeneteket.\n\n[További információk az írásvédett bejelentési csatornák létrehozásáról](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "Amikor rengeteg beszélgetés folyik az egész Matterfosson, kihívást jelenthet tudni, hogy hol keressünk fontos információkat. Ha nagy közönségnek szeretne üzenetet küldeni, beállíthat írásvédett bejelentési csatornákat, ahová bárki csatlakozhat, de csak a csatornák rendszergazdái küldhetnek üzeneteket.\n\n[További információk az írásvédett bejelentési csatornák létrehozásáról](https://www.matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=channel-moderation)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.notification_body",
-    "translation": "Amikor rengeteg beszélgetés folyik az egész Mattermoston, kihívást jelenthet tudni, hogy hol keressünk fontos információkat. Ha nagy közönségnek szeretne üzenetet küldeni, beállíthat írásvédett bejelentési csatornákat, ahová bárki csatlakozhat, de csak a csatornák rendszergazdái küldhetnek üzeneteket.\n\n[További információk az írásvédett bejelentési csatornák létrehozásáról](https://www.mattermost.com/docs-channel-moderation/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=channel-moderation)\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Amikor rengeteg beszélgetés folyik az egész Matterfosson, kihívást jelenthet tudni, hogy hol keressünk fontos információkat. Ha nagy közönségnek szeretne üzenetet küldeni, beállíthat írásvédett bejelentési csatornákat, ahová bárki csatlakozhat, de csak a csatornák rendszergazdái küldhetnek üzeneteket.\n\n[További információk az írásvédett bejelentési csatornák létrehozásáról](https://www.matterfoss.com/docs-channel-moderation/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=channel-moderation)\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_300.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. Szeretnék többet megtudni az írásvédett bejelentési csatornák létrehozásáról.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. Szeretnék többet megtudni az írásvédett bejelentési csatornák létrehozásáról.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_success.message",
@@ -6317,19 +6317,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.start_trial.notification_body",
-    "translation": "A Mattermost rendszerének most 200 felhasználója van. Amikor összekapcsolja Mattermostot és a szervezete egyszeri bejelentkezési szolgáltatóját, a felhasználók anélkül érhetik el a Mattermostot, hogy újra meg kellene adniuk hitelesítő adataikat. Javasoljuk, hogy integrálja SAML 2.0 szolgáltatóját a Mattermost szerverével. [Tudjon meg többet a SAML 2.0 integrációról](https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml).\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "A Matterfoss rendszerének most 200 felhasználója van. Amikor összekapcsolja Matterfossot és a szervezete egyszeri bejelentkezési szolgáltatóját, a felhasználók anélkül érhetik el a Matterfossot, hogy újra meg kellene adniuk hitelesítő adataikat. Javasoljuk, hogy integrálja SAML 2.0 szolgáltatóját a Matterfoss szerverével. [Tudjon meg többet a SAML 2.0 integrációról](https://www.matterfoss.com/docs-saml/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=saml).\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_title",
-    "translation": "Méretezés a Mattermost segítségével"
+    "translation": "Méretezés a Matterfoss segítségével"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "A Mattermost rendszerének most 200 felhasználója van. Amikor összekapcsolja Mattermostot és a szervezete egyszeri bejelentkezési szolgáltatóját, a felhasználók anélkül érhetik el a Mattermostot, hogy újra meg kellene adniuk hitelesítő adataikat. Javasoljuk, hogy integrálja SAML 2.0 szolgáltatóját a Mattermost szerverével. [Tudjon meg többet a SAML 2.0 integrációról](https://www.mattermost.com/docs-saml/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=saml).\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "A Matterfoss rendszerének most 200 felhasználója van. Amikor összekapcsolja Matterfossot és a szervezete egyszeri bejelentkezési szolgáltatóját, a felhasználók anélkül érhetik el a Matterfossot, hogy újra meg kellene adniuk hitelesítő adataikat. Javasoljuk, hogy integrálja SAML 2.0 szolgáltatóját a Matterfoss szerverével. [Tudjon meg többet a SAML 2.0 integrációról](https://www.matterfoss.com/docs-saml/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=saml).\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvétele kérés. A csapatomnak már 200 felhasználója van, és fontolóra veszem a Mattermost Enterprise kiadást.\n"
+    "translation": "Matterfoss kapcsolat felvétele kérés. A csapatomnak már 200 felhasználója van, és fontolóra veszem a Matterfoss Enterprise kiadást.\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_success.message",
@@ -6337,19 +6337,19 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.start_trial.notification_body",
-    "translation": "A Mattermost rendszerének több mint 100 felhasználója van. Ahogyan a felhasználói bázisa növekszik az új fiókok létrehozása időigényessé válhat. Javasoljuk, hogy integrálja vállalata Active Directory/LDAP-ját amely lehetővé teszi, hogy bárki, akinek van fiókja hozzáférjen a Mattermosthoz.\n\n[További információ az AD/LDAP integrációról](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "A Matterfoss rendszerének több mint 100 felhasználója van. Ahogyan a felhasználói bázisa növekszik az új fiókok létrehozása időigényessé válhat. Javasoljuk, hogy integrálja vállalata Active Directory/LDAP-ját amely lehetővé teszi, hogy bárki, akinek van fiókja hozzáférjen a Matterfosshoz.\n\n[További információ az AD/LDAP integrációról](https://www.matterfoss.com/docs-adldap/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
-    "translation": "Méretezés a Mattermost segítségével"
+    "translation": "Méretezés a Matterfoss segítségével"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "A Mattermost rendszerének több mint 100 felhasználója van. Ahogyan a felhasználói bázisa növekszik az új fiókok létrehozása időigényessé válhat. Javasoljuk, hogy integrálja vállalata Active Directory/LDAP-ját amely lehetővé teszi, hogy bárki, akinek van fiókja hozzáférjen a Mattermosthoz.\n\n[További információk az AD/LDAP integrációról](https://www.mattermost.com/docs-adldap/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\nA Kapcsolat felvételi gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "A Matterfoss rendszerének több mint 100 felhasználója van. Ahogyan a felhasználói bázisa növekszik az új fiókok létrehozása időigényessé válhat. Javasoljuk, hogy integrálja vállalata Active Directory/LDAP-ját amely lehetővé teszi, hogy bárki, akinek van fiókja hozzáférjen a Matterfosshoz.\n\n[További információk az AD/LDAP integrációról](https://www.matterfoss.com/docs-adldap/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)\n\nA Kapcsolat felvételi gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. A csapatomnak már 100 felhasználója van, és fontolóra veszem a Mattermost Enterprise kiadást.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. A csapatomnak már 100 felhasználója van, és fontolóra veszem a Matterfoss Enterprise kiadást.\n"
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial_notification_success.message",
@@ -6357,7 +6357,7 @@
   },
   {
     "id": "api.server.warn_metric.mfa.start_trial.notification_body",
-    "translation": "Az Ön Mattermost rendszerében engedélyezve van a többtényezős hitelesítés, amely lehetővé teszi a felhasználók számára, hogy a jelszavukon felül további hitelesítéssel biztosítsák fiókjukat. A rendszer biztonságának javítása érdekében megkövetelheti az összes Mattermost fióktól, hogy többtényezős hitelesítést használjanak.\n\n[További információ a többtényezős hitelesítés kényszerítéséről](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "Az Ön Matterfoss rendszerében engedélyezve van a többtényezős hitelesítés, amely lehetővé teszi a felhasználók számára, hogy a jelszavukon felül további hitelesítéssel biztosítsák fiókjukat. A rendszer biztonságának javítása érdekében megkövetelheti az összes Matterfoss fióktól, hogy többtényezős hitelesítést használjanak.\n\n[További információ a többtényezős hitelesítés kényszerítéséről](https://www.matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=multi-factor-authentication)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.mfa.notification_title",
@@ -6365,11 +6365,11 @@
   },
   {
     "id": "api.server.warn_metric.mfa.notification_body",
-    "translation": "Az Ön Mattermost rendszerében engedélyezve van a többtényezős hitelesítés, amely lehetővé teszi a felhasználók számára, hogy a jelszavukon felül további hitelesítési eszközökkel biztosítsák fiókjukat. A rendszer biztonságának javítása érdekében megkövetelheti az összes Mattermost fióktól, hogy többtényezős hitelesítést használjanak.\n\n[További információk a többtényezős hitelesítés kényszerítéséről](https://www.mattermost.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=multi-factor-authentication).\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Az Ön Matterfoss rendszerében engedélyezve van a többtényezős hitelesítés, amely lehetővé teszi a felhasználók számára, hogy a jelszavukon felül további hitelesítési eszközökkel biztosítsák fiókjukat. A rendszer biztonságának javítása érdekében megkövetelheti az összes Matterfoss fióktól, hogy többtényezős hitelesítést használjanak.\n\n[További információk a többtényezős hitelesítés kényszerítéséről](https://www.matterfoss.com/docs-multi-factor-authentication/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=multi-factor-authentication).\n\nA Kapcsolat felvétele gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.mfa.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. Szeretnék többet megtudni a többtényezős hitelesítés kényszerítéséről.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. Szeretnék többet megtudni a többtényezős hitelesítés kényszerítéséről.\n"
   },
   {
     "id": "api.server.warn_metric.email_us",
@@ -6381,7 +6381,7 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.start_trial.notification_body",
-    "translation": "A projektek gyakran érintenek vállalaton belüli és kívüli embereket egyaránt. A Vendégfiókok segítségével külső partnereket vonhat be a Mattermost rendszerébe, és meghatározhatja, kivel dolgozhatnak és mit láthatnak.\n\n[További információ a vendégfiókok engedélyezéséről](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Mattermost szoftver felhasználási megállapodást](https://mattermost.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://mattermost.com/privacy-policy/), valamint termék e-mailek fogadását."
+    "translation": "A projektek gyakran érintenek vállalaton belüli és kívüli embereket egyaránt. A Vendégfiókok segítségével külső partnereket vonhat be a Matterfoss rendszerébe, és meghatározhatja, kivel dolgozhatnak és mit láthatnak.\n\n[További információ a vendégfiókok engedélyezéséről](https://www.matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=guest-accounts)\n\nA Próbaidőszak indítása gombra kattintva elfogadom a [Matterfoss szoftver felhasználási megállapodást](https://matterfoss.com/software-evaluation-agreement/), az [Adatvédelmi irányelveket](https://matterfoss.com/privacy-policy/), valamint termék e-mailek fogadását."
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_title",
@@ -6389,19 +6389,19 @@
   },
   {
     "id": "api.server.warn_metric.email_domain.notification_body",
-    "translation": "A projektek gyakran érintenek vállalaton belüli és kívüli embereket egyaránt. A Vendégfiókok segítségével külső partnereket vonhat be a Mattermost rendszerébe, és meghatározhatja, kivel dolgozhatnak és mit láthatnak.\n\n[További információ a vendégfiókok engedélyezéséről](https://www.mattermost.com/docs-guest-accounts/?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=guest-accounts).\n\nA Kapcsolat felvétel gombra kattintva megosztja adatait a Mattermost, Inc.-vel. [További információk](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "A projektek gyakran érintenek vállalaton belüli és kívüli embereket egyaránt. A Vendégfiókok segítségével külső partnereket vonhat be a Matterfoss rendszerébe, és meghatározhatja, kivel dolgozhatnak és mit láthatnak.\n\n[További információ a vendégfiókok engedélyezéséről](https://www.matterfoss.com/docs-guest-accounts/?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=guest-accounts).\n\nA Kapcsolat felvétel gombra kattintva megosztja adatait a Matterfoss, Inc.-vel. [További információk](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.email_domain.contact_us.email_body",
-    "translation": "Mattermost kapcsolat felvételi kérés. Szeretnék többet megtudni a vendégfiókok használatáról.\n"
+    "translation": "Matterfoss kapcsolat felvételi kérés. Szeretnék többet megtudni a vendégfiókok használatáról.\n"
   },
   {
     "id": "api.server.warn_metric.bot_response.start_trial_failure.message",
-    "translation": "A próba licenct nem lehet lekérni. Látogasson el a https://mattermost.com/trial/ címre egy licenc kéréséhez."
+    "translation": "A próba licenct nem lehet lekérni. Látogasson el a https://matterfoss.com/trial/ címre egy licenc kéréséhez."
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "Köszönjük, hogy felvette a kapcsolatot a Mattermost-tal. Hamarosan jelentkezni fogunk."
+    "translation": "Köszönjük, hogy felvette a kapcsolatot a Matterfoss-tal. Hamarosan jelentkezni fogunk."
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -6413,7 +6413,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Mattermost kapcsolat felvételi kérelem"
+    "translation": "Matterfoss kapcsolat felvételi kérelem"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -6425,7 +6425,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "Ha további kérdése van, forduljon a support@mattermost.com e-mail címhez"
+    "translation": "Ha további kérdése van, forduljon a support@matterfoss.com e-mail címhez"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -7060,7 +7060,7 @@
   },
   {
     "id": "api.command_share.invite_remote.help",
-    "translation": "Meghív egy külső Mattermost példányt az aktuális megosztott csatornára"
+    "translation": "Meghív egy külső Matterfoss példányt az aktuális megosztott csatornára"
   },
   {
     "id": "api.command_share.invitation_sent",
@@ -7092,7 +7092,7 @@
   },
   {
     "id": "api.templates.copyright",
-    "translation": "© 2021 Mattermost, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
+    "translation": "© 2021 Matterfoss, Inc. 530 Lytton Avenue, Second floor, Palo Alto, CA, 94301"
   },
   {
     "id": "api.templates.cloud_welcome_email.title",
@@ -7128,7 +7128,7 @@
   },
   {
     "id": "api.command_share.desc",
-    "translation": "Megosztja az aktuális csatornát egy külső Mattermost példánnyal."
+    "translation": "Megosztja az aktuális csatornát egy külső Matterfoss példánnyal."
   },
   {
     "id": "api.command_share.could_not_uninvite.error",
@@ -7300,7 +7300,7 @@
   },
   {
     "id": "api.command_remote.invite_summary",
-    "translation": "Küldje el a következő AES 256 bites titkosított meghívót a külső Mattermost rendszer rendszergazdának a jelszóval együtt. A meghívás elfogadásához a `{{.Command}}` perjel parancsot fogják használni.\n\n```\n{{.Invitation}}\n```\n\n**Győződjön meg róla, hogy a biztonságos kapcsolat a** {{.SiteURL}} **cím segítségével érheti el az Ön Mattermost példányát.**"
+    "translation": "Küldje el a következő AES 256 bites titkosított meghívót a külső Matterfoss rendszer rendszergazdának a jelszóval együtt. A meghívás elfogadásához a `{{.Command}}` perjel parancsot fogják használni.\n\n```\n{{.Invitation}}\n```\n\n**Győződjön meg róla, hogy a biztonságos kapcsolat a** {{.SiteURL}} **cím segítségével érheti el az Ön Matterfoss példányát.**"
   },
   {
     "id": "api.command_remote.invite_password.hint",
@@ -7352,7 +7352,7 @@
   },
   {
     "id": "api.command_remote.desc",
-    "translation": "Hívjon meg biztonságos kapcsolatokat a Mattermost példányok közötti kommunikációhoz."
+    "translation": "Hívjon meg biztonságos kapcsolatokat a Matterfoss példányok közötti kommunikációhoz."
   },
   {
     "id": "api.command_remote.decode_invitation.error",
@@ -7544,7 +7544,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "Küldjön egy e-mail meghívót az Ön Mattermost csapatának"
+    "translation": "Küldjön egy e-mail meghívót az Ön Matterfoss csapatának"
   },
   {
     "id": "api.command.execute_command.start.app_error",
@@ -7872,7 +7872,7 @@
   },
   {
     "id": "api.bot.teams_channels.add_message_mobile",
-    "translation": "Kérem, adjon hozzá azokhoz a csapatokhoz és csatornákhoz, amelyekben szeretné, hogy részt vegyek. Ehhez használjon egy böngészőt vagy a Mattermost alkalmazást."
+    "translation": "Kérem, adjon hozzá azokhoz a csapatokhoz és csatornákhoz, amelyekben szeretné, hogy részt vegyek. Ehhez használjon egy böngészőt vagy a Matterfoss alkalmazást."
   },
   {
     "id": "api.bot.create_disabled",
@@ -8174,15 +8174,15 @@
   },
   {
     "id": "api.license.request_trial_license.no-site-url.app_error",
-    "translation": "Nem kérhető próba licenc. Kérjük, konfigurálja a Rendszer URL-jét a Mattermost Rendszerkonzol webkiszolgáló részében."
+    "translation": "Nem kérhető próba licenc. Kérjük, konfigurálja a Rendszer URL-jét a Matterfoss Rendszerkonzol webkiszolgáló részében."
   },
   {
     "id": "api.license.request_trial_license.fail_get_user_count.app_error",
-    "translation": "Nem sikerült megszerezni a próba licencet, kérjük próbálkozzon újra, vagy írjon a support@mattermost.com címre. Nem lehet lekérni a regisztrált felhasználók számát."
+    "translation": "Nem sikerült megszerezni a próba licencet, kérjük próbálkozzon újra, vagy írjon a support@matterfoss.com címre. Nem lehet lekérni a regisztrált felhasználók számát."
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "Nem sikerült megszerezni a próba licencet, kérjük próbálkozzon újra, vagy írjon a support@mattermost.com címre."
+    "translation": "Nem sikerült megszerezni a próba licencet, kérjük próbálkozzon újra, vagy írjon a support@matterfoss.com címre."
   },
   {
     "id": "api.license.request_renewal_link.app_error",
@@ -8190,7 +8190,7 @@
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "A licenc igényléséhez el kell fogadnia a Mattermost szoftver használati megállapodását és az adatvédelmi irányelveit."
+    "translation": "A licenc igényléséhez el kell fogadnia a Matterfoss szoftver használati megállapodását és az adatvédelmi irányelveit."
   },
   {
     "id": "api.license.request-trial.bad-request",
@@ -8350,7 +8350,7 @@
   },
   {
     "id": "api.command_remote.accept.help",
-    "translation": "Fogadja el egy külső Mattermost példány meghívását"
+    "translation": "Fogadja el egy külső Matterfoss példány meghívását"
   },
   {
     "id": "api.command_open.name",
@@ -8402,7 +8402,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "Nem található a megadott csatorna. A csatornák azonosításához használja a [csatorna azonosítót](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)."
+    "translation": "Nem található a megadott csatorna. A csatornák azonosításához használja a [csatorna azonosítót](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel)."
   },
   {
     "id": "api.command_mute.name",
@@ -8414,7 +8414,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "Nem sikerült megtalálni a {{.Channel}} csatornát. A csatornák azonosításához használja a [csatorna azonosítót](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)."
+    "translation": "Nem sikerült megtalálni a {{.Channel}} csatornát. A csatornák azonosításához használja a [csatorna azonosítót](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel)."
   },
   {
     "id": "api.command_mute.desc",
@@ -8466,7 +8466,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "Kijelentkezés a Mattermostból"
+    "translation": "Kijelentkezés a Matterfossból"
   },
   {
     "id": "api.command_leave.name",
@@ -8566,7 +8566,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "Nem sikerült megtalálni a {{.Channel}} csatornát. A csatornák azonosításához használja a [csatorna azonosítót](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)."
+    "translation": "Nem sikerült megtalálni a {{.Channel}} csatornát. A csatornák azonosításához használja a [csatorna azonosítót](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel)."
   },
   {
     "id": "api.command_invite.channel.app_error",
@@ -8578,7 +8578,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "Mattermost súgó oldal megnyitása"
+    "translation": "Matterfoss súgó oldal megnyitása"
   },
   {
     "id": "api.command_groupmsg.permission.app_error",
@@ -8697,7 +8697,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Mattermost - E-mail beállítások tesztelése"
+    "translation": "Matterfoss - E-mail beállítások tesztelése"
   },
   {
     "id": "api.admin.test_email.reenter_password",
@@ -8709,7 +8709,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "Úgy tűnik a Mattermost e-mail helyesen van beállítva!"
+    "translation": "Úgy tűnik a Matterfoss e-mail helyesen van beállítva!"
   },
   {
     "id": "api.admin.saml.set_certificate_from_metadata.missing_content_type.app_error",
@@ -8853,7 +8853,7 @@
   },
   {
     "id": "app.notification.footer.infoLogin",
-    "translation": "Bejelentkezés a Mattermostba"
+    "translation": "Bejelentkezés a Matterfossba"
   },
   {
     "id": "app.notification.footer.info",
@@ -8885,15 +8885,15 @@
   },
   {
     "id": "api.templates.cloud_trial_ended_email.title",
-    "translation": "A Mattermost 14 napos ingyenes próbaverziója ma lejárt"
+    "translation": "A Matterfoss 14 napos ingyenes próbaverziója ma lejárt"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subtitle",
-    "translation": "{{.Name}}, a Mattermost Cloud Enterprise 14 napos ingyenes próbaverziója ma lejárt, {{.TodayDate}}. Kérjük adja hozzá fizetési adatait, hogy csapata továbbra is élvezhesse a Cloud Enterprise előnyeit. Ha 30 napon belül nem adja meg a fizetési adatait, a Cloud munkaterületét véglegesen töröljük, és a kapcsolódó adatokat elveszíti."
+    "translation": "{{.Name}}, a Matterfoss Cloud Enterprise 14 napos ingyenes próbaverziója ma lejárt, {{.TodayDate}}. Kérjük adja hozzá fizetési adatait, hogy csapata továbbra is élvezhesse a Cloud Enterprise előnyeit. Ha 30 napon belül nem adja meg a fizetési adatait, a Cloud munkaterületét véglegesen töröljük, és a kapcsolódó adatokat elveszíti."
   },
   {
     "id": "api.templates.cloud_trial_ended_email.subject",
-    "translation": "Mattermost cloud próbaidőszak véget ért"
+    "translation": "Matterfoss cloud próbaidőszak véget ért"
   },
   {
     "id": "api.templates.cloud_trial_ended_email.start_subscription",
@@ -8909,7 +8909,7 @@
   },
   {
     "id": "api.email_batching.send_batched_email_notification.button",
-    "translation": "Mattermost megnyitása"
+    "translation": "Matterfoss megnyitása"
   },
   {
     "id": "api.command_channel_purpose.update_channel.max_length",
@@ -8977,7 +8977,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} ki lett kapcsolva. A következő bot fiókokat kezelték, amelyek le lettek tiltva.\n\n{{.BotNames}}{{else}}{{.UserName}} tiltásra került. Ők kezeltek {{.NumBots}} botfiókot, amelyek le lettek tiltva, beleértve a következőket:\n\n{{.BotNames}}{{end}}Az egyes botok tulajdonjogát úgy veheti át, hogy engedélyezi őket az **Integrációk > Botfiókok** menüpontban, és új tokeneket hoz létre a bothoz.\n\nTovábbi információért lásd a [dokumentációnkat](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} letiltásra került. A következő botfiókokat kezelték, amelyek még mindig engedélyezve vannak.\n\n{{.BotNames}}\n{{else}}{{.UserName}} letiltásra került. Ők kezelték a még mindig engedélyezett {{.NumBots}} botfiókokat, köztük a következőket:\n\n{{.BotNames}}{{end}}Nyomatékosan javasoljuk, hogy vegye tulajdonába az egyes botokat, és engedélyezze újra a **Integrációk > Botfiókok** menüpontban, és hozzon létre új tokeneket a bothoz.\n\nTovábbi információért lásd a [dokumentációnkat](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nHa azt szeretné, hogy a botfiókok automatikusan kikapcsolódjanak a tulajdonos litáltása után, állítsa a **Rendszerkonzol > Integrációk > Botfiókok** pontban a \"Botfiókok kikapcsolása, ha a tulajdonos letiltásra kerül\" opciót igazra.{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} ki lett kapcsolva. A következő bot fiókokat kezelték, amelyek le lettek tiltva.\n\n{{.BotNames}}{{else}}{{.UserName}} tiltásra került. Ők kezeltek {{.NumBots}} botfiókot, amelyek le lettek tiltva, beleértve a következőket:\n\n{{.BotNames}}{{end}}Az egyes botok tulajdonjogát úgy veheti át, hogy engedélyezi őket az **Integrációk > Botfiókok** menüpontban, és új tokeneket hoz létre a bothoz.\n\nTovábbi információért lásd a [dokumentációnkat](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).{{else}}{{if .printAllBots}}{{.UserName}} letiltásra került. A következő botfiókokat kezelték, amelyek még mindig engedélyezve vannak.\n\n{{.BotNames}}\n{{else}}{{.UserName}} letiltásra került. Ők kezelték a még mindig engedélyezett {{.NumBots}} botfiókokat, köztük a következőket:\n\n{{.BotNames}}{{end}}Nyomatékosan javasoljuk, hogy vegye tulajdonába az egyes botokat, és engedélyezze újra a **Integrációk > Botfiókok** menüpontban, és hozzon létre új tokeneket a bothoz.\n\nTovábbi információért lásd a [dokumentációnkat](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled).\n\nHa azt szeretné, hogy a botfiókok automatikusan kikapcsolódjanak a tulajdonos litáltása után, állítsa a **Rendszerkonzol > Integrációk > Botfiókok** pontban a \"Botfiókok kikapcsolása, ha a tulajdonos letiltásra kerül\" opciót igazra.{{end}}"
   },
   {
     "id": "api.user.upload_profile_user.check_image_limits.app_error",
@@ -8989,7 +8989,7 @@
   },
   {
     "id": "api.user.update_active.cloud_at_limit_check_error",
-    "translation": "Nem lehet ellenőrizni a felhasználók számát a Mattermost cloud telepítésben."
+    "translation": "Nem lehet ellenőrizni a felhasználók számát a Matterfoss cloud telepítésben."
   },
   {
     "id": "api.team.set_team_icon.check_image_limits.app_error",
@@ -9037,7 +9037,7 @@
   },
   {
     "id": "api.license.request-trial.can-start-trial.not-allowed",
-    "translation": "Ez a teszt kulcs a Mattermost Enterprise kiadáshoz lejárt és már nem érvényes. Ha szeretné meghosszabbítani a próba időszakot, kérjük [vegye fel a kapcsolatot értékesítési csapatunkkal](https://mattermost.com/contact-us/)."
+    "translation": "Ez a teszt kulcs a Matterfoss Enterprise kiadáshoz lejárt és már nem érvényes. Ha szeretné meghosszabbítani a próba időszakot, kérjük [vegye fel a kapcsolatot értékesítési csapatunkkal](https://matterfoss.com/contact-us/)."
   },
   {
     "id": "api.license.request-trial.can-start-trial.error",
@@ -9049,7 +9049,7 @@
   },
   {
     "id": "api.templates.license_up_for_renewal_subtitle",
-    "translation": "{{.UserName}}, az előfizetése le fog járni {{.Days}} nap múlva. Reméljük, hogy megtapasztalta a rugalmas, biztonságos csoport munkát, amit a Mattermost biztosít. Újítsa meg mielőbb az előfizetését, hogy a csapata biztosan tovább élvezhesse eme szolgáltatások nyújtotta előnyöket."
+    "translation": "{{.UserName}}, az előfizetése le fog járni {{.Days}} nap múlva. Reméljük, hogy megtapasztalta a rugalmas, biztonságos csoport munkát, amit a Matterfoss biztosít. Újítsa meg mielőbb az előfizetését, hogy a csapata biztosan tovább élvezhesse eme szolgáltatások nyújtotta előnyöket."
   },
   {
     "id": "api.server.license_up_for_renewal.error_sending_email",
@@ -9057,7 +9057,7 @@
   },
   {
     "id": "api.templates.license_up_for_renewal_title",
-    "translation": "A Mattermost előfizetése megújításra szorul"
+    "translation": "A Matterfoss előfizetése megújításra szorul"
   },
   {
     "id": "api.templates.license_up_for_renewal_subtitle_two",
@@ -9333,15 +9333,15 @@
   },
   {
     "id": "api.templates.server_inactivity_button",
-    "translation": "Mattermost megnyitása"
+    "translation": "Matterfoss megnyitása"
   },
   {
     "id": "api.templates.server_inactivity_subtitle",
-    "translation": "Helló {{.Name}}, észrevettük, hogy a Mattermost szervered egy kicsit porosodik. Vess egy pillantást néhány funkcióra, amelyek segíthetnek könnyíteni csapatod munkaterhét."
+    "translation": "Helló {{.Name}}, észrevettük, hogy a Matterfoss szervered egy kicsit porosodik. Vess egy pillantást néhány funkcióra, amelyek segíthetnek könnyíteni csapatod munkaterhét."
   },
   {
     "id": "api.templates.server_inactivity_subject",
-    "translation": "ÜDV! Nyissa meg a Mattermostot, hogy növelje csapata termelékenységét!"
+    "translation": "ÜDV! Nyissa meg a Matterfossot, hogy növelje csapata termelékenységét!"
   },
   {
     "id": "api.templates.server_inactivity_title",
@@ -9380,7 +9380,7 @@
     "translation": "Az előre becsomagolt plugin verzióját nem lehetett értelmezni."
   },
   {
-    "id": "model.oauth.is_valid.mattermost_app_id.app_error",
-    "translation": "A MattermostAppID maximális hossza 32 karakter."
+    "id": "model.oauth.is_valid.matterfoss_app_id.app_error",
+    "translation": "A MatterfossAppID maximális hossza 32 karakter."
   }
 ]

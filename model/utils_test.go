@@ -885,7 +885,7 @@ func TestIsValidHTTPURL(t *testing.T) {
 		},
 		{
 			"url with invalid scheme",
-			"http-bad://mattermost.com",
+			"http-bad://matterfoss.org",
 			false,
 		},
 		{
@@ -900,17 +900,17 @@ func TestIsValidHTTPURL(t *testing.T) {
 		},
 		{
 			"url with extra slashes",
-			"https:///mattermost.com",
+			"https:///matterfoss.org",
 			false,
 		},
 		{
 			"correct url with http scheme",
-			"http://mattermost.com",
+			"http://matterfoss.org",
 			true,
 		},
 		{
 			"correct url with https scheme",
-			"https://mattermost.com/api/test",
+			"https://matterfoss.org/api/test",
 			true,
 		},
 		{
@@ -920,12 +920,12 @@ func TestIsValidHTTPURL(t *testing.T) {
 		},
 		{
 			"correct url without scheme",
-			"mattermost.com/some/url/",
+			"matterfoss.org/some/url/",
 			false,
 		},
 		{
 			"correct url with extra slashes",
-			"https://mattermost.com/some//url",
+			"https://matterfoss.org/some//url",
 			true,
 		},
 	}

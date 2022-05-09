@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 func TestOAuthStore(t *testing.T, ss store.Store) {
@@ -49,13 +49,13 @@ func testOAuthStoreSaveApp(t *testing.T, ss store.Store) {
 	require.Error(t, err, "Should have failed, app should be invalid cause it doesn' have a name set")
 
 	a1.Name = "TestApp" + model.NewId() // Valid name
-	a1.MattermostAppID = "a very, very, very, very, very, very, very long id"
+	a1.MatterfossAppID = "a very, very, very, very, very, very, very long id"
 	_, err = ss.OAuth().SaveApp(&a1)
-	require.Error(t, err, "Should have failed, app should be invalid cause the MattermostAppID is to long")
+	require.Error(t, err, "Should have failed, app should be invalid cause the MatterfossAppID is to long")
 
 	// Save the app
 	a1.Id = ""
-	a1.MattermostAppID = "some small id" // Valid id
+	a1.MatterfossAppID = "some small id" // Valid id
 	_, err = ss.OAuth().SaveApp(&a1)
 	require.NoError(t, err)
 }

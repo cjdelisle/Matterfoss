@@ -12,8 +12,8 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 type SqlRoleStore struct {
@@ -338,7 +338,7 @@ func (s *SqlRoleStore) channelHigherScopedPermissionsQuery(roleNames []string) s
 	`
 
 	// The below three channel role names are referenced by their name value because there is no system scheme
-	// record that ships with Mattermost, otherwise the system scheme would be referenced by name and the channel
+	// record that ships with Matterfoss, otherwise the system scheme would be referenced by name and the channel
 	// roles would be referenced by their column names.
 	return fmt.Sprintf(
 		sqlTmpl,

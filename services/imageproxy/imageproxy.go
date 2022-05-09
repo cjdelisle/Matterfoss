@@ -11,15 +11,15 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/configservice"
-	"github.com/mattermost/mattermost-server/v6/services/httpservice"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/configservice"
+	"github.com/cjdelisle/matterfoss-server/v6/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 var ErrNotEnabled = Error{errors.New("imageproxy.ImageProxy: image proxy not enabled")}
 
-// An ImageProxy is the public interface for Mattermost's image proxy. An instance of ImageProxy should be created
+// An ImageProxy is the public interface for Matterfoss's image proxy. An instance of ImageProxy should be created
 // using MakeImageProxy which requires a configService and an HTTPService provided by the server.
 type ImageProxy struct {
 	ConfigService    configservice.ConfigService

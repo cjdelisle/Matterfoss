@@ -17,11 +17,11 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 type slackChannel struct {
@@ -96,7 +96,7 @@ type Actions struct {
 	PrepareImage           func(fileData []byte) (image.Image, func(), error)
 }
 
-// SlackImporter is a service that allows to import slack dumps into mattermost
+// SlackImporter is a service that allows to import slack dumps into matterfoss
 type SlackImporter struct {
 	store   store.Store
 	actions Actions
@@ -305,7 +305,7 @@ func (si *SlackImporter) slackAddPosts(teamId string, channel *model.Channel, po
 				continue
 			}
 			if users[sPost.User] == nil {
-				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Mattermost.", mlog.String("user", sPost.User))
+				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Matterfoss.", mlog.String("user", sPost.User))
 				continue
 			}
 			newPost := model.Post{
@@ -346,7 +346,7 @@ func (si *SlackImporter) slackAddPosts(teamId string, channel *model.Channel, po
 				continue
 			}
 			if users[sPost.Comment.User] == nil {
-				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Mattermost.", mlog.String("user", sPost.User))
+				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Matterfoss.", mlog.String("user", sPost.User))
 				continue
 			}
 			newPost := model.Post{
@@ -391,7 +391,7 @@ func (si *SlackImporter) slackAddPosts(teamId string, channel *model.Channel, po
 				continue
 			}
 			if users[sPost.User] == nil {
-				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Mattermost.", mlog.String("user", sPost.User))
+				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Matterfoss.", mlog.String("user", sPost.User))
 				continue
 			}
 
@@ -419,7 +419,7 @@ func (si *SlackImporter) slackAddPosts(teamId string, channel *model.Channel, po
 				continue
 			}
 			if users[sPost.User] == nil {
-				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Mattermost.", mlog.String("user", sPost.User))
+				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Matterfoss.", mlog.String("user", sPost.User))
 				continue
 			}
 			newPost := model.Post{
@@ -439,7 +439,7 @@ func (si *SlackImporter) slackAddPosts(teamId string, channel *model.Channel, po
 				continue
 			}
 			if users[sPost.User] == nil {
-				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Mattermost.", mlog.String("user", sPost.User))
+				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Matterfoss.", mlog.String("user", sPost.User))
 				continue
 			}
 			newPost := model.Post{
@@ -456,7 +456,7 @@ func (si *SlackImporter) slackAddPosts(teamId string, channel *model.Channel, po
 				continue
 			}
 			if users[sPost.User] == nil {
-				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Mattermost.", mlog.String("user", sPost.User))
+				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Matterfoss.", mlog.String("user", sPost.User))
 				continue
 			}
 			newPost := model.Post{
@@ -473,7 +473,7 @@ func (si *SlackImporter) slackAddPosts(teamId string, channel *model.Channel, po
 				continue
 			}
 			if users[sPost.User] == nil {
-				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Mattermost.", mlog.String("user", sPost.User))
+				mlog.Debug("Slack Import: Unable to add the message as the Slack user does not exist in Matterfoss.", mlog.String("user", sPost.User))
 				continue
 			}
 			newPost := model.Post{

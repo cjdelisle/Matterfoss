@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 type cleanUpFn func(store *Store)
@@ -65,10 +65,10 @@ func TestMigrate(t *testing.T) {
 			files[4],
 		}
 		cfg.SqlSettings.DataSourceReplicas = []string{
-			"mysql://mmuser:password@tcp(replicahost:3306)/mattermost",
+			"mysql://mmuser:password@tcp(replicahost:3306)/matterfoss",
 		}
 		cfg.SqlSettings.DataSourceSearchReplicas = []string{
-			"mysql://mmuser:password@tcp(searchreplicahost:3306)/mattermost",
+			"mysql://mmuser:password@tcp(searchreplicahost:3306)/matterfoss",
 		}
 
 		_, _, err := source.Set(cfg)

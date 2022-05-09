@@ -14,7 +14,7 @@ import (
 	"github.com/uber/jaeger-client-go/zipkin"
 	"github.com/uber/jaeger-lib/metrics"
 
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 // Tracer is a wrapper around Jaeger OpenTracing client, used to properly de-initialize jaeger on exit
@@ -51,7 +51,7 @@ func New() (*Tracer, error) {
 	zipkinPropagator := zipkin.NewZipkinB3HTTPHeaderPropagator()
 
 	closer, err := cfg.InitGlobalTracer(
-		"mattermost",
+		"matterfoss",
 		jaegercfg.Logger(LogrusAdapter{}),
 		jaegercfg.Metrics(metrics.NullFactory),
 		jaegercfg.Tag("serverStartTime", time.Now().UTC().Format(time.RFC3339)),

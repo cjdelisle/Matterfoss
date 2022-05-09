@@ -21,12 +21,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/db"
-	"github.com/mattermost/mattermost-server/v6/einterfaces/mocks"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/searchtest"
-	"github.com/mattermost/mattermost-server/v6/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/db"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/searchtest"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
 )
 
 type storeType struct {
@@ -711,20 +711,20 @@ func TestAppendMultipleStatementsFlagMysql(t *testing.T) {
 	}{
 		{
 			"Should append multiStatements param to the DSN path with existing params",
-			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost?writeTimeout=30s",
-			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost?writeTimeout=30s&multiStatements=true",
+			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/matterfoss?writeTimeout=30s",
+			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/matterfoss?writeTimeout=30s&multiStatements=true",
 			model.DatabaseDriverMysql,
 		},
 		{
 			"Should append multiStatements param to the DSN path with no existing params",
-			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost",
-			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost?multiStatements=true",
+			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/matterfoss",
+			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/matterfoss?multiStatements=true",
 			model.DatabaseDriverMysql,
 		},
 		{
 			"Should not multiStatements param to the DSN when driver is not MySQL",
-			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost",
-			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/mattermost",
+			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/matterfoss",
+			"user:rand?&ompasswith@character@unix(/var/run/mysqld/mysqld.sock)/matterfoss",
 			model.DatabaseDriverPostgres,
 		},
 	}

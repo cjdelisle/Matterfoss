@@ -62,7 +62,7 @@
         "ExperimentalEnableHardenedMode": false
     },
     "TeamSettings": {
-        "SiteName": "Mattermost",
+        "SiteName": "Matterfoss",
         "MaxUsersPerTeam": 50,
         "EnableUserCreation": true,
         "EnableOpenServer": false,
@@ -88,7 +88,7 @@
     },
     "SqlSettings": {
         "DriverName": "mysql",
-        "DataSource": "mmuser:mostest@tcp(localhost:3306)/mattermost_test?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s",
+        "DataSource": "mmuser:mostest@tcp(localhost:3306)/matterfoss_test?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s",
         "DataSourceReplicas": [],
         "DataSourceSearchReplicas": [],
         "MaxIdleConns": 20,
@@ -180,12 +180,12 @@
         "ShowFullName": true
     },
     "SupportSettings": {
-        "TermsOfServiceLink": "https://mattermost.com/terms-of-use/",
-        "PrivacyPolicyLink": "https://mattermost.com/privacy-policy/",
-        "AboutLink": "https://mattermost.com/default-about/",
-        "HelpLink": "https://mattermost.com/default-help/",
-        "ReportAProblemLink": "https://mattermost.com/default-report-a-problem/",
-        "SupportEmail": "feedback@mattermost.com"
+        "TermsOfServiceLink": "https://matterfoss.com/terms-of-use/",
+        "PrivacyPolicyLink": "https://matterfoss.com/privacy-policy/",
+        "AboutLink": "https://matterfoss.com/default-about/",
+        "HelpLink": "https://matterfoss.com/default-help/",
+        "ReportAProblemLink": "https://matterfoss.com/default-report-a-problem/",
+        "SupportEmail": "feedback@matterfoss.com"
     },
     "AnnouncementSettings": {
         "EnableBanner": false,
@@ -292,9 +292,9 @@
         "LoginButtonTextColor": ""
     },
     "NativeAppSettings": {
-        "AppDownloadLink": "https://mattermost.com/download/",
-        "AndroidAppDownloadLink": "https://mattermost.com/mattermost-android-app/",
-        "IosAppDownloadLink": "https://mattermost.com/mattermost-ios-app/"
+        "AppDownloadLink": "https://matterfoss.com/download/",
+        "AndroidAppDownloadLink": "https://matterfoss.com/matterfoss-android-app/",
+        "IosAppDownloadLink": "https://matterfoss.com/matterfoss-ios-app/"
     },
     "ClusterSettings": {
         "Enable": false,

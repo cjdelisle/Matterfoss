@@ -9,9 +9,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 const (
@@ -19,7 +19,7 @@ const (
 	LogCompress             = true
 	LogRotateMaxAge         = 0
 	LogRotateMaxBackups     = 0
-	LogFilename             = "mattermost.log"
+	LogFilename             = "matterfoss.log"
 	LogNotificationFilename = "notifications.log"
 	LogMinLevelLen          = 5
 	LogMinMsgLen            = 45

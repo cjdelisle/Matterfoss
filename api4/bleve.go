@@ -6,8 +6,8 @@ package api4
 import (
 	"net/http"
 
-	"github.com/mattermost/mattermost-server/v6/audit"
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func (api *API) InitBleve() {

@@ -23,7 +23,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
 	"github.com/pborman/uuid"
 	"github.com/pkg/errors"
 )
@@ -80,7 +80,7 @@ func (sa StringArray) Value() (driver.Value, error) {
 	if err != nil {
 		return nil, err
 	}
-	// non utf8 characters are not supported https://mattermost.atlassian.net/browse/MM-41066
+	// non utf8 characters are not supported https://matterfoss.atlassian.net/browse/MM-41066
 	return string(j), err
 }
 
@@ -128,7 +128,7 @@ func (m StringMap) Value() (driver.Value, error) {
 	if err != nil {
 		return nil, err
 	}
-	// non utf8 characters are not supported https://mattermost.atlassian.net/browse/MM-41066
+	// non utf8 characters are not supported https://matterfoss.atlassian.net/browse/MM-41066
 	return string(j), err
 }
 
@@ -174,7 +174,7 @@ func (si StringInterface) Value() (driver.Value, error) {
 	if err != nil {
 		return nil, err
 	}
-	// non utf8 characters are not supported https://mattermost.atlassian.net/browse/MM-41066
+	// non utf8 characters are not supported https://matterfoss.atlassian.net/browse/MM-41066
 	return string(j), err
 }
 

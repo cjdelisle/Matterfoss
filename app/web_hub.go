@@ -11,8 +11,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (
@@ -48,7 +48,7 @@ type webConnCheckMessage struct {
 // user connections.
 type Hub struct {
 	// connectionCount should be kept first.
-	// See https://github.com/mattermost/mattermost-server/pull/7281
+	// See https://github.com/cjdelisle/matterfoss-server/pull/7281
 	connectionCount int64
 	srv             *Server
 	connectionIndex int
@@ -121,7 +121,7 @@ func (s *Server) HubStop() {
 func (s *Server) GetHubForUserId(userID string) *Hub {
 	// TODO: check if caching the userID -> hub mapping
 	// is worth the memory tradeoff.
-	// https://mattermost.atlassian.net/browse/MM-26629.
+	// https://matterfoss.atlassian.net/browse/MM-26629.
 	var hash maphash.Hash
 	hash.SetSeed(s.hashSeed)
 	hash.Write([]byte(userID))

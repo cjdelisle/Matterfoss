@@ -14,11 +14,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mail"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/shared/templates"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/templates"
 	"github.com/pkg/errors"
 
 	"github.com/microcosm-cc/bluemonday"
@@ -296,12 +296,12 @@ func (es *Service) SendCloudWelcomeEmail(userEmail, locale, teamInviteID, workSp
 	data.Props["AddAppsInfo"] = T("api.templates.cloud_welcome_email.add_apps_info")
 	data.Props["AddAppsSubInfo"] = T("api.templates.cloud_welcome_email.add_apps_sub_info")
 	data.Props["AppMarketPlace"] = T("api.templates.cloud_welcome_email.app_market_place")
-	data.Props["AppMarketPlaceLink"] = "https://integrations.mattermost.com/"
+	data.Props["AppMarketPlaceLink"] = "https://integrations.matterfoss.org/"
 	data.Props["DownloadMMInfo"] = T("api.templates.cloud_welcome_email.download_mm_info")
 	data.Props["SignInSubInfo"] = T("api.templates.cloud_welcome_email.signin_sub_info")
 	data.Props["MMApps"] = T("api.templates.cloud_welcome_email.mm_apps")
 	data.Props["SignInSubInfo2"] = T("api.templates.cloud_welcome_email.signin_sub_info2")
-	data.Props["DownloadMMAppsLink"] = "https://mattermost.com/download/"
+	data.Props["DownloadMMAppsLink"] = "https://matterfoss.org/download/"
 	data.Props["Button"] = T("api.templates.cloud_welcome_email.button")
 	data.Props["GettingStartedQuestions"] = T("api.templates.cloud_welcome_email.start_questions")
 
@@ -751,7 +751,7 @@ func (es *Service) SendAtUserLimitWarningEmail(email string, locale string, site
 	data.Props["Title"] = T("api.templates.at_limit_title")
 	data.Props["Info1"] = T("api.templates.at_limit_info1")
 	data.Props["Info2"] = T("api.templates.at_limit_info2")
-	data.Props["Button"] = T("api.templates.upgrade_mattermost_cloud")
+	data.Props["Button"] = T("api.templates.upgrade_matterfoss_cloud")
 	data.Props["EmailUs"] = T("api.templates.email_us_anytime_at")
 
 	data.Props["Footer"] = T("api.templates.copyright")
@@ -783,7 +783,7 @@ func (es *Service) SendLicenseInactivityEmail(email, name, locale, siteURL strin
 	data.Props["QuestionTitle"] = T("api.templates.questions_footer.title")
 	data.Props["QuestionInfo"] = T("api.templates.questions_footer.info")
 	data.Props["Button"] = T("api.templates.server_inactivity_button")
-	data.Props["SupportEmail"] = "feedback@mattermost.com"
+	data.Props["SupportEmail"] = "feedback@matterfoss.org"
 	data.Props["ButtonURL"] = siteURL
 	data.Props["Channels"] = T("Channels")
 	data.Props["Playbooks"] = T("Playbooks")
@@ -814,7 +814,7 @@ func (es *Service) SendLicenseUpForRenewalEmail(email, name, locale, siteURL, re
 	data.Props["Button"] = T("api.templates.license_up_for_renewal_renew_now")
 	data.Props["ButtonURL"] = renewalLink
 	data.Props["QuestionTitle"] = T("api.templates.questions_footer.title")
-	data.Props["SupportEmail"] = "feedback@mattermost.com"
+	data.Props["SupportEmail"] = "feedback@matterfoss.org"
 	data.Props["QuestionInfo"] = T("api.templates.questions_footer.info")
 
 	body, err := es.templatesContainer.RenderToString("license_up_for_renewal", data)
@@ -839,7 +839,7 @@ func (es *Service) SendUpgradeEmail(user, email, locale, siteURL, action string)
 	data.Props["Info5"] = T("api.templates.at_limit_info5")
 	data.Props["BillingPath"] = "admin_console/billing/subscription"
 	data.Props["SiteURL"] = siteURL
-	data.Props["Button"] = T("api.templates.upgrade_mattermost_cloud")
+	data.Props["Button"] = T("api.templates.upgrade_matterfoss_cloud")
 	data.Props["EmailUs"] = T("api.templates.email_us_anytime_at")
 	data.Props["Footer"] = T("api.templates.copyright")
 
@@ -873,7 +873,7 @@ func (es *Service) SendOverUserLimitWarningEmail(email string, locale string, si
 	data.Props["Title"] = T("api.templates.over_limit_title")
 	data.Props["Info1"] = T("api.templates.over_limit_info1")
 	data.Props["Info2"] = T("api.templates.over_limit_info2")
-	data.Props["Button"] = T("api.templates.upgrade_mattermost_cloud")
+	data.Props["Button"] = T("api.templates.upgrade_matterfoss_cloud")
 	data.Props["EmailUs"] = T("api.templates.email_us_anytime_at")
 
 	data.Props["Footer"] = T("api.templates.copyright")

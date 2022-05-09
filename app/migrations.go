@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const EmojisPermissionsMigrationKey = "EmojisPermissionsMigrationComplete"
@@ -112,21 +112,21 @@ func (s *Server) doEmojisPermissionsMigration() {
 	// Emoji creation is set to all by default
 	role, err = s.GetRoleByName(context.Background(), model.SystemUserRoleId)
 	if err != nil {
-		mlog.Critical("Failed to migrate emojis creation permissions from mattermost config.", mlog.Err(err))
+		mlog.Critical("Failed to migrate emojis creation permissions from matterfoss config.", mlog.Err(err))
 		return
 	}
 
 	if role != nil {
 		role.Permissions = append(role.Permissions, model.PermissionCreateEmojis.Id, model.PermissionDeleteEmojis.Id)
 		if _, nErr := s.Store.Role().Save(role); nErr != nil {
-			mlog.Critical("Failed to migrate emojis creation permissions from mattermost config.", mlog.Err(nErr))
+			mlog.Critical("Failed to migrate emojis creation permissions from matterfoss config.", mlog.Err(nErr))
 			return
 		}
 	}
 
 	systemAdminRole, err = s.GetRoleByName(context.Background(), model.SystemAdminRoleId)
 	if err != nil {
-		mlog.Critical("Failed to migrate emojis creation permissions from mattermost config.", mlog.Err(err))
+		mlog.Critical("Failed to migrate emojis creation permissions from matterfoss config.", mlog.Err(err))
 		return
 	}
 
@@ -136,7 +136,7 @@ func (s *Server) doEmojisPermissionsMigration() {
 		model.PermissionDeleteOthersEmojis.Id,
 	)
 	if _, err := s.Store.Role().Save(systemAdminRole); err != nil {
-		mlog.Critical("Failed to migrate emojis creation permissions from mattermost config.", mlog.Err(err))
+		mlog.Critical("Failed to migrate emojis creation permissions from matterfoss config.", mlog.Err(err))
 		return
 	}
 

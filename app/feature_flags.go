@@ -8,8 +8,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/app/featureflag"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/app/featureflag"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 // setupFeatureFlags called on startup and when the cluster leader changes.

@@ -16,15 +16,15 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app"
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/config"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store/localcachelayer"
-	"github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store/localcachelayer"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 var apiClient *model.Client4
@@ -187,7 +187,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	th := Setup(t).InitPlugins()
 	defer th.TearDown()
 
-	pluginID := "com.mattermost.sample"
+	pluginID := "com.matterfoss.sample"
 
 	// Setup the directory directly in the plugin working path.
 	pluginDir := filepath.Join(*th.App.Config().PluginSettings.Directory, pluginID)
@@ -202,11 +202,11 @@ func TestStaticFilesRequest(t *testing.T) {
 	package main
 
 	import (
-		"github.com/mattermost/mattermost-server/v6/plugin"
+		"github.com/cjdelisle/matterfoss-server/v6/plugin"
 	)
 
 	type MyPlugin struct {
-		plugin.MattermostPlugin
+		plugin.MatterfossPlugin
 	}
 
 	func main() {
@@ -223,7 +223,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	require.NoError(t, err)
 
 	// Write the plugin.json manifest
-	pluginManifest := `{"id": "com.mattermost.sample", "server": {"executable": "backend.exe"}, "webapp": {"bundle_path":"main.js"}, "settings_schema": {"settings": []}}`
+	pluginManifest := `{"id": "com.matterfoss.sample", "server": {"executable": "backend.exe"}, "webapp": {"bundle_path":"main.js"}, "settings_schema": {"settings": []}}`
 	ioutil.WriteFile(filepath.Join(pluginDir, "plugin.json"), []byte(pluginManifest), 0600)
 
 	// Activate the plugin
@@ -233,7 +233,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	require.True(t, activated)
 
 	// Verify access to the bundle with requisite headers
-	req, _ := http.NewRequest("GET", "/static/plugins/com.mattermost.sample/com.mattermost.sample_724ed0e2ebb2b841_bundle.js", nil)
+	req, _ := http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/com.matterfoss.sample_724ed0e2ebb2b841_bundle.js", nil)
 	res := httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, http.StatusOK, res.Code)
@@ -242,7 +242,7 @@ func TestStaticFilesRequest(t *testing.T) {
 
 	// Verify cached access to the bundle with an If-Modified-Since timestamp in the future
 	future := time.Now().Add(24 * time.Hour)
-	req, _ = http.NewRequest("GET", "/static/plugins/com.mattermost.sample/com.mattermost.sample_724ed0e2ebb2b841_bundle.js", nil)
+	req, _ = http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/com.matterfoss.sample_724ed0e2ebb2b841_bundle.js", nil)
 	req.Header.Add("If-Modified-Since", future.Format(time.RFC850))
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
@@ -252,7 +252,7 @@ func TestStaticFilesRequest(t *testing.T) {
 
 	// Verify access to the bundle with an If-Modified-Since timestamp in the past
 	past := time.Now().Add(-24 * time.Hour)
-	req, _ = http.NewRequest("GET", "/static/plugins/com.mattermost.sample/com.mattermost.sample_724ed0e2ebb2b841_bundle.js", nil)
+	req, _ = http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/com.matterfoss.sample_724ed0e2ebb2b841_bundle.js", nil)
 	req.Header.Add("If-Modified-Since", past.Format(time.RFC850))
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
@@ -261,7 +261,7 @@ func TestStaticFilesRequest(t *testing.T) {
 	assert.Equal(t, []string{"max-age=31556926, public"}, res.Result().Header[http.CanonicalHeaderKey("Cache-Control")])
 
 	// Verify handling of 404.
-	req, _ = http.NewRequest("GET", "/static/plugins/com.mattermost.sample/404.js", nil)
+	req, _ = http.NewRequest("GET", "/static/plugins/com.matterfoss.sample/404.js", nil)
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, http.StatusNotFound, res.Code)
@@ -283,17 +283,17 @@ func TestPublicFilesRequest(t *testing.T) {
 	env, err := plugin.NewEnvironment(th.NewPluginAPI, app.NewDriverImpl(th.Server), pluginDir, webappPluginDir, th.App.Log(), nil)
 	require.NoError(t, err)
 
-	pluginID := "com.mattermost.sample"
+	pluginID := "com.matterfoss.sample"
 	pluginCode :=
 		`
 	package main
 
 	import (
-		"github.com/mattermost/mattermost-server/v6/plugin"
+		"github.com/cjdelisle/matterfoss-server/v6/plugin"
 	)
 
 	type MyPlugin struct {
-		plugin.MattermostPlugin
+		plugin.MatterfossPlugin
 	}
 
 	func main() {
@@ -306,11 +306,11 @@ func TestPublicFilesRequest(t *testing.T) {
 	utils.CompileGo(t, pluginCode, backend)
 
 	// Write the plugin.json manifest
-	pluginManifest := `{"id": "com.mattermost.sample", "server": {"executable": "backend.exe"}, "settings_schema": {"settings": []}}`
+	pluginManifest := `{"id": "com.matterfoss.sample", "server": {"executable": "backend.exe"}, "settings_schema": {"settings": []}}`
 	ioutil.WriteFile(filepath.Join(pluginDir, pluginID, "plugin.json"), []byte(pluginManifest), 0600)
 
 	// Write the test public file
-	helloHTML := `Hello from the static files public folder for the com.mattermost.sample plugin!`
+	helloHTML := `Hello from the static files public folder for the com.matterfoss.sample plugin!`
 	htmlFolderPath := filepath.Join(pluginDir, pluginID, "public")
 	os.MkdirAll(htmlFolderPath, os.ModePerm)
 	htmlFilePath := filepath.Join(htmlFolderPath, "hello.html")
@@ -329,17 +329,17 @@ func TestPublicFilesRequest(t *testing.T) {
 
 	th.App.Channels().SetPluginsEnvironment(env)
 
-	req, _ := http.NewRequest("GET", "/plugins/com.mattermost.sample/public/hello.html", nil)
+	req, _ := http.NewRequest("GET", "/plugins/com.matterfoss.sample/public/hello.html", nil)
 	res := httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, helloHTML, res.Body.String())
 
-	req, _ = http.NewRequest("GET", "/plugins/com.mattermost.sample/nefarious-file-access.html", nil)
+	req, _ = http.NewRequest("GET", "/plugins/com.matterfoss.sample/nefarious-file-access.html", nil)
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, 404, res.Code)
 
-	req, _ = http.NewRequest("GET", "/plugins/com.mattermost.sample/public/../nefarious-file-access.html", nil)
+	req, _ = http.NewRequest("GET", "/plugins/com.matterfoss.sample/public/../nefarious-file-access.html", nil)
 	res = httptest.NewRecorder()
 	th.Web.MainRouter.ServeHTTP(res, req)
 	assert.Equal(t, 301, res.Code)
@@ -371,7 +371,7 @@ func TestCheckClientCompatability(t *testing.T) {
 		{"Chrome 60", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36", true},
 		{"Chrome Mobile", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Mobile Safari/537.36", true},
 		{"MM Classic App", "Mozilla/5.0 (Linux; Android 8.0.0; Nexus 5X Build/OPR6.170623.013; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/61.0.3163.81 Mobile Safari/537.36 Web-Atoms-Mobile-WebView", true},
-		{"MM App 3.7.1", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Mattermost/3.7.1 Chrome/56.0.2924.87 Electron/1.6.11 Safari/537.36", true},
+		{"MM App 3.7.1", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Matterfoss/3.7.1 Chrome/56.0.2924.87 Electron/1.6.11 Safari/537.36", true},
 		{"Franz 4.0.4", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Franz/4.0.4 Chrome/52.0.2743.82 Electron/1.3.1 Safari/537.36", true},
 		{"Edge 14", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393", true},
 		{"Internet Explorer 9", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; Trident/5.0", false},

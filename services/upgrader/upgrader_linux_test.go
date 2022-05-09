@@ -12,7 +12,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func TestCanIUpgradeToE0(t *testing.T) {
@@ -45,7 +45,7 @@ func TestGetCurrentVersionTgzURL(t *testing.T) {
 			model.CurrentVersion = currentVersion
 			model.BuildNumber = buildNumber
 		}()
-		require.Equal(t, "https://releases.mattermost.com/5.22.0/mattermost-5.22.0-linux-amd64.tar.gz", getCurrentVersionTgzURL())
+		require.Equal(t, "https://releases.matterfoss.org/5.22.0/matterfoss-5.22.0-linux-amd64.tar.gz", getCurrentVersionTgzURL())
 	})
 
 	t.Run("get release version in dev version", func(t *testing.T) {
@@ -57,7 +57,7 @@ func TestGetCurrentVersionTgzURL(t *testing.T) {
 			model.CurrentVersion = currentVersion
 			model.BuildNumber = buildNumber
 		}()
-		require.Equal(t, "https://releases.mattermost.com/5.22.0/mattermost-5.22.0-linux-amd64.tar.gz", getCurrentVersionTgzURL())
+		require.Equal(t, "https://releases.matterfoss.org/5.22.0/matterfoss-5.22.0-linux-amd64.tar.gz", getCurrentVersionTgzURL())
 	})
 
 	t.Run("get release version in rc version", func(t *testing.T) {
@@ -69,7 +69,7 @@ func TestGetCurrentVersionTgzURL(t *testing.T) {
 			model.CurrentVersion = currentVersion
 			model.BuildNumber = buildNumber
 		}()
-		require.Equal(t, "https://releases.mattermost.com/5.22.0-rc2/mattermost-5.22.0-rc2-linux-amd64.tar.gz", getCurrentVersionTgzURL())
+		require.Equal(t, "https://releases.matterfoss.org/5.22.0-rc2/matterfoss-5.22.0-rc2-linux-amd64.tar.gz", getCurrentVersionTgzURL())
 	})
 }
 
@@ -106,7 +106,7 @@ func TestExtractBinary(t *testing.T) {
 		require.Error(t, extractBinary(tmpMockExecutable.Name(), tmpMockTarGz.Name()))
 	})
 
-	t.Run("extract from tar.gz without mattermost/bin/mattermost file", func(t *testing.T) {
+	t.Run("extract from tar.gz without matterfoss/bin/matterfoss file", func(t *testing.T) {
 		tmpMockTarGz, err := ioutil.TempFile("", "mock_tgz")
 		require.NoError(t, err)
 		defer os.Remove(tmpMockTarGz.Name())
@@ -131,7 +131,7 @@ func TestExtractBinary(t *testing.T) {
 		require.Error(t, extractBinary(tmpMockExecutable.Name(), tmpMockTarGz.Name()))
 	})
 
-	t.Run("extract from tar.gz with mattermost/bin/mattermost file", func(t *testing.T) {
+	t.Run("extract from tar.gz with matterfoss/bin/matterfoss file", func(t *testing.T) {
 		tmpMockTarGz, err := ioutil.TempFile("", "mock_tgz")
 		require.NoError(t, err)
 		defer os.Remove(tmpMockTarGz.Name())
@@ -140,7 +140,7 @@ func TestExtractBinary(t *testing.T) {
 
 		tw.WriteHeader(&tar.Header{
 			Typeflag: tar.TypeReg,
-			Name:     "mattermost/bin/mattermost",
+			Name:     "matterfoss/bin/matterfoss",
 			Size:     4,
 		})
 		tw.Write([]byte("test"))

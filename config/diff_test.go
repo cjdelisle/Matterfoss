@@ -6,7 +6,7 @@ package config
 import (
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 
 	"github.com/stretchr/testify/require"
 )
@@ -512,7 +512,7 @@ func TestDiffSanitized(t *testing.T) {
 			func() *model.Config {
 				cfg := defaultConfigGen()
 				cfg.PluginSettings.Plugins = map[string]map[string]interface{}{
-					"com.mattermost.newplugin": {
+					"com.matterfoss.newplugin": {
 						"key": true,
 					},
 				}
@@ -794,8 +794,8 @@ func TestDiff(t *testing.T) {
 			defaultConfigGen(),
 			func() *model.Config {
 				cfg := defaultConfigGen()
-				cfg.PluginSettings.PluginStates["com.mattermost.nps"] = &model.PluginState{
-					Enable: !cfg.PluginSettings.PluginStates["com.mattermost.nps"].Enable,
+				cfg.PluginSettings.PluginStates["com.matterfoss.nps"] = &model.PluginState{
+					Enable: !cfg.PluginSettings.PluginStates["com.matterfoss.nps"].Enable,
 				}
 				return cfg
 			}(),
@@ -804,8 +804,8 @@ func TestDiff(t *testing.T) {
 					Path:    "PluginSettings.PluginStates",
 					BaseVal: defaultConfigGen().PluginSettings.PluginStates,
 					ActualVal: map[string]*model.PluginState{
-						"com.mattermost.nps": {
-							Enable: !defaultConfigGen().PluginSettings.PluginStates["com.mattermost.nps"].Enable,
+						"com.matterfoss.nps": {
+							Enable: !defaultConfigGen().PluginSettings.PluginStates["com.matterfoss.nps"].Enable,
 						},
 						"focalboard": {
 							Enable: true,
@@ -813,7 +813,7 @@ func TestDiff(t *testing.T) {
 						"playbooks": {
 							Enable: true,
 						},
-						"com.mattermost.apps": {
+						"com.matterfoss.apps": {
 							Enable: true,
 						},
 					},
@@ -826,7 +826,7 @@ func TestDiff(t *testing.T) {
 			defaultConfigGen(),
 			func() *model.Config {
 				cfg := defaultConfigGen()
-				cfg.PluginSettings.PluginStates["com.mattermost.newplugin"] = &model.PluginState{
+				cfg.PluginSettings.PluginStates["com.matterfoss.newplugin"] = &model.PluginState{
 					Enable: true,
 				}
 				return cfg
@@ -836,10 +836,10 @@ func TestDiff(t *testing.T) {
 					Path:    "PluginSettings.PluginStates",
 					BaseVal: defaultConfigGen().PluginSettings.PluginStates,
 					ActualVal: map[string]*model.PluginState{
-						"com.mattermost.nps": {
-							Enable: defaultConfigGen().PluginSettings.PluginStates["com.mattermost.nps"].Enable,
+						"com.matterfoss.nps": {
+							Enable: defaultConfigGen().PluginSettings.PluginStates["com.matterfoss.nps"].Enable,
 						},
-						"com.mattermost.newplugin": {
+						"com.matterfoss.newplugin": {
 							Enable: true,
 						},
 						"focalboard": {
@@ -848,7 +848,7 @@ func TestDiff(t *testing.T) {
 						"playbooks": {
 							Enable: true,
 						},
-						"com.mattermost.apps": {
+						"com.matterfoss.apps": {
 							Enable: true,
 						},
 					},
@@ -861,7 +861,7 @@ func TestDiff(t *testing.T) {
 			defaultConfigGen(),
 			func() *model.Config {
 				cfg := defaultConfigGen()
-				delete(cfg.PluginSettings.PluginStates, "com.mattermost.nps")
+				delete(cfg.PluginSettings.PluginStates, "com.matterfoss.nps")
 				return cfg
 			}(),
 			ConfigDiffs{
@@ -875,7 +875,7 @@ func TestDiff(t *testing.T) {
 						"playbooks": {
 							Enable: true,
 						},
-						"com.mattermost.apps": {
+						"com.matterfoss.apps": {
 							Enable: true,
 						},
 					},
@@ -907,7 +907,7 @@ func TestDiff(t *testing.T) {
 			func() *model.Config {
 				cfg := defaultConfigGen()
 				cfg.PluginSettings.Plugins = map[string]map[string]interface{}{
-					"com.mattermost.newplugin": {
+					"com.matterfoss.newplugin": {
 						"key": true,
 					},
 				}
@@ -916,7 +916,7 @@ func TestDiff(t *testing.T) {
 			func() *model.Config {
 				cfg := defaultConfigGen()
 				cfg.PluginSettings.Plugins = map[string]map[string]interface{}{
-					"com.mattermost.newplugin": {
+					"com.matterfoss.newplugin": {
 						"key": "string",
 					},
 				}
@@ -927,14 +927,14 @@ func TestDiff(t *testing.T) {
 					Path: "PluginSettings.Plugins",
 					BaseVal: func() interface{} {
 						return map[string]map[string]interface{}{
-							"com.mattermost.newplugin": {
+							"com.matterfoss.newplugin": {
 								"key": true,
 							},
 						}
 					}(),
 					ActualVal: func() interface{} {
 						return map[string]map[string]interface{}{
-							"com.mattermost.newplugin": {
+							"com.matterfoss.newplugin": {
 								"key": "string",
 							},
 						}

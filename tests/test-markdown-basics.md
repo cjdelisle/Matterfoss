@@ -55,7 +55,7 @@ _Italics_
 - List
   - List Sub-item
 [Link](http://i.giphy.com/xNrM4cGJ8u3ao.gif)
-[![GitHub](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)
+[![GitHub](https://assets-cdn.github.com/favicon.ico)](https://github.com/matterfoss/platform)
 | Left-Aligned Text | Center Aligned Text | Right Aligned Text |
 | :------------ |:---------------:| -----:|
 | Left column 1 | this text       |  $100 |

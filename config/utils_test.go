@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 func TestDesanitize(t *testing.T) {
@@ -185,7 +185,7 @@ func TestIsDatabaseDSN(t *testing.T) {
 		},
 		{
 			Name:     "Absolute path DSN",
-			DSN:      "/opt/mattermost/configuration/config.json",
+			DSN:      "/opt/matterfoss/configuration/config.json",
 			Expected: false,
 		},
 	}
@@ -204,29 +204,29 @@ func TestStripPassword(t *testing.T) {
 		ExpectedOut string
 	}{
 		"mysql": {
-			DSN:         "mysql://mmuser:password@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			DSN:         "mysql://mmuser:password@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 			Schema:      "mysql",
-			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 		},
 		"mysql idempotent": {
-			DSN:         "mysql://mmuser:@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			DSN:         "mysql://mmuser:@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 			Schema:      "mysql",
-			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 		},
 		"mysql: password with : and @": {
-			DSN:         "mysql://mmuser:p:assw@ord@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			DSN:         "mysql://mmuser:p:assw@ord@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 			Schema:      "mysql",
-			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 		},
 		"mysql: password with @ and :": {
-			DSN:         "mysql://mmuser:pa@sswo:rd@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			DSN:         "mysql://mmuser:pa@sswo:rd@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 			Schema:      "mysql",
-			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s",
+			ExpectedOut: "mysql://mmuser:@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s",
 		},
 		"postgres": {
-			DSN:         "postgres://mmuser:password@localhost:5432/mattermost?sslmode=disable&connect_timeout=10",
+			DSN:         "postgres://mmuser:password@localhost:5432/matterfoss?sslmode=disable&connect_timeout=10",
 			Schema:      "postgres",
-			ExpectedOut: "postgres://mmuser:@localhost:5432/mattermost?sslmode=disable&connect_timeout=10",
+			ExpectedOut: "postgres://mmuser:@localhost:5432/matterfoss?sslmode=disable&connect_timeout=10",
 		},
 		"pipe": {
 			DSN:         "mysql://user@unix(/path/to/socket)/dbname",
@@ -234,12 +234,12 @@ func TestStripPassword(t *testing.T) {
 			ExpectedOut: "mysql://user@unix(/path/to/socket)/dbname",
 		},
 		"malformed without :": {
-			DSN:         "postgres://mmuserpassword@localhost:5432/mattermost?sslmode=disable&connect_timeout=10",
+			DSN:         "postgres://mmuserpassword@localhost:5432/matterfoss?sslmode=disable&connect_timeout=10",
 			Schema:      "postgres",
-			ExpectedOut: "postgres://mmuserpassword@localhost:5432/mattermost?sslmode=disable&connect_timeout=10",
+			ExpectedOut: "postgres://mmuserpassword@localhost:5432/matterfoss?sslmode=disable&connect_timeout=10",
 		},
 		"malformed without @": {
-			DSN:         "postgres://mmuser:passwordlocalhost:5432/mattermost?sslmode=disable&connect_timeout=10",
+			DSN:         "postgres://mmuser:passwordlocalhost:5432/matterfoss?sslmode=disable&connect_timeout=10",
 			Schema:      "postgres",
 			ExpectedOut: "(omitted due to error parsing the DSN)",
 		},
@@ -271,8 +271,8 @@ func TestIsJSONMap(t *testing.T) {
 		{name: "array json", data: `["test1", "test2"]`, want: false},
 		{name: "bad json", data: `{huh?}`, want: false},
 		{name: "filename", data: "/tmp/logger.conf", want: false},
-		{name: "mysql dsn", data: "mysql://mmuser:@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s", want: false},
-		{name: "postgres dsn", data: "postgres://mmuser:passwordlocalhost:5432/mattermost?sslmode=disable&connect_timeout=10", want: false},
+		{name: "mysql dsn", data: "mysql://mmuser:@tcp(localhost:3306)/matterfoss?charset=utf8mb4,utf8&readTimeout=30s", want: false},
+		{name: "postgres dsn", data: "postgres://mmuser:passwordlocalhost:5432/matterfoss?sslmode=disable&connect_timeout=10", want: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

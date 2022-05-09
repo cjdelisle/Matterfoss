@@ -15,15 +15,15 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin/plugintest/mock"
-	"github.com/mattermost/mattermost-server/v6/services/imageproxy"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine/mocks"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/storetest"
-	storemocks "github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
-	"github.com/mattermost/mattermost-server/v6/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v6/services/imageproxy"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
+	storemocks "github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
 )
 
 func TestCreatePostDeduplicate(t *testing.T) {
@@ -57,12 +57,12 @@ func TestCreatePostDeduplicate(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v6/plugin"
-				"github.com/mattermost/mattermost-server/v6/model"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 				allow bool
 			}
 
@@ -106,13 +106,13 @@ func TestCreatePostDeduplicate(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v6/plugin"
-				"github.com/mattermost/mattermost-server/v6/model"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/model"
 				"time"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 				instant bool
 			}
 
@@ -467,7 +467,7 @@ func TestImageProxy(t *testing.T) {
 	mockStore.On("GetDBSchemaVersion").Return(1, nil)
 
 	th.App.UpdateConfig(func(cfg *model.Config) {
-		*cfg.ServiceSettings.SiteURL = "http://mymattermost.com"
+		*cfg.ServiceSettings.SiteURL = "http://mymatterfoss.org"
 	})
 
 	th.App.ch.imageProxy = imageproxy.MakeImageProxy(th.Server, th.Server.HTTPService(), th.Server.Log)
@@ -486,23 +486,23 @@ func TestImageProxy(t *testing.T) {
 			ProxyOptions:           "foo",
 			ImageURL:               "http://mydomain.com/myimage",
 			ProxiedRemovedImageURL: "http://mydomain.com/myimage",
-			ProxiedImageURL:        "http://mymattermost.com/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage",
+			ProxiedImageURL:        "http://mymatterfoss.org/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage",
 		},
 		"atmos/camo_SameSite": {
 			ProxyType:              model.ImageProxyTypeAtmosCamo,
 			ProxyURL:               "https://127.0.0.1",
 			ProxyOptions:           "foo",
-			ImageURL:               "http://mymattermost.com/myimage",
-			ProxiedRemovedImageURL: "http://mymattermost.com/myimage",
-			ProxiedImageURL:        "http://mymattermost.com/myimage",
+			ImageURL:               "http://mymatterfoss.org/myimage",
+			ProxiedRemovedImageURL: "http://mymatterfoss.org/myimage",
+			ProxiedImageURL:        "http://mymatterfoss.org/myimage",
 		},
 		"atmos/camo_PathOnly": {
 			ProxyType:              model.ImageProxyTypeAtmosCamo,
 			ProxyURL:               "https://127.0.0.1",
 			ProxyOptions:           "foo",
 			ImageURL:               "/myimage",
-			ProxiedRemovedImageURL: "http://mymattermost.com/myimage",
-			ProxiedImageURL:        "http://mymattermost.com/myimage",
+			ProxiedRemovedImageURL: "http://mymatterfoss.org/myimage",
+			ProxiedImageURL:        "http://mymatterfoss.org/myimage",
 		},
 		"atmos/camo_EmptyImageURL": {
 			ProxyType:              model.ImageProxyTypeAtmosCamo,
@@ -516,19 +516,19 @@ func TestImageProxy(t *testing.T) {
 			ProxyType:              model.ImageProxyTypeLocal,
 			ImageURL:               "http://mydomain.com/myimage",
 			ProxiedRemovedImageURL: "http://mydomain.com/myimage",
-			ProxiedImageURL:        "http://mymattermost.com/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage",
+			ProxiedImageURL:        "http://mymatterfoss.org/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage",
 		},
 		"local_SameSite": {
 			ProxyType:              model.ImageProxyTypeLocal,
-			ImageURL:               "http://mymattermost.com/myimage",
-			ProxiedRemovedImageURL: "http://mymattermost.com/myimage",
-			ProxiedImageURL:        "http://mymattermost.com/myimage",
+			ImageURL:               "http://mymatterfoss.org/myimage",
+			ProxiedRemovedImageURL: "http://mymatterfoss.org/myimage",
+			ProxiedImageURL:        "http://mymatterfoss.org/myimage",
 		},
 		"local_PathOnly": {
 			ProxyType:              model.ImageProxyTypeLocal,
 			ImageURL:               "/myimage",
-			ProxiedRemovedImageURL: "http://mymattermost.com/myimage",
-			ProxiedImageURL:        "http://mymattermost.com/myimage",
+			ProxiedRemovedImageURL: "http://mymatterfoss.org/myimage",
+			ProxiedImageURL:        "http://mymatterfoss.org/myimage",
 		},
 		"local_EmptyImageURL": {
 			ProxyType:              model.ImageProxyTypeLocal,
@@ -680,7 +680,7 @@ func TestCreatePost(t *testing.T) {
 		defer th.TearDown()
 
 		th.App.UpdateConfig(func(cfg *model.Config) {
-			*cfg.ServiceSettings.SiteURL = "http://mymattermost.com"
+			*cfg.ServiceSettings.SiteURL = "http://mymatterfoss.org"
 			*cfg.ImageProxySettings.Enable = true
 			*cfg.ImageProxySettings.ImageProxyType = "atmos/camo"
 			*cfg.ImageProxySettings.RemoteImageProxyURL = "https://127.0.0.1"
@@ -690,7 +690,7 @@ func TestCreatePost(t *testing.T) {
 		th.App.ch.imageProxy = imageproxy.MakeImageProxy(th.Server, th.Server.HTTPService(), th.Server.Log)
 
 		imageURL := "http://mydomain.com/myimage"
-		proxiedImageURL := "http://mymattermost.com/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
+		proxiedImageURL := "http://mymatterfoss.org/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
 
 		post := &model.Post{
 			ChannelId: th.BasicChannel.Id,
@@ -767,7 +767,7 @@ func TestCreatePost(t *testing.T) {
 		}
 
 		th.App.UpdateConfig(func(cfg *model.Config) {
-			*cfg.ServiceSettings.SiteURL = "http://mymattermost.com"
+			*cfg.ServiceSettings.SiteURL = "http://mymatterfoss.org"
 		})
 
 		th.Context.Session().UserId = th.BasicUser.Id
@@ -886,7 +886,7 @@ func TestPatchPost(t *testing.T) {
 		defer th.TearDown()
 
 		th.App.UpdateConfig(func(cfg *model.Config) {
-			*cfg.ServiceSettings.SiteURL = "http://mymattermost.com"
+			*cfg.ServiceSettings.SiteURL = "http://mymatterfoss.org"
 			*cfg.ImageProxySettings.Enable = true
 			*cfg.ImageProxySettings.ImageProxyType = "atmos/camo"
 			*cfg.ImageProxySettings.RemoteImageProxyURL = "https://127.0.0.1"
@@ -896,7 +896,7 @@ func TestPatchPost(t *testing.T) {
 		th.App.ch.imageProxy = imageproxy.MakeImageProxy(th.Server, th.Server.HTTPService(), th.Server.Log)
 
 		imageURL := "http://mydomain.com/myimage"
-		proxiedImageURL := "http://mymattermost.com/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
+		proxiedImageURL := "http://mymatterfoss.org/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
 
 		post := &model.Post{
 			ChannelId: th.BasicChannel.Id,
@@ -1178,7 +1178,7 @@ func TestUpdatePost(t *testing.T) {
 		defer th.TearDown()
 
 		th.App.UpdateConfig(func(cfg *model.Config) {
-			*cfg.ServiceSettings.SiteURL = "http://mymattermost.com"
+			*cfg.ServiceSettings.SiteURL = "http://mymatterfoss.org"
 			*cfg.ImageProxySettings.Enable = true
 			*cfg.ImageProxySettings.ImageProxyType = "atmos/camo"
 			*cfg.ImageProxySettings.RemoteImageProxyURL = "https://127.0.0.1"
@@ -1188,7 +1188,7 @@ func TestUpdatePost(t *testing.T) {
 		th.App.ch.imageProxy = imageproxy.MakeImageProxy(th.Server, th.Server.HTTPService(), th.Server.Log)
 
 		imageURL := "http://mydomain.com/myimage"
-		proxiedImageURL := "http://mymattermost.com/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
+		proxiedImageURL := "http://mymatterfoss.org/api/v4/image?url=http%3A%2F%2Fmydomain.com%2Fmyimage"
 
 		post := &model.Post{
 			ChannelId: th.BasicChannel.Id,
@@ -1220,7 +1220,7 @@ func TestUpdatePost(t *testing.T) {
 		}
 
 		th.App.UpdateConfig(func(cfg *model.Config) {
-			*cfg.ServiceSettings.SiteURL = "http://mymattermost.com"
+			*cfg.ServiceSettings.SiteURL = "http://mymatterfoss.org"
 		})
 
 		th.Context.Session().UserId = th.BasicUser.Id

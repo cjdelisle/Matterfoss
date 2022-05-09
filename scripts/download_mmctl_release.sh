@@ -24,7 +24,7 @@ else
   RELEASE_TO_DOWNLOAD=master
 fi
 
-echo "Downloading prepackaged binary: https://releases.mattermost.com/mmctl/$RELEASE_TO_DOWNLOAD";
+echo "Downloading prepackaged binary: https://releases.matterfoss.com/mmctl/$RELEASE_TO_DOWNLOAD";
 
 # When packaging we need to download different platforms
 # Values need to match the case statement below
@@ -36,23 +36,23 @@ fi
 case "$PLATFORM" in
 
 Linux-x86_64)
-  MMCTL_FILE="linux_amd64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
+  MMCTL_FILE="linux_amd64.tar" && curl -f -O -L https://releases.matterfoss.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
   ;;
 
 Linux-aarch64)
-  MMCTL_FILE="linux_arm64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
+  MMCTL_FILE="linux_arm64.tar" && curl -f -O -L https://releases.matterfoss.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
   ;;
 
 Darwin-x86_64)
-  MMCTL_FILE="darwin_amd64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
+  MMCTL_FILE="darwin_amd64.tar" && curl -f -O -L https://releases.matterfoss.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
   ;;
 
 Darwin-arm64)
-  MMCTL_FILE="darwin_arm64.tar" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
+  MMCTL_FILE="darwin_arm64.tar" && curl -f -O -L https://releases.matterfoss.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && tar -xvf "$MMCTL_FILE" -C "$BIN_PATH" && rm "$MMCTL_FILE";
   ;;
 
 Windows)
-  MMCTL_FILE="windows_amd64.zip" && curl -f -O -L https://releases.mattermost.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && unzip -o "$MMCTL_FILE" -d "$BIN_PATH" && rm "$MMCTL_FILE";
+  MMCTL_FILE="windows_amd64.zip" && curl -f -O -L https://releases.matterfoss.com/mmctl/"$RELEASE_TO_DOWNLOAD"/"$MMCTL_FILE" && unzip -o "$MMCTL_FILE" -d "$BIN_PATH" && rm "$MMCTL_FILE";
   ;;
 
 *)

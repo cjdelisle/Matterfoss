@@ -10,7 +10,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/mattermost/mattermost-server/v6/services/configservice"
+	"github.com/cjdelisle/matterfoss-server/v6/services/configservice"
 )
 
 // HTTPService wraps the functionality for making http requests to provide some improvements to the default client
@@ -23,9 +23,9 @@ type HTTPService interface {
 	// implementation provides:
 	// - A shorter timeout for dial and TLS handshake (defined as constant "ConnectTimeout")
 	// - A timeout for end-to-end requests
-	// - A Mattermost-specific user agent header
+	// - A Matterfoss-specific user agent header
 	// - Additional security for untrusted and insecure connections
-	MakeTransport(trustURLs bool) *MattermostTransport
+	MakeTransport(trustURLs bool) *MatterfossTransport
 }
 
 type HTTPServiceImpl struct {
@@ -52,7 +52,7 @@ func (h *HTTPServiceImpl) MakeClient(trustURLs bool) *http.Client {
 	}
 }
 
-func (h *HTTPServiceImpl) MakeTransport(trustURLs bool) *MattermostTransport {
+func (h *HTTPServiceImpl) MakeTransport(trustURLs bool) *MatterfossTransport {
 	insecure := h.configService.Config().ServiceSettings.EnableInsecureOutgoingConnections != nil && *h.configService.Config().ServiceSettings.EnableInsecureOutgoingConnections
 
 	if trustURLs {

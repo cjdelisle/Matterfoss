@@ -20,12 +20,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/testlib"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/testlib"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func getHashedKey(key string) string {
@@ -419,7 +419,7 @@ func TestHandlePluginRequest(t *testing.T) {
 	r.Header.Add("Authorization", "Bearer "+token.Token)
 	assertions = func(r *http.Request) {
 		assert.Equal(t, "/bar", r.URL.Path)
-		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Mattermost-User-Id"))
+		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Matterfoss-User-Id"))
 	}
 	router.ServeHTTP(nil, r)
 
@@ -427,7 +427,7 @@ func TestHandlePluginRequest(t *testing.T) {
 	assertions = func(r *http.Request) {
 		assert.Equal(t, "/bar", r.URL.Path)
 		assert.Equal(t, "a=b&c=d", r.URL.RawQuery)
-		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Mattermost-User-Id"))
+		assert.Equal(t, th.BasicUser.Id, r.Header.Get("Matterfoss-User-Id"))
 	}
 	router.ServeHTTP(nil, r)
 
@@ -435,7 +435,7 @@ func TestHandlePluginRequest(t *testing.T) {
 	assertions = func(r *http.Request) {
 		assert.Equal(t, "/bar", r.URL.Path)
 		assert.Equal(t, "a=b&c=d", r.URL.RawQuery)
-		assert.Empty(t, r.Header.Get("Mattermost-User-Id"))
+		assert.Empty(t, r.Header.Get("Matterfoss-User-Id"))
 	}
 	router.ServeHTTP(nil, r)
 }
@@ -629,7 +629,7 @@ func TestPluginSync(t *testing.T) {
 	}
 }
 
-// See https://github.com/mattermost/mattermost-server/issues/19189
+// See https://github.com/cjdelisle/matterfoss-server/issues/19189
 func TestChannelsPluginsInit(t *testing.T) {
 	th := Setup(t)
 	defer th.TearDown()
@@ -729,12 +729,12 @@ func TestPluginPanicLogs(t *testing.T) {
 		package main
 
 		import (
-			"github.com/mattermost/mattermost-server/v6/plugin"
-			"github.com/mattermost/mattermost-server/v6/model"
+			"github.com/cjdelisle/matterfoss-server/v6/plugin"
+			"github.com/cjdelisle/matterfoss-server/v6/model"
 		)
 
 		type MyPlugin struct {
-			plugin.MattermostPlugin
+			plugin.MatterfossPlugin
 		}
 
 		func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {

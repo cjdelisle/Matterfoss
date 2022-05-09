@@ -9,8 +9,8 @@ import (
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (
@@ -140,12 +140,12 @@ func upgradeDatabase(sqlStore *SqlStore, currentModelVersionString string) error
 
 	// Upgrades prior to the oldest supported version are not supported.
 	if currentSchemaVersion.LT(oldestSupportedVersion) {
-		return errors.Errorf("Database schema version %s is no longer supported. This Mattermost server supports automatic upgrades from schema version %s through schema version %s. Please manually upgrade to at least version %s before continuing.", *currentSchemaVersion, oldestSupportedVersion, currentModelVersion, oldestSupportedVersion)
+		return errors.Errorf("Database schema version %s is no longer supported. This Matterfoss server supports automatic upgrades from schema version %s through schema version %s. Please manually upgrade to at least version %s before continuing.", *currentSchemaVersion, oldestSupportedVersion, currentModelVersion, oldestSupportedVersion)
 	}
 
 	// Allow forwards compatibility only within the same major version.
 	if currentSchemaVersion.GTE(nextUnsupportedMajorVersion) {
-		return errors.Errorf("Database schema version %s is not supported. This Mattermost server supports only >=%s, <%s. Please upgrade to at least version %s before continuing.", *currentSchemaVersion, currentModelVersion, nextUnsupportedMajorVersion, nextUnsupportedMajorVersion)
+		return errors.Errorf("Database schema version %s is not supported. This Matterfoss server supports only >=%s, <%s. Please upgrade to at least version %s before continuing.", *currentSchemaVersion, currentModelVersion, nextUnsupportedMajorVersion, nextUnsupportedMajorVersion)
 	} else if currentSchemaVersion.GT(currentModelVersion) {
 		mlog.Warn("The database schema version and model versions do not match", mlog.String("schema_version", currentSchemaVersion.String()), mlog.String("model_version", currentModelVersion.String()))
 	}
@@ -447,7 +447,7 @@ func upgradeDatabaseToVersion481(sqlStore *SqlStore) {
 }
 
 func upgradeDatabaseToVersion49(sqlStore *SqlStore) {
-	// This version of Mattermost includes an App-Layer migration which migrates from hard-coded roles configured by
+	// This version of Matterfoss includes an App-Layer migration which migrates from hard-coded roles configured by
 	// a number of parameters in `config.json` to a `Roles` table in the database. The migration code can be seen
 	// in the file `app/app.go` in the function `DoAdvancedPermissionsMigration()`.
 
@@ -463,13 +463,13 @@ func upgradeDatabaseToVersion410(sqlStore *SqlStore) {
 }
 
 func upgradeDatabaseToVersion50(sqlStore *SqlStore) {
-	// This version of Mattermost includes an App-Layer migration which migrates from hard-coded emojis configured
+	// This version of Matterfoss includes an App-Layer migration which migrates from hard-coded emojis configured
 	// in `config.json` to a `Permission` in the database. The migration code can be seen
 	// in the file `app/app.go` in the function `DoEmojisPermissionsMigration()`.
 
-	// This version of Mattermost also includes a online-migration which migrates some roles from the `Roles` columns of
+	// This version of Matterfoss also includes a online-migration which migrates some roles from the `Roles` columns of
 	// TeamMember and ChannelMember rows to the new SchemeAdmin and SchemeUser columns. If you need to downgrade to a
-	// version of Mattermost prior to 5.0, you should take your server offline and run the following SQL statements
+	// version of Matterfoss prior to 5.0, you should take your server offline and run the following SQL statements
 	// prior to launching the downgraded version:
 	//
 	//    UPDATE Teams SET SchemeId = NULL;

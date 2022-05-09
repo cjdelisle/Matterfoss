@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (
@@ -25,7 +25,7 @@ const (
 	SessionPropIsBot              = "is_bot"
 	SessionPropIsBotValue         = "true"
 	SessionPropOAuthAppID         = "oauth_app_id"
-	SessionPropMattermostAppID    = "mattermost_app_id"
+	SessionPropMatterfossAppID    = "matterfoss_app_id"
 	SessionTypeUserAccessToken    = "UserAccessToken"
 	SessionTypeCloudKey           = "CloudKey"
 	SessionTypeRemoteclusterToken = "RemoteClusterToken"

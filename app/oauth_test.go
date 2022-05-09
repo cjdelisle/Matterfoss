@@ -15,10 +15,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/einterfaces"
-	"github.com/mattermost/mattermost-server/v6/einterfaces/mocks"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest/mock"
 )
 
 func TestGetOAuthAccessTokenForImplicitFlow(t *testing.T) {
@@ -167,7 +167,7 @@ func TestAuthorizeOAuthUser(t *testing.T) {
 	}
 
 	makeRequest := func(cookie string) *http.Request {
-		request, _ := http.NewRequest(http.MethodGet, "https://mattermost.example.com", nil)
+		request, _ := http.NewRequest(http.MethodGet, "https://matterfoss.example.com", nil)
 
 		if cookie != "" {
 			request.AddCookie(&http.Cookie{
@@ -570,7 +570,7 @@ func TestGetAuthorizationCode(t *testing.T) {
 					*cfg.ServiceSettings.SiteURL = tc.SiteURL
 				})
 
-				request, _ := http.NewRequest(http.MethodGet, "https://mattermost.example.com", nil)
+				request, _ := http.NewRequest(http.MethodGet, "https://matterfoss.example.com", nil)
 
 				stateProps := map[string]string{
 					"email":  "email@example.com",

@@ -4,9 +4,9 @@
 package app
 
 import (
-	"github.com/mattermost/mattermost-server/v6/einterfaces"
-	ejobs "github.com/mattermost/mattermost-server/v6/einterfaces/jobs"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	ejobs "github.com/cjdelisle/matterfoss-server/v6/einterfaces/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
 )
 
 var accountMigrationInterface func(*App) einterfaces.AccountMigrationInterface

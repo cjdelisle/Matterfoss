@@ -14,10 +14,10 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 func (ch *Channels) ServePluginRequest(w http.ResponseWriter, r *http.Request) {
@@ -73,7 +73,7 @@ func (a *App) ServeInterPluginRequest(w http.ResponseWriter, r *http.Request, so
 		UserAgent: r.UserAgent(),
 	}
 
-	r.Header.Set("Mattermost-Plugin-ID", sourcePluginId)
+	r.Header.Set("Matterfoss-Plugin-ID", sourcePluginId)
 
 	hooks.ServeHTTP(context, w, r)
 }
@@ -136,10 +136,10 @@ func (ch *Channels) servePluginRequest(w http.ResponseWriter, r *http.Request, h
 		token = r.URL.Query().Get("access_token")
 	}
 
-	// Mattermost-Plugin-ID can only be set by inter-plugin requests
-	r.Header.Del("Mattermost-Plugin-ID")
+	// Matterfoss-Plugin-ID can only be set by inter-plugin requests
+	r.Header.Del("Matterfoss-Plugin-ID")
 
-	r.Header.Del("Mattermost-User-Id")
+	r.Header.Del("Matterfoss-User-Id")
 	if token != "" {
 		session, err := New(ServerConnector(ch)).GetSession(token)
 		defer ch.srv.userService.ReturnSessionToPool(session)
@@ -195,7 +195,7 @@ func (ch *Channels) servePluginRequest(w http.ResponseWriter, r *http.Request, h
 		}
 
 		if (session != nil && session.Id != "") && err == nil && csrfCheckPassed {
-			r.Header.Set("Mattermost-User-Id", session.UserId)
+			r.Header.Set("Matterfoss-User-Id", session.UserId)
 			context.SessionId = session.Id
 		}
 	}

@@ -23,11 +23,11 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/openpgp" //nolint:staticcheck
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
-const mattermostBuildPublicKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+const matterfossBuildPublicKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQENBFjZQxwBCAC6kNn3zDlq/aY83M9V7MHVPoK2jnZ3BfH7sA+ibQXsijCkPSR4
 5bCUJ9qVA4XKGK+cpO9vkolSNs10igCaaemaUZNB6ksu3gT737/SZcCAfRO+cLX7
@@ -75,7 +75,7 @@ func getCurrentVersionTgzURL() string {
 		version = model.BuildNumber
 	}
 
-	return "https://releases.mattermost.com/" + version + "/mattermost-" + version + "-linux-amd64.tar.gz"
+	return "https://releases.matterfoss.org/" + version + "/matterfoss-" + version + "-linux-amd64.tar.gz"
 }
 
 func verifySignature(filename string, sigfilename string, publicKey string) error {
@@ -85,21 +85,21 @@ func verifySignature(filename string, sigfilename string, publicKey string) erro
 		return NewInvalidSignature()
 	}
 
-	mattermost_tar, err := os.Open(filename)
+	matterfoss_tar, err := os.Open(filename)
 	if err != nil {
-		mlog.Debug("Unable to open the Mattermost .tar file to verify the file signature", mlog.Err(err))
+		mlog.Debug("Unable to open the Matterfoss .tar file to verify the file signature", mlog.Err(err))
 		return NewInvalidSignature()
 	}
 
 	signature, err := os.Open(sigfilename)
 	if err != nil {
-		mlog.Debug("Unable to open the Mattermost .sig file verify the file signature", mlog.Err(err))
+		mlog.Debug("Unable to open the Matterfoss .sig file verify the file signature", mlog.Err(err))
 		return NewInvalidSignature()
 	}
 
-	_, err = openpgp.CheckDetachedSignature(keyring, mattermost_tar, signature)
+	_, err = openpgp.CheckDetachedSignature(keyring, matterfoss_tar, signature)
 	if err != nil {
-		mlog.Debug("Unable to verify the Mattermost file signature", mlog.Err(err))
+		mlog.Debug("Unable to verify the Matterfoss file signature", mlog.Err(err))
 		return NewInvalidSignature()
 	}
 	return nil
@@ -124,23 +124,23 @@ func canIWriteTheExecutable() error {
 		return errors.New("error getting the executable info")
 	}
 
-	mattermostUID := os.Getuid()
-	mattermostUser, err := user.LookupId(strconv.Itoa(mattermostUID))
+	matterfossUID := os.Getuid()
+	matterfossUser, err := user.LookupId(strconv.Itoa(matterfossUID))
 	if err != nil {
 		return errors.New("error getting the executable info")
 	}
 
 	mode := executableInfo.Mode()
-	if fileUID != mattermostUID && mode&(1<<1) == 0 && mode&(1<<7) == 0 {
-		return NewInvalidPermissions("invalid-user-and-permission", path.Dir(executablePath), mattermostUser.Username, fileUser.Username)
+	if fileUID != matterfossUID && mode&(1<<1) == 0 && mode&(1<<7) == 0 {
+		return NewInvalidPermissions("invalid-user-and-permission", path.Dir(executablePath), matterfossUser.Username, fileUser.Username)
 	}
 
-	if fileUID != mattermostUID && mode&(1<<1) == 0 && mode&(1<<7) != 0 {
-		return NewInvalidPermissions("invalid-user", path.Dir(executablePath), mattermostUser.Username, fileUser.Username)
+	if fileUID != matterfossUID && mode&(1<<1) == 0 && mode&(1<<7) != 0 {
+		return NewInvalidPermissions("invalid-user", path.Dir(executablePath), matterfossUser.Username, fileUser.Username)
 	}
 
-	if fileUID == mattermostUID && mode&(1<<7) == 0 {
-		return NewInvalidPermissions("invalid-permission", path.Dir(executablePath), mattermostUser.Username, fileUser.Username)
+	if fileUID == matterfossUID && mode&(1<<7) == 0 {
+		return NewInvalidPermissions("invalid-permission", path.Dir(executablePath), matterfossUser.Username, fileUser.Username)
 	}
 	return nil
 }
@@ -161,7 +161,7 @@ func CanIUpgradeToE0() error {
 	}
 	if model.BuildEnterpriseReady == "true" {
 		mlog.Warn("Unable to upgrade from TE to E0. The server is already running E0.")
-		return errors.New("you cannot upgrade your server from TE to E0 because you are already running Mattermost Enterprise Edition")
+		return errors.New("you cannot upgrade your server from TE to E0 because you are already running Matterfoss Enterprise Edition")
 	}
 	return nil
 }
@@ -180,7 +180,7 @@ func UpgradeToE0() error {
 	if err != nil {
 		upgradePercentage = 0
 		upgradeError = errors.New("error getting the executable path")
-		mlog.Error("Unable to get the path of the Mattermost executable", mlog.Err(err))
+		mlog.Error("Unable to get the path of the Matterfoss executable", mlog.Err(err))
 		return err
 	}
 
@@ -189,8 +189,8 @@ func UpgradeToE0() error {
 		if filename != "" {
 			os.Remove(filename)
 		}
-		upgradeError = fmt.Errorf("error downloading the new Mattermost server binary file (percentage: %d)", upgradePercentage)
-		mlog.Error("Unable to download the Mattermost server binary file", mlog.Int64("percentage", upgradePercentage), mlog.String("url", getCurrentVersionTgzURL()), mlog.Err(err))
+		upgradeError = fmt.Errorf("error downloading the new Matterfoss server binary file (percentage: %d)", upgradePercentage)
+		mlog.Error("Unable to download the Matterfoss server binary file", mlog.Int64("percentage", upgradePercentage), mlog.String("url", getCurrentVersionTgzURL()), mlog.Err(err))
 		upgradePercentage = 0
 		return err
 	}
@@ -201,13 +201,13 @@ func UpgradeToE0() error {
 			os.Remove(sigfilename)
 		}
 		upgradeError = errors.New("error downloading the signature file of the new server")
-		mlog.Error("Unable to download the signature file of the new Mattermost server", mlog.String("url", getCurrentVersionTgzURL()+".sig"), mlog.Err(err))
+		mlog.Error("Unable to download the signature file of the new Matterfoss server", mlog.String("url", getCurrentVersionTgzURL()+".sig"), mlog.Err(err))
 		upgradePercentage = 0
 		return err
 	}
 	defer os.Remove(sigfilename)
 
-	err = verifySignature(filename, sigfilename, mattermostBuildPublicKey)
+	err = verifySignature(filename, sigfilename, matterfossBuildPublicKey)
 	if err != nil {
 		upgradePercentage = 0
 		upgradeError = errors.New("unable to verify the signature of the downloaded file")
@@ -237,7 +237,7 @@ func download(url string, limit int64) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	out, err := ioutil.TempFile("", "*_mattermost.tar.gz")
+	out, err := ioutil.TempFile("", "*_matterfoss.tar.gz")
 	if err != nil {
 		return "", err
 	}
@@ -281,14 +281,14 @@ func extractBinary(executablePath string, filename string) error {
 		header, err := tarReader.Next()
 
 		if err == io.EOF {
-			return errors.New("unable to find the Mattermost binary in the downloaded version")
+			return errors.New("unable to find the Matterfoss binary in the downloaded version")
 		}
 
 		if err != nil {
 			return err
 		}
 
-		if header.Typeflag == tar.TypeReg && header.Name == "mattermost/bin/mattermost" {
+		if header.Typeflag == tar.TypeReg && header.Name == "matterfoss/bin/matterfoss" {
 			permissions := getFilePermissionsOrDefault(executablePath, 0755)
 			tmpFile, err := ioutil.TempFile(path.Dir(executablePath), "*")
 			if err != nil {

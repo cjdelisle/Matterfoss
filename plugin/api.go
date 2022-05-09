@@ -9,13 +9,13 @@ import (
 
 	plugin "github.com/hashicorp/go-plugin"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 // The API can be used to retrieve data or perform actions on behalf of the plugin. Most methods
 // have direct counterparts in the REST API and very similar behavior.
 //
-// Plugins obtain access to the API by embedding MattermostPlugin and accessing the API member
+// Plugins obtain access to the API by embedding MatterfossPlugin and accessing the API member
 // directly.
 type API interface {
 	// LoadPluginConfiguration loads the plugin's configuration. dest should be a pointer to a
@@ -80,26 +80,26 @@ type API interface {
 	// Minimum server version: 5.10
 	GetBundlePath() (string, error)
 
-	// GetLicense returns the current license used by the Mattermost server. Returns nil if
+	// GetLicense returns the current license used by the Matterfoss server. Returns nil if
 	// the server does not have a license.
 	//
 	// @tag Server
 	// Minimum server version: 5.10
 	GetLicense() *model.License
 
-	// IsEnterpriseReady returns true if the Mattermost server is configured as Enterprise Ready.
+	// IsEnterpriseReady returns true if the Matterfoss server is configured as Enterprise Ready.
 	//
 	// @tag Server
 	// Minimum server version: 5.10
 	IsEnterpriseReady() bool
 
-	// GetServerVersion return the current Mattermost server version
+	// GetServerVersion return the current Matterfoss server version
 	//
 	// @tag Server
 	// Minimum server version: 5.4
 	GetServerVersion() string
 
-	// GetSystemInstallDate returns the time that Mattermost was first installed and ran.
+	// GetSystemInstallDate returns the time that Matterfoss was first installed and ran.
 	//
 	// @tag Server
 	// Minimum server version: 5.10
@@ -934,7 +934,7 @@ type API interface {
 
 	// PublishWebSocketEvent sends an event to WebSocket connections.
 	// event is the type and will be prepended with "custom_<pluginid>_".
-	// payload is the data sent with the event. Interface values must be primitive Go types or mattermost-server/model types.
+	// payload is the data sent with the event. Interface values must be primitive Go types or matterfoss-server/model types.
 	// broadcast determines to which users to send the event.
 	//
 	// Minimum server version: 5.2
@@ -965,7 +965,7 @@ type API interface {
 	// Minimum server version: 6.3
 	RolesGrantPermission(roleNames []string, permissionId string) bool
 
-	// LogDebug writes a log message to the Mattermost server log file.
+	// LogDebug writes a log message to the Matterfoss server log file.
 	// Appropriate context such as the plugin name will already be added as fields so plugins
 	// do not need to add that info.
 	//
@@ -973,7 +973,7 @@ type API interface {
 	// Minimum server version: 5.2
 	LogDebug(msg string, keyValuePairs ...interface{})
 
-	// LogInfo writes a log message to the Mattermost server log file.
+	// LogInfo writes a log message to the Matterfoss server log file.
 	// Appropriate context such as the plugin name will already be added as fields so plugins
 	// do not need to add that info.
 	//
@@ -981,7 +981,7 @@ type API interface {
 	// Minimum server version: 5.2
 	LogInfo(msg string, keyValuePairs ...interface{})
 
-	// LogError writes a log message to the Mattermost server log file.
+	// LogError writes a log message to the Matterfoss server log file.
 	// Appropriate context such as the plugin name will already be added as fields so plugins
 	// do not need to add that info.
 	//
@@ -989,7 +989,7 @@ type API interface {
 	// Minimum server version: 5.2
 	LogError(msg string, keyValuePairs ...interface{})
 
-	// LogWarn writes a log message to the Mattermost server log file.
+	// LogWarn writes a log message to the Matterfoss server log file.
 	// Appropriate context such as the plugin name will already be added as fields so plugins
 	// do not need to add that info.
 	//

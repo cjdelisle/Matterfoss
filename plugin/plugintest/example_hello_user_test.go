@@ -13,17 +13,17 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/plugin/plugintest"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest"
 )
 
 type HelloUserPlugin struct {
-	plugin.MattermostPlugin
+	plugin.MatterfossPlugin
 }
 
 func (p *HelloUserPlugin) ServeHTTP(context *plugin.Context, w http.ResponseWriter, r *http.Request) {
-	userID := r.Header.Get("Mattermost-User-Id")
+	userID := r.Header.Get("Matterfoss-User-Id")
 	user, err := p.API.GetUser(userID)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -50,7 +50,7 @@ func Example() {
 
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest("GET", "/", nil)
-	r.Header.Add("Mattermost-User-Id", user.Id)
+	r.Header.Add("Matterfoss-User-Id", user.Id)
 	p.ServeHTTP(&plugin.Context{}, w, r)
 	body, err := ioutil.ReadAll(w.Result().Body)
 	require.NoError(t, err)

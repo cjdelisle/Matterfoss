@@ -13,8 +13,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 const (
@@ -4304,13 +4304,13 @@ func testUserStoreAnalyticsGetGuestCount(t *testing.T, ss store.Store) {
 }
 
 func testUserStoreAnalyticsGetExternalUsers(t *testing.T, ss store.Store) {
-	localHostDomain := "mattermost.com"
+	localHostDomain := "matterfoss.org"
 	result, err := ss.User().AnalyticsGetExternalUsers(localHostDomain)
 	require.NoError(t, err)
 	assert.False(t, result)
 
 	u1 := model.User{}
-	u1.Email = "a@mattermost.com"
+	u1.Email = "a@matterfoss.org"
 	u1.Username = model.NewId()
 	u1.Roles = "system_user system_admin"
 
@@ -5941,7 +5941,7 @@ func testIsEmpty(t *testing.T, ss store.Store) {
 
 func testGetUsersWithInvalidEmails(t *testing.T, ss store.Store) {
 	u1, err := ss.User().Save(&model.User{
-		Email:    "ben@invalid.mattermost.com",
+		Email:    "ben@invalid.matterfoss.org",
 		Username: "u1" + model.NewId(),
 	})
 

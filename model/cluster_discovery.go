@@ -10,7 +10,7 @@ import (
 
 const (
 	CDSOfflineAfterMillis = 1000 * 60 * 30 // 30 minutes
-	CDSTypeApp            = "mattermost_app"
+	CDSTypeApp            = "matterfoss_app"
 )
 
 type ClusterDiscovery struct {

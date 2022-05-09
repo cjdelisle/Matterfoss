@@ -8,16 +8,16 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 // this functions loads translations from filesystem if they are not
 // loaded already and assigns english while loading server config
 func TranslationsPreInit() error {
 	translationsDir := "i18n"
-	if mattermostPath := os.Getenv("MM_SERVER_PATH"); mattermostPath != "" {
-		translationsDir = filepath.Join(mattermostPath, "i18n")
+	if matterfossPath := os.Getenv("MM_SERVER_PATH"); matterfossPath != "" {
+		translationsDir = filepath.Join(matterfossPath, "i18n")
 	}
 
 	i18nDirectory, found := fileutils.FindDirRelBinary(translationsDir)

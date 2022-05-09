@@ -13,10 +13,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/filestore"
-	"github.com/mattermost/mattermost-server/v6/utils"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 const (
@@ -29,7 +29,7 @@ const (
 	actionSymlink
 )
 
-const root = "___mattermost-server"
+const root = "___matterfoss-server"
 
 type testResourceDetails struct {
 	src     string
@@ -87,7 +87,7 @@ func getTestResourcesToSetup() []testResourceDetails {
 	var found bool
 
 	var testResourcesToSetup = []testResourceDetails{
-		{root, "mattermost-server", resourceTypeFolder, actionSymlink},
+		{root, "matterfoss-server", resourceTypeFolder, actionSymlink},
 		{"go.mod", "go.mod", resourceTypeFile, actionSymlink},
 		{"i18n", "i18n", resourceTypeFolder, actionSymlink},
 		{"templates", "templates", resourceTypeFolder, actionSymlink},

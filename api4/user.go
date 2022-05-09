@@ -13,13 +13,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/app"
-	"github.com/mattermost/mattermost-server/v6/audit"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/utils"
-	"github.com/mattermost/mattermost-server/v6/web"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/web"
 )
 
 func (api *API) InitUser() {
@@ -1888,7 +1888,7 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 		c.App.AttachSessionCookies(c.AppContext, w, r)
 	}
 
-	// For context see: https://mattermost.atlassian.net/browse/MM-39583
+	// For context see: https://matterfoss.atlassian.net/browse/MM-39583
 	if c.App.Channels().License() != nil && *c.App.Channels().License().Features.Cloud {
 		c.App.AttachCloudSessionCookie(c.AppContext, w, r)
 	}
@@ -2919,7 +2919,7 @@ func migrateAuthToLDAP(c *Context, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Email auth in Mattermost system is represented by ""
+	// Email auth in Matterfoss system is represented by ""
 	if from == "email" {
 		from = ""
 	}
@@ -2978,7 +2978,7 @@ func migrateAuthToSaml(c *Context, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Email auth in Mattermost system is represented by ""
+	// Email auth in Matterfoss system is represented by ""
 	if from == "email" {
 		from = ""
 	}

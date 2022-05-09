@@ -4,7 +4,7 @@
 package searchengine
 
 import (
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func NewBroker(cfg *model.Config) *Broker {

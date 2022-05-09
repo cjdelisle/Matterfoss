@@ -20,8 +20,8 @@ import (
 
 	"github.com/mattermost/ldap"
 
-	"github.com/mattermost/mattermost-server/v6/shared/filestore"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (
@@ -40,7 +40,7 @@ const (
 
 	MinioAccessKey = "minioaccesskey"
 	MinioSecretKey = "miniosecretkey"
-	MinioBucket    = "mattermost-test"
+	MinioBucket    = "matterfoss-test"
 
 	PasswordMaximumLength = 64
 	PasswordMinimumLength = 5
@@ -52,8 +52,8 @@ const (
 
 	GenericNoChannelNotification = "generic_no_channel"
 	GenericNotification          = "generic"
-	GenericNotificationServer    = "https://push-test.mattermost.com"
-	MmSupportAdvisorAddress      = "support-advisor@mattermost.com"
+	GenericNotificationServer    = "https://push-test.matterfoss.org"
+	MmSupportAdvisorAddress      = "support-advisor@matterfoss.org"
 	FullNotification             = "full"
 	IdLoadedNotification         = "id_loaded"
 
@@ -111,13 +111,13 @@ const (
 	ServiceSettingsDefaultGfycatAPISecret  = "3wLVZPiswc3DnaiaFoLkDvB4X0IV6CpMkj4tf2inJRsBY6-FnkT08zGmppWFgeof"
 	ServiceSettingsDefaultDeveloperFlags   = ""
 
-	TeamSettingsDefaultSiteName              = "Mattermost"
+	TeamSettingsDefaultSiteName              = "Matterfoss"
 	TeamSettingsDefaultMaxUsersPerTeam       = 50
 	TeamSettingsDefaultCustomBrandText       = ""
 	TeamSettingsDefaultCustomDescriptionText = ""
 	TeamSettingsDefaultUserStatusAwayTimeout = 300
 
-	SqlSettingsDefaultDataSource = "postgres://mmuser:mostest@localhost/mattermost_test?sslmode=disable&connect_timeout=10&binary_parameters=yes"
+	SqlSettingsDefaultDataSource = "postgres://mmuser:mostest@localhost/matterfoss_test?sslmode=disable&connect_timeout=10&binary_parameters=yes"
 
 	FileSettingsDefaultDirectory = "./data/"
 
@@ -129,11 +129,11 @@ const (
 
 	EmailSettingsDefaultFeedbackOrganization = ""
 
-	SupportSettingsDefaultTermsOfServiceLink = "https://mattermost.com/terms-of-use/"
-	SupportSettingsDefaultPrivacyPolicyLink  = "https://mattermost.com/privacy-policy/"
-	SupportSettingsDefaultAboutLink          = "https://docs.mattermost.com/about/product.html/"
-	SupportSettingsDefaultHelpLink           = "https://mattermost.com/default-help/"
-	SupportSettingsDefaultReportAProblemLink = "https://mattermost.com/default-report-a-problem/"
+	SupportSettingsDefaultTermsOfServiceLink = "https://matterfoss.org/terms-of-use/"
+	SupportSettingsDefaultPrivacyPolicyLink  = "https://matterfoss.org/privacy-policy/"
+	SupportSettingsDefaultAboutLink          = "https://docs.matterfoss.org/about/product.html/"
+	SupportSettingsDefaultHelpLink           = "https://matterfoss.org/default-help/"
+	SupportSettingsDefaultReportAProblemLink = "https://matterfoss.org/default-report-a-problem/"
 	SupportSettingsDefaultSupportEmail       = ""
 	SupportSettingsDefaultReAcceptancePeriod = 365
 
@@ -169,9 +169,9 @@ const (
 	SamlSettingsCanonicalAlgorithmC14n11  = "Canonical1.1"
 	SamlSettingsDefaultCanonicalAlgorithm = SamlSettingsCanonicalAlgorithmC14n
 
-	NativeappSettingsDefaultAppDownloadLink        = "https://mattermost.com/download/#mattermostApps"
-	NativeappSettingsDefaultAndroidAppDownloadLink = "https://mattermost.com/mattermost-android-app/"
-	NativeappSettingsDefaultIosAppDownloadLink     = "https://mattermost.com/mattermost-ios-app/"
+	NativeappSettingsDefaultAppDownloadLink        = "https://matterfoss.org/download/#matterfossApps"
+	NativeappSettingsDefaultAndroidAppDownloadLink = "https://matterfoss.org/matterfoss-android-app/"
+	NativeappSettingsDefaultIosAppDownloadLink     = "https://matterfoss.org/matterfoss-ios-app/"
 
 	ExperimentalSettingsDefaultLinkMetadataTimeoutMilliseconds = 5000
 
@@ -179,7 +179,7 @@ const (
 
 	AnnouncementSettingsDefaultBannerColor                  = "#f2a93b"
 	AnnouncementSettingsDefaultBannerTextColor              = "#333333"
-	AnnouncementSettingsDefaultNoticesJsonURL               = "https://notices.mattermost.com/"
+	AnnouncementSettingsDefaultNoticesJsonURL               = "https://notices.matterfoss.org/"
 	AnnouncementSettingsDefaultNoticesFetchFrequencySeconds = 3600
 
 	TeamSettingsDefaultTeamText = "default"
@@ -212,8 +212,8 @@ const (
 	PluginSettingsDefaultDirectory         = "./plugins"
 	PluginSettingsDefaultClientDirectory   = "./client/plugins"
 	PluginSettingsDefaultEnableMarketplace = true
-	PluginSettingsDefaultMarketplaceURL    = "https://api.integrations.mattermost.com"
-	PluginSettingsOldMarketplaceURL        = "https://marketplace.integrations.mattermost.com"
+	PluginSettingsDefaultMarketplaceURL    = "https://api.integrations.matterfoss.org"
+	PluginSettingsOldMarketplaceURL        = "https://marketplace.integrations.matterfoss.org"
 
 	ComplianceExportTypeCsv            = "csv"
 	ComplianceExportTypeActiance       = "actiance"
@@ -238,11 +238,11 @@ const (
 	Office365SettingsDefaultTokenEndpoint   = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 	Office365SettingsDefaultUserAPIEndpoint = "https://graph.microsoft.com/v1.0/me"
 
-	CloudSettingsDefaultCwsURL    = "https://customers.mattermost.com"
-	CloudSettingsDefaultCwsAPIURL = "https://portal.internal.prod.cloud.mattermost.com"
+	CloudSettingsDefaultCwsURL    = "https://customers.matterfoss.org"
+	CloudSettingsDefaultCwsAPIURL = "https://portal.internal.prod.cloud.matterfoss.org"
 	OpenidSettingsDefaultScope    = "profile openid email"
 
-	LocalModeSocketPath = "/var/tmp/mattermost_local.socket"
+	LocalModeSocketPath = "/var/tmp/matterfoss_local.socket"
 )
 
 func GetDefaultAppCustomURLSchemes() []string {
@@ -2731,9 +2731,9 @@ func (s *PluginSettings) SetDefaults(ls LogSettings) {
 		s.PluginStates = make(map[string]*PluginState)
 	}
 
-	if s.PluginStates["com.mattermost.nps"] == nil {
+	if s.PluginStates["com.matterfoss.nps"] == nil {
 		// Enable the NPS plugin by default if diagnostics are enabled
-		s.PluginStates["com.mattermost.nps"] = &PluginState{Enable: ls.EnableDiagnostics == nil || *ls.EnableDiagnostics}
+		s.PluginStates["com.matterfoss.nps"] = &PluginState{Enable: ls.EnableDiagnostics == nil || *ls.EnableDiagnostics}
 	}
 
 	if s.PluginStates["playbooks"] == nil {
@@ -2741,9 +2741,9 @@ func (s *PluginSettings) SetDefaults(ls LogSettings) {
 		s.PluginStates["playbooks"] = &PluginState{Enable: true}
 	}
 
-	if s.PluginStates["com.mattermost.plugin-channel-export"] == nil && BuildEnterpriseReady == "true" {
+	if s.PluginStates["com.matterfoss.plugin-channel-export"] == nil && BuildEnterpriseReady == "true" {
 		// Enable the channel export plugin by default
-		s.PluginStates["com.mattermost.plugin-channel-export"] = &PluginState{Enable: true}
+		s.PluginStates["com.matterfoss.plugin-channel-export"] = &PluginState{Enable: true}
 	}
 
 	if s.PluginStates["focalboard"] == nil {
@@ -2751,9 +2751,9 @@ func (s *PluginSettings) SetDefaults(ls LogSettings) {
 		s.PluginStates["focalboard"] = &PluginState{Enable: true}
 	}
 
-	if s.PluginStates["com.mattermost.apps"] == nil {
+	if s.PluginStates["com.matterfoss.apps"] == nil {
 		// Enable the Apps plugin by default
-		s.PluginStates["com.mattermost.apps"] = &PluginState{Enable: true}
+		s.PluginStates["com.matterfoss.apps"] = &PluginState{Enable: true}
 	}
 
 	if s.EnableMarketplace == nil {

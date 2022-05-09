@@ -14,10 +14,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/timezones"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/timezones"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 func TestGetDirectMessageNotificationEmailSubject(t *testing.T) {
@@ -839,33 +839,33 @@ func TestMarkdownConversion(t *testing.T) {
 		},
 		{
 			name: "markdown: strong",
-			args: "This is **Mattermost**",
-			want: "This is <strong>Mattermost</strong>",
+			args: "This is **Matterfoss**",
+			want: "This is <strong>Matterfoss</strong>",
 		},
 		{
 			name: "markdown: blockquote",
 			args: "Below is blockquote\n" +
-				"> This is Mattermost blockquote\n" +
+				"> This is Matterfoss blockquote\n" +
 				"> on multiple lines!",
 			want: "<blockquote>\n" +
-				"<p>This is Mattermost blockquote\n" +
+				"<p>This is Matterfoss blockquote\n" +
 				"on multiple lines!</p>\n" +
 				"</blockquote>",
 		},
 		{
 			name: "markdown: emphasis",
-			args: "This is *Mattermost*",
-			want: "This is <em>Mattermost</em>",
+			args: "This is *Matterfoss*",
+			want: "This is <em>Matterfoss</em>",
 		},
 		{
 			name: "markdown: links",
-			args: "This is [Mattermost](https://mattermost.com)",
-			want: "This is <a href=\"https://mattermost.com\">Mattermost</a>",
+			args: "This is [Matterfoss](https://matterfoss.org)",
+			want: "This is <a href=\"https://matterfoss.org\">Matterfoss</a>",
 		},
 		{
 			name: "markdown: strikethrough",
-			args: "This is ~~Mattermost~~",
-			want: "This is <del>Mattermost</del>",
+			args: "This is ~~Matterfoss~~",
+			want: "This is <del>Matterfoss</del>",
 		},
 		{
 			name: "markdown: table",
@@ -903,9 +903,9 @@ func TestMarkdownConversion(t *testing.T) {
 		},
 		{
 			name: "markdown: multiline with header and links",
-			args: "###### H6 header\n[link 1](https://mattermost.com) - [link 2](https://mattermost.com)",
+			args: "###### H6 header\n[link 1](https://matterfoss.org) - [link 2](https://matterfoss.org)",
 			want: "<h6>H6 header</h6>\n" +
-				"<p><a href=\"https://mattermost.com\">link 1</a> - <a href=\"https://mattermost.com\">link 2</a></p>",
+				"<p><a href=\"https://matterfoss.org\">link 1</a> - <a href=\"https://matterfoss.org\">link 2</a></p>",
 		},
 	}
 

@@ -37,51 +37,51 @@ import (
 	"github.com/rs/cors"
 	"golang.org/x/crypto/acme/autocert"
 
-	"github.com/mattermost/mattermost-server/v6/app/email"
-	"github.com/mattermost/mattermost-server/v6/app/featureflag"
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/app/teams"
-	"github.com/mattermost/mattermost-server/v6/app/users"
-	"github.com/mattermost/mattermost-server/v6/audit"
-	"github.com/mattermost/mattermost-server/v6/config"
-	"github.com/mattermost/mattermost-server/v6/einterfaces"
-	"github.com/mattermost/mattermost-server/v6/jobs"
-	"github.com/mattermost/mattermost-server/v6/jobs/active_users"
-	"github.com/mattermost/mattermost-server/v6/jobs/expirynotify"
-	"github.com/mattermost/mattermost-server/v6/jobs/export_delete"
-	"github.com/mattermost/mattermost-server/v6/jobs/export_process"
-	"github.com/mattermost/mattermost-server/v6/jobs/extract_content"
-	"github.com/mattermost/mattermost-server/v6/jobs/import_delete"
-	"github.com/mattermost/mattermost-server/v6/jobs/import_process"
-	"github.com/mattermost/mattermost-server/v6/jobs/migrations"
-	"github.com/mattermost/mattermost-server/v6/jobs/product_notices"
-	"github.com/mattermost/mattermost-server/v6/jobs/resend_invitation_email"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin/scheduler"
-	"github.com/mattermost/mattermost-server/v6/services/awsmeter"
-	"github.com/mattermost/mattermost-server/v6/services/cache"
-	"github.com/mattermost/mattermost-server/v6/services/httpservice"
-	"github.com/mattermost/mattermost-server/v6/services/remotecluster"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine/bleveengine"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine/bleveengine/indexer"
-	"github.com/mattermost/mattermost-server/v6/services/sharedchannel"
-	"github.com/mattermost/mattermost-server/v6/services/telemetry"
-	"github.com/mattermost/mattermost-server/v6/services/timezones"
-	"github.com/mattermost/mattermost-server/v6/services/tracing"
-	"github.com/mattermost/mattermost-server/v6/services/upgrader"
-	"github.com/mattermost/mattermost-server/v6/shared/filestore"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mail"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/shared/templates"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/localcachelayer"
-	"github.com/mattermost/mattermost-server/v6/store/retrylayer"
-	"github.com/mattermost/mattermost-server/v6/store/searchlayer"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v6/store/timerlayer"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/email"
+	"github.com/cjdelisle/matterfoss-server/v6/app/featureflag"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/app/teams"
+	"github.com/cjdelisle/matterfoss-server/v6/app/users"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/config"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/active_users"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/expirynotify"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/export_delete"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/export_process"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/extract_content"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/import_delete"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/import_process"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/migrations"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/product_notices"
+	"github.com/cjdelisle/matterfoss-server/v6/jobs/resend_invitation_email"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/scheduler"
+	"github.com/cjdelisle/matterfoss-server/v6/services/awsmeter"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v6/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v6/services/remotecluster"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine/bleveengine"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine/bleveengine/indexer"
+	"github.com/cjdelisle/matterfoss-server/v6/services/sharedchannel"
+	"github.com/cjdelisle/matterfoss-server/v6/services/telemetry"
+	"github.com/cjdelisle/matterfoss-server/v6/services/timezones"
+	"github.com/cjdelisle/matterfoss-server/v6/services/tracing"
+	"github.com/cjdelisle/matterfoss-server/v6/services/upgrader"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/templates"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/localcachelayer"
+	"github.com/cjdelisle/matterfoss-server/v6/store/retrylayer"
+	"github.com/cjdelisle/matterfoss-server/v6/store/searchlayer"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/store/timerlayer"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 // declaring this as var to allow overriding in tests
@@ -436,7 +436,7 @@ func NewServer(options ...Option) (*Server, error) {
 	s.pushNotificationClient = s.httpService.MakeClient(true)
 
 	if err2 := utils.TranslationsPreInit(); err2 != nil {
-		return nil, errors.Wrapf(err2, "unable to load Mattermost translation files")
+		return nil, errors.Wrapf(err2, "unable to load Matterfoss translation files")
 	}
 	model.AppErrorInit(i18n.T)
 
@@ -454,7 +454,7 @@ func NewServer(options ...Option) (*Server, error) {
 	s.createPushNotificationsHub()
 
 	if err2 := i18n.InitTranslations(*s.Config().LocalizationSettings.DefaultServerLocale, *s.Config().LocalizationSettings.DefaultClientLocale); err2 != nil {
-		return nil, errors.Wrapf(err2, "unable to load Mattermost translation files")
+		return nil, errors.Wrapf(err2, "unable to load Matterfoss translation files")
 	}
 
 	templatesDir, ok := templates.GetTemplateDirectory()
@@ -549,7 +549,7 @@ func NewServer(options ...Option) (*Server, error) {
 	}
 
 	if _, err = url.ParseRequestURI(*s.Config().ServiceSettings.SiteURL); err != nil {
-		mlog.Error("SiteURL must be set. Some features will operate incorrectly if the SiteURL is not set. See documentation for details: https://docs.mattermost.com/configure/configuration-settings.html#site-url")
+		mlog.Error("SiteURL must be set. Some features will operate incorrectly if the SiteURL is not set. See documentation for details: https://docs.matterfoss.org/configure/configuration-settings.html#site-url")
 	}
 
 	// Start email batching because it's not like the other jobs
@@ -1736,7 +1736,7 @@ func (s *Server) doLicenseExpirationCheck() {
 
 	users, err := s.Store.User().GetSystemAdminProfiles()
 	if err != nil {
-		mlog.Error("Failed to get system admins for license expired message from Mattermost.")
+		mlog.Error("Failed to get system admins for license expired message from Matterfoss.")
 		return
 	}
 
@@ -2069,7 +2069,7 @@ func (a *App) GenerateSupportPacket() []model.FileData {
 		a.generateSupportPacketYaml,
 		a.createPluginsFile,
 		a.createSanitizedConfigFile,
-		a.getMattermostLog,
+		a.getMatterfossLog,
 		a.getNotificationsLog,
 	}
 
@@ -2122,27 +2122,27 @@ func (a *App) getNotificationsLog() (*model.FileData, string) {
 	return nil, warning
 }
 
-func (a *App) getMattermostLog() (*model.FileData, string) {
+func (a *App) getMatterfossLog() (*model.FileData, string) {
 	var warning string
 
-	// Getting mattermost.log
+	// Getting matterfoss.log
 	if *a.Config().LogSettings.EnableFile {
-		// mattermost.log
-		mattermostLog := config.GetLogFileLocation(*a.Config().LogSettings.FileLocation)
+		// matterfoss.log
+		matterfossLog := config.GetLogFileLocation(*a.Config().LogSettings.FileLocation)
 
-		mattermostLogFileData, mattermostLogFileDataErr := ioutil.ReadFile(mattermostLog)
+		matterfossLogFileData, matterfossLogFileDataErr := ioutil.ReadFile(matterfossLog)
 
-		if mattermostLogFileDataErr == nil {
+		if matterfossLogFileDataErr == nil {
 			fileData := model.FileData{
-				Filename: "mattermost.log",
-				Body:     mattermostLogFileData,
+				Filename: "matterfoss.log",
+				Body:     matterfossLogFileData,
 			}
 			return &fileData, ""
 		}
-		warning = fmt.Sprintf("ioutil.ReadFile(mattermostLog) Error: %s", mattermostLogFileDataErr.Error())
+		warning = fmt.Sprintf("ioutil.ReadFile(matterfossLog) Error: %s", matterfossLogFileDataErr.Error())
 
 	} else {
-		warning = "Unable to retrieve mattermost.log because LogSettings: EnableFile is false in config.json"
+		warning = "Unable to retrieve matterfoss.log because LogSettings: EnableFile is false in config.json"
 	}
 
 	return nil, warning

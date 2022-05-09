@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func TestCreateDefaultMemberships(t *testing.T) {
@@ -337,7 +337,7 @@ func TestCreateDefaultMemberships(t *testing.T) {
 
 	t.Run("Team with restricted domains skips over members that do not match the allowed domains", func(t *testing.T) {
 		restrictedUser := th.CreateUser()
-		restrictedUser.Email = "restricted@mattermost.org"
+		restrictedUser.Email = "restricted@matterfoss.org"
 		_, err = th.App.UpdateUser(restrictedUser, false)
 		require.Nil(t, err)
 		_, err = th.App.UpsertGroupMember(scienceGroup.Id, restrictedUser.Id)
@@ -346,8 +346,8 @@ func TestCreateDefaultMemberships(t *testing.T) {
 		restrictedTeam, err := th.App.CreateTeam(th.Context, &model.Team{
 			DisplayName:    "Restricted",
 			Name:           "restricted" + model.NewId(),
-			Email:          "restricted@mattermost.org",
-			AllowedDomains: "mattermost.org",
+			Email:          "restricted@matterfoss.org",
+			AllowedDomains: "matterfoss.org",
 			Type:           model.TeamOpen,
 		})
 		require.Nil(t, err)

@@ -4,13 +4,13 @@
 package main
 
 import (
-	"github.com/mattermost/mattermost-server/v6/app/plugin_api_tests"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/app/plugin_api_tests"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
 )
 
 type MyPlugin struct {
-	plugin.MattermostPlugin
+	plugin.MatterfossPlugin
 	configuration plugin_api_tests.BasicConfig
 }
 

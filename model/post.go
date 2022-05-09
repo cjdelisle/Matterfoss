@@ -14,7 +14,7 @@ import (
 	"sync"
 	"unicode/utf8"
 
-	"github.com/mattermost/mattermost-server/v6/shared/markdown"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/markdown"
 )
 
 const (
@@ -85,7 +85,7 @@ type Post struct {
 
 	Message string `json:"message"`
 	// MessageSource will contain the message as submitted by the user if Message has been modified
-	// by Mattermost for presentation (e.g if an image proxy is being used). It should be used to
+	// by Matterfoss for presentation (e.g if an image proxy is being used). It should be used to
 	// populate edit boxes if present.
 	MessageSource string `json:"message_source,omitempty"`
 

@@ -17,11 +17,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/audit"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/services/cache"
-	"github.com/mattermost/mattermost-server/v6/services/upgrader"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/services/cache"
+	"github.com/cjdelisle/matterfoss-server/v6/services/upgrader"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (
@@ -96,9 +96,9 @@ func generateSupportPacket(c *Context, w http.ResponseWriter, r *http.Request) {
 
 	fileDatas := c.App.GenerateSupportPacket()
 
-	// Constructing the ZIP file name as per spec (mattermost_support_packet_YYYY-MM-DD-HH-MM.zip)
+	// Constructing the ZIP file name as per spec (matterfoss_support_packet_YYYY-MM-DD-HH-MM.zip)
 	now := time.Now()
-	outputZipFilename := fmt.Sprintf("mattermost_support_packet_%s.zip", now.Format("2006-01-02-03-04"))
+	outputZipFilename := fmt.Sprintf("matterfoss_support_packet_%s.zip", now.Format("2006-01-02-03-04"))
 
 	fileStorageBackend := c.App.FileBackend()
 
@@ -415,7 +415,7 @@ func getLatestVersion(c *Context, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := c.App.GetLatestVersion("https://api.github.com/repos/mattermost/mattermost-server/releases/latest")
+	resp, err := c.App.GetLatestVersion("https://api.github.com/repos/matterfoss/matterfoss-server/releases/latest")
 	if err != nil {
 		c.Err = err
 		return
@@ -683,7 +683,7 @@ func upgradeToEnterprise(c *Context, w http.ResponseWriter, r *http.Request) {
 		switch {
 		case errors.As(err, &ipErr):
 			params := map[string]interface{}{
-				"MattermostUsername": ipErr.MattermostUsername,
+				"MatterfossUsername": ipErr.MatterfossUsername,
 				"FileUsername":       ipErr.FileUsername,
 				"Path":               ipErr.Path,
 			}

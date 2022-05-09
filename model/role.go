@@ -51,7 +51,7 @@ func init() {
 		RunMemberRoleId,
 	}, NewSystemRoleIDs...)
 
-	// When updating the values here, the values in mattermost-redux must also be updated.
+	// When updating the values here, the values in matterfoss-redux must also be updated.
 	SysconsoleAncillaryPermissions = map[string][]*Permission{
 		PermissionSysconsoleReadAboutEditionAndLicense.Id: {
 			PermissionReadLicenseInformation,

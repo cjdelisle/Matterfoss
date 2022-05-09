@@ -20,7 +20,7 @@ const (
 var reservedIPRanges []*net.IPNet
 
 // IsReservedIP checks whether the target IP belongs to reserved IP address ranges to avoid SSRF attacks to the internal
-// network of the Mattermost server
+// network of the Matterfoss server
 func IsReservedIP(ip net.IP) bool {
 	for _, ipRange := range reservedIPRanges {
 		if ipRange.Contains(ip) {
@@ -84,7 +84,7 @@ func init() {
 		}
 		reservedIPRanges = append(reservedIPRanges, parsed)
 	}
-	defaultUserAgent = "Mattermost-Bot/1.1"
+	defaultUserAgent = "Matterfoss-Bot/1.1"
 }
 
 type DialContextFunction func(ctx context.Context, network, addr string) (net.Conn, error)
@@ -134,7 +134,7 @@ func dialContextFilter(dial DialContextFunction, allowHost func(host string) boo
 	}
 }
 
-func NewTransport(enableInsecureConnections bool, allowHost func(host string) bool, allowIP func(ip net.IP) bool) *MattermostTransport {
+func NewTransport(enableInsecureConnections bool, allowHost func(host string) bool, allowIP func(ip net.IP) bool) *MatterfossTransport {
 	dialContext := (&net.Dialer{
 		Timeout:   ConnectTimeout,
 		KeepAlive: 30 * time.Second,
@@ -144,7 +144,7 @@ func NewTransport(enableInsecureConnections bool, allowHost func(host string) bo
 		dialContext = dialContextFilter(dialContext, allowHost, allowIP)
 	}
 
-	return &MattermostTransport{
+	return &MatterfossTransport{
 		&http.Transport{
 			Proxy:                 http.ProxyFromEnvironment,
 			DialContext:           dialContext,

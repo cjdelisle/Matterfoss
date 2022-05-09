@@ -59,7 +59,7 @@ func TestOAuthAppIsValid(t *testing.T) {
 	app.CallbackUrls = []string{"https://nowhere.com"}
 	require.NotNil(t, app.IsValid())
 
-	app.MattermostAppID = "Some app ID"
+	app.MatterfossAppID = "Some app ID"
 	require.NotNil(t, app.IsValid())
 
 	app.Homepage = "https://nowhere.com"

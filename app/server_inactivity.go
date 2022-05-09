@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 )
 
 const serverInactivityHours = 100
@@ -107,7 +107,7 @@ func (s *Server) takeInactivityAction() {
 	s.GetTelemetryService().SendTelemetry("inactive_server", properties)
 	users, err := s.Store.User().GetSystemAdminProfiles()
 	if err != nil {
-		mlog.Error("Failed to get system admins for inactivity check from Mattermost.")
+		mlog.Error("Failed to get system admins for inactivity check from Matterfoss.")
 		return
 	}
 

@@ -33,7 +33,7 @@ type FeatureFlags struct {
 
 	// Feature flags to control plugin versions
 	PluginPlaybooks  string `plugin_id:"playbooks"`
-	PluginApps       string `plugin_id:"com.mattermost.apps"`
+	PluginApps       string `plugin_id:"com.matterfoss.apps"`
 	PluginFocalboard string `plugin_id:"focalboard"`
 
 	PermalinkPreviews bool

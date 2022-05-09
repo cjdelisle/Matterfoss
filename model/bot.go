@@ -14,7 +14,7 @@ const (
 	BotDisplayNameMaxRunes   = UserFirstNameMaxRunes
 	BotDescriptionMaxRunes   = 1024
 	BotCreatorIdMaxRunes     = KeyValuePluginIdMaxRunes // UserId or PluginId
-	BotWarnMetricBotUsername = "mattermost-advisor"
+	BotWarnMetricBotUsername = "matterfoss-advisor"
 	BotSystemBotUsername     = "system-bot"
 )
 

@@ -12,7 +12,7 @@ import (
 
 // customTransport is used to point the request to a different server.
 // This is helpful in situations where a different service is handling AWS S3 requests
-// from multiple Mattermost applications, and the Mattermost service itself does not
+// from multiple Matterfoss applications, and the Matterfoss service itself does not
 // have any S3 credentials.
 type customTransport struct {
 	base   http.RoundTripper

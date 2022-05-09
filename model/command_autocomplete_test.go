@@ -68,7 +68,7 @@ func TestAutocompleteData(t *testing.T) {
 func getAutocompleteData() *AutocompleteData {
 	ad := NewAutocompleteData("jira", "", "Available commands:")
 	ad.RoleID = SystemUserRoleId
-	command := NewAutocompleteData("connect", "", "Connect to mattermost")
+	command := NewAutocompleteData("connect", "", "Connect to matterfoss")
 	command.RoleID = SystemAdminRoleId
 	items := []AutocompleteListItem{
 		{
@@ -90,10 +90,10 @@ func getAutocompleteData() *AutocompleteData {
 
 func TestUpdateRelativeURLsForPluginCommands(t *testing.T) {
 	ad := getAutocompleteData()
-	baseURL, _ := url.Parse("http://localhost:8065/plugins/com.mattermost.demo-plugin")
+	baseURL, _ := url.Parse("http://localhost:8065/plugins/com.matterfoss.demo-plugin")
 	err := ad.UpdateRelativeURLsForPluginCommands(baseURL)
 	assert.NoError(t, err)
 	arg, ok := ad.SubCommands[0].Arguments[2].Data.(*AutocompleteDynamicListArg)
 	assert.True(t, ok)
-	assert.Equal(t, "http://localhost:8065/plugins/com.mattermost.demo-plugin/other/url", arg.FetchURL)
+	assert.Equal(t, "http://localhost:8065/plugins/com.matterfoss.demo-plugin/other/url", arg.FetchURL)
 }

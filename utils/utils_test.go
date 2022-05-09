@@ -162,7 +162,7 @@ func TestRemoveStringFromSlice(t *testing.T) {
 }
 
 func TestAppendQueryParamsToURL(t *testing.T) {
-	url := "mattermost://callback"
+	url := "matterfoss://callback"
 	redirectURL := AppendQueryParamsToURL(url, map[string]string{
 		"key1": "value1",
 		"key2": "value2",

@@ -29,7 +29,7 @@ type OAuthApp struct {
 	CallbackUrls    StringArray `json:"callback_urls"`
 	Homepage        string      `json:"homepage"`
 	IsTrusted       bool        `json:"is_trusted"`
-	MattermostAppID string      `json:"mattermost_app_id"`
+	MatterfossAppID string      `json:"matterfoss_app_id"`
 }
 
 // IsValid validates the app and returns an error if it isn't configured
@@ -84,8 +84,8 @@ func (a *OAuthApp) IsValid() *AppError {
 		}
 	}
 
-	if len(a.MattermostAppID) > 32 {
-		return NewAppError("OAuthApp.IsValid", "model.oauth.is_valid.mattermost_app_id.app_error", nil, "app_id="+a.Id, http.StatusBadRequest)
+	if len(a.MatterfossAppID) > 32 {
+		return NewAppError("OAuthApp.IsValid", "model.oauth.is_valid.matterfoss_app_id.app_error", nil, "app_id="+a.Id, http.StatusBadRequest)
 	}
 
 	return nil

@@ -6,7 +6,7 @@ package teams
 import (
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 // By default the list will be (not necessarily in this order):
@@ -93,7 +93,7 @@ func (ts *TeamService) checkValidDomains(team *model.Team) error {
 
 func normalizeDomains(domains string) []string {
 	// commas and @ signs are optional
-	// can be in the form of "@corp.mattermost.com, mattermost.com mattermost.org" -> corp.mattermost.com mattermost.com mattermost.org
+	// can be in the form of "@corp.matterfoss.org, matterfoss.org matterfoss.org" -> corp.matterfoss.org matterfoss.org matterfoss.org
 	return strings.Fields(strings.TrimSpace(strings.ToLower(strings.Replace(strings.Replace(domains, "@", " ", -1), ",", " ", -1))))
 }
 

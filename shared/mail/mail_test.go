@@ -217,8 +217,8 @@ func TestSendMailUsingConfigAdvanced(t *testing.T) {
 	mail := mailData{
 		mimeTo:        "test@example.com",
 		smtpTo:        "test2@example.com",
-		from:          mail.Address{Name: "Nobody", Address: "nobody@mattermost.com"},
-		replyTo:       mail.Address{Name: "ReplyTo", Address: "reply_to@mattermost.com"},
+		from:          mail.Address{Name: "Nobody", Address: "nobody@matterfoss.org"},
+		replyTo:       mail.Address{Name: "ReplyTo", Address: "reply_to@matterfoss.org"},
 		subject:       "Testing this email",
 		htmlBody:      "This is a test from autobot",
 		embeddedFiles: embeddedFiles,

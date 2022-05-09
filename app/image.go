@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/mattermost/mattermost-server/v6/app/imaging"
+	"github.com/cjdelisle/matterfoss-server/v6/app/imaging"
 )
 
 func checkImageResolutionLimit(w, h int, maxRes int64) error {

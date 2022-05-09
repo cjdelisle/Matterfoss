@@ -8,12 +8,12 @@ import (
 	"mime/multipart"
 	"net/http"
 
-	"github.com/mattermost/mattermost-server/v6/audit"
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 type mixedUnlinkedGroup struct {
-	Id           *string `json:"mattermost_group_id"`
+	Id           *string `json:"matterfoss_group_id"`
 	DisplayName  string  `json:"name"`
 	RemoteId     string  `json:"primary_key"`
 	HasSyncables *bool   `json:"has_syncables"`

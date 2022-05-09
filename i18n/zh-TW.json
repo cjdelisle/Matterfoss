@@ -85,7 +85,7 @@
   },
   {
     "id": "api.admin.test_email.body",
-    "translation": "看起來您的 Mattermost 電子郵件設定正確！"
+    "translation": "看起來您的 Matterfoss 電子郵件設定正確！"
   },
   {
     "id": "api.admin.test_email.missing_server",
@@ -97,7 +97,7 @@
   },
   {
     "id": "api.admin.test_email.subject",
-    "translation": "Mattermost - 測試電子郵件設定"
+    "translation": "Matterfoss - 測試電子郵件設定"
   },
   {
     "id": "api.admin.test_s3.missing_s3_bucket",
@@ -345,7 +345,7 @@
   },
   {
     "id": "api.command.invite_people.desc",
-    "translation": "送個邀請函給您的 Mattermost 團隊"
+    "translation": "送個邀請函給您的 Matterfoss 團隊"
   },
   {
     "id": "api.command.invite_people.email_invitations_off",
@@ -619,7 +619,7 @@
   },
   {
     "id": "api.command_help.desc",
-    "translation": "開啟 Mattermost 說明頁面"
+    "translation": "開啟 Matterfoss 說明頁面"
   },
   {
     "id": "api.command_help.name",
@@ -631,7 +631,7 @@
   },
   {
     "id": "api.command_invite.channel.error",
-    "translation": "找不到頻道 {{.Channel}}. 請用[頻道識別](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)以分辨頻道。"
+    "translation": "找不到頻道 {{.Channel}}. 請用[頻道識別](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel)以分辨頻道。"
   },
   {
     "id": "api.command_invite.desc",
@@ -723,7 +723,7 @@
   },
   {
     "id": "api.command_logout.desc",
-    "translation": "登出 Mattermost"
+    "translation": "登出 Matterfoss"
   },
   {
     "id": "api.command_logout.name",
@@ -775,7 +775,7 @@
   },
   {
     "id": "api.command_mute.error",
-    "translation": "找不到頻道 {{.Channel}}. 請用[頻道識別](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)以分辨頻道。"
+    "translation": "找不到頻道 {{.Channel}}. 請用[頻道識別](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel)以分辨頻道。"
   },
   {
     "id": "api.command_mute.hint",
@@ -787,7 +787,7 @@
   },
   {
     "id": "api.command_mute.no_channel.error",
-    "translation": "找不到特定的頻道。 請用[頻道識別](https://docs.mattermost.com/messaging/managing-channels.html#naming-a-channel)以分辨頻道。"
+    "translation": "找不到特定的頻道。 請用[頻道識別](https://docs.matterfoss.com/messaging/managing-channels.html#naming-a-channel)以分辨頻道。"
   },
   {
     "id": "api.command_mute.not_member.error",
@@ -1517,7 +1517,7 @@
   },
   {
     "id": "api.slackimport.slack_add_channels.merge",
-    "translation": "Slack 頻道 {{.DisplayName}} 以存在於現行 Mattermost 中。已合併兩邊頻道。\r\n"
+    "translation": "Slack 頻道 {{.DisplayName}} 以存在於現行 Matterfoss 中。已合併兩邊頻道。\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.created",
@@ -1529,11 +1529,11 @@
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing",
-    "translation": "由於有相同的電子郵件 {{.Email}} 與使用者名稱 {{.Username}}，Slack 帳號與現有 Mattermost 帳號已合併。\r\n"
+    "translation": "由於有相同的電子郵件 {{.Email}} 與使用者名稱 {{.Username}}，Slack 帳號與現有 Matterfoss 帳號已合併。\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.merge_existing_failed",
-    "translation": "由於有相同的電子郵件 {{.Email}} 與使用者名稱 {{.Username}}，Slack 帳號與現有 Mattermost 帳號已合併，但無法新增使用者至對應團隊。\r\n"
+    "translation": "由於有相同的電子郵件 {{.Email}} 與使用者名稱 {{.Username}}，Slack 帳號與現有 Matterfoss 帳號已合併，但無法新增使用者至對應團隊。\r\n"
   },
   {
     "id": "api.slackimport.slack_add_users.missing_email_address",
@@ -1545,7 +1545,7 @@
   },
   {
     "id": "api.slackimport.slack_import.log",
-    "translation": "Mattermost Slack 匯入記錄\r\n"
+    "translation": "Matterfoss Slack 匯入記錄\r\n"
   },
   {
     "id": "api.slackimport.slack_import.note1",
@@ -3209,7 +3209,7 @@
   },
   {
     "id": "ent.ldap.do_login.user_filtered.app_error",
-    "translation": "您的 AD/LDAP 帳號沒有使用此 Mattermost 伺服器的權限。請向系統管理員詢問確認 AD/LDAP 使用者過濾條件。"
+    "translation": "您的 AD/LDAP 帳號沒有使用此 Matterfoss 伺服器的權限。請向系統管理員詢問確認 AD/LDAP 使用者過濾條件。"
   },
   {
     "id": "ent.ldap.do_login.user_not_registered.app_error",
@@ -3229,7 +3229,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure.app_error",
-    "translation": "無法用 AD/LDAP 搜尋使用者。請測試 Mattermost 是否能連線至 AD/LDAP 伺服器並重新嘗試。"
+    "translation": "無法用 AD/LDAP 搜尋使用者。請測試 Matterfoss 是否能連線至 AD/LDAP 伺服器並重新嘗試。"
   },
   {
     "id": "ent.ldap.validate_filter.app_error",
@@ -3325,7 +3325,7 @@
   },
   {
     "id": "ent.migration.migratetosaml.username_already_used_by_other_user",
-    "translation": "使用者名稱已被其他 Mattermost 使用者使用。 "
+    "translation": "使用者名稱已被其他 Matterfoss 使用者使用。 "
   },
   {
     "id": "ent.saml.attribute.app_error",
@@ -3424,8 +3424,8 @@
     "translation": "無法取得頻道"
   },
   {
-    "id": "mattermost.bulletin.subject",
-    "translation": "Mattermost 安全性公告"
+    "id": "matterfoss.bulletin.subject",
+    "translation": "Matterfoss 安全性公告"
   },
   {
     "id": "mfa.activate.bad_token.app_error",
@@ -4585,7 +4585,7 @@
   },
   {
     "id": "oauth.gitlab.tos.error",
-    "translation": "GitLab 的服務使用條款有更新。請前往 gitlab.com 接受新條款後重新嘗試登入 Mattermost。"
+    "translation": "GitLab 的服務使用條款有更新。請前往 gitlab.com 接受新條款後重新嘗試登入 Matterfoss。"
   },
   {
     "id": "plugin.api.update_user_status.bad_status",
@@ -4749,11 +4749,11 @@
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support_version",
-    "translation": "Mattermost 不再支援瀏覽器的這個版本"
+    "translation": "Matterfoss 不再支援瀏覽器的這個版本"
   },
   {
     "id": "web.error.unsupported_browser.no_longer_support",
-    "translation": "Mattermost 不再支援此瀏覽器"
+    "translation": "Matterfoss 不再支援此瀏覽器"
   },
   {
     "id": "web.error.unsupported_browser.min_os_version.windows",
@@ -4797,7 +4797,7 @@
   },
   {
     "id": "web.error.unsupported_browser.download_app_or_upgrade_browser",
-    "translation": "下載 Mattermost 應用程式或只用支援的瀏覽器以獲得更好的體驗。"
+    "translation": "下載 Matterfoss 應用程式或只用支援的瀏覽器以獲得更好的體驗。"
   },
   {
     "id": "web.error.unsupported_browser.download",
@@ -4989,7 +4989,7 @@
   },
   {
     "id": "ent.ldap.syncronize.search_failure_size_exceeded.app_error",
-    "translation": "超過大小限制。請檢查[最大分頁大小](https://docs.mattermost.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
+    "translation": "超過大小限制。請檢查[最大分頁大小](https://docs.matterfoss.com/deployment/sso-ldap.html#i-see-the-log-error-ldap-result-code-4-size-limit-exceeded)。"
   },
   {
     "id": "ent.ldap.syncronize.delete_group_constained_memberships",
@@ -5477,7 +5477,7 @@
   },
   {
     "id": "app.bot.get_disable_bot_sysadmin_message",
-    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號已被停用。{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號已被停用，包括：{{.BotNames}}{{end}}可以在 **外部整合 > 機器人帳號** 對個別啟用以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號還在運作：{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號還在運作，包括：{{.BotNames}}{{end}}在此強烈建議前往 **外部整合 > 機器人帳號** 重新啟用各個機器人以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.mattermost.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。如果想要在停用使用者帳號同時自動停用機器人帳號，請前往 **系統主控台 > 外部整合 > 機器人帳號** 啟用 \"停用使用者時停用機器人帳號\"。{{end}}"
+    "translation": "{{if .disableBotsSetting}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號已被停用。{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號已被停用，包括：{{.BotNames}}{{end}}可以在 **外部整合 > 機器人帳號** 對個別啟用以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。{{else}}{{if .printAllBots}}{{.UserName}} 已被停用。下列由他們管理的機器人帳號還在運作：{{.BotNames}}{{else}}{{.UserName}} 已被停用。他們管理的 {{.NumBots}} 個機器人帳號還在運作，包括：{{.BotNames}}{{end}}在此強烈建議前往 **外部整合 > 機器人帳號** 重新啟用各個機器人以獲得所有權，並為其建立新的 Token。詳情請參閱 [文件](https://docs.matterfoss.com/developer/bot-accounts.html#what-happens-when-a-user-who-owns-bot-accounts-is-disabled)。如果想要在停用使用者帳號同時自動停用機器人帳號，請前往 **系統主控台 > 外部整合 > 機器人帳號** 啟用 \"停用使用者時停用機器人帳號\"。{{end}}"
   },
   {
     "id": "app.bot.createbot.internal_error",
@@ -5569,7 +5569,7 @@
   },
   {
     "id": "api.templates.remove_expired_license.subject",
-    "translation": "Mattermost 企業授權已被停用。"
+    "translation": "Matterfoss 企業授權已被停用。"
   },
   {
     "id": "api.templates.remove_expired_license.body.title",
@@ -6009,15 +6009,15 @@
   },
   {
     "id": "api.license.request_trial_license.no-site-url.app_error",
-    "translation": "無法要求試用授權。請在 Mattermost 系統控制台的網頁伺服器區段設定站台 URL。"
+    "translation": "無法要求試用授權。請在 Matterfoss 系統控制台的網頁伺服器區段設定站台 URL。"
   },
   {
     "id": "api.license.request_trial_license.app_error",
-    "translation": "無法取得試用授權，請再嘗試一次或聯絡 support@mattermost.com。"
+    "translation": "無法取得試用授權，請再嘗試一次或聯絡 support@matterfoss.com。"
   },
   {
     "id": "api.license.request-trial.bad-request.terms-not-accepted",
-    "translation": "要求授權前必須接受 Mattermost Software Evaluation Agreement 跟隱私權政策。"
+    "translation": "要求授權前必須接受 Matterfoss Software Evaluation Agreement 跟隱私權政策。"
   },
   {
     "id": "api.license.request-trial.bad-request",
@@ -6237,7 +6237,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_success.message",
-    "translation": "感謝您對 Mattermost 有興趣，我們會盡快聯絡。"
+    "translation": "感謝您對 Matterfoss 有興趣，我們會盡快聯絡。"
   },
   {
     "id": "api.server.warn_metric.bot_response.notification_failure.message",
@@ -6249,7 +6249,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_subject",
-    "translation": "Mattermost 聯絡我們 要求"
+    "translation": "Matterfoss 聯絡我們 要求"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_site_url_header",
@@ -6261,7 +6261,7 @@
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_footer",
-    "translation": "如果有其他的查詢，請聯絡 support@mattermost.com"
+    "translation": "如果有其他的查詢，請聯絡 support@matterfoss.com"
   },
   {
     "id": "api.server.warn_metric.bot_response.mailto_email_header",
@@ -6285,11 +6285,11 @@
   },
   {
     "id": "api.templates.warn_metric_ack.subject",
-    "translation": "Mattermost 聯絡我們 要求"
+    "translation": "Matterfoss 聯絡我們 要求"
   },
   {
     "id": "api.templates.warn_metric_ack.footer",
-    "translation": "如果有其他的查詢，請聯絡 support@mattermost.com"
+    "translation": "如果有其他的查詢，請聯絡 support@matterfoss.com"
   },
   {
     "id": "ent.message_export.run_export.app_error",
@@ -6345,7 +6345,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.notification_body",
-    "translation": "Mattermost 強烈建議將使用者數量超過 {limit} 的佈署升級至企業版，企業版提供使用者管理、伺服器叢集、效能監控等功能。\n\n當點下聯絡我們時，將會把您的訊息分享給 Mattermost 公司，了解更多有關升級。[了解更多](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "Matterfoss 強烈建議將使用者數量超過 {limit} 的佈署升級至企業版，企業版提供使用者管理、伺服器叢集、效能監控等功能。\n\n當點下聯絡我們時，將會把您的訊息分享給 Matterfoss 公司，了解更多有關升級。[了解更多](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.user.delete_user.not_enabled.app_error",
@@ -6445,7 +6445,7 @@
   },
   {
     "id": "app.system.warn_metric.bot_displayname",
-    "translation": "Mattermost Advisor"
+    "translation": "Matterfoss Advisor"
   },
   {
     "id": "api.templates.warn_metric_ack.body.contact_name_header",
@@ -7085,15 +7085,15 @@
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user.app_error",
-    "translation": "無法升級至企業版。Mattermost 系統使用者 {{.MattermostUsername}} 沒有必要執行檔的寫入權限。系統管理員可以在 Mattermost 伺服器上執行下列命令以更新檔案權限：\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\n```\n\n變更檔案權限後，請重新嘗試升級。當完成升級並重新啟動後，記得還原執行檔權限：\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
+    "translation": "無法升級至企業版。Matterfoss 系統使用者 {{.MatterfossUsername}} 沒有必要執行檔的寫入權限。系統管理員可以在 Matterfoss 伺服器上執行下列命令以更新檔案權限：\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\n```\n\n變更檔案權限後，請重新嘗試升級。當完成升級並重新啟動後，記得還原執行檔權限：\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-user-and-permission.app_error",
-    "translation": "無法升級至企業版。Mattermost 系統使用者 {{.MattermostUsername}} 沒有必要執行檔的寫入權限。系統管理員可以在 Mattermost 伺服器上執行下列命令以更新檔案權限：\n\n```\nchown {{.MattermostUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\n變更檔案權限後，請重新嘗試升級。當完成升級並重新啟動後，記得還原執行檔權限：\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "無法升級至企業版。Matterfoss 系統使用者 {{.MatterfossUsername}} 沒有必要執行檔的寫入權限。系統管理員可以在 Matterfoss 伺服器上執行下列命令以更新檔案權限：\n\n```\nchown {{.MatterfossUsername}} \"{{.Path}}\"\nchmod +w \"{{.Path}}\"\n```\n\n變更檔案權限後，請重新嘗試升級。當完成升級並重新啟動後，記得還原執行檔權限：\n\n```\nchown {{.FileUsername}} \"{{.Path}}\"\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.invalid-permission.app_error",
-    "translation": "無法升級至企業版。Mattermost 系統使用者 {{.MattermostUsername}} 沒有必要執行檔的寫入權限。系統管理員可以在 Mattermost 伺服器上執行下列命令以更新檔案權限：\n\n```\nchmod +w \"{{.Path}}\"\n```\n\n變更檔案權限後，請重新嘗試升級。當完成升級並重新啟動後，記得還原執行檔權限：\n\n```\nchmod -w \"{{.Path}}\"\n```"
+    "translation": "無法升級至企業版。Matterfoss 系統使用者 {{.MatterfossUsername}} 沒有必要執行檔的寫入權限。系統管理員可以在 Matterfoss 伺服器上執行下列命令以更新檔案權限：\n\n```\nchmod +w \"{{.Path}}\"\n```\n\n變更檔案權限後，請重新嘗試升級。當完成升級並重新啟動後，記得還原執行檔權限：\n\n```\nchmod -w \"{{.Path}}\"\n```"
   },
   {
     "id": "api.upgrade_to_enterprise.generic_error.app_error",
@@ -7101,15 +7101,15 @@
   },
   {
     "id": "api.upgrade_to_enterprise.app_error",
-    "translation": "正在升級至 Mattermost 企業版。"
+    "translation": "正在升級至 Matterfoss 企業版。"
   },
   {
     "id": "api.upgrade_to_enterprise.already-enterprise.app_error",
-    "translation": "無法升級，目前已運行 Mattermost 企業版。"
+    "translation": "無法升級，目前已運行 Matterfoss 企業版。"
   },
   {
     "id": "api.upgrade_to_enterprise.already-done.app_error",
-    "translation": "已升級至 Mattermost 企業版。請重新啟動伺服器以完成升級。"
+    "translation": "已升級至 Matterfoss 企業版。請重新啟動伺服器以完成升級。"
   },
   {
     "id": "api.templates.warn_metric_ack.body.diagnostic_id_header",
@@ -7125,7 +7125,7 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.notification_body",
-    "translation": "一共有 200 位使用者在此 Mattermost。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Mattermost。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Mattermost 公司，了解更多有關升級。[了解更多](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "一共有 200 位使用者在此 Matterfoss。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Matterfoss。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Matterfoss 公司，了解更多有關升級。[了解更多](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.post.search_posts.invalid_body.app_error",
@@ -7221,11 +7221,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_500.contact_us.email_body",
-    "translation": "Mattermost 聯絡我們 要求。我的團隊現有 {{.Limit}} 使用者，正在考慮企業版。\n"
+    "translation": "Matterfoss 聯絡我們 要求。我的團隊現有 {{.Limit}} 使用者，正在考慮企業版。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_200.contact_us.email_body",
-    "translation": "Mattermost 聯絡我們 要求。我的團隊現有 {{.Limit}} 使用者，正在考慮企業版。\n"
+    "translation": "Matterfoss 聯絡我們 要求。我的團隊現有 {{.Limit}} 使用者，正在考慮企業版。\n"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_title",
@@ -7233,11 +7233,11 @@
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.notification_body",
-    "translation": "一共有 200 位使用者在此 Mattermost。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Mattermost。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.mattermost.com/deployment/sso-ldap.html?utm_medium=product&utm_source=mattermost-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Mattermost 公司，了解更多有關升級。[了解更多](https://mattermost.com/pl/default-admin-advisory)"
+    "translation": "一共有 200 位使用者在此 Matterfoss。隨著使用者數量的增長，準備新帳號將耗費更多的時間。我們建議與您組織的 Active Directory/LDAP 進行整合，如此將讓任何有帳號的人存取 Matterfoss。\n\n[了解更多有關與 AD/LDAP 整合](https://docs.matterfoss.com/deployment/sso-ldap.html?utm_medium=product&utm_source=matterfoss-advisor-bot&utm_content=adldap)\n\n當點下聯絡我們時，將會把您的訊息分享給 Matterfoss 公司，了解更多有關升級。[了解更多](https://matterfoss.com/pl/default-admin-advisory)"
   },
   {
     "id": "api.server.warn_metric.number_of_active_users_100.contact_us.email_body",
-    "translation": "Mattermost 聯絡我們 要求。我的團隊現有 {{.Limit}} 使用者，正在考慮企業版。\n"
+    "translation": "Matterfoss 聯絡我們 要求。我的團隊現有 {{.Limit}} 使用者，正在考慮企業版。\n"
   },
   {
     "id": "api.server.warn_metric.mfa.notification_title",

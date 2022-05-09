@@ -18,10 +18,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin/plugintest/mock"
-	"github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin/plugintest/mock"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 func TestCreateChannel(t *testing.T) {
@@ -153,7 +153,7 @@ func TestUpdateChannel(t *testing.T) {
 	//Update a open channel
 	channel.DisplayName = "My new display name"
 	channel.Header = "My fancy header"
-	channel.Purpose = "Mattermost ftw!"
+	channel.Purpose = "Matterfoss ftw!"
 
 	newChannel, _, err := client.UpdateChannel(channel)
 	require.NoError(t, err)
@@ -173,7 +173,7 @@ func TestUpdateChannel(t *testing.T) {
 	//Update a private channel
 	private.DisplayName = "My new display name for private channel"
 	private.Header = "My fancy private header"
-	private.Purpose = "Mattermost ftw! in private mode"
+	private.Purpose = "Matterfoss ftw! in private mode"
 
 	newPrivateChannel, _, err := client.UpdateChannel(private)
 	require.NoError(t, err)
@@ -1736,7 +1736,7 @@ func TestSearchGroupChannels(t *testing.T) {
 }
 
 func TestDeleteChannel(t *testing.T) {
-	t.Skip("https://mattermost.atlassian.net/browse/MM-42092")
+	t.Skip("https://matterfoss.atlassian.net/browse/MM-42092")
 	th := Setup(t).InitBasic()
 	defer th.TearDown()
 	c := th.Client

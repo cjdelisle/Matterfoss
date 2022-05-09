@@ -13,10 +13,10 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/mattermost/mattermost-server/v6/audit"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/audit"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
 	"github.com/pkg/errors"
 )
 
@@ -152,7 +152,7 @@ func installMarketplacePlugin(c *Context, w http.ResponseWriter, r *http.Request
 	auditRec.AddMeta("plugin_id", pluginRequest.Id)
 
 	// Always install the latest compatible version
-	// https://mattermost.atlassian.net/browse/MM-41981
+	// https://matterfoss.atlassian.net/browse/MM-41981
 	pluginRequest.Version = ""
 
 	manifest, appErr := c.App.Channels().InstallMarketplacePlugin(pluginRequest)

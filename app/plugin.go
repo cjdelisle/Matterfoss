@@ -20,13 +20,13 @@ import (
 	svg "github.com/h2non/go-is-svg"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/services/marketplace"
-	"github.com/mattermost/mattermost-server/v6/shared/filestore"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/services/marketplace"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 const prepackagedPluginsDir = "prepackaged_plugins"
@@ -99,7 +99,7 @@ func (ch *Channels) syncPluginsActiveState() {
 			}
 
 			// Tie Apps proxy disabled status to the feature flag.
-			if pluginID == "com.mattermost.apps" {
+			if pluginID == "com.matterfoss.apps" {
 				if !ch.cfgSvc.Config().FeatureFlags.AppsEnabled {
 					pluginEnabled = false
 				}
@@ -507,7 +507,7 @@ func (a *App) GetMarketplacePlugins(filter *model.MarketplacePluginFilter) ([]*m
 	// but prepackaged plugins are not. Hence, on a cloud installation prepackaged plugins
 	// shouldn't be shown in the Marketplace modal.
 	// This is a short term fix. The long term solution is to have a separate set of
-	// prepacked plugins for cloud: https://mattermost.atlassian.net/browse/MM-31331.
+	// prepacked plugins for cloud: https://matterfoss.atlassian.net/browse/MM-31331.
 	license := a.Srv().License()
 	if license == nil || !*license.Features.Cloud {
 		appErr := a.mergePrepackagedPlugins(plugins)

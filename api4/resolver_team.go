@@ -6,7 +6,7 @@ package api4
 import (
 	"context"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func getGraphQLTeam(ctx context.Context, id string) (*model.Team, error) {

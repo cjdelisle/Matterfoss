@@ -7,16 +7,16 @@ import (
 	"database/sql"
 	"testing"
 
-	"github.com/mattermost/mattermost-server/v6/app/plugin_api_tests"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/shared/driver"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v6/store/storetest"
+	"github.com/cjdelisle/matterfoss-server/v6/app/plugin_api_tests"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/driver"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest"
 )
 
 type MyPlugin struct {
-	plugin.MattermostPlugin
+	plugin.MatterfossPlugin
 	config plugin_api_tests.BasicConfig
 	t      *testing.T
 }

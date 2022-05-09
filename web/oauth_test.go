@@ -18,12 +18,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/einterfaces"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/einterfaces"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 func TestOAuthComplete_AccessDenied(t *testing.T) {
@@ -380,7 +380,7 @@ func TestMobileLoginWithOAuth(t *testing.T) {
 	translationFunc := i18n.GetUserTranslations("en")
 	c.AppContext.SetT(translationFunc)
 	c.Logger = th.TestLogger
-	provider := &MattermostTestProvider{}
+	provider := &MatterfossTestProvider{}
 	einterfaces.RegisterOAuthProvider(model.ServiceGitlab, provider)
 
 	t.Run("Should include redirect URL in the output when valid URL Scheme is passed", func(t *testing.T) {
@@ -462,7 +462,7 @@ func TestOAuthComplete(t *testing.T) {
 	assert.Error(t, err)
 	closeBody(r)
 
-	// We are going to use mattermost as the provider emulating gitlab
+	// We are going to use matterfoss as the provider emulating gitlab
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.ServiceSettings.EnableOAuthServiceProvider = true })
 
 	defaultRolePermissions := th.SaveDefaultRolePermissions()
@@ -492,7 +492,7 @@ func TestOAuthComplete(t *testing.T) {
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.GitLabSettings.TokenEndpoint = apiClient.URL + "/oauth/access_token" })
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.GitLabSettings.UserAPIEndpoint = apiClient.APIURL + "/users/me" })
 
-	provider := &MattermostTestProvider{}
+	provider := &MatterfossTestProvider{}
 
 	authRequest := &model.AuthorizeRequest{
 		ResponseType: model.AuthCodeResponseType,
@@ -585,7 +585,7 @@ func TestOAuthComplete_ErrorMessages(t *testing.T) {
 	defer c.Logger.Shutdown()
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.GitLabSettings.Enable = true })
 	th.App.UpdateConfig(func(cfg *model.Config) { *cfg.ServiceSettings.EnableOAuthServiceProvider = true })
-	provider := &MattermostTestProvider{}
+	provider := &MatterfossTestProvider{}
 	einterfaces.RegisterOAuthProvider(model.ServiceGitlab, provider)
 
 	responseWriter := httptest.NewRecorder()
@@ -642,10 +642,10 @@ func closeBody(r *http.Response) {
 	}
 }
 
-type MattermostTestProvider struct {
+type MatterfossTestProvider struct {
 }
 
-func (m *MattermostTestProvider) GetUserFromJSON(data io.Reader, tokenUser *model.User) (*model.User, error) {
+func (m *MatterfossTestProvider) GetUserFromJSON(data io.Reader, tokenUser *model.User) (*model.User, error) {
 	var user model.User
 	if err := json.NewDecoder(data).Decode(&user); err != nil {
 		return nil, err
@@ -654,15 +654,15 @@ func (m *MattermostTestProvider) GetUserFromJSON(data io.Reader, tokenUser *mode
 	return &user, nil
 }
 
-func (m *MattermostTestProvider) GetSSOSettings(config *model.Config, service string) (*model.SSOSettings, error) {
+func (m *MatterfossTestProvider) GetSSOSettings(config *model.Config, service string) (*model.SSOSettings, error) {
 	return &config.GitLabSettings, nil
 }
 
-func (m *MattermostTestProvider) GetUserFromIdToken(token string) (*model.User, error) {
+func (m *MatterfossTestProvider) GetUserFromIdToken(token string) (*model.User, error) {
 	return nil, nil
 }
 
-func (m *MattermostTestProvider) IsSameUser(dbUser, oauthUser *model.User) bool {
+func (m *MatterfossTestProvider) IsSameUser(dbUser, oauthUser *model.User) bool {
 	return dbUser.AuthData == oauthUser.AuthData
 }
 

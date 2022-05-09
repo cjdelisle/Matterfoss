@@ -48,10 +48,10 @@ import (
 	"github.com/blang/semver"
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/filestore"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/filestore"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 // managedPluginFileName is the file name of the flag file that marks
@@ -393,7 +393,7 @@ func (ch *Channels) installExtractedPlugin(manifest *model.Manifest, fromPluginD
 	// Activate the plugin if enabled.
 	pluginState := ch.cfgSvc.Config().PluginSettings.PluginStates[manifest.Id]
 	if pluginState != nil && pluginState.Enable {
-		if manifest.Id == "com.mattermost.apps" && !ch.cfgSvc.Config().FeatureFlags.AppsEnabled {
+		if manifest.Id == "com.matterfoss.apps" && !ch.cfgSvc.Config().FeatureFlags.AppsEnabled {
 			return manifest, nil
 		}
 		updatedManifest, _, err := pluginsEnvironment.Activate(manifest.Id)

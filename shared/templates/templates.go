@@ -12,7 +12,7 @@ import (
 	"sync"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 // Container represents a set of templates that can be render
@@ -33,8 +33,8 @@ type Data struct {
 
 func GetTemplateDirectory() (string, bool) {
 	templatesDir := "templates"
-	if mattermostPath := os.Getenv("MM_SERVER_PATH"); mattermostPath != "" {
-		templatesDir = filepath.Join(mattermostPath, templatesDir)
+	if matterfossPath := os.Getenv("MM_SERVER_PATH"); matterfossPath != "" {
+		templatesDir = filepath.Join(matterfossPath, templatesDir)
 	}
 
 	return fileutils.FindDir(templatesDir)

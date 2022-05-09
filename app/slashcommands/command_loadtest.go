@@ -15,15 +15,15 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/mattermost/mattermost-server/v6/app"
-	"github.com/mattermost/mattermost-server/v6/app/request"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/app"
+	"github.com/cjdelisle/matterfoss-server/v6/app/request"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
-var usage = `Mattermost testing commands to help configure the system
+var usage = `Matterfoss testing commands to help configure the system
 
 	COMMANDS:
 
@@ -495,7 +495,7 @@ func (*LoadTestProvider) URLCommand(a *app.App, c *request.Context, args *model.
 
 	// provide a shortcut to easily access tests stored in doc/developer/tests
 	if !strings.HasPrefix(url, "http") {
-		url = "https://raw.githubusercontent.com/mattermost/mattermost-server/master/tests/" + url
+		url = "https://raw.githubusercontent.com/matterfoss/matterfoss-server/master/tests/" + url
 
 		if path.Ext(url) == "" {
 			url += ".md"
@@ -549,7 +549,7 @@ func (*LoadTestProvider) JsonCommand(a *app.App, c *request.Context, args *model
 
 	// provide a shortcut to easily access tests stored in doc/developer/tests
 	if !strings.HasPrefix(url, "http") {
-		url = "https://raw.githubusercontent.com/mattermost/mattermost-server/master/tests/" + url
+		url = "https://raw.githubusercontent.com/matterfoss/matterfoss-server/master/tests/" + url
 
 		if path.Ext(url) == "" {
 			url += ".json"

@@ -12,7 +12,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 func TestPluginDeadlock(t *testing.T) {
@@ -24,12 +24,12 @@ func TestPluginDeadlock(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v6/plugin"
-				"github.com/mattermost/mattermost-server/v6/model"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) OnActivate() error {
@@ -112,12 +112,12 @@ func TestPluginDeadlock(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v6/plugin"
-				"github.com/mattermost/mattermost-server/v6/model"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
@@ -147,12 +147,12 @@ func TestPluginDeadlock(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v6/plugin"
-				"github.com/mattermost/mattermost-server/v6/model"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) OnActivate() error {
@@ -218,12 +218,12 @@ func TestPluginDeadlock(t *testing.T) {
 			package main
 
 			import (
-				"github.com/mattermost/mattermost-server/v6/plugin"
-				"github.com/mattermost/mattermost-server/v6/model"
+				"github.com/cjdelisle/matterfoss-server/v6/plugin"
+				"github.com/cjdelisle/matterfoss-server/v6/model"
 			)
 
 			type MyPlugin struct {
-				plugin.MattermostPlugin
+				plugin.MatterfossPlugin
 			}
 
 			func (p *MyPlugin) OnDeactivate() error {

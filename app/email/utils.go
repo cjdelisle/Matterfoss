@@ -4,8 +4,8 @@
 package email
 
 import (
-	"github.com/mattermost/mattermost-server/v6/shared/mail"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 func (es *Service) mailServiceConfig() *mail.SMTPConfig {

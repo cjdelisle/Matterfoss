@@ -5,12 +5,12 @@ DUMPDIR=`mktemp -d 2>/dev/null || mktemp -d -t 'dumpDir'`
 SCHEMA_VERSION=$1
 
 echo "Creating databases"
-docker exec mattermost-postgres sh -c 'exec echo "CREATE DATABASE migrated; CREATE DATABASE latest;" | exec psql -U mmuser mattermost_test'
+docker exec matterfoss-postgres sh -c 'exec echo "CREATE DATABASE migrated; CREATE DATABASE latest;" | exec psql -U mmuser matterfoss_test'
 
 echo "Importing postgres dump from version ${SCHEMA_VERSION}"
-docker exec -i mattermost-postgres psql -U mmuser -d migrated < $(pwd)/scripts/mattermost-postgresql-$SCHEMA_VERSION.sql
+docker exec -i matterfoss-postgres psql -U mmuser -d migrated < $(pwd)/scripts/matterfoss-postgresql-$SCHEMA_VERSION.sql
 
-docker exec -i mattermost-postgres psql -U mmuser -d migrated -c "INSERT INTO Systems (Name, Value) VALUES ('Version', '$SCHEMA_VERSION')"
+docker exec -i matterfoss-postgres psql -U mmuser -d migrated -c "INSERT INTO Systems (Name, Value) VALUES ('Version', '$SCHEMA_VERSION')"
 
 echo "Setting up config for db migration"
 cat config/config.json | \
@@ -32,17 +32,17 @@ if [ "$SCHEMA_VERSION" == "5.0.0" ]; then
   for i in "ChannelMembers MentionCountRoot" "ChannelMembers MsgCountRoot" "Channels TotalMsgCountRoot"; do
     a=( $i );
     echo "Ignoring known Postgres mismatch: ${a[0]}.${a[1]}"
-    docker exec mattermost-postgres psql -U mmuser -d migrated -c "ALTER TABLE ${a[0]} DROP COLUMN ${a[1]};"
-    docker exec mattermost-postgres psql -U mmuser -d latest -c "ALTER TABLE ${a[0]} DROP COLUMN ${a[1]};"
+    docker exec matterfoss-postgres psql -U mmuser -d migrated -c "ALTER TABLE ${a[0]} DROP COLUMN ${a[1]};"
+    docker exec matterfoss-postgres psql -U mmuser -d latest -c "ALTER TABLE ${a[0]} DROP COLUMN ${a[1]};"
   done
 fi
 
 echo "Generating dump"
-docker exec mattermost-postgres pg_dump --schema-only -d migrated -U mmuser > $DUMPDIR/migrated.sql
-docker exec mattermost-postgres pg_dump --schema-only -d latest -U mmuser > $DUMPDIR/latest.sql
+docker exec matterfoss-postgres pg_dump --schema-only -d migrated -U mmuser > $DUMPDIR/migrated.sql
+docker exec matterfoss-postgres pg_dump --schema-only -d latest -U mmuser > $DUMPDIR/latest.sql
 
 echo "Removing databases created for db comparison"
-docker exec mattermost-postgres sh -c 'exec echo "DROP DATABASE migrated; DROP DATABASE latest;" | exec psql -U mmuser mattermost_test'
+docker exec matterfoss-postgres sh -c 'exec echo "DROP DATABASE migrated; DROP DATABASE latest;" | exec psql -U mmuser matterfoss_test'
 
 echo "Generating diff"
 git diff --word-diff=color $DUMPDIR/migrated.sql $DUMPDIR/latest.sql > $DUMPDIR/diff.txt

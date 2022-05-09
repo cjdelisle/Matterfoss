@@ -21,8 +21,8 @@ import (
 	// Load the Postgres driver
 	_ "github.com/lib/pq"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 	"github.com/mattermost/morph"
 
 	"github.com/mattermost/morph/drivers"
@@ -169,10 +169,10 @@ func (ds *DatabaseStore) initializeConfigurationsTable() error {
 // parseDSN splits up a connection string into a driver name and data source name.
 //
 // For example:
-//	mysql://mmuser:mostest@localhost:5432/mattermost_test
+//	mysql://mmuser:mostest@localhost:5432/matterfoss_test
 // returns
 //	driverName = mysql
-//	dataSourceName = mmuser:mostest@localhost:5432/mattermost_test
+//	dataSourceName = mmuser:mostest@localhost:5432/matterfoss_test
 //
 // By contrast, a Postgres DSN is returned unmodified.
 func parseDSN(dsn string) (string, string, error) {

@@ -34,18 +34,18 @@ type InvalidPermissions struct {
 	ErrType            string
 	Path               string
 	FileUsername       string
-	MattermostUsername string
+	MatterfossUsername string
 }
 
-func NewInvalidPermissions(errType string, path string, mattermostUsername string, fileUsername string) *InvalidPermissions {
+func NewInvalidPermissions(errType string, path string, matterfossUsername string, fileUsername string) *InvalidPermissions {
 	return &InvalidPermissions{
 		ErrType:            errType,
 		Path:               path,
 		FileUsername:       fileUsername,
-		MattermostUsername: mattermostUsername,
+		MatterfossUsername: matterfossUsername,
 	}
 }
 
 func (e *InvalidPermissions) Error() string {
-	return fmt.Sprintf("the user %s is unable to update the %s file", e.MattermostUsername, e.Path)
+	return fmt.Sprintf("the user %s is unable to update the %s file", e.MatterfossUsername, e.Path)
 }

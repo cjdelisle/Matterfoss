@@ -48,7 +48,7 @@ type Conditions struct {
 	MobileVersion         []string               `json:"mobileVersion,omitempty"` // What mobile client versions does this notice apply to.; Format: semver ranges (https://devhints.io/semver); Example: [">=1.2.3 < ~2.4.x"]; Example: ["<v5.19", "v5.20-v5.22"]
 	NumberOfPosts         *int64                 `json:"numberOfPosts,omitempty"` // Only show the notice when server has more than specified number of posts
 	NumberOfUsers         *int64                 `json:"numberOfUsers,omitempty"` // Only show the notice when server has more than specified number of users
-	ServerConfig          map[string]interface{} `json:"serverConfig,omitempty"`  // Map of mattermost server config paths and their values. Notice will be displayed only if; the values match the target server config; Example: serverConfig: { "PluginSettings.Enable": true, "GuestAccountsSettings.Enable":; false }
+	ServerConfig          map[string]interface{} `json:"serverConfig,omitempty"`  // Map of matterfoss server config paths and their values. Notice will be displayed only if; the values match the target server config; Example: serverConfig: { "PluginSettings.Enable": true, "GuestAccountsSettings.Enable":; false }
 	ServerVersion         []string               `json:"serverVersion,omitempty"` // What server versions does this notice apply to.; Format: semver ranges (https://devhints.io/semver); Example: [">=1.2.3 < ~2.4.x"]; Example: ["<v5.19", "v5.20-v5.22"]
 	Sku                   *NoticeSKU             `json:"sku,omitempty"`
 	UserConfig            map[string]interface{} `json:"userConfig,omitempty"`             // Map of user's settings and their values. Notice will be displayed only if the values; match the viewing users' config; Example: userConfig: { "new_sidebar.disabled": true }
@@ -59,9 +59,9 @@ type NoticeMessageInternal struct {
 	Action      *NoticeAction `json:"action,omitempty"`      // Optional action to perform on action button click. (defaults to closing the notice)
 	ActionParam *string       `json:"actionParam,omitempty"` // Optional action parameter.; Example: {"action": "url", actionParam: "/console/some-page"}
 	ActionText  *string       `json:"actionText,omitempty"`  // Optional override for the action button text (defaults to OK)
-	Description string        `json:"description"`           // Notice content. Use {{Mattermost}} instead of plain text to support white-labeling. Text; supports Markdown.
+	Description string        `json:"description"`           // Notice content. Use {{Matterfoss}} instead of plain text to support white-labeling. Text; supports Markdown.
 	Image       *string       `json:"image,omitempty"`
-	Title       string        `json:"title"` // Notice title. Use {{Mattermost}} instead of plain text to support white-labeling. Text; supports Markdown.
+	Title       string        `json:"title"` // Notice title. Use {{Matterfoss}} instead of plain text to support white-labeling. Text; supports Markdown.
 }
 type NoticeMessages []NoticeMessage
 

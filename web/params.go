@@ -11,7 +11,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 const (
@@ -376,7 +376,7 @@ func ParamsFromRequest(r *http.Request) *Params {
 // getPerPageFromQuery returns the PerPage value from the given query.
 // This function should be removed and the support for `pageSize`
 // should be dropped after v1.46 of the mobile app is no longer supported
-// https://mattermost.atlassian.net/browse/MM-38131
+// https://matterfoss.atlassian.net/browse/MM-38131
 func getPerPageFromQuery(query url.Values) int {
 	val, err := strconv.Atoi(query.Get("per_page"))
 	if err != nil {

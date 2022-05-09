@@ -1,4 +1,4 @@
-module github.com/mattermost/mattermost-server/v6
+module github.com/cjdelisle/matterfoss-server/v6
 
 go 1.16
 

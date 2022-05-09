@@ -10,29 +10,29 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
 )
 
 func TestCondenseSiteURL(t *testing.T) {
 	require.Equal(t, "", condenseSiteURL(""))
-	require.Equal(t, "mattermost.com", condenseSiteURL("mattermost.com"))
-	require.Equal(t, "mattermost.com", condenseSiteURL("mattermost.com/"))
-	require.Equal(t, "chat.mattermost.com", condenseSiteURL("chat.mattermost.com"))
-	require.Equal(t, "chat.mattermost.com", condenseSiteURL("chat.mattermost.com/"))
-	require.Equal(t, "mattermost.com/subpath", condenseSiteURL("mattermost.com/subpath"))
-	require.Equal(t, "mattermost.com/subpath", condenseSiteURL("mattermost.com/subpath/"))
-	require.Equal(t, "chat.mattermost.com/subpath", condenseSiteURL("chat.mattermost.com/subpath"))
-	require.Equal(t, "chat.mattermost.com/subpath", condenseSiteURL("chat.mattermost.com/subpath/"))
+	require.Equal(t, "matterfoss.org", condenseSiteURL("matterfoss.org"))
+	require.Equal(t, "matterfoss.org", condenseSiteURL("matterfoss.org/"))
+	require.Equal(t, "chat.matterfoss.org", condenseSiteURL("chat.matterfoss.org"))
+	require.Equal(t, "chat.matterfoss.org", condenseSiteURL("chat.matterfoss.org/"))
+	require.Equal(t, "matterfoss.org/subpath", condenseSiteURL("matterfoss.org/subpath"))
+	require.Equal(t, "matterfoss.org/subpath", condenseSiteURL("matterfoss.org/subpath/"))
+	require.Equal(t, "chat.matterfoss.org/subpath", condenseSiteURL("chat.matterfoss.org/subpath"))
+	require.Equal(t, "chat.matterfoss.org/subpath", condenseSiteURL("chat.matterfoss.org/subpath/"))
 
-	require.Equal(t, "mattermost.com:8080", condenseSiteURL("http://mattermost.com:8080"))
-	require.Equal(t, "mattermost.com:8080", condenseSiteURL("http://mattermost.com:8080/"))
-	require.Equal(t, "chat.mattermost.com:8080", condenseSiteURL("http://chat.mattermost.com:8080"))
-	require.Equal(t, "chat.mattermost.com:8080", condenseSiteURL("http://chat.mattermost.com:8080/"))
-	require.Equal(t, "mattermost.com:8080/subpath", condenseSiteURL("http://mattermost.com:8080/subpath"))
-	require.Equal(t, "mattermost.com:8080/subpath", condenseSiteURL("http://mattermost.com:8080/subpath/"))
-	require.Equal(t, "chat.mattermost.com:8080/subpath", condenseSiteURL("http://chat.mattermost.com:8080/subpath"))
-	require.Equal(t, "chat.mattermost.com:8080/subpath", condenseSiteURL("http://chat.mattermost.com:8080/subpath/"))
+	require.Equal(t, "matterfoss.org:8080", condenseSiteURL("http://matterfoss.org:8080"))
+	require.Equal(t, "matterfoss.org:8080", condenseSiteURL("http://matterfoss.org:8080/"))
+	require.Equal(t, "chat.matterfoss.org:8080", condenseSiteURL("http://chat.matterfoss.org:8080"))
+	require.Equal(t, "chat.matterfoss.org:8080", condenseSiteURL("http://chat.matterfoss.org:8080/"))
+	require.Equal(t, "matterfoss.org:8080/subpath", condenseSiteURL("http://matterfoss.org:8080/subpath"))
+	require.Equal(t, "matterfoss.org:8080/subpath", condenseSiteURL("http://matterfoss.org:8080/subpath/"))
+	require.Equal(t, "chat.matterfoss.org:8080/subpath", condenseSiteURL("http://chat.matterfoss.org:8080/subpath"))
+	require.Equal(t, "chat.matterfoss.org:8080/subpath", condenseSiteURL("http://chat.matterfoss.org:8080/subpath/"))
 }
 
 func TestSendInviteEmails(t *testing.T) {
@@ -212,7 +212,7 @@ func TestSendCloudTrialEndWarningEmail(t *testing.T) {
 			require.Contains(t, resultsEmail.Body.HTML, emailToUsername, "Wrong received message %s", resultsEmail.Body.Text)
 			require.Contains(t, resultsEmail.Body.Text, "http://testserver", "Wrong received message %s", resultsEmail.Body.Text)
 			require.Contains(t, resultsEmail.Body.Text, emailToUsername, "Wrong received message %s", resultsEmail.Body.Text)
-			require.Contains(t, resultsEmail.Body.Text, "feedback-cloud@mattermost.com")
+			require.Contains(t, resultsEmail.Body.Text, "feedback-cloud@matterfoss.org")
 		}
 		mail.DeleteMailBox(emailTo)
 
@@ -249,7 +249,7 @@ func TestSendCloudTrialEndedEmail(t *testing.T) {
 			require.Contains(t, resultsMailbox[0].To[0], emailTo, "Wrong To: recipient")
 			resultsEmail, err := mail.GetMessageFromMailbox(emailTo, resultsMailbox[0].ID)
 			require.NoError(t, err, "Could not get message from mailbox")
-			require.Contains(t, resultsEmail.Body.Text, "your 14-day free trial of Mattermost Cloud Enterprise has ended today", "Wrong received message %s", resultsEmail.Body.Text)
+			require.Contains(t, resultsEmail.Body.Text, "your 14-day free trial of Matterfoss Cloud Enterprise has ended today", "Wrong received message %s", resultsEmail.Body.Text)
 			require.Contains(t, resultsEmail.Body.Text, "we will delete your Cloud workspace permanently", "Wrong received message %s", resultsEmail.Body.Text)
 		}
 		mail.DeleteMailBox(emailTo)

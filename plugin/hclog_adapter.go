@@ -11,7 +11,7 @@ import (
 
 	"github.com/hashicorp/go-hclog"
 
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 type hclogAdapter struct {
@@ -129,5 +129,5 @@ func (h *hclogAdapter) ImpliedArgs() []interface{} {
 }
 
 func (h *hclogAdapter) Name() string {
-	return "MattermostPluginLogger"
+	return "MatterfossPluginLogger"
 }

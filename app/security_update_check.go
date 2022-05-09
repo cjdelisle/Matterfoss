@@ -11,14 +11,14 @@ import (
 	"runtime"
 	"strconv"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/i18n"
-	"github.com/mattermost/mattermost-server/v6/shared/mail"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/i18n"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mail"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 const (
-	PropSecurityURL      = "https://securityupdatecheck.mattermost.com"
+	PropSecurityURL      = "https://securityupdatecheck.matterfoss.org"
 	SecurityUpdatePeriod = 86400000 // 24 hours in milliseconds.
 
 	PropSecurityID              = "id"
@@ -46,7 +46,7 @@ func (s *Server) DoSecurityUpdateCheck() {
 	currentTime := model.GetMillis()
 
 	if (currentTime - lastSecurityTime) > SecurityUpdatePeriod {
-		mlog.Debug("Checking for security update from Mattermost")
+		mlog.Debug("Checking for security update from Matterfoss")
 
 		v := url.Values{}
 
@@ -83,7 +83,7 @@ func (s *Server) DoSecurityUpdateCheck() {
 
 		res, err := http.Get(PropSecurityURL + "/security?" + v.Encode())
 		if err != nil {
-			mlog.Error("Failed to get security update information from Mattermost.")
+			mlog.Error("Failed to get security update information from Matterfoss.")
 			return
 		}
 
@@ -100,7 +100,7 @@ func (s *Server) DoSecurityUpdateCheck() {
 				if props["SecurityBulletin_"+bulletin.Id] == "" {
 					users, userErr := s.Store.User().GetSystemAdminProfiles()
 					if userErr != nil {
-						mlog.Error("Failed to get system admins for security update information from Mattermost.")
+						mlog.Error("Failed to get system admins for security update information from Matterfoss.")
 						return
 					}
 
@@ -121,7 +121,7 @@ func (s *Server) DoSecurityUpdateCheck() {
 						mlog.Info("Sending security bulletin", mlog.String("bulletin_id", bulletin.Id), mlog.String("user_email", user.Email))
 						license := s.License()
 						mailConfig := s.MailServiceConfig()
-						mail.SendMailUsingConfig(user.Email, i18n.T("mattermost.bulletin.subject"), string(body), mailConfig, license != nil && *license.Features.Compliance, "")
+						mail.SendMailUsingConfig(user.Email, i18n.T("matterfoss.bulletin.subject"), string(body), mailConfig, license != nil && *license.Features.Compliance, "")
 					}
 
 					bulletinSeen := &model.System{Name: "SecurityBulletin_" + bulletin.Id, Value: bulletin.Id}

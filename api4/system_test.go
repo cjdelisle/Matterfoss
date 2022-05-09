@@ -21,9 +21,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/utils/fileutils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/utils/fileutils"
 )
 
 func TestGetPing(t *testing.T) {
@@ -538,7 +538,7 @@ func TestS3TestConnection(t *testing.T) {
 		CheckBadRequestStatus(t, resp)
 		CheckErrorMessage(t, err, "S3 Bucket is required")
 		// If this fails, check the test configuration to ensure minio is setup with the
-		// `mattermost-test` bucket defined by model.MINIO_BUCKET.
+		// `matterfoss-test` bucket defined by model.MINIO_BUCKET.
 		*config.FileSettings.AmazonS3Bucket = model.MinioBucket
 		config.FileSettings.AmazonS3PathPrefix = model.NewString("")
 		*config.FileSettings.AmazonS3Region = "us-east-1"
@@ -592,7 +592,7 @@ func TestSupportedTimezones(t *testing.T) {
 }
 
 func TestRedirectLocation(t *testing.T) {
-	expected := "https://mattermost.com/wp-content/themes/mattermostv2/img/logo-light.svg"
+	expected := "https://matterfoss.org/wp-content/themes/matterfossv2/img/logo-light.svg"
 
 	testServer := httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		res.Header().Set("Location", expected)
@@ -614,7 +614,7 @@ func TestRedirectLocation(t *testing.T) {
 	*th.App.Config().ServiceSettings.EnableLinkPreviews = true
 	*th.App.Config().ServiceSettings.AllowedUntrustedInternalConnections = "127.0.0.1"
 
-	_, _, err := th.SystemAdminClient.GetRedirectLocation("https://mattermost.com/", "")
+	_, _, err := th.SystemAdminClient.GetRedirectLocation("https://matterfoss.org/", "")
 	require.NoError(t, err)
 
 	_, resp, err := th.SystemAdminClient.GetRedirectLocation("", "")
@@ -631,7 +631,7 @@ func TestRedirectLocation(t *testing.T) {
 	assert.Equal(t, expected, actual)
 
 	*th.App.Config().ServiceSettings.EnableLinkPreviews = false
-	actual, _, err = th.SystemAdminClient.GetRedirectLocation("https://mattermost.com/", "")
+	actual, _, err = th.SystemAdminClient.GetRedirectLocation("https://matterfoss.org/", "")
 	require.NoError(t, err)
 	assert.Equal(t, actual, "")
 
@@ -823,7 +823,7 @@ func TestCompleteOnboarding(t *testing.T) {
 
 	samplePlugins := []*model.MarketplacePlugin{{
 		BaseMarketplacePlugin: &model.BaseMarketplacePlugin{
-			HomepageURL: "https://example.com/mattermost/mattermost-plugin-nps",
+			HomepageURL: "https://example.com/matterfoss/matterfoss-plugin-nps",
 			IconData:    "https://example.com/icon.svg",
 			DownloadURL: pluginServer.URL,
 			Manifest: &model.Manifest{

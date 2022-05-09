@@ -16,7 +16,7 @@ import (
 	"github.com/stretchr/testify/suite"
 	"github.com/xtgo/uuid"
 
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
 )
 
 func randomString() string {
@@ -76,7 +76,7 @@ func runBackendTest(t *testing.T, encrypt bool) {
 			DriverName:              driverS3,
 			AmazonS3AccessKeyId:     "minioaccesskey",
 			AmazonS3SecretAccessKey: "miniosecretkey",
-			AmazonS3Bucket:          "mattermost-test",
+			AmazonS3Bucket:          "matterfoss-test",
 			AmazonS3Region:          "",
 			AmazonS3Endpoint:        s3Endpoint,
 			AmazonS3PathPrefix:      "",
@@ -503,7 +503,7 @@ func BenchmarkS3WriteFile(b *testing.B) {
 		DriverName:              driverS3,
 		AmazonS3AccessKeyId:     "minioaccesskey",
 		AmazonS3SecretAccessKey: "miniosecretkey",
-		AmazonS3Bucket:          "mattermost-test",
+		AmazonS3Bucket:          "matterfoss-test",
 		AmazonS3Region:          "",
 		AmazonS3Endpoint:        "localhost:9000",
 		AmazonS3PathPrefix:      "",

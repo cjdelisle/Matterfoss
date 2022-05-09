@@ -16,14 +16,14 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"github.com/mattermost/mattermost-server/v6/app/email"
-	emailmocks "github.com/mattermost/mattermost-server/v6/app/email/mocks"
-	"github.com/mattermost/mattermost-server/v6/app/teams"
-	"github.com/mattermost/mattermost-server/v6/app/users"
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/store/sqlstore"
-	"github.com/mattermost/mattermost-server/v6/store/storetest/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/app/email"
+	emailmocks "github.com/cjdelisle/matterfoss-server/v6/app/email/mocks"
+	"github.com/cjdelisle/matterfoss-server/v6/app/teams"
+	"github.com/cjdelisle/matterfoss-server/v6/app/users"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/store/sqlstore"
+	"github.com/cjdelisle/matterfoss-server/v6/store/storetest/mocks"
 )
 
 func TestCreateTeam(t *testing.T) {
@@ -1259,14 +1259,14 @@ func TestInviteNewUsersToTeamGracefully(t *testing.T) {
 			mock.AnythingOfType("*model.Team"),
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("string"),
-			[]string{"idontexist@mattermost.com"},
+			[]string{"idontexist@matterfoss.org"},
 			"",
 			mock.Anything,
 			true,
 		).Once().Return(nil)
 		th.App.Srv().EmailService = &emailServiceMock
 
-		res, err := th.App.InviteNewUsersToTeamGracefully([]string{"idontexist@mattermost.com"}, th.BasicTeam.Id, th.BasicUser.Id, "")
+		res, err := th.App.InviteNewUsersToTeamGracefully([]string{"idontexist@matterfoss.org"}, th.BasicTeam.Id, th.BasicUser.Id, "")
 		require.Nil(t, err)
 		require.Len(t, res, 1)
 		require.Nil(t, res[0].Error)
@@ -1278,14 +1278,14 @@ func TestInviteNewUsersToTeamGracefully(t *testing.T) {
 			mock.AnythingOfType("*model.Team"),
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("string"),
-			[]string{"idontexist@mattermost.com"},
+			[]string{"idontexist@matterfoss.org"},
 			"",
 			mock.Anything,
 			true,
 		).Once().Return(email.SendMailError)
 		th.App.Srv().EmailService = &emailServiceMock
 
-		res, err := th.App.InviteNewUsersToTeamGracefully([]string{"idontexist@mattermost.com"}, th.BasicTeam.Id, th.BasicUser.Id, "")
+		res, err := th.App.InviteNewUsersToTeamGracefully([]string{"idontexist@matterfoss.org"}, th.BasicTeam.Id, th.BasicUser.Id, "")
 		require.Nil(t, err)
 		require.Len(t, res, 1)
 		require.NotNil(t, res[0].Error)
@@ -1308,7 +1308,7 @@ func TestInviteGuestsToChannelsGracefully(t *testing.T) {
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("[]uint8"),
-			[]string{"idontexist@mattermost.com"},
+			[]string{"idontexist@matterfoss.org"},
 			"",
 			"",
 			true,
@@ -1316,7 +1316,7 @@ func TestInviteGuestsToChannelsGracefully(t *testing.T) {
 		th.App.Srv().EmailService = &emailServiceMock
 
 		res, err := th.App.InviteGuestsToChannelsGracefully(th.BasicTeam.Id, &model.GuestsInvite{
-			Emails:   []string{"idontexist@mattermost.com"},
+			Emails:   []string{"idontexist@matterfoss.org"},
 			Channels: []string{th.BasicChannel.Id},
 		}, th.BasicUser.Id)
 		require.Nil(t, err)
@@ -1332,7 +1332,7 @@ func TestInviteGuestsToChannelsGracefully(t *testing.T) {
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("[]uint8"),
-			[]string{"idontexist@mattermost.com"},
+			[]string{"idontexist@matterfoss.org"},
 			"",
 			"",
 			true,
@@ -1340,7 +1340,7 @@ func TestInviteGuestsToChannelsGracefully(t *testing.T) {
 		th.App.Srv().EmailService = &emailServiceMock
 
 		res, err := th.App.InviteGuestsToChannelsGracefully(th.BasicTeam.Id, &model.GuestsInvite{
-			Emails:   []string{"idontexist@mattermost.com"},
+			Emails:   []string{"idontexist@matterfoss.org"},
 			Channels: []string{th.BasicChannel.Id},
 		}, th.BasicUser.Id)
 

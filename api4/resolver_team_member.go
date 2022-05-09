@@ -7,7 +7,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/mattermost/mattermost-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
 )
 
 // teamMember is an internal graphQL wrapper struct to add resolver methods.

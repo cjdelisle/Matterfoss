@@ -13,14 +13,14 @@ import (
 
 	rudder "github.com/rudderlabs/analytics-go"
 
-	"github.com/mattermost/mattermost-server/v6/model"
-	"github.com/mattermost/mattermost-server/v6/plugin"
-	"github.com/mattermost/mattermost-server/v6/services/httpservice"
-	"github.com/mattermost/mattermost-server/v6/services/marketplace"
-	"github.com/mattermost/mattermost-server/v6/services/searchengine"
-	"github.com/mattermost/mattermost-server/v6/shared/mlog"
-	"github.com/mattermost/mattermost-server/v6/store"
-	"github.com/mattermost/mattermost-server/v6/utils"
+	"github.com/cjdelisle/matterfoss-server/v6/model"
+	"github.com/cjdelisle/matterfoss-server/v6/plugin"
+	"github.com/cjdelisle/matterfoss-server/v6/services/httpservice"
+	"github.com/cjdelisle/matterfoss-server/v6/services/marketplace"
+	"github.com/cjdelisle/matterfoss-server/v6/services/searchengine"
+	"github.com/cjdelisle/matterfoss-server/v6/shared/mlog"
+	"github.com/cjdelisle/matterfoss-server/v6/store"
+	"github.com/cjdelisle/matterfoss-server/v6/utils"
 )
 
 const (
@@ -453,7 +453,7 @@ func (ts *TelemetryService) trackConfig() {
 		"teammate_name_display":                   *cfg.TeamSettings.TeammateNameDisplay,
 		"experimental_view_archived_channels":     *cfg.TeamSettings.ExperimentalViewArchivedChannels,
 		"lock_teammate_name_display":              *cfg.TeamSettings.LockTeammateNameDisplay,
-		"isdefault_site_name":                     isDefault(cfg.TeamSettings.SiteName, "Mattermost"),
+		"isdefault_site_name":                     isDefault(cfg.TeamSettings.SiteName, "Matterfoss"),
 		"isdefault_custom_brand_text":             isDefault(*cfg.TeamSettings.CustomBrandText, model.TeamSettingsDefaultCustomBrandText),
 		"isdefault_custom_description_text":       isDefault(*cfg.TeamSettings.CustomDescriptionText, model.TeamSettingsDefaultCustomDescriptionText),
 		"isdefault_user_status_away_timeout":      isDefault(*cfg.TeamSettings.UserStatusAwayTimeout, model.TeamSettingsDefaultUserStatusAwayTimeout),
@@ -1290,7 +1290,7 @@ func (ts *TelemetryService) trackWarnMetrics() {
 
 func (ts *TelemetryService) trackPluginConfig(cfg *model.Config, marketplaceURL string) {
 	pluginConfigData := map[string]interface{}{
-		"enable_nps_survey":             pluginSetting(&cfg.PluginSettings, "com.mattermost.nps", "enablesurvey", true),
+		"enable_nps_survey":             pluginSetting(&cfg.PluginSettings, "com.matterfoss.nps", "enablesurvey", true),
 		"enable":                        *cfg.PluginSettings.Enable,
 		"enable_uploads":                *cfg.PluginSettings.EnableUploads,
 		"allow_insecure_download_url":   *cfg.PluginSettings.AllowInsecureDownloadURL,
@@ -1307,25 +1307,25 @@ func (ts *TelemetryService) trackPluginConfig(cfg *model.Config, marketplaceURL 
 	// knownPluginIDs lists all known plugin IDs in the Marketplace
 	knownPluginIDs := []string{
 		"antivirus",
-		"com.github.manland.mattermost-plugin-gitlab",
-		"com.github.moussetc.mattermost.plugin.giphy",
-		"com.github.phillipahereza.mattermost-plugin-digitalocean",
-		"com.mattermost.aws-sns",
-		"com.mattermost.confluence",
-		"com.mattermost.custom-attributes",
-		"com.mattermost.mscalendar",
-		"com.mattermost.nps",
-		"com.mattermost.plugin-channel-export",
-		"com.mattermost.plugin-incident-management",
+		"com.github.manland.matterfoss-plugin-gitlab",
+		"com.github.moussetc.matterfoss.plugin.giphy",
+		"com.github.phillipahereza.matterfoss-plugin-digitalocean",
+		"com.matterfoss.aws-sns",
+		"com.matterfoss.confluence",
+		"com.matterfoss.custom-attributes",
+		"com.matterfoss.mscalendar",
+		"com.matterfoss.nps",
+		"com.matterfoss.plugin-channel-export",
+		"com.matterfoss.plugin-incident-management",
 		"playbooks",
-		"com.mattermost.plugin-todo",
-		"com.mattermost.webex",
-		"com.mattermost.welcomebot",
+		"com.matterfoss.plugin-todo",
+		"com.matterfoss.webex",
+		"com.matterfoss.welcomebot",
 		"github",
 		"jenkins",
 		"jira",
 		"jitsi",
-		"mattermost-autolink",
+		"matterfoss-autolink",
 		"memes",
 		"skype4business",
 		"zoom",
