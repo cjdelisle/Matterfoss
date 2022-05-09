@@ -119,6 +119,7 @@ func New(srv ServerIface, dbStore store.Store, searchEngine *searchengine.Broker
 }
 
 func (ts *TelemetryService) ensureTelemetryID() {
+	return // __MATTERFOSS__: No tracking
 	if ts.TelemetryID != "" {
 		return
 	}
@@ -1213,6 +1214,7 @@ func (ts *TelemetryService) trackChannelModeration() {
 }
 
 func (ts *TelemetryService) initRudder(endpoint string, rudderKey string) {
+	return // __MATTERFOSS__: No tracking
 	if ts.rudderClient == nil {
 		config := rudder.Config{}
 		config.Logger = rudder.StdLogger(ts.log.With(mlog.String("source", "rudder")).StdLogger(mlog.LvlDebug))
