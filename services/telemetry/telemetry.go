@@ -119,7 +119,6 @@ func New(srv ServerIface, dbStore store.Store, searchEngine *searchengine.Broker
 }
 
 func (ts *TelemetryService) ensureTelemetryID() {
-	return // __MATTERFOSS__: No tracking
 	if ts.TelemetryID != "" {
 		return
 	}
